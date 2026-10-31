@@ -23,6 +23,10 @@ export function E13VotacionVivo() {
             <div className="vivo__barra"><i className={resultado.correcta ? 'vivo__barra--correcta' : ''} style={{ width: `${Math.max(2, resultado.porcentaje)}%` }} /></div>
           </div>
         ))}
+        <div className="vivo__pie">
+          <img src={`${import.meta.env.BASE_URL}objetos/binoculares.webp`} alt="" />
+          <p>Mira cómo vota el grupo: todo agregado, sin nombres.</p>
+        </div>
         <p style={{ fontSize: 12, fontWeight: 600, opacity: .65 }}>22 respuestas · lo ves agregado, sin nombres. El docente decide cuándo cerrar.</p>
       </div>
     </Pantalla>

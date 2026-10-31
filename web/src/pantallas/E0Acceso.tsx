@@ -14,6 +14,7 @@ export function E0Acceso() {
         </header>
         <div className="acceso__escena">
           <Jaguar pose="saluda" ancho={150} clase="acceso__guia" />
+          <img className="acceso__mapa" src={`${import.meta.env.BASE_URL}objetos/mapa.webp`} alt="" />
         </div>
         <div className="acceso__hoja">
           <p>Entra con tu correo institucional. Te enviamos un enlace, sin contraseña.</p>

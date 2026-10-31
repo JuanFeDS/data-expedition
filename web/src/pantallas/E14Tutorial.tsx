@@ -12,6 +12,7 @@ export function E14Tutorial() {
           <Kicker estilo={{ color: 'var(--mint)' }}>Tutorial</Kicker>
           <h1 className="titulo" style={{ fontSize: 36, lineHeight: 1.05, maxWidth: 220 }}>Así se usa la expedición</h1>
           <Jaguar pose="saluda" ancho={120} clase="tutorial__guia" />
+          <img className="tutorial__linterna" src={`${import.meta.env.BASE_URL}objetos/linterna.webp`} alt="" />
         </header>
         <ol className="tutorial__lista">
           {pasosTutorial.map((paso, indice) => (
