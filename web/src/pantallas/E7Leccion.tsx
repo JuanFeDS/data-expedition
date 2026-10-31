@@ -14,7 +14,7 @@ export function E7Leccion() {
     <Pantalla tono="oscura">
       <div className="pantalla__cuerpo">
         <div className="leccion__barra">
-          <a href="#/e1" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
+          <a href="#/home" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
           <div className="leccion__prog">{[0, 1, 2, 3, 4].map((i) => <i key={i} className={i < 3 ? 'ok' : ''} />)}</div>
           <Pill variante="accent">0:24</Pill>
         </div>

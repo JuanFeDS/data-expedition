@@ -13,7 +13,7 @@ export function E9Votacion() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <Cabecera kicker="Módulo 2 · votación del grupo" titulo="¿Cómo quieren jugar?" subtitulo="Las mismas misiones; cambia cómo se puntúa. Tu voto es anónimo." volver={{ texto: 'Ruta', ruta: '#/e1' }} />
+        <Cabecera kicker="Módulo 2 · votación del grupo" titulo="¿Cómo quieren jugar?" subtitulo="Las mismas misiones; cambia cómo se puntúa. Tu voto es anónimo." volver={{ texto: 'Inicio', ruta: '#/home' }} />
         <div className="contenido" style={{ gap: 10 }}>
           {OPCIONES.map((opcion) => (
             <button key={opcion.modo} className={`voto voto--${opcion.color}`} aria-pressed={voto === opcion.modo} onClick={() => setVoto(opcion.modo)}>

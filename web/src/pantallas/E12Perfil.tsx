@@ -1,8 +1,8 @@
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
 
 const HISTORIAL = [
-  { semana: 'Semana 1', rol: 'Exploradora de datos' },
-  { semana: 'Semana 3', rol: 'Exploradora de datos' },
+  { semana: 'Semana 1', rol: 'Explorador de datos' },
+  { semana: 'Semana 3', rol: 'Explorador de datos' },
   { semana: 'Semana 4', rol: 'Analista' },
 ];
 
@@ -11,12 +11,12 @@ export function E12Perfil() {
     <Pantalla>
       <div className="pantalla__cuerpo">
         <header className="banda banda--verde" style={{ gap: 10, paddingBottom: 22 }}>
-          <a href="#/e1" style={{ fontSize: 14, fontWeight: 700 }}>‹ Ruta</a>
+          <a href="#/home" style={{ fontSize: 14, fontWeight: 700 }}>‹ Inicio</a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <span className="avatar avatar--grande avatar--deep">CR</span>
             <div>
-              <h1 className="titulo" style={{ fontSize: 26 }}>Camila Restrepo</h1>
-              <span style={{ fontSize: 12, fontWeight: 600, opacity: .85 }}>Grupo 2 · camila@universidad.edu.co</span>
+              <h1 className="titulo" style={{ fontSize: 26 }}>Camilo Restrepo</h1>
+              <span style={{ fontSize: 12, fontWeight: 600, opacity: .85 }}>Grupo 2 · camilo@universidad.edu.co</span>
             </div>
           </div>
         </header>

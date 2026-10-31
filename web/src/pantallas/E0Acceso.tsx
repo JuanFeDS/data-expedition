@@ -10,7 +10,7 @@ export function E0Acceso() {
         <Jaguar pose="saluda" ancho={150} clase="acceso__guia" />
         <div className="acceso__texto">
           <Kicker estilo={{ color: 'var(--accent)' }}>Cursos de ciencia de datos</Kicker>
-          <h1 className="titulo" style={{ fontSize: 60, lineHeight: .95 }}>data-expedición</h1>
+          <h1 className="titulo" style={{ fontSize: 60, lineHeight: .95 }}>data-expedicion</h1>
           <p style={{ fontSize: 16, fontWeight: 600, lineHeight: '22px', opacity: .92 }}>Entra con tu correo institucional. Te enviamos un enlace, sin contraseña.</p>
           <input className="acceso__campo" type="email" placeholder="tu.nombre@universidad.edu.co" value={correo} onChange={(evento) => setCorreo(evento.target.value)} aria-label="Correo institucional" />
         </div>

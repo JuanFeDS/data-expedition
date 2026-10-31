@@ -12,7 +12,7 @@ export function E11Resumen() {
     <Pantalla>
       <div className="pantalla__cuerpo">
         <header className="banda banda--deep resumen__banda" style={{ paddingBottom: 26 }}>
-          <a href="#/e1" style={{ fontSize: 14, fontWeight: 700, color: 'var(--mint)' }}>‹ Ruta</a>
+          <a href="#/home" style={{ fontSize: 14, fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a>
           <Kicker estilo={{ color: 'var(--mint)' }}>Semana 4 · 20 al 26 oct</Kicker>
           <h1 className="titulo" style={{ fontSize: 36, lineHeight: 1.05, maxWidth: 220 }}>Tu semana en una página</h1>
           <Jaguar pose="saluda" ancho={124} clase="resumen__guia" />
