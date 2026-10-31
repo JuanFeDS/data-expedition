@@ -26,7 +26,13 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
 /* ---------- Pantalla (marco de celular) ---------- */
 .pantalla { width: 390px; height: 844px; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); position: relative; }
-.pantalla--oscura { background: var(--deep); color: var(--on-primary); }
+.pantalla--oscura {
+  --velo: rgb(7 59 58 / .62);
+  background-color: var(--deep);
+  background-image: linear-gradient(var(--velo), var(--velo)), url('/fondos/hojas-suave.webp');
+  background-size: auto, 520px auto;
+  color: var(--on-primary);
+}
 .pantalla--verde { background: var(--primary); color: var(--on-primary); }
 .pantalla--menta { background: var(--mint); color: var(--deep); }
 .pantalla--viva { width: min(390px, 100vw); height: min(844px, 100dvh); }
@@ -81,27 +87,44 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .radar svg { display: block; }
 .radar__etiqueta { position: absolute; font-size: 11px; font-weight: 700; line-height: 13px; transform: translateY(-50%); }
 
-/* ---------- E1 Ruta ---------- */
-.ruta { background: var(--deep); color: var(--on-primary); }
-.ruta__cab { padding: 48px 24px 0; display: flex; flex-direction: column; gap: 4px; }
+/* ---------- E1 Ruta (diario de ruta) ---------- */
+.ruta { color: var(--on-primary); }
+.ruta__cab { padding: 28px 24px 8px; display: flex; flex-direction: column; gap: 6px; }
 .ruta__top { display: flex; align-items: center; justify-content: space-between; font-size: 14px; font-weight: 600; opacity: .9; }
-.ruta__top .pill { opacity: 1; }
 .ruta__sub { font-size: 13px; font-weight: 600; color: var(--mint); }
-.ruta__mapa { position: relative; flex: 1; min-height: 548px; }
-.ruta__mapa > svg { position: absolute; inset: 0; }
-.nodo { position: absolute; transform: translate(-50%, -50%); border-radius: 50%; display: grid; place-items: center; }
-.nodo--hecho { width: 32px; height: 32px; background: var(--mint); border: 3px solid var(--deep); }
-.nodo--aqui { width: 40px; height: 40px; background: var(--accent); border: 3px solid var(--deep); box-shadow: 0 0 0 8px rgb(255 210 63 / .45); }
-.nodo--aqui::after { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--deep); }
-.nodo--proximo { width: 28px; height: 28px; background: var(--deep); border: 3px solid rgb(255 255 255 / .7); }
-.nodo--cima { width: 64px; height: 62px; border-radius: 0; transform: translate(-50%, -68%); }
-.hito { position: absolute; width: 190px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 3px; }
-.hito--der { text-align: left; align-items: flex-start; }
-.hito--izq { text-align: right; align-items: flex-end; }
-.hito .kicker { font-size: 10px; color: var(--mint); }
-.hito__titulo { font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -.06em; line-height: 1.08; }
-.hito__meta { font-size: 12px; font-weight: 600; opacity: .8; line-height: 1.35; }
-.hito--bloqueado { opacity: .6; }
+.tramos { display: flex; gap: 4px; margin-top: 0; position: relative; }
+.tramos i { flex: 1; height: 6px; border-radius: 3px; background: rgb(255 255 255 / .2); }
+.tramos .tramos__hecho { background: var(--mint); }
+.tramos .tramos__actual { background: var(--accent); }
+
+.itinerario { list-style: none; padding: 8px 24px 24px; margin: 0; }
+.paso { position: relative; display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 14px 0; min-height: 56px; }
+.paso::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 4px; border-left: 4px dotted rgb(255 255 255 / .5); }
+.paso--hecho::before { border-left: 0; background: var(--mint); border-radius: 2px; }
+.paso--primero::before { top: 30px; }
+.paso--ultimo::before { bottom: auto; height: 30px; }
+.paso--actual::before { display: none; }
+.paso__texto { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding-top: 2px; }
+.paso .kicker { font-size: 12px; color: var(--mint); }
+.paso--cima .kicker, .paso--actual .kicker { color: var(--accent); }
+.paso__titulo { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -.04em; line-height: 1.1; }
+.paso__meta, .paso__nota { font-size: 13px; font-weight: 600; opacity: .85; line-height: 1.35; display: flex; align-items: center; gap: 8px; }
+.paso__meta { display: block; }
+.paso--bloqueado .paso__titulo, .paso--bloqueado .paso__meta { color: #a8c7be; opacity: 1; }
+.paso--bloqueado .kicker { color: #a8c7be; }
+
+.paso__nodo { position: relative; z-index: 1; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; }
+.paso__nodo--hecho { background: var(--mint); border: 3px solid var(--deep); }
+.paso__nodo--bloqueado { background: var(--deep); border: 3px solid rgb(255 255 255 / .6); }
+.paso__nodo--cima { background: var(--deep); width: 36px; height: 36px; margin-left: -2px; border-radius: 0; }
+
+.paso--actual { margin: 8px -24px; padding: 20px 24px 24px; grid-template-columns: 40px 1fr; background: var(--accent); color: var(--ink); }
+.paso--actual .kicker { color: var(--deep); }
+.paso--actual .paso__titulo { font-size: 40px; letter-spacing: -.05em; line-height: 1; }
+.paso--actual .paso__meta { opacity: 1; font-weight: 700; }
+.paso--actual .paso__nodo--aqui { width: 40px; height: 40px; background: var(--deep); }
+.paso--actual .paso__nodo--aqui::after { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+.paso__accion { display: block; margin-top: 12px; }
 
 /* ---------- Bandas ---------- */
 .banda { padding: 52px 24px 22px; display: flex; flex-direction: column; gap: 6px; }
@@ -143,4 +166,37 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
 @media (prefers-reduced-motion: no-preference) {
   .opcion, .resp, .pill { transition: background-color .15s, border-color .15s; }
+}
+
+/* ---------- E1 vida ---------- */
+.avance { display: flex; align-items: center; gap: 14px; margin: 2px 0 6px; }
+.avance__num { font-family: var(--font-display); font-weight: 800; font-size: 84px; line-height: .9; letter-spacing: -.06em; color: var(--accent); }
+.avance__num small { font-size: 40px; letter-spacing: 0; margin-left: 2px; }
+.avance p { font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--on-primary); }
+.paso__fecha { position: absolute; top: 20px; right: 24px; z-index: 2; display: flex; flex-direction: column; align-items: center; min-width: 58px; padding: 8px 10px 6px; border-radius: 16px; background: var(--deep); color: var(--accent); line-height: 1; }
+.paso__fecha small { font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+.paso__fecha b { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: -.04em; }
+.paso__radar { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.paso__radar i { font-style: normal; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: rgb(94 234 176 / .16); color: var(--mint); }
+.paso--cima .paso__titulo { font-size: 28px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .paso { animation: paso-sube .35s both ease-out; animation-delay: calc(var(--i, 0) * 40ms); }
+  .paso--hecho::before { transform-origin: bottom; animation: paso-trazo .5s .15s both ease-out; }
+  .paso--actual .paso__nodo--aqui { animation: paso-pulso 2s infinite; }
+  @keyframes paso-sube { from { opacity: 0; transform: translateY(6px); } }
+  @keyframes paso-trazo { from { transform: scaleY(0); } }
+  @keyframes paso-pulso { 0% { box-shadow: 0 0 0 0 rgb(7 59 58 / .55); } 70%, 100% { box-shadow: 0 0 0 14px rgb(7 59 58 / 0); } }
+}
+
+/* ---------- Guía (jaguar) ---------- */
+.avance { align-items: flex-end; margin-bottom: -10px; }
+.avance__num, .avance p { margin-bottom: 14px; }
+.avance__guia { scale: -1 1; margin-left: auto; margin-right: -6px; width: 112px; flex: none; height: auto; }
+.resultado__remate { display: flex; align-items: flex-end; gap: 8px; }
+.resultado__remate p { flex: 1; padding-bottom: 12px; }
+.resultado__guia { scale: -1 1; flex: none; height: auto; margin-bottom: -1px; }
+@media (prefers-reduced-motion: no-preference) {
+  .avance__guia, .resultado__guia { animation: guia-respira 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
+  @keyframes guia-respira { 50% { transform: scale(1.02) translateY(-3px); } }
 }

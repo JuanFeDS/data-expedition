@@ -28,11 +28,11 @@ export function Radar({ dimensiones, ancho = 342, alto = 262, radio = 84 }: Prop
           const [x, y] = punto(indice, 100);
           return <line key={indice} x1={centroX} y1={centroY} x2={x} y2={y} stroke="var(--line)" />;
         })}
-        <polygon points={poligono(dimensiones.map((d) => d.ahora))} fill="var(--primary)" fillOpacity=".22" stroke="var(--primary)" strokeWidth="3" strokeLinejoin="round" />
-        <polygon points={poligono(dimensiones.map((d) => d.inicio))} stroke="var(--ink)" strokeWidth="2" strokeDasharray="4 4" />
+        <polygon className="radar__ahora" points={poligono(dimensiones.map((d) => d.ahora))} fill="var(--primary)" fillOpacity=".22" stroke="var(--primary)" strokeWidth="3" strokeLinejoin="round" />
+        <polygon className="radar__inicio" points={poligono(dimensiones.map((d) => d.inicio))} stroke="var(--ink)" strokeWidth="2" strokeDasharray="4 4" />
         {dimensiones.map((dimension, indice) => {
           const [x, y] = punto(indice, dimension.ahora);
-          return <circle key={dimension.nombre} cx={x} cy={y} r="5" fill="#fff" stroke="var(--primary)" strokeWidth="3" />;
+          return <circle className="radar__punto" key={dimension.nombre} cx={x} cy={y} r="5" fill="#fff" stroke="var(--primary)" strokeWidth="3" />;
         })}
       </svg>
       {dimensiones.map((dimension, indice) => {
