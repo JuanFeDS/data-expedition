@@ -1,82 +1,114 @@
-import { Jaguar } from '../componentes/Jaguar';
-import { Kicker, Pantalla, Pill, TabBar } from '../componentes/ui';
-import { hitosRuta, type HitoRuta } from '../datos';
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Isla } from '../componentes/Region';
+import { Kicker, ModoViva, Pantalla, Pill, TabBar } from '../componentes/ui';
+import { hitosRuta, regionesCurso } from '../datos';
 
-function Montana({ tamano = 36 }: { tamano?: number }) {
-  return (
-    <svg width={tamano} height={(tamano * 62) / 64} viewBox="0 0 64 62" fill="none" aria-hidden="true">
-      <polygon points="2,60 32,22 62,60" fill="#F1F8F4" />
-      <polygon points="22,60 32,46 42,60" fill="#D3E5DB" />
-      <line x1="32" y1="22" x2="32" y2="3" stroke="#F1F8F4" strokeWidth="3" strokeLinecap="round" />
-      <polygon points="32,3 52,9 32,15" fill="#FFD23F" />
-    </svg>
-  );
+interface Tramo {
+  d: string;
+  hecho: boolean;
 }
 
 function Candado() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="#A8C7BE" />
-      <path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#A8C7BE" strokeWidth="1.6" />
+    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="#F1F8F4" />
+      <path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="#F1F8F4" strokeWidth="1.6" />
     </svg>
   );
 }
 
-function Nodo({ hito }: { hito: HitoRuta }) {
-  if (hito.estado === 'cima') return <span className="paso__nodo paso__nodo--cima"><Montana /></span>;
-  if (hito.estado === 'hecho') {
-    return (
-      <span className="paso__nodo paso__nodo--hecho">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" stroke="#073B3A" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-      </span>
-    );
-  }
-  if (hito.estado === 'actual') return <span className="paso__nodo paso__nodo--aqui" />;
-  return <span className="paso__nodo paso__nodo--bloqueado"><Candado /></span>;
-}
-
 export function E1Ruta() {
-  const total = hitosRuta.length;
-  const indiceActual = hitosRuta.findIndex((hito) => hito.estado === 'actual');
-  const mostrados = [...hitosRuta].reverse();
-  const porcentaje = Math.round((hitosRuta.filter((hito) => hito.estado === 'hecho').length / total) * 100);
+  const viva = useContext(ModoViva);
+  const indiceActual = regionesCurso.findIndex((region) => region.estado === 'actual');
+  const regiones = regionesCurso.map((region, indice) => ({
+    region,
+    indice,
+    hitos: region.hitos.map((titulo) => hitosRuta.find((hito) => hito.titulo === titulo)).filter((hito) => hito !== undefined),
+  }));
+  const mostradas = [...regiones].reverse();
+  const mapa = useRef<HTMLDivElement>(null);
+  const anclas = useRef<(HTMLDivElement | null)[]>([]);
+  const [tramos, setTramos] = useState<Tramo[]>([]);
+
+  useLayoutEffect(() => {
+    const medir = () => {
+      const caja = mapa.current;
+      if (!caja) return;
+      const base = caja.getBoundingClientRect();
+      const puntos = regionesCurso.map((_, indice) => {
+        const elemento = anclas.current[indice];
+        if (!elemento) return null;
+        const caja_ = elemento.getBoundingClientRect();
+        return { x: caja_.left - base.left + caja_.width / 2, y: caja_.top - base.top + caja_.height * 0.62 };
+      });
+      const nuevos: Tramo[] = [];
+      for (let i = 0; i < puntos.length - 1; i++) {
+        const desde = puntos[i];
+        const hasta = puntos[i + 1];
+        if (!desde || !hasta) continue;
+        const medio = (desde.y + hasta.y) / 2;
+        nuevos.push({ d: `M ${desde.x} ${desde.y} C ${desde.x} ${medio}, ${hasta.x} ${medio}, ${hasta.x} ${hasta.y}`, hecho: i + 1 <= indiceActual });
+      }
+      setTramos(nuevos);
+    };
+    medir();
+    const observador = new ResizeObserver(medir);
+    if (mapa.current) observador.observe(mapa.current);
+    return () => observador.disconnect();
+  }, [indiceActual]);
+
+  useEffect(() => {
+    if (viva) anclas.current[indiceActual]?.scrollIntoView({ block: 'center' });
+  }, [viva, indiceActual]);
 
   return (
     <Pantalla tono="oscura">
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
-          <div className="ruta__top"><span>Hola, Camila</span><Pill variante="accent">Semana 4 de 8</Pill></div>
-          <div className="avance">
-            <span className="avance__num">{porcentaje}<small>%</small></span>
-            <p>de la expedición<br />recorrida</p>
-            <Jaguar clase="avance__guia" />
-          </div>
-          <div className="tramos" aria-hidden="true">
-            {hitosRuta.map((hito, indice) => (
-              <i key={hito.titulo} className={indice < indiceActual ? 'tramos__hecho' : indice === indiceActual ? 'tramos__actual' : ''} />
-            ))}
-          </div>
-          <p className="ruta__sub">Tramo {indiceActual + 1} de {total} · una entrega más y ves la cima</p>
+          <div className="ruta__top"><a href="#/home" style={{ fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a><Pill variante="accent">Semana 4 de 8</Pill></div>
+          <h1 className="titulo" style={{ fontSize: 38, lineHeight: 1.05 }}>Mapa del curso</h1>
+          <p className="ruta__sub">Semana {regionesCurso[indiceActual].semanas} de {regionesCurso.length} · una entrega más y ves la cima</p>
         </header>
-        <ol className="itinerario">
-          {mostrados.map((hito, indice) => {
-            const clases = ['paso', `paso--${hito.estado}`, indice === 0 && 'paso--primero', indice === mostrados.length - 1 && 'paso--ultimo'].filter(Boolean).join(' ');
+
+        <div className="mapa" ref={mapa}>
+          <svg className="mapa__ruta" aria-hidden="true">
+            {tramos.map((tramo, i) => (
+              <path key={i} d={tramo.d} fill="none" strokeLinecap="round" strokeWidth={tramo.hecho ? 6 : 4} stroke={tramo.hecho ? 'var(--mint)' : 'rgba(255,255,255,.55)'} strokeDasharray={tramo.hecho ? undefined : '1 11'} />
+            ))}
+          </svg>
+          {mostradas.map(({ region, indice, hitos }) => {
+            const derecha = indice % 2 === 1;
             return (
-              <li key={hito.titulo} className={clases} style={{ '--i': indice } as React.CSSProperties}>
-                {hito.fecha && <span className="paso__fecha"><small>{hito.fecha.dia}</small><b>{hito.fecha.numero}</b></span>}
-                <Nodo hito={hito} />
-                <div className="paso__texto">
-                  <Kicker>{hito.kicker}</Kicker>
-                  <span className="paso__titulo">{hito.titulo}</span>
-                  {hito.nota && <span className="paso__nota"><Pill variante="accent" pequena>{hito.nota}</Pill> calificado</span>}
-                  {hito.meta && <span className="paso__meta">{hito.meta}</span>}
-                  {hito.radar && <span className="paso__radar">{hito.radar.map((cambio) => <i key={cambio}>{cambio}</i>)}</span>}
-                  {hito.accion && <a className="paso__accion" href={hito.accion.ruta}><Pill variante="deep" grande>{hito.accion.texto}</Pill></a>}
+              <section key={region.nombre} className={`isla-fila isla-fila--${region.estado} ${derecha ? 'isla-fila--der' : ''}`}>
+                <div className="isla-fila__arte" ref={(elemento) => { anclas.current[indice] = elemento; }}>
+                  <Isla bioma={region.bioma} />
+                  {region.estado === 'pendiente' && <span className="isla-fila__candado"><Candado /></span>}
+                  {region.estado === 'actual' && <span className="isla-fila__aqui">Estás aquí</span>}
                 </div>
-              </li>
+                <div className="isla-fila__texto">
+                  <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 10 }}>Semana {region.semanas} · {region.modulo}</Kicker>
+                  <h2 className="isla-fila__nombre">{region.nombre}</h2>
+                  <ul className="mapa__hitos">
+                    {hitos.length === 0 && (
+                      <li className="mapa__hito mapa__hito--libre"><span className="mapa__nodo" /><div><small>Lecciones y práctica de la semana</small></div></li>
+                    )}
+                    {hitos.map((hito) => (
+                      <li key={hito.titulo} className={`mapa__hito mapa__hito--${hito.estado}`}>
+                        <span className="mapa__nodo" />
+                        <div>
+                          <strong>{hito.titulo}</strong>
+                          {hito.nota && <span className="mapa__nota"><Pill variante="accent" pequena>{hito.nota}</Pill></span>}
+                          {hito.meta && <small>{hito.meta}</small>}
+                          {hito.accion && <a href={hito.accion.ruta}><Pill variante="deep" boton>{hito.accion.texto}</Pill></a>}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
             );
           })}
-        </ol>
+        </div>
       </div>
       <TabBar activa="Ruta" />
     </Pantalla>
