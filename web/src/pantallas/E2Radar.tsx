@@ -12,10 +12,10 @@ export function E2Radar() {
           <Segmentado opciones={['Ahora', 'Inicio', 'Ambos']} activa={2} />
           <Radar dimensiones={dimensiones} />
           <Kicker>Cambio por dimensión</Kicker>
-          {porCambio.map((dimension) => {
+          {porCambio.map((dimension, indice) => {
             const cambio = dimension.ahora - dimension.inicio;
             return (
-              <div className="cambio" key={dimension.nombre}>
+              <div className="cambio" key={dimension.nombre} style={{ '--i': indice } as React.CSSProperties}>
                 <span className="cambio__nombre">{dimension.nombre}</span>
                 <div className="barra" aria-hidden="true">
                   <div className="barra__pista" />

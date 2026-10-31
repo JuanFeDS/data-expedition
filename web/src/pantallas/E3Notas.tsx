@@ -1,4 +1,4 @@
-import { Kicker, Pantalla, Pill, TabBar } from '../componentes/ui';
+import { Contador, Kicker, Pantalla, Pill, TabBar } from '../componentes/ui';
 
 interface FilaNota {
   nota: string;
@@ -24,7 +24,7 @@ export function E3Notas() {
         <header className="banda banda--verde" style={{ gap: 2 }}>
           <Kicker>Notas</Kicker>
           <div className="promedio">
-            <span className="num">4.2</span>
+            <span className="num"><Contador valor={4.2} decimales={1} /></span>
             <div><strong style={{ fontSize: 14 }}>promedio hasta ahora</strong><div className="meta" style={{ color: 'inherit', opacity: .8, fontSize: 12 }}>1 de 3 trabajos calificados</div></div>
           </div>
         </header>

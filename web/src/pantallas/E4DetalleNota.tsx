@@ -1,4 +1,4 @@
-import { Kicker, Niveles, Pantalla, Pill, TabBar } from '../componentes/ui';
+import { Contador, Kicker, Niveles, Pantalla, Pill, TabBar } from '../componentes/ui';
 import { criteriosTrabajo1 } from '../datos';
 
 export function E4DetalleNota() {
@@ -9,7 +9,7 @@ export function E4DetalleNota() {
           <a href="#/e3" style={{ fontSize: 14, fontWeight: 700 }}>‹ Notas</a>
           <Kicker>Trabajo 1 · calificado el 21 oct</Kicker>
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14 }}>
-            <span className="num" style={{ fontSize: 88 }}>4.2</span>
+            <span className="num" style={{ fontSize: 88 }}><Contador valor={4.2} decimales={1} /></span>
             <div style={{ paddingBottom: 14, display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
               <Pill variante="accent">Con IA declarada</Pill>
               <span style={{ fontSize: 12, fontWeight: 600, opacity: .9 }}>Bitácora entregada</span>
