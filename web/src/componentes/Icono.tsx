@@ -1,4 +1,4 @@
-export type Icono = 'votar' | 'resumen' | 'equipo' | 'perfil' | 'ruta' | 'radar' | 'notas' | 'entregas' | 'leccion' | 'menu' | 'ayuda';
+export type Icono = 'votar' | 'resumen' | 'equipo' | 'perfil' | 'ruta' | 'radar' | 'notas' | 'entregas' | 'leccion' | 'menu' | 'ayuda' | 'inicio';
 
 export function IconoSvg({ tipo, tamano = 24 }: { tipo: Icono; tamano?: number }) {
   const t = { stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
@@ -14,6 +14,7 @@ export function IconoSvg({ tipo, tamano = 24 }: { tipo: Icono; tamano?: number }
       {tipo === 'entregas' && <><path d="M12 15V4M8 8l4-4 4 4" {...t} /><path d="M5 15v4h14v-4" {...t} /></>}
       {tipo === 'leccion' && <path d="M13 3 5 13.5h6L10 21l9-11h-6.5L13 3Z" {...t} />}
       {tipo === 'ayuda' && <><circle cx="12" cy="12" r="9" {...t} /><path d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.9" {...t} /><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="currentColor" /></>}
+      {tipo === 'inicio' && <path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8Z" {...t} />}
       {tipo === 'menu' && <><rect x="4" y="4" width="6.5" height="6.5" rx="1.8" {...t} /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8" {...t} /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8" {...t} /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8" {...t} /></>}
     </svg>
   );
