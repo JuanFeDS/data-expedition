@@ -1,16 +1,24 @@
+import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { Dock } from '../componentes/Dock';
 import { Radar } from '../componentes/Radar';
-import { Cabecera, Kicker, Pantalla, Segmentado, TabBar } from '../componentes/ui';
+import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 import { dimensiones } from '../datos';
 
 export function E2Radar() {
   const porCambio = [...dimensiones].sort((a, b) => b.ahora - b.inicio - (a.ahora - a.inicio));
+  const subieron = dimensiones.filter((dimension) => dimension.ahora > dimension.inicio).length;
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <Cabecera titulo="Tu radar" subtitulo="Frente a tu punto de partida, no frente a nadie más." />
-        <div className="contenido" style={{ gap: 10 }}>
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Tu radar" titulo="Cómo vas" subtitulo="Frente a tu punto de partida, no frente a nadie más." jaguar="pensando">
+          <p className="radar__resumen"><strong>{subieron} de {dimensiones.length}</strong> dimensiones subieron</p>
+        </CabeceraMundo>
+        <div className="contenido cuerpo-mundo" style={{ gap: 10 }}>
           <Segmentado opciones={['Ahora', 'Inicio', 'Ambos']} activa={2} />
-          <Radar dimensiones={dimensiones} />
+          <div className="radar__marco">
+            <Radar dimensiones={dimensiones} ancho={342} alto={300} radio={100} />
+          </div>
+          <div className="radar__leyenda"><span><i className="ahora" />Ahora</span><span><i className="inicio" />Tu punto de partida</span></div>
           <Kicker>Cambio por dimensión</Kicker>
           {porCambio.map((dimension, indice) => {
             const cambio = dimension.ahora - dimension.inicio;
@@ -28,7 +36,7 @@ export function E2Radar() {
           })}
         </div>
       </div>
-      <TabBar activa="Radar" />
+      <Dock accion={{ etiqueta: 'Tu punto débil', texto: 'Practicar Validación', ruta: '#/e7' }} />
     </Pantalla>
   );
 }

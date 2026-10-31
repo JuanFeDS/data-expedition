@@ -1,49 +1,56 @@
+import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { Dock } from '../componentes/Dock';
+import { Isla } from '../componentes/Region';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
+import { regionesCurso } from '../datos';
 
 const HISTORIAL = [
   { semana: 'Semana 1', rol: 'Explorador de datos' },
   { semana: 'Semana 3', rol: 'Explorador de datos' },
-  { semana: 'Semana 4', rol: 'Analista' },
+  { semana: 'Semana 4', rol: 'Analista', actual: true },
 ];
+const XP = 340;
+const META_XP = 500;
 
 export function E12Perfil() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <header className="banda banda--verde" style={{ gap: 10, paddingBottom: 22 }}>
-          <a href="#/home" style={{ fontSize: 14, fontWeight: 700 }}>‹ Inicio</a>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <span className="avatar avatar--grande avatar--deep">CR</span>
-            <div>
-              <h1 className="titulo" style={{ fontSize: 26 }}>Camilo Restrepo</h1>
-              <span style={{ fontSize: 12, fontWeight: 600, opacity: .85 }}>Grupo 2 · camilo@universidad.edu.co</span>
-            </div>
-          </div>
-        </header>
-        <div className="contenido" style={{ paddingTop: 14, gap: 4 }}>
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · camilo@universidad.edu.co" jaguar="guia" />
+        <div className="contenido cuerpo-mundo" style={{ gap: 4 }}>
           <Kicker>Tu rol de expedición hoy</Kicker>
-          <div style={{ padding: '4px 0 10px' }}>
-            <div className="num" style={{ fontSize: 44, color: 'var(--secondary)' }}>Analista</div>
-            <p className="meta" style={{ fontSize: 13, paddingTop: 4 }}>Sale de tu radar: Modelado y Datos pesan más hoy. Puede cambiar.</p>
+          <div className="perfil__rol">
+            <span className="num">Analista</span>
+            <p className="meta">Sale de tu radar: Modelado y Datos pesan más hoy. Puede cambiar.</p>
           </div>
-          <hr className="sep" />
-          <div style={{ padding: '10px 0' }}>
-            <Kicker>Cómo ha cambiado</Kicker>
+          <ol className="linea-tiempo">
             {HISTORIAL.map((fila) => (
-              <div className="historial" key={fila.semana}><span>{fila.semana}</span><strong>{fila.rol}</strong></div>
+              <li key={fila.semana} className={fila.actual ? 'linea-tiempo__actual' : ''}>
+                <span className="linea-tiempo__punto" />
+                <span className="linea-tiempo__semana">{fila.semana}</span>
+                <strong>{fila.rol}</strong>
+              </li>
             ))}
+          </ol>
+          <hr className="sep" />
+          <div className="perfil__xp">
+            <div className="perfil__xp-cifra"><span className="num"><Contador valor={XP} /></span><small>de {META_XP} XP para el nivel 4</small></div>
+            <div className="perfil__xp-barra"><i style={{ width: `${(XP / META_XP) * 100}%` }} /></div>
+            <p className="meta" style={{ fontSize: 12 }}>El XP no es nota: se gana con lecciones y misiones y desbloquea retos opcionales.</p>
           </div>
           <hr className="sep" />
-          <div className="xp">
-            <span className="num" style={{ fontSize: 44 }}><Contador valor={340} /></span>
-            <p className="meta" style={{ fontSize: 12 }}>XP · se gana con lecciones y misiones. No es nota; desbloquea retos opcionales.</p>
-          </div>
-          <div className="insignias" aria-label="Insignias">
-            {['accent', 'mint', 'azul'].map((color) => <span key={color} className={`insignia insignia--${color}`} />)}
-            {[0, 1].map((i) => <span key={i} className="insignia insignia--vacia" />)}
+          <Kicker>Sellos de la expedición</Kicker>
+          <div className="sellos">
+            {regionesCurso.map((region) => (
+              <div key={region.nombre} className={`sello sello--${region.estado}`}>
+                <Isla bioma={region.bioma} />
+                <small>Sem {region.semanas}</small>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+      <Dock />
     </Pantalla>
   );
 }

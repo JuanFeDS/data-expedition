@@ -1,34 +1,41 @@
-import { Cabecera, Kicker, Pantalla, Pill } from '../componentes/ui';
+import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { Dock } from '../componentes/Dock';
+import { Contador, Kicker, Pantalla, Pill } from '../componentes/ui';
 
 const EQUIPO = [
-  { iniciales: 'CR', nombre: 'Camilo R. (tú)', rol: 'Modelado', aportes: '9 aportes · bitácora al día', color: 'verde' },
-  { iniciales: 'JA', nombre: 'Julián A.', rol: 'Datos', aportes: '7 aportes', color: 'azul' },
-  { iniciales: 'MS', nombre: 'María S.', rol: 'Comunicación', aportes: '6 aportes', color: 'verde' },
-  { iniciales: 'DP', nombre: 'Daniel P.', rol: 'Producción', aportes: '2 aportes · sin movimiento hace 4 días', color: 'azul' },
+  { iniciales: 'CR', nombre: 'Camilo R. (tú)', rol: 'Modelado', aportes: 9, color: 'verde' },
+  { iniciales: 'JA', nombre: 'Julián A.', rol: 'Datos', aportes: 7, color: 'azul' },
+  { iniciales: 'MS', nombre: 'María S.', rol: 'Comunicación', aportes: 6, color: 'verde' },
+  { iniciales: 'DP', nombre: 'Daniel P.', rol: 'Producción', aportes: 2, color: 'azul', alerta: 'Sin movimiento hace 4 días' },
 ];
+const MAXIMO = 10;
 
 export function E10Mision() {
+  const total = EQUIPO.reduce((suma, miembro) => suma + miembro.aportes, 0);
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <Cabecera kicker="La cima · semana 8" titulo="Proyecto final" subtitulo="Equipo Páramo · 4 personas" volver={{ texto: 'Inicio', ruta: '#/home' }} />
-        <div className="contenido">
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="La cima · semana 8" titulo="Proyecto final" subtitulo="Equipo Páramo · 4 personas" isla="volcan" />
+        <div className="contenido cuerpo-mundo" style={{ gap: 0 }}>
+          <div className="mision__resumen">
+            <span className="num"><Contador valor={total} /></span>
+            <p><strong>aportes en la bitácora</strong><br />3 de 4 personas al día</p>
+          </div>
           <Kicker>Quién responde por qué</Kicker>
           {EQUIPO.map((miembro) => (
-            <div className="fila" key={miembro.nombre}>
+            <div className="mision__miembro" key={miembro.nombre}>
               <span className={`avatar avatar--${miembro.color}`}>{miembro.iniciales}</span>
               <div className="fila__texto">
-                <strong>{miembro.nombre}</strong>
-                <span className="meta" style={{ fontSize: 12 }}>{miembro.aportes}</span>
+                <div className="mision__linea"><strong>{miembro.nombre}</strong><Pill variante="suave" pequena>Rol: {miembro.rol}</Pill></div>
+                <div className="mision__barra" aria-label={`${miembro.aportes} aportes`}><i style={{ width: `${(miembro.aportes / MAXIMO) * 100}%` }} className={miembro.alerta ? 'mision__barra--alerta' : ''} /></div>
+                <span className="meta" style={{ fontSize: 12 }}>{miembro.aportes} aportes{miembro.alerta ? ` · ${miembro.alerta}` : ''}</span>
               </div>
-              <Pill variante="suave" pequena>Rol: {miembro.rol}</Pill>
             </div>
           ))}
-          <p className="meta" style={{ fontSize: 13, padding: '14px 0 0' }}>La nota es la misma para todo el equipo. Tu radar cambia según tu rol, que se calcula de tu radar y puede cambiar.</p>
-          <div style={{ flex: 1 }} />
-          <a href="#/home" style={{ padding: '12px 0 26px' }}><Pill grande>Abrir la bitácora del equipo</Pill></a>
+          <p className="meta" style={{ fontSize: 13, paddingTop: 14 }}>La nota es la misma para todo el equipo. Tu radar cambia según tu rol, que se calcula de tu radar y puede cambiar.</p>
         </div>
       </div>
+      <Dock accion={{ etiqueta: 'Misión en equipo', texto: 'Abrir la bitácora', ruta: '#/e10' }} />
     </Pantalla>
   );
 }
