@@ -1,3 +1,4 @@
+import { Jaguar } from '../componentes/Jaguar';
 import { Kicker, Pantalla, Pill, TabBar } from '../componentes/ui';
 import { hitosRuta, type HitoRuta } from '../datos';
 
@@ -45,6 +46,7 @@ export function E1Ruta() {
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
           <div className="ruta__top"><span>Hola, Camila</span><Pill variante="accent">Semana 4 de 8</Pill></div>
+          <Jaguar clase="ruta__guia" />
           <div className="avance">
             <span className="avance__num">{porcentaje}<small>%</small></span>
             <p>de la expedición<br />recorrida</p>
@@ -54,7 +56,7 @@ export function E1Ruta() {
               <i key={hito.titulo} className={indice < indiceActual ? 'tramos__hecho' : indice === indiceActual ? 'tramos__actual' : ''} />
             ))}
           </div>
-          <p className="ruta__sub">Tramo {indiceActual + 1} de {total} · la cima es el proyecto final</p>
+          <p className="ruta__sub">Tramo {indiceActual + 1} de {total} · una entrega más y ves la cima</p>
         </header>
         <ol className="itinerario">
           {mostrados.map((hito, indice) => {
