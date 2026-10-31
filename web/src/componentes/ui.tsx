@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 
 export const ModoViva = createContext(false);
 
@@ -36,7 +36,7 @@ export function Niveles({ nivel }: { nivel: number }) {
     <div className="nivel" aria-label={`Nivel ${nivel} de 5`}>
       {[0, 1, 2, 3, 4].map((indice) => (
         <div className="nivel__seg" key={indice}>
-          <i style={{ width: `${Math.max(0, Math.min(1, nivel - indice)) * 100}%` }} />
+          <i style={{ width: `${Math.max(0, Math.min(1, nivel - indice)) * 100}%`, '--i': indice } as React.CSSProperties} />
         </div>
       ))}
     </div>
@@ -44,13 +44,14 @@ export function Niveles({ nivel }: { nivel: number }) {
 }
 
 const PESTANAS = [
+  { nombre: 'Inicio', ruta: '#/home' },
   { nombre: 'Ruta', ruta: '#/e1' },
   { nombre: 'Radar', ruta: '#/e2' },
   { nombre: 'Notas', ruta: '#/e3' },
   { nombre: 'Entregas', ruta: '#/e5' },
 ];
 
-export function TabBar({ activa }: { activa: 'Ruta' | 'Radar' | 'Notas' | 'Entregas' }) {
+export function TabBar({ activa }: { activa: 'Inicio' | 'Ruta' | 'Radar' | 'Notas' | 'Entregas' }) {
   return (
     <nav className="tabs">
       {PESTANAS.map((pestana) => (
@@ -68,5 +69,48 @@ export function Cabecera({ kicker, titulo, subtitulo, volver }: { kicker?: strin
       <h1 className="titulo titulo--xl">{titulo}</h1>
       {subtitulo && <p className="meta" style={{ fontSize: 14 }}>{subtitulo}</p>}
     </header>
+  );
+}
+
+function reducirMovimiento() {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+export function Contador({ valor, decimales = 0, prefijo = '', duracion = 600 }: { valor: number; decimales?: number; prefijo?: string; duracion?: number }) {
+  const [actual, setActual] = useState(reducirMovimiento() ? valor : 0);
+  useEffect(() => {
+    if (reducirMovimiento()) { setActual(valor); return; }
+    const inicio = performance.now();
+    let cuadro = 0;
+    const paso = (ahora: number) => {
+      const avance = Math.min(1, (ahora - inicio) / duracion);
+      setActual(valor * (1 - Math.pow(1 - avance, 3)));
+      if (avance < 1) cuadro = requestAnimationFrame(paso);
+    };
+    cuadro = requestAnimationFrame(paso);
+    return () => cancelAnimationFrame(cuadro);
+  }, [valor, duracion]);
+  return <>{prefijo}{actual.toFixed(decimales)}</>;
+}
+
+export function Hoja({ abierta, alCerrar, titulo, children }: { abierta: boolean; alCerrar: () => void; titulo: string; children: ReactNode }) {
+  const cierre = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!abierta) return;
+    cierre.current?.focus();
+    const alTeclear = (evento: KeyboardEvent) => { if (evento.key === 'Escape') alCerrar(); };
+    window.addEventListener('keydown', alTeclear);
+    return () => window.removeEventListener('keydown', alTeclear);
+  }, [abierta, alCerrar]);
+  if (!abierta) return null;
+  return (
+    <>
+      <div className="hoja__velo" onClick={alCerrar} />
+      <div className="hoja" role="dialog" aria-modal="true" aria-label={titulo}>
+        <div className="hoja__asa" />
+        <button ref={cierre} className="hoja__cerrar" onClick={alCerrar} aria-label="Cerrar">✕</button>
+        {children}
+      </div>
+    </>
   );
 }
