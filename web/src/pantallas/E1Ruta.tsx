@@ -38,13 +38,17 @@ export function E1Ruta() {
   const total = hitosRuta.length;
   const indiceActual = hitosRuta.findIndex((hito) => hito.estado === 'actual');
   const mostrados = [...hitosRuta].reverse();
+  const porcentaje = Math.round((hitosRuta.filter((hito) => hito.estado === 'hecho').length / total) * 100);
 
   return (
     <Pantalla tono="oscura">
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
           <div className="ruta__top"><span>Hola, Camila</span><Pill variante="accent">Semana 4 de 8</Pill></div>
-          <h1 className="titulo" style={{ fontSize: 40, lineHeight: 1.1 }}>Tu ruta</h1>
+          <div className="avance">
+            <span className="avance__num">{porcentaje}<small>%</small></span>
+            <p>de la expedición<br />recorrida</p>
+          </div>
           <div className="tramos" aria-hidden="true">
             {hitosRuta.map((hito, indice) => (
               <i key={hito.titulo} className={indice < indiceActual ? 'tramos__hecho' : indice === indiceActual ? 'tramos__actual' : ''} />
@@ -56,13 +60,15 @@ export function E1Ruta() {
           {mostrados.map((hito, indice) => {
             const clases = ['paso', `paso--${hito.estado}`, indice === 0 && 'paso--primero', indice === mostrados.length - 1 && 'paso--ultimo'].filter(Boolean).join(' ');
             return (
-              <li key={hito.titulo} className={clases}>
+              <li key={hito.titulo} className={clases} style={{ '--i': indice } as React.CSSProperties}>
+                {hito.fecha && <span className="paso__fecha"><small>{hito.fecha.dia}</small><b>{hito.fecha.numero}</b></span>}
                 <Nodo hito={hito} />
                 <div className="paso__texto">
                   <Kicker>{hito.kicker}</Kicker>
                   <span className="paso__titulo">{hito.titulo}</span>
                   {hito.nota && <span className="paso__nota"><Pill variante="accent" pequena>{hito.nota}</Pill> calificado</span>}
                   {hito.meta && <span className="paso__meta">{hito.meta}</span>}
+                  {hito.radar && <span className="paso__radar">{hito.radar.map((cambio) => <i key={cambio}>{cambio}</i>)}</span>}
                   {hito.accion && <a className="paso__accion" href={hito.accion.ruta}><Pill variante="deep" grande>{hito.accion.texto}</Pill></a>}
                 </div>
               </li>
