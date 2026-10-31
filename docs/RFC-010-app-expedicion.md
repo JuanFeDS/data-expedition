@@ -49,7 +49,7 @@ Ninguna herramienta que Juan conozca une esas piezas: rúbricas por niveles que 
 - **F14.** **Misiones**: trabajos largos (1 a 2 horas) en equipo, que son los trabajos con rúbrica de F4. El **proyecto final** es una misión en equipo con arquetipos mezclados: cada miembro responde por su rol y la bitácora muestra su contribución.
 - **F15.** **Arquetipos** asignados desde el diagnóstico (por ejemplo, fortalezas y debilidades por dimensión).
 - **F16.** **Votaciones y encuestas** dentro de la app. Cada grupo vota su **modo de clase**: colaborativo o competitivo. Mismas misiones, distinta puntuación: metas de grupo, o ligas pequeñas armadas por nivel del diagnóstico. El voto puede repetirse por módulo.
-- **F17.** **Narrativa de expedición, ligera**: vocabulario y estética (rutas, bitácora, hallazgos, roles), sin personajes ni diálogos. Las dimensiones conservan su nombre real.
+- **F17.** **Narrativa de expedición, ligera**: vocabulario y estética (rutas, bitácora, hallazgos, roles) y **un único personaje guía, un jaguar** (decisión del 2026-10-31, sustituye al "sin personajes" original): plano, con pocas poses y frases de una línea, que aparece en la ruta, en los estados vacíos y al celebrar. No habla en diálogos largos ni condiciona nota ni radar. Las dimensiones conservan su nombre real.
 
 **Después (v2)**
 - **F18.** Votación en vivo durante la clase (*peer instruction*) con histograma por pregunta y dimensión, e insignias.
