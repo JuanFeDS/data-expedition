@@ -46,10 +46,10 @@ export function E1Ruta() {
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
           <div className="ruta__top"><span>Hola, Camila</span><Pill variante="accent">Semana 4 de 8</Pill></div>
-          <Jaguar clase="ruta__guia" />
           <div className="avance">
             <span className="avance__num">{porcentaje}<small>%</small></span>
             <p>de la expedición<br />recorrida</p>
+            <Jaguar clase="avance__guia" />
           </div>
           <div className="tramos" aria-hidden="true">
             {hitosRuta.map((hito, indice) => (
