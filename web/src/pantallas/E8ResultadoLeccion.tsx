@@ -1,3 +1,4 @@
+import { Jaguar } from '../componentes/Jaguar';
 import { Kicker, Pantalla, Pill } from '../componentes/ui';
 
 const METRICAS = [
@@ -9,6 +10,7 @@ export function E8ResultadoLeccion() {
   return (
     <Pantalla tono="menta">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
+        <Jaguar pose="celebra" tamano={112} clase="resultado__guia" />
         <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
         <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
         <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Mira precisión, sensibilidad y la matriz de confusión.</p>
