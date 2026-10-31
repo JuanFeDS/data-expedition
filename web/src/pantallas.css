@@ -1,0 +1,28 @@
+/* E2 */
+.cambio { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+.cambio__nombre { width: 104px; font-size: 13px; font-weight: 700; }
+.cambio__delta { margin-left: auto; font-size: 14px; font-weight: 800; color: var(--primary); }
+.cambio__delta--cero { color: var(--muted); }
+.barra { position: relative; width: 150px; height: 14px; flex: none; }
+.barra__pista { position: absolute; top: 3px; left: 0; right: 0; height: 8px; border-radius: 4px; background: var(--line); }
+.barra__relleno { position: absolute; top: 3px; left: 0; height: 8px; border-radius: 4px; background: var(--primary); }
+.barra__inicio { position: absolute; top: 0; width: 3px; height: 14px; border-radius: 1px; background: var(--ink); margin-left: -1px; }
+
+/* E3 */
+.promedio { display: flex; align-items: center; gap: 12px; }
+.promedio .num { font-size: 76px; }
+.fila__nota { width: 72px; flex: none; font-family: var(--font-display); font-weight: 800; font-size: 38px; letter-spacing: -.07em; color: var(--secondary); }
+.fila__nota--atenuada { color: var(--muted); opacity: .6; }
+
+/* E4 */
+.criterio { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.criterio__valor { width: 28px; text-align: right; font-size: 14px; font-weight: 800; }
+
+/* E5 */
+.fila__titulo { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -.05em; line-height: 1.1; }
+.aviso { margin-top: 12px; padding: 16px; border-radius: 20px; background: var(--accent); display: flex; flex-direction: column; gap: 4px; }
+.aviso p { font-size: 13px; font-weight: 600; line-height: 18px; }
+
+/* E8 */
+.metrica { display: flex; align-items: center; gap: 14px; }
+.metrica .num { width: 110px; flex: none; font-size: 40px; }
