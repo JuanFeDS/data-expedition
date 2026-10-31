@@ -25,7 +25,7 @@ export function E3Notas() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Notas" titulo="Tus trabajos" isla="costa">
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Notas" titulo="Tus trabajos" objeto="trofeo">
           <div className="cifra-mundo">
             <span className="num"><Contador valor={4.2} decimales={1} /></span>
             <small>promedio hasta ahora<br />1 de 3 calificados</small>

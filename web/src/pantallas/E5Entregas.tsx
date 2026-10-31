@@ -19,7 +19,7 @@ export function E5Entregas() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Semana 4 · Desierto del Modelado" titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." isla="desierto" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Semana 4 · Desierto del Modelado" titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
         <div className="contenido cuerpo-mundo" style={{ gap: 8 }}>
           <Segmentado opciones={['Pendientes', 'Entregadas']} activa={vista} alCambiar={setVista} />
           {vista === 0 ? (

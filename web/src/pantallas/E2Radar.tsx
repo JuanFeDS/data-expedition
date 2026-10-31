@@ -10,7 +10,7 @@ export function E2Radar() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Tu radar" titulo="Cómo vas" subtitulo="Frente a tu punto de partida, no frente a nadie más." jaguar="pensando">
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Tu radar" titulo="Cómo vas" subtitulo="Frente a tu punto de partida, no frente a nadie más." objeto="brujula">
           <p className="radar__resumen"><strong>{subieron} de {dimensiones.length}</strong> dimensiones subieron</p>
         </CabeceraMundo>
         <div className="contenido cuerpo-mundo" style={{ gap: 10 }}>

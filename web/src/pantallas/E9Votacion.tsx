@@ -29,7 +29,7 @@ export function E9Votacion() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Módulo 2 · votación del grupo" titulo="¿Cómo quieren jugar?" subtitulo="Las mismas misiones; cambia cómo se puntúa. Tu voto es anónimo." jaguar="pensando" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Módulo 2 · votación del grupo" titulo="¿Cómo quieren jugar?" subtitulo="Las mismas misiones; cambia cómo se puntúa. Tu voto es anónimo." objeto="urna" />
         <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
           <button className="voto voto--verde" aria-pressed={voto === 'colaborativo'} onClick={() => setVoto('colaborativo')}>
             <span className="voto__cabeza">

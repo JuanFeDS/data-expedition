@@ -8,7 +8,7 @@ export function E4DetalleNota() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Notas', ruta: '#/e3' }} kicker="Trabajo 1 · semana 3 · 21 oct" titulo="Tu nota" isla="costa">
+        <CabeceraMundo atras={{ texto: 'Notas', ruta: '#/e3' }} kicker="Trabajo 1 · semana 3 · 21 oct" titulo="Tu nota" objeto="trofeo">
           <div className="cifra-mundo">
             <span className="num"><Contador valor={4.2} decimales={1} /></span>
             <small><Pill variante="accent" pequena>Con IA declarada</Pill><br />Bitácora entregada</small>

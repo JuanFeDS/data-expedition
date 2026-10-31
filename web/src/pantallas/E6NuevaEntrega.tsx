@@ -22,7 +22,7 @@ export function E6NuevaEntrega() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker="Trabajo 2 · Modelo predictivo" titulo="Declara cómo lo hiciste" isla="desierto" />
+        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker="Trabajo 2 · Modelo predictivo" titulo="Declara cómo lo hiciste" objeto="cuaderno" />
         <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
           <ol className="pasos" aria-label="Pasos de la entrega">
             {['Declarar', 'Bitácora', 'Entregar'].map((etiqueta, indice) => (
