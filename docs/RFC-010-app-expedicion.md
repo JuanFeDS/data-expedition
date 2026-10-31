@@ -115,7 +115,7 @@ Riesgo a vigilar: el plan gratuito de Supabase **pausa proyectos inactivos** (un
 ### 5.3 Modelo de datos (resumen)
 
 - `ediciones` (periodo). La **plantilla** reutilizable es una edición con `es_plantilla = true`; dimensiones, trabajos y criterios cuelgan siempre de una edición, y crear una edición nueva es copiar las filas de la plantilla.
-- `perfiles` (usuario, rol), `grupos` (de una edición), `matriculas` (perfil, edición, grupo), `equipos`, `miembros_equipo` (con rol de expedición).
+- `perfiles` (usuario, rol), `grupos` (de una edición), `matriculas` (perfil, edición, grupo), `equipos`, `miembros_equipo` (con el rol de expedición que tenía cada miembro al formar el equipo: es una foto, ver sección 5.4).
 - `dimensiones` (configurable), `trabajos`, `criterios` (trabajo, dimensión, modo de IA, descriptores de los 5 niveles).
 - `entregas` (estudiante o equipo, trabajo, modo de IA declarado, bitácora), `calificaciones` (criterio, nivel, comentario).
 - `diagnosticos` y `resultados_diagnostico`, `evidencias_radar` (estudiante, dimensión, fuente, valor, fecha).
@@ -150,6 +150,7 @@ Se muestra **siempre contra su propio punto de partida**. Los pesos y el tope so
 **Propuestas a profundizar en el desarrollo (no cerradas):**
 - *Modo de IA.* Cada criterio tiene dimensión y modo (Con IA o Sin IA) y todos aportan a su dimensión. "Dirección de IA" solo se evalúa en Con IA. El radar guarda cuántas evidencias vienen de cada modo.
 - *Trabajos en equipo.* La nota es igual para todos, pero el radar individual puede diferir: el aporte de cada criterio se pondera según el rol (o el arquetipo) del estudiante en el equipo. Las dimensiones de su rol pesan más. Riesgo: ponderar por arquetipo, que sale del diagnóstico, tiende a confirmar fortalezas; se prefiere el rol del equipo.
+- *El rol de expedición es dinámico.* Depende de las habilidades que el estudiante va desarrollando, así que no es un dato fijo: se **deriva del radar actual** con una regla configurable en el dominio puro (`derivarRol`). Al formar un equipo se guarda el rol de cada miembro en ese momento (foto en `miembros_equipo`) y esa foto pondera el radar de ese trabajo, para que un cambio posterior de rol no recalcule trabajos pasados. El historial de roles se reconstruye desde las `evidencias_radar` (fechadas) y alimenta el resumen semanal (F20). Por decidir: si el rol de cada trabajo es automático o automático con ajuste del docente (se recomienda lo segundo). No confundir con el rol de acceso (docente, estudiante, observador), que es estático y lo asigna el docente.
 
 ### 5.5 El banco de ejercicios
 
