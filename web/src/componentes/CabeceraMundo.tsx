@@ -9,11 +9,12 @@ interface PropsCabecera {
   titulo: string;
   subtitulo?: string;
   isla?: string;
+  objeto?: string;
   jaguar?: PoseJaguar;
   children?: ReactNode;
 }
 
-export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, jaguar, children }: PropsCabecera) {
+export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, objeto, jaguar, children }: PropsCabecera) {
   return (
     <header className="mundo">
       {atras && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
@@ -24,6 +25,7 @@ export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, jaguar, 
         {children}
       </div>
       {isla && <span className="mundo__arte"><Isla bioma={isla} /></span>}
+      {objeto && <span className={`mundo__arte mundo__arte--objeto ${jaguar ? 'mundo__arte--junto' : ''}`}><img className="mundo__objeto" src={`${import.meta.env.BASE_URL}objetos/${objeto}.webp`} alt="" /></span>}
       {jaguar && <Jaguar pose={jaguar} ancho={104} clase="mundo__jaguar" />}
     </header>
   );
