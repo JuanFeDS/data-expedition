@@ -532,3 +532,36 @@
 .retro { display: flex; align-items: center; gap: 12px; padding-top: 4px; }
 .retro__guia { flex: none; height: auto; scale: 1 1; }
 .retro p { font-size: 14px; font-weight: 600; line-height: 1.4; padding-top: 2px; }
+
+/* ---------- Objetos de expedicion en las cabeceras ---------- */
+.mundo__arte--objeto { width: 138px; right: 18px; bottom: -30px; }
+.mundo__objeto { display: block; width: 100%; height: auto; filter: drop-shadow(0 8px 0 rgb(7 59 58 / .22)); }
+@media (prefers-reduced-motion: no-preference) {
+  .mundo__objeto { animation: isla-flota 4.2s ease-in-out infinite; }
+}
+
+/* ---------- Objetos restantes ---------- */
+.mundo__arte--junto { width: 96px; right: 116px; bottom: 6px; }
+.tutorial__linterna { position: absolute; right: 118px; bottom: 6px; width: 50px; height: auto; filter: drop-shadow(0 6px 0 rgb(7 59 58 / .25)); }
+.tutorial__cab h1 { max-width: 190px; }
+.acceso__mapa { position: absolute; right: 16px; bottom: 30px; width: 118px; height: auto; rotate: -8deg; filter: drop-shadow(0 6px 0 rgb(7 59 58 / .25)); }
+.vivo__pie { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 10px; text-align: center; }
+.vivo__pie img { width: 150px; height: auto; filter: drop-shadow(0 6px 0 rgb(0 0 0 / .25)); }
+.vivo__pie p { font-size: 13px; font-weight: 700; opacity: .85; }
+@media (prefers-reduced-motion: no-preference) {
+  .acceso__mapa, .vivo__pie img { animation: isla-flota 4.4s ease-in-out infinite; }
+  .tutorial__linterna { animation: isla-flota 3.6s ease-in-out infinite; }
+}
+
+/* ---------- Coleccion de gemas ---------- */
+.gemas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 8px; padding: 6px 0 4px; }
+.gema { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
+.gema img { display: block; width: 100%; height: 58px; object-fit: contain; }
+.gema strong { font-size: 11px; font-weight: 800; line-height: 1.15; }
+.gema small { font-size: 10px; font-weight: 700; color: var(--muted); line-height: 1.2; }
+.gema--pulida img { filter: drop-shadow(0 0 8px rgb(255 210 63 / .55)); }
+.gema--tallada img { filter: saturate(.8) brightness(.95); }
+.gema--bruto img { filter: grayscale(.65) brightness(.85); }
+.gema--bloqueada img { filter: grayscale(1) brightness(.8); opacity: .45; }
+.gema--bloqueada strong, .gema--bruto strong { color: var(--muted); }
+.metrica__gema { flex: none; width: 46px; height: auto; margin-left: auto; filter: drop-shadow(0 4px 0 rgb(7 59 58 / .2)); }
