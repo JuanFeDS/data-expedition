@@ -3,6 +3,7 @@ import { Jaguar } from '../componentes/Jaguar';
 import { IconoSvg, type Icono } from '../componentes/Icono';
 import { consejosJaguar, regionesCurso } from '../datos';
 import { Region } from '../componentes/Region';
+import { MenuHoja } from '../componentes/Menu';
 import { Contador, Hoja, Kicker, Pantalla, Pill } from '../componentes/ui';
 
 const ACCESOS: { tipo: Icono; etiqueta: string; ruta: string; color: string; aviso?: string }[] = [
@@ -12,14 +13,6 @@ const ACCESOS: { tipo: Icono; etiqueta: string; ruta: string; color: string; avi
   { tipo: 'perfil', etiqueta: 'Perfil', ruta: '#/e12', color: 'claro' },
 ];
 
-const MENU: { tipo: Icono; etiqueta: string; detalle: string; ruta: string; color: string }[] = [
-  { tipo: 'ruta', etiqueta: 'Ruta', detalle: 'Tu recorrido por el curso', ruta: '#/e1', color: 'mint' },
-  { tipo: 'radar', etiqueta: 'Radar', detalle: 'Cómo vas frente a tu punto de partida', ruta: '#/e2', color: 'accent' },
-  { tipo: 'notas', etiqueta: 'Notas', detalle: 'Tus trabajos y retroalimentación', ruta: '#/e3', color: 'azul' },
-  { tipo: 'entregas', etiqueta: 'Entregas', detalle: 'Pendientes y entregadas', ruta: '#/e5', color: 'mint' },
-  { tipo: 'leccion', etiqueta: 'Lección del día', detalle: '5 minutos de práctica', ruta: '#/e7', color: 'accent' },
-  { tipo: 'ayuda', etiqueta: 'Tutorial', detalle: 'Cómo se usa la expedición', ruta: '#/tutorial', color: 'azul' },
-];
 
 
 function Fogata() {
@@ -139,18 +132,7 @@ export function E1Home() {
         <a href="#/e6"><Pill variante="deep" grande>Empezar la entrega</Pill></a>
       </Hoja>
 
-      <Hoja abierta={hoja === 'menu'} alCerrar={cerrar} titulo="Menú">
-        <Kicker>Explorar</Kicker>
-        <nav className="hoja__menu">
-          {MENU.map((opcion) => (
-            <a key={opcion.etiqueta} href={opcion.ruta} className="menu-fila">
-              <span className={`acceso-rapido__icono acceso-rapido__icono--${opcion.color}`}><IconoSvg tipo={opcion.tipo} /></span>
-              <span className="menu-fila__texto"><strong>{opcion.etiqueta}</strong><small>{opcion.detalle}</small></span>
-              <span aria-hidden="true">›</span>
-            </a>
-          ))}
-        </nav>
-      </Hoja>
+      <MenuHoja abierta={hoja === 'menu'} alCerrar={cerrar} omitir="#/home" />
     </Pantalla>
   );
 }
