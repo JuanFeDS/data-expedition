@@ -1,14 +1,34 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
-import { Isla } from '../componentes/Region';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
-import { regionesCurso } from '../datos';
+import { dimensiones } from '../datos';
 
 const HISTORIAL = [
   { semana: 'Semana 1', rol: 'Explorador de datos' },
   { semana: 'Semana 3', rol: 'Explorador de datos' },
   { semana: 'Semana 4', rol: 'Analista', actual: true },
 ];
+const GEMAS = [
+  { gema: 'esmeralda', dimension: 'Datos' },
+  { gema: 'topacio', dimension: 'Análisis' },
+  { gema: 'zafiro', dimension: 'Modelado' },
+  { gema: 'peridoto', dimension: 'Validación' },
+  { gema: 'aguamarina', dimension: 'Comunicación' },
+  { gema: 'ambar', dimension: 'Producción' },
+  { gema: 'opalo', dimension: 'Dirección de IA' },
+  { gema: 'diamante', dimension: 'Proyecto final' },
+];
+
+type NivelGema = 'pulida' | 'tallada' | 'bruto' | 'bloqueada';
+const ETIQUETA_NIVEL: Record<NivelGema, string> = { pulida: 'Pulida', tallada: 'Tallada', bruto: 'En bruto', bloqueada: 'Al final del curso' };
+
+function nivelDeGema(valor?: number): NivelGema {
+  if (valor === undefined) return 'bloqueada';
+  if (valor >= 60) return 'pulida';
+  if (valor >= 40) return 'tallada';
+  return 'bruto';
+}
+
 const XP = 340;
 const META_XP = 500;
 
@@ -16,7 +36,7 @@ export function E12Perfil() {
   return (
     <Pantalla>
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · camilo@universidad.edu.co" jaguar="guia" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · camilo@uni…" objeto="mochila" jaguar="guia" />
         <div className="contenido cuerpo-mundo" style={{ gap: 4 }}>
           <Kicker>Tu rol de expedición hoy</Kicker>
           <div className="perfil__rol">
@@ -39,14 +59,20 @@ export function E12Perfil() {
             <p className="meta" style={{ fontSize: 12 }}>El XP no es nota: se gana con lecciones y misiones y desbloquea retos opcionales.</p>
           </div>
           <hr className="sep" />
-          <Kicker>Sellos de la expedición</Kicker>
-          <div className="sellos">
-            {regionesCurso.map((region) => (
-              <div key={region.nombre} className={`sello sello--${region.estado}`}>
-                <Isla bioma={region.bioma} />
-                <small>Sem {region.semanas}</small>
-              </div>
-            ))}
+          <Kicker>Tu colección de gemas</Kicker>
+          <p className="meta" style={{ fontSize: 12 }}>Cada gema se pule a medida que sube su dimensión en el radar.</p>
+          <div className="gemas">
+            {GEMAS.map((item) => {
+              const valor = dimensiones.find((dimension) => dimension.nombre === item.dimension)?.ahora;
+              const nivel = nivelDeGema(valor);
+              return (
+                <div key={item.gema} className={`gema gema--${nivel}`}>
+                  <img src={`${import.meta.env.BASE_URL}gemas/${item.gema}.webp`} alt="" />
+                  <strong>{item.dimension}</strong>
+                  <small>{valor !== undefined ? `${ETIQUETA_NIVEL[nivel]} · ${valor}` : ETIQUETA_NIVEL[nivel]}</small>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

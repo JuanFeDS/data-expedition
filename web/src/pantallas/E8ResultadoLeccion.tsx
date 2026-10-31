@@ -3,7 +3,7 @@ import { Contador, Kicker, Pantalla, Pill } from '../componentes/ui';
 
 const METRICAS = [
   { valor: 30, decimales: 0, etiqueta: 'XP', detalle: 'Por esta lección. El XP no es nota.' },
-  { valor: 1.5, decimales: 1, etiqueta: 'Validación', detalle: 'Práctica verificada ligera · tope de 5 por semana (te quedan 3.5)' },
+  { valor: 1.5, decimales: 1, etiqueta: 'Validación', gema: 'peridoto', detalle: 'Práctica verificada ligera · tope de 5 por semana (te quedan 3.5)' },
 ];
 
 export function E8ResultadoLeccion() {
@@ -21,6 +21,7 @@ export function E8ResultadoLeccion() {
           <div className="metrica" key={metrica.etiqueta}>
             <span className="num"><Contador valor={metrica.valor} decimales={metrica.decimales} prefijo="+" /></span>
             <div><strong style={{ fontSize: 14, fontWeight: 800, display: 'block' }}>{metrica.etiqueta}</strong><span style={{ fontSize: 12, fontWeight: 600, opacity: .8 }}>{metrica.detalle}</span></div>
+            {'gema' in metrica && <img className="metrica__gema" src={`${import.meta.env.BASE_URL}gemas/${metrica.gema}.webp`} alt="" />}
           </div>
         ))}
         <div style={{ flex: 1 }} />
