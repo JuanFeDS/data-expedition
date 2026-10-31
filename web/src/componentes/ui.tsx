@@ -43,24 +43,6 @@ export function Niveles({ nivel }: { nivel: number }) {
   );
 }
 
-const PESTANAS = [
-  { nombre: 'Inicio', ruta: '#/home' },
-  { nombre: 'Ruta', ruta: '#/e1' },
-  { nombre: 'Radar', ruta: '#/e2' },
-  { nombre: 'Notas', ruta: '#/e3' },
-  { nombre: 'Entregas', ruta: '#/e5' },
-];
-
-export function TabBar({ activa }: { activa: 'Inicio' | 'Ruta' | 'Radar' | 'Notas' | 'Entregas' }) {
-  return (
-    <nav className="tabs">
-      {PESTANAS.map((pestana) => (
-        <a key={pestana.nombre} href={pestana.ruta} aria-current={pestana.nombre === activa ? 'page' : undefined}>{pestana.nombre}</a>
-      ))}
-    </nav>
-  );
-}
-
 export function Cabecera({ kicker, titulo, subtitulo, volver }: { kicker?: string; titulo: string; subtitulo?: string; volver?: { texto: string; ruta: string } }) {
   return (
     <header className="cabecera">

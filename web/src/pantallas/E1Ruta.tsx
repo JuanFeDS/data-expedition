@@ -1,6 +1,7 @@
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Isla } from '../componentes/Region';
-import { Kicker, ModoViva, Pantalla, Pill, TabBar } from '../componentes/ui';
+import { Dock } from '../componentes/Dock';
+import { Kicker, ModoViva, Pantalla, Pill } from '../componentes/ui';
 import { hitosRuta, regionesCurso } from '../datos';
 
 interface Tramo {
@@ -110,7 +111,7 @@ export function E1Ruta() {
           })}
         </div>
       </div>
-      <TabBar activa="Ruta" />
+      <Dock accion={{ etiqueta: 'Estás en la semana 4', texto: 'Continuar Trabajo 2', ruta: '#/e6' }} />
     </Pantalla>
   );
 }
