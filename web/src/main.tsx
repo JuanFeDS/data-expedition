@@ -5,6 +5,8 @@ import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
 
+if (window.location.search.includes('completo')) document.documentElement.classList.add('modo-completo');
+
 function rutaActual() {
   return window.location.hash.replace(/^#\/?/, '') || 'todas';
 }
