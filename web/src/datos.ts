@@ -28,3 +28,68 @@ export const criteriosTrabajo1: CriterioNota[] = [
   { nombre: 'Reproducibilidad', dimension: 'Producción', nivel: 3.5, peso: 1 },
   { nombre: 'Bitácora de IA', dimension: 'Dirección de IA', nivel: 4, peso: 1 },
 ];
+
+export type EstadoHito = 'hecho' | 'actual' | 'bloqueado' | 'cima';
+
+export interface HitoRuta {
+  kicker: string;
+  titulo: string;
+  estado: EstadoHito;
+  meta?: string;
+  nota?: string;
+  radar?: string[];
+  fecha?: { dia: string; numero: string };
+  accion?: { texto: string; ruta: string };
+}
+
+export const hitosRuta: HitoRuta[] = [
+  { kicker: 'Semana 1', titulo: 'Diagnóstico', estado: 'hecho', meta: 'Punto de partida fijado' },
+  { kicker: 'Semanas 2–3', titulo: 'Trabajo 1', estado: 'hecho', nota: '4.2', radar: ['Datos +12', 'Análisis +9', 'Modelado +8'] },
+  { kicker: 'Estás aquí · Semanas 4–5', titulo: 'Trabajo 2', estado: 'actual', fecha: { dia: 'VIE', numero: '7' }, meta: 'Modelo predictivo · vence el viernes 7', accion: { texto: 'Entregar', ruta: '#/e6' } },
+  { kicker: 'Semana 6', titulo: 'Trabajo 3', estado: 'bloqueado', meta: 'Se abre al entregar el Trabajo 2' },
+  { kicker: 'La cima · Semana 8', titulo: 'Proyecto final', estado: 'cima', meta: 'Misión en equipo · faltan 4 semanas' },
+];
+
+export const consejosJaguar = [
+  'Una entrega más y ves la cima. Toca de nuevo y te cuento cómo funciona todo.',
+  'Tu ruta muestra los trabajos del curso. Lo que sigue es lo que está en amarillo.',
+  'El radar compara cómo vas con tu punto de partida, no con tus compañeros.',
+  'Al entregar, declara si usaste IA. Las dos opciones valen igual; se evalúan habilidades distintas.',
+  'El XP no es nota: lo ganas con lecciones y misiones y desbloquea retos opcionales.',
+  'Las lecciones de 5 minutos suman práctica a tu radar, con un tope por semana.',
+  'Cada semana te llega un resumen con lo que subió y qué practicar. Míralo en Resumen.',
+  'Cada módulo tu grupo vota cómo jugar: colaborativo o competitivo. Tu voto es anónimo.',
+  '¿Te perdiste? Abre el menú (los cuatro cuadritos) o mira el tutorial completo.',
+];
+
+export const pasosTutorial = [
+  { icono: 'ruta', titulo: 'Tu ruta', texto: 'Cada punto del camino es un trabajo del curso. Lo recorrido va en menta, lo que sigue en amarillo y lo bloqueado se abre al entregar el anterior.' },
+  { icono: 'radar', titulo: 'Tu radar', texto: 'Mide tus habilidades en varias dimensiones y las compara con tu punto de partida del diagnóstico. Nunca con tus compañeros.' },
+  { icono: 'notas', titulo: 'Notas y retroalimentación', texto: 'Cada trabajo se califica con una rúbrica de 5 niveles. Ves qué nivel sacaste en cada criterio y cómo se calculó la nota de 1.0 a 5.0.' },
+  { icono: 'entregas', titulo: 'Entregas y uso de IA', texto: 'Puedes usar IA, pero debes declararlo al entregar y contar tu bitácora: qué pediste, qué aceptaste y qué descartaste.' },
+  { icono: 'leccion', titulo: 'Lecciones y XP', texto: 'Lecciones de 5 minutos para practicar desde el celular. Dan XP (que no es nota) y un aporte pequeño a tu radar, con tope semanal.' },
+  { icono: 'equipo', titulo: 'Votaciones y equipos', texto: 'Cada módulo tu grupo vota cómo jugar. En la misión final trabajas en equipo y cada quien responde por su rol.' },
+  { icono: 'resumen', titulo: 'Tu resumen semanal', texto: 'Cada semana recibes lo que subió, lo que conviene vigilar y qué hacer después, en la app y en tu correo institucional.' },
+] as const;
+
+export type Bioma = 'selva' | 'paramo' | 'costa' | 'volcan' | 'desierto' | 'glaciar' | 'cueva' | 'ruinas';
+
+export interface RegionCurso {
+  nombre: string;
+  modulo: string;
+  semanas: string;
+  bioma: Bioma;
+  estado: 'hecha' | 'actual' | 'pendiente';
+  hitos: string[];
+}
+
+export const regionesCurso: RegionCurso[] = [
+  { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'] },
+  { nombre: 'Páramo de la Limpieza', modulo: 'Datos', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: [] },
+  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'] },
+  { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '4', bioma: 'desierto', estado: 'actual', hitos: ['Trabajo 2'] },
+  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [] },
+  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'] },
+  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [] },
+  { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'] },
+];
