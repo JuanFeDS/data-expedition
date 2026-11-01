@@ -24,24 +24,24 @@ export function Radar({ dimensiones, ancho = 342, alto = 262, radio = 84 }: Prop
     <div className="radar" style={{ width: '100%', maxWidth: ancho, aspectRatio: `${ancho} / ${alto}` }} role="img" aria-label="Radar de habilidades: ahora frente al punto de partida">
       <svg width="100%" height="100%" viewBox={`0 0 ${ancho} ${alto}`} fill="none">
         {[25, 50, 75, 100].map((nivel) => (
-          <polygon key={nivel} points={poligono(dimensiones.map(() => nivel))} stroke="var(--line)" />
+          <polygon className="radar__rejilla" key={nivel} points={poligono(dimensiones.map(() => nivel))} stroke="var(--line)" style={{ '--n': nivel / 25 } as React.CSSProperties} />
         ))}
         {dimensiones.map((_, indice) => {
           const [x, y] = punto(indice, 100);
-          return <line key={indice} x1={centroX} y1={centroY} x2={x} y2={y} stroke="var(--line)" />;
+          return <line className="radar__eje" key={indice} x1={centroX} y1={centroY} x2={x} y2={y} stroke="var(--line)" />;
         })}
         <polygon className="radar__ahora" points={poligono(dimensiones.map((d) => d.ahora))} fill="var(--primary)" fillOpacity=".22" stroke="var(--primary)" strokeWidth="3" strokeLinejoin="round" />
         <polygon className="radar__inicio" points={poligono(dimensiones.map((d) => d.inicio))} stroke="var(--ink)" strokeWidth="2" strokeDasharray="4 4" />
         {dimensiones.map((dimension, indice) => {
           const [x, y] = punto(indice, dimension.ahora);
-          return <circle className="radar__punto" key={dimension.nombre} cx={x} cy={y} r="5" fill="#fff" stroke="var(--primary)" strokeWidth="3" />;
+          return <circle className="radar__punto" key={dimension.nombre} cx={x} cy={y} r="5" fill="#fff" stroke="var(--primary)" strokeWidth="3" style={{ '--i': indice } as React.CSSProperties} />;
         })}
       </svg>
       {dimensiones.map((dimension, indice) => {
         const [x, y] = punto(indice, 100, radio + 13);
         const horizontal = Math.cos(angulo(indice));
         const ajusteY = (Math.sin(angulo(indice)) > 0.5 ? 4 : 0) + (indice === 0 ? -6 : 0);
-        const estilo: React.CSSProperties = { top: porcentajeY(y + ajusteY) };
+        const estilo = { top: porcentajeY(y + ajusteY), '--i': indice } as React.CSSProperties;
         if (horizontal < -0.2) Object.assign(estilo, { right: `${((ancho - x) / ancho) * 100}%`, textAlign: 'right' });
         else if (horizontal > 0.2) Object.assign(estilo, { left: porcentajeX(x), textAlign: 'left' });
         else Object.assign(estilo, { left: porcentajeX(x), transform: 'translate(-50%, -50%)', textAlign: 'center' });
