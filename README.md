@@ -41,7 +41,8 @@ El curso se repensó para la era de la IA: la evaluación se rediseña antes que
 | 📝 | **Rúbricas de 5 niveles** que dan la nota de 1.0 a 5.0, con decimales, y una regla visible para el estudiante |
 | 🤖 | **Declaración de IA por entrega** ("con IA" o "sin IA"), con bitácora cuando se usó |
 | ⚡ | **Lecciones** de 3 a 5 minutos para el celular, con XP y un aporte pequeño y con tope al radar |
-| 💎 | **Gemas**: cada módulo cerrado da una gema y desbloquea sus preguntas de repaso; el nivel de pulido sube la dificultad |
+| 💎 | **Gemas y álbum por isla**: cada isla cerrada da una gema y abre su álbum de fotos con preguntas de repaso; el nivel de pulido sube la dificultad |
+| 🔥 | **Practicar**: sesiones de repaso sin límite con todo lo visto, para sostener racha por días y XP |
 | 🤝 | **Misiones en equipo** y **votaciones** por grupo (modo colaborativo o competitivo) |
 | 🗳️ | **Votación en vivo** durante la clase |
 | 📬 | **Resumen semanal** dentro de la app y por correo |

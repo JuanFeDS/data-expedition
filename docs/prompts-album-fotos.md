@@ -1,6 +1,6 @@
 # Prompts para las fotos del álbum de la expedición
 
-El álbum de **Practicar** tiene una página por gema. Cada sesión de 5 preguntas revela una foto de esa página. Son **6 fotos por página** y **8 páginas** (una por gema).
+El álbum vive dentro de cada isla del mapa y del inicio: **una página por isla**, y cada isla tiene su propia gema. Cada sesión de repaso de esa isla revela una foto. Son **6 fotos por página** y **8 páginas**. La pantalla Practicar no revela fotos: allí solo se suma racha y XP.
 
 Se generan con una IA de imágenes, **una hoja por página**: una cuadrícula de 3 columnas × 2 filas, con las 6 escenas sobre fondo magenta para recortarlas después (igual que las hojas de islas, objetos y gemas).
 
@@ -9,7 +9,7 @@ Se generan con una IA de imágenes, **una hoja por página**: una cuadrícula de
 1. Copia el **prompt base** y pega al final las **6 escenas** de la página que vas a generar.
 2. Genera la hoja en formato **horizontal, 3:2**.
 3. Si la IA mezcla las escenas, genera una sola escena y repite; lo importante es el estilo consistente.
-4. Guarda cada hoja como `fotos-<gema>.png` y pásamela. Yo la recorto en 6 fotos y las dejo en `web/public/album/`.
+4. Guarda cada hoja como `fotos-<isla>.png` y pásamela. Yo la recorto en 6 fotos y las dejo en `web/public/album/`.
 
 ## Prompt base
 
@@ -27,7 +27,9 @@ Después del bloque anterior, pega la lista de escenas de la página.
 
 ## Escenas por página
 
-### 1. Datos · Esmeralda Semilla · Valle de los Datos (selva)
+Una página por isla, en el orden del curso.
+
+### 1. Valle de los Datos · Esmeralda Semilla (selva)
 
 Ambientación: selva verde, cascada, palmeras, flores amarillas. Acento: verde esmeralda.
 
@@ -38,7 +40,18 @@ Ambientación: selva verde, cascada, palmeras, flores amarillas. Acento: verde e
 5. El jaguar con mochila cruza un puente colgante de lianas sobre un río.
 6. El jaguar levanta un cesto lleno de frutas recién cosechadas, sonriendo.
 
-### 2. Análisis · Topacio Faro · Costa de la Exploración (costa)
+### 2. Páramo de la Limpieza · Ópalo Bruma (páramo)
+
+Ambientación: páramo de altura con frailejones plateados, neblina suave y lagunas frías. Acento: tonos iridiscentes de ópalo (celeste, rosa, lila).
+
+1. El jaguar limpia con un trapo una lupa empañada por la neblina.
+2. El jaguar barre hojas secas de un sendero de piedra con una escoba.
+3. El jaguar cuela agua turbia con un tamiz hacia una vasija clara.
+4. El jaguar sacude el polvo de un mapa antiguo extendido sobre una roca.
+5. El jaguar separa frutos buenos y dañados en dos cestas, entre frailejones.
+6. El jaguar mira cómo la neblina se levanta y deja ver una cima despejada.
+
+### 3. Costa de la Exploración · Topacio Faro (costa)
 
 Ambientación: playa, faro rojo y blanco, mar turquesa. Acento: amarillo topacio.
 
@@ -49,29 +62,7 @@ Ambientación: playa, faro rojo y blanco, mar turquesa. Acento: amarillo topacio
 5. El jaguar sigue un mapa del tesoro hacia una palmera.
 6. El jaguar rema en una pequeña barca de madera, con el faro al fondo.
 
-### 3. Producción · Ámbar Brasa · hoguera del campamento
-
-Ambientación: campamento al atardecer, tonos cálidos naranja y ámbar. Acento: ámbar.
-
-1. El jaguar enciende una hoguera con un trozo de madera.
-2. El jaguar hace la mochila, metiendo un cuaderno y una brújula.
-3. El jaguar ajusta una tuerca en un mecanismo de engranajes de madera.
-4. El jaguar sella una caja de madera con cinta y una etiqueta lisa, sin texto.
-5. El jaguar cuelga herramientas ordenadas en un tablero de madera.
-6. El jaguar guarda frascos de miel ámbar en una estantería, orgulloso.
-
-### 4. Dirección de IA · Ópalo Aurora · cielo de aurora
-
-Ambientación: claro de bosque bajo una aurora de colores suaves, sin más personajes que un pequeño robot de madera con una sola luz azul. Acento: tonos iridiscentes de ópalo (celeste, rosa, lila).
-
-1. El jaguar guía a un pequeño robot de madera con una brújula, señalando el camino.
-2. El jaguar sostiene un mapa abierto mientras el robot señala una dirección distinta.
-3. El jaguar corrige con una brocha una flecha de un letrero de madera, sin texto, que apuntaba al lado equivocado.
-4. El jaguar y el robot cruzan juntos un puente pequeño de piedra.
-5. El jaguar mira una aurora de colores con el robot sentado a su lado.
-6. El jaguar elige entre dos caminos que se separan en el bosque, con el robot esperando.
-
-### 5. Modelado · Zafiro del Oasis · Desierto del Modelado (desierto)
+### 4. Desierto del Modelado · Zafiro del Oasis (desierto)
 
 Ambientación: dunas, cactus, palmera y un oasis azul. Acento: azul zafiro.
 
@@ -82,7 +73,18 @@ Ambientación: dunas, cactus, palmera y un oasis azul. Acento: azul zafiro.
 5. El jaguar sigue huellas en la arena hacia una duna lejana.
 6. El jaguar clava una bandera pequeña en la cima de una duna, con el oasis abajo.
 
-### 6. Validación · Peridoto Centinela · Ruinas de la Validación (ruinas)
+### 5. Cueva de los Modelos · Ámbar Brasa (cueva)
+
+Ambientación: cueva con cristales, luz cálida de antorcha y paredes de ámbar. Acento: ámbar y naranja cálido.
+
+1. El jaguar entra en la cueva con una linterna encendida.
+2. El jaguar mira cristales que forman un patrón regular en la pared.
+3. El jaguar compara dos formaciones de estalactitas, una en cada mano de la escena.
+4. El jaguar mide una formación con una cuerda anudada.
+5. El jaguar moldea arcilla en moldes de distinta forma sobre una mesa de piedra.
+6. El jaguar descubre una veta de ámbar brillante en la pared y sonríe.
+
+### 6. Ruinas de la Validación · Peridoto Centinela (ruinas)
 
 Ambientación: ruinas de piedra cubiertas de musgo, columnas, una puerta antigua. Acento: verde oliva peridoto.
 
@@ -93,7 +95,7 @@ Ambientación: ruinas de piedra cubiertas de musgo, columnas, una puerta antigua
 5. El jaguar vigila la entrada de las ruinas con una linterna encendida.
 6. El jaguar marca con una cuerda el contorno de un cuarto de las ruinas.
 
-### 7. Comunicación · Aguamarina Eco · Glaciar de la Comunicación (glaciar)
+### 7. Glaciar de la Comunicación · Aguamarina Eco (glaciar)
 
 Ambientación: glaciar azul claro, picos nevados, hielo brillante. Acento: aguamarina.
 
@@ -104,7 +106,7 @@ Ambientación: glaciar azul claro, picos nevados, hielo brillante. Acento: aguam
 5. El jaguar hace un muñeco de nieve con su mismo pañuelo azul.
 6. El jaguar toca un cuerno de montaña sobre el glaciar, con ondas de sonido.
 
-### 8. Proyecto final · Rubí del Volcán · El Volcán (volcán)
+### 8. El Volcán · Rubí del Volcán (volcán)
 
 Ambientación: volcán con cráter, lava naranja, roca oscura. Acento: rojo rubí.
 
