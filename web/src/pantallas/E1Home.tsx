@@ -4,14 +4,22 @@ import { IconoSvg, type Icono } from '../componentes/Icono';
 import { consejosJaguar, hitosRuta, regionesCurso } from '../datos';
 import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
-import { Contador, Hoja, Kicker, Pantalla, Pill } from '../componentes/ui';
+import { Contador, Hoja, Kicker, ModoModal, Pantalla, Pill } from '../componentes/ui';
+import { E9Votacion } from './E9Votacion';
+import { E10Mision } from './E10Mision';
+import { E11Resumen } from './E11Resumen';
+import { E12Perfil } from './E12Perfil';
 
-const ACCESOS: { tipo: Icono; etiqueta: string; ruta: string; color: string; aviso?: string }[] = [
-  { tipo: 'votar', etiqueta: 'Votación', ruta: '#/e9', color: 'accent', aviso: '1' },
-  { tipo: 'resumen', etiqueta: 'Resumen', ruta: '#/e11', color: 'mint', aviso: '•' },
-  { tipo: 'equipo', etiqueta: 'Equipo', ruta: '#/e10', color: 'azul' },
-  { tipo: 'perfil', etiqueta: 'Perfil', ruta: '#/e12', color: 'claro' },
+type Modal = 'votacion' | 'resumen' | 'equipo' | 'perfil';
+
+const ACCESOS: { tipo: Icono; etiqueta: string; modal: Modal; color: string; aviso?: string }[] = [
+  { tipo: 'votar', etiqueta: 'Votación', modal: 'votacion', color: 'accent', aviso: '1' },
+  { tipo: 'resumen', etiqueta: 'Resumen', modal: 'resumen', color: 'mint', aviso: '•' },
+  { tipo: 'equipo', etiqueta: 'Equipo', modal: 'equipo', color: 'azul' },
+  { tipo: 'perfil', etiqueta: 'Perfil', modal: 'perfil', color: 'claro' },
 ];
+
+const CONTENIDO_MODAL: Record<Modal, () => React.ReactElement> = { votacion: E9Votacion, resumen: E11Resumen, equipo: E10Mision, perfil: E12Perfil };
 
 
 
@@ -38,9 +46,10 @@ const PASOS = ['Declara si usaste IA (con o sin IA).', 'Si usaste IA, cuenta tu 
 const regionActual = Math.max(0, regionesCurso.findIndex((region) => region.estado === 'actual'));
 
 export function E1Home() {
-  const [hoja, setHoja] = useState<'paso' | 'menu' | null>(null);
+  const [hoja, setHoja] = useState<'paso' | 'menu' | Modal | null>(null);
   const [vista, setVista] = useState(regionActual);
   const [consejo, setConsejo] = useState(0);
+  const [frase, setFrase] = useState<string | null>(null);
   const [abierto, setAbierto] = useState(false);
   const [pista, setPista] = useState(true);
 
@@ -48,7 +57,7 @@ export function E1Home() {
     if (!abierto) return;
     const temporizador = setTimeout(() => setAbierto(false), 8000);
     return () => clearTimeout(temporizador);
-  }, [abierto, consejo]);
+  }, [abierto, consejo, frase]);
 
   useEffect(() => {
     if (abierto || !pista) return;
@@ -60,6 +69,13 @@ export function E1Home() {
     setPista(false);
     if (!abierto) setAbierto(true);
     else setConsejo((actual) => (actual + 1) % consejosJaguar.length);
+    setFrase(null);
+  };
+  const cambiarIsla = (indice: number) => {
+    setVista(indice);
+    setPista(false);
+    setFrase(regionesCurso[indice].frase);
+    setAbierto(true);
   };
   const cerrar = () => setHoja(null);
   return (
@@ -88,12 +104,12 @@ export function E1Home() {
         </div>
 
         <div className="camp__zona">
-          <Region regiones={regionesCurso} actual={regionActual} vista={vista} alCambiar={setVista} />
+          <Region regiones={regionesCurso} actual={regionActual} vista={vista} alCambiar={cambiarIsla} />
           <div className="camp__guiabox">
             {abierto ? (
-              <p className="camp__globo" key={consejo} role="status">
-                {consejosJaguar[consejo]}
-                <a href="#/tutorial">Ver el tutorial ›</a>
+              <p className="camp__globo" key={frase ?? consejo} role="status">
+                {frase ?? consejosJaguar[consejo]}
+                {!frase && <a href="#/tutorial">Ver el tutorial ›</a>}
               </p>
             ) : pista ? (
               <p className="camp__globo camp__globo--mini" key="mini">¿Un consejo?</p>
@@ -104,13 +120,13 @@ export function E1Home() {
           </div>
           <nav className="camp__accesos" aria-label="Accesos rápidos">
             {ACCESOS.map((acceso) => (
-              <a key={acceso.etiqueta} href={acceso.ruta} className="acceso-rapido">
+              <button key={acceso.etiqueta} className="acceso-rapido" onClick={() => setHoja(acceso.modal)}>
                 <span className={`acceso-rapido__icono acceso-rapido__icono--${acceso.color}`}>
                   <IconoSvg tipo={acceso.tipo} />
                   {acceso.aviso && <i className="acceso-rapido__aviso">{acceso.aviso}</i>}
                 </span>
                 <span>{acceso.etiqueta}</span>
-              </a>
+              </button>
             ))}
           </nav>
         </div>
@@ -150,6 +166,15 @@ export function E1Home() {
         <ol className="hoja__pasos">{PASOS.map((paso) => <li key={paso}>{paso}</li>)}</ol>
         <a href="#/e6"><Pill variante="deep" grande>Empezar la entrega</Pill></a>
       </Hoja>
+
+      {(Object.keys(CONTENIDO_MODAL) as Modal[]).map((modal) => {
+        const Contenido = CONTENIDO_MODAL[modal];
+        return (
+          <Hoja key={modal} abierta={hoja === modal} alCerrar={cerrar} titulo={ACCESOS.find((acceso) => acceso.modal === modal)?.etiqueta ?? ''} clase="hoja--pantalla">
+            <ModoModal.Provider value><Contenido /></ModoModal.Provider>
+          </Hoja>
+        );
+      })}
 
       <MenuHoja abierta={hoja === 'menu'} alCerrar={cerrar} omitir="#/home" />
     </Pantalla>

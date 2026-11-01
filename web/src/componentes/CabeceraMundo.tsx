@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { Jaguar, type PoseJaguar } from './Jaguar';
 import { Isla } from './Region';
-import { Kicker } from './ui';
+import { Kicker, ModoModal } from './ui';
 
 interface PropsCabecera {
   atras?: { texto: string; ruta: string };
@@ -15,9 +15,10 @@ interface PropsCabecera {
 }
 
 export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, objeto, jaguar, children }: PropsCabecera) {
+  const modal = useContext(ModoModal);
   return (
     <header className="mundo">
-      {atras && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
+      {atras && !modal && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
       <div className="mundo__texto">
         {kicker && <Kicker estilo={{ color: 'var(--mint)' }}>{kicker}</Kicker>}
         <h1 className="titulo">{titulo}</h1>

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IconoSvg } from './Icono';
 import { MenuHoja } from './Menu';
+import { ModoModal } from './ui';
 
 interface AccionDock {
   etiqueta: string;
@@ -10,6 +11,8 @@ interface AccionDock {
 
 export function Dock({ accion }: { accion?: AccionDock }) {
   const [abierto, setAbierto] = useState(false);
+  const modal = useContext(ModoModal);
+  if (modal) return null;
   return (
     <>
       <footer className="dock">

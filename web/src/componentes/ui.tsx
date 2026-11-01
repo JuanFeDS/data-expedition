@@ -1,13 +1,15 @@
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 
 export const ModoViva = createContext(false);
+export const ModoModal = createContext(false);
 
 type Tono = 'claro' | 'oscura' | 'verde' | 'menta';
 
 export function Pantalla({ tono = 'claro', clase = '', children }: { tono?: Tono; clase?: string; children: ReactNode }) {
   const viva = useContext(ModoViva);
+  const modal = useContext(ModoModal);
   const tonoClase = tono === 'claro' ? '' : `pantalla--${tono}`;
-  return <div className={`pantalla ${tonoClase} ${viva ? 'pantalla--viva' : ''} ${clase}`}>{children}</div>;
+  return <div className={`pantalla ${tonoClase} ${viva ? 'pantalla--viva' : ''} ${modal ? 'pantalla--modal' : ''} ${clase}`}>{children}</div>;
 }
 
 export function Kicker({ children, estilo }: { children: ReactNode; estilo?: React.CSSProperties }) {
@@ -75,8 +77,26 @@ export function Contador({ valor, decimales = 0, prefijo = '', duracion = 600 }:
   return <>{prefijo}{actual.toFixed(decimales)}</>;
 }
 
-export function Hoja({ abierta, alCerrar, titulo, children }: { abierta: boolean; alCerrar: () => void; titulo: string; children: ReactNode }) {
+export function Hoja({ abierta, alCerrar, titulo, clase = '', children }: { abierta: boolean; alCerrar: () => void; titulo: string; clase?: string; children: ReactNode }) {
   const cierre = useRef<HTMLButtonElement>(null);
+  const hoja = useRef<HTMLDivElement>(null);
+  const ajuste = useRef<HTMLDivElement>(null);
+  const encaja = clase.includes('hoja--pantalla');
+  useLayoutEffect(() => {
+    if (!abierta || !encaja) return;
+    const reducir = () => {
+      const contenido = ajuste.current;
+      const contenedor = hoja.current?.offsetParent as HTMLElement | null;
+      if (!contenido || !contenedor) return;
+      contenido.style.zoom = '1';
+      const escala = Math.min(1, (contenedor.clientHeight * 0.92) / contenido.offsetHeight);
+      contenido.style.zoom = String(escala);
+    };
+    reducir();
+    const pendiente = setTimeout(reducir, 350);
+    window.addEventListener('resize', reducir);
+    return () => { clearTimeout(pendiente); window.removeEventListener('resize', reducir); };
+  }, [abierta, encaja]);
   useEffect(() => {
     if (!abierta) return;
     cierre.current?.focus();
@@ -88,10 +108,10 @@ export function Hoja({ abierta, alCerrar, titulo, children }: { abierta: boolean
   return (
     <>
       <div className="hoja__velo" onClick={alCerrar} />
-      <div className="hoja" role="dialog" aria-modal="true" aria-label={titulo}>
+      <div ref={hoja} className={`hoja ${clase}`} role="dialog" aria-modal="true" aria-label={titulo}>
         <div className="hoja__asa" />
         <button ref={cierre} className="hoja__cerrar" onClick={alCerrar} aria-label="Cerrar">✕</button>
-        {children}
+        {encaja ? <div ref={ajuste}>{children}</div> : children}
       </div>
     </>
   );
