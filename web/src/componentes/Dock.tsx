@@ -6,7 +6,9 @@ import { ModoModal } from './ui';
 interface AccionDock {
   etiqueta: string;
   texto: string;
-  ruta: string;
+  ruta?: string;
+  alPulsar?: () => void;
+  deshabilitada?: boolean;
 }
 
 export function Dock({ accion }: { accion?: AccionDock }) {
@@ -18,10 +20,17 @@ export function Dock({ accion }: { accion?: AccionDock }) {
       <footer className="dock">
         <button className="dock__menu" onClick={() => setAbierto(true)} aria-label="Abrir menú"><IconoSvg tipo="menu" tamano={26} /></button>
         {accion ? (
-          <a className="dock__accion" href={accion.ruta}>
-            <small>{accion.etiqueta}</small>
-            <strong>{accion.texto}</strong>
-          </a>
+          accion.alPulsar ? (
+            <button className="dock__accion" onClick={accion.alPulsar} disabled={accion.deshabilitada} key={accion.texto}>
+              <small>{accion.etiqueta}</small>
+              <strong>{accion.texto}</strong>
+            </button>
+          ) : (
+            <a className="dock__accion" href={accion.ruta}>
+              <small>{accion.etiqueta}</small>
+              <strong>{accion.texto}</strong>
+            </a>
+          )
         ) : (
           <a className="dock__inicio" href="#/home">Volver al campamento</a>
         )}
