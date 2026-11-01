@@ -15,7 +15,7 @@ Borrador del 2026-11-01. Parte del pensum de ESTUD-IA (8 módulos, English for T
 
 | Sesión | Por qué presencial |
 |---|---|
-| **S1** (semana 1) | Instalar el entorno y resolver los problemas de Git a mano; es el mayor riesgo de abandono |
+| **S2** (semana 1) | La verificación sin IA se hace con supervisión real; además sirve de clínica para quien no terminó el entorno o el PR de prueba en la clase 1 virtual |
 | **S11** (semana 6) | Formar equipos, repartir roles y arrancar el integrador con Scrum cara a cara |
 | **S16** (semana 8) | Presentación del integrador |
 
@@ -35,19 +35,19 @@ Bloques de 40 a 50 min con pausas de 10 min; nada de 3 h seguidas de pantalla co
 3. 50 min: avance individual con apoyo.
 4. 30 min: **revisión al azar** (F10): se sortean 2 o 3 equipos que comparten pantalla 3 min cada uno y reciben retroalimentación del grupo.
 
-## 4. Clase 1 (S1, presencial)
+## 4. Clase 1 (S1, virtual)
 
 | Min | Bloque |
 |---|---|
 | 0–20 | Bienvenida: cómo funciona el curso (islas, radar, IA con declaración, entrega por PR) y por qué hay un diagnóstico |
 | 20–60 | Introducción a la ciencia de datos (teoría): ciclo, roles, qué es big data, dónde entra la IA |
 | 60–70 | Pausa |
-| 70–110 | Entorno: cuenta de GitHub, Git, VS Code y Colab. Censo rápido de equipos (sistema operativo, memoria, navegador) |
+| 70–110 | Entorno: cuenta de GitHub, Git, VS Code y Colab, con lista de verificación y salas de apoyo por sistema operativo. Censo rápido de equipos (sistema operativo, memoria, navegador) |
 | 110–120 | Pausa |
 | 120–165 | **Guía de entrega por PR**: repo público, rama, commit, abrir el PR y copiar el enlace. Cada estudiante abre un **PR de prueba** (un README con su nombre y tres líneas) |
 | 165–180 | Cierre: se explica la tarea diagnóstica y el plazo |
 
-El PR de prueba valida de punta a punta el flujo de F21 antes de cualquier trabajo con nota. La guía de PR queda como documento aparte para los estudiantes.
+El PR de prueba valida de punta a punta el flujo de F21 antes de cualquier trabajo con nota. La guía de PR queda como documento aparte para los estudiantes. Al ser virtual, quien no termine el entorno o el PR lo resuelve en la clínica de la S2, que es presencial. Detalle de la dinámica en [semana-01.md](plan-de-estudios/semana-01.md).
 
 ## 5. Diagnóstico
 
@@ -68,10 +68,12 @@ Punto de partida del radar (F7). No cuenta para aprobar.
 
 ## 6. Plan semana por semana
 
+La dinámica detallada de cada sesión está en `plan-de-estudios/`, un archivo por semana: [1](plan-de-estudios/semana-01.md), [2](plan-de-estudios/semana-02.md), [3](plan-de-estudios/semana-03.md), [4](plan-de-estudios/semana-04.md), [5](plan-de-estudios/semana-05.md), [6](plan-de-estudios/semana-06.md), [7](plan-de-estudios/semana-07.md), [8](plan-de-estudios/semana-08.md).
+
 | Sem. | Ses. | Modalidad | Foco | Trabajo (PR) |
 |---|---|---|---|---|
-| 1 | S1 | Presencial | Introducción a la ciencia de datos, entorno, guía de PR | PR de prueba; tarea diagnóstica |
-| 1 | S2 | Virtual | Verificación sin IA; pandas fundamentos en tres niveles | Diagnóstico entregado |
+| 1 | S1 | Virtual | Introducción a la ciencia de datos, entorno, guía de PR | PR de prueba; tarea diagnóstica |
+| 1 | S2 | Presencial | Verificación sin IA, clínica de entorno y PR; pandas fundamentos en tres niveles | Diagnóstico entregado |
 | 2 | S3 | Virtual | pandas avanzado: joins, ventanas, limpieza; NumPy | |
 | 2 | S4 | Virtual | EDA con Matplotlib y Seaborn | **T1** EDA reproducible |
 | 3 | S5 | Virtual | Regresión con scikit-learn, partición train/test y métricas | |
