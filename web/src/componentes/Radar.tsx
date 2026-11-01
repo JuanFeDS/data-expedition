@@ -17,10 +17,12 @@ export function Radar({ dimensiones, ancho = 342, alto = 262, radio = 84 }: Prop
     centroY + Math.sin(angulo(indice)) * radioBase * (valor / 100),
   ];
   const poligono = (valores: number[]) => valores.map((valor, indice) => punto(indice, valor).map((n) => n.toFixed(1)).join(',')).join(' ');
+  const porcentajeX = (x: number) => `${(x / ancho) * 100}%`;
+  const porcentajeY = (y: number) => `${(y / alto) * 100}%`;
 
   return (
-    <div className="radar" style={{ width: ancho, height: alto }} role="img" aria-label="Radar de habilidades: ahora frente al punto de partida">
-      <svg width={ancho} height={alto} viewBox={`0 0 ${ancho} ${alto}`} fill="none">
+    <div className="radar" style={{ width: '100%', maxWidth: ancho, aspectRatio: `${ancho} / ${alto}` }} role="img" aria-label="Radar de habilidades: ahora frente al punto de partida">
+      <svg width="100%" height="100%" viewBox={`0 0 ${ancho} ${alto}`} fill="none">
         {[25, 50, 75, 100].map((nivel) => (
           <polygon key={nivel} points={poligono(dimensiones.map(() => nivel))} stroke="var(--line)" />
         ))}
@@ -39,10 +41,10 @@ export function Radar({ dimensiones, ancho = 342, alto = 262, radio = 84 }: Prop
         const [x, y] = punto(indice, 100, radio + 13);
         const horizontal = Math.cos(angulo(indice));
         const ajusteY = (Math.sin(angulo(indice)) > 0.5 ? 4 : 0) + (indice === 0 ? -6 : 0);
-        const estilo: React.CSSProperties = { top: y + ajusteY };
-        if (horizontal < -0.2) Object.assign(estilo, { right: ancho - x, textAlign: 'right' });
-        else if (horizontal > 0.2) Object.assign(estilo, { left: x, textAlign: 'left' });
-        else Object.assign(estilo, { left: x, transform: 'translate(-50%, -50%)', textAlign: 'center' });
+        const estilo: React.CSSProperties = { top: porcentajeY(y + ajusteY) };
+        if (horizontal < -0.2) Object.assign(estilo, { right: `${((ancho - x) / ancho) * 100}%`, textAlign: 'right' });
+        else if (horizontal > 0.2) Object.assign(estilo, { left: porcentajeX(x), textAlign: 'left' });
+        else Object.assign(estilo, { left: porcentajeX(x), transform: 'translate(-50%, -50%)', textAlign: 'center' });
         const partes = dimension.nombre === 'Dirección de IA' ? ['Dirección', 'de IA'] : [dimension.nombre];
         return (
           <span key={dimension.nombre} className="radar__etiqueta" style={estilo}>
