@@ -57,6 +57,7 @@ Ninguna herramienta que Juan conozca une esas piezas: rúbricas por niveles que 
 
 **Agregado el 2026-10-31**
 - **F20.** **Resumen semanal por estudiante**: un reporte con análisis de su semana (radar frente a su punto de partida, notas, lecciones, qué mejoró y qué no). Se entrega **dentro de la app y también por correo**. Proveedor de envío y revisión previa del docente por definir (pregunta 17).
+- **F21.** **Entrega por enlace de PR**: en todos los trabajos, cada estudiante entrega **individualmente** el enlace de un *pull request* de su **propio repo público**, donde vive la entrega final. Flujo: enlace del PR, declaración de IA (F6), bitácora si usó IA y confirmación. Una función de servidor verifica contra la API de GitHub que el PR exista, sea del estudiante (usuario de GitHub guardado en su perfil) y registra su estado y el **SHA del último commit al entregar**, para saber qué había en el momento de la entrega aunque el estudiante siga empujando después. El prototipo de interfaz ya existe sin verificación; falta la parte funcional (decidido el 2026-10-31).
 
 ### 3.2 No funcionales
 - **N1.** Costo cero estricto (por confirmar, pregunta 2).
