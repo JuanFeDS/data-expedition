@@ -40,9 +40,13 @@
   a:active .pill, button:active .pill, .opcion:active, .resp:active, .dock__menu:active, .dock__accion:active { transform: scale(.96); }
   .opcion[aria-pressed='true'], .resp[aria-pressed='true'] { animation: pop .28s ease-out; }
 
-  .radar__ahora { transform-box: view-box; transform-origin: 50% 50%; animation: radar-crece .6s .1s both ease-out; }
-  .radar__inicio { animation: aparece .4s both; }
-  .radar__punto { animation: aparece .3s .5s both; }
+  .radar__rejilla, .radar__eje { animation: aparece .45s both; }
+  .radar__rejilla { animation-delay: calc(var(--n) * 90ms); }
+  .radar__eje { animation-delay: .3s; }
+  .radar__inicio { animation: aparece .5s .6s both; }
+  .radar__ahora { transform-box: view-box; transform-origin: 50% 50%; animation: radar-crece .9s .9s both cubic-bezier(.22, 1.2, .36, 1); }
+  .radar__punto { transform-box: fill-box; transform-origin: center; animation: radar-punto .4s calc(1.55s + var(--i) * 70ms) both cubic-bezier(.3, 1.6, .5, 1); }
+  .radar__etiqueta { animation: aparece .4s calc(.5s + var(--i) * 60ms) both; }
   .barra__relleno { transform-origin: left; animation: barra-llena .5s both ease-out; animation-delay: calc(var(--i, 0) * 35ms + .15s); }
   .nivel__seg i { transform-origin: left; animation: barra-llena .45s both ease-out; animation-delay: calc(var(--i, 0) * 50ms + .15s); }
 
@@ -52,7 +56,8 @@
 
   @keyframes aparece { from { opacity: 0; } }
   @keyframes pop { 50% { transform: scale(1.03); } }
-  @keyframes radar-crece { from { opacity: 0; transform: scale(.85); } }
+  @keyframes radar-crece { from { opacity: 0; transform: scale(.05); } }
+  @keyframes radar-punto { from { opacity: 0; transform: scale(0); } }
   @keyframes barra-llena { from { transform: scaleX(0); } }
   @keyframes guia-salta { from { opacity: 0; transform: translateY(46px) scale(.6) rotate(-6deg); } }
 }
@@ -559,10 +564,18 @@
 .gema img { display: block; width: 100%; height: 58px; object-fit: contain; }
 .gema strong { font-size: 11px; font-weight: 800; line-height: 1.15; }
 .gema small { font-size: 10px; font-weight: 700; color: var(--muted); line-height: 1.2; }
-.gema--pulida img { filter: drop-shadow(0 0 8px rgb(255 210 63 / .55)); }
-.gema--tallada img { filter: saturate(.8) brightness(.95); }
-.gema--bruto img { filter: grayscale(.65) brightness(.85); }
-.gema--bloqueada img { filter: grayscale(1) brightness(.8); opacity: .45; }
+.gema--pulida img { filter: saturate(1.12) contrast(1.04) brightness(1.03) drop-shadow(0 0 9px rgb(255 214 90 / .75)); }
+.gema--tallada img { filter: saturate(.95) contrast(.98) brightness(.97); }
+.gema--bruto img { filter: grayscale(.8) brightness(.72) contrast(.78) blur(.5px); }
+.gema__nivel { display: flex; gap: 3px; margin-top: 1px; }
+.gema__nivel b { width: 12px; height: 4px; border-radius: 2px; background: var(--line); }
+.gema__nivel b.on { background: var(--accent); }
+.gema--bruto .gema__nivel b.on { background: var(--muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .gema--pulida img { animation: gema-brilla 3.2s ease-in-out infinite; }
+  @keyframes gema-brilla { 50% { filter: saturate(1.18) contrast(1.06) brightness(1.08) drop-shadow(0 0 14px rgb(255 224 120 / .95)); } }
+}
+.gema--bloqueada img { filter: saturate(1.2); opacity: 1; }
 .gema--bloqueada strong, .gema--bruto strong { color: var(--muted); }
 .metrica__gema { flex: none; width: 46px; height: auto; margin-left: auto; filter: drop-shadow(0 4px 0 rgb(7 59 58 / .2)); }
 
@@ -575,3 +588,14 @@
 .acceso__escena { display: flex; align-items: center; justify-content: center; gap: 22px; padding: 0 20px; }
 .acceso__escena .acceso__guia { position: static; scale: 1 1; }
 .acceso__escena .acceso__mapa { position: static; width: 120px; }
+
+/* Accesos rapidos: la pantalla completa dentro de un modal */
+.hoja--pantalla { padding: 0; gap: 0; max-height: 92%; overflow: hidden; background: var(--bg); }
+.hoja--pantalla .hoja__asa { display: none; }
+.hoja--pantalla .hoja__cerrar { z-index: 4; top: 16px; right: 16px; background: rgb(255 255 255 / .22); color: #fff; }
+.hoja--pantalla .pantalla--modal, .hoja--pantalla .pantalla--modal.pantalla--viva { width: 100%; height: auto; min-height: 0; overflow: visible; }
+.hoja--pantalla .pantalla--modal .pantalla__cuerpo { overflow: visible; }
+.hoja--pantalla .pantalla--modal .dock { display: none; }
+
+.leccion__nivel { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--mint); }
+.leccion__nivel img { width: 26px; height: 26px; object-fit: contain; }
