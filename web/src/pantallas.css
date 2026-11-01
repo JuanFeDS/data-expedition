@@ -599,3 +599,121 @@
 
 .leccion__nivel { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--mint); }
 .leccion__nivel img { width: 26px; height: 26px; object-fit: contain; }
+
+/* Entrega por enlace de PR: pasos, verificacion y exito */
+.entrega__paso { display: flex; flex-direction: column; gap: 12px; }
+.entrega__atras { align-self: flex-start; font-size: 13px; font-weight: 800; color: var(--primary); padding: 2px 0; }
+.pasos li b .marca { display: block; }
+.campo--url input { font-size: 15px; font-weight: 600; padding: 6px 0; }
+.campo--error { border-bottom-color: #e5484d; }
+.campo textarea { border: 0; background: none; resize: none; font: 400 13px var(--font-body); color: var(--ink); padding: 2px 0; }
+.campo textarea::placeholder { color: var(--muted); opacity: .8; }
+.entrega__error { font-size: 13px; font-weight: 700; color: #c0282d; }
+.verif { list-style: none; padding: 4px 0; display: flex; flex-direction: column; gap: 10px; }
+.verif li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.verif li.activa, .verif li.hecha { color: var(--ink); }
+.verif__icono { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 2.5px solid var(--line); color: var(--deep); }
+.verif li.activa .verif__icono { border-color: var(--line); border-top-color: var(--primary); }
+.verif li.hecha .verif__icono { background: var(--mint); border-color: var(--mint); }
+.verif__tarjeta { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 20px; background: var(--primary-soft); border: 2px solid var(--mint); }
+.verif__tarjeta > strong { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -.04em; }
+.verif__tarjeta > strong span { color: var(--muted); font-size: 16px; }
+.verif__tarjeta dl { display: flex; flex-direction: column; gap: 6px; }
+.verif__tarjeta dl > div { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.verif__tarjeta dt { font-weight: 700; color: var(--muted); }
+.verif__tarjeta dd { font-weight: 800; text-align: right; }
+.verif__tarjeta dd em { font-style: normal; font-size: 12px; color: var(--primary); margin-left: 6px; }
+.verif__tarjeta code { font: 800 13px ui-monospace, Consolas, monospace; padding: 2px 6px; border-radius: 6px; background: rgb(7 59 58 / .08); }
+.verif__tarjeta--aviso { background: #fff3d6; border-color: var(--accent); }
+.verif__tarjeta--aviso p { font-size: 14px; font-weight: 600; }
+.entrega__ok { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding-top: 6px; }
+.entrega__ok .titulo { font-size: 40px; }
+.entrega__sello { position: relative; width: 84px; height: 84px; margin-bottom: 6px; }
+.entrega__guia { margin-top: 4px; }
+.confeti { position: absolute; left: 50%; top: 50%; width: 9px; height: 14px; border-radius: 3px; opacity: 0; background: var(--accent); }
+.confeti:nth-child(3n+2) { background: var(--primary); }
+.confeti:nth-child(3n) { background: #3b82f6; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .entrega__paso { animation: paso-entra .38s cubic-bezier(.2, .8, .2, 1) both; }
+  .pasos li { transition: border-color .4s, color .4s; }
+  .pasos li b { transition: background-color .4s; }
+  .pasos li.hecho b, .pasos li.actual b { animation: pop-ok .45s both; }
+  .campo--error { animation: sacude .4s; }
+  .verif li { animation: paso-sube .3s calc(var(--i) * 90ms) both ease-out; }
+  .verif li.activa .verif__icono { animation: giro .7s linear infinite; }
+  .verif li.hecha .verif__icono { animation: pop-ok .4s both; }
+  .verif li.hecha .marca path { stroke-dasharray: 16; animation: trazo .35s .05s both; }
+  .verif__tarjeta { animation: tarjeta-sale .5s .05s both cubic-bezier(.3, 1.4, .5, 1); }
+  .campo--numerado { animation: paso-sube .35s calc(var(--i) * 90ms) both ease-out; }
+  .opcion[aria-pressed='true'] { animation: pop .3s; }
+  .entrega__sello svg { animation: pop-ok .6s both cubic-bezier(.3, 1.6, .5, 1); }
+  .entrega__trazo { stroke-dasharray: 60; stroke-dashoffset: 60; animation: trazo-ok .5s .45s forwards ease-out; }
+  .confeti { animation: confeti 1.1s calc(.5s + var(--i) * 18ms) both ease-out; }
+  .entrega__ok .titulo, .entrega__ok .meta { animation: paso-sube .45s .7s both ease-out; }
+  .entrega__guia { animation: guia-salta .7s .9s both cubic-bezier(.3, 1.6, .5, 1); }
+  @keyframes paso-entra { from { opacity: 0; transform: translateX(calc(var(--dir, 1) * 26px)); } }
+  @keyframes giro { to { transform: rotate(360deg); } }
+  @keyframes trazo { from { stroke-dashoffset: 16; } to { stroke-dashoffset: 0; } }
+  @keyframes trazo-ok { to { stroke-dashoffset: 0; } }
+  @keyframes pop-ok { from { transform: scale(0); } 65% { transform: scale(1.18); } }
+  @keyframes sacude { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+  @keyframes tarjeta-sale { from { opacity: 0; transform: translateY(14px) scale(.96); } }
+  @keyframes confeti { 0% { opacity: 1; transform: translate(-50%, -50%) rotate(0); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--giro)); } }
+}
+
+/* Practicar: el album de la expedicion */
+.album { gap: 18px; padding-top: 22px; }
+.album__racha { display: flex; flex-direction: column; gap: 12px; padding: 14px 16px; border-radius: 22px; background: var(--deep); color: #fff; }
+.album__racha-cifra { display: flex; align-items: center; gap: 12px; }
+.album__racha-cifra .num { font-size: 46px; line-height: 1; color: var(--accent); }
+.album__racha-cifra small { font-size: 12px; font-weight: 700; line-height: 1.3; color: var(--mint); }
+.album__dias { list-style: none; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; padding: 0; }
+.album__dias li { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 800; color: rgb(255 255 255 / .6); }
+.album__dias b { width: 100%; max-width: 34px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; border: 2px dashed rgb(255 255 255 / .3); }
+.album__dias li.hecho b { background: var(--accent); border: 2px solid var(--accent); color: var(--ink); }
+.album__dias li.hoy b { border: 2.5px solid var(--mint); border-style: solid; }
+.album__dias li.hoy { color: #fff; }
+.album__paginas { display: flex; flex-direction: column; gap: 8px; }
+.album__lista { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; scrollbar-width: none; }
+.album__lista::-webkit-scrollbar { display: none; }
+.album__pestana { flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; border: 2px solid var(--line); text-align: left; }
+.album__pestana img { width: 34px; height: 34px; object-fit: contain; }
+.album__pestana span { display: flex; flex-direction: column; }
+.album__pestana strong { font-size: 13px; font-weight: 800; line-height: 1.1; }
+.album__pestana small { font-size: 11px; font-weight: 700; color: var(--muted); }
+.album__pestana[aria-pressed='true'] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.album__pestana[aria-pressed='true'] small { color: var(--mint); }
+.album__pagina { display: flex; flex-direction: column; gap: 16px; padding: 16px; border-radius: 26px; background: #e7efe6; box-shadow: inset 0 0 0 2px rgb(7 59 58 / .08); }
+.album__cabeza { display: flex; align-items: center; gap: 12px; }
+.album__cabeza > img { width: 64px; height: 64px; object-fit: contain; flex: none; filter: drop-shadow(0 0 8px rgb(255 210 63 / .45)); }
+.album__cabeza .titulo { font-size: 26px; line-height: 1.05; }
+.album__fotos { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 14px; padding: 4px 2px 8px; }
+.foto { rotate: var(--giro); }
+.foto__marco { display: flex; flex-direction: column; gap: 8px; padding: 8px 8px 10px; border-radius: 6px; background: #fffaf0; box-shadow: 0 6px 0 rgb(7 59 58 / .12), 0 14px 22px rgb(7 59 58 / .18); }
+.foto__marco p { font-size: 12px; font-weight: 800; line-height: 1.2; text-align: center; color: var(--deep); min-height: 2.4em; display: grid; place-items: center; }
+.foto__imagen { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 3px; background: linear-gradient(#bfe9ff, #e9fbe9 62%, #b7e3a4); }
+.foto__isla { position: absolute; left: 8%; right: 8%; bottom: 4%; }
+.foto__isla .region__isla { display: block; width: 100%; height: auto; }
+.foto__jaguar { position: absolute; left: 4%; bottom: 0; width: 34%; height: auto; filter: drop-shadow(0 3px 3px rgb(7 59 58 / .35)); }
+.foto__objeto { position: absolute; right: 6%; bottom: 8%; width: 28%; height: auto; filter: drop-shadow(0 3px 3px rgb(7 59 58 / .35)); }
+.foto__imagen--basica { filter: sepia(.35) saturate(.85) brightness(.97); }
+.foto__imagen--alta { filter: saturate(1.1) contrast(1.04); }
+.foto__imagen--vacia { display: grid; place-content: center; justify-items: center; gap: 4px; background: repeating-linear-gradient(135deg, #d3dfd8 0 10px, #dbe6df 10px 20px); color: var(--muted); }
+.foto__imagen--vacia small { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); }
+.foto--oculta { opacity: .72; }
+.foto--siguiente .foto__marco { box-shadow: 0 0 0 3px var(--accent), 0 6px 0 rgb(7 59 58 / .12), 0 14px 26px rgb(7 59 58 / .22); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .album__pagina { animation: pagina-pasa .4s both cubic-bezier(.2, .8, .2, 1); }
+  .foto--revelada { animation: foto-cae .55s calc(var(--i) * 70ms + .1s) both cubic-bezier(.3, 1.3, .5, 1); }
+  .foto--siguiente .foto__imagen--vacia svg { animation: latido 2.2s ease-in-out infinite; }
+  .foto--siguiente .foto__marco { animation: foto-pulso 2.2s ease-in-out infinite; }
+  .foto--oculta { animation: aparece .4s calc(var(--i) * 60ms) both; }
+  .album__dias li.hecho b { animation: pop-ok .45s calc(var(--n, 0) * 90ms) both; }
+  .album__dias li.hoy b { animation: foto-pulso 2s ease-in-out infinite; }
+  .album__racha-cifra .num { animation: pop-ok .6s both cubic-bezier(.3, 1.6, .5, 1); }
+  @keyframes pagina-pasa { from { opacity: 0; transform: translateY(14px) rotate(-.4deg); } }
+  @keyframes foto-cae { from { opacity: 0; transform: translateY(-26px) scale(1.08) rotate(5deg); } }
+  @keyframes foto-pulso { 50% { box-shadow: 0 0 0 7px rgb(255 210 63 / .28), 0 6px 0 rgb(7 59 58 / .12), 0 14px 26px rgb(7 59 58 / .22); } }
+}
