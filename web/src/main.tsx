@@ -1,6 +1,7 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
+import { useAjusteAltura } from './componentes/ajusteAltura';
 import { ModoViva } from './componentes/ui';
 import { PANTALLAS } from './registro';
 import './estilos.css';
@@ -43,6 +44,8 @@ function App() {
     window.addEventListener('hashchange', alCambiar);
     return () => window.removeEventListener('hashchange', alCambiar);
   }, []);
+
+  useAjusteAltura(ruta);
 
   const pantalla = PANTALLAS.find((candidata) => candidata.codigo === ruta);
   if (!pantalla) return <Galeria />;
