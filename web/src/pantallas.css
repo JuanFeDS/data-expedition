@@ -674,16 +674,6 @@
 .album__dias li.hecho b { background: var(--accent); border: 2px solid var(--accent); color: var(--ink); }
 .album__dias li.hoy b { border: 2.5px solid var(--mint); border-style: solid; }
 .album__dias li.hoy { color: #fff; }
-.album__paginas { display: flex; flex-direction: column; gap: 8px; }
-.album__lista { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; scrollbar-width: none; }
-.album__lista::-webkit-scrollbar { display: none; }
-.album__pestana { flex: none; display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; border: 2px solid var(--line); text-align: left; }
-.album__pestana img { width: 34px; height: 34px; object-fit: contain; }
-.album__pestana span { display: flex; flex-direction: column; }
-.album__pestana strong { font-size: 13px; font-weight: 800; line-height: 1.1; }
-.album__pestana small { font-size: 11px; font-weight: 700; color: var(--muted); }
-.album__pestana[aria-pressed='true'] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
-.album__pestana[aria-pressed='true'] small { color: var(--mint); }
 .album__pagina { display: flex; flex-direction: column; gap: 16px; padding: 16px; border-radius: 26px; background: #e7efe6; box-shadow: inset 0 0 0 2px rgb(7 59 58 / .08); }
 .album__cabeza { display: flex; align-items: center; gap: 12px; }
 .album__cabeza > img { width: 64px; height: 64px; object-fit: contain; flex: none; filter: drop-shadow(0 0 8px rgb(255 210 63 / .45)); }
@@ -755,3 +745,45 @@
   .unir__columna li:nth-child(4) { animation-delay: .18s; }
   @keyframes ficha-une { 40% { transform: scale(1.06); } }
 }
+
+/* Album de isla: acceso desde el mapa y el inicio, y modal */
+.isla-fila__album { position: absolute; right: 2%; bottom: 8%; z-index: 3; display: flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: 999px; background: var(--mint); color: var(--deep); font-size: 12px; font-weight: 800; box-shadow: 0 3px 0 rgb(7 59 58 / .35); }
+.region__volver--album { background: var(--mint); color: var(--deep); }
+.region__volver-hueco { gap: 8px; }
+.album__pagina--isla { margin: 0; border-radius: 0; box-shadow: none; padding: 20px 18px 22px; }
+.album__repasar { align-self: center; }
+.hoja--album .hoja__cerrar { background: rgb(7 59 58 / .12); color: var(--deep); }
+
+/* Practicar: racha, XP y mezcla de repaso */
+.practica { gap: 16px; }
+.practica__xp { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; background: var(--primary-soft); border: 2px solid var(--mint); }
+.practica__xp-cifra { display: flex; align-items: baseline; gap: 10px; }
+.practica__xp-cifra .num { font-size: 40px; line-height: 1; color: var(--primary); }
+.practica__xp-cifra small { font-size: 13px; font-weight: 800; color: var(--muted); }
+.practica__barra { height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+.practica__barra i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--primary), var(--mint)); }
+.practica__mezcla { display: flex; flex-direction: column; gap: 10px; padding: 18px 16px; border-radius: 26px; background: #e7efe6; box-shadow: inset 0 0 0 2px rgb(7 59 58 / .08); }
+.practica__temas { list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 0; }
+.tema { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 18px; background: #fffaf0; box-shadow: 0 3px 0 rgb(7 59 58 / .1); }
+.tema > img { flex: none; width: 46px; height: 46px; object-fit: contain; }
+.tema > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.tema strong { font-size: 15px; font-weight: 800; }
+.tema strong small { font-weight: 700; color: var(--muted); }
+.tema > div > small { font-size: 12px; font-weight: 700; color: var(--muted); }
+.tema__barra { display: block; height: 7px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.tema__barra i { display: block; height: 100%; border-radius: 4px; background: var(--primary); }
+.tema em { flex: none; font-style: normal; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: var(--accent); color: var(--ink); }
+.tema--peso { box-shadow: 0 0 0 2px var(--accent), 0 3px 0 rgb(7 59 58 / .1); }
+.practica__nota { font-size: 12px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .practica__barra i { transform-origin: left; animation: barra-llena .9s .2s both cubic-bezier(.2, .8, .2, 1); }
+  .tema { animation: paso-sube .4s both ease-out; }
+  .tema:nth-child(2) { animation-delay: .07s; } .tema:nth-child(3) { animation-delay: .14s; } .tema:nth-child(4) { animation-delay: .21s; }
+  .tema__barra i { transform-origin: left; animation: barra-llena .8s .3s both cubic-bezier(.2, .8, .2, 1); }
+}
+.album__pagina--isla .album__fotos { grid-template-columns: repeat(3, 1fr); gap: 12px 8px; }
+.album__pagina--isla .foto__marco { padding: 5px 5px 6px; gap: 5px; }
+.album__pagina--isla .foto__marco p { font-size: 9.5px; min-height: 2.5em; }
+.album__pagina--isla .foto__imagen--vacia svg { width: 22px; height: 22px; }
+.album__pagina--isla .foto__imagen--vacia small { font-size: 9px; }

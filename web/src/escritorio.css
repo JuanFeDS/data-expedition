@@ -234,26 +234,31 @@
   .escenario .p-e6 .entrega__sello svg { width: 110px; height: 110px; }
 
 
-  /* ---------- Practicar: el album ---------- */
-  .escenario .p-e15 .cuerpo-mundo { display: grid; grid-template-columns: 300px minmax(0, 1fr); column-gap: 40px; row-gap: 20px; grid-template-rows: auto auto 1fr; align-content: start; align-items: start; width: min(1120px, calc(100% - 96px)); margin: 0 auto; padding: 18px 0 20px !important; box-sizing: border-box; }
-  .escenario .p-e15 .cuerpo-mundo::before, .p-e15 .cuerpo-mundo::after { display: none; }
-  .escenario .p-e15 .album__racha { grid-column: 1; grid-row: 1; padding: 18px; }
-  .escenario .p-e15 .album__racha-cifra .num { font-size: 60px; }
-  .escenario .p-e15 .album__racha-cifra small { font-size: 14px; }
-  .escenario .p-e15 .album__paginas { grid-column: 1; grid-row: 2; }
-  .escenario .p-e15 .album__lista { flex-direction: column; overflow: visible; }
-  .escenario .p-e15 .album__pestana { padding: 8px 16px 8px 10px; }
-  .escenario .p-e15 .album__pestana img { width: 42px; height: 42px; }
-  .escenario .p-e15 .album__pestana strong { font-size: 15px; }
-  .escenario .p-e15 .album__pagina { grid-column: 2; grid-row: 1 / span 3; padding: 20px 26px 24px; gap: 16px; }
+  /* ---------- Practicar: racha, XP y mezcla ---------- */
+  .escenario .p-e15 .cuerpo-mundo { display: grid; grid-template-columns: 340px minmax(0, 1fr); column-gap: 40px; row-gap: 18px; grid-template-rows: auto 1fr; align-content: start; align-items: start; width: min(1120px, calc(100% - 96px)); margin: 0 auto; padding: 22px 0 20px !important; box-sizing: border-box; }
+  .escenario .p-e15 .cuerpo-mundo::before, .escenario .p-e15 .cuerpo-mundo::after { display: none; }
   .escenario .p-e15 .mundo { min-height: 190px; padding-bottom: 28px; }
-  .escenario .p-e15 .foto__imagen { aspect-ratio: 4 / 3; }
-  .escenario .p-e15 .foto__marco { padding: 8px 8px 8px; gap: 6px; }
-  .escenario .p-e15 .foto__marco p { min-height: 2.2em; }
-  .escenario .p-e15 .album__cabeza > img { width: 84px; height: 84px; }
-  .escenario .p-e15 .album__cabeza .titulo { font-size: 38px; }
-  .escenario .p-e15 .album__fotos { grid-template-columns: repeat(3, 1fr); gap: 18px 22px; padding-bottom: 4px; }
-  .escenario .p-e15 .foto__marco p { font-size: 14px; }
+  .escenario .p-e15 .album__racha { grid-column: 1; grid-row: 1; padding: 20px; }
+  .escenario .p-e15 .album__racha-cifra .num { font-size: 64px; }
+  .escenario .p-e15 .album__racha-cifra small { font-size: 14px; }
+  .escenario .p-e15 .practica__xp { grid-column: 1; grid-row: 2; padding: 20px; }
+  .escenario .p-e15 .practica__xp-cifra .num { font-size: 52px; }
+  .escenario .p-e15 .practica__mezcla { grid-column: 2; grid-row: 1 / span 2; padding: 24px 26px 26px; gap: 14px; }
+  .escenario .p-e15 .practica__mezcla .meta { font-size: 15px; }
+  .escenario .p-e15 .tema { padding: 12px 16px; gap: 16px; }
+  .escenario .p-e15 .tema > img { width: 56px; height: 56px; }
+  .escenario .p-e15 .tema strong { font-size: 18px; }
+  .escenario .p-e15 .tema > div > small { font-size: 13px; }
+
+  /* ---------- Album de isla (modal) ---------- */
+  .escenario .hoja--album { width: min(880px, 94%); }
+  .escenario .album__pagina--isla { padding: 28px 34px 30px; gap: 20px; border-radius: 0; }
+  .escenario .album__pagina--isla .album__fotos { grid-template-columns: repeat(3, 1fr); gap: 22px 24px; }
+  .escenario .album__pagina--isla .album__cabeza > img { width: 84px; height: 84px; }
+  .escenario .album__pagina--isla .album__cabeza .titulo { font-size: 38px; }
+  .escenario .album__pagina--isla .foto__imagen { aspect-ratio: 4 / 3; }
+  .escenario .album__pagina--isla .foto__marco p { font-size: 14px; }
+  .escenario .isla-fila__album { font-size: 13px; padding: 6px 12px; }
 
   /* ---------- Leccion ---------- */
   .escenario .p-e7 .pantalla__cuerpo { align-items: center; }
