@@ -81,15 +81,16 @@ export interface RegionCurso {
   bioma: Bioma;
   estado: 'hecha' | 'actual' | 'pendiente';
   hitos: string[];
+  frase: string;
 }
 
 export const regionesCurso: RegionCurso[] = [
-  { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'] },
-  { nombre: 'Páramo de la Limpieza', modulo: 'Datos', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: [] },
-  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'] },
-  { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '4', bioma: 'desierto', estado: 'actual', hitos: ['Trabajo 2'] },
-  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [] },
-  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'] },
-  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [] },
-  { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'] },
+  { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'], frase: 'Aquí empezó todo: fijaste tu punto de partida con el diagnóstico.' },
+  { nombre: 'Páramo de la Limpieza', modulo: 'Datos', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: [], frase: 'En el Páramo se aprende lo menos vistoso y más importante: limpiar los datos.' },
+  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'], frase: 'En la Costa le hiciste buenas preguntas a los datos. Ahí sacaste tu 4.2.' },
+  { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '4', bioma: 'desierto', estado: 'actual', hitos: ['Trabajo 2'], frase: 'Bienvenido al Desierto: aquí un modelo predictivo se pone a prueba. ¡Tú puedes!' },
+  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [], frase: 'En la Cueva compararás modelos. Hace frío, llevaré la linterna.' },
+  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'], frase: 'En las Ruinas verás si tu modelo aguanta o solo lo parece. Ojo con la exactitud.' },
+  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [], frase: 'En el Glaciar toca explicar tus resultados, hasta a quien no sabe de datos.' },
+  { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'], frase: 'La cima. Aquí se junta todo en el proyecto final, y en equipo.' },
 ];
