@@ -1,35 +1,25 @@
-import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { Contador, Kicker, Pantalla } from '../componentes/ui';
 import { Dock } from '../componentes/Dock';
-import { Jaguar } from '../componentes/Jaguar';
-import { Isla } from '../componentes/Region';
-import { Kicker, Pantalla } from '../componentes/ui';
-import { dificultadPara, dimensiones, gemasGanadas, paginasAlbum, rachaPractica, temaDeRepaso } from '../datos';
-
-const FOTOS_POR_PAGINA = 6;
-const GIROS = [-2.4, 1.8, -1.2, 2.6, -1.9, 1.4];
+import { dificultadPara, dimensiones, gemasGanadas, nivelDePulido, rachaPractica, temaDeRepaso } from '../datos';
 
 export function E15Practicar() {
-  const paginas = gemasGanadas.map((gema) => ({ gema, pagina: paginasAlbum.find((candidata) => candidata.gema === gema.gema)! }));
-  const [actual, setActual] = useState(Math.max(0, paginas.findIndex((item) => item.gema.gema === temaDeRepaso().gema.gema)));
-  const { gema, pagina } = paginas[actual];
-  const valor = dimensiones.find((dimension) => dimension.nombre === gema.dimension)?.ahora ?? 0;
-  const dificultad = dificultadPara(valor);
-  const completa = pagina.reveladas >= FOTOS_POR_PAGINA;
   const racha = rachaPractica.hechos.filter(Boolean).length;
   const cumplida = rachaPractica.sesionesHoy >= rachaPractica.metaHoy;
-  const totalReveladas = paginas.reduce((suma, item) => suma + item.pagina.reveladas, 0);
+  const temas = gemasGanadas.map((gema) => ({ gema, valor: dimensiones.find((dimension) => dimension.nombre === gema.dimension)?.ahora ?? 0 }));
+  const masFlojo = temaDeRepaso();
+  const porcentajeXp = Math.min(100, (rachaPractica.xpSemana / rachaPractica.metaXpSemana) * 100);
 
   return (
     <Pantalla clase="p-e15">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Tu álbum de la expedición" titulo="Practicar" subtitulo="Cada sesión de 5 preguntas revela una foto nueva." objeto="binoculares">
-          <p className="radar__resumen"><strong>{totalReveladas} de {paginas.length * FOTOS_POR_PAGINA}</strong> fotos reveladas</p>
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Repaso sin límite" titulo="Practicar" subtitulo="Sesiones de 5 preguntas con todo lo que ya viste." objeto="binoculares">
+          <p className="radar__resumen"><strong>{temas.length}</strong> {temas.length === 1 ? 'tema' : 'temas'} en tu mezcla</p>
         </CabeceraMundo>
-        <div className="contenido cuerpo-mundo album">
+        <div className="contenido cuerpo-mundo album practica">
           <section className="album__racha" aria-label="Racha de práctica">
             <div className="album__racha-cifra">
-              <span className="num">{racha}</span>
+              <span className="num"><Contador valor={racha} /></span>
               <small>días seguidos<br />{cumplida ? '¡Meta de hoy cumplida!' : `Practica hoy y llegas a ${racha + 1}`}</small>
             </div>
             <ol className="album__dias">
@@ -46,58 +36,36 @@ export function E15Practicar() {
             </ol>
           </section>
 
-          <nav className="album__paginas" aria-label="Páginas del álbum">
-            <Kicker>Páginas</Kicker>
-            <div className="album__lista">
-              {paginas.map((item, indice) => (
-                <button key={item.gema.gema} className="album__pestana" aria-pressed={indice === actual} onClick={() => setActual(indice)}>
-                  <img src={`${import.meta.env.BASE_URL}gemas/${item.gema.gema}.webp`} alt="" />
-                  <span><strong>{item.gema.dimension}</strong><small>{item.pagina.reveladas}/{FOTOS_POR_PAGINA}</small></span>
-                </button>
-              ))}
+          <section className="practica__xp" aria-label="XP de la semana">
+            <div className="practica__xp-cifra">
+              <span className="num"><Contador valor={rachaPractica.xpSemana} /></span>
+              <small>de {rachaPractica.metaXpSemana} XP esta semana</small>
             </div>
-          </nav>
+            <div className="practica__barra" role="progressbar" aria-valuenow={rachaPractica.xpSemana} aria-valuemax={rachaPractica.metaXpSemana}><i style={{ width: `${porcentajeXp}%` }} /></div>
+            <p className="meta">+{rachaPractica.xpPorSesion} XP por sesión · {rachaPractica.sesionesSemana} sesiones esta semana. El XP no es nota.</p>
+          </section>
 
-          <section className="album__pagina" key={gema.gema} aria-label={`Página de ${gema.dimension}`}>
-            <header className="album__cabeza">
-              <img src={`${import.meta.env.BASE_URL}gemas/${gema.gema}.webp`} alt="" />
-              <div>
-                <Kicker>Página {actual + 1} · dificultad {dificultad}</Kicker>
-                <h2 className="titulo">{gema.nombre}</h2>
-                <p className="meta">{gema.dimension} · {completa ? 'página completa' : `${pagina.reveladas} de ${FOTOS_POR_PAGINA} fotos`}</p>
-              </div>
-            </header>
-            <ol className="album__fotos">
-              {pagina.fotos.map((foto, indice) => {
-                const estado = indice < pagina.reveladas ? 'revelada' : indice === pagina.reveladas ? 'siguiente' : 'oculta';
-                return (
-                  <li key={foto.pie} className={`foto foto--${estado}`} style={{ '--i': indice, '--giro': `${GIROS[indice]}deg` } as React.CSSProperties}>
-                    <div className="foto__marco">
-                      {estado === 'revelada' ? (
-                        <div className={`foto__imagen foto__imagen--${dificultad}`}>
-                          <span className="foto__isla"><Isla bioma={pagina.bioma} /></span>
-                          <Jaguar pose={foto.jaguar} ancho={64} clase="foto__jaguar" />
-                          <img className="foto__objeto" src={`${import.meta.env.BASE_URL}objetos/${foto.objeto}.webp`} alt="" />
-                        </div>
-                      ) : (
-                        <div className="foto__imagen foto__imagen--vacia">
-                          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1-1.6h6.6l1 1.6h1.2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-                            <circle cx="12" cy="12.5" r="3.2" stroke="currentColor" strokeWidth="1.8" />
-                          </svg>
-                          {estado === 'siguiente' && <small>Siguiente</small>}
-                        </div>
-                      )}
-                      <p>{estado === 'revelada' ? foto.pie : estado === 'siguiente' ? 'Sin revelar' : 'Por llegar'}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
+          <section className="practica__mezcla" aria-label="Temas de la mezcla">
+            <Kicker>Tu mezcla de repaso</Kicker>
+            <p className="meta">Cada sesión mezcla los temas de las islas que ya cerraste, con más peso en los que van más flojos.</p>
+            <ul className="practica__temas">
+              {temas.map(({ gema, valor }) => (
+                <li key={gema.gema} className={`tema ${gema.gema === masFlojo.gema.gema ? 'tema--peso' : ''}`}>
+                  <img src={`${import.meta.env.BASE_URL}gemas/${gema.gema}.webp`} alt="" />
+                  <div>
+                    <strong>{gema.dimension} <small>· {gema.islaCorta}</small></strong>
+                    <span className="tema__barra"><i style={{ width: `${valor}%` }} /></span>
+                    <small>{nivelDePulido(valor)} · dificultad {dificultadPara(valor)}</small>
+                  </div>
+                  {gema.gema === masFlojo.gema.gema && <em>Más peso</em>}
+                </li>
+              ))}
+            </ul>
+            <p className="meta practica__nota">Sin tope de sesiones. Lo que sí tiene tope semanal es el aporte pequeño de la práctica al radar.</p>
           </section>
         </div>
       </div>
-      <Dock accion={{ etiqueta: completa ? 'Página completa' : `Foto ${pagina.reveladas + 1} de ${FOTOS_POR_PAGINA}`, texto: completa ? 'Repasar este tema' : `Practicar ${gema.dimension}`, ruta: '#/e7' }} />
+      <Dock accion={{ etiqueta: 'Sesión de 5 preguntas', texto: 'Empezar a practicar', ruta: '#/e7' }} />
     </Pantalla>
   );
 }
