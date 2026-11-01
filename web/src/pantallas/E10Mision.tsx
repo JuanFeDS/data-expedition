@@ -13,10 +13,10 @@ const MAXIMO = 10;
 export function E10Mision() {
   const total = EQUIPO.reduce((suma, miembro) => suma + miembro.aportes, 0);
   return (
-    <Pantalla>
+    <Pantalla clase="p-e10">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="La cima · semana 8" titulo="Proyecto final" subtitulo="Equipo Páramo · 4 personas" isla="volcan" />
-        <div className="contenido cuerpo-mundo" style={{ gap: 0 }}>
+        <div className="contenido cuerpo-mundo centrar" style={{ gap: 0 }}>
           <div className="mision__resumen">
             <span className="num"><Contador valor={total} /></span>
             <p><strong>aportes en la bitácora</strong><br />3 de 4 personas al día</p>

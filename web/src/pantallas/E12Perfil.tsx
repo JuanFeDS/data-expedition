@@ -34,7 +34,7 @@ const META_XP = 500;
 
 export function E12Perfil() {
   return (
-    <Pantalla>
+    <Pantalla clase="p-e12">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · camilo@uni…" objeto="mochila" jaguar="guia" />
         <div className="contenido cuerpo-mundo" style={{ gap: 4 }}>

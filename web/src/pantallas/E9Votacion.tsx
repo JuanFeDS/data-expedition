@@ -27,7 +27,7 @@ function Podio({ activo }: { activo: boolean }) {
 export function E9Votacion() {
   const [voto, setVoto] = useState<Modo>('colaborativo');
   return (
-    <Pantalla>
+    <Pantalla clase="p-e9">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Módulo 2 · votación del grupo" titulo="¿Cómo quieren jugar?" subtitulo="Las mismas misiones; cambia cómo se puntúa. Tu voto es anónimo." objeto="urna" />
         <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>

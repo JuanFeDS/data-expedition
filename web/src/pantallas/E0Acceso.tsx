@@ -5,7 +5,7 @@ import { Kicker, Pantalla, Pill } from '../componentes/ui';
 export function E0Acceso() {
   const [correo, setCorreo] = useState('');
   return (
-    <Pantalla tono="oscura" clase="pantalla--acceso">
+    <Pantalla tono="oscura" clase="pantalla--acceso p-e0">
       <div className="pantalla__cuerpo acceso">
         <header className="acceso__titulo">
           <Kicker estilo={{ color: 'var(--accent)' }}>Cursos de ciencia de datos</Kicker>

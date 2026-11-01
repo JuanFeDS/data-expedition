@@ -8,7 +8,7 @@ export function E2Radar() {
   const porCambio = [...dimensiones].sort((a, b) => b.ahora - b.inicio - (a.ahora - a.inicio));
   const subieron = dimensiones.filter((dimension) => dimension.ahora > dimension.inicio).length;
   return (
-    <Pantalla>
+    <Pantalla clase="p-e2">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Tu radar" titulo="Cómo vas" subtitulo="Frente a tu punto de partida, no frente a nadie más." objeto="brujula">
           <p className="radar__resumen"><strong>{subieron} de {dimensiones.length}</strong> dimensiones subieron</p>

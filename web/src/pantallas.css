@@ -565,3 +565,13 @@
 .gema--bloqueada img { filter: grayscale(1) brightness(.8); opacity: .45; }
 .gema--bloqueada strong, .gema--bruto strong { color: var(--muted); }
 .metrica__gema { flex: none; width: 46px; height: auto; margin-left: auto; filter: drop-shadow(0 4px 0 rgb(7 59 58 / .2)); }
+
+/* ---------- Espacios libres: se reparten para centrar el contenido (sin recortar si es largo) ---------- */
+.centrar::before, .centrar::after { content: ''; flex: 1 1 0; min-height: 0; }
+.vivo__pie { margin-top: 18px; }
+.vivo__pie img { width: 130px; }
+
+/* Acceso: el jaguar y el mapa se centran en la escena */
+.acceso__escena { display: flex; align-items: center; justify-content: center; gap: 22px; padding: 0 20px; }
+.acceso__escena .acceso__guia { position: static; scale: 1 1; }
+.acceso__escena .acceso__mapa { position: static; width: 120px; }

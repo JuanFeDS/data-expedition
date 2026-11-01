@@ -20,10 +20,10 @@ export function E6NuevaEntrega() {
   const [modo, setModo] = useState<Modo>('con_ia');
   const pasoActual = modo === 'con_ia' ? 2 : 3;
   return (
-    <Pantalla>
+    <Pantalla clase="p-e6">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker="Trabajo 2 · Modelo predictivo" titulo="Declara cómo lo hiciste" objeto="cuaderno" />
-        <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
+        <div className="contenido cuerpo-mundo centrar" style={{ gap: 12 }}>
           <ol className="pasos" aria-label="Pasos de la entrega">
             {['Declarar', 'Bitácora', 'Entregar'].map((etiqueta, indice) => (
               <li key={etiqueta} className={indice + 1 < pasoActual ? 'hecho' : indice + 1 === pasoActual ? 'actual' : ''}>

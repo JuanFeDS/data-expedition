@@ -5,7 +5,7 @@ import { pasosTutorial } from '../datos';
 
 export function E14Tutorial() {
   return (
-    <Pantalla tono="oscura">
+    <Pantalla tono="oscura" clase="p-tutorial">
       <div className="pantalla__cuerpo">
         <header className="tutorial__cab">
           <a href="#/home" style={{ fontSize: 14, fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a>

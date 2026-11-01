@@ -23,7 +23,7 @@ const FILAS: FilaNota[] = [
 
 export function E3Notas() {
   return (
-    <Pantalla>
+    <Pantalla clase="p-e3">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Notas" titulo="Tus trabajos" objeto="trofeo">
           <div className="cifra-mundo">

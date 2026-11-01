@@ -8,7 +8,7 @@ const METRICAS = [
 
 export function E8ResultadoLeccion() {
   return (
-    <Pantalla tono="menta">
+    <Pantalla tono="menta" clase="p-e8">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
         <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>

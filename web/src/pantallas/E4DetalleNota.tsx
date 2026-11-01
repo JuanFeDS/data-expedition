@@ -6,7 +6,7 @@ import { criteriosTrabajo1 } from '../datos';
 
 export function E4DetalleNota() {
   return (
-    <Pantalla>
+    <Pantalla clase="p-e4">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Notas', ruta: '#/e3' }} kicker="Trabajo 1 · semana 3 · 21 oct" titulo="Tu nota" objeto="trofeo">
           <div className="cifra-mundo">
@@ -14,7 +14,7 @@ export function E4DetalleNota() {
             <small><Pill variante="accent" pequena>Con IA declarada</Pill><br />Bitácora entregada</small>
           </div>
         </CabeceraMundo>
-        <div className="contenido cuerpo-mundo" style={{ gap: 0 }}>
+        <div className="contenido cuerpo-mundo centrar" style={{ gap: 0 }}>
           <Kicker>Cómo se calculó</Kicker>
           {criteriosTrabajo1.map((criterio) => (
             <div className="criterio" key={criterio.nombre}>

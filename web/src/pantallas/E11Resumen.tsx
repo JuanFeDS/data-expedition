@@ -16,10 +16,10 @@ const TAREAS = [
 
 export function E11Resumen() {
   return (
-    <Pantalla>
+    <Pantalla clase="p-e11">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Semana 4 · 20 al 26 oct" titulo="Tu semana en una página" objeto="carta" />
-        <div className="contenido cuerpo-mundo" style={{ gap: 4 }}>
+        <div className="contenido cuerpo-mundo centrar" style={{ gap: 4 }}>
           <Kicker>Lo que subió</Kicker>
           <div className="resumen__subidas">
             {SUBIDAS.map((fila) => (

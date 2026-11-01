@@ -9,8 +9,8 @@ const RESULTADOS = [
 
 export function E13VotacionVivo() {
   return (
-    <Pantalla tono="oscura">
-      <div className="pantalla__cuerpo contenido" style={{ padding: '56px 24px 24px', gap: 12 }}>
+    <Pantalla tono="oscura" clase="p-e13">
+      <div className="pantalla__cuerpo contenido centrar" style={{ padding: '56px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--mint)' }}>En vivo · Validación</Kicker>
         <h1 className="titulo" style={{ fontSize: 28, lineHeight: 1.08 }}>¿Qué métrica mirarías primero con clases desbalanceadas?</h1>
         {RESULTADOS.map((resultado, indice) => (

@@ -17,10 +17,10 @@ function Candado() {
 export function E5Entregas() {
   const [vista, setVista] = useState(0);
   return (
-    <Pantalla>
+    <Pantalla clase="p-e5">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Semana 4 · Desierto del Modelado" titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
-        <div className="contenido cuerpo-mundo" style={{ gap: 8 }}>
+        <div className="contenido cuerpo-mundo centrar" style={{ gap: 8 }}>
           <Segmentado opciones={['Pendientes', 'Entregadas']} activa={vista} alCambiar={setVista} />
           {vista === 0 ? (
             <>

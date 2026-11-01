@@ -11,7 +11,7 @@ const RESPUESTAS = [
 export function E7Leccion() {
   const [elegida, setElegida] = useState(1);
   return (
-    <Pantalla tono="oscura">
+    <Pantalla tono="oscura" clase="p-e7">
       <div className="pantalla__cuerpo">
         <div className="leccion__barra">
           <a href="#/home" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
