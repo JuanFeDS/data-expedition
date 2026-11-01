@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Jaguar } from '../componentes/Jaguar';
 import { IconoSvg, type Icono } from '../componentes/Icono';
-import { consejosJaguar, regionesCurso } from '../datos';
+import { consejosJaguar, hitosRuta, regionesCurso } from '../datos';
 import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
 import { Contador, Hoja, Kicker, Pantalla, Pill } from '../componentes/ui';
@@ -63,9 +63,12 @@ export function E1Home() {
   };
   const cerrar = () => setHoja(null);
   return (
-    <Pantalla tono="oscura" clase="pantalla--campamento">
+    <Pantalla tono="oscura" clase="pantalla--campamento p-home">
       <div className="camp__fondo" aria-hidden="true">
-        <img src={`${import.meta.env.BASE_URL}fondos/campamento-sin-fuego.webp`} alt="" />
+        <picture>
+          <source media="(min-width: 1100px)" srcSet={`${import.meta.env.BASE_URL}fondos/campamento-panoramico.webp`} />
+          <img src={`${import.meta.env.BASE_URL}fondos/campamento-sin-fuego.webp`} alt="" />
+        </picture>
         <Fogata />
       </div>
       <div className="pantalla__cuerpo camp">
@@ -111,6 +114,22 @@ export function E1Home() {
             ))}
           </nav>
         </div>
+
+        <aside className="camp__lateral" aria-label="Esta semana">
+          <Kicker estilo={{ color: 'var(--mint)' }}>Lo que sigue</Kicker>
+          <ol>
+            {hitosRuta.filter((hito) => hito.estado !== 'hecho').map((hito) => (
+              <li key={hito.titulo} className={`camp__lateral-${hito.estado}`}>
+                <strong>{hito.titulo}</strong>
+                <small>{hito.estado === 'actual' ? 'Vence el viernes 7' : hito.kicker}</small>
+              </li>
+            ))}
+          </ol>
+          <button className="camp__paso camp__paso--lateral" onClick={() => setHoja('paso')}>
+            <small>Siguiente paso · vence vie 7</small>
+            <strong>Entregar Trabajo 2</strong>
+          </button>
+        </aside>
 
         <div className="camp__dock">
           <button className="camp__menu" onClick={() => setHoja('menu')} aria-label="Abrir menú"><IconoSvg tipo="menu" tamano={26} /></button>

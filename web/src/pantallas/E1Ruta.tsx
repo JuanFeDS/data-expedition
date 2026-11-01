@@ -63,7 +63,7 @@ export function E1Ruta() {
   }, [viva, indiceActual]);
 
   return (
-    <Pantalla tono="oscura">
+    <Pantalla tono="oscura" clase="p-e1">
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
           <div className="ruta__top"><a href="#/home" style={{ fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a><Pill variante="accent">Semana 4 de 8</Pill></div>
@@ -80,7 +80,7 @@ export function E1Ruta() {
           {mostradas.map(({ region, indice, hitos }) => {
             const derecha = indice % 2 === 1;
             return (
-              <section key={region.nombre} className={`isla-fila isla-fila--${region.estado} ${derecha ? 'isla-fila--der' : ''}`}>
+              <section key={region.nombre} className={`isla-fila isla-fila--${region.estado} ${derecha ? 'isla-fila--der' : ''}`} style={{ '--fila': indice < 4 ? 1 : 2, '--col': indice < 4 ? indice + 1 : 8 - indice } as React.CSSProperties}>
                 <div className="isla-fila__arte" ref={(elemento) => { anclas.current[indice] = elemento; }}>
                   <Isla bioma={region.bioma} />
                   {region.estado === 'pendiente' && <span className="isla-fila__candado"><Candado /></span>}
