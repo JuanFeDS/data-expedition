@@ -5,6 +5,7 @@ import { E11Resumen } from './pantallas/E11Resumen';
 import { E12Perfil } from './pantallas/E12Perfil';
 import { E13VotacionVivo } from './pantallas/E13VotacionVivo';
 import { E14Tutorial } from './pantallas/E14Tutorial';
+import { E15Practicar } from './pantallas/E15Practicar';
 import { E1Home } from './pantallas/E1Home';
 import { E1Ruta } from './pantallas/E1Ruta';
 import { E2Radar } from './pantallas/E2Radar';
@@ -33,6 +34,7 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'e4', titulo: 'Detalle de nota', grupo: 'Estudiante · celular', componente: E4DetalleNota },
   { codigo: 'e5', titulo: 'Entregas', grupo: 'Estudiante · celular', componente: E5Entregas },
   { codigo: 'e6', titulo: 'Nueva entrega', grupo: 'Estudiante · celular', componente: E6NuevaEntrega },
+  { codigo: 'e15', titulo: 'Practicar (álbum)', grupo: 'Estudiante · celular', componente: E15Practicar },
   { codigo: 'e7', titulo: 'Lección', grupo: 'Estudiante · celular', componente: E7Leccion },
   { codigo: 'e8', titulo: 'Resultado de lección', grupo: 'Estudiante · celular', componente: E8ResultadoLeccion },
   { codigo: 'e9', titulo: 'Votación del modo de clase', grupo: 'Estudiante · celular', componente: E9Votacion },

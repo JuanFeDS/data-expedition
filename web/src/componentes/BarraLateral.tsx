@@ -15,7 +15,7 @@ const EXPLORAR: Enlace[] = [
   { tipo: 'radar', etiqueta: 'Radar', ruta: '#/e2', activa: ['e2'] },
   { tipo: 'notas', etiqueta: 'Notas', ruta: '#/e3', activa: ['e3', 'e4'] },
   { tipo: 'entregas', etiqueta: 'Entregas', ruta: '#/e5', activa: ['e5', 'e6'] },
-  { tipo: 'leccion', etiqueta: 'Lección del día', ruta: '#/e7', activa: ['e7', 'e8'] },
+  { tipo: 'leccion', etiqueta: 'Practicar', ruta: '#/e15', activa: ['e15', 'e7', 'e8'] },
 ];
 
 const GRUPO: Enlace[] = [

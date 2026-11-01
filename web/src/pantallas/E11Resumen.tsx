@@ -12,7 +12,7 @@ const MAXIMO = 5;
 
 const TAREAS = [
   { titulo: 'Entrega el Trabajo 2', detalle: 'Vence el viernes 7. Declara si usaste IA.', ruta: '#/e6' },
-  { titulo: `Haz 3 lecciones de ${temaDeRepaso().gema.dimension}`, detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e7' },
+  { titulo: `Haz 3 lecciones de ${temaDeRepaso().gema.dimension}`, detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e15' },
 ];
 
 export function E11Resumen() {
@@ -59,7 +59,7 @@ export function E11Resumen() {
           <p className="meta" style={{ fontSize: 12, paddingTop: 4 }}>También lo recibes en tu correo institucional.</p>
         </div>
       </div>
-      <Dock accion={{ etiqueta: 'Para esta semana', texto: 'Hacer una lección', ruta: '#/e7' }} />
+      <Dock accion={{ etiqueta: 'Para esta semana', texto: 'Abrir el álbum', ruta: '#/e15' }} />
     </Pantalla>
   );
 }

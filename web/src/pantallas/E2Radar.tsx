@@ -37,7 +37,7 @@ export function E2Radar() {
           })}
         </div>
       </div>
-      <Dock accion={{ etiqueta: 'Para repasar', texto: `Practicar ${repaso}`, ruta: '#/e7' }} />
+      <Dock accion={{ etiqueta: 'Para repasar', texto: `Practicar ${repaso}`, ruta: '#/e15' }} />
     </Pantalla>
   );
 }

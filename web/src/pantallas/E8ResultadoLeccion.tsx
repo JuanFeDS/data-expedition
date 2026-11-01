@@ -28,7 +28,7 @@ export function E8ResultadoLeccion() {
           </div>
         ))}
         <div style={{ flex: 1 }} />
-        <a href="#/home"><Pill variante="deep" grande>Siguiente</Pill></a>
+        <a href="#/e15"><Pill variante="deep" grande>Ver mi álbum</Pill></a>
       </div>
     </Pantalla>
   );

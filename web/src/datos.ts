@@ -129,3 +129,44 @@ export const temaDeRepaso = () => {
     .filter((item): item is { gema: GemaCurso; valor: number } => item.valor !== undefined);
   return ganadas.reduce((peor, item) => (item.valor < peor.valor ? item : peor), ganadas[0]);
 };
+
+export interface FotoAlbum {
+  pie: string;
+  jaguar: 'guia' | 'saluda' | 'pensando' | 'celebra';
+  objeto: string;
+}
+
+export interface PaginaAlbum {
+  gema: string;
+  bioma: Bioma;
+  fotos: FotoAlbum[];
+  reveladas: number;
+}
+
+const POSES: FotoAlbum['jaguar'][] = ['guia', 'saluda', 'pensando', 'celebra', 'guia', 'celebra'];
+
+const paginaAlbum = (gema: string, bioma: Bioma, objetos: string[], pies: string[], reveladas: number): PaginaAlbum => ({
+  gema,
+  bioma,
+  reveladas,
+  fotos: pies.map((pie, indice) => ({ pie, jaguar: POSES[indice], objeto: objetos[indice % objetos.length] })),
+});
+
+export const paginasAlbum: PaginaAlbum[] = [
+  paginaAlbum('esmeralda', 'selva', ['mochila', 'binoculares', 'mapa'], ['Plantando la primera semilla', 'La cascada, con lupa', 'Frutas en tres cestas', 'Un brote que crece', 'Puente de lianas', 'La cosecha'], 6),
+  paginaAlbum('topacio', 'costa', ['linterna', 'binoculares', 'mapa'], ['Subiendo al faro', 'Mirando el horizonte', 'Barras en la arena', 'Caracolas en fila', 'El mapa del tesoro', 'Rumbo al faro'], 4),
+  paginaAlbum('zafiro', 'desierto', ['cuaderno', 'mapa', 'mochila'], ['Una línea entre piedras', 'La cantimplora del oasis', 'Torre escalonada', 'Probando la balanza', 'Siguiendo huellas', 'Bandera en la duna'], 0),
+  paginaAlbum('peridoto', 'ruinas', ['linterna', 'cuaderno', 'binoculares'], ['La columna, con lupa', 'Dos tablillas casi iguales', 'El puente aguanta', 'Piedras en equilibrio', 'Vigilando la entrada', 'El contorno del cuarto'], 0),
+  paginaAlbum('aguamarina', 'glaciar', ['carta', 'mapa', 'trofeo'], ['El eco de la montaña', 'Un cartel de hielo', 'Señal de humo', 'Mostrando el mapa', 'Un muñeco con pañuelo', 'El cuerno del glaciar'], 0),
+  paginaAlbum('ambar', 'cueva', ['mochila', 'cuaderno', 'linterna'], ['Encendiendo la hoguera', 'Armando la mochila', 'Engranajes de madera', 'La caja sellada', 'Herramientas en orden', 'Frascos de miel'], 1),
+  paginaAlbum('opalo', 'paramo', ['brujula', 'mapa', 'cuaderno'], ['Guiando al robot', 'Dos direcciones', 'Corrigiendo la flecha', 'Cruzando el puente', 'La aurora', 'Dos caminos'], 3),
+  paginaAlbum('rubi', 'volcan', ['trofeo', 'mochila', 'mapa'], ['El volcán, a lo lejos', 'Subiendo el sendero', 'El puente sobre la lava', 'Bandera en el cráter', 'El rubí brilla', 'La cima'], 0),
+];
+
+export const rachaPractica = {
+  dias: ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
+  hechos: [true, true, true, false, false, false, false],
+  hoy: 3,
+  metaHoy: 1,
+  sesionesHoy: 0,
+};
