@@ -56,7 +56,9 @@ El curso se repensó para la era de la IA: la evaluación se rediseña antes que
 - ✅ **Prototipo de interfaz** (`web/`): 16 pantallas con datos de ejemplo, en móvil y en escritorio.
 - ✅ **Dominio en TypeScript** (`src/`): nota, niveles y radar con pruebas, sin red ni base de datos.
 - 🏗️ **Migración inicial de Supabase** con políticas por fila, todavía sin aplicar a un proyecto real.
-- ⏳ **Pendiente:** autenticación, conexión de la interfaz con la base de datos, panel del docente y vista del observador.
+- ⏳ **Pendiente:**
+  - Autenticación, conexión de la interfaz con la base de datos, panel del docente y vista del observador.
+  - **Entrega por enlace de PR** (todos los trabajos, uno por persona, en el repo público de cada estudiante). Flujo: enlace del PR, declaración de IA, bitácora si usó IA y confirmación. Falta pasar de la interfaz a lo funcional: verificación contra la API de GitHub desde una función de servidor (repo, autor, estado y SHA del último commit al entregar), y guardar el usuario de GitHub en el perfil para comprobar la autoría.
 
 ---
 
