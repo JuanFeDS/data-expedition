@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Kicker, Pantalla, Pill } from '../componentes/ui';
+import { dificultadPara, temaDeRepaso } from '../datos';
 
 const RESPUESTAS = [
-  'Es un excelente modelo: casi no se equivoca.',
-  'La exactitud no basta: un modelo que siempre dice “negativo” ya acierta 98 %.',
-  'Hay que subir el umbral hasta no ver falsos positivos.',
-  'No se puede evaluar sin más datos de entrenamiento.',
+  'Mandarle una captura con mi resultado para que le crea.',
+  'Fijar las versiones de las librerías y ejecutar el cuaderno de principio a fin.',
+  'Decirle que cambie de computador, el mío funciona.',
+  'Borrar las celdas que fallan antes de entregar.',
 ];
 
 export function E7Leccion() {
   const [elegida, setElegida] = useState(1);
+  const tema = temaDeRepaso();
+  const dificultad = dificultadPara(tema.valor);
   return (
     <Pantalla tono="oscura" clase="p-e7">
       <div className="pantalla__cuerpo">
@@ -19,8 +22,9 @@ export function E7Leccion() {
           <Pill variante="accent">0:24</Pill>
         </div>
         <div className="contenido" style={{ gap: 14, paddingTop: 18 }}>
-          <Kicker estilo={{ color: 'var(--mint)' }}>Validación · pregunta 4 de 5</Kicker>
-          <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Un modelo acierta el 98 % de las veces, pero solo el 2 % de los casos son positivos. ¿Qué concluyes?</h1>
+          <Kicker estilo={{ color: 'var(--mint)' }}>Repaso de {tema.gema.dimension} · pregunta 4 de 5</Kicker>
+          <p className="leccion__nivel"><img src={`${import.meta.env.BASE_URL}gemas/${tema.gema.gema}.webp`} alt="" />{tema.gema.nombre} · dificultad {dificultad}</p>
+          <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Tu cuaderno corre bien en tu computador, pero a tu compañero le da error. ¿Qué haces primero?</h1>
           {RESPUESTAS.map((texto, indice) => (
             <button key={texto} className="resp" aria-pressed={elegida === indice} onClick={() => setElegida(indice)}>
               <b>{'ABCD'[indice]}</b><span>{texto}</span>

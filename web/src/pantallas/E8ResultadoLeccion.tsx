@@ -1,9 +1,12 @@
 import { Jaguar } from '../componentes/Jaguar';
 import { Contador, Kicker, Pantalla, Pill } from '../componentes/ui';
+import { temaDeRepaso } from '../datos';
+
+const tema = temaDeRepaso();
 
 const METRICAS = [
   { valor: 30, decimales: 0, etiqueta: 'XP', detalle: 'Por esta lección. El XP no es nota.' },
-  { valor: 1.5, decimales: 1, etiqueta: 'Validación', gema: 'peridoto', detalle: 'Práctica verificada ligera · tope de 5 por semana (te quedan 3.5)' },
+  { valor: 1.5, decimales: 1, etiqueta: tema.gema.dimension, gema: tema.gema.gema, detalle: 'Práctica verificada ligera · tope de 5 por semana (te quedan 3.5)' },
 ];
 
 export function E8ResultadoLeccion() {
@@ -11,9 +14,9 @@ export function E8ResultadoLeccion() {
     <Pantalla tono="menta" clase="p-e8">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
-        <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
+        <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: lo que no se reproduce no se entrega.</h1>
         <div className="resultado__remate">
-          <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Mira precisión, sensibilidad y la matriz de confusión.</p>
+          <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Si otra persona no puede correr tu trabajo, nadie puede confiar en él. Fija las versiones y prueba el cuaderno de principio a fin antes de entregar.</p>
           <Jaguar pose="celebra" ancho={136} clase="resultado__guia" />
         </div>
         <hr className="sep" style={{ background: 'var(--deep)' }} />

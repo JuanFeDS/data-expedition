@@ -67,7 +67,7 @@ export const pasosTutorial = [
   { icono: 'radar', titulo: 'Tu radar', texto: 'Mide tus habilidades en varias dimensiones y las compara con tu punto de partida del diagnóstico. Nunca con tus compañeros.' },
   { icono: 'notas', titulo: 'Notas y retroalimentación', texto: 'Cada trabajo se califica con una rúbrica de 5 niveles. Ves qué nivel sacaste en cada criterio y cómo se calculó la nota de 1.0 a 5.0.' },
   { icono: 'entregas', titulo: 'Entregas y uso de IA', texto: 'Puedes usar IA, pero debes declararlo al entregar y contar tu bitácora: qué pediste, qué aceptaste y qué descartaste.' },
-  { icono: 'leccion', titulo: 'Lecciones y XP', texto: 'Lecciones de 5 minutos para practicar desde el celular. Dan XP (que no es nota) y un aporte pequeño a tu radar, con tope semanal.' },
+  { icono: 'leccion', titulo: 'Lecciones y XP', texto: 'Lecciones de 5 minutos para practicar desde el celular. Al cerrar un módulo ganas su gema y se desbloquean sus preguntas de repaso. Dan XP (que no es nota) y un aporte pequeño a tu radar, con tope semanal.' },
   { icono: 'equipo', titulo: 'Votaciones y equipos', texto: 'Cada módulo tu grupo vota cómo jugar. En la misión final trabajas en equipo y cada quien responde por su rol.' },
   { icono: 'resumen', titulo: 'Tu resumen semanal', texto: 'Cada semana recibes lo que subió, lo que conviene vigilar y qué hacer después, en la app y en tu correo institucional.' },
 ] as const;
@@ -87,10 +87,45 @@ export interface RegionCurso {
 export const regionesCurso: RegionCurso[] = [
   { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'], frase: 'Aquí empezó todo: fijaste tu punto de partida con el diagnóstico.' },
   { nombre: 'Páramo de la Limpieza', modulo: 'Datos', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: [], frase: 'En el Páramo se aprende lo menos vistoso y más importante: limpiar los datos.' },
-  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'], frase: 'En la Costa le hiciste buenas preguntas a los datos. Ahí sacaste tu 4.2.' },
+  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'], frase: 'Brisa de mar y datos por explorar: la Costa te enseñó a hacer buenas preguntas.' },
   { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '4', bioma: 'desierto', estado: 'actual', hitos: ['Trabajo 2'], frase: 'Bienvenido al Desierto: aquí un modelo predictivo se pone a prueba. ¡Tú puedes!' },
-  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [], frase: 'En la Cueva compararás modelos. Hace frío, llevaré la linterna.' },
-  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'], frase: 'En las Ruinas verás si tu modelo aguanta o solo lo parece. Ojo con la exactitud.' },
-  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [], frase: 'En el Glaciar toca explicar tus resultados, hasta a quien no sabe de datos.' },
-  { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'], frase: 'La cima. Aquí se junta todo en el proyecto final, y en equipo.' },
+  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [], frase: 'La Cueva de los Modelos aún no está disponible. Se abre en la semana 5.' },
+  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'], frase: 'Las Ruinas de la Validación aún no están disponibles. Se abren en la semana 6.' },
+  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [], frase: 'El Glaciar de la Comunicación aún no está disponible. Se abre en la semana 7.' },
+  { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'], frase: 'El Volcán aún no está disponible. Es la cima y se abre en la semana 8.' },
 ];
+
+export interface GemaCurso {
+  gema: string;
+  nombre: string;
+  dimension: string;
+  cierraCon: string;
+}
+
+export const gemasCurso: GemaCurso[] = [
+  { gema: 'esmeralda', nombre: 'Esmeralda Semilla', dimension: 'Datos', cierraCon: 'Datos' },
+  { gema: 'topacio', nombre: 'Topacio Faro', dimension: 'Análisis', cierraCon: 'Análisis' },
+  { gema: 'zafiro', nombre: 'Zafiro del Oasis', dimension: 'Modelado', cierraCon: 'Modelado' },
+  { gema: 'peridoto', nombre: 'Peridoto Centinela', dimension: 'Validación', cierraCon: 'Validación' },
+  { gema: 'aguamarina', nombre: 'Aguamarina Eco', dimension: 'Comunicación', cierraCon: 'Comunicación' },
+  { gema: 'ambar', nombre: 'Ámbar Brasa', dimension: 'Producción', cierraCon: 'Análisis' },
+  { gema: 'opalo', nombre: 'Ópalo Aurora', dimension: 'Dirección de IA', cierraCon: 'Análisis' },
+  { gema: 'rubi', nombre: 'Rubí del Volcán', dimension: 'Proyecto final', cierraCon: 'Proyecto final' },
+];
+
+const moduloCerrado = (modulo: string) => {
+  const regiones = regionesCurso.filter((region) => region.modulo === modulo);
+  return regiones.length > 0 && regiones.every((region) => region.estado === 'hecha');
+};
+
+export const gemasGanadas = gemasCurso.filter((gema) => moduloCerrado(gema.cierraCon));
+
+export type Dificultad = 'básica' | 'media' | 'alta';
+export const dificultadPara = (valor: number): Dificultad => (valor >= 60 ? 'alta' : valor >= 40 ? 'media' : 'básica');
+
+export const temaDeRepaso = () => {
+  const ganadas = gemasGanadas
+    .map((gema) => ({ gema, valor: dimensiones.find((dimension) => dimension.nombre === gema.dimension)?.ahora }))
+    .filter((item): item is { gema: GemaCurso; valor: number } => item.valor !== undefined);
+  return ganadas.reduce((peor, item) => (item.valor < peor.valor ? item : peor), ganadas[0]);
+};

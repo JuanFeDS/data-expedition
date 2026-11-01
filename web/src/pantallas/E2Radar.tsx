@@ -2,10 +2,11 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Radar } from '../componentes/Radar';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
-import { dimensiones } from '../datos';
+import { dimensiones, temaDeRepaso } from '../datos';
 
 export function E2Radar() {
   const porCambio = [...dimensiones].sort((a, b) => b.ahora - b.inicio - (a.ahora - a.inicio));
+  const repaso = temaDeRepaso().gema.dimension;
   const subieron = dimensiones.filter((dimension) => dimension.ahora > dimension.inicio).length;
   return (
     <Pantalla clase="p-e2">
@@ -36,7 +37,7 @@ export function E2Radar() {
           })}
         </div>
       </div>
-      <Dock accion={{ etiqueta: 'Tu punto débil', texto: 'Practicar Validación', ruta: '#/e7' }} />
+      <Dock accion={{ etiqueta: 'Para repasar', texto: `Practicar ${repaso}`, ruta: '#/e7' }} />
     </Pantalla>
   );
 }

@@ -1,26 +1,18 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
-import { dimensiones } from '../datos';
+import { dimensiones, gemasGanadas } from '../datos';
 
 const HISTORIAL = [
   { semana: 'Semana 1', rol: 'Explorador de datos' },
   { semana: 'Semana 3', rol: 'Explorador de datos' },
   { semana: 'Semana 4', rol: 'Analista', actual: true },
 ];
-const GEMAS = [
-  { gema: 'esmeralda', dimension: 'Datos' },
-  { gema: 'topacio', dimension: 'Análisis' },
-  { gema: 'zafiro', dimension: 'Modelado' },
-  { gema: 'peridoto', dimension: 'Validación' },
-  { gema: 'aguamarina', dimension: 'Comunicación' },
-  { gema: 'ambar', dimension: 'Producción' },
-  { gema: 'opalo', dimension: 'Dirección de IA' },
-  { gema: 'diamante', dimension: 'Proyecto final' },
-];
 
 type NivelGema = 'pulida' | 'tallada' | 'bruto' | 'bloqueada';
 const ETIQUETA_NIVEL: Record<NivelGema, string> = { pulida: 'Pulida', tallada: 'Tallada', bruto: 'En bruto', bloqueada: 'Al final del curso' };
+
+const PUNTOS_NIVEL: Record<NivelGema, number> = { bloqueada: 0, bruto: 1, tallada: 2, pulida: 3 };
 
 function nivelDeGema(valor?: number): NivelGema {
   if (valor === undefined) return 'bloqueada';
@@ -62,13 +54,15 @@ export function E12Perfil() {
           <Kicker>Tu colección de gemas</Kicker>
           <p className="meta" style={{ fontSize: 12 }}>Cada gema se pule a medida que sube su dimensión en el radar.</p>
           <div className="gemas">
-            {GEMAS.map((item) => {
+            {gemasGanadas.map((item) => {
               const valor = dimensiones.find((dimension) => dimension.nombre === item.dimension)?.ahora;
               const nivel = nivelDeGema(valor);
               return (
                 <div key={item.gema} className={`gema gema--${nivel}`}>
                   <img src={`${import.meta.env.BASE_URL}gemas/${item.gema}.webp`} alt="" />
-                  <strong>{item.dimension}</strong>
+                  <strong>{item.nombre}</strong>
+                  <small>{item.dimension}</small>
+                  <span className="gema__nivel" aria-hidden="true">{[1, 2, 3].map((punto) => <b key={punto} className={punto <= PUNTOS_NIVEL[nivel] ? 'on' : ''} />)}</span>
                   <small>{valor !== undefined ? `${ETIQUETA_NIVEL[nivel]} · ${valor}` : ETIQUETA_NIVEL[nivel]}</small>
                 </div>
               );

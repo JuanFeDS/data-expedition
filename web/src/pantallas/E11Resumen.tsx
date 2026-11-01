@@ -1,6 +1,7 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Kicker, Pantalla } from '../componentes/ui';
+import { temaDeRepaso } from '../datos';
 
 const SUBIDAS = [
   { dimension: 'Modelado', cambio: 4 },
@@ -11,7 +12,7 @@ const MAXIMO = 5;
 
 const TAREAS = [
   { titulo: 'Entrega el Trabajo 2', detalle: 'Vence el viernes 7. Declara si usaste IA.', ruta: '#/e6' },
-  { titulo: 'Haz 3 lecciones de Validación', detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e7' },
+  { titulo: `Haz 3 lecciones de ${temaDeRepaso().gema.dimension}`, detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e7' },
 ];
 
 export function E11Resumen() {
@@ -38,7 +39,7 @@ export function E11Resumen() {
             <span className="num">0</span>
             <div>
               <strong className="titulo">Validación sin cambio</strong>
-              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Las lecciones de esta dimensión son tu mejor atajo.</p>
+              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su módulo llega en la semana 6; al cerrarlo ganas su gema y se desbloquean sus lecciones.</p>
             </div>
           </div>
 
