@@ -262,6 +262,24 @@
   .escenario .p-e7 .titulo { font-size: 38px !important; }
   .escenario .p-e7 .resp { padding: 18px; font-size: 16px; }
 
+  /* ---------- Leccion: unir conceptos ---------- */
+  .escenario .p-e16 .pantalla__cuerpo { align-items: center; }
+  .escenario .p-e16 .pantalla__cuerpo > * { width: min(900px, 100%); }
+  .escenario .p-e16 .leccion__barra { padding-top: 44px; }
+  .escenario .p-e16 .titulo { font-size: 38px !important; }
+  .escenario .p-e16 .unir { gap: 18px; padding-top: 26px; }
+  .escenario .p-e16 .unir__ayuda { font-size: 16px; }
+  .escenario .p-e16 .unir__tablero { gap: 56px; }
+  .escenario .p-e16 .unir__columna { gap: 14px; }
+  .escenario .p-e16 .ficha { min-height: 84px; padding: 16px 20px; border-radius: 20px; }
+  .escenario .p-e16 .ficha--concepto { font-size: 22px; }
+  .escenario .p-e16 .ficha--definicion { font-size: 16px; }
+  .escenario .p-e16 .ficha__enlace { width: 14px; height: 14px; }
+  .escenario .p-e16 .ficha--concepto .ficha__enlace { right: -10px; }
+  .escenario .p-e16 .ficha--definicion .ficha__enlace { left: -10px; }
+  .escenario .p-e16 .unir__estado { font-size: 14px; }
+  .escenario .p-e16 .unir__ok { font-size: 17px; }
+
   /* ---------- Resultado de leccion ---------- */
   .escenario .p-e8 .pantalla__cuerpo { padding-left: max(32px, calc((100% - 780px) / 2)) !important; padding-right: max(32px, calc((100% - 780px) / 2)) !important; }
   .escenario .p-e8 .pantalla__cuerpo.contenido { padding-top: 12vh !important; }
