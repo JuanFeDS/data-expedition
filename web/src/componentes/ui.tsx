@@ -88,9 +88,15 @@ export function Hoja({ abierta, alCerrar, titulo, clase = '', children }: { abie
       const contenido = ajuste.current;
       const contenedor = hoja.current?.offsetParent as HTMLElement | null;
       if (!contenido || !contenedor) return;
+      const objetivo = contenedor.clientHeight * 0.92;
+      let escala = 1;
       contenido.style.zoom = '1';
-      const escala = Math.min(1, (contenedor.clientHeight * 0.92) / contenido.offsetHeight);
-      contenido.style.zoom = String(escala);
+      for (let intento = 0; intento < 8; intento += 1) {
+        const alto = contenido.offsetHeight * escala;
+        if (alto <= objetivo + 1) break;
+        escala = Math.max(0.5, escala * 0.985 * (objetivo / alto));
+        contenido.style.zoom = String(escala);
+      }
     };
     reducir();
     const pendiente = setTimeout(reducir, 350);

@@ -4,6 +4,7 @@ import { IconoSvg, type Icono } from '../componentes/Icono';
 import { consejosJaguar, hitosRuta, regionesCurso } from '../datos';
 import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
+import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Contador, Hoja, Kicker, ModoModal, Pantalla, Pill } from '../componentes/ui';
 import { E9Votacion } from './E9Votacion';
 import { E10Mision } from './E10Mision';
@@ -49,6 +50,7 @@ export function E1Home() {
   const [hoja, setHoja] = useState<'paso' | 'menu' | Modal | null>(null);
   const [vista, setVista] = useState(regionActual);
   const [consejo, setConsejo] = useState(0);
+  const [islaAlbum, setIslaAlbum] = useState<string | null>(null);
   const [frase, setFrase] = useState<string | null>(null);
   const [abierto, setAbierto] = useState(false);
   const [pista, setPista] = useState(true);
@@ -104,7 +106,7 @@ export function E1Home() {
         </div>
 
         <div className="camp__zona">
-          <Region regiones={regionesCurso} actual={regionActual} vista={vista} alCambiar={cambiarIsla} />
+          <Region regiones={regionesCurso} actual={regionActual} vista={vista} alCambiar={cambiarIsla} alAbrirAlbum={(indice) => setIslaAlbum(regionesCurso[indice].nombre)} />
           <div className="camp__guiabox">
             {abierto ? (
               <p className="camp__globo" key={frase ?? consejo} role="status">
@@ -175,6 +177,8 @@ export function E1Home() {
           </Hoja>
         );
       })}
+
+      <ModalAlbum nombreIsla={islaAlbum} ganada={regionesCurso.find((region) => region.nombre === islaAlbum)?.estado === 'hecha'} alCerrar={() => setIslaAlbum(null)} />
 
       <MenuHoja abierta={hoja === 'menu'} alCerrar={cerrar} omitir="#/home" />
     </Pantalla>

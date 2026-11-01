@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import type { RegionCurso } from '../datos';
+import { albumDeIsla, type RegionCurso } from '../datos';
 
 export function IslaProvisional() {
   return (
@@ -29,11 +29,12 @@ interface PropsRegion {
   actual: number;
   vista: number;
   alCambiar: (indice: number) => void;
+  alAbrirAlbum?: (indice: number) => void;
 }
 
 const UMBRAL_DESLIZAR = 40;
 
-export function Region({ regiones, actual, vista, alCambiar }: PropsRegion) {
+export function Region({ regiones, actual, vista, alCambiar, alAbrirAlbum }: PropsRegion) {
   const region = regiones[vista];
   const total = regiones.length;
   const [direccion, setDireccion] = useState(0);
@@ -107,6 +108,9 @@ export function Region({ regiones, actual, vista, alCambiar }: PropsRegion) {
       </div>
       <div className="region__volver-hueco">
         {vista !== actual && <button className="region__volver" onClick={() => ir(actual)}>Volver a la semana {regiones[actual].semanas}</button>}
+        {alAbrirAlbum && region.estado !== 'pendiente' && (
+          <button className="region__volver region__volver--album" onClick={() => alAbrirAlbum(vista)}>Álbum {albumDeIsla(region.nombre)?.pagina.reveladas ?? 0}/6</button>
+        )}
       </div>
     </div>
   );

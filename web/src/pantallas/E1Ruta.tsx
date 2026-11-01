@@ -1,8 +1,9 @@
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Isla } from '../componentes/Region';
 import { Dock } from '../componentes/Dock';
 import { Kicker, ModoViva, Pantalla, Pill } from '../componentes/ui';
-import { hitosRuta, regionesCurso } from '../datos';
+import { albumDeIsla, hitosRuta, regionesCurso } from '../datos';
 
 interface Tramo {
   d: string;
@@ -28,6 +29,7 @@ export function E1Ruta() {
   }));
   const mostradas = [...regiones].reverse();
   const mapa = useRef<HTMLDivElement>(null);
+  const [islaAlbum, setIslaAlbum] = useState<string | null>(null);
   const anclas = useRef<(HTMLDivElement | null)[]>([]);
   const [tramos, setTramos] = useState<Tramo[]>([]);
 
@@ -85,6 +87,12 @@ export function E1Ruta() {
                   <Isla bioma={region.bioma} />
                   {region.estado === 'pendiente' && <span className="isla-fila__candado"><Candado /></span>}
                   {region.estado === 'actual' && <span className="isla-fila__aqui">Estás aquí</span>}
+                  {region.estado !== 'pendiente' && (
+                    <button className="isla-fila__album" onClick={() => setIslaAlbum(region.nombre)} aria-label={`Abrir el álbum de ${region.nombre}`}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1-1.6h6.6l1 1.6h1.2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><circle cx="12" cy="12.5" r="3.2" stroke="currentColor" strokeWidth="2" /></svg>
+                      {albumDeIsla(region.nombre)?.pagina.reveladas ?? 0}/6
+                    </button>
+                  )}
                 </div>
                 <div className="isla-fila__texto">
                   <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 10 }}>Semana {region.semanas} · {region.modulo}</Kicker>
@@ -111,6 +119,7 @@ export function E1Ruta() {
           })}
         </div>
       </div>
+      <ModalAlbum nombreIsla={islaAlbum} ganada={regionesCurso.find((region) => region.nombre === islaAlbum)?.estado === 'hecha'} alCerrar={() => setIslaAlbum(null)} />
       <Dock accion={{ etiqueta: 'Estás en la semana 4', texto: 'Continuar Trabajo 2', ruta: '#/e6' }} />
     </Pantalla>
   );

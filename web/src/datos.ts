@@ -67,7 +67,7 @@ export const pasosTutorial = [
   { icono: 'radar', titulo: 'Tu radar', texto: 'Mide tus habilidades en varias dimensiones y las compara con tu punto de partida del diagnóstico. Nunca con tus compañeros.' },
   { icono: 'notas', titulo: 'Notas y retroalimentación', texto: 'Cada trabajo se califica con una rúbrica de 5 niveles. Ves qué nivel sacaste en cada criterio y cómo se calculó la nota de 1.0 a 5.0.' },
   { icono: 'entregas', titulo: 'Entregas y uso de IA', texto: 'Puedes usar IA, pero debes declararlo al entregar y contar tu bitácora: qué pediste, qué aceptaste y qué descartaste.' },
-  { icono: 'leccion', titulo: 'Lecciones y XP', texto: 'Lecciones de 5 minutos para practicar desde el celular. Al cerrar un módulo ganas su gema y se desbloquean sus preguntas de repaso. Dan XP (que no es nota) y un aporte pequeño a tu radar, con tope semanal.' },
+  { icono: 'leccion', titulo: 'Lecciones y XP', texto: 'Lecciones de 5 minutos para practicar desde el celular. Al cerrar una isla ganas su gema y se abre su álbum con preguntas de repaso. En Practicar repasas todo lo visto, sin límite: suma racha y XP (que no es nota), y un aporte pequeño a tu radar, con tope semanal.' },
   { icono: 'equipo', titulo: 'Votaciones y equipos', texto: 'Cada módulo tu grupo vota cómo jugar. En la misión final trabajas en equipo y cada quien responde por su rol.' },
   { icono: 'resumen', titulo: 'Tu resumen semanal', texto: 'Cada semana recibes lo que subió, lo que conviene vigilar y qué hacer después, en la app y en tu correo institucional.' },
 ] as const;
@@ -99,26 +99,24 @@ export interface GemaCurso {
   gema: string;
   nombre: string;
   dimension: string;
-  cierraCon: string;
+  isla: string;
+  islaCorta: string;
 }
 
 export const gemasCurso: GemaCurso[] = [
-  { gema: 'esmeralda', nombre: 'Esmeralda Semilla', dimension: 'Datos', cierraCon: 'Datos' },
-  { gema: 'topacio', nombre: 'Topacio Faro', dimension: 'Análisis', cierraCon: 'Análisis' },
-  { gema: 'zafiro', nombre: 'Zafiro del Oasis', dimension: 'Modelado', cierraCon: 'Modelado' },
-  { gema: 'peridoto', nombre: 'Peridoto Centinela', dimension: 'Validación', cierraCon: 'Validación' },
-  { gema: 'aguamarina', nombre: 'Aguamarina Eco', dimension: 'Comunicación', cierraCon: 'Comunicación' },
-  { gema: 'ambar', nombre: 'Ámbar Brasa', dimension: 'Producción', cierraCon: 'Análisis' },
-  { gema: 'opalo', nombre: 'Ópalo Aurora', dimension: 'Dirección de IA', cierraCon: 'Análisis' },
-  { gema: 'rubi', nombre: 'Rubí del Volcán', dimension: 'Proyecto final', cierraCon: 'Proyecto final' },
+  { gema: 'esmeralda', nombre: 'Esmeralda Semilla', dimension: 'Datos', isla: 'Valle de los Datos', islaCorta: 'Valle' },
+  { gema: 'opalo', nombre: 'Ópalo Bruma', dimension: 'Datos', isla: 'Páramo de la Limpieza', islaCorta: 'Páramo' },
+  { gema: 'topacio', nombre: 'Topacio Faro', dimension: 'Análisis', isla: 'Costa de la Exploración', islaCorta: 'Costa' },
+  { gema: 'zafiro', nombre: 'Zafiro del Oasis', dimension: 'Modelado', isla: 'Desierto del Modelado', islaCorta: 'Desierto' },
+  { gema: 'ambar', nombre: 'Ámbar Brasa', dimension: 'Modelado', isla: 'Cueva de los Modelos', islaCorta: 'Cueva' },
+  { gema: 'peridoto', nombre: 'Peridoto Centinela', dimension: 'Validación', isla: 'Ruinas de la Validación', islaCorta: 'Ruinas' },
+  { gema: 'aguamarina', nombre: 'Aguamarina Eco', dimension: 'Comunicación', isla: 'Glaciar de la Comunicación', islaCorta: 'Glaciar' },
+  { gema: 'rubi', nombre: 'Rubí del Volcán', dimension: 'Proyecto final', isla: 'El Volcán', islaCorta: 'Volcán' },
 ];
 
-const moduloCerrado = (modulo: string) => {
-  const regiones = regionesCurso.filter((region) => region.modulo === modulo);
-  return regiones.length > 0 && regiones.every((region) => region.estado === 'hecha');
-};
+const islaCerrada = (gema: GemaCurso) => regionesCurso.find((region) => region.nombre === gema.isla)?.estado === 'hecha';
 
-export const gemasGanadas = gemasCurso.filter((gema) => moduloCerrado(gema.cierraCon));
+export const gemasGanadas = gemasCurso.filter(islaCerrada);
 
 export type Dificultad = 'básica' | 'media' | 'alta';
 export const dificultadPara = (valor: number): Dificultad => (valor >= 60 ? 'alta' : valor >= 40 ? 'media' : 'básica');
@@ -154,14 +152,22 @@ const paginaAlbum = (gema: string, bioma: Bioma, objetos: string[], pies: string
 
 export const paginasAlbum: PaginaAlbum[] = [
   paginaAlbum('esmeralda', 'selva', ['mochila', 'binoculares', 'mapa'], ['Plantando la primera semilla', 'La cascada, con lupa', 'Frutas en tres cestas', 'Un brote que crece', 'Puente de lianas', 'La cosecha'], 6),
+  paginaAlbum('opalo', 'paramo', ['cuaderno', 'binoculares', 'linterna'], ['Limpiando la lupa', 'Barriendo hojas secas', 'Agua turbia, colada', 'Un mapa sin polvo', 'Frutos buenos y dañados', 'La bruma se levanta'], 3),
   paginaAlbum('topacio', 'costa', ['linterna', 'binoculares', 'mapa'], ['Subiendo al faro', 'Mirando el horizonte', 'Barras en la arena', 'Caracolas en fila', 'El mapa del tesoro', 'Rumbo al faro'], 4),
   paginaAlbum('zafiro', 'desierto', ['cuaderno', 'mapa', 'mochila'], ['Una línea entre piedras', 'La cantimplora del oasis', 'Torre escalonada', 'Probando la balanza', 'Siguiendo huellas', 'Bandera en la duna'], 0),
+  paginaAlbum('ambar', 'cueva', ['linterna', 'cuaderno', 'mochila'], ['Entrando con la linterna', 'Cristales en patrón', 'Dos formaciones, comparadas', 'Midiendo con la cuerda', 'Moldes de arcilla', 'El ámbar de la pared'], 0),
   paginaAlbum('peridoto', 'ruinas', ['linterna', 'cuaderno', 'binoculares'], ['La columna, con lupa', 'Dos tablillas casi iguales', 'El puente aguanta', 'Piedras en equilibrio', 'Vigilando la entrada', 'El contorno del cuarto'], 0),
   paginaAlbum('aguamarina', 'glaciar', ['carta', 'mapa', 'trofeo'], ['El eco de la montaña', 'Un cartel de hielo', 'Señal de humo', 'Mostrando el mapa', 'Un muñeco con pañuelo', 'El cuerno del glaciar'], 0),
-  paginaAlbum('ambar', 'cueva', ['mochila', 'cuaderno', 'linterna'], ['Encendiendo la hoguera', 'Armando la mochila', 'Engranajes de madera', 'La caja sellada', 'Herramientas en orden', 'Frascos de miel'], 1),
-  paginaAlbum('opalo', 'paramo', ['brujula', 'mapa', 'cuaderno'], ['Guiando al robot', 'Dos direcciones', 'Corrigiendo la flecha', 'Cruzando el puente', 'La aurora', 'Dos caminos'], 3),
   paginaAlbum('rubi', 'volcan', ['trofeo', 'mochila', 'mapa'], ['El volcán, a lo lejos', 'Subiendo el sendero', 'El puente sobre la lava', 'Bandera en el cráter', 'El rubí brilla', 'La cima'], 0),
 ];
+
+export const albumDeIsla = (nombreIsla: string) => {
+  const gema = gemasCurso.find((candidata) => candidata.isla === nombreIsla);
+  const pagina = gema && paginasAlbum.find((candidata) => candidata.gema === gema.gema);
+  return gema && pagina ? { gema, pagina } : undefined;
+};
+
+export const nivelDePulido = (valor: number) => (valor >= 60 ? 'Pulida' : valor >= 40 ? 'Tallada' : 'En bruto');
 
 export const rachaPractica = {
   dias: ['L', 'M', 'X', 'J', 'V', 'S', 'D'],
@@ -169,4 +175,8 @@ export const rachaPractica = {
   hoy: 3,
   metaHoy: 1,
   sesionesHoy: 0,
+  xpSemana: 140,
+  metaXpSemana: 200,
+  xpPorSesion: 30,
+  sesionesSemana: 5,
 };

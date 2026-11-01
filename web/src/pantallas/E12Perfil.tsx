@@ -61,7 +61,7 @@ export function E12Perfil() {
                 <div key={item.gema} className={`gema gema--${nivel}`}>
                   <img src={`${import.meta.env.BASE_URL}gemas/${item.gema}.webp`} alt="" />
                   <strong>{item.nombre}</strong>
-                  <small>{item.dimension}</small>
+                  <small>{item.dimension} · {item.islaCorta}</small>
                   <span className="gema__nivel" aria-hidden="true">{[1, 2, 3].map((punto) => <b key={punto} className={punto <= PUNTOS_NIVEL[nivel] ? 'on' : ''} />)}</span>
                   <small>{valor !== undefined ? `${ETIQUETA_NIVEL[nivel]} · ${valor}` : ETIQUETA_NIVEL[nivel]}</small>
                 </div>
