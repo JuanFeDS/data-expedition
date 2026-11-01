@@ -1,9 +1,11 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BarraLateral } from './componentes/BarraLateral';
 import { ModoViva } from './componentes/ui';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
+import './escritorio.css';
 
 if (window.location.search.includes('completo')) document.documentElement.classList.add('modo-completo');
 
@@ -47,7 +49,10 @@ function App() {
   const Componente = pantalla.componente;
   return (
     <ModoViva.Provider value>
-      <div className="escenario"><Componente /></div>
+      <div className="escenario">
+        <BarraLateral ruta={ruta} />
+        <Componente />
+      </div>
     </ModoViva.Provider>
   );
 }
