@@ -15,7 +15,7 @@ export const OPCIONES_MENU: OpcionMenu[] = [
   { tipo: 'radar', etiqueta: 'Radar', detalle: 'Cómo vas frente a tu punto de partida', ruta: '#/e2', color: 'accent' },
   { tipo: 'notas', etiqueta: 'Notas', detalle: 'Tus trabajos y retroalimentación', ruta: '#/e3', color: 'azul' },
   { tipo: 'entregas', etiqueta: 'Entregas', detalle: 'Pendientes y entregadas', ruta: '#/e5', color: 'mint' },
-  { tipo: 'leccion', etiqueta: 'Practicar', detalle: 'Tu álbum de la expedición', ruta: '#/e15', color: 'accent' },
+  { tipo: 'leccion', etiqueta: 'Practicar', detalle: 'Racha, XP y repaso sin límite', ruta: '#/e15', color: 'accent' },
   { tipo: 'ayuda', etiqueta: 'Tutorial', detalle: 'Cómo se usa la expedición', ruta: '#/tutorial', color: 'azul' },
 ];
 

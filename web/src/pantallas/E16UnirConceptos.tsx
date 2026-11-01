@@ -8,10 +8,10 @@ interface Par {
 }
 
 const PARES: Par[] = [
-  { concepto: 'Reproducibilidad', definicion: 'Que otra persona obtenga tu mismo resultado al correr tu trabajo' },
-  { concepto: 'Entorno virtual', definicion: 'Un espacio aislado con las librerías exactas de un proyecto' },
-  { concepto: 'Control de versiones', definicion: 'El historial de cambios que permite volver atrás y colaborar' },
-  { concepto: 'Semilla aleatoria', definicion: 'Un valor fijo que hace repetible un proceso con azar' },
+  { concepto: 'Mediana', definicion: 'El valor central: no lo mueve un caso extremo' },
+  { concepto: 'Promedio', definicion: 'La suma de los valores dividida entre cuántos son' },
+  { concepto: 'Valor atípico', definicion: 'Un dato muy lejos del resto, que puede distorsionar' },
+  { concepto: 'Correlación', definicion: 'Qué tanto se mueven juntas dos variables' },
 ];
 
 const ORDEN_DEFINICIONES = [2, 0, 3, 1];
@@ -60,7 +60,7 @@ export function E16UnirConceptos() {
           <Pill variante="accent">0:41</Pill>
         </div>
         <div className="contenido unir">
-          <Kicker estilo={{ color: 'var(--mint)' }}>Repaso de Producción · pregunta 3 de 5</Kicker>
+          <Kicker estilo={{ color: 'var(--mint)' }}>Práctica mixta · Análisis · pregunta 3 de 5</Kicker>
           <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Une cada concepto con su definición</h1>
           <p className="unir__ayuda">{completo ? '¡Todo unido!' : concepto === null ? 'Toca un concepto y luego su definición.' : 'Ahora toca la definición que le corresponde.'}</p>
 

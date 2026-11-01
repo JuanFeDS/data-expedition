@@ -3,10 +3,10 @@ import { Kicker, Pantalla, Pill } from '../componentes/ui';
 import { dificultadPara, temaDeRepaso } from '../datos';
 
 const RESPUESTAS = [
-  'Mandarle una captura con mi resultado para que le crea.',
-  'Fijar las versiones de las librerías y ejecutar el cuaderno de principio a fin.',
-  'Decirle que cambie de computador, el mío funciona.',
-  'Borrar las celdas que fallan antes de entregar.',
+  'El promedio: suma todo y refleja a todos.',
+  'La mediana: el valor central no se mueve por un caso extremo.',
+  'El máximo: muestra hasta dónde llega una compra.',
+  'La suma: da el total de lo que se vendió.',
 ];
 
 export function E7Leccion() {
@@ -22,9 +22,9 @@ export function E7Leccion() {
           <Pill variante="accent">0:24</Pill>
         </div>
         <div className="contenido" style={{ gap: 14, paddingTop: 18 }}>
-          <Kicker estilo={{ color: 'var(--mint)' }}>Repaso de {tema.gema.dimension} · pregunta 4 de 5</Kicker>
-          <p className="leccion__nivel"><img src={`${import.meta.env.BASE_URL}gemas/${tema.gema.gema}.webp`} alt="" />{tema.gema.nombre} · dificultad {dificultad}</p>
-          <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Tu cuaderno corre bien en tu computador, pero a tu compañero le da error. ¿Qué haces primero?</h1>
+          <Kicker estilo={{ color: 'var(--mint)' }}>Práctica mixta · pregunta 4 de 5</Kicker>
+          <p className="leccion__nivel"><img src={`${import.meta.env.BASE_URL}gemas/${tema.gema.gema}.webp`} alt="" />{tema.gema.nombre} · {tema.gema.dimension} · dificultad {dificultad}</p>
+          <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Nueve de cada diez clientes compran 20 USD y uno compra 2.000 USD. ¿Qué medida resume mejor la compra típica?</h1>
           {RESPUESTAS.map((texto, indice) => (
             <button key={texto} className="resp" aria-pressed={elegida === indice} onClick={() => setElegida(indice)}>
               <b>{'ABCD'[indice]}</b><span>{texto}</span>

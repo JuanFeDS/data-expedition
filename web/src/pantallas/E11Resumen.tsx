@@ -39,7 +39,7 @@ export function E11Resumen() {
             <span className="num">0</span>
             <div>
               <strong className="titulo">Validación sin cambio</strong>
-              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su módulo llega en la semana 6; al cerrarlo ganas su gema y se desbloquean sus lecciones.</p>
+              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su isla llega en la semana 6; al cerrarla ganas su gema y se abre su álbum de repaso.</p>
             </div>
           </div>
 
