@@ -154,6 +154,6 @@ export const gruposVisibles = (
   const delCurso = [ENLACE_INFO, ...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces)]
     .filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)))
     .filter((enlace) => !desbloqueadas || desbloqueadas.has(codigoDeRuta(enlace.ruta)))
-    .map((enlace) => ({ ...enlace, ruta: enCurso(enlace.ruta, curso.id) }));
+    .map((enlace) => ({ ...enlace, aviso: undefined, ruta: enCurso(enlace.ruta, curso.id) }));
   return delCurso.length > 0 ? [general, { titulo: curso.nombre, enlaces: delCurso }] : [general];
 };

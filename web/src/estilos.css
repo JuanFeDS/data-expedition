@@ -268,3 +268,18 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   * { scrollbar-width: thin; scrollbar-color: rgb(10 128 87 / .45) transparent; }
   .barra-lateral { scrollbar-color: rgb(255 255 255 / .35) transparent; }
 }
+
+/* ---------- Selector propio (reemplaza el menú desplegable del navegador) ---------- */
+.selector { position: relative; min-width: 0; flex: 1; }
+.selector__boton { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 44px; padding: 10px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font-size: var(--fs-sm); font-weight: 700; text-align: left; }
+.selector__boton:hover:not(:disabled) { border-color: var(--primary); }
+.selector__boton:disabled { opacity: .55; cursor: default; }
+.selector--abierto .selector__boton { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+.selector__boton span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.selector__boton svg { flex: none; color: var(--muted); transition: transform .15s; }
+.selector--abierto .selector__boton svg { transform: rotate(180deg); }
+.selector__lista { position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0; display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 6px; list-style: none; border-radius: 16px; background: var(--surface); box-shadow: 0 12px 32px rgb(0 0 0 / .25), 0 0 0 2px var(--line); max-height: 260px; overflow-y: auto; }
+.selector__lista button { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 40px; padding: 8px 12px; border-radius: 10px; font-size: var(--fs-sm); font-weight: 700; text-align: left; color: var(--ink); }
+.selector__lista li.resaltada button { background: var(--primary-soft); }
+.selector__lista li[aria-selected='true'] button { background: var(--accent); color: var(--on-accent); }
+@media (prefers-reduced-motion: no-preference) { .selector__lista { animation: selector-abre .12s ease-out; } }

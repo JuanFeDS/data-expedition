@@ -3,6 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import type { Rol } from '../componentes/navegacion';
 import { useConfirmar } from '../componentes/confirmar';
+import { Selector } from '../componentes/Selector';
 import { useCurso } from '../componentes/curso';
 import { Tarjeta } from '../componentes/panel';
 import { useSesion } from '../componentes/sesion';
@@ -123,9 +124,7 @@ export function D13Personas() {
                 <Tarjeta kicker="Nuevas personas" titulo="Invitar">
                   <textarea className="d13__campo d13__texto" rows={4} placeholder={'ana@gmail.com, luis@gmail.com\n(uno por línea o separados por coma)'} value={texto} onChange={(evento) => setTexto(evento.target.value)} aria-label="Correos a invitar" />
                   <div className="d13__fila">
-                    <select className="d13__campo" value={rolInvitado} onChange={(evento) => setRolInvitado(evento.target.value as Rol)} aria-label="Rol">
-                      {ROLES.map((rol) => <option key={rol.valor} value={rol.valor}>{rol.etiqueta}</option>)}
-                    </select>
+                    <Selector valor={rolInvitado} opciones={ROLES} alCambiar={setRolInvitado} etiqueta="Rol" clase="d13__selector" />
                   </div>
                   <button className="acceso__boton acceso__boton--principal" disabled={correosNuevos.length === 0} onClick={() => void invitar()}>
                     {correosNuevos.length > 1 ? `Invitar a ${correosNuevos.length} personas` : 'Invitar'}
@@ -158,9 +157,7 @@ export function D13Personas() {
                       <li key={persona.id}>
                         <span className="avatar avatar--verde">{iniciales(persona)}</span>
                         <span className="d13__datos"><strong>{persona.nombre ?? 'Sin nombre'}{persona.usuario && <em> @{persona.usuario}</em>}</strong><small>{persona.correo}</small></span>
-                        <select className="d13__campo" value={persona.rol} disabled={esYo} onChange={(evento) => void ejecutar(servicio.cambiarRol(persona, evento.target.value as Rol))} aria-label={`Rol de ${persona.nombre ?? persona.correo}`}>
-                          {ROLES.map((rol) => <option key={rol.valor} value={rol.valor}>{rol.etiqueta}</option>)}
-                        </select>
+                        <Selector valor={persona.rol} opciones={ROLES} deshabilitado={esYo} alCambiar={(rol) => void ejecutar(servicio.cambiarRol(persona, rol))} etiqueta={`Rol de ${persona.nombre ?? persona.correo}`} clase="d13__selector" />
                         {persona.rol !== 'docente' && <button className="d13__quitar" aria-label={`Quitar a ${persona.nombre ?? persona.correo} del curso`} onClick={() => void quitarDelCurso(persona)}>Quitar</button>}
                       </li>
                     );
