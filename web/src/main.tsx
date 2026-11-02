@@ -7,7 +7,7 @@ import { CursoProvider, useCurso } from './componentes/curso';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
-import { Cargando, CompletarPerfil, CONECTADAS, INICIO_REAL, OtroRol, SinCurso, SinDatos } from './componentes/acceso';
+import { Cargando, CompletarPerfil, CONECTADAS, INICIO_REAL, InsigniaDemo, OtroRol, SinCurso, SinDatos } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -66,10 +66,11 @@ function App() {
   }, [debeRedirigir, inicio]);
 
   if (modoDemo) {
-    if (!pantalla) return <Galeria />;
+    if (!pantalla) return <><InsigniaDemo /><Galeria /></>;
     const Componente = pantalla.componente;
     return (
       <ModoViva.Provider value>
+        <InsigniaDemo />
         <div className="escenario">
           <BarraLateral ruta={ruta} />
           <Componente />

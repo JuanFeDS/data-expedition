@@ -96,6 +96,16 @@ export function Cargando() {
   );
 }
 
+export function InsigniaDemo() {
+  const salir = () => `${window.location.pathname}${window.location.hash}`;
+  return (
+    <div className="insignia-demo" role="note">
+      <span>Modo demostración · datos de ejemplo</span>
+      <a href={salir()}>Salir de la demo</a>
+    </div>
+  );
+}
+
 export function SinCurso() {
   const { persona } = useSesion();
   const { recargar, cargando } = useCurso();
