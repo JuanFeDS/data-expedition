@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Isla } from '../componentes/Region';
-import { useCurso } from '../componentes/curso';
+import { useCurso, useRutaCurso } from '../componentes/curso';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
 
@@ -23,6 +23,7 @@ const ESTADO_TEXTO = { entregada: 'Entregada, en revisión', calificada: 'Califi
 export function E5Entregas() {
   const servicio = useServicioTrabajos();
   const { curso, cargando: cargandoCursos } = useCurso();
+  const rutaCurso = useRutaCurso();
   const [vista, setVista] = useState(0);
   const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
   const [entregas, setEntregas] = useState<EntregaPropia[]>([]);
@@ -76,7 +77,7 @@ export function E5Entregas() {
                   <h2 className="titulo">{actual.nombre}</h2>
                   <p>{actual.tema || 'Pega el enlace de tu PR cuando esté listo'}{borrador ? '. Tienes un borrador guardado.' : '.'}</p>
                   <span className="hoja__fecha bloque-actual__fecha"><small>{vence.dia}</small><b>{vence.numero}</b></span>
-                  <a className="bloque-actual__accion" href="#/e6"><Pill variante="deep" boton>{borrador ? 'Continuar entrega' : 'Empezar entrega'}</Pill></a>
+                  <a className="bloque-actual__accion" href={rutaCurso('#/e6')}><Pill variante="deep" boton>{borrador ? 'Continuar entrega' : 'Empezar entrega'}</Pill></a>
                 </section>
               )}
               {!actual && trabajos && trabajos.length > 0 && (

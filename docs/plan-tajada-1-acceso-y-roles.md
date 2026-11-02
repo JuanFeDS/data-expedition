@@ -129,3 +129,10 @@ Tamaños: S = media jornada, M = una jornada.
 - **Selector de curso** en la barra lateral y en el menú móvil (`componentes/curso.tsx`); Personas, Trabajos y Entregas leen el curso activo.
 - **Estudiante u observador sin curso:** ve una sola pantalla de bienvenida («Casi listo…»), sin menú ni pestañas, con «Ya me invitaron, actualizar» y «Cerrar sesión». También está en la galería como `e33`.
 - Pruebas de políticas: 30 en verde, más la comprobación de que un correo no autorizado no se registra.
+
+## El curso va en la dirección (2 nov)
+
+- Ya no existe un «curso activo» global ni un selector fijo. Las pantallas de curso se abren con el curso en la dirección: `#/c/<curso>/<pantalla>` (información, entregas, personas, trabajos).
+- Fuera de un curso (Inicio, Cursos, perfil) la barra lateral solo muestra lo general. Dentro de un curso, un bloque con el nombre del curso agrupa sus secciones.
+- Los enlaces antiguos sin curso (`#/e5`, `#/d13`…) se redirigen al último curso usado, o a Cursos si no hay ninguno. Un curso que no existe o al que no perteneces también lleva a Cursos.
+- El modelo de datos no cambió: las matrículas siguen decidiendo qué cursos ve cada persona.

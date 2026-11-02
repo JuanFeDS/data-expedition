@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
-import { CONECTADAS, RUTAS_COMUNES, rolDeRuta } from './componentes/navegacion';
+import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from './componentes/navegacion';
 import { CursoProvider, useCurso } from './componentes/curso';
 import { InicioSinCurso } from './componentes/inicio';
 import { SesionProvider, useSesion } from './componentes/sesion';
@@ -48,7 +48,7 @@ function Galeria() {
 function App() {
   const [ruta, setRuta] = useState(rutaActual);
   const { modoDemo, cargando, persona } = useSesion();
-  const { cargando: cargandoCursos, cursos } = useCurso();
+  const { cargando: cargandoCursos, cursos, reciente } = useCurso();
   useEffect(() => {
     const alCambiar = () => setRuta(rutaActual());
     window.addEventListener('hashchange', alCambiar);
@@ -57,14 +57,24 @@ function App() {
 
   useAjusteAltura(ruta);
 
-  const pantalla = PANTALLAS.find((candidata) => candidata.codigo === ruta);
+  const { cursoId, codigo } = analizarRuta(ruta);
+  const pantalla = PANTALLAS.find((candidata) => candidata.codigo === codigo);
   const inicio = persona ? INICIO_REAL[persona.rol] : '#/e0';
   const perfilCompleto = Boolean(persona?.nombre && persona.usuario);
-  const debeRedirigir = !modoDemo && persona !== null && perfilCompleto && (!pantalla || ruta === 'e0');
+  const esDeCurso = ENCURSO.has(codigo);
+
+  let destino: string | null = null;
+  if (!modoDemo && persona !== null && perfilCompleto) {
+    if (!pantalla || codigo === 'e0') destino = inicio;
+    else if (esDeCurso && !cargandoCursos) {
+      if (!cursoId) destino = reciente ? rutaDeCurso(reciente.id, codigo) : '#/cursos';
+      else if (!cursos.some((candidato) => candidato.id === cursoId)) destino = '#/cursos';
+    }
+  }
 
   useEffect(() => {
-    if (debeRedirigir) window.location.hash = inicio;
-  }, [debeRedirigir, inicio]);
+    if (destino) window.location.hash = destino;
+  }, [destino]);
 
   if (modoDemo) {
     if (!pantalla) return <><InsigniaDemo /><Galeria /></>;
@@ -73,14 +83,14 @@ function App() {
       <ModoViva.Provider value>
         <InsigniaDemo />
         <div className="escenario">
-          <BarraLateral ruta={ruta} />
+          <BarraLateral ruta={codigo} />
           <Componente />
         </div>
       </ModoViva.Provider>
     );
   }
 
-  if (cargando || debeRedirigir) return <Cargando />;
+  if (cargando || destino) return <Cargando />;
 
   if (!persona) {
     const Acceso = PANTALLAS.find((candidata) => candidata.codigo === 'e0')!.componente;
@@ -99,7 +109,7 @@ function App() {
     );
   }
 
-  if (cargandoCursos && persona.rol !== 'docente') return <Cargando />;
+  if (cargandoCursos && (persona.rol !== 'docente' || esDeCurso)) return <Cargando />;
 
   if (persona.rol !== 'docente' && cursos.length === 0) {
     return (
@@ -111,12 +121,12 @@ function App() {
 
   if (!pantalla) return <Cargando />;
   const Componente = pantalla.componente;
-  const permitido = RUTAS_COMUNES.has(ruta) || rolDeRuta(ruta) === persona.rol;
+  const permitido = RUTAS_COMUNES.has(codigo) || rolDeRuta(codigo) === persona.rol;
   return (
     <ModoViva.Provider value>
       <div className="escenario">
-        <BarraLateral ruta={permitido ? ruta : inicio.replace('#/', '')} />
-        {!permitido ? <OtroRol rol={persona.rol} /> : CONECTADAS.has(ruta) ? <Componente /> : <SinDatos rol={persona.rol} />}
+        <BarraLateral ruta={permitido ? codigo : inicio.replace('#/', '')} />
+        {!permitido ? <OtroRol rol={persona.rol} /> : CONECTADAS.has(codigo) ? <Componente /> : <SinDatos rol={persona.rol} />}
       </div>
     </ModoViva.Provider>
   );

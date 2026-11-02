@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useRutaCurso } from './curso';
 import { IconoSvg } from './Icono';
 import { MenuHoja } from './Menu';
 import { ModoModal, ModoRol } from './ui';
@@ -16,6 +17,7 @@ export function Dock({ accion }: { accion?: AccionDock }) {
   const [abierto, setAbierto] = useState(false);
   const modal = useContext(ModoModal);
   const rol = useContext(ModoRol);
+  const rutaCurso = useRutaCurso();
   if (modal) return null;
   return (
     <>
@@ -28,7 +30,7 @@ export function Dock({ accion }: { accion?: AccionDock }) {
               <strong>{accion.texto}</strong>
             </button>
           ) : (
-            <a className="dock__accion" href={accion.ruta}>
+            <a className="dock__accion" href={rutaCurso(accion.ruta)}>
               <small>{accion.etiqueta}</small>
               <strong>{accion.texto}</strong>
             </a>

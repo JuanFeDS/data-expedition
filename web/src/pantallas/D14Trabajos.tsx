@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useCurso } from '../componentes/curso';
+import { useCurso, useRutaCurso } from '../componentes/curso';
 import { finDelDia, formatoFecha, useServicioTrabajos, type TrabajoCurso } from '../servicios/trabajos';
 
 const VACIO = { nombre: '', tema: '', semana: '', fecha: '', minPylint: '8' };
@@ -11,6 +11,7 @@ const VACIO = { nombre: '', tema: '', semana: '', fecha: '', minPylint: '8' };
 export function D14Trabajos() {
   const servicio = useServicioTrabajos();
   const { curso } = useCurso();
+  const rutaCurso = useRutaCurso();
   const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
   const [fallo, setFallo] = useState(false);
   const [aviso, setAviso] = useState<string | null>(null);
@@ -59,7 +60,7 @@ export function D14Trabajos() {
           {aviso && <p className="acceso__error" role="alert">{aviso}</p>}
           {!curso && (
             <Tarjeta kicker="Primer paso" titulo="Falta crear un curso">
-              <p className="meta">Créalo en <a href="#/d13"><u>Personas</u></a> y vuelve aquí para agregar los trabajos.</p>
+              <p className="meta">Créalo en <a href={rutaCurso('#/d13')}><u>Personas</u></a> y vuelve aquí para agregar los trabajos.</p>
             </Tarjeta>
           )}
           {curso && trabajos && (

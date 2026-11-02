@@ -1,5 +1,6 @@
 import { IconoSvg } from './Icono';
 import { INICIO_REAL } from './acceso';
+import { useCurso } from './curso';
 import { BotonSalir } from './BotonSalir';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
@@ -24,6 +25,7 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
 
 export function BarraLateral({ ruta }: { ruta: string }) {
   const { modoDemo, persona } = useSesion();
+  const { curso, dentro } = useCurso();
   const rol = RUTAS_COMUNES.has(ruta) && persona ? persona.rol : rolDeRuta(ruta);
   const base = usuarioDeRol[rol];
   const real = !modoDemo && persona !== null;
@@ -39,7 +41,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
       </a>
       {!real && <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>}
       <nav className="lateral__nav">
-        {gruposVisibles(rol, real).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
+        {gruposVisibles(rol, real, dentro ? curso : null).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
       <div className="lateral__ajustes"><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>

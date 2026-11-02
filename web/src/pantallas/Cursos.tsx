@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { useCurso } from '../componentes/curso';
+import { enCurso, rutaDeCurso } from '../componentes/navegacion';
 import { Tarjeta } from '../componentes/panel';
 import { useSesion } from '../componentes/sesion';
 import { Pantalla } from '../componentes/ui';
@@ -28,7 +29,7 @@ function EditorCurso({ curso, alGuardar, alCancelar }: { curso: Curso; alGuardar
 
 export function Cursos() {
   const { persona } = useSesion();
-  const { cursos, conteos, curso, elegir, crear, actualizar, eliminar, cargando } = useCurso();
+  const { cursos, conteos, reciente, crear, actualizar, eliminar, cargando } = useCurso();
   const [nombre, setNombre] = useState('');
   const [periodo, setPeriodo] = useState('');
   const [editando, setEditando] = useState<string | null>(null);
@@ -37,13 +38,11 @@ export function Cursos() {
   const esDocente = rol === 'docente';
 
   const entrar = (id: string) => {
-    elegir(id);
-    window.location.hash = DESTINO[rol];
+    window.location.hash = enCurso(DESTINO[rol], id);
   };
 
   const abrir = (id: string) => {
-    elegir(id);
-    window.location.hash = '#/curso';
+    window.location.hash = rutaDeCurso(id, 'curso');
   };
 
   const crearCurso = async (evento: React.FormEvent) => {
@@ -92,7 +91,7 @@ export function Cursos() {
                         <span className="cursos__nombre">{candidato.nombre}</span>
                         {candidato.periodo && <small>Periodo {candidato.periodo}</small>}
                         {esDocente && <small>{plural(conteo?.estudiantes ?? 0, 'estudiante', 'estudiantes')} · {plural(conteo?.grupos ?? 0, 'grupo', 'grupos')}</small>}
-                        {candidato.id === curso?.id && <small>Último que usaste</small>}
+                        {candidato.id === reciente?.id && <small>Último que usaste</small>}
                           <span className="cursos__ver">Ver información ›</span>
                         </button>
                         <div className="cursos__acciones">

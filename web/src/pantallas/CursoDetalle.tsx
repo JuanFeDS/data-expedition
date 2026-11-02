@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
-import { useCurso } from '../componentes/curso';
+import { useCurso, useRutaCurso } from '../componentes/curso';
 import { Dato, Tarjeta } from '../componentes/panel';
 import { useSesion } from '../componentes/sesion';
 import { Pantalla } from '../componentes/ui';
@@ -16,6 +16,7 @@ const plural = (cantidad: number, uno: string, varios: string) => `${cantidad} $
 export function CursoDetalle() {
   const { persona, modoDemo } = useSesion();
   const { curso } = useCurso();
+  const rutaCurso = useRutaCurso();
   const trabajosServicio = useServicioTrabajos();
   const personas = useMemo(() => (modoDemo ? personasDemo() : personasReal), [modoDemo]);
   const cursos = modoDemo ? cursosDemo : servicioCursosSupabase;
@@ -53,14 +54,14 @@ export function CursoDetalle() {
                 <Tarjeta><Dato valor={trabajos?.length ?? 0} etiqueta={trabajos?.length === 1 ? 'Trabajo' : 'Trabajos'} /></Tarjeta>
               </div>
               <div className="d13__columnas">
-                <Tarjeta kicker="Organización" titulo="Grupos" accion={<a className="cursos__secundaria" href="#/d13">Gestionar</a>}>
+                <Tarjeta kicker="Organización" titulo="Grupos" accion={<a className="cursos__secundaria" href={rutaCurso('#/d13')}>Gestionar</a>}>
                   <ul className="detalle__lista">
                     {datos?.grupos.map((grupo) => <li key={grupo.id}><strong>{grupo.nombre}</strong><small>{plural(porGrupo(grupo.id), 'estudiante', 'estudiantes')}</small></li>)}
                     {sinGrupo > 0 && <li><strong>Sin grupo</strong><small>{plural(sinGrupo, 'estudiante', 'estudiantes')}</small></li>}
                     {datos && datos.grupos.length === 0 && sinGrupo === 0 && <li><small>Aún no hay grupos ni estudiantes.</small></li>}
                   </ul>
                 </Tarjeta>
-                <Tarjeta kicker="Qué se entrega" titulo="Trabajos" accion={<a className="cursos__secundaria" href="#/d14">Gestionar</a>}>
+                <Tarjeta kicker="Qué se entrega" titulo="Trabajos" accion={<a className="cursos__secundaria" href={rutaCurso('#/d14')}>Gestionar</a>}>
                   <ul className="detalle__lista">
                     {trabajos?.map((trabajo) => <li key={trabajo.id}><strong>{trabajo.nombre}</strong><small>Vence {formatoFecha(trabajo.venceEn).largo}</small></li>)}
                     {trabajos && trabajos.length === 0 && <li><small>Aún no hay trabajos.</small></li>}
@@ -74,7 +75,7 @@ export function CursoDetalle() {
               <Tarjeta kicker="Tu lugar" titulo="Tu grupo">
                 <p className="meta">{miGrupo ? <>Estás en <b>{miGrupo}</b>.</> : 'Aún no te asignan un grupo. Tu docente lo hará pronto.'}</p>
               </Tarjeta>
-              <Tarjeta kicker="Qué se entrega" titulo="Trabajos" accion={<a className="cursos__secundaria" href="#/e5">Mis entregas</a>}>
+              <Tarjeta kicker="Qué se entrega" titulo="Trabajos" accion={<a className="cursos__secundaria" href={rutaCurso('#/e5')}>Mis entregas</a>}>
                 <ul className="detalle__lista">
                   {trabajos?.map((trabajo) => <li key={trabajo.id}><strong>{trabajo.nombre}</strong><small>Vence {formatoFecha(trabajo.venceEn).largo}</small></li>)}
                   {trabajos && trabajos.length === 0 && <li><small>Tu docente aún no publica trabajos.</small></li>}

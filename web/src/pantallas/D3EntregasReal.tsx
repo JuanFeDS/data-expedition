@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
-import { useCurso } from '../componentes/curso';
+import { useCurso, useRutaCurso } from '../componentes/curso';
 import { Estado, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
 import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../servicios/personas';
@@ -13,6 +13,7 @@ const TEXTO: Record<EstadoEntrega, string> = { borrador: 'Borrador', entregada: 
 export function D3EntregasReal() {
   const servicio = useServicioTrabajos();
   const { curso } = useCurso();
+  const rutaCurso = useRutaCurso();
   const [trabajos, setTrabajos] = useState<TrabajoCurso[]>([]);
   const [entregas, setEntregas] = useState<EntregaVista[]>([]);
   const [estudiantes, setEstudiantes] = useState<PersonaCurso[]>([]);
@@ -47,7 +48,7 @@ export function D3EntregasReal() {
           {fallo && <p className="acceso__error" role="alert">No pudimos cargar las entregas. <button onClick={() => void cargar()}>Reintentar</button></p>}
           {trabajos.length === 0 && !fallo && (
             <Tarjeta kicker="Primer paso" titulo="Publica los trabajos">
-              <p className="meta">Agrégalos en <a href="#/d14"><u>Trabajos</u></a> para que los estudiantes puedan entregar.</p>
+              <p className="meta">Agrégalos en <a href={rutaCurso('#/d14')}><u>Trabajos</u></a> para que los estudiantes puedan entregar.</p>
             </Tarjeta>
           )}
           {trabajos.length > 0 && <Segmentado opciones={trabajos.map((candidato) => candidato.nombre)} activa={indice} alCambiar={setIndice} />}

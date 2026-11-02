@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BotonSalir } from './BotonSalir';
 import { IconoSvg } from './Icono';
+import { useCurso } from './curso';
 import { NAVEGACION, esConectada, gruposVisibles, type Rol } from './navegacion';
 import { useSesion } from './sesion';
 import { InterruptorSonido } from './tema';
@@ -13,6 +14,7 @@ export const OPCIONES_MENU = (rol: Rol) => NAVEGACION[rol].flatMap((grupo) => gr
 export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCerrar: () => void; omitir?: string }) {
   const rol = useContext(ModoRol);
   const { modoDemo, persona } = useSesion();
+  const { curso, dentro } = useCurso();
   return (
     <Hoja abierta={abierta} alCerrar={alCerrar} titulo="Menú">
       {rol === 'docente' && (
@@ -26,7 +28,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
         </div>
       )}
       <nav className="hoja__menu">
-        {gruposVisibles(rol, !modoDemo).map((grupo) => {
+        {gruposVisibles(rol, !modoDemo, dentro ? curso : null).map((grupo) => {
           const enlaces = grupo.enlaces.filter((opcion) => opcion.ruta !== omitir && !(rol === 'docente' && ATAJOS_DOCENTE.includes(opcion.ruta)));
           if (enlaces.length === 0) return null;
           return (

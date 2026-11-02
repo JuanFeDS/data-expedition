@@ -4,6 +4,7 @@ import { CabeceraMundo } from './CabeceraMundo';
 import { Dock } from './Dock';
 import { Jaguar, type PoseJaguar } from './Jaguar';
 import { useCurso } from './curso';
+import { enCurso } from './navegacion';
 import { Tarjeta } from './panel';
 import { useSesion } from './sesion';
 import { Pantalla } from './ui';
@@ -134,7 +135,7 @@ export function InicioSinCurso() {
 }
 
 function PrimerosPasos() {
-  const { cursos, curso, conteos } = useCurso();
+  const { cursos, reciente: curso, conteos } = useCurso();
   const servicio = useServicioTrabajos();
   const [trabajos, setTrabajos] = useState<number | null>(null);
 
@@ -158,7 +159,7 @@ function PrimerosPasos() {
         {pasos.map((paso) => (
           <li key={paso.texto} className={paso.hecho ? 'hecho' : ''}>
             <span className="inicio__marca" aria-hidden="true">{paso.hecho ? '✓' : ''}</span>
-            <a href={paso.ruta}>{paso.texto}</a>
+            <a href={curso ? enCurso(paso.ruta, curso.id) : paso.ruta}>{paso.texto}</a>
           </li>
         ))}
       </ul>

@@ -120,13 +120,31 @@ export const RUTAS_COMUNES = new Set(['cursos', 'curso', 'inicio']);
 export const CONECTADAS = new Set(['e0', 'inicio', 'cursos', 'curso', 'e5', 'e6', 'd3', 'd13', 'd14']);
 
 const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio'], color: 'accent' };
-const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Tus cursos y el que tienes activo', ruta: '#/cursos', activa: ['cursos', 'curso'], color: 'claro' };
+const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Todos tus cursos', ruta: '#/cursos', activa: ['cursos'], color: 'claro' };
+const ENLACE_INFO: Enlace = { tipo: 'panel', etiqueta: 'Información', detalle: 'Resumen del curso', ruta: '#/curso', activa: ['curso'], color: 'claro' };
+
+export const ENCURSO = new Set(['curso', 'e5', 'e6', 'd3', 'd13', 'd14']);
 
 export const codigoDeRuta = (ruta: string) => ruta.replace(/^#\/?/, '');
 
 export const esConectada = (ruta: string) => CONECTADAS.has(codigoDeRuta(ruta));
 
-export const gruposVisibles = (rol: Rol, soloConectadas: boolean) =>
-  [...(soloConectadas ? [{ titulo: 'Cursos', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS] : [ENLACE_CURSOS] }] : []), ...NAVEGACION[rol]]
-    .map((grupo) => ({ ...grupo, enlaces: soloConectadas ? grupo.enlaces.filter((enlace) => esConectada(enlace.ruta)) : grupo.enlaces }))
-    .filter((grupo) => grupo.enlaces.length > 0);
+export const analizarRuta = (ruta: string): { cursoId: string | null; codigo: string } => {
+  const coincidencia = /^c\/([^/]+)\/(.+)$/.exec(ruta);
+  return coincidencia ? { cursoId: coincidencia[1], codigo: coincidencia[2] } : { cursoId: null, codigo: ruta };
+};
+
+export const rutaDeCurso = (cursoId: string, codigo: string) => `#/c/${cursoId}/${codigo}`;
+
+export const enCurso = (ruta: string, cursoId: string) => {
+  const codigo = codigoDeRuta(ruta);
+  return ENCURSO.has(codigo) ? rutaDeCurso(cursoId, codigo) : ruta;
+};
+
+export const gruposVisibles = (rol: Rol, soloConectadas: boolean, curso: { id: string; nombre: string } | null = null): GrupoEnlaces[] => {
+  if (!soloConectadas) return NAVEGACION[rol];
+  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS] : [ENLACE_CURSOS] };
+  if (!curso) return [general];
+  const delCurso = NAVEGACION[rol].flatMap((grupo) => grupo.enlaces).filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)));
+  return [general, { titulo: curso.nombre, enlaces: [ENLACE_INFO, ...delCurso].map((enlace) => ({ ...enlace, ruta: enCurso(enlace.ruta, curso.id) })) }];
+};
