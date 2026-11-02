@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BotonSalir } from './BotonSalir';
 import { CabeceraMundo } from './CabeceraMundo';
+import { Dock } from './Dock';
 import { Jaguar, type PoseJaguar } from './Jaguar';
 import { useCurso } from './curso';
 import { Tarjeta } from './panel';
 import { useSesion } from './sesion';
 import { Pantalla } from './ui';
+import { useServicioTrabajos } from '../servicios/trabajos';
 
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 
-const PASOS: { pose: PoseJaguar; titulo: string; texto: string }[] = [
+interface PasoTutorial { pose: PoseJaguar; titulo: string; texto: string }
+
+const PASOS_ESTUDIANTE: PasoTutorial[] = [
   {
     pose: 'saluda',
     titulo: 'Bienvenida a Data Expedition',
@@ -27,11 +31,29 @@ const PASOS: { pose: PoseJaguar; titulo: string; texto: string }[] = [
   },
 ];
 
-function Tutorial() {
+const PASOS_DOCENTE: PasoTutorial[] = [
+  {
+    pose: 'saluda',
+    titulo: 'Cada curso es una cohorte',
+    texto: 'Un curso reúne a sus personas, sus grupos y sus trabajos. Puedes tener varios y cambiar de uno a otro desde el selector o desde la pestaña Cursos.',
+  },
+  {
+    pose: 'guia',
+    titulo: 'Invita y organiza',
+    texto: 'En Personas invitas por correo o con un CSV y armas los grupos. Quien se registre con ese correo queda matriculado en el curso y en su grupo.',
+  },
+  {
+    pose: 'pensando',
+    titulo: 'Publica trabajos y revisa entregas',
+    texto: 'En Trabajos creas lo que se entrega y su fecha. Los estudiantes entregan con el enlace de su PR, y tú lo ves en Entregas.',
+  },
+];
+
+function Tutorial({ pasos }: { pasos: PasoTutorial[] }) {
   const [paso, setPaso] = useState(0);
-  const actual = PASOS[paso];
+  const actual = pasos[paso];
   return (
-    <Tarjeta kicker={`Paso ${paso + 1} de ${PASOS.length}`} titulo="Cómo funciona">
+    <Tarjeta kicker={`Paso ${paso + 1} de ${pasos.length}`} titulo="Cómo funciona">
       <div className="inicio__tuto">
         <Jaguar pose={actual.pose} ancho={96} clase="inicio__guia" />
         <div>
@@ -40,11 +62,11 @@ function Tutorial() {
         </div>
       </div>
       <div className="inicio__pasos" aria-hidden="true">
-        {PASOS.map((_, indice) => <i key={indice} className={indice === paso ? 'actual' : ''} />)}
+        {pasos.map((_, indice) => <i key={indice} className={indice === paso ? 'actual' : ''} />)}
       </div>
       <div className="d13__fila">
         <button className="acceso__boton" disabled={paso === 0} onClick={() => setPaso(paso - 1)}>Atrás</button>
-        <button className="acceso__boton acceso__boton--principal" disabled={paso === PASOS.length - 1} onClick={() => setPaso(paso + 1)}>Siguiente</button>
+        <button className="acceso__boton acceso__boton--principal" disabled={paso === pasos.length - 1} onClick={() => setPaso(paso + 1)}>Siguiente</button>
       </div>
     </Tarjeta>
   );
@@ -99,11 +121,62 @@ export function InicioSinCurso() {
             <p className="meta">Tu docente debe invitarte a un curso con el correo <b>{persona?.correo}</b>. Cuando lo haga, aparecerá aquí.</p>
             <button className="acceso__boton acceso__boton--principal" disabled={revisando || cargando} onClick={() => void revisar()}>{revisando ? 'Revisando…' : 'Ya me invitaron, actualizar'}</button>
           </Tarjeta>
-          <Tutorial />
+          <Tutorial pasos={PASOS_ESTUDIANTE} />
           <MiPerfil />
           <BotonSalir clase="inicio__salir">Cerrar sesión</BotonSalir>
         </div>
       </div>
+    </Pantalla>
+  );
+}
+
+function PrimerosPasos() {
+  const { cursos, curso, conteos } = useCurso();
+  const servicio = useServicioTrabajos();
+  const [trabajos, setTrabajos] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!curso) { setTrabajos(0); return; }
+    void servicio.cargarTrabajos(curso.id).then((lista) => setTrabajos(lista.length)).catch(() => setTrabajos(null));
+  }, [servicio, curso]);
+
+  const conteo = curso ? conteos[curso.id] : undefined;
+  const pasos = [
+    { hecho: cursos.length > 0, texto: 'Crear tu primer curso', ruta: '#/cursos' },
+    { hecho: (conteo?.grupos ?? 0) > 0, texto: 'Crear los grupos del curso', ruta: '#/d13' },
+    { hecho: (conteo?.estudiantes ?? 0) > 0, texto: 'Invitar a tus estudiantes', ruta: '#/d13' },
+    { hecho: (trabajos ?? 0) > 0, texto: 'Publicar el primer trabajo', ruta: '#/d14' },
+  ];
+  const completos = pasos.filter((paso) => paso.hecho).length;
+
+  return (
+    <Tarjeta kicker={`${completos} de ${pasos.length} listos`} titulo="Primeros pasos">
+      <ul className="inicio__lista">
+        {pasos.map((paso) => (
+          <li key={paso.texto} className={paso.hecho ? 'hecho' : ''}>
+            <span className="inicio__marca" aria-hidden="true">{paso.hecho ? '✓' : ''}</span>
+            <a href={paso.ruta}>{paso.texto}</a>
+          </li>
+        ))}
+      </ul>
+      {completos === pasos.length && <p className="meta">Todo listo. Desde Entregas puedes seguir lo que llega.</p>}
+    </Tarjeta>
+  );
+}
+
+export function InicioDocente() {
+  const { persona } = useSesion();
+  return (
+    <Pantalla rol="docente" clase="p-inicio">
+      <div className="pantalla__cuerpo">
+        <CabeceraMundo kicker="Panel del docente" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo="Esto es lo que necesitas para arrancar el curso." objeto="mochila" />
+        <div className="contenido cuerpo-mundo panel">
+          <PrimerosPasos />
+          <Tutorial pasos={PASOS_DOCENTE} />
+          <MiPerfil />
+        </div>
+      </div>
+      <Dock />
     </Pantalla>
   );
 }

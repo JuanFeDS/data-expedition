@@ -32,8 +32,8 @@ export function useAjusteAltura(ruta: string) {
 
     const observador = new MutationObserver(programar);
     const vigilar = () => {
-      const elemento = cuerpo();
-      if (elemento) observador.observe(elemento, { childList: true, subtree: true, characterData: true });
+      const raiz = document.getElementById('raiz') ?? document.body;
+      observador.observe(raiz, { childList: true, subtree: true, characterData: true });
     };
 
     vigilar();

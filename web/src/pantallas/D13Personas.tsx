@@ -121,7 +121,7 @@ export function D13Personas() {
           {aviso && <p className="acceso__error" role="alert">{aviso}</p>}
           {!cargandoCursos && !curso && (
             <Tarjeta kicker="Primer paso" titulo="Crea tu primer curso">
-              <form className="d13__formulario" onSubmit={(evento) => { evento.preventDefault(); if (nombreCurso.trim()) void crearCurso(nombreCurso.trim()).then((error) => { setAviso(error); if (!error) setNombreCurso(''); }); }}>
+              <form className="d13__formulario" onSubmit={(evento) => { evento.preventDefault(); if (nombreCurso.trim()) void crearCurso({ nombre: nombreCurso.trim(), periodo: '' }).then((error) => { setAviso(error); if (!error) setNombreCurso(''); }); }}>
                 <input className="d13__campo" placeholder="Ciencia de datos 2026-2" value={nombreCurso} onChange={(evento) => setNombreCurso(evento.target.value)} aria-label="Nombre del curso" />
                 <button className="acceso__boton acceso__boton--principal" disabled={!nombreCurso.trim()}>Crear curso</button>
               </form>

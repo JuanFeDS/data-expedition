@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { crearServicioCursosDemo, servicioCursosSupabase, type ConteoCurso, type Curso } from '../servicios/cursos';
+import { crearServicioCursosDemo, servicioCursosSupabase, type ConteoCurso, type Curso, type DatosCurso } from '../servicios/cursos';
 import { useSesion } from './sesion';
 
 const CLAVE = 'curso-activo';
@@ -11,11 +11,13 @@ interface ValorCurso {
   conteos: Record<string, ConteoCurso>;
   curso: Curso | null;
   elegir: (id: string) => void;
-  crear: (nombre: string) => Promise<string | null>;
+  crear: (datos: DatosCurso) => Promise<string | null>;
+  actualizar: (id: string, datos: DatosCurso) => Promise<string | null>;
+  eliminar: (id: string) => Promise<string | null>;
   recargar: () => Promise<void>;
 }
 
-const SIN_CURSO: ValorCurso = { cargando: false, cursos: [], conteos: {}, curso: null, elegir: () => undefined, crear: async () => 'Sin conexión', recargar: async () => undefined };
+const SIN_CURSO: ValorCurso = { cargando: false, cursos: [], conteos: {}, curso: null, elegir: () => undefined, crear: async () => 'Sin conexión', actualizar: async () => 'Sin conexión', eliminar: async () => 'Sin conexión', recargar: async () => undefined };
 const ContextoCurso = createContext<ValorCurso>(SIN_CURSO);
 
 export const useCurso = () => useContext(ContextoCurso);
@@ -67,13 +69,25 @@ export function CursoProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const crear = useCallback(async (nombre: string) => {
-    const error = await servicio.crear(nombre);
+  const crear = useCallback(async (datos: DatosCurso) => {
+    const error = await servicio.crear(datos);
     await recargar();
     return error;
   }, [servicio, recargar]);
 
-  const valor = useMemo(() => ({ cargando, cursos, conteos, curso, elegir, crear, recargar }), [cargando, cursos, conteos, curso, elegir, crear, recargar]);
+  const actualizar = useCallback(async (id: string, datos: DatosCurso) => {
+    const error = await servicio.actualizar(id, datos);
+    await recargar();
+    return error;
+  }, [servicio, recargar]);
+
+  const eliminar = useCallback(async (id: string) => {
+    const error = await servicio.eliminar(id);
+    await recargar();
+    return error;
+  }, [servicio, recargar]);
+
+  const valor = useMemo(() => ({ cargando, cursos, conteos, curso, elegir, crear, actualizar, eliminar, recargar }), [cargando, cursos, conteos, curso, elegir, crear, actualizar, eliminar, recargar]);
   return <ContextoCurso.Provider value={valor}>{children}</ContextoCurso.Provider>;
 }
 
