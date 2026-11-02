@@ -5,19 +5,21 @@ Borrador del 2026-11-01. Parte del pensum de ESTUD-IA (8 módulos, English for T
 ## 1. Supuestos
 
 - 8 semanas, 2 sesiones de 3 h por semana: **16 sesiones** (S1 a S16; la semana *n* tiene las sesiones 2n−1 y 2n).
-- Modalidad 60 % virtual, 40 % presencial: **3 sesiones presenciales** y 13 virtuales.
+- Las **16 sesiones entre semana son todas virtuales**. Además hay **3 sesiones presenciales adicionales** (P1 a P3), el 14, 21 y 28 de noviembre. El calendario real de las 16 sesiones aún no existe, así que las presenciales no se atan a una semana concreta.
 - Entrada con prueba técnica de más del 80 %, pero **no se sabe qué mide** (en particular, si incluye Python). Por eso el curso es dinámico: se ajusta con el diagnóstico.
 - Computador por estudiante; sistema operativo por confirmar (decide la herramienta de la semana 5).
-- Todo se entrega por **PR a un repo público propio** (F21 del RFC). Python se trabaja en Colab (sin instalación); Git y VS Code se instalan en la clase 1.
+- Todo se entrega por **PR a un repo público propio** (F21 del RFC). Todo el trabajo es **local, sin Colab**: Python 3.12, VS Code con la extensión Jupyter y Git, instalados en la clase 1. Spark corre en modo local (requiere JDK 17).
 - Mismas 7 dimensiones del borrador del RFC: Datos, Análisis, Modelado, Validación, Comunicación, Producción y Dirección de IA.
 
-## 2. Sesiones presenciales (propuesta, por confirmar)
+## 2. Sesiones presenciales adicionales (14, 21 y 28 de noviembre)
 
-| Sesión | Por qué presencial |
-|---|---|
-| **S2** (semana 1) | La verificación sin IA se hace con supervisión real; además sirve de clínica para quien no terminó el entorno o el PR de prueba en la clase 1 virtual |
-| **S11** (semana 6) | Formar equipos, repartir roles y arrancar el integrador con Scrum cara a cara |
-| **S16** (semana 8) | Presentación del integrador |
+| Sesión | Fecha | Propósito |
+|---|---|---|
+| **P1** | 14 nov | Verificación sin IA oficial, clínica de entorno y PR, y asignación de ruta |
+| **P2** | 21 nov | Formación de equipos, roles y arranque del integrador |
+| **P3** | 28 nov | Laboratorio práctico: Spark local y modelado, con ayuda en persona |
+
+Son adicionales a las 16 sesiones virtuales. El detalle está en [presenciales.md](plan-de-estudios/presenciales.md). Cuando exista el calendario real se asocia cada una a su semana. La presentación final del integrador (S16) es virtual.
 
 ## 3. Cómo corre una sesión virtual de 3 h
 
@@ -42,12 +44,12 @@ Bloques de 40 a 50 min con pausas de 10 min; nada de 3 h seguidas de pantalla co
 | 0–20 | Bienvenida: cómo funciona el curso (islas, radar, IA con declaración, entrega por PR) y por qué hay un diagnóstico |
 | 20–60 | Introducción a la ciencia de datos (teoría): ciclo, roles, qué es big data, dónde entra la IA |
 | 60–70 | Pausa |
-| 70–110 | Entorno: cuenta de GitHub, Git, VS Code y Colab, con lista de verificación y salas de apoyo por sistema operativo. Censo rápido de equipos (sistema operativo, memoria, navegador) |
+| 70–110 | Entorno: cuenta de GitHub, Git, Python, VS Code con Jupyter, con lista de verificación y salas de apoyo por sistema operativo. Censo rápido de equipos (sistema operativo, memoria, navegador) |
 | 110–120 | Pausa |
 | 120–165 | **Guía de entrega por PR**: repo público, rama, commit, abrir el PR y copiar el enlace. Cada estudiante abre un **PR de prueba** (un README con su nombre y tres líneas) |
 | 165–180 | Cierre: se explica la tarea diagnóstica y el plazo |
 
-El PR de prueba valida de punta a punta el flujo de F21 antes de cualquier trabajo con nota. La guía de PR queda como documento aparte para los estudiantes. Al ser virtual, quien no termine el entorno o el PR lo resuelve en la clínica de la S2, que es presencial. Detalle de la dinámica en [semana-01.md](plan-de-estudios/semana-01.md).
+El PR de prueba valida de punta a punta el flujo de F21 antes de cualquier trabajo con nota. La guía de PR queda como documento aparte para los estudiantes. Al ser virtual, quien no termine el entorno o el PR lo resuelve en la sala de apoyo de la S2 o en la clínica de la P1 (14 de noviembre). Detalle de la dinámica en [semana-01.md](plan-de-estudios/semana-01.md).
 
 ## 5. Diagnóstico
 
@@ -56,24 +58,24 @@ Punto de partida del radar (F7). No cuenta para aprobar.
 **Tarea (después de S1, máximo 60 min, entregada por PR):**
 1. Autoinforme: confianza declarada en Python, SQL, estadística, Git, ML y uso de IA (5 min).
 2. Preguntas cortas con corrección automática (15 min).
-3. Mini tarea práctica en Colab con un dataset sucio: cargar, limpiar, responder dos preguntas, un gráfico y su interpretación (40 min). **IA permitida y declarada** en una bitácora de tres líneas.
+3. Mini tarea práctica en un notebook local (VS Code) con un dataset sucio: cargar, limpiar, responder dos preguntas, un gráfico y su interpretación (40 min). **IA permitida y declarada** en una bitácora de tres líneas.
 
-**Verificación en clase (primeros 20 min de S2, sin IA):** tres o cuatro ejercicios paralelos a los de la tarea (leer código, un `groupby`, interpretar un gráfico).
+**Verificación sin IA:** tres o cuatro ejercicios paralelos a los de la tarea (leer código, un `groupby`, interpretar un gráfico). Se hace dos veces: una orientativa y virtual en los primeros 20 min de la S2, con cámara y pantalla compartida, y la oficial y supervisada en la P1.
 
 **Resultado:** dos valores por dimensión, con IA y sin IA. La brecha entre ambos mide dependencia de la IA y alimenta Dirección de IA. La parte práctica se califica con la rúbrica de 5 niveles; un revisor automático comprueba cifras concretas (filas tras limpiar, medias) y solo la interpretación se califica a mano.
 
 **Forma paralela (B):** se aplica al final con el mismo formato (tarea después de S14 y verificación sin IA al inicio de S15). Cada ejercicio existe en versión A y B de la misma dificultad.
 
-**Limitación:** entre el fin de S1 y S2 hay pocos días, así que S2 no puede depender de resultados ya procesados. S2 se diseña con ejercicios en tres niveles y cada estudiante elige el suyo ese día. El ajuste fino empieza en S3.
+**Limitación:** entre el fin de S1 y S2 hay pocos días, así que S2 no puede depender de resultados ya procesados. La ruta definitiva se asigna con la verificación oficial de la P1; hasta entonces S2 y S3 usan ejercicios en tres niveles y cada estudiante elige el suyo.
 
 ## 6. Plan semana por semana
 
-La dinámica detallada de cada sesión está en `plan-de-estudios/`, un archivo por semana: [1](plan-de-estudios/semana-01.md), [2](plan-de-estudios/semana-02.md), [3](plan-de-estudios/semana-03.md), [4](plan-de-estudios/semana-04.md), [5](plan-de-estudios/semana-05.md), [6](plan-de-estudios/semana-06.md), [7](plan-de-estudios/semana-07.md), [8](plan-de-estudios/semana-08.md).
+La dinámica detallada de cada sesión está en `plan-de-estudios/`, un archivo por semana: [1](plan-de-estudios/semana-01.md), [2](plan-de-estudios/semana-02.md), [3](plan-de-estudios/semana-03.md), [4](plan-de-estudios/semana-04.md), [5](plan-de-estudios/semana-05.md), [6](plan-de-estudios/semana-06.md), [7](plan-de-estudios/semana-07.md), [8](plan-de-estudios/semana-08.md). Las tres presenciales adicionales (P1 a P3) están en [presenciales.md](plan-de-estudios/presenciales.md).
 
 | Sem. | Ses. | Modalidad | Foco | Trabajo (PR) |
 |---|---|---|---|---|
 | 1 | S1 | Virtual | Introducción a la ciencia de datos, entorno, guía de PR | PR de prueba; tarea diagnóstica |
-| 1 | S2 | Presencial | Verificación sin IA, clínica de entorno y PR; pandas fundamentos en tres niveles | Diagnóstico entregado |
+| 1 | S2 | Virtual | Verificación sin IA orientativa; pandas fundamentos en tres niveles | Diagnóstico entregado |
 | 2 | S3 | Virtual | pandas avanzado: joins, ventanas, limpieza; NumPy | |
 | 2 | S4 | Virtual | EDA con Matplotlib y Seaborn | **T1** EDA reproducible |
 | 3 | S5 | Virtual | Regresión con scikit-learn, partición train/test y métricas | |
@@ -82,14 +84,14 @@ La dinámica detallada de cada sesión está en `plan-de-estudios/`, un archivo 
 | 4 | S8 | Virtual | PySpark SQL, particiones y dataset masivo; comparación con pandas | **T3** Mismo análisis en Spark |
 | 5 | S9 | Virtual | Visualización interactiva: filtros, medidas (DAX) o campos calculados | |
 | 5 | S10 | Virtual | Storytelling con datos y diseño del dashboard | **T4** Dashboard con narrativa |
-| 6 | S11 | Presencial | Scrum, equipos y roles; arranque del integrador (backlog y sprint 1) | |
+| 6 | S11 | Virtual | Scrum, ajuste de equipos y planificación del sprint 1 | |
 | 6 | S12 | Virtual | Pipelines de datos reproducibles | **T5** Pipeline y backlog |
 | 7 | S13 | Virtual | Validación cruzada y ajuste de hiperparámetros | |
 | 7 | S14 | Virtual | Interpretación con SHAP y LIME | **T6** Modelo optimizado e interpretado; tarea forma B |
 | 8 | S15 | Virtual | Verificación sin IA (forma B); sprint final y ensayo | |
-| 8 | S16 | Presencial | Presentación del integrador y retroalimentación | **T7** Integrador |
+| 8 | S16 | Virtual | Presentación del integrador y retroalimentación | **T7** Integrador |
 
-Hilo transversal **Habilidades para el empleo**: el repo como portafolio (S1), retroalimentación entre pares (revisiones al azar), roles de equipo (S11), retrospectivas por sprint (S12) y presentación profesional (S15–S16).
+Hilo transversal **Habilidades para el empleo**: el repo como portafolio (S1), retroalimentación entre pares (revisiones al azar), roles de equipo (P2 y S11), retrospectivas por sprint (S12) y presentación profesional (S15–S16).
 
 ## 7. Cobertura del pensum
 
@@ -143,11 +145,11 @@ Reglas por dimensión:
 ## 10. Decisiones abiertas
 
 1. **Herramienta de la semana 5.** Power BI Desktop si todo el grupo tiene Windows; si no, Tableau Public (campos calculados, sin DAX). Se decide con el censo de equipos de la S1.
-2. **Fechas exactas** de las tres sesiones presenciales y confirmación de las propuestas.
+2. **Calendario real** de las 16 sesiones, para asociar las presenciales P1 a P3 (14, 21 y 28 de noviembre) a su semana.
 3. **Tamaño del grupo** (pregunta 17 del RFC): define el costo de calificar a mano y el tamaño de las salas.
 4. **Qué mide la prueba técnica de entrada**, para ajustar los umbrales de la sección 9.
 5. **Si las formas A y B del diagnóstico son realmente paralelas**: requiere probarlas con un grupo piloto o calibrarlas con la primera cohorte.
-6. **Entorno de Python:** Colab como principal; decidir si se pide también instalación local.
+6. **Spark local:** requiere JDK 17 y en Windows puede pedir ajustes extra; se prueba en la P3. Respaldo si falla: GitHub Codespaces.
 
 ## 11. Versiones futuras
 
