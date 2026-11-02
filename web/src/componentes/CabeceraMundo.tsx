@@ -21,7 +21,7 @@ export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, objeto, 
       {atras && !modal && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
       <div className="mundo__texto">
         {kicker && <Kicker estilo={{ color: 'var(--mint)' }}>{kicker}</Kicker>}
-        <h1 className="titulo">{titulo}</h1>
+        <h1 className={`titulo ${titulo.split(' ').some((palabra) => palabra.length > 11) ? 'titulo--largo' : ''}`}>{titulo}</h1>
         {subtitulo && <p>{subtitulo}</p>}
         {children}
       </div>

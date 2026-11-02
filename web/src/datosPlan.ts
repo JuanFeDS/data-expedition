@@ -152,3 +152,56 @@ export const equiposCurso = [
 ];
 
 export const ROLES_EQUIPO = ['Analista de datos', 'Ingeniero de pipelines', 'Modelador', 'Narrador'];
+
+export interface RegistroRelampago {
+  sesion: string;
+  tema: string;
+  resultado: 'acierto' | 'fallo' | 'fuera';
+  segundos: number;
+  xp: number;
+}
+
+export const historicoRelampagos: RegistroRelampago[] = [
+  { sesion: 'S2', tema: 'DataFrame frente a Series', resultado: 'acierto', segundos: 41, xp: 20 },
+  { sesion: 'S3', tema: 'Tipo de unión en pandas', resultado: 'acierto', segundos: 33, xp: 20 },
+  { sesion: 'S4', tema: 'Cuándo usar un histograma', resultado: 'fallo', segundos: 52, xp: 0 },
+  { sesion: 'S5', tema: 'Qué mide el R²', resultado: 'acierto', segundos: 38, xp: 20 },
+  { sesion: 'S6', tema: 'Para qué sirve un baseline', resultado: 'acierto', segundos: 29, xp: 20 },
+  { sesion: 'S7', tema: 'Transformación o acción', resultado: 'fuera', segundos: 74, xp: 0 },
+];
+
+export interface RegistroEncuesta {
+  nombre: string;
+  semana: number;
+  respuesta: string;
+}
+
+export const historicoEncuestas: RegistroEncuesta[] = [
+  { nombre: 'Pulso semanal', semana: 1, respuesta: 'Ritmo justo · claridad 4' },
+  { nombre: 'Pulso semanal', semana: 2, respuesta: 'Ritmo rápido · claridad 3' },
+  { nombre: 'Pulso semanal', semana: 3, respuesta: 'Ritmo justo · claridad 5' },
+  { nombre: 'Autoinforme de habilidades', semana: 1, respuesta: 'Enviada' },
+  { nombre: 'Uso y actitud frente a la IA', semana: 1, respuesta: 'Enviada' },
+];
+
+export const pulsoSemanal = [
+  { semana: 1, claridad: 4.1, ritmo: 3.0, respuestas: 35 },
+  { semana: 2, claridad: 3.6, ritmo: 3.7, respuestas: 34 },
+  { semana: 3, claridad: 4.3, ritmo: 3.2, respuestas: 33 },
+];
+
+export const ligaActual = {
+  nombre: 'Liga Esmeralda',
+  nivel: 'Nivel intermedio del diagnóstico',
+  cierra: 'domingo 29 nov',
+  ascienden: 2,
+  descienden: 2,
+  participantes: [
+    { nombre: 'Tomás Ruiz', iniciales: 'TR', xp: 310, cambio: 1 },
+    { nombre: 'María Soto', iniciales: 'MS', xp: 285, cambio: 0 },
+    { nombre: 'Camilo Restrepo', iniciales: 'CR', xp: 240, cambio: 2, yo: true },
+    { nombre: 'Valentina Ortiz', iniciales: 'VO', xp: 225, cambio: -1 },
+    { nombre: 'Andrés Cano', iniciales: 'AC', xp: 170, cambio: -1 },
+    { nombre: 'Mateo Ríos', iniciales: 'MR', xp: 130, cambio: 0 },
+  ],
+};
