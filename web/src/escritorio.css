@@ -18,13 +18,13 @@
     background-image: linear-gradient(rgb(7 59 58 / .74), rgb(7 59 58 / .74)), url('/fondos/hojas-suave.webp'); background-size: auto, 440px auto; }
   .escenario .lateral__marca { display: flex; align-items: center; gap: 10px; padding: 0 6px; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: -.04em; }
   .escenario .lateral__marca img { height: auto; }
-  .escenario .lateral__semana { align-self: flex-start; margin-left: 6px; padding: 6px 14px; border-radius: 999px; background: var(--accent); color: var(--ink); font-size: 12px; font-weight: 800; }
+  .escenario .lateral__semana { align-self: flex-start; margin-left: 6px; padding: 6px 14px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 800; }
   .escenario .lateral__nav { flex: 1; display: flex; flex-direction: column; gap: 18px; }
   .escenario .lateral__grupo { display: flex; flex-direction: column; gap: 2px; }
   .escenario .lateral__titulo { margin: 0 10px 4px; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--mint); }
   .escenario .lateral__enlace { position: relative; display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 18px; font-size: 15px; font-weight: 700; color: rgb(255 255 255 / .9); transition: background-color .15s; }
   .escenario .lateral__enlace:hover { background: rgb(255 255 255 / .09); }
-  .escenario .lateral__enlace[aria-current='page'] { background: var(--accent); color: var(--ink); }
+  .escenario .lateral__enlace[aria-current='page'] { background: var(--accent); color: var(--on-accent); }
   .escenario .lateral__icono { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / .12); }
   .escenario .lateral__enlace[aria-current='page'] .lateral__icono { background: var(--deep); color: var(--accent); }
   .escenario .lateral__aviso { margin-left: auto; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #ff4d4d; color: #fff; font: 800 11px/20px var(--font-body); font-style: normal; text-align: center; }
@@ -94,8 +94,8 @@
   .escenario .pantalla--campamento .camp__guiabox .camp__globo { max-width: 280px; padding: 14px 18px; font-size: 17px; line-height: 1.35; }
   .escenario .pantalla--campamento .camp__guiabox .camp__globo a { font-size: 15px; }
   .escenario .pantalla--campamento .camp__guiabox .camp__globo--mini { font-size: 16px; padding: 9px 18px; }
-  .escenario .pantalla--campamento .camp__guiabox .camp__globo { background: #fffaf0; color: var(--deep); border: 3px solid var(--deep); border-radius: 26px 26px 26px 6px; padding: 16px 20px 18px; gap: 10px; box-shadow: 0 6px 0 var(--deep), 0 16px 28px rgb(7 59 58 / .3); font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; }
-  .escenario .pantalla--campamento .camp__guiabox .camp__globo::after { background: #fffaf0; border: 3px solid var(--deep); border-width: 0 0 3px 3px; left: -10px; bottom: 20px; width: 16px; height: 16px; border-radius: 0 0 0 5px; }
+  .escenario .pantalla--campamento .camp__guiabox .camp__globo { background: var(--papel); color: var(--deep); border: 3px solid var(--deep); border-radius: 26px 26px 26px 6px; padding: 16px 20px 18px; gap: 10px; box-shadow: 0 6px 0 var(--deep), 0 16px 28px rgb(7 59 58 / .3); font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; }
+  .escenario .pantalla--campamento .camp__guiabox .camp__globo::after { background: var(--papel); border: 3px solid var(--deep); border-width: 0 0 3px 3px; left: -10px; bottom: 20px; width: 16px; height: 16px; border-radius: 0 0 0 5px; }
   .escenario .pantalla--campamento .camp__guiabox .camp__globo a { align-self: flex-start; padding: 7px 14px; border-radius: 999px; background: var(--accent); color: var(--deep); font-family: var(--font-body); font-size: 14px; font-weight: 800; letter-spacing: 0; box-shadow: 0 3px 0 #d8a413; }
   .escenario .pantalla--campamento .camp__guiabox .camp__globo--mini { padding: 9px 18px 11px; border-radius: 22px; box-shadow: 0 4px 0 var(--deep), 0 12px 22px rgb(7 59 58 / .25); }
   .escenario .pantalla--campamento .camp__accesos { right: auto; left: 32px; top: 24px; }
@@ -259,6 +259,108 @@
   .escenario .album__pagina--isla .foto__imagen { aspect-ratio: 4 / 3; }
   .escenario .album__pagina--isla .foto__marco p { font-size: 14px; }
   .escenario .isla-fila__album { font-size: 13px; padding: 6px 12px; }
+
+  /* ---------- Componentes compartidos ---------- */
+  .escenario .panel { width: min(1120px, calc(100% - 96px)); margin: 0 auto; padding: 24px 0 24px !important; gap: 18px !important; box-sizing: border-box; }
+  .escenario .panel::before, .escenario .panel::after { display: none; }
+  .escenario .rejilla--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .escenario .rejilla--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .escenario .tarjeta { padding: 20px 22px; gap: 14px; }
+  .escenario .tarjeta__cab h2 { font-size: 22px; }
+  .escenario .dato .num { font-size: 46px; }
+  .escenario .tabla__cab { display: grid; gap: 12px; padding: 0 16px 4px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .escenario .tabla__fila { display: grid; gap: 12px; padding: 10px 16px; border-radius: 14px; align-items: center; }
+  .escenario .tabla__fila > span:first-child { flex: none; font-size: 15px; }
+  .escenario .tabla__fila > span[data-etiqueta]:not(:first-child)::before { display: none; }
+
+  @media (max-height: 880px) {
+    .escenario .barra-lateral { gap: 12px; padding: 18px 16px 14px; }
+    .escenario .lateral__nav { gap: 10px; }
+    .escenario .lateral__enlace { padding: 4px 10px; font-size: 14px; }
+    .escenario .lateral__icono { width: 28px; height: 28px; }
+    .escenario .lateral__icono svg { width: 18px; height: 18px; }
+    .escenario .lateral__usuario { padding: 8px 12px; }
+  }
+
+  /* ---------- Fase 1: pantallas nuevas del estudiante ---------- */
+  .escenario .diag__ejercicio { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .diag__resultado { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .diag__lista li { padding: 14px 18px; }
+  .escenario .diag__lista strong { font-size: 19px; }
+  .escenario .rel__cuerpo { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .rel__tiempo { flex-direction: column; text-align: center; align-items: center; }
+  .escenario .rel__resultado { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; align-items: center; }
+  .escenario .cal__columnas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .cal__semanas { grid-template-columns: 1fr 1fr; gap: 12px 22px; }
+  .escenario .cal__sesion { padding: 6px 10px; }
+  .escenario .vista--off { display: flex; }
+  .escenario .cal__lado.vista--off { display: flex; }
+  .escenario .ses__columnas { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .ruta__columnas { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .vot__columnas { max-width: 640px; }
+
+  /* ---------- Sesion de practica ---------- */
+  .escenario .p-e7 .sesion__cuerpo { width: min(760px, 100%); align-self: center; padding-top: 26px; gap: 14px; }
+  .escenario .p-e7 .sesion__pie, .escenario .p-e7 .sesion__fb { width: min(760px, 100%); align-self: center; }
+  .escenario .p-e7 .sesion__fb { border-radius: 26px; margin-bottom: 26px; }
+  .escenario .p-e7 .preg__titulo { font-size: 34px; }
+  .escenario .p-e7 .unir__tablero { gap: 40px; }
+  .escenario .p-e7 .ficha { min-height: 74px; padding: 14px 18px; }
+  .escenario .p-e7 .ficha--concepto { font-size: 19px; }
+  .escenario .p-e7 .ficha--definicion { font-size: 15px; }
+  .escenario .p-e7 .comp__frase { font-size: 28px; }
+
+  /* ---------- Calendario compacto ---------- */
+  .escenario .p-e22 .cal__sesion { padding: 3px 10px; gap: 8px; }
+  .escenario .p-e22 .cal__sesion strong { font-size: 12.5px; }
+  .escenario .p-e22 .cal__sesion small { font-size: 11.5px; }
+  .escenario .p-e22 .cal__plazo { padding: 4px 10px; }
+  .escenario .p-e22 .cal__plazo b { font-size: 19px; }
+  .escenario .p-e22 .cal__semanas { gap: 8px 22px; }
+  .escenario .p-e22 .cal__lado { gap: 12px; }
+  .escenario .p-e22 .cal__nota { font-size: 12px; }
+
+  /* ---------- Docente, observador y estados ---------- */
+  .escenario .barra-lateral--docente { background-color: #0b2f55; background-image: linear-gradient(rgb(11 47 85 / .76), rgb(11 47 85 / .76)), url('/fondos/hojas-suave.webp'); }
+  .escenario .barra-lateral--docente .lateral__titulo { color: #8ec5ff; }
+  .escenario .d1__datos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .escenario .d1__columnas { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d1__columnas > :first-child { grid-row: 1 / span 2; }
+  .escenario .d1__alertas li { grid-template-columns: auto 1fr auto; }
+  .escenario .d1__alertas .boton { grid-column: auto; }
+  .escenario .d2__columnas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d2__brecha { grid-column: 2; grid-row: 1 / span 2; }
+  .escenario .d3__columnas { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d4__columnas { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d4__criterios li { grid-template-columns: 1fr 150px auto; }
+  .escenario .d4__nombre { grid-column: auto; }
+  .escenario .d5__columnas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d5__lado.vista--off { display: flex; }
+  .escenario .d6__columnas { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d7__equipos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+  .escenario .d8__columnas { display: grid; grid-template-columns: 210px minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .d8__lista ul { flex-direction: column; flex-wrap: nowrap; }
+  .escenario .d8__lista button { width: 100%; }
+  .escenario .d10__columnas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+  .escenario .d11__columnas { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .qr { width: 210px; height: 210px; }
+  .escenario .o1__datos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .escenario .o1__grupos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .escenario .o2__columnas { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .o3__columnas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+  .escenario .est__rejilla { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+  /* ---------- Ventanas bajas: cabecera y paneles mas compactos ---------- */
+  @media (max-height: 800px) {
+    .escenario .mundo { min-height: 168px; padding-top: 28px; padding-bottom: 24px; }
+    .escenario .mundo__arte { transform: scale(.8); transform-origin: top right; }
+    .escenario .panel { padding-top: 14px !important; gap: 12px !important; }
+    .escenario .tarjeta { padding: 14px 18px; gap: 10px; }
+    .escenario .d4__criterios { gap: 8px; }
+    .escenario .d4__criterios li { padding: 6px 10px; }
+    .escenario .d4__nombre small { display: none; }
+    .escenario .dato .num { font-size: 36px; }
+  }
 
   /* ---------- Leccion ---------- */
   .escenario .p-e7 .pantalla__cuerpo { align-items: center; }
