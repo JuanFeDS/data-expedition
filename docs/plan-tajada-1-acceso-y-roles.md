@@ -85,3 +85,26 @@ Tamaños: S = media jornada, M = una jornada.
 
 - **Sin preguntar:** escribir el código, las pruebas y la documentación en el repositorio.
 - **Con tu aprobación explícita:** crear el proyecto de Supabase, aplicar la migración, crear usuarios de prueba, promover el docente, configurar el SMTP y hacer cualquier push.
+
+## 9. Estado de ejecución (2026-11-02)
+
+| Paso | Estado |
+|---|---|
+| 0. Proyecto de Supabase | **Hecho.** `data-expedition`, referencia `ltbhlckxeeqonmphvaxm`, organización "The Scientist", región São Paulo, 0 USD al mes. Claves públicas en `web/.env.local` (ignorado por Git) y `web/.env.example` |
+| 1. Migración y avisos | **Hecho.** Se aplicó `0001_modelo_inicial` sin errores: 10 tablas, todas con RLS. Seed aplicado: edición plantilla con 7 dimensiones |
+| 2. Pruebas de las políticas | **Hecho.** 20 de 20 pruebas pasan (estudiante, anónimo, docente y observador), más la comprobación de que el observador solo recibe agregados. Los usuarios de prueba se borraron. El script está en `supabase/pruebas/politicas_acceso.sql` y se repite después de cada cambio de políticas |
+| 3. Primer docente | **Decidido: opción 1.** Se promueve el correo de Juan con SQL justo después de su primer ingreso (aún no hay ningún usuario real) |
+| 4. Cliente de Supabase | **Hecho.** `@supabase/supabase-js` con PKCE, contexto de sesión (`componentes/sesion.tsx`) y cliente (`servicios/supabase.ts`). Sin variables de entorno, o con `?demo` en la dirección, la web funciona como antes (modo demo) |
+| 5. Pantalla de acceso real | **Hecha** (`e0`): validación del correo, enviando, "revisa tu correo" con reenvío tras 60 s, enlace vencido y errores traducidos. **El envío real del correo no se ha probado**: depende de la configuración de Auth y del correo (ver abajo) |
+| 6. Guardas por rol | **Hecho y probado** con usuarios de prueba (ya borrados): sin sesión todo cae en el acceso; cada rol entra a su inicio; las pantallas de otro rol muestran un aviso; `#/e0` y la galería redirigen al inicio |
+| 7. Perfil y cerrar sesión | **Parcial.** "Cerrar sesión" en la barra lateral y en el menú móvil, y el nombre y el correo reales en la tarjeta de usuario. Falta editar el nombre |
+| 8 a 10 | Pendientes (personas y matrícula, despliegue con variables, cierre) |
+
+**Lo que no puede hacer Claude y debes hacer tú en el panel de Supabase** (Authentication):
+1. *URL Configuration:* Site URL `https://juanfeds.com/data-expedition/` y en Redirect URLs agregar `https://juanfeds.com/data-expedition/` y `http://localhost:5173/`.
+2. *Emails / SMTP:* el correo integrado es muy limitado; configura un SMTP propio antes de la primera clase. Para probar tu propio ingreso puede bastar el integrado.
+3. *Variables del repositorio en GitHub* (Settings > Secrets and variables > Actions > Variables): `VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY`, con los valores de `web/.env.local`. Hasta que existan, la versión publicada sigue en modo demo.
+
+**Avisos de seguridad de Supabase tras la migración:** ninguna tabla sin RLS. Quedan 8 avisos de nivel "advertencia" por funciones `security definer` que el rol `authenticated` puede ejecutar. Son intencionales: `rol_actual`, `es_docente` y `en_edicion` los usan las políticas; `asignar_rol` y las dos funciones de resumen se validan por dentro. Un detalle menor: `edicion_de_trabajo` y `propietario_de_entrega` también quedan llamables por API y revelarían un identificador a quien ya conociera otro, así que se pueden mover a un esquema privado en la migración `0002`.
+
+**Avisos de rendimiento (no urgentes):** 8 claves foráneas sin índice y 10 tablas con dos políticas permisivas (la de lectura y la del docente). Con unas decenas de estudiantes no se nota. Se pueden agregar los índices y unificar las políticas en `0002`.
