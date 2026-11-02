@@ -3,7 +3,7 @@ import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Isla } from '../componentes/Region';
 import { Dock } from '../componentes/Dock';
 import { Kicker, ModoViva, Pantalla, Pill } from '../componentes/ui';
-import { albumDeIsla, hitosRuta, regionesCurso } from '../datos';
+import { albumDeIsla, hitosRuta, regionesCurso, semanaActual, totalSemanas, trabajoActual } from '../datos';
 
 interface Tramo {
   d: string;
@@ -68,7 +68,7 @@ export function E1Ruta() {
     <Pantalla tono="oscura" clase="p-e1">
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
-          <div className="ruta__top"><a href="#/home" style={{ fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a><Pill variante="accent">Semana 4 de 8</Pill></div>
+          <div className="ruta__top"><a href="#/home" style={{ fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a><Pill variante="accent">Semana {semanaActual} de {totalSemanas}</Pill></div>
           <h1 className="titulo" style={{ fontSize: 38, lineHeight: 1.05 }}>Mapa del curso</h1>
           <p className="ruta__sub">Semana {regionesCurso[indiceActual].semanas} de {regionesCurso.length} · una entrega más y ves la cima</p>
         </header>
@@ -120,7 +120,7 @@ export function E1Ruta() {
         </div>
       </div>
       <ModalAlbum nombreIsla={islaAlbum} ganada={regionesCurso.find((region) => region.nombre === islaAlbum)?.estado === 'hecha'} alCerrar={() => setIslaAlbum(null)} />
-      <Dock accion={{ etiqueta: 'Estás en la semana 4', texto: 'Continuar Trabajo 2', ruta: '#/e6' }} />
+      <Dock accion={{ etiqueta: `Estás en la semana ${semanaActual}`, texto: `Continuar ${trabajoActual.titulo}`, ruta: '#/e6' }} />
     </Pantalla>
   );
 }

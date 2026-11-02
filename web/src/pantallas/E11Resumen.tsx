@@ -1,7 +1,7 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Kicker, Pantalla } from '../componentes/ui';
-import { temaDeRepaso } from '../datos';
+import { rangoSemanaActual, semanaActual, temaDeRepaso, trabajoActual } from '../datos';
 
 const SUBIDAS = [
   { dimension: 'Modelado', cambio: 4 },
@@ -11,7 +11,7 @@ const SUBIDAS = [
 const MAXIMO = 5;
 
 const TAREAS = [
-  { titulo: 'Entrega el Trabajo 2', detalle: 'Vence el viernes 7. Declara si usaste IA.', ruta: '#/e6' },
+  { titulo: `Entrega el ${trabajoActual.titulo}`, detalle: `Vence el ${trabajoActual.vence.largo}. Declara si usaste IA.`, ruta: '#/e6' },
   { titulo: `Haz 3 lecciones de ${temaDeRepaso().gema.dimension}`, detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e15' },
 ];
 
@@ -19,7 +19,7 @@ export function E11Resumen() {
   return (
     <Pantalla clase="p-e11">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Semana 4 · 20 al 26 oct" titulo="Tu semana en una página" objeto="carta" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker={`Semana ${semanaActual} · ${rangoSemanaActual}`} titulo="Tu semana en una página" objeto="carta" />
         <div className="contenido cuerpo-mundo centrar" style={{ gap: 4 }}>
           <Kicker>Lo que subió</Kicker>
           <div className="resumen__subidas">
@@ -30,7 +30,7 @@ export function E11Resumen() {
                 <strong>+{fila.cambio}</strong>
               </div>
             ))}
-            <p className="meta" style={{ fontSize: 12 }}>Tu Trabajo 1 y 6 lecciones movieron estas dimensiones.</p>
+            <p className="meta" style={{ fontSize: 12 }}>Tu Trabajo 2 y 6 lecciones movieron estas dimensiones.</p>
           </div>
 
           <hr className="sep" />
@@ -39,7 +39,7 @@ export function E11Resumen() {
             <span className="num">0</span>
             <div>
               <strong className="titulo">Validación sin cambio</strong>
-              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su isla llega en la semana 6; al cerrarla ganas su gema y se abre su álbum de repaso.</p>
+              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su isla llega en la semana 7; al cerrarla ganas su gema y se abre su álbum de repaso.</p>
             </div>
           </div>
 

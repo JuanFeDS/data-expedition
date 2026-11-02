@@ -14,9 +14,9 @@ export function E8ResultadoLeccion() {
     <Pantalla tono="menta" clase="p-e8">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
-        <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la mediana resiste lo extremo.</h1>
+        <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
         <div className="resultado__remate">
-          <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Un solo valor extremo arrastra al promedio, pero no a la mediana. Antes de resumir, mira cómo se reparten los datos.</p>
+          <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Compáralo siempre con un baseline.</p>
           <Jaguar pose="celebra" ancho={136} clase="resultado__guia" />
         </div>
         <hr className="sep" style={{ background: 'var(--deep)' }} />

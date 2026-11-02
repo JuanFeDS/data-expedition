@@ -2,6 +2,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Isla } from '../componentes/Region';
 import { Contador, Pantalla, Pill } from '../componentes/ui';
+import { calificados, promedioNotas, trabajos } from '../datos';
 
 interface FilaNota {
   nota: string;
@@ -14,10 +15,10 @@ interface FilaNota {
 }
 
 const FILAS: FilaNota[] = [
-  { nota: '4.2', titulo: 'Trabajo 1', meta: 'Semana 3 · calificado el 21 oct · ver rúbrica', bioma: 'costa', chip: { texto: 'Con IA', variante: 'suave' }, estado: 'hecha', ruta: '#/e4' },
-  { nota: '—', titulo: 'Trabajo 2', meta: 'Semana 4 · vence el viernes 7', bioma: 'desierto', chip: { texto: 'En curso', variante: 'accent' }, estado: 'actual' },
-  { nota: '—', titulo: 'Trabajo 3', meta: 'Semana 6 · se abre al entregar el Trabajo 2', bioma: 'ruinas', estado: 'pendiente' },
-  { nota: '0.0', titulo: 'Taller de práctica', meta: 'No presentado · recupéralo con un trabajo adicional', bioma: 'paramo', chip: { texto: 'Recuperable', variante: 'azul' }, estado: 'hecha' },
+  { nota: '3.8', titulo: 'Trabajo 2', meta: 'Semana 3 · Modelo frente a baseline · ver rúbrica', bioma: 'desierto', chip: { texto: 'Sin IA', variante: 'azul' }, estado: 'hecha', ruta: '#/e4' },
+  { nota: '4.2', titulo: 'Trabajo 1', meta: 'Semana 2 · EDA reproducible · ver rúbrica', bioma: 'paramo', chip: { texto: 'Con IA', variante: 'suave' }, estado: 'hecha', ruta: '#/e4' },
+  { nota: '—', titulo: 'Trabajo 3', meta: 'Semana 4 · Mismo análisis en Spark · vence el viernes 27', bioma: 'cueva', chip: { texto: 'En curso', variante: 'accent' }, estado: 'actual' },
+  { nota: '—', titulo: 'Trabajo 4', meta: 'Semana 5 · se abre al entregar el Trabajo 3', bioma: 'glaciar', estado: 'pendiente' },
   { nota: '—', titulo: 'Diagnóstico', meta: 'Semana 1 · fijó tu punto de partida, no cuenta para aprobar', bioma: 'selva', estado: 'hecha' },
 ];
 
@@ -27,8 +28,8 @@ export function E3Notas() {
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Notas" titulo="Tus trabajos" objeto="trofeo">
           <div className="cifra-mundo">
-            <span className="num"><Contador valor={4.2} decimales={1} /></span>
-            <small>promedio hasta ahora<br />1 de 3 calificados</small>
+            <span className="num"><Contador valor={promedioNotas} decimales={1} /></span>
+            <small>promedio hasta ahora<br />{calificados.length} de {trabajos.length} calificados</small>
           </div>
         </CabeceraMundo>
         <div className="contenido cuerpo-mundo" style={{ gap: 0 }}>

@@ -42,12 +42,47 @@ export interface HitoRuta {
   accion?: { texto: string; ruta: string };
 }
 
+export const semanaActual = 4;
+export const totalSemanas = 8;
+export const rangoSemanaActual = '23 al 27 nov';
+
+export interface Trabajo {
+  codigo: string;
+  titulo: string;
+  tema: string;
+  semana: number;
+  estado: 'calificado' | 'actual' | 'pendiente';
+  nota?: string;
+  bioma: Bioma;
+  vence: { dia: string; numero: string; largo: string };
+  minPylint: number;
+  declaracion?: 'Con IA' | 'Sin IA';
+}
+
+export const trabajos: Trabajo[] = [
+  { codigo: 'T1', titulo: 'Trabajo 1', tema: 'EDA reproducible', semana: 2, estado: 'calificado', nota: '4.2', bioma: 'paramo', vence: { dia: 'VIE', numero: '13', largo: 'viernes 13 nov' }, minPylint: 6, declaracion: 'Con IA' },
+  { codigo: 'T2', titulo: 'Trabajo 2', tema: 'Modelo frente a baseline', semana: 3, estado: 'calificado', nota: '3.8', bioma: 'desierto', vence: { dia: 'VIE', numero: '20', largo: 'viernes 20 nov' }, minPylint: 7, declaracion: 'Sin IA' },
+  { codigo: 'T3', titulo: 'Trabajo 3', tema: 'Mismo análisis en Spark', semana: 4, estado: 'actual', bioma: 'cueva', vence: { dia: 'VIE', numero: '27', largo: 'viernes 27 nov' }, minPylint: 8 },
+  { codigo: 'T4', titulo: 'Trabajo 4', tema: 'Dashboard con narrativa', semana: 5, estado: 'pendiente', bioma: 'glaciar', vence: { dia: 'VIE', numero: '4', largo: 'viernes 4 dic' }, minPylint: 8 },
+  { codigo: 'T5', titulo: 'Trabajo 5', tema: 'Pipeline y backlog', semana: 6, estado: 'pendiente', bioma: 'costa', vence: { dia: 'VIE', numero: '11', largo: 'viernes 11 dic' }, minPylint: 8 },
+  { codigo: 'T6', titulo: 'Trabajo 6', tema: 'Modelo optimizado e interpretado', semana: 7, estado: 'pendiente', bioma: 'ruinas', vence: { dia: 'VIE', numero: '18', largo: 'viernes 18 dic' }, minPylint: 8 },
+  { codigo: 'T7', titulo: 'Proyecto final', tema: 'Integrador en equipo', semana: 8, estado: 'pendiente', bioma: 'volcan', vence: { dia: 'JUE', numero: '24', largo: 'jueves 24 dic' }, minPylint: 8 },
+];
+
+export const trabajoActual = trabajos.find((trabajo) => trabajo.estado === 'actual')!;
+export const trabajoSiguiente = trabajos[trabajos.findIndex((trabajo) => trabajo.estado === 'actual') + 1];
+export const calificados = trabajos.filter((trabajo) => trabajo.estado === 'calificado');
+export const promedioNotas = calificados.reduce((suma, trabajo) => suma + Number(trabajo.nota), 0) / calificados.length;
+
 export const hitosRuta: HitoRuta[] = [
   { kicker: 'Semana 1', titulo: 'Diagnóstico', estado: 'hecho', meta: 'Punto de partida fijado' },
-  { kicker: 'Semanas 2–3', titulo: 'Trabajo 1', estado: 'hecho', nota: '4.2', radar: ['Datos +12', 'Análisis +9', 'Modelado +8'] },
-  { kicker: 'Estás aquí · Semanas 4–5', titulo: 'Trabajo 2', estado: 'actual', fecha: { dia: 'VIE', numero: '7' }, meta: 'Modelo predictivo · vence el viernes 7', accion: { texto: 'Entregar', ruta: '#/e6' } },
-  { kicker: 'Semana 6', titulo: 'Trabajo 3', estado: 'bloqueado', meta: 'Se abre al entregar el Trabajo 2' },
-  { kicker: 'La cima · Semana 8', titulo: 'Proyecto final', estado: 'cima', meta: 'Misión en equipo · faltan 4 semanas' },
+  { kicker: 'Semana 2', titulo: 'Trabajo 1', estado: 'hecho', nota: '4.2', radar: ['Datos +12', 'Análisis +9', 'Producción +6'] },
+  { kicker: 'Semana 3', titulo: 'Trabajo 2', estado: 'hecho', nota: '3.8', radar: ['Modelado +8', 'Validación +2'] },
+  { kicker: `Estás aquí · Semana ${semanaActual}`, titulo: 'Trabajo 3', estado: 'actual', fecha: { dia: 'VIE', numero: '27' }, meta: 'Mismo análisis en Spark · vence el viernes 27', accion: { texto: 'Entregar', ruta: '#/e6' } },
+  { kicker: 'Semana 5', titulo: 'Trabajo 4', estado: 'bloqueado', meta: 'Se abre al entregar el Trabajo 3' },
+  { kicker: 'Semana 6', titulo: 'Trabajo 5', estado: 'bloqueado', meta: 'Pipeline y backlog' },
+  { kicker: 'Semana 7', titulo: 'Trabajo 6', estado: 'bloqueado', meta: 'Modelo optimizado e interpretado' },
+  { kicker: 'La cima · Semana 8', titulo: 'Proyecto final', estado: 'cima', meta: 'Integrador en equipo · faltan 4 semanas' },
 ];
 
 export const consejosJaguar = [
@@ -85,13 +120,13 @@ export interface RegionCurso {
 }
 
 export const regionesCurso: RegionCurso[] = [
-  { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'], frase: 'Aquí empezó todo: fijaste tu punto de partida con el diagnóstico.' },
-  { nombre: 'Páramo de la Limpieza', modulo: 'Datos', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: [], frase: 'En el Páramo se aprende lo menos vistoso y más importante: limpiar los datos.' },
-  { nombre: 'Costa de la Exploración', modulo: 'Análisis', semanas: '3', bioma: 'costa', estado: 'hecha', hitos: ['Trabajo 1'], frase: 'Brisa de mar y datos por explorar: la Costa te enseñó a hacer buenas preguntas.' },
-  { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '4', bioma: 'desierto', estado: 'actual', hitos: ['Trabajo 2'], frase: 'Bienvenido al Desierto: aquí un modelo predictivo se pone a prueba. ¡Tú puedes!' },
-  { nombre: 'Cueva de los Modelos', modulo: 'Modelado', semanas: '5', bioma: 'cueva', estado: 'pendiente', hitos: [], frase: 'La Cueva de los Modelos aún no está disponible. Se abre en la semana 5.' },
-  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '6', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 3'], frase: 'Las Ruinas de la Validación aún no están disponibles. Se abren en la semana 6.' },
-  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '7', bioma: 'glaciar', estado: 'pendiente', hitos: [], frase: 'El Glaciar de la Comunicación aún no está disponible. Se abre en la semana 7.' },
+  { nombre: 'Valle de los Datos', modulo: 'Datos', semanas: '1', bioma: 'selva', estado: 'hecha', hitos: ['Diagnóstico'], frase: 'Aquí empezó todo: armaste tu entorno y fijaste tu punto de partida con el diagnóstico.' },
+  { nombre: 'Páramo de la Limpieza', modulo: 'Análisis', semanas: '2', bioma: 'paramo', estado: 'hecha', hitos: ['Trabajo 1'], frase: 'En el Páramo se aprende lo menos vistoso y más importante: limpiar con pandas antes de explorar.' },
+  { nombre: 'Desierto del Modelado', modulo: 'Modelado', semanas: '3', bioma: 'desierto', estado: 'hecha', hitos: ['Trabajo 2'], frase: 'En el Desierto pusiste un modelo frente a su baseline. Allí se ve si de verdad aprendió algo.' },
+  { nombre: 'Cueva de la Escala', modulo: 'Big Data', semanas: '4', bioma: 'cueva', estado: 'actual', hitos: ['Trabajo 3'], frase: 'Aquí estamos: la Cueva de la Escala. Cuando los datos no caben en memoria, llega Spark. ¡Tú puedes!' },
+  { nombre: 'Glaciar de la Comunicación', modulo: 'Comunicación', semanas: '5', bioma: 'glaciar', estado: 'pendiente', hitos: ['Trabajo 4'], frase: 'El Glaciar de la Comunicación aún no está disponible. Se abre en la semana 5.' },
+  { nombre: 'Costa de los Ensambles', modulo: 'Ensambles', semanas: '6', bioma: 'costa', estado: 'pendiente', hitos: ['Trabajo 5'], frase: 'La Costa de los Ensambles aún no está disponible. Se abre en la semana 6.' },
+  { nombre: 'Ruinas de la Validación', modulo: 'Validación', semanas: '7', bioma: 'ruinas', estado: 'pendiente', hitos: ['Trabajo 6'], frase: 'Las Ruinas de la Validación aún no están disponibles. Se abren en la semana 7.' },
   { nombre: 'El Volcán', modulo: 'Proyecto final', semanas: '8', bioma: 'volcan', estado: 'pendiente', hitos: ['Proyecto final'], frase: 'El Volcán aún no está disponible. Es la cima y se abre en la semana 8.' },
 ];
 
@@ -105,12 +140,12 @@ export interface GemaCurso {
 
 export const gemasCurso: GemaCurso[] = [
   { gema: 'esmeralda', nombre: 'Esmeralda Semilla', dimension: 'Datos', isla: 'Valle de los Datos', islaCorta: 'Valle' },
-  { gema: 'opalo', nombre: 'Ópalo Bruma', dimension: 'Datos', isla: 'Páramo de la Limpieza', islaCorta: 'Páramo' },
-  { gema: 'topacio', nombre: 'Topacio Faro', dimension: 'Análisis', isla: 'Costa de la Exploración', islaCorta: 'Costa' },
+  { gema: 'opalo', nombre: 'Ópalo Bruma', dimension: 'Análisis', isla: 'Páramo de la Limpieza', islaCorta: 'Páramo' },
   { gema: 'zafiro', nombre: 'Zafiro del Oasis', dimension: 'Modelado', isla: 'Desierto del Modelado', islaCorta: 'Desierto' },
-  { gema: 'ambar', nombre: 'Ámbar Brasa', dimension: 'Modelado', isla: 'Cueva de los Modelos', islaCorta: 'Cueva' },
-  { gema: 'peridoto', nombre: 'Peridoto Centinela', dimension: 'Validación', isla: 'Ruinas de la Validación', islaCorta: 'Ruinas' },
+  { gema: 'ambar', nombre: 'Ámbar Brasa', dimension: 'Datos', isla: 'Cueva de la Escala', islaCorta: 'Cueva' },
   { gema: 'aguamarina', nombre: 'Aguamarina Eco', dimension: 'Comunicación', isla: 'Glaciar de la Comunicación', islaCorta: 'Glaciar' },
+  { gema: 'topacio', nombre: 'Topacio Faro', dimension: 'Producción', isla: 'Costa de los Ensambles', islaCorta: 'Costa' },
+  { gema: 'peridoto', nombre: 'Peridoto Centinela', dimension: 'Validación', isla: 'Ruinas de la Validación', islaCorta: 'Ruinas' },
   { gema: 'rubi', nombre: 'Rubí del Volcán', dimension: 'Proyecto final', isla: 'El Volcán', islaCorta: 'Volcán' },
 ];
 
@@ -152,10 +187,10 @@ const paginaAlbum = (gema: string, bioma: Bioma, objetos: string[], pies: string
 
 export const paginasAlbum: PaginaAlbum[] = [
   paginaAlbum('esmeralda', 'selva', ['mochila', 'binoculares', 'mapa'], ['Plantando la primera semilla', 'La cascada, con lupa', 'Frutas en tres cestas', 'Un brote que crece', 'Puente de lianas', 'La cosecha'], 6),
-  paginaAlbum('opalo', 'paramo', ['cuaderno', 'binoculares', 'linterna'], ['Limpiando la lupa', 'Barriendo hojas secas', 'Agua turbia, colada', 'Un mapa sin polvo', 'Frutos buenos y dañados', 'La bruma se levanta'], 3),
-  paginaAlbum('topacio', 'costa', ['linterna', 'binoculares', 'mapa'], ['Subiendo al faro', 'Mirando el horizonte', 'Barras en la arena', 'Caracolas en fila', 'El mapa del tesoro', 'Rumbo al faro'], 4),
-  paginaAlbum('zafiro', 'desierto', ['cuaderno', 'mapa', 'mochila'], ['Una línea entre piedras', 'La cantimplora del oasis', 'Torre escalonada', 'Probando la balanza', 'Siguiendo huellas', 'Bandera en la duna'], 0),
-  paginaAlbum('ambar', 'cueva', ['linterna', 'cuaderno', 'mochila'], ['Entrando con la linterna', 'Cristales en patrón', 'Dos formaciones, comparadas', 'Midiendo con la cuerda', 'Moldes de arcilla', 'El ámbar de la pared'], 0),
+  paginaAlbum('opalo', 'paramo', ['cuaderno', 'binoculares', 'linterna'], ['Limpiando la lupa', 'Barriendo hojas secas', 'Agua turbia, colada', 'Un mapa sin polvo', 'Frutos buenos y dañados', 'La bruma se levanta'], 4),
+  paginaAlbum('topacio', 'costa', ['linterna', 'binoculares', 'mapa'], ['Subiendo al faro', 'Mirando el horizonte', 'Barras en la arena', 'Caracolas en fila', 'El mapa del tesoro', 'Rumbo al faro'], 0),
+  paginaAlbum('zafiro', 'desierto', ['cuaderno', 'mapa', 'mochila'], ['Una línea entre piedras', 'La cantimplora del oasis', 'Torre escalonada', 'Probando la balanza', 'Siguiendo huellas', 'Bandera en la duna'], 2),
+  paginaAlbum('ambar', 'cueva', ['linterna', 'cuaderno', 'mochila'], ['Entrando con la linterna', 'Cristales en patrón', 'Dos formaciones, comparadas', 'Midiendo con la cuerda', 'Moldes de arcilla', 'El ámbar de la pared'], 1),
   paginaAlbum('peridoto', 'ruinas', ['linterna', 'cuaderno', 'binoculares'], ['La columna, con lupa', 'Dos tablillas casi iguales', 'El puente aguanta', 'Piedras en equilibrio', 'Vigilando la entrada', 'El contorno del cuarto'], 0),
   paginaAlbum('aguamarina', 'glaciar', ['carta', 'mapa', 'trofeo'], ['El eco de la montaña', 'Un cartel de hielo', 'Señal de humo', 'Mostrando el mapa', 'Un muñeco con pañuelo', 'El cuerno del glaciar'], 0),
   paginaAlbum('rubi', 'volcan', ['trofeo', 'mochila', 'mapa'], ['El volcán, a lo lejos', 'Subiendo el sendero', 'El puente sobre la lava', 'Bandera en el cráter', 'El rubí brilla', 'La cima'], 0),

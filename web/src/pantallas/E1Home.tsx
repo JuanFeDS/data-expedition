@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Jaguar } from '../componentes/Jaguar';
 import { IconoSvg, type Icono } from '../componentes/Icono';
-import { consejosJaguar, hitosRuta, regionesCurso } from '../datos';
+import { consejosJaguar, hitosRuta, regionesCurso, semanaActual, totalSemanas, trabajoActual } from '../datos';
 import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
 import { ModalAlbum } from '../componentes/AlbumIsla';
@@ -95,7 +95,7 @@ export function E1Home() {
           <span className="avatar avatar--verde">CR</span>
           <div className="camp__nombre"><strong>Camilo</strong><span>Rol: Analista</span></div>
           <span className="camp__xp"><Contador valor={340} /> XP</span>
-          <Pill variante="accent">Semana 4 de 8</Pill>
+          <Pill variante="accent">Semana {semanaActual} de {totalSemanas}</Pill>
         </header>
 
         <div className="camp__cifras">
@@ -136,35 +136,35 @@ export function E1Home() {
         <aside className="camp__lateral" aria-label="Esta semana">
           <Kicker estilo={{ color: 'var(--mint)' }}>Lo que sigue</Kicker>
           <ol>
-            {hitosRuta.filter((hito) => hito.estado !== 'hecho').map((hito) => (
+            {hitosRuta.filter((hito) => hito.estado !== 'hecho').slice(0, 3).map((hito) => (
               <li key={hito.titulo} className={`camp__lateral-${hito.estado}`}>
                 <strong>{hito.titulo}</strong>
-                <small>{hito.estado === 'actual' ? 'Vence el viernes 7' : hito.kicker}</small>
+                <small>{hito.estado === 'actual' ? `Vence el ${trabajoActual.vence.largo}` : hito.kicker}</small>
               </li>
             ))}
           </ol>
           <button className="camp__paso camp__paso--lateral" onClick={() => setHoja('paso')}>
-            <small>Siguiente paso · vence vie 7</small>
-            <strong>Entregar Trabajo 2</strong>
+            <small>Siguiente paso · vence {trabajoActual.vence.dia.toLowerCase()} {trabajoActual.vence.numero}</small>
+            <strong>Entregar {trabajoActual.titulo}</strong>
           </button>
         </aside>
 
         <div className="camp__dock">
           <button className="camp__menu" onClick={() => setHoja('menu')} aria-label="Abrir menú"><IconoSvg tipo="menu" tamano={26} /></button>
           <button className="camp__paso" onClick={() => setHoja('paso')}>
-            <small>Siguiente paso · vence vie 7</small>
-            <strong>Entregar Trabajo 2</strong>
+            <small>Siguiente paso · vence {trabajoActual.vence.dia.toLowerCase()} {trabajoActual.vence.numero}</small>
+            <strong>Entregar {trabajoActual.titulo}</strong>
           </button>
         </div>
       </div>
 
       <Hoja abierta={hoja === 'paso'} alCerrar={cerrar} titulo="Siguiente paso">
-        <Kicker>Tu siguiente paso · semanas 4–5</Kicker>
+        <Kicker>Tu siguiente paso · semana 4</Kicker>
         <div className="hoja__cabeza">
-          <h2 className="titulo">Entrega el Trabajo 2</h2>
-          <span className="hoja__fecha"><small>VIE</small><b>7</b></span>
+          <h2 className="titulo">Entrega el {trabajoActual.titulo}</h2>
+          <span className="hoja__fecha"><small>{trabajoActual.vence.dia}</small><b>{trabajoActual.vence.numero}</b></span>
         </div>
-        <p className="meta">Modelo predictivo. Te quedan 3 días.</p>
+        <p className="meta">{trabajoActual.tema}. Te quedan 3 días.</p>
         <ol className="hoja__pasos">{PASOS.map((paso) => <li key={paso}>{paso}</li>)}</ol>
         <a href="#/e6"><Pill variante="deep" grande>Empezar la entrega</Pill></a>
       </Hoja>

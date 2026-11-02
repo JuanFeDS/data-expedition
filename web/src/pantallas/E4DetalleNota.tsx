@@ -8,7 +8,7 @@ export function E4DetalleNota() {
   return (
     <Pantalla clase="p-e4">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Notas', ruta: '#/e3' }} kicker="Trabajo 1 · semana 3 · 21 oct" titulo="Tu nota" objeto="trofeo">
+        <CabeceraMundo atras={{ texto: 'Notas', ruta: '#/e3' }} kicker="Trabajo 1 · semana 2 · 13 nov" titulo="Tu nota" objeto="trofeo">
           <div className="cifra-mundo">
             <span className="num"><Contador valor={4.2} decimales={1} /></span>
             <small><Pill variante="accent" pequena>Con IA declarada</Pill><br />Bitácora entregada</small>
@@ -36,7 +36,7 @@ export function E4DetalleNota() {
           </div>
         </div>
       </div>
-      <Dock accion={{ etiqueta: 'Sigue la ruta', texto: 'Ir al Trabajo 2', ruta: '#/e6' }} />
+      <Dock accion={{ etiqueta: 'Sigue la ruta', texto: 'Ir al Trabajo 3', ruta: '#/e6' }} />
     </Pantalla>
   );
 }
