@@ -162,3 +162,39 @@ Estado de cada pantalla al 2026-11-01. "Medida" quiere decir que se comprobó qu
 - **Ventanas muy bajas:** a 1317×640 las pantallas densas se reducen hasta un 60 % de escala y algunas pueden quedar pequeñas.
 - **Animaciones:** se comprobaron los estados finales con capturas; la secuencia en movimiento no se pudo ver desde el entorno de pruebas.
 - **Todo es de muestra:** no hay datos reales, ni verificación contra GitHub, ni base de datos.
+
+## 9. Segunda ronda (revisión del 2026-11-01)
+
+Correcciones tras la primera revisión, todas medidas sin scroll en escritorio y sin desbordes de texto a 390 px, 1366 px y 1440 px:
+
+- **Botones amarillos del dock:** el texto salía en línea porque la galería aplicaba estilos de enlace a todo; ahora solo afecta a los títulos de la galería.
+- **Imágenes que tapaban texto:** el Tutorial reserva espacio para el jaguar y la linterna. Solo las islas flotan; los objetos, el mapa y el pie de la votación en vivo quedan fijos.
+- **Entrega en móvil:** el formulario empieza arriba y muestra una vista previa de lo que se revisa al verificar.
+- **Respuestas incorrectas:** `e27` práctica con fallos, `e28` relámpago incorrecta (con tres casos: acierto, fallo y fuera de tiempo en `e21`) y `e29` entrega con problemas (Pylint, Black, pareja).
+- **Encuestas:** el pulso semanal es un asistente de 3 pasos con escala animada y estrellas, y cierra con confeti.
+- **Histórico:** `e30` para el estudiante (relámpagos, encuestas y votaciones) y `d12` para el docente.
+- **Ligas:** `e31` con la clasificación, zonas de ascenso y descenso, y las reglas del modo competitivo.
+- **Desbordes del docente:** el detector automático encontró y corrigió los segmentados, el título de Configuración y la fila de rutas.
+
+## 10. Sonidos (elegidos el 2026-11-01)
+
+Los sonidos se sintetizan con Web Audio (`web/src/componentes/sonidos.ts`), sin archivos ni dependencias. La galería para volver a escucharlos y cambiarlos es `#/e32`. La elección vigente está en `ELECCION` del mismo archivo.
+
+| Momento | Estilo elegido | Por defecto | Dónde suena |
+|---|---|---|---|
+| Toque en un botón | Suave | Encendido | Controles de selección, pestañas y botones del dock |
+| Respuesta correcta | Arcade | Encendido | `e7`, al comprobar |
+| Respuesta incorrecta | Arcade | Encendido | `e7`, al comprobar |
+| Sesión completada | Suave | Encendido | `e8` y `e27` |
+| Revelar una foto | Destello | Encendido | `e8`, un segundo después |
+| Racha de un día más | Campana | Encendido | `e8`, dos segundos después |
+| Subir de liga | Campanas | Encendido | Definido, sin pantalla que lo dispare todavía |
+| Entrega registrada | Campana | Encendido | `e6`, al entregar |
+| Se abre una relámpago | Doble aviso | Apagado | `e20`, solo con "Sonidos de clase" activo |
+| Cuenta regresiva | Tic | Apagado | `Cuenta`, últimos 10 s, solo con "Sonidos de clase" |
+| Aviso para el docente | Campana | Con el sonido activado | `d1`, una vez por visita |
+| Comprobación lista | Tic ascendente | Encendido | `e6`, una nota por cada línea de la verificación |
+
+- **Interruptores:** "Sonido" (encendido por defecto) está en la barra lateral y en el menú móvil. "Sonidos de clase" (apagado) está en la galería. Los dos se guardan en el navegador.
+- **Reglas:** no suena nada en la galería de pantallas (`#/todas`), ni antes de que el usuario toque algo, porque el navegador lo bloquea.
+- **Pendiente:** "Subir de liga" no tiene aún una pantalla que lo dispare, y no se han comparado con archivos reales de Kenney.
