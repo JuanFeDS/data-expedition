@@ -29,7 +29,7 @@ import { E31Liga } from './pantallas/E31Liga';
 import { D12Resultados } from './pantallas/D12Resultados';
 import { D13Personas } from './pantallas/D13Personas';
 import { D14Trabajos } from './pantallas/D14Trabajos';
-import { SinCurso } from './componentes/acceso';
+import { InicioSinCurso } from './componentes/inicio';
 import { Cursos } from './pantallas/Cursos';
 import { E32Sonidos } from './pantallas/E32Sonidos';
 import { E16UnirConceptos } from './pantallas/E16UnirConceptos';
@@ -112,6 +112,6 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'd13', titulo: 'Personas y grupos', grupo: 'Docente', componente: D13Personas },
   { codigo: 'd14', titulo: 'Trabajos del curso', grupo: 'Docente', componente: D14Trabajos },
   { codigo: 'cursos', titulo: 'Mis cursos', grupo: 'Transversal', componente: Cursos },
-  { codigo: 'e33', titulo: 'Sin curso (estudiante nuevo)', grupo: 'Transversal', componente: SinCurso },
+  { codigo: 'e33', titulo: 'Inicio sin curso (estudiante nuevo)', grupo: 'Transversal', componente: InicioSinCurso },
   { codigo: 'e32', titulo: 'Galería de sonidos', grupo: 'Transversal', componente: E32Sonidos },
 ];

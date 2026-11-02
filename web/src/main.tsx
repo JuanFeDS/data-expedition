@@ -4,10 +4,11 @@ import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
 import { CONECTADAS, RUTAS_COMUNES, rolDeRuta } from './componentes/navegacion';
 import { CursoProvider, useCurso } from './componentes/curso';
+import { InicioSinCurso } from './componentes/inicio';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
-import { Cargando, CompletarPerfil, INICIO_REAL, InsigniaDemo, OtroRol, SinCurso, SinDatos } from './componentes/acceso';
+import { Cargando, CompletarPerfil, INICIO_REAL, InsigniaDemo, OtroRol, SinDatos } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -103,7 +104,7 @@ function App() {
   if (persona.rol !== 'docente' && cursos.length === 0) {
     return (
       <ModoViva.Provider value>
-        <div className="escenario escenario--sin-barra"><SinCurso /></div>
+        <div className="escenario escenario--sin-barra"><InicioSinCurso /></div>
       </ModoViva.Provider>
     );
   }
