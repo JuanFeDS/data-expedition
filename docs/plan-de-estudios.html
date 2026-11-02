@@ -1,0 +1,2271 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan de estudios · Ciencia de Datos</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,800;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f1f8f4;
+  --ink: #0b2a24;
+  --muted: #4a6660;
+  --line: #c4dccf;
+  --primary: #0a8057;
+  --deep: #073b3a;
+  --blue: #1f6bff;
+  --accent: #ffd23f;
+  --mint: #5eeab0;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  --nav-w: 300px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--font-body);
+}
+a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--blue); }
+
+.progreso { position: fixed; top: 0; left: 0; height: 4px; width: 0; background: var(--accent); z-index: 50; }
+
+.layout { display: grid; grid-template-columns: var(--nav-w) minmax(0, 1fr); }
+
+/* Índice lateral */
+.indice {
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  background: var(--deep); color: #d6f3e5;
+  padding: 2rem 0 3rem;
+}
+.indice-marca { padding: 0 1.5rem 1.25rem; font: 800 1.35rem/1.1 var(--font-display); color: #fff; }
+.indice-marca small { display: block; margin-top: .4rem; font: 400 .72rem/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); }
+.indice ul { list-style: none; margin: 0; padding: 0; }
+.indice > ul > li > a {
+  display: block; padding: .55rem 1.5rem; color: #d6f3e5; text-decoration: none;
+  border-left: 4px solid transparent; line-height: 1.3;
+}
+.indice > ul > li > a span { display: block; font: 400 .68rem/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); }
+.indice > ul > li > a:hover { background: rgba(255,255,255,.07); color: #fff; }
+.indice > ul > li.activo > a { border-left-color: var(--accent); background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
+.indice li ul { display: none; padding: .2rem 0 .6rem; }
+.indice li.activo ul { display: block; }
+.indice li ul a { display: block; padding: .28rem 1.5rem .28rem 2.4rem; font-size: .86rem; color: #a9d8c3; text-decoration: none; line-height: 1.35; }
+.indice li ul a:hover, .indice li ul a.activo { color: var(--accent); }
+
+.barra-movil { display: none; }
+
+/* Portada */
+.portada {
+  position: relative; overflow: hidden; color: #fff;
+  padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 5rem);
+  background:
+    radial-gradient(60% 80% at 85% 10%, rgba(31,107,255,.65), transparent 60%),
+    radial-gradient(50% 70% at 10% 100%, rgba(94,234,176,.38), transparent 60%),
+    var(--deep);
+}
+.portada .etiqueta { font: 600 .8rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.portada h1 {
+  margin: 1rem 0 0; font: 800 clamp(3rem, 9vw, 8rem)/.92 var(--font-display);
+  letter-spacing: -.02em;
+}
+.portada h1 em { font-style: italic; font-weight: 500; color: var(--mint); }
+.portada p.bajada { max-width: 46ch; margin: 1.5rem 0 0; font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.45; color: #d6f3e5; }
+.cifras { display: flex; flex-wrap: wrap; gap: 1.5rem 3.5rem; margin-top: clamp(2rem, 5vw, 3.5rem); }
+.cifras div { font: 400 .8rem/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: #bfe6d3; }
+.cifras b { display: block; font: 800 clamp(2.6rem, 6vw, 4.6rem)/1 var(--font-display); color: var(--accent); letter-spacing: -.02em; }
+
+/* Pestañas */
+.js .capitulo, .js .portada { display: none; }
+.js .capitulo.visible, .js .portada.visible { display: block; }
+.pestanas {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: .15rem; overflow-x: auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem); background: var(--bg); border-bottom: 2px solid var(--ink);
+  scrollbar-width: none;
+}
+.pestanas::-webkit-scrollbar { display: none; }
+.pestanas a {
+  flex: none; padding: 1rem 1.05rem .85rem; margin-bottom: -2px; border-bottom: 4px solid transparent;
+  font: 600 .74rem/1.2 var(--font-mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+.pestanas a:hover { color: var(--ink); }
+.pestanas a.activa { color: var(--ink); border-bottom-color: var(--primary); }
+.pasos { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; padding-top: 1.25rem; border-top: 3px solid var(--ink); }
+.pasos a { display: block; max-width: 48%; font: 800 1.2rem/1.2 var(--font-display); color: var(--ink); text-decoration: none; }
+.pasos a small { display: block; margin-bottom: .3rem; font: 600 .7rem/1.2 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--primary); }
+.pasos a:hover { color: var(--blue); }
+.pasos .sig { margin-left: auto; text-align: right; }
+
+/* Capítulos */
+.capitulo { --cap: var(--primary); scroll-margin-top: 48px; }
+.capitulo.c-plan { --cap: var(--deep); }
+.capitulo.c-pres { --cap: var(--blue); }
+.capitulo.par { --cap: var(--deep); }
+.cap-cabeza {
+  position: relative; overflow: hidden; background: var(--cap); color: #fff;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem);
+}
+.cap-cabeza::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(50% 90% at 100% 0%, rgba(255,255,255,.14), transparent 65%);
+}
+.cap-num {
+  position: absolute; right: 2%; bottom: -.12em; z-index: 0;
+  font: 800 clamp(9rem, 24vw, 19rem)/.8 var(--font-display);
+  color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.28);
+  user-select: none;
+}
+.cap-cabeza > *:not(.cap-num) { position: relative; z-index: 1; }
+.cap-kicker { font: 600 .8rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.cap-cabeza h2.cap-titulo { margin: .8rem 0 0; max-width: 18ch; font: 800 clamp(2.2rem, 5.5vw, 4.2rem)/1 var(--font-display); letter-spacing: -.015em; }
+.ficha { display: grid; gap: .55rem 2rem; margin: 2rem 0 0; max-width: 60ch; grid-template-columns: max-content 1fr; font-size: .95rem; line-height: 1.45; }
+.ficha dt { font: 600 .72rem/1.7 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mint); }
+.ficha dd { margin: 0; color: #f1f8f4; }
+.ficha a, .ficha code { color: #fff; }
+
+.cap-cuerpo { padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem); max-width: 1040px; }
+.cap-cuerpo > p, .cap-cuerpo > ul, .cap-cuerpo > ol { max-width: 72ch; }
+.cap-cuerpo h2 {
+  margin: 3.5rem 0 1rem; padding-top: 1.1rem; border-top: 3px solid var(--ink);
+  font: 800 clamp(1.5rem, 3vw, 2.2rem)/1.15 var(--font-display); letter-spacing: -.01em;
+  scroll-margin-top: 5rem;
+}
+.cap-cuerpo > h2:first-child { margin-top: 0; }
+.cap-cuerpo h3 { margin: 2rem 0 .4rem; font: 600 .8rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--primary); }
+.cap-cuerpo hr { border: 0; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+.cap-cuerpo li { margin: .3rem 0; }
+code { font: 400 .88em var(--font-mono); background: #dff2e8; padding: .1em .35em; border-radius: 4px; }
+strong { font-weight: 600; }
+
+.tag {
+  display: inline-block; margin-left: .7rem; padding: .2em .7em; vertical-align: .25em;
+  font: 600 .66rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; border-radius: 999px;
+}
+.tag-virtual { background: var(--blue); color: #fff; }
+.tag-presencial { background: var(--accent); color: var(--deep); }
+
+.tabla { overflow-x: auto; margin: 1.25rem 0 1.75rem; -webkit-overflow-scrolling: touch; }
+.tabla table { border-collapse: collapse; width: 100%; min-width: 580px; font-size: .95rem; line-height: 1.5; }
+.tabla th {
+  padding: .6rem .9rem .6rem 0; text-align: left; white-space: nowrap;
+  font: 600 .7rem/1.4 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  border-bottom: 2px solid var(--ink);
+}
+.tabla td { padding: .7rem .9rem .7rem 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tabla tr:last-child td { border-bottom-color: var(--ink); }
+.tabla.tiempos td:first-child { font: 600 .85rem/1.6 var(--font-mono); color: var(--primary); white-space: nowrap; }
+
+.pie { padding: 2.5rem clamp(1.25rem, 5vw, 4rem); background: var(--ink); color: #a9d8c3; font: 400 .8rem/1.5 var(--font-mono); letter-spacing: .04em; }
+
+@media (max-width: 1000px) {
+  .layout { display: block; }
+  .barra-movil {
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 40; padding: .7rem 1.25rem;
+    background: var(--deep); color: #fff; font: 800 1rem var(--font-display);
+  }
+  .barra-movil button {
+    font: 600 .75rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--deep); background: var(--accent); border: 0; border-radius: 999px; padding: .6rem 1rem; min-height: 44px; cursor: pointer;
+  }
+  .indice { position: fixed; inset: 0 0 0 auto; width: min(86vw, 340px); height: 100vh; z-index: 60; transform: translateX(100%); transition: transform .25s ease; }
+  .indice.abierto { transform: none; box-shadow: -20px 0 60px rgba(0,0,0,.4); }
+  .pestanas { top: 66px; }
+  .capitulo { scroll-margin-top: 114px; }
+  .ficha { grid-template-columns: 1fr; gap: .15rem; }
+  .ficha dd { margin-bottom: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .indice { transition: none; }
+}
+@media print {
+  .indice, .barra-movil, .progreso, .pestanas, .pasos { display: none; }
+  .js .capitulo, .js .portada { display: block; }
+  .layout { display: block; }
+  .capitulo { break-before: page; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .portada > * { animation: sube .7s both cubic-bezier(.2,.7,.2,1); }
+  .portada > *:nth-child(2) { animation-delay: .08s; }
+  .portada > *:nth-child(3) { animation-delay: .16s; }
+  .portada > *:nth-child(4) { animation-delay: .24s; }
+  @keyframes sube { from { opacity: 0; transform: translateY(18px); } }
+}
+</style>
+</head>
+<body>
+<div class="progreso" id="progreso"></div>
+<div class="barra-movil"><span>Plan de estudios</span><button id="abrir-indice" type="button" aria-expanded="false" aria-controls="indice">Índice</button></div>
+<div class="layout">
+  <nav class="indice" id="indice" aria-label="Índice del plan">
+    <div class="indice-marca">Plan de estudios<small>Ciencia de Datos · Avanzado</small></div>
+    <ul>
+<li data-cap="plan"><a href="#plan"><span>Plan general</span>Ciencia de Datos, nivel Avanzado</a><ul><li><a href="#plan-1-supuestos">1. Supuestos</a></li><li><a href="#plan-2-sesiones-presenciales-abiertas">2. Sesiones presenciales (abiertas)</a></li><li><a href="#plan-3-como-corre-una-sesion-virtual-de-3-h">3. Cómo corre una sesión virtual de 3 h</a></li><li><a href="#plan-4-clase-1-s1-virtual">4. Clase 1 (S1, virtual)</a></li><li><a href="#plan-5-diagnostico">5. Diagnóstico</a></li><li><a href="#plan-6-plan-semana-por-semana">6. Plan semana por semana</a></li><li><a href="#plan-7-cobertura-del-pensum">7. Cobertura del pensum</a></li><li><a href="#plan-8-matriz-trabajo-dimension">8. Matriz trabajo × dimensión</a></li><li><a href="#plan-9-curso-dinamico-nucleo-y-semanas-elasticas">9. Curso dinámico: núcleo y semanas elásticas</a></li><li><a href="#plan-10-decisiones-abiertas">10. Decisiones abiertas</a></li><li><a href="#plan-11-versiones-futuras">11. Versiones futuras</a></li><li><a href="#plan-12-hilos-transversales">12. Hilos transversales</a></li></ul></li>
+<li data-cap="presenciales"><a href="#presenciales"><span>Presenciales</span>Tres sesiones abiertas</a><ul><li><a href="#presenciales-criterio">Criterio</a></li><li><a href="#presenciales-ideas-candidatas-no-son-compromisos">Ideas candidatas (no son compromisos)</a></li><li><a href="#presenciales-decisiones-que-dependen-de-esto">Decisiones que dependen de esto</a></li></ul></li>
+<li data-cap="encuestas"><a href="#encuestas"><span>Encuestas</span>Lista y sistema de formularios</a><ul><li><a href="#encuestas-1-lista-de-encuestas">1. Lista de encuestas</a></li><li><a href="#encuestas-2-preguntas-relampago">2. Preguntas relámpago</a></li><li><a href="#encuestas-3-sistema-para-el-docente-propuesta">3. Sistema para el docente (propuesta)</a></li></ul></li>
+<li data-cap="semana-01"><a href="#semana-01"><span>Semana 1</span>Arranque, entorno y diagnóstico</a><ul><li><a href="#semana-01-s1-clase-1-virtual-180-min">S1 — Clase 1 (virtual, 180 min) virtual</a></li><li><a href="#semana-01-s2-verificacion-y-pandas-fundamentos-virtual-180-min">S2 — Verificación y pandas fundamentos (virtual, 180 min) virtual</a></li><li><a href="#semana-01-criterios-de-la-tarea-diagnostica">Criterios de la tarea diagnóstica</a></li></ul></li>
+<li data-cap="semana-02"><a href="#semana-02"><span>Semana 2</span>Python y datos reales</a><ul><li><a href="#semana-02-s3-pandas-avanzado-virtual-sesion-a">S3 — pandas avanzado (virtual, sesión A) virtual</a></li><li><a href="#semana-02-s4-visualizacion-y-eda-virtual-sesion-b">S4 — Visualización y EDA (virtual, sesión B) virtual</a></li><li><a href="#semana-02-rubrica-de-t1-eda-reproducible">Rúbrica de T1 — EDA reproducible</a></li><li><a href="#semana-02-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</a></li></ul></li>
+<li data-cap="semana-03"><a href="#semana-03"><span>Semana 3</span>Modelado predictivo</a><ul><li><a href="#semana-03-s5-regresion-y-evaluacion-basica-virtual-sesion-a">S5 — Regresión y evaluación básica (virtual, sesión A) virtual</a></li><li><a href="#semana-03-s6-clasificacion-pipelines-y-baseline-virtual-sesion-b">S6 — Clasificación, pipelines y baseline (virtual, sesión B) virtual</a></li><li><a href="#semana-03-rubrica-de-t2-modelo-frente-a-baseline">Rúbrica de T2 — Modelo frente a baseline</a></li><li><a href="#semana-03-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</a></li></ul></li>
+<li data-cap="semana-04"><a href="#semana-04"><span>Semana 4</span>Big Data y procesamiento distribuido</a><ul><li><a href="#semana-04-s7-big-data-y-spark-virtual-sesion-a">S7 — Big Data y Spark (virtual, sesión A) virtual</a></li><li><a href="#semana-04-s8-pyspark-sql-y-comparacion-con-pandas-virtual-sesion-b">S8 — PySpark SQL y comparación con pandas (virtual, sesión B) virtual</a></li><li><a href="#semana-04-rubrica-de-t3-mismo-analisis-en-spark">Rúbrica de T3 — Mismo análisis en Spark</a></li><li><a href="#semana-04-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</a></li></ul></li>
+<li data-cap="semana-05"><a href="#semana-05"><span>Semana 5</span>Visualización interactiva y storytelling</a><ul><li><a href="#semana-05-s9-dashboards-y-votacion-de-la-herramienta-virtual-sesion-a">S9 — Dashboards y votación de la herramienta (virtual, sesión A) virtual</a></li><li><a href="#semana-05-s10-storytelling-con-datos-virtual-sesion-b">S10 — Storytelling con datos (virtual, sesión B) virtual</a></li><li><a href="#semana-05-rubrica-de-t4-dashboard-con-narrativa">Rúbrica de T4 — Dashboard con narrativa</a></li><li><a href="#semana-05-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</a></li></ul></li>
+<li data-cap="semana-06"><a href="#semana-06"><span>Semana 6</span>Ensambles, pipelines y arranque del integrador</a><ul><li><a href="#semana-06-s11-arboles-y-ensambles-planning-del-sprint-1-virtual-sesion-a">S11 — Árboles y ensambles; planning del sprint 1 (virtual, sesión A) virtual</a></li><li><a href="#semana-06-s12-pipelines-y-flujo-de-trabajo-en-equipo-virtual-sesion-b">S12 — Pipelines y flujo de trabajo en equipo (virtual, sesión B) virtual</a></li><li><a href="#semana-06-rubrica-de-t5-pipeline-y-backlog">Rúbrica de T5 — Pipeline y backlog</a></li><li><a href="#semana-06-habilidades-para-el-empleo">Habilidades para el empleo</a></li></ul></li>
+<li data-cap="semana-07"><a href="#semana-07"><span>Semana 7</span>Optimización y validación de modelos</a><ul><li><a href="#semana-07-s13-validacion-cruzada-y-ajuste-de-hiperparametros-virtual-sesion-a">S13 — Validación cruzada y ajuste de hiperparámetros (virtual, sesión A) virtual</a></li><li><a href="#semana-07-s14-interpretacion-con-shap-y-lime-virtual-sesion-b">S14 — Interpretación con SHAP y LIME (virtual, sesión B) virtual</a></li><li><a href="#semana-07-rubrica-de-t6-modelo-optimizado-e-interpretado">Rúbrica de T6 — Modelo optimizado e interpretado</a></li><li><a href="#semana-07-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</a></li></ul></li>
+<li data-cap="semana-08"><a href="#semana-08"><span>Semana 8</span>Proyecto integrador y cierre</a><ul><li><a href="#semana-08-s15-verificacion-final-y-sprint-final-virtual-sesion-a">S15 — Verificación final y sprint final (virtual, sesión A) virtual</a></li><li><a href="#semana-08-s16-presentacion-del-integrador-virtual-sesion-b">S16 — Presentación del integrador (virtual, sesión B) virtual</a></li><li><a href="#semana-08-rubrica-de-t7-integrador">Rúbrica de T7 — Integrador</a></li><li><a href="#semana-08-habilidades-para-el-empleo">Habilidades para el empleo</a></li></ul></li>
+    </ul>
+  </nav>
+  <main>
+<nav class="pestanas" aria-label="Capítulos"><a href="#plan">Plan general</a><a href="#presenciales">Presenciales</a><a href="#encuestas">Encuestas</a><a href="#semana-01">Sem 1</a><a href="#semana-02">Sem 2</a><a href="#semana-03">Sem 3</a><a href="#semana-04">Sem 4</a><a href="#semana-05">Sem 5</a><a href="#semana-06">Sem 6</a><a href="#semana-07">Sem 7</a><a href="#semana-08">Sem 8</a></nav>
+    <header class="portada">
+      <div class="etiqueta">Expedición de datos · borrador 2026-11-01</div>
+      <h1>Plan de <em>estudios</em></h1>
+      <p class="bajada">Ocho semanas para pasar de limpiar datos a defender un modelo ante un equipo, con un curso que se ajusta a las habilidades reales de cada estudiante.</p>
+      <div class="cifras">
+        <div><b>8</b>semanas</div>
+        <div><b>16</b>sesiones virtuales</div>
+        <div><b>3</b>presenciales extra</div>
+        <div><b>7</b>dimensiones del radar</div>
+      </div>
+    </header>
+<section class="capitulo c-plan" id="plan"><header class="cap-cabeza"><div class="cap-kicker">Plan general</div><h2 class="cap-titulo">Ciencia de Datos, nivel Avanzado</h2></header><div class="cap-cuerpo"><p>Borrador del 2026-11-01. Parte del pensum de ESTUD-IA (8 módulos, English for Tech excluido) y de las decisiones de <a href="RFC-010-app-expedicion.md">RFC-010</a>. Los umbrales y fechas marcados como provisionales se calibran con la primera cohorte.</p>
+<h2 id="plan-1-supuestos">1. Supuestos</h2>
+<ul>
+<li>8 semanas, 2 sesiones de 3 h por semana: <strong>16 sesiones virtuales</strong> (S1 a S16; la semana <em>n</em> tiene las sesiones 2n−1 y 2n).</li>
+<li>Además hay <strong>3 sesiones presenciales adicionales</strong> (P1 a P3), el 14, 21 y 28 de noviembre. Quedan abiertas: el plan funciona sin ellas (sección 2).</li>
+<li>El calendario real de las 16 sesiones aún no existe, así que las presenciales no se atan a una semana concreta.</li>
+<li>Entrada con prueba técnica de más del 80 %, pero <strong>no se sabe qué mide</strong> (en particular, si incluye Python). Por eso el curso es dinámico: se ajusta con el diagnóstico.</li>
+<li>Computador por estudiante; sistema operativo por confirmar con el censo de la clase 1.</li>
+<li><strong>Entrega por PR (F21 del RFC):</strong> cada estudiante carga el enlace del PR en la app, que queda habilitada hasta la fecha límite. El docente no recoge nada.</li>
+<li><strong>Entorno local, sin Colab:</strong> Python 3.12, VS Code (extensiones Python, Jupyter, Black y Pylint) y Git, instalados en la clase 1.</li>
+<li><strong>Spark sin instalación:</strong> se usa un GitHub Codespace con el entorno ya armado (Java y PySpark), para no depender de instalaciones en cada computador.</li>
+<li>Mismas 7 dimensiones del borrador del RFC: Datos, Análisis, Modelado, Validación, Comunicación, Producción y Dirección de IA.</li>
+</ul>
+<h2 id="plan-2-sesiones-presenciales-abiertas">2. Sesiones presenciales (abiertas)</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Sesión</th>
+<th>Fecha</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P1</strong></td>
+<td>14 nov</td>
+<td>Por definir</td>
+</tr>
+<tr>
+<td><strong>P2</strong></td>
+<td>21 nov</td>
+<td>Por definir</td>
+</tr>
+<tr>
+<td><strong>P3</strong></td>
+<td>28 nov</td>
+<td>Por definir</td>
+</tr>
+</tbody>
+</table></div>
+<p>Criterio: solo se usan para lo que vale la pena en persona. Ninguna actividad del plan depende de ellas. Las ideas candidatas están en <a href="#presenciales">presenciales.md</a>.</p>
+<h2 id="plan-3-como-corre-una-sesion-virtual-de-3-h">3. Cómo corre una sesión virtual de 3 h</h2>
+<p>Bloques de 40 a 50 min con pausas de 10 min; nada de 3 h seguidas de pantalla compartida.</p>
+<p><strong>Sesión A (concepto y laboratorio guiado)</strong></p>
+<ol>
+<li>15 min: retro del trabajo anterior y <strong>votación en vivo</strong> (F18), desde la app o un formulario.</li>
+<li>40 min: concepto.</li>
+<li>50 min: laboratorio guiado en vivo.</li>
+<li>40 min: práctica en tres niveles (Base, Estándar, Reto), en salas pequeñas con apoyo.</li>
+</ol>
+<p><strong>Sesión B (aplicado y revisión)</strong></p>
+<ol>
+<li>10 min: preguntas pendientes.</li>
+<li>60 min: trabajo del PR en parejas o equipos, en salas.</li>
+<li>50 min: avance individual con apoyo.</li>
+<li>30 min: <strong>revisión al azar</strong> (F10): se sortean 2 o 3 equipos que comparten pantalla 3 min cada uno y reciben retroalimentación del grupo.</li>
+</ol>
+<p><strong>Dentro de cualquier sesión:</strong> una o dos <strong>preguntas relámpago</strong> con bonificación (sección 12.4) y, al cierre de la sesión B, una encuesta de pulso de 3 preguntas (<a href="#encuestas">encuestas.md</a>).</p>
+<h2 id="plan-4-clase-1-s1-virtual">4. Clase 1 (S1, virtual)</h2>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Bloque</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–20</td>
+<td>Bienvenida: cómo funciona el curso (islas, radar, IA con declaración, entrega por PR) y por qué hay un diagnóstico</td>
+</tr>
+<tr>
+<td>20–60</td>
+<td>Introducción a la ciencia de datos (teoría): ciclo, roles, qué es big data, dónde entra la IA</td>
+</tr>
+<tr>
+<td>60–70</td>
+<td>Pausa</td>
+</tr>
+<tr>
+<td>70–110</td>
+<td>Entorno: cuenta de GitHub, Git, Python, VS Code con Jupyter, Black y Pylint, con lista de verificación y salas de apoyo por sistema operativo. Primer script: <code>import this</code> (el Zen de Python). Censo rápido de equipos</td>
+</tr>
+<tr>
+<td>110–120</td>
+<td>Pausa</td>
+</tr>
+<tr>
+<td>120–165</td>
+<td><strong>Guía de entrega por PR</strong>: repo público, rama, commit, abrir el PR y copiar el enlace. Cada estudiante abre un <strong>PR de prueba</strong> (un README con su nombre y tres líneas), enlazado a un issue de su <strong>tablero personal</strong> en GitHub Projects</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre: se explica la tarea diagnóstica, el plazo y dónde se carga el enlace en la app</td>
+</tr>
+</tbody>
+</table></div>
+<p>El PR de prueba valida de punta a punta el flujo de F21 antes de cualquier trabajo con nota. La guía de PR queda como documento aparte para los estudiantes. Quien no termine el entorno o el PR lo resuelve en la sala de apoyo de la S2. Detalle de la dinámica en <a href="#semana-01">semana-01.md</a>.</p>
+<h2 id="plan-5-diagnostico">5. Diagnóstico</h2>
+<p>Punto de partida del radar (F7). No cuenta para aprobar.</p>
+<p><strong>Tarea (después de S1, máximo 60 min, entregada por PR):</strong></p>
+<ol>
+<li>Autoinforme: confianza declarada en Python, SQL, estadística, Git, ML y uso de IA (5 min).</li>
+<li>Preguntas cortas con corrección automática (15 min).</li>
+<li>Mini tarea práctica en un notebook local (VS Code) con un dataset sucio: cargar, limpiar, responder dos preguntas, un gráfico y su interpretación (40 min). <strong>IA permitida y declarada</strong> en una bitácora de tres líneas.</li>
+</ol>
+<p><strong>Verificación sin IA (primeros 20 min de S2):</strong> tres o cuatro ejercicios paralelos a los de la tarea (leer código, un <code>groupby</code>, interpretar un gráfico), con cámara y pantalla compartida.</p>
+<p><strong>Resultado:</strong> dos valores por dimensión, con IA y sin IA. La brecha entre ambos mide dependencia de la IA y alimenta Dirección de IA. La parte práctica se califica con la rúbrica de 5 niveles; un revisor automático comprueba cifras concretas (filas tras limpiar, medias) y solo la interpretación se califica a mano.</p>
+<p><strong>Forma paralela (B):</strong> se aplica al final con el mismo formato (tarea después de S14 y verificación sin IA al inicio de S15). Cada ejercicio existe en versión A y B de la misma dificultad.</p>
+<p><strong>Asignación de ruta:</strong> el docente procesa los resultados entre S2 y S3 y asigna la ruta (sección 9). Hasta entonces, S2 usa ejercicios en tres niveles y cada estudiante elige el suyo.</p>
+<h2 id="plan-6-plan-semana-por-semana">6. Plan semana por semana</h2>
+<p>La dinámica detallada de cada sesión, con su material complementario, está en <code>plan-de-estudios/</code>, un archivo por semana: <a href="#semana-01">1</a>, <a href="#semana-02">2</a>, <a href="#semana-03">3</a>, <a href="#semana-04">4</a>, <a href="#semana-05">5</a>, <a href="#semana-06">6</a>, <a href="#semana-07">7</a>, <a href="#semana-08">8</a>. También hay un archivo de <a href="#presenciales">presenciales</a> y otro de <a href="#encuestas">encuestas</a>.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Sem.</th>
+<th>Ses.</th>
+<th>Foco</th>
+<th>Trabajo (PR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>S1</td>
+<td>Introducción a la ciencia de datos, entorno, guía de PR</td>
+<td>PR de prueba; tarea diagnóstica</td>
+</tr>
+<tr>
+<td>1</td>
+<td>S2</td>
+<td>Verificación sin IA; pandas fundamentos en tres niveles</td>
+<td>Diagnóstico entregado</td>
+</tr>
+<tr>
+<td>2</td>
+<td>S3</td>
+<td>pandas avanzado: joins, ventanas, limpieza; NumPy</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>S4</td>
+<td>Teoría de visualización y <strong>votación</strong>: Matplotlib y Seaborn o Plotly; EDA</td>
+<td><strong>T1</strong> EDA reproducible</td>
+</tr>
+<tr>
+<td>3</td>
+<td>S5</td>
+<td>Regresión con scikit-learn, partición train/test y métricas</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>S6</td>
+<td>Clasificación, pipelines y baseline</td>
+<td><strong>T2</strong> Modelo frente a baseline</td>
+</tr>
+<tr>
+<td>4</td>
+<td>S7</td>
+<td>Big Data: Hadoop, escalabilidad y Spark (concepto); PySpark DataFrames</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>S8</td>
+<td>PySpark SQL, particiones y dataset masivo; comparación con pandas</td>
+<td><strong>T3</strong> Mismo análisis en Spark</td>
+</tr>
+<tr>
+<td>5</td>
+<td>S9</td>
+<td>Teoría de dashboards y <strong>votación</strong>: Power BI, Looker Studio o Streamlit; laboratorio con la ganadora</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>S10</td>
+<td>Storytelling con datos y diseño del dashboard</td>
+<td><strong>T4</strong> Dashboard con narrativa</td>
+</tr>
+<tr>
+<td>6</td>
+<td>S11</td>
+<td>Árboles y ensambles, ingeniería de características; planning del sprint 1 del integrador</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>S12</td>
+<td>Pipelines reproducibles y flujo de trabajo en equipo con Git</td>
+<td><strong>T5</strong> Pipeline y backlog</td>
+</tr>
+<tr>
+<td>7</td>
+<td>S13</td>
+<td>Validación cruzada y ajuste de hiperparámetros</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>S14</td>
+<td>Interpretación con SHAP y LIME</td>
+<td><strong>T6</strong> Modelo optimizado e interpretado; tarea forma B</td>
+</tr>
+<tr>
+<td>8</td>
+<td>S15</td>
+<td>Verificación sin IA (forma B); sprint final y ensayo</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>S16</td>
+<td>Presentación del integrador y retroalimentación</td>
+<td><strong>T7</strong> Integrador</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hilo transversal <strong>Habilidades para el empleo</strong>: el repo como portafolio (S1), retroalimentación entre pares (revisión de PR y revisiones al azar), roles de equipo (S11), retrospectivas por sprint (S12 en adelante) y presentación profesional (S15–S16).</p>
+<h2 id="plan-7-cobertura-del-pensum">7. Cobertura del pensum</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Módulo del pensum</th>
+<th>Sesiones</th>
+<th>Subtemas del pensum cubiertos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Fundamentos de ciencia de datos y Big Data</td>
+<td>S1, S7</td>
+<td>Conceptos de ciencia de datos (S1); introducción a Big Data, Hadoop y escalabilidad (S7)</td>
+</tr>
+<tr>
+<td>2. Programación en Python para ciencia de datos</td>
+<td>S2–S4</td>
+<td>pandas, NumPy, Matplotlib y Seaborn (o Plotly, según la votación; ver 12.5)</td>
+</tr>
+<tr>
+<td>3. Modelado predictivo con ML</td>
+<td>S5–S6, S11</td>
+<td>Regresión, clasificación, árboles y ensambles, scikit-learn, evaluación de modelos</td>
+</tr>
+<tr>
+<td>4. Procesamiento avanzado con frameworks</td>
+<td>S7–S8</td>
+<td>Spark, procesamiento distribuido, datasets masivos</td>
+</tr>
+<tr>
+<td>5. Análisis avanzado y visualización interactiva</td>
+<td>S9–S10</td>
+<td>Power BI, Looker Studio o Streamlit (según la votación), campos calculados o DAX, storytelling</td>
+</tr>
+<tr>
+<td>6. Gestión de proyectos de ciencia de datos</td>
+<td>S1–S16 (hilo), S12</td>
+<td>Scrum transversal con GitHub Projects (12.1), pipelines de datos (S12), colaboración en equipos con Git (S12)</td>
+</tr>
+<tr>
+<td>7. Optimización y validación de modelos</td>
+<td>S13–S14</td>
+<td>Hyperparameter tuning, validación cruzada, SHAP y LIME</td>
+</tr>
+<tr>
+<td>8. Proyecto integrador</td>
+<td>S11–S16</td>
+<td>Diseño, desarrollo, implementación y presentación; retroalimentación</td>
+</tr>
+<tr>
+<td>Habilidades para el empleo</td>
+<td>Hilo</td>
+<td>Trabajo en equipo y liderazgo</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="plan-8-matriz-trabajo-dimension">8. Matriz trabajo × dimensión</h2>
+<p>Cada dimensión se evalúa al menos dos veces (pregunta 10 del RFC). Dirección de IA aparece en todos los trabajos como evidencia declarada, y Producción también, a través del criterio transversal de calidad de código y tablero (12.1 y 12.2).</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Trabajo</th>
+<th>Datos</th>
+<th>Análisis</th>
+<th>Modelado</th>
+<th>Validación</th>
+<th>Comunicación</th>
+<th>Producción</th>
+<th>Dirección de IA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1 EDA</td>
+<td>●</td>
+<td>●</td>
+<td></td>
+<td></td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T2 Modelo vs baseline</td>
+<td></td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td></td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T3 Spark</td>
+<td>●</td>
+<td>●</td>
+<td></td>
+<td></td>
+<td></td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T4 Dashboard</td>
+<td>●</td>
+<td>●</td>
+<td></td>
+<td></td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T5 Pipeline</td>
+<td>●</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T6 Modelo interpretado</td>
+<td></td>
+<td></td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td>T7 Integrador</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr>
+<td><strong>Veces evaluada</strong></td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+<td>7</td>
+<td>7</td>
+</tr>
+</tbody>
+</table></div>
+<p>Producción y Dirección de IA no tienen isla propia en la app (decisión pendiente de la sesión anterior); aquí viven en el hilo de calidad de código, el tablero y la bitácora de cada PR.</p>
+<h2 id="plan-9-curso-dinamico-nucleo-y-semanas-elasticas">9. Curso dinámico: núcleo y semanas elásticas</h2>
+<ul>
+<li><strong>Núcleo fijo:</strong> semanas 3 (modelado), 5 (visualización), 7 (validación) y 8 (integrador).</li>
+<li><strong>Elásticas:</strong> semana 2 (pandas), semana 4 (Spark) y semana 6 (ensambles y pipelines).</li>
+<li><strong>Por estudiante:</strong> cada sesión A trae ejercicios en tres niveles (Base, Estándar, Reto), asignados según el radar de entrada.</li>
+</ul>
+<p><strong>Reglas de ajuste (provisionales; se miden tras la verificación de S2).</strong> Se usa el porcentaje de estudiantes en nivel 3 o más de 5 en la dimensión Datos, en la verificación sin IA:</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Resultado</th>
+<th>Ruta</th>
+<th>Qué cambia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Menos del 50 %</td>
+<td>Nivelación</td>
+<td>S3 se dedica a pandas básico y S4 a un EDA guiado. Spark (S7–S8) se reduce a concepto más un laboratorio corto</td>
+</tr>
+<tr>
+<td>50 % a 80 %</td>
+<td>Estándar</td>
+<td>Se sigue el plan tal cual</td>
+</tr>
+<tr>
+<td>Más del 80 %</td>
+<td>Profundización</td>
+<td>S3–S4 se resuelven en una sola semana de pandas avanzado y rendimiento; el tiempo ganado va a Spark y al integrador</td>
+</tr>
+</tbody>
+</table></div>
+<p>Reglas por dimensión:</p>
+<ul>
+<li>Si menos del 50 % llega a nivel 3 en <strong>Validación</strong> (base de estadística), se añade un bloque de estadística (distribuciones, sesgo y varianza) en S5.</li>
+<li>Si la brecha media entre con IA y sin IA supera 1 nivel en una dimensión, se añade práctica sin IA en esa dimensión durante la primera media hora de cada sesión B.</li>
+</ul>
+<h2 id="plan-10-decisiones-abiertas">10. Decisiones abiertas</h2>
+<ol>
+<li><strong>Votaciones de herramientas</strong> (S4 y S9): hay que confirmar con el censo de la S1 qué opciones corren en los equipos (Power BI exige Windows).</li>
+<li><strong>Calendario real</strong> de las 16 sesiones, para asociar las presenciales P1 a P3 (14, 21 y 28 de noviembre) a su semana y decidir qué se hace en ellas.</li>
+<li><strong>Tamaño del grupo</strong> (pregunta 17 del RFC): define el costo de calificar a mano y el tamaño de las salas.</li>
+<li><strong>Qué mide la prueba técnica de entrada</strong>, para ajustar los umbrales de la sección 9.</li>
+<li><strong>Si las formas A y B del diagnóstico son realmente paralelas</strong>: requiere probarlas con un grupo piloto o calibrarlas con la primera cohorte.</li>
+<li><strong>Spark en Codespaces:</strong> cada cuenta personal gratuita incluye 120 horas-núcleo al mes (60 h en una máquina de 2 núcleos), que alcanza de sobra para una semana de laboratorio. Hay que confirmar que cada estudiante use una cuenta personal y no una de organización, que no tiene cuota gratuita. Respaldo: instalación local con JDK 17.</li>
+<li><strong>Quién fusiona los PR:</strong> las opciones están en 12.3 y hay que elegir una.</li>
+<li><strong>Encuestas y preguntas relámpago en la app:</strong> requieren F22 y F23 en el RFC (ver <a href="#encuestas">encuestas.md</a>). Mientras no existan, se usa un formulario externo.</li>
+</ol>
+<h2 id="plan-11-versiones-futuras">11. Versiones futuras</h2>
+<p>Los niveles Junior (hojas de cálculo) e Intermedio (Business Intelligence) del pensum de la universidad pueden reutilizar este esqueleto de 8 semanas, la estructura de islas, la rúbrica de 5 niveles y el radar, con dimensiones propias por nivel (el RFC las trata como datos, F3). Solo cambian los módulos y los niveles esperados.</p>
+<h2 id="plan-12-hilos-transversales">12. Hilos transversales</h2>
+<h3 id="plan-121-scrum-a-lo-largo-del-curso-con-github-projects">12.1 Scrum a lo largo del curso, con GitHub Projects</h3>
+<p>Scrum no tiene una sesión propia. Se practica en todas, con <strong>GitHub Projects</strong>, que ya vive junto a los repos y los PR: tiene vistas de tabla, tablero y hoja de ruta, campos de iteración para los sprints y enlace entre issues y PR.</p>
+<p><strong>Fase individual (S1 a S10).</strong> Cada estudiante tiene un tablero personal. Cada trabajo (T1 a T4) es un issue con su lista de tareas, y el PR lo cierra. El sprint dura una semana.</p>
+<p><strong>Fase de equipo (S11 a S16).</strong> Cada equipo tiene un tablero compartido del integrador, con sprints semanales (planning en S11, revisión y retro en S12, S14 y S16).</p>
+<p><strong>Ceremonias mínimas, dentro de las sesiones existentes:</strong></p>
+<ul>
+<li>Planning (5 a 10 min) al inicio de la sesión A.</li>
+<li>Seguimiento en el issue con un comentario de dos líneas (sin nota).</li>
+<li>Revisión: la revisión al azar de la sesión B.</li>
+<li>Retro (5 min) al cierre de la sesión B: una pregunta por la encuesta de pulso.</li>
+</ul>
+<p><strong>Criterio de rúbrica (Producción):</strong> issues pequeños y enlazados al PR, avance visible en el tablero.</p>
+<p><strong>En la app:</strong> GitHub Projects tiene API (GraphQL), así que la app podría leer el estado de los tableros. Se recomienda no construirlo ahora: se parte del tablero de GitHub y se decide con la primera cohorte si vale la pena integrarlo.</p>
+<h3 id="plan-122-buenas-practicas-de-codigo">12.2 Buenas prácticas de código</h3>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Práctica</th>
+<th>Cuándo entra</th>
+<th>Herramienta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zen de Python y formato automático</td>
+<td>S1</td>
+<td><code>import this</code>, Black al guardar</td>
+</tr>
+<tr>
+<td>Convenciones de nombres y PEP 8</td>
+<td>S3</td>
+<td>Pylint (nombres descriptivos, sin variables de una letra)</td>
+</tr>
+<tr>
+<td>Revisión automática en el PR</td>
+<td>S4 en adelante</td>
+<td>GitHub Actions con <code>black --check</code> y Pylint</td>
+</tr>
+<tr>
+<td>Docstrings y funciones cortas</td>
+<td>S6</td>
+<td>Pylint, revisión entre pares</td>
+</tr>
+<tr>
+<td>Estructura de proyecto y pruebas básicas</td>
+<td>S12</td>
+<td>módulos con responsabilidad clara, <code>pytest</code> en las funciones de limpieza</td>
+</tr>
+<tr>
+<td>Ganchos antes del commit</td>
+<td>S12</td>
+<td><code>pre-commit</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>El puntaje mínimo de Pylint sube de manera gradual (por ejemplo 6, 7 y 8) en vez de exigirse desde el inicio. Black y Pylint se aplican a archivos <code>.py</code>; si un trabajo es un notebook, las funciones se piden en un módulo aparte. El resultado de las comprobaciones queda visible en el PR y puede alimentar el criterio de Producción.</p>
+<h3 id="plan-123-revision-de-los-pr-en-pareja">12.3 Revisión de los PR en pareja</h3>
+<ul>
+<li>La pareja <strong>revisa y aprueba</strong> el PR del otro, con al menos dos comentarios en línea (uno de lo que funciona y otro de mejora). <strong>No lo fusiona.</strong></li>
+<li>El docente hace la revisión general, deja sus comentarios y <strong>fusiona</strong>.</li>
+<li>Cada estudiante agrega al docente como colaborador de su repo, con permiso de escritura, para que pueda fusionar.</li>
+<li>Un repo propio le da al estudiante permisos para fusionar, así que la regla se sostiene por acuerdo, no por bloqueo técnico. La API de GitHub permite que la app compruebe quién aprobó y quién fusionó cada PR, y marque los que no cumplan.</li>
+<li><strong>Alternativa con bloqueo real:</strong> que los PR vayan a un repo del curso (cada estudiante desde su fork). Es más estricto, pero deja de ser el "repo público propio" de F21 y mezcla los trabajos en un solo repo. Es una decisión abierta (10.7).</li>
+<li>Las aprobaciones de quien no tiene escritura en el repo no cuentan para una protección de rama, así que sirven como evidencia visible, no como control.</li>
+</ul>
+<h3 id="plan-124-preguntas-relampago-con-bonificacion">12.4 Preguntas relámpago con bonificación</h3>
+<ul>
+<li>Una o dos por sesión, ligadas a lo que se está explicando en ese momento.</li>
+<li>Un enlace corto y un <strong>código QR</strong> en la pantalla compartida abren la pregunta. Hay una ventana de 60 a 90 segundos, un solo intento y corrección inmediata con una explicación breve.</li>
+<li>La bonificación de XP es para quien responde dentro de la ventana, es decir, quien está en clase.</li>
+<li>Para que no se copien, las preguntas son de aplicación (por ejemplo, leer una línea de código) y pueden llevar parámetros distintos por estudiante.</li>
+<li>En la app es una pieza nueva (F23, ver <a href="#encuestas">encuestas.md</a>). Mientras tanto, se hace con un formulario con cierre manual.</li>
+</ul>
+<h3 id="plan-125-votacion-de-herramientas">12.5 Votación de herramientas</h3>
+<p><strong>Visualización (S4).</strong> La teoría general de visualización va primero, con el mismo gráfico mostrado en <strong>Matplotlib y Seaborn</strong> y en <strong>Plotly</strong>. Al final votan los estudiantes, y la ganadora es la librería del T1 y de las sesiones siguientes. El pensum nombra Matplotlib y Seaborn, así que si gana Plotly se mantiene un ejemplo corto de Matplotlib como referencia.</p>
+<p><strong>Dashboards (S9).</strong> Misma lógica con <strong>Power BI</strong>, <strong>Looker Studio</strong> y <strong>Streamlit</strong>: la misma pregunta de negocio resuelta de las tres formas en la teoría, y votación.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>A favor</th>
+<th>En contra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power BI</td>
+<td>Es la del pensum, con DAX</td>
+<td>Solo Windows, el archivo es binario (no encaja bien en un PR)</td>
+</tr>
+<tr>
+<td>Looker Studio</td>
+<td>Web, gratis, conecta con Google Sheets y BigQuery</td>
+<td>No tiene repositorio; el PR sería una captura o un enlace</td>
+</tr>
+<tr>
+<td>Streamlit</td>
+<td>Es código Python, reproducible, encaja con el PR</td>
+<td>No cubre DAX; hay que alojarlo para compartirlo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Solo entran a la votación las opciones que corren en los equipos de todo el grupo. La votación se hace con la votación en vivo de la app (F18) o con un formulario.</p>
+<h3 id="plan-126-material-complementario">12.6 Material complementario</h3>
+<p>Cada sesión lista su material: libros, capítulos, papers o videos, <strong>gratuitos y en español siempre que sea posible</strong>. Los recursos en inglés se marcan con <strong>[EN]</strong>.</p>
+<p><strong>Nota para la app:</strong> para los recursos en inglés, la app podría ofrecer un resumen en español y un glosario, como parte de lo que ya se estaba construyendo para eso.</p>
+<p><strong>Estado de verificación:</strong> los enlaces a Pro Git, la Guía de Scrum, cienciadedatos.net, Microsoft Learn, Molnar, Wilke y los datos de Codespaces se comprobaron el 2026-11-01. Los enlaces a la documentación oficial de las librerías son las direcciones habituales y hay que revisarlos al preparar cada clase. Donde dice «Pendiente» falta encontrar y verificar un recurso, sobre todo videos en español.</p><nav class="pasos"><a class="sig" href="#presenciales"><small>Siguiente · Presenciales →</small>Tres sesiones abiertas</a></nav></div></section>
+<section class="capitulo c-pres" id="presenciales"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">P</div><div class="cap-kicker">Presenciales</div><h2 class="cap-titulo">Tres sesiones abiertas</h2></header><div class="cap-cuerpo"><p>Son tres sesiones de 3 h, <strong>además</strong> de las 16 virtuales, el 14, 21 y 28 de noviembre. Quedan <strong>abiertas</strong>: no hay contenido fijado. El plan completo funciona sin ellas, así que se pueden usar para lo que más valga la pena en persona.</p>
+<p>Aún no existe el calendario real de las sesiones virtuales, por lo que no se sabe en qué semana cae cada una.</p>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Sesión</th>
+<th>Fecha</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>14 de noviembre</td>
+<td>Por definir</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>21 de noviembre</td>
+<td>Por definir</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>28 de noviembre</td>
+<td>Por definir</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="presenciales-criterio">Criterio</h2>
+<p>Una actividad solo entra si rinde más en persona que a distancia. Si se puede hacer igual de bien por videollamada, se queda en las sesiones virtuales.</p>
+<h2 id="presenciales-ideas-candidatas-no-son-compromisos">Ideas candidatas (no son compromisos)</h2>
+<ul>
+<li>Revisión de PR en vivo con el docente, con los estudiantes alrededor de la pantalla.</li>
+<li>Mentoría por equipos del proyecto integrador, mesa por mesa.</li>
+<li>Programación en parejas presencial sobre un reto con tiempo y bonificación.</li>
+<li>Clínica de entorno y de errores comunes, para quien lo necesite.</li>
+<li>Verificación sin IA supervisada, si se quiere una medida con más control que la virtual.</li>
+<li>Retos cronometrados con preguntas relámpago y premios.</li>
+<li>Demostración de avances del integrador entre equipos.</li>
+<li>Taller de empleabilidad: portafolio en GitHub, hoja de vida técnica y simulacro de entrevista.</li>
+</ul>
+<h2 id="presenciales-decisiones-que-dependen-de-esto">Decisiones que dependen de esto</h2>
+<ul>
+<li>Qué se hace en cada sesión, una vez exista el calendario real.</li>
+<li>Si alguna cae antes de la S2: no hay problema, el plan no la necesita.</li>
+</ul><nav class="pasos"><a href="#plan"><small>← Anterior · Plan general</small>Ciencia de Datos, nivel Avanzado</a><a class="sig" href="#encuestas"><small>Siguiente · Encuestas →</small>Lista y sistema de formularios</a></nav></div></section>
+<section class="capitulo c-pres" id="encuestas"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">E</div><div class="cap-kicker">Encuestas</div><h2 class="cap-titulo">Lista y sistema de formularios</h2></header><div class="cap-cuerpo"><p>Lista de lo que se va a necesitar durante el curso y propuesta de un sistema, dentro de la app, para que el docente cree y guarde formularios sin esfuerzo. Todo es borrador.</p>
+<h2 id="encuestas-1-lista-de-encuestas">1. Lista de encuestas</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Nombre</th>
+<th>Cuándo</th>
+<th>Tipo</th>
+<th>Anonimato</th>
+<th>Qué decisión alimenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Autorización de tratamiento de datos</td>
+<td>Antes de la S1</td>
+<td>Aceptación</td>
+<td>Identificada</td>
+<td>Requisito legal para guardar datos de los estudiantes (RFC, Ley 1581)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Contexto y expectativas</td>
+<td>Antes de la S1 o en la S1</td>
+<td>Mixta</td>
+<td>Identificada</td>
+<td>Experiencia previa, objetivos, horas disponibles por semana, acceso a internet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Censo de equipos y entorno</td>
+<td>S1</td>
+<td>Opción única</td>
+<td>Identificada</td>
+<td>Sistema operativo, memoria y navegador: define si Power BI es viable y si hace falta respaldo para Spark</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Autoinforme de habilidades</td>
+<td>Diagnóstico (S1) y forma B (S14)</td>
+<td>Escala 1 a 5</td>
+<td>Identificada</td>
+<td>Brecha entre lo que creen y lo que hacen, y cambio entre el inicio y el final</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Uso y actitud frente a la IA</td>
+<td>S1 y S16</td>
+<td>Mixta</td>
+<td>Identificada</td>
+<td>Cuánto cambia el uso de la IA a lo largo del curso (Dirección de IA)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Votación de librería de visualización</td>
+<td>S4</td>
+<td>Opción única, en vivo</td>
+<td>Anónima</td>
+<td>Librería del T1 y del resto del curso</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Votación de herramienta de dashboards</td>
+<td>S9</td>
+<td>Opción única, en vivo</td>
+<td>Anónima</td>
+<td>Herramienta del T4</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Pulso semanal</td>
+<td>Cierre de cada sesión B (8 veces)</td>
+<td>3 preguntas</td>
+<td>Anónima</td>
+<td>Ritmo (muy lento a muy rápido), claridad (1 a 5), qué mantener o cambiar. Es la retro individual de Scrum</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Retro del equipo</td>
+<td>S12, S14 y S16</td>
+<td>Mixta</td>
+<td>Por equipo</td>
+<td>Qué mantener, dejar y empezar; alimenta los sprints siguientes</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Evaluación entre pares del equipo</td>
+<td>S16</td>
+<td>Escala y texto</td>
+<td>Confidencial para el docente</td>
+<td>Aportes individuales al integrador, que pesan en el radar por rol</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Seguimiento de quien no entrega</td>
+<td>Cuando falta una entrega</td>
+<td>2 preguntas</td>
+<td>Identificada</td>
+<td>Razón (tiempo, técnica, comprensión) para intervenir a tiempo</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Salida y satisfacción</td>
+<td>S16</td>
+<td>Mixta</td>
+<td>Anónima, con opción de dar testimonio</td>
+<td>Qué cambiar para la siguiente edición</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las encuestas 4, 5 y 12 comparten preguntas entre el inicio y el final para poder comparar.</p>
+<h2 id="encuestas-2-preguntas-relampago">2. Preguntas relámpago</h2>
+<p>Además de las encuestas, el curso usa preguntas relámpago con bonificación (plan de estudios, 12.4). Son una variante del mismo mecanismo: una pregunta con respuesta correcta, ventana de tiempo corta y XP.</p>
+<h2 id="encuestas-3-sistema-para-el-docente-propuesta">3. Sistema para el docente (propuesta)</h2>
+<p>La idea es <strong>un único módulo de formularios</strong> que cubra tres usos: encuesta, votación y pregunta relámpago. Así se construye una vez.</p>
+<p><strong>Qué puede hacer el docente:</strong></p>
+<ul>
+<li>Crear un formulario en menos de un minuto. Puede pegar las preguntas como texto simple y la app las convierte, o usar una plantilla ya guardada.</li>
+<li>Elegir el tipo de pregunta: opción única, opción múltiple, escala de 1 a 5, sí o no, número, texto corto y texto largo.</li>
+<li>Configurar:</li>
+<li>Anónimo o identificado.</li>
+<li>Apertura y cierre: manual, o con fecha y hora, o con cuenta regresiva visible.</li>
+<li>Un solo intento.</li>
+<li>Si se muestran los resultados: nunca, en vivo o al cerrar.</li>
+<li>Para las relámpago: respuesta correcta, explicación, ventana de tiempo y XP de bonificación.</li>
+<li>Repartirlo con un <strong>enlace corto y un código QR</strong> generados automáticamente.</li>
+<li>Ver los resultados agregados en vivo y exportarlos a CSV.</li>
+<li><strong>Guardar y reutilizar</strong>: cada formulario queda guardado, se puede duplicar y se copia con la edición del curso (F2), igual que los trabajos y las rúbricas.</li>
+</ul>
+<p><strong>Reglas de privacidad:</strong></p>
+<ul>
+<li>En las anónimas no se guarda quién respondió, solo el contenido.</li>
+<li>El observador solo ve agregados, con el mismo mínimo de personas que el resto de la app.</li>
+</ul>
+<p><strong>Para empezar (versión mínima):</strong> crear, abrir y cerrar, enlace y QR, resultados en vivo, plantillas guardadas. Queda fuera por ahora la lógica condicional y la ramificación de preguntas.</p>
+<p><strong>Mientras la app no esté lista:</strong> Google Forms o una hoja de cálculo con las mismas preguntas guardadas como plantilla (plan B del RFC, hito H1). La pregunta relámpago se hace con un formulario que se cierra a mano.</p>
+<p><strong>Pendiente de decidir:</strong> agregar al RFC-010 los requisitos F22 (encuestas y votaciones guardadas) y F23 (preguntas relámpago con QR y bonificación). No se editó el RFC.</p><nav class="pasos"><a href="#presenciales"><small>← Anterior · Presenciales</small>Tres sesiones abiertas</a><a class="sig" href="#semana-01"><small>Siguiente · Semana 1 →</small>Arranque, entorno y diagnóstico</a></nav></div></section>
+<section class="capitulo " id="semana-01"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">01</div><div class="cap-kicker">Semana 1</div><h2 class="cap-titulo">Arranque, entorno y diagnóstico</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol>
+<li>Fundamentos de ciencia de datos y Big Data (conceptos) y arranque del 2. Python.</li>
+</ol></dd><dt>Trabajo</dt><dd>PR de prueba y tarea diagnóstica (no cuentan para aprobar).</dd><dt>Dimensiones</dt><dd>todas, como punto de partida del radar.</dd><dt>Elasticidad</dt><dd>la ruta del curso se asigna tras la verificación de la S2 (ver <a href="#plan">plan-de-estudios.md</a>, sección 9).</dd></dl></header><div class="cap-cuerpo"><h2 id="semana-01-s1-clase-1-virtual-180-min">S1 — Clase 1 (virtual, 180 min) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> que todos salgan con el entorno funcionando, un PR de prueba abierto y claridad sobre cómo se trabaja y se evalúa el curso.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Bienvenida</td>
+<td>Cómo funciona el curso: islas, radar frente al punto de partida, IA permitida con declaración, entrega por PR con el enlace cargado en la app. Se aclara que el diagnóstico no cuenta para aprobar</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Introducción a la ciencia de datos (teoría)</td>
+<td>Sondeo inicial: «¿dónde cruzas datos en tu día?». Ciclo de ciencia de datos, roles, qué es Big Data, dónde entra la IA. Una pregunta relámpago con bonificación a la mitad</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>65–110</td>
+<td>Entorno</td>
+<td>Lista de verificación en pantalla: cuenta de GitHub, Git, Python 3.12, VS Code con Jupyter, Black y Pylint. Salas de apoyo por sistema operativo. Primer script: <code>import this</code> (el Zen de Python). Censo en formulario: sistema operativo, memoria, navegador</td>
+</tr>
+<tr>
+<td>110–120</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>120–165</td>
+<td>Guía de entrega por PR</td>
+<td>Demostración en vivo y luego en parejas: repo público, rama, commit, PR y enlace. Cada estudiante abre un PR de prueba (un README con su nombre y tres líneas) enlazado a un issue de su tablero personal en GitHub Projects. Quien termina ayuda a su pareja</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Se presenta la tarea diagnóstica, el plazo, dónde se carga el enlace en la app y la regla de IA (se declara, no se oculta)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Materiales:</strong> diapositivas de la intro, lista de verificación del entorno, guía de PR (documento aparte), enlace al formulario de censo.</p>
+<p><strong>Riesgo principal:</strong> que el entorno falle a distancia. Plan de respaldo: quien no logre instalar algo lo resuelve en la sala de apoyo de la S2.</p>
+<p><strong>Tarea diagnóstica (máximo 60 min, entrega por PR antes de la S2):</strong></p>
+<ol>
+<li>Autoinforme: confianza en Python, SQL, estadística, Git, ML y uso de IA, más sistema operativo (5 min).</li>
+<li>Preguntas cortas con corrección automática (15 min).</li>
+<li>Mini tarea práctica en un notebook local (VS Code) con un dataset sucio: cargar, limpiar, responder dos preguntas, un gráfico y su interpretación (40 min). IA permitida con bitácora de tres líneas.</li>
+</ol>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Pro Git, capítulos 1 y 2 (inicio y fundamentos de Git): <a href="https://git-scm.com/book/es/v2">git-scm.com/book/es/v2</a></li>
+<li>[ES] Documentación de GitHub Projects, para el tablero personal: <a href="https://docs.github.com/es/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects">docs.github.com</a></li>
+<li>[EN] PEP 20, El Zen de Python: <a href="https://peps.python.org/pep-0020/">peps.python.org/pep-0020</a></li>
+<li>[ES] Python para todos, de Raúl González Duque (licencia Creative Commons). Pendiente: verificar el enlace vigente de descarga.</li>
+<li>Pendiente: un video corto en español de introducción a la ciencia de datos.</li>
+</ul>
+<hr />
+<h2 id="semana-01-s2-verificacion-y-pandas-fundamentos-virtual-180-min">S2 — Verificación y pandas fundamentos (virtual, 180 min) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> medir el nivel real sin IA y empezar pandas en el nivel de cada uno.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Conexión</td>
+<td>Se confirma quién cargó el enlace de la tarea en la app</td>
+</tr>
+<tr>
+<td>10–30</td>
+<td>Verificación sin IA</td>
+<td>Tres o cuatro ejercicios paralelos a los de la tarea: leer código, un <code>groupby</code>, interpretar un gráfico. Con cámara y pantalla compartida, sin IA</td>
+</tr>
+<tr>
+<td>30–45</td>
+<td>Resultados del grupo</td>
+<td>Panel anónimo con lo que salió, votación en vivo: «¿qué te sorprendió de tu resultado?». Se explica que desde la S3 el ritmo se ajusta</td>
+</tr>
+<tr>
+<td>45–55</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>55–110</td>
+<td>pandas fundamentos</td>
+<td>Laboratorio guiado: cargar, inspeccionar, filtrar, seleccionar y agrupar. Tres niveles (Base, Estándar, Reto) a elegir; quien lo necesite pasa al nivel inferior sin penalización</td>
+</tr>
+<tr>
+<td>110–120</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>120–165</td>
+<td>Práctica y apoyo</td>
+<td>Práctica por niveles. En una sala aparte, apoyo de entorno y PR para quien no terminó en la S1</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Se explica el trabajo de la semana 2 y se recuerda el tablero personal</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Materiales:</strong> hoja de verificación, dataset de pandas en tres niveles de ejercicios, rúbrica de la tarea práctica del diagnóstico.</p>
+<p><strong>Decisión después de la S2:</strong> con los resultados de la verificación y la tarea se asigna la ruta (nivelación, estándar o profundización) y el nivel de ejercicios por estudiante.</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] pandas, 10 minutos para pandas (guía oficial): <a href="https://pandas.pydata.org/docs/user_guide/10min.html">pandas.pydata.org</a></li>
+<li>[ES] Python para todos, capítulos sobre datos y estructuras (ver S1).</li>
+<li>Pendiente: un video en español de pandas desde cero.</li>
+</ul>
+<hr />
+<h2 id="semana-01-criterios-de-la-tarea-diagnostica">Criterios de la tarea diagnóstica</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carga y limpieza correctas del dataset</td>
+<td>Datos</td>
+<td>Detecta nulos, duplicados y tipos erróneos y justifica cada decisión</td>
+</tr>
+<tr>
+<td>Respuestas a las dos preguntas</td>
+<td>Análisis</td>
+<td>Respuestas correctas, con la operación apropiada y razonamiento claro</td>
+</tr>
+<tr>
+<td>Gráfico e interpretación</td>
+<td>Comunicación</td>
+<td>Gráfico adecuado a la pregunta y una conclusión en palabras para un no técnico</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora que dice qué se pidió, qué se corrigió y qué se rechazó</td>
+</tr>
+</tbody>
+</table></div><nav class="pasos"><a href="#encuestas"><small>← Anterior · Encuestas</small>Lista y sistema de formularios</a><a class="sig" href="#semana-02"><small>Siguiente · Semana 2 →</small>Python y datos reales</a></nav></div></section>
+<section class="capitulo par" id="semana-02"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">02</div><div class="cap-kicker">Semana 2</div><h2 class="cap-titulo">Python y datos reales</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol start="2">
+<li>Programación en Python para ciencia de datos (pandas, NumPy, Matplotlib y Seaborn, o Plotly según la votación).</li>
+</ol></dd><dt>Trabajo</dt><dd><strong>T1</strong> EDA reproducible (entrega al final de la S4).</dd><dt>Dimensiones</dt><dd>Datos, Análisis, Comunicación, Producción y Dirección de IA.</dd><dt>Elasticidad</dt><dd><strong>elástica</strong>. La ruta sale de la verificación de la S2.</dd></dl></header><div class="cap-cuerpo"><p>Sesiones virtuales de 180 min con bloques de 40 a 50 min y pausas de 10 min.</p>
+<h2 id="semana-02-s3-pandas-avanzado-virtual-sesion-a">S3 — pandas avanzado (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> que cada estudiante combine y limpie datos de varias fuentes con pandas, entienda la vectorización con NumPy y escriba código con nombres claros.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>Planning de la semana en el tablero. Votación en vivo: «¿qué hace este <code>merge</code>?» con tres opciones</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Concepto</td>
+<td><code>merge</code> y <code>join</code>, <code>groupby</code> con varias agregaciones, funciones de ventana, valores nulos y tipos. Vectorización con NumPy frente a bucles. Convenciones de nombres y PEP 8, con Pylint. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>65–115</td>
+<td>Laboratorio guiado</td>
+<td>Se parte de dos tablas sucias y se llega a un dataset limpio, en vivo y paso a paso</td>
+</tr>
+<tr>
+<td>115–125</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>125–165</td>
+<td>Práctica por niveles</td>
+<td>Base, Estándar, Reto, en salas pequeñas con apoyo</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Resumen, recordatorio del T1 y XP de la sesión</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Según la ruta:</strong></p>
+<ul>
+<li>Nivelación: se dedica a pandas básico (selección, filtros, <code>groupby</code> simple) y el laboratorio es más corto.</li>
+<li>Profundización: pandas avanzado y rendimiento (índices, <code>apply</code> frente a vectorizado) y los datos son más grandes.</li>
+</ul>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Guías oficiales de pandas: <a href="https://pandas.pydata.org/docs/user_guide/merging.html">combinar tablas</a>, <a href="https://pandas.pydata.org/docs/user_guide/groupby.html">groupby</a> y <a href="https://pandas.pydata.org/docs/user_guide/window.html">ventanas</a></li>
+<li>[EN] NumPy, guía rápida: <a href="https://numpy.org/doc/stable/user/quickstart.html">numpy.org</a></li>
+<li>[EN] PEP 8, guía de estilo: <a href="https://peps.python.org/pep-0008/">peps.python.org/pep-0008</a></li>
+<li>[EN] Pylint: <a href="https://pylint.readthedocs.io/en/stable/">pylint.readthedocs.io</a></li>
+<li>Pendiente: un video en español sobre <code>merge</code> y <code>groupby</code>.</li>
+</ul>
+<h2 id="semana-02-s4-visualizacion-y-eda-virtual-sesion-b">S4 — Visualización y EDA (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> elegir con criterio la librería de visualización del curso y hacer un EDA reproducible.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–50</td>
+<td>Teoría de visualización con demostraciones</td>
+<td>Qué gráfico responde qué pregunta, color, escalas y errores comunes. El mismo gráfico se muestra en Matplotlib y Seaborn y en Plotly</td>
+</tr>
+<tr>
+<td>50–60</td>
+<td>Votación</td>
+<td>Los estudiantes votan la librería que se usará en el T1 y en el resto del curso. Se anuncia la ganadora</td>
+</tr>
+<tr>
+<td>60–70</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>70–120</td>
+<td>Trabajo del PR</td>
+<td>En parejas o equipos, en salas. Dataset común con una pregunta propia por pareja, usando la librería ganadora</td>
+</tr>
+<tr>
+<td>120–130</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>130–160</td>
+<td>Revisión al azar</td>
+<td>Se sortean 2 o 3 parejas; comparten pantalla 3 min y reciben dos comentarios del grupo</td>
+</tr>
+<tr>
+<td>160–180</td>
+<td>Cierre</td>
+<td>Plazo del PR y carga del enlace en la app, aprobación cruzada de la pareja (sin fusionar) y encuesta de pulso</td>
+</tr>
+</tbody>
+</table></div>
+<p>Si gana Plotly, se mantiene un ejemplo corto de Matplotlib como referencia, porque el pensum nombra Matplotlib y Seaborn.</p>
+<p><strong>Materiales:</strong> dataset del EDA, plantilla de notebook reproducible, guía rápida de gráficos, el mismo gráfico preparado en las tres librerías.</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Fundamentals of Data Visualization, de Claus Wilke (gratis en línea): <a href="https://clauswilke.com/dataviz/">clauswilke.com/dataviz</a></li>
+<li>[EN] Tutorial de Seaborn: <a href="https://seaborn.pydata.org/tutorial.html">seaborn.pydata.org</a></li>
+<li>[EN] Guía rápida de Matplotlib: <a href="https://matplotlib.org/stable/users/explain/quick_start.html">matplotlib.org</a></li>
+<li>[EN] Plotly para Python: <a href="https://plotly.com/python/">plotly.com/python</a></li>
+<li>Pendiente: un video en español sobre elección de gráficos.</li>
+</ul>
+<h2 id="semana-02-rubrica-de-t1-eda-reproducible">Rúbrica de T1 — EDA reproducible</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Limpieza justificada y reproducible</td>
+<td>Datos</td>
+<td>El notebook corre de arriba abajo sin errores y cada decisión está explicada</td>
+</tr>
+<tr>
+<td>Preguntas y hallazgos</td>
+<td>Análisis</td>
+<td>Plantea preguntas útiles y las responde con evidencia</td>
+</tr>
+<tr>
+<td>Gráficos y mensaje</td>
+<td>Comunicación</td>
+<td>Cada gráfico tiene título, ejes y una conclusión en una frase</td>
+</tr>
+<tr>
+<td>Calidad del código y tablero</td>
+<td>Producción</td>
+<td>Pasa Black y Pylint sin errores; el PR cierra un issue del tablero</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora con prompts, correcciones y verificación del resultado</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-02-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</h2>
+<ol>
+<li>«¿Qué devuelve este <code>groupby</code>?» (tres opciones).</li>
+<li>«¿Qué gráfico usarías para ver la relación entre dos variables numéricas?»</li>
+<li>La votación de la librería de visualización (S4).</li>
+</ol><nav class="pasos"><a href="#semana-01"><small>← Anterior · Semana 1</small>Arranque, entorno y diagnóstico</a><a class="sig" href="#semana-03"><small>Siguiente · Semana 3 →</small>Modelado predictivo</a></nav></div></section>
+<section class="capitulo " id="semana-03"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">03</div><div class="cap-kicker">Semana 3</div><h2 class="cap-titulo">Modelado predictivo</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol start="3">
+<li>Modelado predictivo con Machine Learning (regresión, clasificación, scikit-learn, evaluación de modelos).</li>
+</ol></dd><dt>Trabajo</dt><dd><strong>T2</strong> Modelo frente a baseline (entrega al final de la S6).</dd><dt>Dimensiones</dt><dd>Modelado, Validación, Análisis, Producción y Dirección de IA.</dd><dt>Elasticidad</dt><dd><strong>núcleo fijo</strong>. Solo se añade un bloque de estadística si la regla de Validación lo pide.</dd></dl></header><div class="cap-cuerpo"><h2 id="semana-03-s5-regresion-y-evaluacion-basica-virtual-sesion-a">S5 — Regresión y evaluación básica (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> entrenar un primer modelo, separar datos de entrenamiento y prueba, y leer las métricas.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>Planning de la semana. «¿Qué crees que predice mejor, la media o una recta?»</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Concepto</td>
+<td>Qué es predecir, regresión lineal, partición train/test, error cuadrático medio y R². Por qué un modelo sin baseline no dice nada. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>65–115</td>
+<td>Laboratorio guiado</td>
+<td>Un dataset de precios: baseline de la media, regresión lineal, métricas</td>
+</tr>
+<tr>
+<td>115–125</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>125–165</td>
+<td>Práctica por niveles</td>
+<td>Base: seguir el laboratorio con otro dataset. Estándar: añadir variables. Reto: comparar dos modelos</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Resumen y pregunta para la S6</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bloque opcional (si Validación sale baja en el diagnóstico):</strong> 25 min de estadística, con distribuciones, sesgo y varianza, entre el concepto y la pausa.</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Regresión lineal con Python, en cienciadedatos.net: <a href="https://www.cienciadedatos.net/documentos/py10-regresion-lineal-python">py10</a></li>
+<li>[ES] Machine learning con Python y Scikit-learn, en cienciadedatos.net: <a href="https://www.cienciadedatos.net/documentos/py06_machine_learning_python_scikitlearn">py06</a></li>
+<li>[EN] Métricas de evaluación en scikit-learn: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html">scikit-learn.org</a></li>
+<li>Pendiente: un video en español sobre sobreajuste y partición de datos.</li>
+</ul>
+<h2 id="semana-03-s6-clasificacion-pipelines-y-baseline-virtual-sesion-b">S6 — Clasificación, pipelines y baseline (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> construir un clasificador reproducible y compararlo con un baseline.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–70</td>
+<td>Trabajo del PR</td>
+<td>En parejas o equipos, en salas. Clasificación con regresión logística y un árbol de decisión</td>
+</tr>
+<tr>
+<td>70–80</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>80–130</td>
+<td>Avance individual</td>
+<td>Pipelines de scikit-learn, matriz de confusión, precisión y recall. Docstrings y funciones cortas</td>
+</tr>
+<tr>
+<td>130–140</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>140–170</td>
+<td>Revisión al azar</td>
+<td>3 min por pareja: «¿qué baseline usaste y qué tanto lo supera tu modelo?»</td>
+</tr>
+<tr>
+<td>170–180</td>
+<td>Cierre</td>
+<td>Plazo del PR y carga del enlace en la app, aprobación cruzada (sin fusionar) y encuesta de pulso</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Regresión logística con Python: <a href="https://www.cienciadedatos.net/documentos/py17-regresion-logistica-python">py17</a></li>
+<li>[ES] Árboles de decisión con Python: <a href="https://www.cienciadedatos.net/documentos/py07_arboles_decision_python">py07</a></li>
+<li>[EN] Pipelines en scikit-learn: <a href="https://scikit-learn.org/stable/modules/compose.html">scikit-learn.org</a></li>
+<li>Pendiente: un video en español sobre matriz de confusión, precisión y recall.</li>
+</ul>
+<h2 id="semana-03-rubrica-de-t2-modelo-frente-a-baseline">Rúbrica de T2 — Modelo frente a baseline</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elección y entrenamiento del modelo</td>
+<td>Modelado</td>
+<td>Modelo adecuado al problema, con pipeline y sin fuga de datos</td>
+</tr>
+<tr>
+<td>Comparación con baseline</td>
+<td>Validación</td>
+<td>Baseline claro, métricas apropiadas y lectura honesta de cuánto mejora</td>
+</tr>
+<tr>
+<td>Lectura de resultados</td>
+<td>Análisis</td>
+<td>Explica en palabras qué errores comete el modelo y por qué</td>
+</tr>
+<tr>
+<td>Calidad del código y tablero</td>
+<td>Producción</td>
+<td>Pasa Black y Pylint sin errores; docstrings; el PR cierra un issue del tablero</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora que muestra qué se verificó del código generado</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-03-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</h2>
+<ol>
+<li>«Un modelo acierta el 95 %. ¿Qué te falta saber?» (el desbalance de clases).</li>
+<li>«¿Qué métrica te importa más al detectar fraude?»</li>
+</ol><nav class="pasos"><a href="#semana-02"><small>← Anterior · Semana 2</small>Python y datos reales</a><a class="sig" href="#semana-04"><small>Siguiente · Semana 4 →</small>Big Data y procesamiento distribuido</a></nav></div></section>
+<section class="capitulo par" id="semana-04"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">04</div><div class="cap-kicker">Semana 4</div><h2 class="cap-titulo">Big Data y procesamiento distribuido</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd>1 (Big Data, Hadoop, escalabilidad) y 4. Procesamiento avanzado con frameworks (Spark, procesamiento distribuido, datasets masivos).</dd><dt>Trabajo</dt><dd><strong>T3</strong> Mismo análisis en Spark, con comparación (entrega al final de la S8).</dd><dt>Dimensiones</dt><dd>Producción, Datos, Análisis y Dirección de IA.</dd><dt>Elasticidad</dt><dd><strong>elástica</strong>. En la ruta de nivelación se reduce a concepto y un laboratorio corto.</dd></dl></header><div class="cap-cuerpo"><p><strong>Sin instalación:</strong> PySpark corre en un <strong>GitHub Codespace</strong> con Java y PySpark ya instalados (un contenedor de desarrollo incluido en el repo plantilla). Cada estudiante lo abre desde su cuenta personal, trabaja en el navegador o en su VS Code y lo detiene al terminar. La cuenta gratuita incluye 120 horas-núcleo al mes (60 h en una máquina de 2 núcleos). Respaldo: instalación local con JDK 17.</p>
+<h2 id="semana-04-s7-big-data-y-spark-virtual-sesion-a">S7 — Big Data y Spark (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> entender por qué existe el procesamiento distribuido y escribir las primeras transformaciones en PySpark.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>Planning de la semana. «¿Cuándo deja de bastar pandas?»</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Concepto</td>
+<td>Las 3 V del Big Data, Hadoop y su lugar actual, escalabilidad horizontal, Spark, evaluación perezosa, transformaciones frente a acciones. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>65–115</td>
+<td>Laboratorio guiado</td>
+<td>Abrir el Codespace (10 min) y escribir PySpark DataFrames: leer, filtrar, agrupar y contar, con un dataset de millones de filas</td>
+</tr>
+<tr>
+<td>115–125</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>125–165</td>
+<td>Práctica por niveles</td>
+<td>Base: repetir el laboratorio. Estándar: sumar uniones. Reto: medir el plan de ejecución</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Resumen, recordatorio de detener el Codespace y anuncio del T3</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] PySpark, primeros pasos (documentación oficial): <a href="https://spark.apache.org/docs/latest/api/python/getting_started/index.html">spark.apache.org</a></li>
+<li>[EN] Guía de Spark SQL y DataFrames: <a href="https://spark.apache.org/docs/latest/sql-programming-guide.html">spark.apache.org</a></li>
+<li>[ES] Documentación de GitHub Codespaces: <a href="https://docs.github.com/es/codespaces">docs.github.com</a></li>
+<li>[ES] Fundamentos de PySpark, en DataCamp (su página lo marca como gratuito; verificar al preparar la clase): <a href="https://www.datacamp.com/es/courses/foundations-of-pyspark">datacamp.com</a></li>
+<li>Pendiente: un video en español sobre Hadoop frente a Spark.</li>
+</ul>
+<h2 id="semana-04-s8-pyspark-sql-y-comparacion-con-pandas-virtual-sesion-b">S8 — PySpark SQL y comparación con pandas (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> resolver el mismo análisis en pandas y en Spark y explicar cuándo conviene cada uno.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–70</td>
+<td>Trabajo del PR</td>
+<td>En parejas o equipos, en salas. Se parte del análisis del T1 y se rehace en Spark</td>
+</tr>
+<tr>
+<td>70–80</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>80–130</td>
+<td>Avance individual</td>
+<td>Spark SQL, particiones, medición de tiempos de ejecución</td>
+</tr>
+<tr>
+<td>130–140</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>140–170</td>
+<td>Revisión al azar</td>
+<td>3 min por pareja: «¿qué te sorprendió al pasar a Spark?»</td>
+</tr>
+<tr>
+<td>170–180</td>
+<td>Cierre</td>
+<td>Plazo del PR y carga del enlace en la app, aprobación cruzada (sin fusionar) y encuesta de pulso</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Guía de Spark SQL (ver S7).</li>
+<li>[EN] Particiones y rendimiento: pendiente de elegir una fuente gratuita y verificada.</li>
+<li>Pendiente: un video en español sobre Spark SQL.</li>
+</ul>
+<h2 id="semana-04-rubrica-de-t3-mismo-analisis-en-spark">Rúbrica de T3 — Mismo análisis en Spark</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Análisis correcto en Spark</td>
+<td>Datos</td>
+<td>El resultado coincide con el de pandas y el código es limpio</td>
+</tr>
+<tr>
+<td>Comparación de rendimiento</td>
+<td>Producción</td>
+<td>Mide tiempos, explica el costo de cada herramienta y cuándo elegir cada una</td>
+</tr>
+<tr>
+<td>Interpretación del resultado</td>
+<td>Análisis</td>
+<td>Las conclusiones se sostienen en los números</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora con las correcciones hechas al código generado</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-04-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</h2>
+<ol>
+<li>«¿Qué ejecuta Spark al llamar <code>.filter()</code>?» (nada, hasta que haya una acción).</li>
+<li>«¿Usarías Spark para un archivo de 50 MB?»</li>
+</ol><nav class="pasos"><a href="#semana-03"><small>← Anterior · Semana 3</small>Modelado predictivo</a><a class="sig" href="#semana-05"><small>Siguiente · Semana 5 →</small>Visualización interactiva y storytelling</a></nav></div></section>
+<section class="capitulo " id="semana-05"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">05</div><div class="cap-kicker">Semana 5</div><h2 class="cap-titulo">Visualización interactiva y storytelling</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol start="5">
+<li>Análisis avanzado y visualización interactiva (Power BI o Tableau, DAX o campos calculados, storytelling con datos).</li>
+</ol></dd><dt>Trabajo</dt><dd><strong>T4</strong> Dashboard con narrativa (entrega al final de la S10).</dd><dt>Dimensiones</dt><dd>Comunicación, Análisis, Datos, Producción y Dirección de IA.</dd><dt>Elasticidad</dt><dd><strong>núcleo fijo</strong>.</dd></dl></header><div class="cap-cuerpo"><p><strong>La herramienta se vota en la S9.</strong> Opciones: Power BI, Looker Studio y Streamlit. Solo entran las que corren en los equipos de todo el grupo (Power BI exige Windows). Ver el cuadro de ventajas y desventajas en <a href="#plan">plan-de-estudios.md</a>, sección 12.5.</p>
+<h2 id="semana-05-s9-dashboards-y-votacion-de-la-herramienta-virtual-sesion-a">S9 — Dashboards y votación de la herramienta (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> entender qué hace un buen dashboard, elegir la herramienta entre todos y construir una primera versión con filtros y medidas calculadas.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>Planning de la semana. «¿Qué gráfico engaña más?» con tres ejemplos</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Teoría y demostraciones</td>
+<td>Modelo de datos para BI, filtros y segmentadores, medidas (DAX) o campos calculados, jerarquías. La misma pregunta de negocio resuelta en Power BI, Looker Studio y Streamlit. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Votación</td>
+<td>Los estudiantes votan la herramienta y se anuncia la ganadora</td>
+</tr>
+<tr>
+<td>65–75</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>75–125</td>
+<td>Laboratorio guiado</td>
+<td>Se parte de un dataset limpio y se llega a un dashboard de tres vistas con filtros, en la herramienta ganadora</td>
+</tr>
+<tr>
+<td>125–135</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>135–165</td>
+<td>Práctica por niveles</td>
+<td>Base: rehacer el laboratorio. Estándar: añadir una medida calculada. Reto: una medida con contexto de tiempo</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Resumen y anuncio del T4. Se anuncian los equipos del integrador</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Equipos del integrador:</strong> el docente los forma con el radar de entrada, equilibrando fortalezas, y los anuncia al cierre de esta sesión.</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Aprendizaje para Power BI, en Microsoft Learn: <a href="https://learn.microsoft.com/es-es/training/paths/data-analytics-microsoft/">introducción al análisis de datos</a>, <a href="https://learn.microsoft.com/es-es/training/paths/model-data-power-bi/">modelado de datos</a> y <a href="https://learn.microsoft.com/es-es/training/paths/build-power-bi-visuals-reports/">objetos visuales e informes</a></li>
+<li>[ES] Centro de asistencia de Looker Studio: <a href="https://support.google.com/looker-studio?hl=es">support.google.com</a></li>
+<li>[EN] Streamlit, documentación oficial: <a href="https://docs.streamlit.io/">docs.streamlit.io</a></li>
+<li>Pendiente: un video en español sobre DAX básico y otro sobre Streamlit.</li>
+</ul>
+<h2 id="semana-05-s10-storytelling-con-datos-virtual-sesion-b">S10 — Storytelling con datos (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> contar una historia con el dashboard para una audiencia no técnica.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–70</td>
+<td>Trabajo del PR</td>
+<td>En parejas o equipos, en salas. Cada pareja define una audiencia y una decisión que el dashboard debe apoyar</td>
+</tr>
+<tr>
+<td>70–80</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>80–130</td>
+<td>Avance individual</td>
+<td>Jerarquía visual, color con intención, título que dice la conclusión</td>
+</tr>
+<tr>
+<td>130–140</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>140–170</td>
+<td>Revisión al azar</td>
+<td>3 min por pareja: se presenta como si fuera a un gerente. El grupo vota si entendió el mensaje</td>
+</tr>
+<tr>
+<td>170–180</td>
+<td>Cierre</td>
+<td>Plazo del PR y carga del enlace en la app, aprobación cruzada (sin fusionar) y encuesta de pulso</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Fundamentals of Data Visualization, capítulos de comunicación y diseño de figuras (ver S4): <a href="https://clauswilke.com/dataviz/">clauswilke.com/dataviz</a></li>
+<li>[ES] Cómo se publica un README profesional, para el repositorio del dashboard: <a href="https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes">docs.github.com</a></li>
+<li>Pendiente: un video en español sobre storytelling con datos.</li>
+</ul>
+<h2 id="semana-05-rubrica-de-t4-dashboard-con-narrativa">Rúbrica de T4 — Dashboard con narrativa</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mensaje y audiencia</td>
+<td>Comunicación</td>
+<td>La conclusión se entiende en menos de un minuto y está pensada para su audiencia</td>
+</tr>
+<tr>
+<td>Elección de visuales</td>
+<td>Comunicación</td>
+<td>Cada gráfico responde una pregunta y no hay adornos</td>
+</tr>
+<tr>
+<td>Análisis que lo sustenta</td>
+<td>Análisis</td>
+<td>Las medidas son correctas y la conclusión está respaldada</td>
+</tr>
+<tr>
+<td>Modelo de datos</td>
+<td>Datos</td>
+<td>Datos limpios, relaciones claras y sin duplicados</td>
+</tr>
+<tr>
+<td>Calidad del código y tablero</td>
+<td>Producción</td>
+<td>Si hay código, pasa Black y Pylint; el PR cierra un issue del tablero</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora con lo que se pidió, corrigió y verificó</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-05-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</h2>
+<ol>
+<li>«¿Qué cambiarías de este dashboard?» (tres opciones).</li>
+<li>«¿Qué entiendes de este gráfico en 5 segundos?»</li>
+<li>La votación de la herramienta de dashboards (S9).</li>
+</ol><nav class="pasos"><a href="#semana-04"><small>← Anterior · Semana 4</small>Big Data y procesamiento distribuido</a><a class="sig" href="#semana-06"><small>Siguiente · Semana 6 →</small>Ensambles, pipelines y arranque del integrador</a></nav></div></section>
+<section class="capitulo par" id="semana-06"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">06</div><div class="cap-kicker">Semana 6</div><h2 class="cap-titulo">Ensambles, pipelines y arranque del integrador</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd>3 (profundización: árboles y ensambles), 6. Gestión de proyectos de ciencia de datos (pipelines y colaboración en equipos; Scrum es transversal) y arranque del 8. Proyecto integrador.</dd><dt>Trabajo</dt><dd><strong>T5</strong> Pipeline y backlog (entrega al final de la S12).</dd><dt>Dimensiones</dt><dd>Producción, Datos y Dirección de IA. Hilo de Habilidades para el empleo.</dd><dt>Elasticidad</dt><dd><strong>elástica</strong>. Si el curso va atrasado, el pipeline se acorta y el tiempo se reserva para el integrador.</dd></dl></header><div class="cap-cuerpo"><p>Scrum no tiene sesión propia: se practica en todas con GitHub Projects (ver <a href="#plan">plan-de-estudios.md</a>, sección 12.1). Aquí solo hay un planning de 25 min para el primer sprint del integrador.</p>
+<h2 id="semana-06-s11-arboles-y-ensambles-planning-del-sprint-1-virtual-sesion-a">S11 — Árboles y ensambles; planning del sprint 1 (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> mejorar los modelos de la semana 3 con árboles y ensambles, y dejar listo el backlog del primer sprint del integrador.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>«¿Qué crees que mejora más un modelo: más datos o un mejor algoritmo?»</td>
+</tr>
+<tr>
+<td>15–60</td>
+<td>Concepto</td>
+<td>Árboles de decisión, random forest, gradient boosting, ingeniería de características, importancia de variables. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>60–70</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>70–120</td>
+<td>Laboratorio guiado</td>
+<td>Se parte del modelo del T2 y se llega a un random forest y a un gradient boosting, con comparación</td>
+</tr>
+<tr>
+<td>120–130</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>130–155</td>
+<td>Práctica por niveles</td>
+<td>Base, Estándar, Reto, en salas pequeñas</td>
+</tr>
+<tr>
+<td>155–180</td>
+<td>Planning del sprint 1</td>
+<td>Cada equipo (anunciado al cierre de la S9) define el objetivo del sprint y el backlog inicial en su tablero de GitHub Projects. Cada equipo lo presenta en una frase</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Materiales:</strong> plantilla de tablero del equipo, lista de roles (analista de datos, ingeniero de pipelines, modelador, narrador).</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Random Forest con Python y Scikit-learn: <a href="https://www.cienciadedatos.net/documentos/py08_random_forest_python">py08</a></li>
+<li>[ES] Gradient Boosting con Python y Scikit-learn: <a href="https://www.cienciadedatos.net/documentos/py09_gradient_boosting_python">py09</a></li>
+<li>[ES] La Guía de Scrum 2020 (versión latinoamericana): <a href="https://www.Scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Spanish-Latin-South-American.pdf">scrumguides.org</a></li>
+<li>[ES] Documentación de GitHub Projects: <a href="https://docs.github.com/es/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects">docs.github.com</a></li>
+<li>[EN] Ensambles en scikit-learn: <a href="https://scikit-learn.org/stable/modules/ensemble.html">scikit-learn.org</a></li>
+</ul>
+<h2 id="semana-06-s12-pipelines-y-flujo-de-trabajo-en-equipo-virtual-sesion-b">S12 — Pipelines y flujo de trabajo en equipo (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> convertir el análisis en un flujo reproducible que otro equipo pueda ejecutar, y trabajar en equipo con Git sin pisarse.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–50</td>
+<td>Concepto</td>
+<td>Pipelines de datos (extraer, transformar, cargar), scripts frente a notebooks, configuración y semillas. Ramas, PR y conflictos en equipo. Estructura de proyecto, <code>pytest</code> básico y <code>pre-commit</code></td>
+</tr>
+<tr>
+<td>50–60</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>60–120</td>
+<td>Trabajo del PR</td>
+<td>Los equipos construyen su pipeline en salas, con el sprint 1 como guía</td>
+</tr>
+<tr>
+<td>120–130</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>130–160</td>
+<td>Revisión al azar</td>
+<td>3 min por equipo: «¿qué entra, qué sale y cómo se reproduce?»</td>
+</tr>
+<tr>
+<td>160–180</td>
+<td>Retro del sprint 1</td>
+<td>Qué salió bien, qué no, qué cambia en el sprint 2. Plazo del PR y carga del enlace en la app</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] Pro Git, capítulo 5: flujos de trabajo distribuidos: <a href="https://git-scm.com/book/es/v2">git-scm.com/book/es/v2</a></li>
+<li>[EN] pytest, primeros pasos: <a href="https://docs.pytest.org/en/stable/getting-started.html">docs.pytest.org</a></li>
+<li>[EN] pre-commit: <a href="https://pre-commit.com/">pre-commit.com</a></li>
+<li>[EN] Pipelines en scikit-learn: <a href="https://scikit-learn.org/stable/modules/compose.html">scikit-learn.org</a></li>
+<li>Pendiente: un video en español sobre estructura de un proyecto de datos.</li>
+</ul>
+<h2 id="semana-06-rubrica-de-t5-pipeline-y-backlog">Rúbrica de T5 — Pipeline y backlog</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pipeline reproducible</td>
+<td>Producción</td>
+<td>Otro equipo lo ejecuta sin ayuda y obtiene el mismo resultado</td>
+</tr>
+<tr>
+<td>Calidad de los datos que produce</td>
+<td>Datos</td>
+<td>Se validan esquema y valores, con mensajes claros cuando algo falla</td>
+</tr>
+<tr>
+<td>Tablero y avance</td>
+<td>Producción</td>
+<td>Tareas pequeñas, estimadas, con responsable y PR enlazados</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora del equipo, con la verificación del código generado</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-06-habilidades-para-el-empleo">Habilidades para el empleo</h2>
+<p>Roles de equipo, comunicación en el equipo, retrospectivas y retroalimentación entre pares.</p><nav class="pasos"><a href="#semana-05"><small>← Anterior · Semana 5</small>Visualización interactiva y storytelling</a><a class="sig" href="#semana-07"><small>Siguiente · Semana 7 →</small>Optimización y validación de modelos</a></nav></div></section>
+<section class="capitulo " id="semana-07"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">07</div><div class="cap-kicker">Semana 7</div><h2 class="cap-titulo">Optimización y validación de modelos</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol start="7">
+<li>Optimización y validación de modelos (hyperparameter tuning, validación cruzada, interpretación con SHAP y LIME).</li>
+</ol></dd><dt>Trabajo</dt><dd><strong>T6</strong> Modelo optimizado e interpretado (entrega al final de la S14) y tarea de la forma B del diagnóstico.</dd><dt>Dimensiones</dt><dd>Validación, Modelado, Comunicación, Producción y Dirección de IA.</dd><dt>Elasticidad</dt><dd><strong>núcleo fijo</strong>.</dd></dl></header><div class="cap-cuerpo"><h2 id="semana-07-s13-validacion-cruzada-y-ajuste-de-hiperparametros-virtual-sesion-a">S13 — Validación cruzada y ajuste de hiperparámetros (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> estimar con honestidad el rendimiento de un modelo y mejorarlo sin sobreajustar.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–15</td>
+<td>Retro y votación</td>
+<td>Planning del sprint. «¿Por qué un modelo que acierta el 99 % en entrenamiento puede ser malo?»</td>
+</tr>
+<tr>
+<td>15–55</td>
+<td>Concepto</td>
+<td>Sobreajuste, validación cruzada, <code>GridSearchCV</code> y <code>RandomizedSearchCV</code>, fuga de datos. Una pregunta relámpago con bonificación</td>
+</tr>
+<tr>
+<td>55–65</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>65–115</td>
+<td>Laboratorio guiado</td>
+<td>Se parte del modelo del T2 y del ensamble de la S11: validación cruzada, búsqueda de hiperparámetros, comparación</td>
+</tr>
+<tr>
+<td>115–125</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>125–165</td>
+<td>Práctica por niveles</td>
+<td>Base: validación cruzada. Estándar: búsqueda en rejilla. Reto: comparar tres modelos con la misma métrica</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Resumen y anuncio del T6</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Validación cruzada en scikit-learn: <a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org</a></li>
+<li>[EN] Ajuste de hiperparámetros en scikit-learn: <a href="https://scikit-learn.org/stable/modules/grid_search.html">scikit-learn.org</a></li>
+<li>[ES] Grid search de modelos Random Forest con out-of-bag error y early stopping (cubre el ajuste, no la validación cruzada): <a href="https://www.cienciadedatos.net/documentos/py36-grid-search-random-forest-out-of-bag-error-early-stopping">py36</a></li>
+<li>Pendiente: un tutorial o video en español sobre validación cruzada en Python.</li>
+</ul>
+<h2 id="semana-07-s14-interpretacion-con-shap-y-lime-virtual-sesion-b">S14 — Interpretación con SHAP y LIME (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> explicar por qué el modelo predice lo que predice y comunicarlo.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Preguntas pendientes</td>
+<td></td>
+</tr>
+<tr>
+<td>10–70</td>
+<td>Trabajo del PR</td>
+<td>En parejas o equipos, en salas: SHAP global y local sobre el modelo optimizado</td>
+</tr>
+<tr>
+<td>70–80</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>80–130</td>
+<td>Avance individual</td>
+<td>LIME para casos individuales; qué decir y qué no sobre importancia de variables</td>
+</tr>
+<tr>
+<td>130–140</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>140–170</td>
+<td>Revisión al azar</td>
+<td>3 min por pareja: «¿qué variable pesa más y por qué te lo crees?»</td>
+</tr>
+<tr>
+<td>170–180</td>
+<td>Cierre</td>
+<td>Plazo del PR y tarea de la forma B, con carga del enlace en la app y aprobación cruzada (sin fusionar)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Tarea de la forma B (máximo 60 min):</strong> mismo formato que el diagnóstico inicial, con ejercicios paralelos. Se entrega por PR antes de la S15.</p>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[EN] Interpretable Machine Learning, de Christoph Molnar (gratis en línea; capítulos de SHAP y LIME): <a href="https://christophm.github.io/interpretable-ml-book/">christophm.github.io</a></li>
+<li>[EN] SHAP, documentación oficial: <a href="https://shap.readthedocs.io/en/latest/">shap.readthedocs.io</a></li>
+<li>[EN] LIME: <a href="https://github.com/marcotcr/lime">github.com/marcotcr/lime</a></li>
+<li>[ES] Gráficos ICE y PDP para interpretar modelos predictivos: <a href="https://www.cienciadedatos.net/documentos/py16-interpretacion-modelos-graficos-pdp-ice">py16</a></li>
+<li>Pendiente: un video en español sobre interpretabilidad de modelos.</li>
+</ul>
+<h2 id="semana-07-rubrica-de-t6-modelo-optimizado-e-interpretado">Rúbrica de T6 — Modelo optimizado e interpretado</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validación del modelo</td>
+<td>Validación</td>
+<td>Validación cruzada correcta, sin fuga, con intervalos o variabilidad reportada</td>
+</tr>
+<tr>
+<td>Optimización</td>
+<td>Modelado</td>
+<td>Búsqueda de hiperparámetros razonable y justificada</td>
+</tr>
+<tr>
+<td>Interpretación</td>
+<td>Comunicación</td>
+<td>Explica con SHAP o LIME en palabras sencillas y reconoce sus límites</td>
+</tr>
+<tr>
+<td>Calidad del código y tablero</td>
+<td>Producción</td>
+<td>Pasa Black y Pylint sin errores; el PR cierra un issue del tablero</td>
+</tr>
+<tr>
+<td>Declaración de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora con la verificación de lo que generó la IA</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-07-votacion-en-vivo-ejemplos">Votación en vivo (ejemplos)</h2>
+<ol>
+<li>«¿Qué indica una gran diferencia entre el puntaje de entrenamiento y el de validación?»</li>
+<li>«¿Qué te dice SHAP que LIME no?»</li>
+</ol><nav class="pasos"><a href="#semana-06"><small>← Anterior · Semana 6</small>Ensambles, pipelines y arranque del integrador</a><a class="sig" href="#semana-08"><small>Siguiente · Semana 8 →</small>Proyecto integrador y cierre</a></nav></div></section>
+<section class="capitulo par" id="semana-08"><header class="cap-cabeza"><div class="cap-num" aria-hidden="true">08</div><div class="cap-kicker">Semana 8</div><h2 class="cap-titulo">Proyecto integrador y cierre</h2><dl class="ficha"><dt>Módulo del pensum</dt><dd><ol start="8">
+<li>Proyecto integrador: solución de ciencia de datos (diseño, desarrollo, implementación y presentación; retroalimentación).</li>
+</ol></dd><dt>Trabajo</dt><dd><strong>T7</strong> Integrador (entrega y presentación en la S16) y diagnóstico paralelo (forma B).</dd><dt>Dimensiones</dt><dd>todas.</dd><dt>Elasticidad</dt><dd><strong>núcleo fijo</strong>.</dd></dl></header><div class="cap-cuerpo"><h2 id="semana-08-s15-verificacion-final-y-sprint-final-virtual-sesion-a">S15 — Verificación final y sprint final (virtual, sesión A) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> medir el progreso frente al punto de partida y dejar el integrador listo para presentar.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–20</td>
+<td>Verificación sin IA (forma B)</td>
+<td>Ejercicios paralelos a los de la S2, con los mismos criterios, con cámara y pantalla compartida</td>
+</tr>
+<tr>
+<td>20–30</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>30–90</td>
+<td>Sprint final</td>
+<td>Los equipos cierran el proyecto: modelo, interpretación, dashboard o informe y repositorio ordenado. Revisión del sprint en el tablero</td>
+</tr>
+<tr>
+<td>90–100</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>100–150</td>
+<td>Ensayo de la presentación</td>
+<td>Cada equipo ensaya 8 min frente a otro equipo. El otro equipo da retroalimentación con una pauta de tres preguntas</td>
+</tr>
+<tr>
+<td>150–165</td>
+<td>Ajustes</td>
+<td>Los equipos aplican la retroalimentación</td>
+</tr>
+<tr>
+<td>165–180</td>
+<td>Cierre</td>
+<td>Logística de la presentación, reparto de turnos y retro final del sprint</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Material complementario</strong></p>
+<ul>
+<li>[ES] La Guía de Scrum 2020: Revisión del Sprint y Retrospectiva del Sprint: <a href="https://www.Scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Spanish-Latin-South-American.pdf">scrumguides.org</a></li>
+<li>[ES] README profesional para el repositorio del integrador: <a href="https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes">docs.github.com</a></li>
+<li>Pendiente: un video en español sobre cómo presentar resultados técnicos a una audiencia no técnica.</li>
+</ul>
+<h2 id="semana-08-s16-presentacion-del-integrador-virtual-sesion-b">S16 — Presentación del integrador (virtual, sesión B) <span class="tag tag-virtual">virtual</span></h2>
+<p><strong>Objetivo:</strong> presentar la solución y cerrar el curso con retroalimentación y lectura del progreso.</p>
+<div class="tabla tiempos"><table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Dinámica</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Conexión y orden</td>
+<td>Se confirma el orden y se prueba la pantalla compartida</td>
+</tr>
+<tr>
+<td>10–115</td>
+<td>Presentaciones</td>
+<td>10 min por equipo (8 de presentación y 2 de preguntas), con pausa de 10 min a la mitad. El grupo vota en vivo la claridad del mensaje</td>
+</tr>
+<tr>
+<td>115–125</td>
+<td>Pausa</td>
+<td></td>
+</tr>
+<tr>
+<td>125–155</td>
+<td>Retroalimentación</td>
+<td>Cada equipo recibe comentarios del docente y de otro equipo</td>
+</tr>
+<tr>
+<td>155–170</td>
+<td>Radar final</td>
+<td>Cada estudiante ve su radar frente a su punto de partida. Se explica qué mejoró y qué no</td>
+</tr>
+<tr>
+<td>170–180</td>
+<td>Cierre</td>
+<td>Cierre del curso, reconocimientos y encuesta de salida</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-08-rubrica-de-t7-integrador">Rúbrica de T7 — Integrador</h2>
+<div class="tabla"><table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Dimensión</th>
+<th>Nivel 5 se ve así</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Datos y pipeline</td>
+<td>Datos, Producción</td>
+<td>Pipeline reproducible, datos validados y documentación clara</td>
+</tr>
+<tr>
+<td>Análisis</td>
+<td>Análisis</td>
+<td>Preguntas bien planteadas, con hallazgos que se sostienen</td>
+</tr>
+<tr>
+<td>Modelo</td>
+<td>Modelado</td>
+<td>Modelo adecuado con baseline y comparación</td>
+</tr>
+<tr>
+<td>Validación</td>
+<td>Validación</td>
+<td>Validación cruzada, sin fuga y con interpretación de resultados</td>
+</tr>
+<tr>
+<td>Comunicación</td>
+<td>Comunicación</td>
+<td>Presentación clara para una audiencia no técnica y repositorio como portafolio</td>
+</tr>
+<tr>
+<td>Calidad del código y tablero</td>
+<td>Producción</td>
+<td>Pasa Black y Pylint; sprints con tablero actualizado y PR enlazados</td>
+</tr>
+<tr>
+<td>Uso de IA</td>
+<td>Dirección de IA</td>
+<td>Bitácora del equipo que muestra decisiones, correcciones y verificaciones</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="semana-08-habilidades-para-el-empleo">Habilidades para el empleo</h2>
+<p>Presentación profesional, retroalimentación entre pares, repositorio como portafolio, trabajo en equipo.</p><nav class="pasos"><a href="#semana-07"><small>← Anterior · Semana 7</small>Optimización y validación de modelos</a></nav></div></section>
+    <footer class="pie">Generado desde docs/plan-de-estudios.md y docs/plan-de-estudios/*.md · el contenido fuente es el markdown</footer>
+  </main>
+</div>
+<script>
+(function () {
+  var indice = document.getElementById('indice');
+  var boton = document.getElementById('abrir-indice');
+  var progreso = document.getElementById('progreso');
+
+  boton.addEventListener('click', function () {
+    var abierto = indice.classList.toggle('abierto');
+    boton.setAttribute('aria-expanded', abierto);
+  });
+  indice.addEventListener('click', function (evento) {
+    if (evento.target.closest('a')) { indice.classList.remove('abierto'); boton.setAttribute('aria-expanded', 'false'); }
+  });
+
+  window.addEventListener('scroll', function () {
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    progreso.style.width = (alto > 0 ? (window.scrollY / alto) * 100 : 0) + '%';
+  }, { passive: true });
+
+  var paginas = [].slice.call(document.querySelectorAll('.capitulo'));
+  var portada = document.querySelector('.portada');
+  var pestanas = document.querySelectorAll('.pestanas a');
+  var itemsIndice = document.querySelectorAll('.indice > ul > li');
+  var tituloBase = document.title;
+
+  function mostrar(hash, desplazar) {
+    var id = decodeURIComponent((hash || '').replace('#', ''));
+    var destino = id ? document.getElementById(id) : null;
+    var pagina = destino ? destino.closest('.capitulo') : null;
+    if (!pagina) { pagina = paginas[0]; destino = null; }
+    paginas.forEach(function (item) { item.classList.toggle('visible', item === pagina); });
+    portada.classList.toggle('visible', pagina === paginas[0]);
+    pestanas.forEach(function (pestana) { pestana.classList.toggle('activa', pestana.getAttribute('href') === '#' + pagina.id); });
+    itemsIndice.forEach(function (item) { item.classList.toggle('activo', item.dataset.cap === pagina.id); });
+    var nombre = pagina.querySelector('.cap-kicker');
+    document.title = (nombre ? nombre.textContent + ' · ' : '') + tituloBase;
+    if (!desplazar) return;
+    if (destino && destino !== pagina) destino.scrollIntoView({ behavior: 'instant' });
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+    var activa = document.querySelector('.pestanas a.activa');
+    if (activa && activa.scrollIntoView) activa.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
+  window.addEventListener('hashchange', function () { mostrar(location.hash, true); });
+  mostrar(location.hash, !!location.hash);
+
+  if (!('IntersectionObserver' in window)) return;
+  var enlaces = indice.querySelectorAll('a[href^="#"]');
+  function marcar(id) {
+    enlaces.forEach(function (enlace) { enlace.classList.toggle('activo', enlace.getAttribute('href') === '#' + id); });
+  }
+  var observadorTitulos = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) { if (entrada.isIntersecting) marcar(entrada.target.id); });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+  document.querySelectorAll('.cap-cuerpo h2[id]').forEach(function (titulo) { observadorTitulos.observe(titulo); });
+})();
+</script>
+</body>
+</html>
