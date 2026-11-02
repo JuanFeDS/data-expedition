@@ -1348,7 +1348,9 @@
 .cursos__peligro { padding: 8px 14px; border-radius: 999px; background: var(--e-alerta-bg); color: var(--e-alerta); font-size: 14px; font-weight: 800; }
 
 /* ---------- Inicio sin curso ---------- */
-.inicio__tuto { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.inicio__tuto { display: grid; margin-bottom: 10px; }
+.inicio__paso { grid-area: 1 / 1; display: flex; align-items: center; gap: 14px; visibility: hidden; }
+.inicio__paso.activo { visibility: visible; }
 .inicio__guia { flex: none; height: auto; }
 .inicio__tuto strong { display: block; font-family: var(--font-display); font-size: 20px; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 4px; }
 .inicio__tuto p { font-size: 14px; font-weight: 600; line-height: 1.45; color: var(--muted); }
@@ -1358,7 +1360,7 @@
 .inicio__ok { padding: 10px 14px; border-radius: 14px; background: var(--primary-soft); color: var(--primary); font-size: 14px; font-weight: 700; }
 .inicio__salir { align-self: center; padding: 12px 22px; border-radius: 999px; background: var(--deep); color: #fff; font-size: 14px; font-weight: 800; margin: 4px 0 12px; }
 .p-inicio .d13__fila .acceso__boton:not(.acceso__boton--principal) { background: var(--deep); color: #fff; }
-@media (max-width: 1099px) { .inicio__tuto { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 1099px) { .inicio__paso { flex-direction: column; align-items: flex-start; } }
 
 .inicio__lista { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .inicio__lista li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--bg); font-size: 15px; font-weight: 800; }

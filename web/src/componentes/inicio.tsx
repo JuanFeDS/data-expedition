@@ -51,15 +51,18 @@ const PASOS_DOCENTE: PasoTutorial[] = [
 
 function Tutorial({ pasos }: { pasos: PasoTutorial[] }) {
   const [paso, setPaso] = useState(0);
-  const actual = pasos[paso];
   return (
     <Tarjeta kicker={`Paso ${paso + 1} de ${pasos.length}`} titulo="Cómo funciona">
       <div className="inicio__tuto">
-        <Jaguar pose={actual.pose} ancho={96} clase="inicio__guia" />
-        <div>
-          <strong>{actual.titulo}</strong>
-          <p>{actual.texto}</p>
-        </div>
+        {pasos.map((candidato, indice) => (
+          <div key={candidato.titulo} className={`inicio__paso ${indice === paso ? 'activo' : ''}`} aria-hidden={indice !== paso}>
+            <Jaguar pose={candidato.pose} ancho={96} clase="inicio__guia" />
+            <div>
+              <strong>{candidato.titulo}</strong>
+              <p>{candidato.texto}</p>
+            </div>
+          </div>
+        ))}
       </div>
       <div className="inicio__pasos" aria-hidden="true">
         {pasos.map((_, indice) => <i key={indice} className={indice === paso ? 'actual' : ''} />)}

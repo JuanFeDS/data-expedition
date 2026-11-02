@@ -1,4 +1,5 @@
 import { IconoSvg } from './Icono';
+import { INICIO_REAL } from './acceso';
 import { BotonSalir } from './BotonSalir';
 import { SelectorCurso } from './curso';
 import { InterruptorSonido } from './tema';
@@ -33,7 +34,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
     : base;
   return (
     <aside className={`barra-lateral barra-lateral--${rol}`} aria-label="Navegación principal">
-      <a className="lateral__marca" href={inicioDeRol[rol]} aria-label="Data Expedition, ir al inicio">
+      <a className="lateral__marca" href={real ? INICIO_REAL[rol] : inicioDeRol[rol]} aria-label="Data Expedition, ir al inicio">
         <img className="marca-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="" />
         <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
