@@ -4,7 +4,8 @@ import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { sonar } from '../componentes/sonidos';
 import { Kicker, Pantalla } from '../componentes/ui';
-import { trabajoActual } from '../datos';
+import { useSesion } from '../componentes/sesion';
+import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type TrabajoCurso } from '../servicios/trabajos';
 
 type Modo = 'sin_ia' | 'con_ia';
 type Verificacion = 'inicial' | 'verificando' | 'ok' | 'ajeno';
@@ -52,6 +53,12 @@ function Marca() {
 }
 
 export function E6NuevaEntrega() {
+  const servicio = useServicioTrabajos();
+  const { modoDemo } = useSesion();
+  const [trabajo, setTrabajo] = useState<TrabajoCurso | null>(null);
+  const [cargado, setCargado] = useState(false);
+  const [errorEntrega, setErrorEntrega] = useState<string | null>(null);
+  const [guardando, setGuardando] = useState(false);
   const [paso, setPaso] = useState(0);
   const [direccion, setDireccion] = useState(1);
   const [enlace, setEnlace] = useState('');
@@ -64,6 +71,13 @@ export function E6NuevaEntrega() {
   const temporizadores = useRef<number[]>([]);
 
   useEffect(() => () => temporizadores.current.forEach(window.clearTimeout), []);
+
+  useEffect(() => {
+    void Promise.all([servicio.cargarTrabajos(), servicio.misEntregas()])
+      .then(([datos, entregas]) => setTrabajo(trabajoPorEntregar(datos.trabajos, entregas)))
+      .catch(() => setTrabajo(null))
+      .finally(() => setCargado(true));
+  }, [servicio]);
 
   const coincidencia = PATRON_PR.exec(enlace.trim());
   const [, dueno = '', repo = '', numero = ''] = coincidencia ?? [];
@@ -83,6 +97,10 @@ export function E6NuevaEntrega() {
       return;
     }
     setErrorEnlace(false);
+    if (!modoDemo) {
+      setVerificacion('ok');
+      return;
+    }
     setVerificacion('verificando');
     setFase(0);
     temporizadores.current.forEach(window.clearTimeout);
@@ -99,6 +117,24 @@ export function E6NuevaEntrega() {
     setFase(0);
   };
 
+  const entregar = async () => {
+    if (!trabajo) return;
+    setErrorEntrega(null);
+    if (modoDemo) {
+      await servicio.entregar({ trabajoId: trabajo.id, enlacePr: enlace.trim(), modoIa: modo, bitacora: null });
+      setEnviado(true);
+      sonar('entrega');
+      return;
+    }
+    setGuardando(true);
+    const textoBitacora = modo === 'con_ia' ? BITACORA.map((campo, indice) => `${campo.etiqueta}: ${bitacora[indice].trim()}`).join(' | ') : null;
+    const error = await servicio.entregar({ trabajoId: trabajo.id, enlacePr: enlace.trim(), modoIa: modo, bitacora: textoBitacora });
+    setGuardando(false);
+    if (error) { setErrorEntrega(error); return; }
+    setEnviado(true);
+    sonar('entrega');
+  };
+
   const accion = (() => {
     const etiqueta = `Paso ${paso + 1} de ${pasos.length}`;
     if (enviado) return { etiqueta: 'Entregado', texto: 'Ver mis entregas', ruta: '#/e5' };
@@ -109,14 +145,14 @@ export function E6NuevaEntrega() {
       return { etiqueta, texto: 'Verificar enlace', alPulsar: verificar, deshabilitada: enlace.trim() === '' };
     }
     if (nombrePaso === 'Bitácora') return { etiqueta, texto: 'Continuar', alPulsar: () => ir(paso + 1), deshabilitada: bitacora[0].trim() === '' };
-    if (nombrePaso === 'Confirmar') return { etiqueta, texto: 'Entregar trabajo', alPulsar: () => { setEnviado(true); sonar('entrega'); } };
+    if (nombrePaso === 'Confirmar') return { etiqueta, texto: guardando ? 'Guardando…' : 'Entregar trabajo', alPulsar: () => void entregar(), deshabilitada: guardando || !trabajo };
     return { etiqueta, texto: 'Continuar', alPulsar: () => ir(paso + 1) };
   })();
 
   return (
     <Pantalla clase="p-e6">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker={`${trabajoActual.titulo} · ${trabajoActual.tema}`} titulo={enviado ? 'Entrega registrada' : TITULOS[nombrePaso]} objeto="cuaderno" />
+        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker={trabajo ? `${trabajo.nombre}${trabajo.tema ? ` · ${trabajo.tema}` : ''}` : 'Nueva entrega'} titulo={enviado ? 'Entrega registrada' : TITULOS[nombrePaso]} objeto="cuaderno" />
         <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
           <ol className="pasos" aria-label="Pasos de la entrega">
             {pasos.map((etiqueta, indice) => (
@@ -143,7 +179,7 @@ export function E6NuevaEntrega() {
                   ))}
                 </div>
                 <h2 className="titulo">Entregado</h2>
-                <p className="meta">Quedó guardada la versión <b>{sha}</b> de tu PR en {repo || 'tu repo'}. Si sigues empujando commits, tu entrega es esta.</p>
+                <p className="meta">{modoDemo ? <>Quedó guardada la versión <b>{sha}</b> de tu PR en {repo || 'tu repo'}. Si sigues empujando commits, tu entrega es esta.</> : <>Quedó registrado tu PR de {repo || 'tu repo'}. Tu docente lo revisará.</>}</p>
                 <Jaguar pose="celebra" ancho={150} clase="entrega__guia" />
               </div>
             ) : nombrePaso === 'Enlace' ? (
@@ -154,13 +190,22 @@ export function E6NuevaEntrega() {
                   <label htmlFor="pr">Enlace del PR</label>
                   <input id="pr" value={enlace} placeholder="https://github.com/camilo-r/trabajo-2/pull/1" disabled={verificacion === 'verificando'} onChange={(evento) => { setEnlace(evento.target.value); setErrorEnlace(false); if (verificacion !== 'inicial') setVerificacion('inicial'); }} />
                 </div>
-                {verificacion === 'inicial' && !errorEnlace && (
+                {verificacion === 'inicial' && !errorEnlace && !modoDemo && (
+                  <div className="verif__previa">
+                    <Kicker>Qué pasa al entregar</Kicker>
+                    <ul>
+                      <li><i>1</i>Guardamos el enlace de tu PR</li>
+                      <li><i>2</i>Tu docente lo revisa y lo califica con la rúbrica</li>
+                    </ul>
+                  </div>
+                )}
+                {verificacion === 'inicial' && !errorEnlace && modoDemo && (
                   <div className="verif__previa">
                     <Kicker>Qué revisamos al verificar</Kicker>
                     <ul>
                       <li><i>1</i>Que el PR exista y sea de tu usuario de GitHub</li>
                       <li><i>2</i>Su estado y el último commit, que queda guardado como tu versión</li>
-                      <li><i>3</i>Black y Pylint, con mínimo de {trabajoActual.minPylint} en este trabajo</li>
+                      <li><i>3</i>Black y Pylint, con mínimo de {trabajo?.minPylint ?? 8} en este trabajo</li>
                       <li><i>4</i>Si tu pareja ya aprobó y quién fusiona</li>
                     </ul>
                   </div>
@@ -175,16 +220,26 @@ export function E6NuevaEntrega() {
                     ))}
                   </ul>
                 )}
-                {verificacion === 'ok' && (
+                {verificacion === 'ok' && !modoDemo && (
+                  <div className="verif__tarjeta">
+                    <strong>{dueno}/{repo} <span>#{numero}</span></strong>
+                    <dl>
+                      <div><dt>Autor</dt><dd>@{dueno}</dd></div>
+                      <div><dt>Comprobación</dt><dd>La revisa tu docente <em>aún no es automática</em></dd></div>
+                      <div><dt>Plazo</dt><dd>{formatoFecha(trabajo?.venceEn ?? null).largo}, 11:59 p. m.</dd></div>
+                    </dl>
+                  </div>
+                )}
+                {verificacion === 'ok' && modoDemo && (
                   <div className="verif__tarjeta">
                     <strong>{dueno}/{repo} <span>#{numero}</span></strong>
                     <dl>
                       <div><dt>Autor</dt><dd>@{dueno} <em>es tu usuario</em></dd></div>
                       <div><dt>Estado</dt><dd>Abierto</dd></div>
                       <div><dt>Último commit</dt><dd><code>{sha}</code> · hace 2 h</dd></div>
-                      <div><dt>Calidad de código</dt><dd>Black ✓ · Pylint 8.4 <em>mín. {trabajoActual.minPylint}</em></dd></div>
+                      <div><dt>Calidad de código</dt><dd>Black ✓ · Pylint 8.4 <em>mín. {trabajo?.minPylint ?? 8}</em></dd></div>
                       <div><dt>Tu pareja</dt><dd>Julián Arias <em>aún no aprueba</em></dd></div>
-                      <div><dt>Plazo</dt><dd>{trabajoActual.vence.largo}, 11:59 p. m. <em>a tiempo</em></dd></div>
+                      <div><dt>Plazo</dt><dd>{formatoFecha(trabajo?.venceEn ?? null).largo}, 11:59 p. m. <em>a tiempo</em></dd></div>
                     </dl>
                   </div>
                 )}
@@ -218,6 +273,8 @@ export function E6NuevaEntrega() {
             ) : (
               <>
                 <Kicker>Esto es lo que entregas</Kicker>
+                {modoDemo ? (
+                  <>
                 <div className="verif__tarjeta">
                   <strong>{dueno}/{repo} <span>#{numero}</span></strong>
                   <dl>
@@ -229,7 +286,20 @@ export function E6NuevaEntrega() {
                     <div><dt>Revisión</dt><dd>Tu pareja aprueba · el docente fusiona</dd></div>
                   </dl>
                 </div>
-                <p className="meta" style={{ fontSize: 13 }}>Al entregar se guarda esta versión (<b>{sha}</b>). Si empujas más commits después, la revisión usa esta.</p>
+                  </>
+                ) : (
+                  <div className="verif__tarjeta">
+                    <strong>{dueno}/{repo} <span>#{numero}</span></strong>
+                    <dl>
+                      <div><dt>Autor</dt><dd>@{dueno}</dd></div>
+                      <div><dt>Declaración</dt><dd>{modo === 'con_ia' ? 'Con IA' : 'Sin IA'}</dd></div>
+                      <div><dt>Bitácora</dt><dd>{modo === 'con_ia' ? 'Completa' : 'No aplica'}</dd></div>
+                      <div><dt>Plazo</dt><dd>{trabajo?.venceEn && new Date() > new Date(trabajo.venceEn) ? 'Fuera de plazo' : 'A tiempo'}</dd></div>
+                    </dl>
+                  </div>
+                )}
+                {errorEntrega && <p className="entrega__error" role="alert">{errorEntrega}</p>}
+                <p className="meta" style={{ fontSize: 13 }}>{modoDemo ? <>Al entregar se guarda esta versión (<b>{sha}</b>). Si empujas más commits después, la revisión usa esta.</> : 'Puedes volver a entregar mientras tu docente no lo califique.'}</p>
               </>
             )}
           </div>

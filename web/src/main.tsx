@@ -2,11 +2,11 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
-import { inicioDeRol, rolDeRuta } from './componentes/navegacion';
+import { rolDeRuta } from './componentes/navegacion';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
-import { Cargando, CompletarPerfil, OtroRol } from './componentes/acceso';
+import { Cargando, CompletarPerfil, CONECTADAS, INICIO_REAL, OtroRol, SinDatos } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -55,7 +55,7 @@ function App() {
   useAjusteAltura(ruta);
 
   const pantalla = PANTALLAS.find((candidata) => candidata.codigo === ruta);
-  const inicio = persona ? inicioDeRol[persona.rol] : '#/e0';
+  const inicio = persona ? INICIO_REAL[persona.rol] : '#/e0';
   const perfilCompleto = Boolean(persona?.nombre && persona.usuario);
   const debeRedirigir = !modoDemo && persona !== null && perfilCompleto && (!pantalla || ruta === 'e0');
 
@@ -102,7 +102,7 @@ function App() {
     <ModoViva.Provider value>
       <div className="escenario">
         <BarraLateral ruta={permitido ? ruta : inicio.replace('#/', '')} />
-        {permitido ? <Componente /> : <OtroRol rol={persona.rol} />}
+        {!permitido ? <OtroRol rol={persona.rol} /> : CONECTADAS.has(ruta) ? <Componente /> : <SinDatos rol={persona.rol} />}
       </div>
     </ModoViva.Provider>
   );

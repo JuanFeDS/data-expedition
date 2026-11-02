@@ -3,12 +3,14 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { trabajoActual } from '../datos';
+import { D3EntregasReal } from './D3EntregasReal';
 import { estudiantes, textoEntrega, type EstadoEntrega } from '../datosPlan';
 
 const TIPO: Record<EstadoEntrega, TipoEstado> = { sin_cargar: 'alerta', cargada: 'info', aprobada: 'ok', fusionada: 'ok', fusion_propia: 'alerta' };
 
-export function D3Entregas() {
+export function D3EntregasEjemplo() {
   const [grupo, setGrupo] = useState(2);
   const lista = estudiantes.filter((estudiante) => grupo === 0 || estudiante.grupo === grupo);
   const faltan = estudiantes.filter((estudiante) => estudiante.entrega === 'sin_cargar');
@@ -42,4 +44,9 @@ export function D3Entregas() {
       <Dock accion={{ etiqueta: `${faltan.length} sin cargar`, texto: 'Enviar seguimiento', ruta: '#/d5' }} />
     </Pantalla>
   );
+}
+
+export function D3Entregas() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D3EntregasEjemplo /> : <D3EntregasReal />;
 }

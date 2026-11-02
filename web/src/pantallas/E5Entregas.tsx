@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Isla } from '../componentes/Region';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
-import { semanaActual, trabajoActual, trabajoSiguiente } from '../datos';
+import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
+
+const BIOMA_POR_SEMANA: Record<number, string> = { 1: 'selva', 2: 'paramo', 3: 'desierto', 4: 'cueva', 5: 'glaciar', 6: 'costa', 7: 'ruinas', 8: 'volcan' };
 
 function Candado() {
   return (
@@ -15,62 +17,113 @@ function Candado() {
   );
 }
 
+const ESTADO_TEXTO = { entregada: 'Entregada, en revisión', calificada: 'Calificada', borrador: 'Borrador', no_presento: 'No presentada' } as const;
+
 export function E5Entregas() {
+  const servicio = useServicioTrabajos();
   const [vista, setVista] = useState(0);
+  const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
+  const [entregas, setEntregas] = useState<EntregaPropia[]>([]);
+  const [fallo, setFallo] = useState(false);
+
+  const cargar = useCallback(async () => {
+    try {
+      const [datos, propias] = await Promise.all([servicio.cargarTrabajos(), servicio.misEntregas()]);
+      setTrabajos(datos.trabajos);
+      setEntregas(propias);
+      setFallo(false);
+    } catch {
+      setFallo(true);
+    }
+  }, [servicio]);
+
+  useEffect(() => { void cargar(); }, [cargar]);
+
+  const actual = trabajos ? trabajoPorEntregar(trabajos, entregas) : null;
+  const siguiente = actual && trabajos ? trabajos[trabajos.indexOf(actual) + 1] : undefined;
+  const borrador = actual ? entregas.find((entrega) => entrega.trabajoId === actual.id && entrega.estado === 'borrador') : undefined;
+  const hechas = entregas.filter((entrega) => entrega.estado !== 'borrador' && trabajos?.some((trabajo) => trabajo.id === entrega.trabajoId));
+  const vence = formatoFecha(actual?.venceEn ?? null);
+  const kicker = actual?.semana ? `Semana ${actual.semana}` : 'Tus trabajos';
+
   return (
     <Pantalla clase="p-e5">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker={`Semana ${semanaActual} · Cueva de la Escala`} titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker={kicker} titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
         <div className="contenido cuerpo-mundo centrar" style={{ gap: 8 }}>
+          {fallo && <p className="acceso__error" role="alert">No pudimos cargar tus entregas. <button onClick={() => void cargar()}>Reintentar</button></p>}
           <Segmentado opciones={['Pendientes', 'Entregadas']} activa={vista} alCambiar={setVista} />
           {vista === 0 ? (
             <>
-              <section className="bloque-actual">
-                <Kicker>Entrega en curso · semana {semanaActual}</Kicker>
-                <h2 className="titulo">{trabajoActual.titulo}</h2>
-                <p>{trabajoActual.tema}. Tienes un borrador guardado hace 2 h.</p>
-                <span className="hoja__fecha bloque-actual__fecha"><small>{trabajoActual.vence.dia}</small><b>{trabajoActual.vence.numero}</b></span>
-                <a className="bloque-actual__accion" href="#/e6"><Pill variante="deep" boton>Continuar entrega</Pill></a>
-              </section>
-              <div className="entrega-bloqueada">
-                <span className="entrega-bloqueada__icono"><Candado /></span>
-                <div>
-                  <strong>{trabajoSiguiente.titulo}</strong>
-                  <small>Semana {trabajoSiguiente.semana} · se abre al entregar el {trabajoActual.titulo}</small>
+              {trabajos && trabajos.length === 0 && (
+                <div className="entrega-bloqueada">
+                  <span className="entrega-bloqueada__icono"><Candado /></span>
+                  <div><strong>Aún no hay trabajos</strong><small>Tu docente los publicará aquí. Si ya te invitaron y no ves nada, avísale para que te matricule en el curso.</small></div>
                 </div>
-              </div>
+              )}
+              {actual && (
+                <section className="bloque-actual">
+                  <Kicker>Entrega en curso{actual.semana ? ` · semana ${actual.semana}` : ''}</Kicker>
+                  <h2 className="titulo">{actual.nombre}</h2>
+                  <p>{actual.tema || 'Pega el enlace de tu PR cuando esté listo'}{borrador ? '. Tienes un borrador guardado.' : '.'}</p>
+                  <span className="hoja__fecha bloque-actual__fecha"><small>{vence.dia}</small><b>{vence.numero}</b></span>
+                  <a className="bloque-actual__accion" href="#/e6"><Pill variante="deep" boton>{borrador ? 'Continuar entrega' : 'Empezar entrega'}</Pill></a>
+                </section>
+              )}
+              {!actual && trabajos && trabajos.length > 0 && (
+                <div className="entrega-bloqueada">
+                  <span className="entrega-bloqueada__icono"><Candado /></span>
+                  <div><strong>Estás al día</strong><small>Entregaste todos los trabajos publicados.</small></div>
+                </div>
+              )}
+              {siguiente && actual && (
+                <div className="entrega-bloqueada">
+                  <span className="entrega-bloqueada__icono"><Candado /></span>
+                  <div>
+                    <strong>{siguiente.nombre}</strong>
+                    <small>{siguiente.semana ? `Semana ${siguiente.semana} · ` : ''}se abre al entregar el {actual.nombre}</small>
+                  </div>
+                </div>
+              )}
               <div className="azar">
                 <Jaguar pose="pensando" ancho={92} clase="azar__guia" />
                 <div>
-                  <Kicker>Revisión al azar · semana {semanaActual + 1}</Kicker>
+                  <Kicker>Revisión al azar</Kicker>
                   <p>Cada semana se sortean 2 o 3 equipos para explicar una decisión en 3 minutos. Ten lista tu bitácora.</p>
                 </div>
               </div>
             </>
           ) : (
             <>
-              <div className="entrega-hecha">
-                <span className="isla-mini"><Isla bioma="desierto" /></span>
-                <div className="fila__texto">
-                  <Kicker>Entregado el 20 nov · semana 3</Kicker>
-                  <strong className="fila__titulo">Trabajo 2</strong>
-                  <div className="chips"><Pill variante="azul" pequena>Sin IA</Pill><Pill variante="accent" pequena>3.8</Pill><Pill variante="suave" pequena>Fusionado por el docente</Pill></div>
+              {hechas.length === 0 && (
+                <div className="entrega-bloqueada">
+                  <span className="entrega-bloqueada__icono"><Candado /></span>
+                  <div><strong>Aún no has entregado nada</strong><small>Cuando entregues un trabajo, aparecerá aquí.</small></div>
                 </div>
-                <a href="#/e4"><Pill variante="suave" boton>Ver nota</Pill></a>
-              </div>
-              <div className="entrega-hecha">
-                <span className="isla-mini"><Isla bioma="selva" /></span>
-                <div className="fila__texto">
-                  <Kicker>Entregado el 6 nov · semana 1</Kicker>
-                  <strong className="fila__titulo">Diagnóstico</strong>
-                  <span className="meta" style={{ fontSize: 12 }}>No cuenta para aprobar</span>
-                </div>
-              </div>
+              )}
+              {hechas.map((entrega) => {
+                const trabajo = trabajos?.find((candidato) => candidato.id === entrega.trabajoId);
+                const fecha = entrega.entregadaEn ? new Date(entrega.entregadaEn).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' }) : '';
+                return (
+                  <div className="entrega-hecha" key={entrega.trabajoId}>
+                    <span className="isla-mini"><Isla bioma={BIOMA_POR_SEMANA[trabajo?.semana ?? 1] ?? 'selva'} /></span>
+                    <div className="fila__texto">
+                      <Kicker>{fecha ? `Entregado el ${fecha}` : 'Entregado'}{trabajo?.semana ? ` · semana ${trabajo.semana}` : ''}</Kicker>
+                      <strong className="fila__titulo">{trabajo?.nombre}</strong>
+                      <div className="chips">
+                        <Pill variante="azul" pequena>{entrega.modoIa === 'con_ia' ? 'Con IA' : 'Sin IA'}</Pill>
+                        {entrega.nota !== null && <Pill variante="accent" pequena>{entrega.nota.toFixed(1)}</Pill>}
+                        <Pill variante="suave" pequena>{ESTADO_TEXTO[entrega.estado]}</Pill>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </>
           )}
         </div>
       </div>
-      <Dock accion={{ etiqueta: `Vence ${trabajoActual.vence.dia.toLowerCase()} ${trabajoActual.vence.numero}`, texto: `Continuar ${trabajoActual.titulo}`, ruta: '#/e6' }} />
+      <Dock accion={actual ? { etiqueta: `Vence ${vence.dia.toLowerCase()} ${vence.numero}`, texto: borrador ? `Continuar ${actual.nombre}` : `Entregar ${actual.nombre}`, ruta: '#/e6' } : undefined} />
     </Pantalla>
   );
 }

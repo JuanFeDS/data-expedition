@@ -111,3 +111,13 @@ Tamaños: S = media jornada, M = una jornada.
 **Avisos de seguridad de Supabase tras la migración:** ninguna tabla sin RLS. Quedan 8 avisos de nivel "advertencia" por funciones `security definer` que el rol `authenticated` puede ejecutar. Son intencionales: `rol_actual`, `es_docente` y `en_edicion` los usan las políticas; `asignar_rol` y las dos funciones de resumen se validan por dentro. Un detalle menor: `edicion_de_trabajo` y `propietario_de_entrega` también quedan llamables por API y revelarían un identificador a quien ya conociera otro, así que se pueden mover a un esquema privado en la migración `0002`.
 
 **Avisos de rendimiento (no urgentes):** 8 claves foráneas sin índice y 10 tablas con dos políticas permisivas (la de lectura y la del docente). Con unas decenas de estudiantes no se nota. Se pueden agregar los índices y unificar las políticas en `0002`.
+
+## Tajada 2: trabajos y entregas (2 nov)
+
+- **Capa de datos agnóstica a la conexión:** `servicios/trabajos.ts` define la interfaz (`ServicioTrabajos`) con dos implementaciones, Supabase y demo (`trabajosDemo.ts`). Las pantallas usan el hook `useServicioTrabajos()` y no saben de dónde vienen los datos. Lo mismo ya aplica a Personas (`servicios/personas.ts`).
+- **Migración `0005`:** `trabajos` gana `tema`, `vence_en` y `min_pylint`; `entregas` gana `enlace_pr` (con formato de PR validado).
+- **Docente:** `d14` (Ajustes → Trabajos) crea y quita trabajos de la edición; `d3` muestra las entregas reales por trabajo y quién falta.
+- **Estudiante:** `e5` lista sus trabajos y entregas; `e6` guarda la entrega (enlace del PR, declaración de IA y bitácora). La verificación contra GitHub aún no existe: en modo real solo se valida el formato y el docente revisa.
+- **Modo real:** las pantallas no conectadas muestran «Esta sección aún no está conectada». Los inicios reales son `e5` (estudiante), `d13` (docente) y `o1` (observador).
+- Un estudiante solo ve los trabajos si está **matriculado** (se asigna un grupo en Personas); las reglas de acceso se probaron en la base (un no matriculado ve 0 trabajos y no puede entregar).
+- **Siguiente:** calificar con rúbrica (`d4`) y ver la nota (`e3`/`e4`), el radar, y las pantallas de inicio.

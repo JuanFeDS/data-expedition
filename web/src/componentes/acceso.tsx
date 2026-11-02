@@ -31,6 +31,9 @@ export const PASOS_DE_ACCESO = [
   { numero: '3', titulo: 'Gana gemas', texto: 'Cada reto pulido suma al radar.' },
 ];
 
+export const INICIO_REAL: Record<Rol, string> = { estudiante: '#/e5', docente: '#/d13', observador: '#/o1' };
+export const CONECTADAS = new Set(['e0', 'e5', 'e6', 'd3', 'd13', 'd14']);
+
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 
 export function CompletarPerfil() {
@@ -88,6 +91,21 @@ export function Cargando() {
       <span className="cargando__rueda" aria-hidden="true" />
       <span>Entrando a la expedición…</span>
     </div>
+  );
+}
+
+export function SinDatos({ rol }: { rol: Rol }) {
+  return (
+    <Pantalla clase="p-e26">
+      <div className="pantalla__cuerpo contenido panel" style={{ justifyContent: 'center' }}>
+        <Vacio
+          titulo="Esta sección aún no está conectada"
+          texto="Todavía no usa datos reales del curso. La estamos conectando por partes."
+          pose="pensando"
+          accion={<a className="boton boton--suave" href={INICIO_REAL[rol]}>Ir a lo que ya funciona</a>}
+        />
+      </div>
+    </Pantalla>
   );
 }
 
