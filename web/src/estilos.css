@@ -254,3 +254,17 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
 .selector-curso__crear { align-self: flex-start; margin-top: 2px; font-size: var(--fs-sm); font-weight: 800; color: var(--accent); text-decoration: underline; }
 .hoja .selector-curso__crear { color: var(--primary); }
+
+/* ---------- Barras de desplazamiento: finas, redondas y con los colores de la app ---------- */
+*::-webkit-scrollbar { width: 12px; height: 12px; }
+*::-webkit-scrollbar-track { background: transparent; margin: 10px 0; }
+*::-webkit-scrollbar-thumb { background: rgb(10 128 87 / .38); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+*::-webkit-scrollbar-thumb:hover { background: rgb(10 128 87 / .7); background-clip: padding-box; }
+*::-webkit-scrollbar-corner { background: transparent; }
+.barra-lateral::-webkit-scrollbar { width: 10px; }
+.barra-lateral::-webkit-scrollbar-thumb { background: rgb(255 255 255 / .28); background-clip: padding-box; }
+.barra-lateral::-webkit-scrollbar-thumb:hover { background: rgb(255 255 255 / .5); background-clip: padding-box; }
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: rgb(10 128 87 / .45) transparent; }
+  .barra-lateral { scrollbar-color: rgb(255 255 255 / .35) transparent; }
+}
