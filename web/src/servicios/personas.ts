@@ -1,7 +1,6 @@
 import type { Rol } from '../componentes/navegacion';
 import { supabase } from './supabase';
 
-export interface Edicion { id: string; nombre: string }
 export interface Grupo { id: string; nombre: string }
 export interface PersonaCurso {
   id: string;
@@ -14,20 +13,19 @@ export interface PersonaCurso {
 export interface Invitacion { correo: string; rol: Rol; grupoId: string | null }
 
 export interface DatosPersonas {
-  edicion: Edicion | null;
   grupos: Grupo[];
   personas: PersonaCurso[];
   invitaciones: Invitacion[];
 }
 
 export interface ServicioPersonas {
-  cargar: () => Promise<DatosPersonas>;
-  crearEdicion: (nombre: string) => Promise<string | null>;
-  crearGrupo: (edicion: Edicion, nombre: string) => Promise<string | null>;
-  invitar: (edicion: Edicion, correos: string[], rol: Rol, grupoId: string | null) => Promise<string | null>;
-  quitarInvitacion: (correo: string) => Promise<string | null>;
+  cargar: (cursoId: string) => Promise<DatosPersonas>;
+  crearGrupo: (cursoId: string, nombre: string) => Promise<string | null>;
+  invitar: (cursoId: string, correos: string[], rol: Rol, grupoId: string | null) => Promise<string | null>;
+  quitarInvitacion: (cursoId: string, correo: string) => Promise<string | null>;
   cambiarRol: (persona: PersonaCurso, rol: Rol) => Promise<string | null>;
-  moverDeGrupo: (edicion: Edicion, persona: PersonaCurso, grupoId: string | null) => Promise<string | null>;
+  moverDeGrupo: (cursoId: string, persona: PersonaCurso, grupoId: string | null) => Promise<string | null>;
+  sacarDelCurso: (cursoId: string, persona: PersonaCurso) => Promise<string | null>;
 }
 
 const FALLO = 'No pudimos guardar el cambio. Intenta de nuevo.';
@@ -37,58 +35,69 @@ const mensaje = (error: { code?: string } | null, repetido?: string) => {
 };
 
 export const servicioSupabase: ServicioPersonas = {
-  async cargar() {
+  async cargar(cursoId) {
     if (!supabase) throw new Error('Sin conexión');
-    const { data: ediciones, error } = await supabase.from('ediciones').select('id, nombre').eq('es_plantilla', false).order('creada_en').limit(1);
-    if (error) throw error;
-    const edicion = (ediciones?.[0] as Edicion | undefined) ?? null;
-    const [grupos, perfiles, matriculas, invitaciones] = await Promise.all([
-      edicion ? supabase.from('grupos').select('id, nombre').eq('edicion_id', edicion.id).order('nombre') : Promise.resolve({ data: [], error: null }),
-      supabase.from('perfiles').select('id, correo, nombre, usuario, rol').order('creado_en'),
-      edicion ? supabase.from('matriculas').select('perfil_id, grupo_id').eq('edicion_id', edicion.id) : Promise.resolve({ data: [], error: null }),
-      supabase.from('correos_autorizados').select('correo, rol, grupo_id').order('creado_en'),
+    const [grupos, matriculas, docentes, invitaciones] = await Promise.all([
+      supabase.from('grupos').select('id, nombre').eq('edicion_id', cursoId).order('nombre'),
+      supabase.from('matriculas').select('grupo_id, perfiles(id, correo, nombre, usuario, rol)').eq('edicion_id', cursoId),
+      supabase.from('perfiles').select('id, correo, nombre, usuario, rol').eq('rol', 'docente'),
+      supabase.from('invitaciones').select('correo, rol, grupo_id').eq('edicion_id', cursoId).order('creado_en'),
     ]);
-    if (grupos.error || perfiles.error || matriculas.error || invitaciones.error) throw new Error('Consulta fallida');
-    const grupoDe = new Map((matriculas.data ?? []).map((fila) => [fila.perfil_id as string, fila.grupo_id as string | null]));
-    const registrados = new Set((perfiles.data ?? []).map((perfil) => (perfil.correo as string).toLowerCase()));
+    if (grupos.error || matriculas.error || docentes.error || invitaciones.error) throw new Error('Consulta fallida');
+    const porId = new Map<string, PersonaCurso>();
+    (docentes.data ?? []).forEach((perfil) => porId.set(perfil.id as string, { ...(perfil as Omit<PersonaCurso, 'grupoId'>), grupoId: null }));
+    (matriculas.data ?? []).forEach((fila) => {
+      const perfil = fila.perfiles as unknown as Omit<PersonaCurso, 'grupoId'> | null;
+      if (perfil) porId.set(perfil.id, { ...perfil, grupoId: fila.grupo_id as string | null });
+    });
+    const registrados = new Set([...porId.values()].map((persona) => persona.correo.toLowerCase()));
     return {
-      edicion,
       grupos: (grupos.data ?? []) as Grupo[],
-      personas: (perfiles.data ?? []).map((perfil) => ({ ...(perfil as Omit<PersonaCurso, 'grupoId'>), grupoId: grupoDe.get(perfil.id as string) ?? null })),
+      personas: [...porId.values()],
       invitaciones: (invitaciones.data ?? []).filter((fila) => !registrados.has(fila.correo as string)).map((fila) => ({ correo: fila.correo as string, rol: fila.rol as Rol, grupoId: fila.grupo_id as string | null })),
     };
   },
 
-  async crearEdicion(nombre) {
-    const { error } = await supabase!.from('ediciones').insert({ nombre });
-    return mensaje(error);
-  },
-
-  async crearGrupo(edicion, nombre) {
-    const { error } = await supabase!.from('grupos').insert({ edicion_id: edicion.id, nombre });
+  async crearGrupo(cursoId, nombre) {
+    const { error } = await supabase!.from('grupos').insert({ edicion_id: cursoId, nombre });
     return mensaje(error, 'Ya existe un grupo con ese nombre.');
   },
 
-  async invitar(edicion, correos, rol, grupoId) {
-    const filas = correos.map((correo) => ({ correo, rol, edicion_id: edicion.id, grupo_id: rol === 'estudiante' ? grupoId : null }));
-    const { error } = await supabase!.from('correos_autorizados').upsert(filas, { onConflict: 'correo' });
-    return mensaje(error);
+  async invitar(cursoId, correos, rol, grupoId) {
+    const grupo = rol === 'estudiante' ? grupoId : null;
+    const { data: existentes, error: falloBusqueda } = await supabase!.from('perfiles').select('id, correo').in('correo', correos);
+    if (falloBusqueda) return FALLO;
+    const idDe = new Map((existentes ?? []).map((perfil) => [(perfil.correo as string).toLowerCase(), perfil.id as string]));
+    const yaRegistrados = correos.filter((correo) => idDe.has(correo));
+    const nuevos = correos.filter((correo) => !idDe.has(correo));
+    if (yaRegistrados.length > 0) {
+      const { error } = await supabase!.from('matriculas').upsert(yaRegistrados.map((correo) => ({ perfil_id: idDe.get(correo), edicion_id: cursoId, grupo_id: grupo })), { onConflict: 'perfil_id,edicion_id' });
+      if (error) return FALLO;
+    }
+    if (nuevos.length > 0) {
+      const { error } = await supabase!.from('invitaciones').upsert(nuevos.map((correo) => ({ correo, edicion_id: cursoId, grupo_id: grupo, rol })), { onConflict: 'correo,edicion_id' });
+      if (error) return FALLO;
+    }
+    return null;
   },
 
-  async quitarInvitacion(correo) {
-    const { error } = await supabase!.from('correos_autorizados').delete().eq('correo', correo);
+  async quitarInvitacion(cursoId, correo) {
+    const { error } = await supabase!.from('invitaciones').delete().eq('edicion_id', cursoId).eq('correo', correo);
     return mensaje(error);
   },
 
   async cambiarRol(persona, rol) {
     const { error } = await supabase!.rpc('asignar_rol', { p_perfil: persona.id, p_rol: rol });
-    if (error) return FALLO;
-    await supabase!.from('correos_autorizados').update({ rol }).eq('correo', persona.correo.toLowerCase());
-    return null;
+    return error ? FALLO : null;
   },
 
-  async moverDeGrupo(edicion, persona, grupoId) {
-    const { error } = await supabase!.from('matriculas').upsert({ perfil_id: persona.id, edicion_id: edicion.id, grupo_id: grupoId }, { onConflict: 'perfil_id,edicion_id' });
+  async moverDeGrupo(cursoId, persona, grupoId) {
+    const { error } = await supabase!.from('matriculas').upsert({ perfil_id: persona.id, edicion_id: cursoId, grupo_id: grupoId }, { onConflict: 'perfil_id,edicion_id' });
+    return mensaje(error);
+  },
+
+  async sacarDelCurso(cursoId, persona) {
+    const { error } = await supabase!.from('matriculas').delete().eq('edicion_id', cursoId).eq('perfil_id', persona.id);
     return mensaje(error);
   },
 };

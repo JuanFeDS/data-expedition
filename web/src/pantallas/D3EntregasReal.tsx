@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
+import { useCurso } from '../componentes/curso';
 import { Estado, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
 import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../servicios/personas';
@@ -11,6 +12,7 @@ const TEXTO: Record<EstadoEntrega, string> = { borrador: 'Borrador', entregada: 
 
 export function D3EntregasReal() {
   const servicio = useServicioTrabajos();
+  const { curso } = useCurso();
   const [trabajos, setTrabajos] = useState<TrabajoCurso[]>([]);
   const [entregas, setEntregas] = useState<EntregaVista[]>([]);
   const [estudiantes, setEstudiantes] = useState<PersonaCurso[]>([]);
@@ -18,16 +20,17 @@ export function D3EntregasReal() {
   const [fallo, setFallo] = useState(false);
 
   const cargar = useCallback(async () => {
+    if (!curso) return;
     try {
-      const [datos, vistas, personas] = await Promise.all([servicio.cargarTrabajos(), servicio.entregasDelCurso(), servicioPersonas.cargar()]);
-      setTrabajos(datos.trabajos);
+      const [lista, vistas, personas] = await Promise.all([servicio.cargarTrabajos(curso.id), servicio.entregasDelCurso(curso.id), servicioPersonas.cargar(curso.id)]);
+      setTrabajos(lista);
       setEntregas(vistas);
       setEstudiantes(personas.personas.filter((persona) => persona.rol === 'estudiante'));
       setFallo(false);
     } catch {
       setFallo(true);
     }
-  }, [servicio]);
+  }, [servicio, curso]);
 
   useEffect(() => { void cargar(); }, [cargar]);
 

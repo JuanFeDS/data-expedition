@@ -17,7 +17,7 @@ export function crearServicioTrabajosDemo(): ServicioTrabajos {
   const vistas: EntregaVista[] = [];
 
   return {
-    cargarTrabajos: async () => ({ edicionId: 'ed-demo', trabajos: [...trabajos] }),
+    cargarTrabajos: async () => [...trabajos],
     crearTrabajo: async (_edicion, datos) => { trabajos = [...trabajos, { id: `demo-${trabajos.length + 1}`, ...datos }]; return null; },
     eliminarTrabajo: async (id) => { trabajos = trabajos.filter((trabajo) => trabajo.id !== id); return null; },
     misEntregas: async () => [...entregas],

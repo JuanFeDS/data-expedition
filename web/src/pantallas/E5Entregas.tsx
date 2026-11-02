@@ -3,6 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Isla } from '../componentes/Region';
+import { useCurso } from '../componentes/curso';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
 
@@ -21,21 +22,23 @@ const ESTADO_TEXTO = { entregada: 'Entregada, en revisión', calificada: 'Califi
 
 export function E5Entregas() {
   const servicio = useServicioTrabajos();
+  const { curso, cargando: cargandoCursos } = useCurso();
   const [vista, setVista] = useState(0);
   const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
   const [entregas, setEntregas] = useState<EntregaPropia[]>([]);
   const [fallo, setFallo] = useState(false);
 
   const cargar = useCallback(async () => {
+    if (!curso) return;
     try {
-      const [datos, propias] = await Promise.all([servicio.cargarTrabajos(), servicio.misEntregas()]);
-      setTrabajos(datos.trabajos);
+      const [lista, propias] = await Promise.all([servicio.cargarTrabajos(curso.id), servicio.misEntregas(curso.id)]);
+      setTrabajos(lista);
       setEntregas(propias);
       setFallo(false);
     } catch {
       setFallo(true);
     }
-  }, [servicio]);
+  }, [servicio, curso]);
 
   useEffect(() => { void cargar(); }, [cargar]);
 
@@ -55,10 +58,16 @@ export function E5Entregas() {
           <Segmentado opciones={['Pendientes', 'Entregadas']} activa={vista} alCambiar={setVista} />
           {vista === 0 ? (
             <>
-              {trabajos && trabajos.length === 0 && (
+              {!cargandoCursos && !curso && (
                 <div className="entrega-bloqueada">
                   <span className="entrega-bloqueada__icono"><Candado /></span>
-                  <div><strong>Aún no hay trabajos</strong><small>Tu docente los publicará aquí. Si ya te invitaron y no ves nada, avísale para que te matricule en el curso.</small></div>
+                  <div><strong>Aún no estás en ningún curso</strong><small>Tu docente debe invitarte a un curso. Si ya lo hizo, cierra sesión y vuelve a entrar con el correo con el que te invitaron.</small></div>
+                </div>
+              )}
+              {curso && trabajos && trabajos.length === 0 && (
+                <div className="entrega-bloqueada">
+                  <span className="entrega-bloqueada__icono"><Candado /></span>
+                  <div><strong>Aún no hay trabajos</strong><small>Tu docente los publicará aquí.</small></div>
                 </div>
               )}
               {actual && (

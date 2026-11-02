@@ -3,25 +3,28 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { finDelDia, formatoFecha, useServicioTrabajos, type DatosTrabajos } from '../servicios/trabajos';
+import { useCurso } from '../componentes/curso';
+import { finDelDia, formatoFecha, useServicioTrabajos, type TrabajoCurso } from '../servicios/trabajos';
 
 const VACIO = { nombre: '', tema: '', semana: '', fecha: '', minPylint: '8' };
 
 export function D14Trabajos() {
   const servicio = useServicioTrabajos();
-  const [datos, setDatos] = useState<DatosTrabajos | null>(null);
+  const { curso } = useCurso();
+  const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
   const [fallo, setFallo] = useState(false);
   const [aviso, setAviso] = useState<string | null>(null);
   const [formulario, setFormulario] = useState(VACIO);
 
   const recargar = useCallback(async () => {
+    if (!curso) { setTrabajos(null); return; }
     try {
-      setDatos(await servicio.cargarTrabajos());
+      setTrabajos(await servicio.cargarTrabajos(curso.id));
       setFallo(false);
     } catch {
       setFallo(true);
     }
-  }, [servicio]);
+  }, [servicio, curso]);
 
   useEffect(() => { void recargar(); }, [recargar]);
 
@@ -29,8 +32,8 @@ export function D14Trabajos() {
 
   const crear = async (evento: React.FormEvent) => {
     evento.preventDefault();
-    if (!datos?.edicionId || !formulario.nombre.trim()) return;
-    const error = await servicio.crearTrabajo(datos.edicionId, {
+    if (!curso || !formulario.nombre.trim()) return;
+    const error = await servicio.crearTrabajo(curso.id, {
       nombre: formulario.nombre.trim(),
       tema: formulario.tema.trim(),
       semana: formulario.semana ? Number(formulario.semana) : null,
@@ -54,12 +57,12 @@ export function D14Trabajos() {
         <div className="contenido cuerpo-mundo panel">
           {fallo && <p className="acceso__error" role="alert">No pudimos cargar los trabajos. <button onClick={() => void recargar()}>Reintentar</button></p>}
           {aviso && <p className="acceso__error" role="alert">{aviso}</p>}
-          {datos && !datos.edicionId && (
-            <Tarjeta kicker="Primer paso" titulo="Falta la edición del curso">
-              <p className="meta">Créala en <a href="#/d13"><u>Personas</u></a> y vuelve aquí para agregar los trabajos.</p>
+          {!curso && (
+            <Tarjeta kicker="Primer paso" titulo="Falta crear un curso">
+              <p className="meta">Créalo en <a href="#/d13"><u>Personas</u></a> y vuelve aquí para agregar los trabajos.</p>
             </Tarjeta>
           )}
-          {datos?.edicionId && (
+          {curso && trabajos && (
             <div className="d13__columnas">
               <Tarjeta kicker="Nuevo" titulo="Agregar trabajo">
                 <form className="d14__formulario" onSubmit={(evento) => void crear(evento)}>
@@ -73,16 +76,16 @@ export function D14Trabajos() {
                   <button className="acceso__boton acceso__boton--principal" disabled={!formulario.nombre.trim()}>Agregar trabajo</button>
                 </form>
               </Tarjeta>
-              <Tarjeta kicker={`${datos.trabajos.length} en la edición`} titulo="Trabajos del curso">
+              <Tarjeta kicker={`${trabajos.length} en ${curso.nombre}`} titulo="Trabajos del curso">
                 <ul className="d13__personas">
-                  {datos.trabajos.map((trabajo) => (
+                  {trabajos.map((trabajo) => (
                     <li key={trabajo.id}>
                       <span className="avatar avatar--verde">{trabajo.semana ?? '·'}</span>
                       <span className="d13__datos"><strong>{trabajo.nombre}</strong><small>{trabajo.tema || 'Sin tema'} · vence {formatoFecha(trabajo.venceEn).largo} · Pylint {trabajo.minPylint}</small></span>
                       <button className="d13__quitar" onClick={() => void quitar(trabajo.id)}>Quitar</button>
                     </li>
                   ))}
-                  {datos.trabajos.length === 0 && <li><span className="d13__datos"><small>Aún no hay trabajos.</small></span></li>}
+                  {trabajos.length === 0 && <li><span className="d13__datos"><small>Aún no hay trabajos.</small></span></li>}
                 </ul>
               </Tarjeta>
             </div>

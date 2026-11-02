@@ -221,3 +221,11 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .lateral__ajustes .interruptor-tema__pista { width: 28px; height: 16px; border-radius: 8px; }
 .lateral__ajustes .interruptor-tema__pista i { top: 2px; left: 2px; width: 12px; height: 12px; }
 .lateral__ajustes .interruptor-tema[aria-checked='true'] .interruptor-tema__pista i { transform: translateX(12px); }
+
+.selector-curso { display: flex; flex-direction: column; gap: 2px; padding: 8px 12px; border-radius: 14px; background: rgb(255 255 255 / .1); color: #fff; }
+.selector-curso small { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--mint); }
+.selector-curso select, .selector-curso strong { font: inherit; font-size: 14px; font-weight: 800; color: inherit; background: transparent; border: 0; padding: 0; width: 100%; min-height: 28px; text-overflow: ellipsis; }
+.selector-curso select option { color: #0a0f0d; }
+.selector-curso--unico { margin: 0; }
+.hoja .selector-curso { background: var(--bg); color: var(--ink); margin-bottom: 4px; }
+.hoja .selector-curso small { color: var(--primary); }

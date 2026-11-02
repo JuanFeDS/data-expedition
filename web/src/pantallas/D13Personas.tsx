@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import type { Rol } from '../componentes/navegacion';
+import { useCurso } from '../componentes/curso';
 import { Tarjeta } from '../componentes/panel';
 import { useSesion } from '../componentes/sesion';
 import { Pantalla } from '../componentes/ui';
@@ -19,11 +20,12 @@ const iniciales = (persona: PersonaCurso) => (persona.nombre ?? persona.correo).
 
 export function D13Personas() {
   const { modoDemo, persona: yo } = useSesion();
+  const { curso, crear: crearCurso, cargando: cargandoCursos } = useCurso();
   const servicio = useMemo<ServicioPersonas>(() => (modoDemo ? crearServicioDemo() : servicioSupabase), [modoDemo]);
   const [datos, setDatos] = useState<DatosPersonas | null>(null);
   const [fallo, setFallo] = useState(false);
   const [aviso, setAviso] = useState<string | null>(null);
-  const [nombreEdicion, setNombreEdicion] = useState('');
+  const [nombreCurso, setNombreCurso] = useState('');
   const [nombreGrupo, setNombreGrupo] = useState('');
   const [texto, setTexto] = useState('');
   const [rolInvitado, setRolInvitado] = useState<Rol>('estudiante');
@@ -32,13 +34,14 @@ export function D13Personas() {
   const [importando, setImportando] = useState(false);
 
   const recargar = useCallback(async () => {
+    if (!curso) { setDatos(null); return; }
     try {
-      setDatos(await servicio.cargar());
+      setDatos(await servicio.cargar(curso.id));
       setFallo(false);
     } catch {
       setFallo(true);
     }
-  }, [servicio]);
+  }, [servicio, curso]);
 
   useEffect(() => { void recargar(); }, [recargar]);
 
@@ -61,7 +64,6 @@ export function D13Personas() {
     );
   }
 
-  const edicion = datos?.edicion ?? null;
   const grupos = datos?.grupos ?? [];
   const nombreDeGrupo = (grupoId: string | null) => grupos.find((grupo) => grupo.id === grupoId)?.nombre ?? 'Sin grupo';
   const cuantos = (grupoId: string) => {
@@ -78,15 +80,15 @@ export function D13Personas() {
   };
 
   const importar = async () => {
-    if (!edicion || !importacion || importacion.filas.length === 0) return;
+    if (!curso || !importacion || importacion.filas.length === 0) return;
     setImportando(true);
     const existentes = new Set(grupos.map((grupo) => grupo.nombre.toLowerCase()));
     const nuevos = [...new Map(importacion.filas.filter((fila) => fila.grupo && !existentes.has(fila.grupo.toLowerCase())).map((fila) => [fila.grupo.toLowerCase(), fila.grupo])).values()];
     for (const nombre of nuevos) {
-      const error = await servicio.crearGrupo(edicion, nombre);
+      const error = await servicio.crearGrupo(curso.id, nombre);
       if (error) { setAviso(error); setImportando(false); await recargar(); return; }
     }
-    const actualizados = await servicio.cargar();
+    const actualizados = await servicio.cargar(curso.id);
     const idDe = new Map(actualizados.grupos.map((grupo) => [grupo.nombre.toLowerCase(), grupo.id]));
     const porDestino = new Map<string, { rol: Rol; grupoId: string | null; correos: string[] }>();
     importacion.filas.forEach((fila) => {
@@ -97,7 +99,7 @@ export function D13Personas() {
       porDestino.set(clave, destino);
     });
     for (const destino of porDestino.values()) {
-      const error = await servicio.invitar(edicion, destino.correos, destino.rol, destino.grupoId);
+      const error = await servicio.invitar(curso.id, destino.correos, destino.rol, destino.grupoId);
       if (error) { setAviso(error); break; }
     }
     setImportando(false);
@@ -106,26 +108,26 @@ export function D13Personas() {
   };
 
   const invitar = async () => {
-    if (!edicion || correosNuevos.length === 0) return;
+    if (!curso || correosNuevos.length === 0) return;
     if (invalidos.length > 0) { setAviso(`Revisa estos correos: ${invalidos.join(', ')}`); return; }
-    if (await ejecutar(servicio.invitar(edicion, correosNuevos, rolInvitado, grupoInvitado || null))) setTexto('');
+    if (await ejecutar(servicio.invitar(curso.id, correosNuevos, rolInvitado, grupoInvitado || null))) setTexto('');
   };
 
   return (
     <Pantalla rol="docente" clase="p-d13">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Panel', ruta: '#/d1' }} kicker={edicion ? edicion.nombre : 'Curso'} titulo="Personas" subtitulo="Invita por correo, asigna roles y arma los grupos." objeto="carta" />
+        <CabeceraMundo atras={{ texto: 'Panel', ruta: '#/d1' }} kicker={curso ? curso.nombre : 'Curso'} titulo="Personas" subtitulo="Invita por correo, asigna roles y arma los grupos." objeto="carta" />
         <div className="contenido cuerpo-mundo panel">
           {aviso && <p className="acceso__error" role="alert">{aviso}</p>}
-          {datos && !edicion && (
-            <Tarjeta kicker="Primer paso" titulo="Crea la edición del curso">
-              <form className="d13__formulario" onSubmit={(evento) => { evento.preventDefault(); if (nombreEdicion.trim()) void ejecutar(servicio.crearEdicion(nombreEdicion.trim())); }}>
-                <input className="d13__campo" placeholder="Edición 2026-2" value={nombreEdicion} onChange={(evento) => setNombreEdicion(evento.target.value)} aria-label="Nombre de la edición" />
-                <button className="acceso__boton acceso__boton--principal" disabled={!nombreEdicion.trim()}>Crear edición</button>
+          {!cargandoCursos && !curso && (
+            <Tarjeta kicker="Primer paso" titulo="Crea tu primer curso">
+              <form className="d13__formulario" onSubmit={(evento) => { evento.preventDefault(); if (nombreCurso.trim()) void crearCurso(nombreCurso.trim()).then((error) => { setAviso(error); if (!error) setNombreCurso(''); }); }}>
+                <input className="d13__campo" placeholder="Ciencia de datos 2026-2" value={nombreCurso} onChange={(evento) => setNombreCurso(evento.target.value)} aria-label="Nombre del curso" />
+                <button className="acceso__boton acceso__boton--principal" disabled={!nombreCurso.trim()}>Crear curso</button>
               </form>
             </Tarjeta>
           )}
-          {edicion && (
+          {curso && (
             <div className="d13__columnas">
               <div className="d13__lado">
                 <Tarjeta kicker="Nuevas personas" titulo="Invitar">
@@ -163,12 +165,12 @@ export function D13Personas() {
                     </>
                   )}
                 </Tarjeta>
-                <Tarjeta kicker={`${grupos.length} en la edición`} titulo="Grupos">
+                <Tarjeta kicker={`${grupos.length} en el curso`} titulo="Grupos">
                   <ul className="d13__grupos">
                     {grupos.map((grupo) => <li key={grupo.id}><strong>{grupo.nombre}</strong><small>{cuantos(grupo.id)}</small></li>)}
                     {grupos.length === 0 && <li><small>Aún no hay grupos.</small></li>}
                   </ul>
-                  <form className="d13__fila" onSubmit={(evento) => { evento.preventDefault(); const nombre = nombreGrupo.trim(); if (nombre) void ejecutar(servicio.crearGrupo(edicion, nombre)).then((hecho) => { if (hecho) setNombreGrupo(''); }); }}>
+                  <form className="d13__fila" onSubmit={(evento) => { evento.preventDefault(); const nombre = nombreGrupo.trim(); if (nombre && curso) void ejecutar(servicio.crearGrupo(curso.id, nombre)).then((hecho) => { if (hecho) setNombreGrupo(''); }); }}>
                     <input className="d13__campo" placeholder="Nuevo grupo" value={nombreGrupo} onChange={(evento) => setNombreGrupo(evento.target.value)} aria-label="Nombre del grupo" />
                     <button className="acceso__boton" disabled={!nombreGrupo.trim()}>Crear</button>
                   </form>
@@ -186,7 +188,7 @@ export function D13Personas() {
                           {ROLES.map((rol) => <option key={rol.valor} value={rol.valor}>{rol.etiqueta}</option>)}
                         </select>
                         {persona.rol === 'estudiante' ? (
-                          <select className="d13__campo" value={persona.grupoId ?? ''} onChange={(evento) => void ejecutar(servicio.moverDeGrupo(edicion, persona, evento.target.value || null))} aria-label={`Grupo de ${persona.nombre ?? persona.correo}`}>
+                          <select className="d13__campo" value={persona.grupoId ?? ''} onChange={(evento) => void ejecutar(servicio.moverDeGrupo(curso.id, persona, evento.target.value || null))} aria-label={`Grupo de ${persona.nombre ?? persona.correo}`}>
                             <option value="">Sin grupo</option>
                             {grupos.map((grupo) => <option key={grupo.id} value={grupo.id}>{grupo.nombre}</option>)}
                           </select>
@@ -198,7 +200,7 @@ export function D13Personas() {
                     <li key={invitacion.correo} className="d13__pendiente">
                       <span className="avatar avatar--claro">?</span>
                       <span className="d13__datos"><strong>{invitacion.correo}</strong><small>Invitada · {ROLES.find((rol) => rol.valor === invitacion.rol)?.etiqueta} · {invitacion.rol === 'estudiante' ? nombreDeGrupo(invitacion.grupoId) : 'sin grupo'}</small></span>
-                      <button className="d13__quitar" onClick={() => void ejecutar(servicio.quitarInvitacion(invitacion.correo))}>Quitar</button>
+                      <button className="d13__quitar" onClick={() => void ejecutar(servicio.quitarInvitacion(curso.id, invitacion.correo))}>Quitar</button>
                     </li>
                   ))}
                 </ul>

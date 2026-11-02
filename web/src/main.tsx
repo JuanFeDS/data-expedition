@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
 import { rolDeRuta } from './componentes/navegacion';
+import { CursoProvider } from './componentes/curso';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
@@ -108,4 +109,4 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><App /></SesionProvider></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><App /></CursoProvider></SesionProvider></StrictMode>);

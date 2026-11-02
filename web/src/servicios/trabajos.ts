@@ -37,17 +37,16 @@ export interface EntregaVista {
   nota: number | null;
 }
 
-export interface DatosTrabajos { edicionId: string | null; trabajos: TrabajoCurso[] }
 export interface NuevoTrabajo { nombre: string; tema: string; semana: number | null; venceEn: string | null; minPylint: number }
 export interface NuevaEntrega { trabajoId: string; enlacePr: string; modoIa: ModoIa; bitacora: string | null }
 
 export interface ServicioTrabajos {
-  cargarTrabajos: () => Promise<DatosTrabajos>;
-  crearTrabajo: (edicionId: string, datos: NuevoTrabajo) => Promise<string | null>;
+  cargarTrabajos: (cursoId: string) => Promise<TrabajoCurso[]>;
+  crearTrabajo: (cursoId: string, datos: NuevoTrabajo) => Promise<string | null>;
   eliminarTrabajo: (id: string) => Promise<string | null>;
-  misEntregas: () => Promise<EntregaPropia[]>;
+  misEntregas: (cursoId: string) => Promise<EntregaPropia[]>;
   entregar: (entrega: NuevaEntrega) => Promise<string | null>;
-  entregasDelCurso: () => Promise<EntregaVista[]>;
+  entregasDelCurso: (cursoId: string) => Promise<EntregaVista[]>;
 }
 
 const FALLO = 'No pudimos guardar el cambio. Intenta de nuevo.';
@@ -68,25 +67,15 @@ export const trabajoPorEntregar = (trabajos: TrabajoCurso[], entregas: EntregaPr
   return trabajos.find((trabajo) => !hechos.has(trabajo.id)) ?? null;
 };
 
-const primeraEdicion = async () => {
-  const { data } = await supabase!.from('ediciones').select('id').eq('es_plantilla', false).order('creada_en').limit(1);
-  return (data?.[0]?.id as string | undefined) ?? null;
-};
-
 const servicioSupabase: ServicioTrabajos = {
-  async cargarTrabajos() {
-    const edicionId = await primeraEdicion();
-    if (!edicionId) return { edicionId: null, trabajos: [] };
-    const { data, error } = await supabase!.from('trabajos').select('id, nombre, tema, semana, vence_en, min_pylint').eq('edicion_id', edicionId).eq('es_diagnostico', false).order('semana').order('vence_en');
+  async cargarTrabajos(cursoId) {
+    const { data, error } = await supabase!.from('trabajos').select('id, nombre, tema, semana, vence_en, min_pylint').eq('edicion_id', cursoId).eq('es_diagnostico', false).order('semana').order('vence_en');
     if (error) throw error;
-    return {
-      edicionId,
-      trabajos: (data ?? []).map((fila) => ({ id: fila.id as string, nombre: fila.nombre as string, tema: (fila.tema as string | null) ?? '', semana: fila.semana as number | null, venceEn: fila.vence_en as string | null, minPylint: fila.min_pylint as number })),
-    };
+    return (data ?? []).map((fila) => ({ id: fila.id as string, nombre: fila.nombre as string, tema: (fila.tema as string | null) ?? '', semana: fila.semana as number | null, venceEn: fila.vence_en as string | null, minPylint: fila.min_pylint as number }));
   },
 
-  async crearTrabajo(edicionId, datos) {
-    const { error } = await supabase!.from('trabajos').insert({ edicion_id: edicionId, nombre: datos.nombre, tema: datos.tema || null, semana: datos.semana, vence_en: datos.venceEn, min_pylint: datos.minPylint });
+  async crearTrabajo(cursoId, datos) {
+    const { error } = await supabase!.from('trabajos').insert({ edicion_id: cursoId, nombre: datos.nombre, tema: datos.tema || null, semana: datos.semana, vence_en: datos.venceEn, min_pylint: datos.minPylint });
     return error ? FALLO : null;
   },
 
@@ -95,11 +84,11 @@ const servicioSupabase: ServicioTrabajos = {
     return error ? 'No se pudo eliminar. Si ya tiene entregas, no se puede borrar.' : null;
   },
 
-  async misEntregas() {
+  async misEntregas(cursoId) {
     const { data: sesion } = await supabase!.auth.getSession();
     const yo = sesion.session?.user.id;
     if (!yo) return [];
-    const { data, error } = await supabase!.from('entregas').select('trabajo_id, estado, modo_ia, enlace_pr, entregada_en, nota').eq('perfil_id', yo);
+    const { data, error } = await supabase!.from('entregas').select('trabajo_id, estado, modo_ia, enlace_pr, entregada_en, nota, trabajos!inner(edicion_id)').eq('perfil_id', yo).eq('trabajos.edicion_id', cursoId);
     if (error) throw error;
     return (data ?? []).map((fila) => ({ trabajoId: fila.trabajo_id as string, estado: fila.estado as EstadoEntrega, modoIa: fila.modo_ia as ModoIa, enlacePr: fila.enlace_pr as string | null, entregadaEn: fila.entregada_en as string | null, nota: fila.nota as number | null }));
   },
@@ -115,10 +104,10 @@ const servicioSupabase: ServicioTrabajos = {
     return error ? FALLO : null;
   },
 
-  async entregasDelCurso() {
+  async entregasDelCurso(cursoId) {
     const [entregas, matriculas] = await Promise.all([
-      supabase!.from('entregas').select('id, trabajo_id, perfil_id, modo_ia, estado, enlace_pr, entregada_en, nota, perfiles(nombre, usuario, correo)').neq('estado', 'borrador').order('entregada_en', { ascending: false }),
-      supabase!.from('matriculas').select('perfil_id, grupos(nombre)'),
+      supabase!.from('entregas').select('id, trabajo_id, perfil_id, modo_ia, estado, enlace_pr, entregada_en, nota, perfiles(nombre, usuario, correo), trabajos!inner(edicion_id)').eq('trabajos.edicion_id', cursoId).neq('estado', 'borrador').order('entregada_en', { ascending: false }),
+      supabase!.from('matriculas').select('perfil_id, grupos(nombre)').eq('edicion_id', cursoId),
     ]);
     if (entregas.error || matriculas.error) throw new Error('Consulta fallida');
     const grupoDe = new Map((matriculas.data ?? []).map((fila) => [fila.perfil_id as string, (fila.grupos as unknown as { nombre: string } | null)?.nombre ?? null]));

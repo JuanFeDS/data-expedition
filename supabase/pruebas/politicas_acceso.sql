@@ -1,5 +1,5 @@
 -- Pruebas de las politicas de acceso por fila. Se corren como el rol postgres (por ejemplo con el
--- editor SQL de Supabase) y deben devolver `ok = true` en las 28 filas.
+-- editor SQL de Supabase) y deben devolver `ok = true` en las 30 filas.
 -- Cada prueba ejecuta una operacion COMO un usuario (con su rol y su identificador) y compara el
 -- resultado con lo esperado. Los usuarios llevan el dominio @prueba.invalid y se borran al final.
 -- Ejecutar en 3 pasos: preparar, probar y limpiar.
@@ -7,12 +7,15 @@
 -- ============ 1. PREPARAR ============
 insert into public.ediciones (id, nombre) values ('b0000000-0000-0000-0000-000000000001', 'PRUEBA');
 insert into public.grupos (id, edicion_id, nombre) values ('b1000000-0000-0000-0000-000000000001', 'b0000000-0000-0000-0000-000000000001', 'G1');
-insert into public.correos_autorizados (correo, rol, edicion_id, grupo_id) values
- ('estudiante1@prueba.invalid', 'estudiante', null, null),
- ('estudiante2@prueba.invalid', 'estudiante', null, null),
- ('docente@prueba.invalid', 'estudiante', null, null),
- ('observador@prueba.invalid', 'estudiante', null, null),
- ('invitado@prueba.invalid', 'estudiante', 'b0000000-0000-0000-0000-000000000001', 'b1000000-0000-0000-0000-000000000001');
+insert into public.ediciones (id, nombre) values ('b0000000-0000-0000-0000-000000000002', 'PRUEBA-2');
+insert into public.correos_autorizados (correo, rol) values
+ ('estudiante1@prueba.invalid', 'estudiante'),
+ ('estudiante2@prueba.invalid', 'estudiante'),
+ ('docente@prueba.invalid', 'estudiante'),
+ ('observador@prueba.invalid', 'estudiante');
+insert into public.invitaciones (correo, edicion_id, grupo_id, rol) values
+ ('invitado@prueba.invalid', 'b0000000-0000-0000-0000-000000000001', 'b1000000-0000-0000-0000-000000000001', 'estudiante'),
+ ('invitado@prueba.invalid', 'b0000000-0000-0000-0000-000000000002', null, 'estudiante');
 insert into auth.users (id, email, instance_id, aud, role, email_confirmed_at) values
  ('a0000000-0000-0000-0000-000000000001', 'estudiante1@prueba.invalid', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', now()),
  ('a0000000-0000-0000-0000-000000000002', 'estudiante2@prueba.invalid', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', now()),
@@ -83,9 +86,11 @@ with c as (
   union all select 23, 'Estudiante: usuario con formato invalido se rechaza', 'error 23514%', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''A'' where id = %L', e2)) from c
   union all select 24, 'Estudiante: no cambia el usuario de otro', 'filas=0', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''robado'' where id = %L', e1)) from c
   union all select 25, 'Invitado: se matricula solo en su grupo', 'filas=1', pg_temp.ejecutar(doc, 'authenticated', 'select * from public.matriculas where perfil_id = ''a0000000-0000-0000-0000-000000000005'' and grupo_id = ''b1000000-0000-0000-0000-000000000001''') from c
-  union all select 26, 'Estudiante: no ve la lista de invitados', 'filas=0', pg_temp.ejecutar(e1, 'authenticated', 'select * from public.correos_autorizados') from c
-  union all select 27, 'Estudiante: no invita a nadie', 'error 42501%', pg_temp.ejecutar(e1, 'authenticated', 'insert into public.correos_autorizados (correo) values (''x@prueba.invalid'')') from c
+  union all select 26, 'Estudiante: no ve las invitaciones', 'filas=0', pg_temp.ejecutar(e1, 'authenticated', 'select * from public.invitaciones') from c
+  union all select 27, 'Estudiante: no invita a nadie', 'error 42501%', pg_temp.ejecutar(e1, 'authenticated', format('insert into public.invitaciones (correo, edicion_id) values (''x@prueba.invalid'', %L)', ed)) from c
   union all select 28, 'Docente: crea grupos', 'filas=1', pg_temp.ejecutar(doc, 'authenticated', format('insert into public.grupos (edicion_id, nombre) values (%L, ''G2'')', ed)) from c
+  union all select 29, 'Invitado a dos cursos: queda matriculado en los dos', 'filas=2', pg_temp.ejecutar(doc, 'authenticated', 'select * from public.matriculas where perfil_id = ''a0000000-0000-0000-0000-000000000005''') from c
+  union all select 30, 'Estudiante: no ve las matriculas de otros', 'filas=1', pg_temp.ejecutar(e1, 'authenticated', 'select * from public.matriculas') from c
 )
 select n, prueba, esperado, r as obtenido, (r like any (string_to_array(esperado, '|'))) as ok from t order by n;
 
@@ -100,6 +105,7 @@ do $$ begin
 end $$;
 
 -- ============ 3. LIMPIAR ============
-delete from public.ediciones where id = 'b0000000-0000-0000-0000-000000000001';
+delete from public.ediciones where id in ('b0000000-0000-0000-0000-000000000001', 'b0000000-0000-0000-0000-000000000002');
 delete from auth.users where email like '%@prueba.invalid';
 delete from public.correos_autorizados where correo like '%@prueba.invalid';
+delete from public.invitaciones where correo like '%@prueba.invalid';

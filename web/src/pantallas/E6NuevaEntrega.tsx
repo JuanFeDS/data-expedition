@@ -4,6 +4,7 @@ import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { sonar } from '../componentes/sonidos';
 import { Kicker, Pantalla } from '../componentes/ui';
+import { useCurso } from '../componentes/curso';
 import { useSesion } from '../componentes/sesion';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type TrabajoCurso } from '../servicios/trabajos';
 
@@ -55,6 +56,7 @@ function Marca() {
 export function E6NuevaEntrega() {
   const servicio = useServicioTrabajos();
   const { modoDemo } = useSesion();
+  const { curso } = useCurso();
   const [trabajo, setTrabajo] = useState<TrabajoCurso | null>(null);
   const [cargado, setCargado] = useState(false);
   const [errorEntrega, setErrorEntrega] = useState<string | null>(null);
@@ -73,11 +75,12 @@ export function E6NuevaEntrega() {
   useEffect(() => () => temporizadores.current.forEach(window.clearTimeout), []);
 
   useEffect(() => {
-    void Promise.all([servicio.cargarTrabajos(), servicio.misEntregas()])
-      .then(([datos, entregas]) => setTrabajo(trabajoPorEntregar(datos.trabajos, entregas)))
+    if (!curso) return;
+    void Promise.all([servicio.cargarTrabajos(curso.id), servicio.misEntregas(curso.id)])
+      .then(([lista, entregas]) => setTrabajo(trabajoPorEntregar(lista, entregas)))
       .catch(() => setTrabajo(null))
       .finally(() => setCargado(true));
-  }, [servicio]);
+  }, [servicio, curso]);
 
   const coincidencia = PATRON_PR.exec(enlace.trim());
   const [, dueno = '', repo = '', numero = ''] = coincidencia ?? [];
