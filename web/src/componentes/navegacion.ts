@@ -119,7 +119,7 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
 export const RUTAS_COMUNES = new Set(['cursos', 'curso', 'inicio', 'ayuda']);
 export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', 'e5', 'e6', 'd3', 'd13', 'd14']);
 
-const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio'], color: 'accent' };
+const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio', 'inicio-estudiante'], color: 'accent' };
 const ENLACE_AYUDA: Enlace = { tipo: 'ayuda', etiqueta: 'Ayuda', detalle: 'Tutorial y tu perfil', ruta: '#/ayuda', activa: ['ayuda'], color: 'claro' };
 const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Todos tus cursos', ruta: '#/cursos', activa: ['cursos'], color: 'claro' };
 const ENLACE_INFO: Enlace = { tipo: 'panel', etiqueta: 'Información', detalle: 'Resumen del curso', ruta: '#/curso', activa: ['curso'], color: 'claro' };
@@ -144,7 +144,7 @@ export const enCurso = (ruta: string, cursoId: string) => {
 
 export const gruposVisibles = (rol: Rol, soloConectadas: boolean, curso: { id: string; nombre: string } | null = null): GrupoEnlaces[] => {
   if (!soloConectadas) return NAVEGACION[rol];
-  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : [ENLACE_CURSOS] };
+  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : rol === 'estudiante' ? [ENLACE_INICIO, ENLACE_CURSOS] : [ENLACE_CURSOS] };
   if (!curso) return [general];
   const delCurso = NAVEGACION[rol].flatMap((grupo) => grupo.enlaces).filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)));
   return [general, { titulo: curso.nombre, enlaces: [ENLACE_INFO, ...delCurso].map((enlace) => ({ ...enlace, ruta: enCurso(enlace.ruta, curso.id) })) }];

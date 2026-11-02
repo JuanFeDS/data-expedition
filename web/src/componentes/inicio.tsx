@@ -10,7 +10,7 @@ import { useSesion } from './sesion';
 import { Pantalla } from './ui';
 import { servicioSupabase as personasReal, type DatosPersonas } from '../servicios/personas';
 import { crearServicioDemo as personasDemo } from '../servicios/personasDemo';
-import { formatoFecha, useServicioTrabajos, type EntregaVista, type TrabajoCurso } from '../servicios/trabajos';
+import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type EntregaVista, type TrabajoCurso } from '../servicios/trabajos';
 
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 
@@ -281,4 +281,109 @@ export function AyudaDocente() {
       <Dock />
     </Pantalla>
   );
+}
+
+const AVANCE_ESTUDIANTE = [
+  { titulo: 'Notas y retroalimentación', texto: 'La nota de cada trabajo con los comentarios de tu docente.' },
+  { titulo: 'Racha y XP de práctica', texto: 'Preguntas de repaso para sumar todos los días.' },
+  { titulo: 'Tu radar de habilidades', texto: 'Cómo avanzas frente a tu punto de partida.' },
+  { titulo: 'Gemas y álbum', texto: 'Cada isla que cierras desbloquea una gema.' },
+];
+
+const ESTADO_ENTREGA = { entregada: 'En revisión', calificada: 'Calificada', borrador: 'Borrador', no_presento: 'No presentada' } as const;
+
+const vencimiento = (iso: string | null) => {
+  if (!iso) return 'sin fecha';
+  const dias = diasHasta(iso);
+  if (dias === null) return 'sin fecha';
+  if (dias < 0) return 'ya venció';
+  if (dias === 0) return 'vence hoy';
+  return `vence en ${dias} ${dias === 1 ? 'día' : 'días'}`;
+};
+
+export function InicioEstudiante() {
+  const { persona } = useSesion();
+  const { cursos, reciente: curso } = useCurso();
+  const servicio = useServicioTrabajos();
+  const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
+  const [entregas, setEntregas] = useState<EntregaPropia[]>([]);
+
+  useEffect(() => {
+    if (!curso) { setTrabajos(null); setEntregas([]); return; }
+    void Promise.all([servicio.cargarTrabajos(curso.id), servicio.misEntregas(curso.id)])
+      .then(([lista, propias]) => { setTrabajos(lista); setEntregas(propias); })
+      .catch(() => { setTrabajos(null); setEntregas([]); });
+  }, [curso, servicio]);
+
+  const siguiente = trabajos ? trabajoPorEntregar(trabajos, entregas) : null;
+  const hechas = entregas.filter((entrega) => entrega.estado !== 'borrador' && trabajos?.some((trabajo) => trabajo.id === entrega.trabajoId));
+  const ir = (ruta: string) => (curso ? enCurso(ruta, curso.id) : ruta);
+  const nombreDe = (id: string) => trabajos?.find((trabajo) => trabajo.id === id)?.nombre ?? 'Trabajo';
+
+  return (
+    <Pantalla clase="p-inicio">
+      <div className="pantalla__cuerpo">
+        <CabeceraMundo kicker="Tu expedición" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo={curso ? `Esto es lo que sigue en ${curso.nombre}.` : 'Elige un curso para empezar.'} objeto="mochila" />
+        <div className="contenido cuerpo-mundo panel">
+          <Tarjeta kicker="Lo siguiente" titulo="Qué entregar">
+            {siguiente ? (
+              <ul className="inicio__atencion">
+                <li>
+                  <a href={ir('#/e6')}>
+                    <b>{formatoFecha(siguiente.venceEn).numero || '·'}</b>
+                    <span>{siguiente.nombre}<small>{siguiente.tema ? `${siguiente.tema} · ` : ''}{vencimiento(siguiente.venceEn)}</small></span>
+                    <i aria-hidden="true">›</i>
+                  </a>
+                </li>
+              </ul>
+            ) : (
+              <ul className="inicio__atencion">
+                <li className="vacio"><span>{!curso ? 'Aún no hay un curso.' : trabajos && trabajos.length > 0 ? 'Estás al día: entregaste todo lo publicado.' : 'Tu docente aún no publica trabajos.'}</span></li>
+              </ul>
+            )}
+          </Tarjeta>
+          <Tarjeta kicker={`${hechas.length} de ${trabajos?.length ?? 0} entregados`} titulo="Tus entregas" accion={curso ? <a className="cursos__secundaria" href={ir('#/e5')}>Ver todas</a> : undefined}>
+            <ul className="inicio__atencion">
+              {hechas.slice(0, 4).map((entrega) => (
+                <li key={entrega.trabajoId}>
+                  <a href={ir('#/e5')}>
+                    <b>{entrega.nota !== null ? entrega.nota.toFixed(1) : '·'}</b>
+                    <span>{nombreDe(entrega.trabajoId)}<small>{ESTADO_ENTREGA[entrega.estado]} · {entrega.modoIa === 'con_ia' ? 'Con IA' : 'Sin IA'}</small></span>
+                    <i aria-hidden="true">›</i>
+                  </a>
+                </li>
+              ))}
+              {hechas.length === 0 && <li className="vacio"><span>Cuando entregues un trabajo, aparecerá aquí.</span></li>}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="Tus cursos" titulo="Cursos" accion={<a className="cursos__secundaria" href="#/cursos">Ver todos</a>}>
+            <ul className="inicio__atencion">
+              {cursos.map((candidato) => (
+                <li key={candidato.id}>
+                  <a href={enCurso('#/curso', candidato.id)}>
+                    <span>{candidato.nombre}{candidato.periodo && <small>Periodo {candidato.periodo}</small>}</span>
+                    <i aria-hidden="true">›</i>
+                  </a>
+                </li>
+              ))}
+              {cursos.length === 0 && <li className="vacio"><span>Aún no estás en ningún curso.</span></li>}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="En camino" titulo="Tu avance">
+            <ul className="inicio__atencion">
+              {AVANCE_ESTUDIANTE.map((item) => (
+                <li key={item.titulo} className="pronto"><span>{item.titulo}<small>{item.texto}</small></span><em>Próximamente</em></li>
+              ))}
+            </ul>
+          </Tarjeta>
+        </div>
+      </div>
+      <Dock />
+    </Pantalla>
+  );
+}
+
+export function InicioPorRol() {
+  const { persona } = useSesion();
+  return persona?.rol === 'estudiante' ? <InicioEstudiante /> : <InicioDocente />;
 }
