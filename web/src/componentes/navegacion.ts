@@ -94,7 +94,10 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
     },
     {
       titulo: 'Ajustes',
-      enlaces: [{ tipo: 'ajustes', etiqueta: 'Configuración', detalle: 'Dimensiones, rúbricas y umbrales', ruta: '#/d10', activa: ['d10'], color: 'azul' }],
+      enlaces: [
+        { tipo: 'equipo', etiqueta: 'Personas', detalle: 'Invitaciones, roles y grupos', ruta: '#/d13', activa: ['d13'], color: 'mint' },
+        { tipo: 'ajustes', etiqueta: 'Configuración', detalle: 'Dimensiones, rúbricas y umbrales', ruta: '#/d10', activa: ['d10'], color: 'azul' },
+      ],
     },
   ],
   observador: [

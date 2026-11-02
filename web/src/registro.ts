@@ -27,6 +27,7 @@ import { E29EntregaConProblemas } from './pantallas/E29EntregaConProblemas';
 import { E30Historico } from './pantallas/E30Historico';
 import { E31Liga } from './pantallas/E31Liga';
 import { D12Resultados } from './pantallas/D12Resultados';
+import { D13Personas } from './pantallas/D13Personas';
 import { E32Sonidos } from './pantallas/E32Sonidos';
 import { E16UnirConceptos } from './pantallas/E16UnirConceptos';
 import { E17Diagnostico } from './pantallas/E17Diagnostico';
@@ -105,5 +106,6 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'e30', titulo: 'Mis resultados (histórico)', grupo: 'Estudiante', componente: E30Historico },
   { codigo: 'e31', titulo: 'Liga del modo competitivo', grupo: 'Estudiante', componente: E31Liga },
   { codigo: 'd12', titulo: 'Resultados de formularios', grupo: 'Docente', componente: D12Resultados },
+  { codigo: 'd13', titulo: 'Personas y grupos', grupo: 'Docente', componente: D13Personas },
   { codigo: 'e32', titulo: 'Galería de sonidos', grupo: 'Transversal', componente: E32Sonidos },
 ];

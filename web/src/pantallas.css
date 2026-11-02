@@ -1212,3 +1212,24 @@
   .salir { animation: salir-entra .22s ease-out both; }
   @keyframes salir-entra { from { transform: translateY(14px) scale(.97); opacity: 0; } }
 }
+
+/* ---------- D13 personas ---------- */
+.d13__columnas, .d13__lado { display: flex; flex-direction: column; gap: 14px; }
+.d13__formulario, .d13__fila { display: flex; gap: 8px; align-items: stretch; }
+.d13__campo { min-width: 0; flex: 1; padding: 10px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; }
+.d13__texto { width: 100%; resize: vertical; margin-bottom: 8px; }
+.d13__fila { margin-bottom: 8px; }
+.d13__nota { display: block; margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+.d13__grupos, .d13__personas { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.d13__grupos { margin-bottom: 10px; }
+.d13__grupos li { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 8px 12px; border-radius: 14px; background: var(--bg); }
+.d13__grupos small, .d13__datos small { font-size: 12px; font-weight: 600; color: var(--muted); }
+.d13__personas li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--bg); }
+.d13__datos { min-width: 0; display: flex; flex-direction: column; }
+.d13__datos strong { font-size: 14px; font-weight: 800; }
+.d13__datos strong, .d13__datos small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.d13__datos em { font-style: normal; font-weight: 600; color: var(--muted); }
+.d13__personas li .d13__campo { grid-column: 1 / -1; }
+.d13__sin { display: none; }
+.d13__pendiente { background: var(--aviso) !important; }
+.d13__quitar { grid-column: 1 / -1; justify-self: start; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; background: var(--e-alerta-bg); color: var(--e-alerta); }
