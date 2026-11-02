@@ -1233,3 +1233,4 @@
 .d13__sin { display: none; }
 .d13__pendiente { background: var(--aviso) !important; }
 .d13__quitar { grid-column: 1 / -1; justify-self: start; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; background: var(--e-alerta-bg); color: var(--e-alerta); }
+.cargando__logo { width: 84px; height: auto; }

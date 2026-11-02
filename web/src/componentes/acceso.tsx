@@ -84,6 +84,7 @@ export function CompletarPerfil() {
 export function Cargando() {
   return (
     <div className="cargando" role="status" aria-label="Cargando">
+      <img className="cargando__logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="" />
       <span className="cargando__rueda" aria-hidden="true" />
       <span>Entrando a la expedición…</span>
     </div>

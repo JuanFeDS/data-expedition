@@ -32,9 +32,9 @@ export function BarraLateral({ ruta }: { ruta: string }) {
     : base;
   return (
     <aside className={`barra-lateral barra-lateral--${rol}`} aria-label="Navegación principal">
-      <a className="lateral__marca" href={inicioDeRol[rol]}>
-        <Jaguar pose="guia" ancho={44} />
-        <span>Data<br />Expedition</span>
+      <a className="lateral__marca" href={inicioDeRol[rol]} aria-label="Data Expedition, ir al inicio">
+        <img className="marca-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="" />
+        <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
       <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>
       <nav className="lateral__nav">

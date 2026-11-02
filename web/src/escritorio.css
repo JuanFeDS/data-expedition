@@ -17,7 +17,8 @@
     background-color: var(--deep);
     background-image: linear-gradient(rgb(7 59 58 / .74), rgb(7 59 58 / .74)), url('/fondos/hojas-suave.webp'); background-size: auto, 440px auto; }
   .escenario .lateral__marca { display: flex; align-items: center; gap: 10px; padding: 0 6px; font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: -.04em; }
-  .escenario .lateral__marca img { height: auto; }
+  .escenario .lateral__marca .marca-logo { width: 46px; height: auto; flex: none; }
+  .escenario .lateral__marca .marca-letras { height: 42px; width: auto; min-width: 0; }
   .escenario .lateral__semana { align-self: flex-start; margin-left: 6px; padding: 6px 14px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 800; }
   .escenario .lateral__nav { flex: 1; display: flex; flex-direction: column; gap: 18px; }
   .escenario .lateral__grupo { display: flex; flex-direction: column; gap: 2px; }
@@ -414,7 +415,8 @@
     .escenario .lateral__icono { width: 22px; height: 22px; }
     .escenario .lateral__icono svg { width: 14px; height: 14px; }
     .escenario .lateral__titulo { font-size: 9.5px; margin: 2px 10px 0; }
-    .escenario .lateral__marca img { width: 34px; }
+    .escenario .lateral__marca .marca-logo { width: 34px; }
+    .escenario .lateral__marca .marca-letras { height: 30px; }
     .escenario .lateral__usuario { padding: 4px 10px; }
     .escenario .lateral__ajustes .interruptor-tema { padding: 4px 6px; }
   }
