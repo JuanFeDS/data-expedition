@@ -30,7 +30,7 @@ export function E11Resumen() {
                 <strong>+{fila.cambio}</strong>
               </div>
             ))}
-            <p className="meta" style={{ fontSize: 12 }}>Tu Trabajo 2 y 6 lecciones movieron estas dimensiones.</p>
+            <p className="meta" style={{ fontSize: 'var(--fs-xs)' }}>Tu Trabajo 2 y 6 lecciones movieron estas dimensiones.</p>
           </div>
 
           <hr className="sep" />
@@ -39,7 +39,7 @@ export function E11Resumen() {
             <span className="num">0</span>
             <div>
               <strong className="titulo">Validación sin cambio</strong>
-              <p className="meta" style={{ fontSize: 13 }}>Llevas 3 semanas en 30. Su isla llega en la semana 7; al cerrarla ganas su gema y se abre su álbum de repaso.</p>
+              <p className="meta" style={{ fontSize: 'var(--fs-sm)' }}>Llevas 3 semanas en 30. Su isla llega en la semana 7; al cerrarla ganas su gema y se abre su álbum de repaso.</p>
             </div>
           </div>
 
@@ -56,7 +56,7 @@ export function E11Resumen() {
               </li>
             ))}
           </ol>
-          <p className="meta" style={{ fontSize: 12, paddingTop: 4 }}>También lo recibes en tu correo institucional.</p>
+          <p className="meta" style={{ fontSize: 'var(--fs-xs)', paddingTop: 4 }}>También lo recibes en tu correo institucional.</p>
         </div>
       </div>
       <Dock accion={{ etiqueta: 'Para esta semana', texto: 'Abrir el álbum', ruta: '#/e15' }} />

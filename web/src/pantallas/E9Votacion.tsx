@@ -33,7 +33,7 @@ export function E9Votacion() {
         <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
           <button className="voto voto--verde" aria-pressed={voto === 'colaborativo'} onClick={() => setVoto('colaborativo')}>
             <span className="voto__cabeza">
-              <strong className="titulo" style={{ fontSize: 30 }}>Colaborativo</strong>
+              <strong className="titulo" style={{ fontSize: 'var(--fs-2xl)' }}>Colaborativo</strong>
               {voto === 'colaborativo' && <Pill variante="accent">Tu voto</Pill>}
             </span>
             <span className="voto__desc">Metas de grupo: sumamos todos hacia una meta común del módulo.</span>
@@ -42,7 +42,7 @@ export function E9Votacion() {
           </button>
           <button className="voto voto--azul" aria-pressed={voto === 'competitivo'} onClick={() => setVoto('competitivo')}>
             <span className="voto__cabeza">
-              <strong className="titulo" style={{ fontSize: 30 }}>Competitivo</strong>
+              <strong className="titulo" style={{ fontSize: 'var(--fs-2xl)' }}>Competitivo</strong>
               {voto === 'competitivo' && <Pill variante="accent">Tu voto</Pill>}
             </span>
             <span className="voto__desc">Ligas pequeñas armadas por nivel del diagnóstico. Compites con quienes están cerca de ti.</span>
@@ -54,7 +54,7 @@ export function E9Votacion() {
             <div className="votantes" aria-hidden="true">
               {Array.from({ length: GRUPO }, (_, i) => <i key={i} className={i < VOTOS ? 'ya' : ''} />)}
             </div>
-            <p className="meta" style={{ fontSize: 12 }}>Los resultados se muestran al cerrar la votación. Puedes cambiar tu voto hasta entonces. Se repite en cada módulo.</p>
+            <p className="meta" style={{ fontSize: 'var(--fs-xs)' }}>Los resultados se muestran al cerrar la votación. Puedes cambiar tu voto hasta entonces. Se repite en cada módulo.</p>
           </div>
         </div>
       </div>

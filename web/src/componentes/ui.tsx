@@ -52,7 +52,7 @@ export function Cabecera({ kicker, titulo, subtitulo, volver }: { kicker?: strin
       {volver && <a className="cabecera__volver" href={volver.ruta}>‹ {volver.texto}</a>}
       {kicker && <Kicker>{kicker}</Kicker>}
       <h1 className="titulo titulo--xl">{titulo}</h1>
-      {subtitulo && <p className="meta" style={{ fontSize: 14 }}>{subtitulo}</p>}
+      {subtitulo && <p className="meta" style={{ fontSize: 'var(--fs-sm)' }}>{subtitulo}</p>}
     </header>
   );
 }

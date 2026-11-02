@@ -19,14 +19,14 @@ export function E4DetalleNota() {
           {criteriosTrabajo1.map((criterio) => (
             <div className="criterio" key={criterio.nombre}>
               <div style={{ flex: 1 }}>
-                <strong style={{ fontSize: 14, display: 'block' }}>{criterio.nombre}</strong>
-                <span className="meta" style={{ fontSize: 12 }}>{criterio.dimension} · peso {criterio.peso}</span>
+                <strong style={{ fontSize: 'var(--fs-sm)', display: 'block' }}>{criterio.nombre}</strong>
+                <span className="meta" style={{ fontSize: 'var(--fs-xs)' }}>{criterio.dimension} · peso {criterio.peso}</span>
               </div>
               <Niveles nivel={criterio.nivel} />
               <span className="criterio__valor">{criterio.nivel}</span>
             </div>
           ))}
-          <p className="meta" style={{ fontSize: 12, padding: '8px 0 12px' }}>Regla: promedio de los niveles ponderado por el peso de cada criterio.</p>
+          <p className="meta" style={{ fontSize: 'var(--fs-xs)', padding: '8px 0 12px' }}>Regla: promedio de los niveles ponderado por el peso de cada criterio.</p>
           <div className="retro">
             <Jaguar pose="saluda" ancho={84} clase="retro__guia" />
             <div>

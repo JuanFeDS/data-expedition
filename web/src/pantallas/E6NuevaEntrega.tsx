@@ -188,7 +188,7 @@ export function E6NuevaEntrega() {
             ) : nombrePaso === 'Enlace' ? (
               <>
                 <Kicker>Enlace de tu pull request</Kicker>
-                <p className="meta" style={{ fontSize: 13 }}>Pega el PR de tu repo público donde está la entrega final.</p>
+                <p className="meta" style={{ fontSize: 'var(--fs-sm)' }}>Pega el PR de tu repo público donde está la entrega final.</p>
                 <div className={`campo campo--url ${errorEnlace ? 'campo--error' : ''}`} key={errorEnlace ? 'e' : 'n'}>
                   <label htmlFor="pr">Enlace del PR</label>
                   <input id="pr" value={enlace} placeholder="https://github.com/camilo-r/trabajo-2/pull/1" disabled={verificacion === 'verificando'} onChange={(evento) => { setEnlace(evento.target.value); setErrorEnlace(false); if (verificacion !== 'inicial') setVerificacion('inicial'); }} />
@@ -261,7 +261,7 @@ export function E6NuevaEntrega() {
                     <span><strong>{opcion.titulo}</strong><span>{opcion.descripcion}</span></span>
                   </button>
                 ))}
-                {modo === 'sin_ia' && <p className="meta" style={{ fontSize: 13 }}>Sin IA no necesitas bitácora. Al entregar responderás las preguntas de decisión del trabajo.</p>}
+                {modo === 'sin_ia' && <p className="meta" style={{ fontSize: 'var(--fs-sm)' }}>Sin IA no necesitas bitácora. Al entregar responderás las preguntas de decisión del trabajo.</p>}
               </>
             ) : nombrePaso === 'Bitácora' ? (
               <>
@@ -302,7 +302,7 @@ export function E6NuevaEntrega() {
                   </div>
                 )}
                 {errorEntrega && <p className="entrega__error" role="alert">{errorEntrega}</p>}
-                <p className="meta" style={{ fontSize: 13 }}>{modoDemo ? <>Al entregar se guarda esta versión (<b>{sha}</b>). Si empujas más commits después, la revisión usa esta.</> : 'Puedes volver a entregar mientras tu docente no lo califique.'}</p>
+                <p className="meta" style={{ fontSize: 'var(--fs-sm)' }}>{modoDemo ? <>Al entregar se guarda esta versión (<b>{sha}</b>). Si empujas más commits después, la revisión usa esta.</> : 'Puedes volver a entregar mientras tu docente no lo califique.'}</p>
               </>
             )}
           </div>

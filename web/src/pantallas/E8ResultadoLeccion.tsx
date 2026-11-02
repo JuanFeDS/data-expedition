@@ -22,16 +22,16 @@ export function E8ResultadoLeccion() {
     <Pantalla tono="menta" clase="p-e8">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
-        <h1 className="titulo" style={{ fontSize: 46, lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
+        <h1 className="titulo" style={{ fontSize: 'var(--fs-3xl)', lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
         <div className="resultado__remate">
-          <p style={{ fontSize: 15, fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Compáralo siempre con un baseline.</p>
+          <p style={{ fontSize: 'var(--fs-md)', fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Compáralo siempre con un baseline.</p>
           <Jaguar pose="celebra" ancho={136} clase="resultado__guia" />
         </div>
         <hr className="sep" style={{ background: 'var(--deep)' }} />
         {METRICAS.map((metrica) => (
           <div className="metrica" key={metrica.etiqueta}>
             <span className="num"><Contador valor={metrica.valor} decimales={metrica.decimales} prefijo="+" /></span>
-            <div><strong style={{ fontSize: 14, fontWeight: 800, display: 'block' }}>{metrica.etiqueta}</strong><span style={{ fontSize: 12, fontWeight: 600, opacity: .8 }}>{metrica.detalle}</span></div>
+            <div><strong style={{ fontSize: 'var(--fs-sm)', fontWeight: 800, display: 'block' }}>{metrica.etiqueta}</strong><span style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, opacity: .8 }}>{metrica.detalle}</span></div>
             {'gema' in metrica && <img className="metrica__gema" src={`${import.meta.env.BASE_URL}gemas/${metrica.gema}.webp`} alt="" />}
           </div>
         ))}

@@ -12,7 +12,7 @@ export function E16UnirConceptos() {
     <Pantalla tono="oscura" clase="p-e16">
       <div className="pantalla__cuerpo">
         <div className="leccion__barra">
-          <a className="cerrar-practica" href="#/e15" aria-label="Salir de la práctica" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
+          <a className="cerrar-practica" href="#/e15" aria-label="Salir de la práctica" style={{ fontSize: 'var(--fs-lg)', fontWeight: 700, opacity: .8 }}>✕</a>
           <div className="leccion__prog">{[0, 1, 2, 3, 4].map((i) => <i key={i} className={i < 2 + (resultado ? 1 : 0) ? 'ok' : ''} />)}</div>
           <Pill variante="accent">0:41</Pill>
         </div>

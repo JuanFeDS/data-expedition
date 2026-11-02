@@ -69,7 +69,7 @@ export function E1Ruta() {
       <div className="pantalla__cuerpo ruta">
         <header className="ruta__cab">
           <div className="ruta__top"><a href="#/home" style={{ fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a><Pill variante="accent">Semana {semanaActual} de {totalSemanas}</Pill></div>
-          <h1 className="titulo" style={{ fontSize: 38, lineHeight: 1.05 }}>Mapa del curso</h1>
+          <h1 className="titulo" style={{ fontSize: 'var(--fs-3xl)', lineHeight: 1.05 }}>Mapa del curso</h1>
           <p className="ruta__sub">Semana {regionesCurso[indiceActual].semanas} de {regionesCurso.length} · una entrega más y ves la cima</p>
         </header>
 
@@ -95,7 +95,7 @@ export function E1Ruta() {
                   )}
                 </div>
                 <div className="isla-fila__texto">
-                  <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 12 }}>Semana {region.semanas} · {region.modulo}</Kicker>
+                  <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 'var(--fs-xs)' }}>Semana {region.semanas} · {region.modulo}</Kicker>
                   <h2 className="isla-fila__nombre">{region.nombre}</h2>
                   <ul className="mapa__hitos">
                     {hitos.length === 0 && (

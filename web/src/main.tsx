@@ -1,7 +1,6 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
-import { useAjusteAltura } from './componentes/ajusteAltura';
 import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from './componentes/navegacion';
 import { CursoProvider, useCurso } from './componentes/curso';
 import { InicioSinCurso } from './componentes/inicio';
@@ -54,8 +53,6 @@ function App() {
     window.addEventListener('hashchange', alCambiar);
     return () => window.removeEventListener('hashchange', alCambiar);
   }, []);
-
-  useAjusteAltura(ruta);
 
   const { cursoId, codigo } = analizarRuta(ruta);
   const pantalla = PANTALLAS.find((candidata) => candidata.codigo === codigo);

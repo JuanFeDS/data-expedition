@@ -12,7 +12,7 @@ export function E13VotacionVivo() {
     <Pantalla tono="oscura" clase="p-e13">
       <div className="pantalla__cuerpo contenido centrar" style={{ padding: '56px 24px 24px', gap: 12 }}>
         <Kicker estilo={{ color: 'var(--mint)' }}>En vivo · Validación</Kicker>
-        <h1 className="titulo" style={{ fontSize: 28, lineHeight: 1.08 }}>¿Qué métrica mirarías primero con clases desbalanceadas?</h1>
+        <h1 className="titulo" style={{ fontSize: 'var(--fs-2xl)', lineHeight: 1.08 }}>¿Qué métrica mirarías primero con clases desbalanceadas?</h1>
         {RESULTADOS.map((resultado, indice) => (
           <div className="vivo__opcion" key={resultado.letra} style={{ '--i': indice } as React.CSSProperties}>
             <div className="vivo__fila">
@@ -27,7 +27,7 @@ export function E13VotacionVivo() {
           <img src={`${import.meta.env.BASE_URL}objetos/binoculares.webp`} alt="" />
           <p>Mira cómo vota el grupo: todo agregado, sin nombres.</p>
         </div>
-        <p style={{ fontSize: 12, fontWeight: 600, opacity: .65 }}>22 respuestas · lo ves agregado, sin nombres. El docente decide cuándo cerrar.</p>
+        <p style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, opacity: .65 }}>22 respuestas · lo ves agregado, sin nombres. El docente decide cuándo cerrar.</p>
       </div>
     </Pantalla>
   );

@@ -48,11 +48,11 @@ export function E12Perfil() {
           <div className="perfil__xp">
             <div className="perfil__xp-cifra"><span className="num"><Contador valor={XP} /></span><small>de {META_XP} XP para el nivel 4</small></div>
             <div className="perfil__xp-barra"><i style={{ width: `${(XP / META_XP) * 100}%` }} /></div>
-            <p className="meta" style={{ fontSize: 12 }}>El XP no es nota: se gana con lecciones y misiones y desbloquea retos opcionales.</p>
+            <p className="meta" style={{ fontSize: 'var(--fs-xs)' }}>El XP no es nota: se gana con lecciones y misiones y desbloquea retos opcionales.</p>
           </div>
           <hr className="sep" />
           <Kicker>Tu colección de gemas</Kicker>
-          <p className="meta" style={{ fontSize: 12 }}>Cada gema se pule a medida que sube su dimensión en el radar.</p>
+          <p className="meta" style={{ fontSize: 'var(--fs-xs)' }}>Cada gema se pule a medida que sube su dimensión en el radar.</p>
           <div className="gemas">
             {gemasGanadas.map((item) => {
               const valor = dimensiones.find((dimension) => dimension.nombre === item.dimension)?.ahora;

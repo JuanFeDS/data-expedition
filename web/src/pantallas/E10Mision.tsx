@@ -28,11 +28,11 @@ export function E10Mision() {
               <div className="fila__texto">
                 <div className="mision__linea"><strong>{miembro.nombre}</strong><Pill variante="suave" pequena>Rol: {miembro.rol}</Pill></div>
                 <div className="mision__barra" aria-label={`${miembro.aportes} aportes`}><i style={{ width: `${(miembro.aportes / MAXIMO) * 100}%` }} className={miembro.alerta ? 'mision__barra--alerta' : ''} /></div>
-                <span className="meta" style={{ fontSize: 12 }}>{miembro.aportes} aportes{miembro.alerta ? ` · ${miembro.alerta}` : ''}</span>
+                <span className="meta" style={{ fontSize: 'var(--fs-xs)' }}>{miembro.aportes} aportes{miembro.alerta ? ` · ${miembro.alerta}` : ''}</span>
               </div>
             </div>
           ))}
-          <p className="meta" style={{ fontSize: 13, paddingTop: 14 }}>La nota es la misma para todo el equipo. Tu radar cambia según tu rol, que se calcula de tu radar y puede cambiar.</p>
+          <p className="meta" style={{ fontSize: 'var(--fs-sm)', paddingTop: 14 }}>La nota es la misma para todo el equipo. Tu radar cambia según tu rol, que se calcula de tu radar y puede cambiar.</p>
         </div>
       </div>
       <Dock accion={{ etiqueta: 'Misión en equipo', texto: 'Abrir la bitácora', ruta: '#/e10' }} />

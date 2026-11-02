@@ -193,7 +193,7 @@ export function D13Personas() {
                             {grupos.map((grupo) => <option key={grupo.id} value={grupo.id}>{grupo.nombre}</option>)}
                           </select>
                         ) : <span className="d13__sin" />}
-                        {persona.rol !== 'docente' && <button className="d13__quitar" onClick={() => { if (window.confirm(`¿Quitar a ${persona.nombre ?? persona.correo} del curso? Su cuenta y sus entregas no se borran.`)) void ejecutar(servicio.sacarDelCurso(curso.id, persona)); }}>Quitar del curso</button>}
+                        {persona.rol !== 'docente' && <button className="d13__quitar" aria-label={`Quitar a ${persona.nombre ?? persona.correo} del curso`} onClick={() => { if (window.confirm(`¿Quitar a ${persona.nombre ?? persona.correo} del curso? Su cuenta y sus entregas no se borran.`)) void ejecutar(servicio.sacarDelCurso(curso.id, persona)); }}>Quitar</button>}
                       </li>
                     );
                   })}

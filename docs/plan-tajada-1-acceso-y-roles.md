@@ -136,3 +136,9 @@ Tamaños: S = media jornada, M = una jornada.
 - Fuera de un curso (Inicio, Cursos, perfil) la barra lateral solo muestra lo general. Dentro de un curso, un bloque con el nombre del curso agrupa sus secciones.
 - Los enlaces antiguos sin curso (`#/e5`, `#/d13`…) se redirigen al último curso usado, o a Cursos si no hay ninguno. Un curso que no existe o al que no perteneces también lleva a Cursos.
 - El modelo de datos no cambió: las matrículas siguen decidiendo qué cursos ve cada persona.
+
+## Escala tipográfica única (2 nov)
+
+- Una sola escala con 8 tamaños (`--fs-xs` 12, `--fs-sm` 14, `--fs-md` 16, `--fs-lg` 20, `--fs-xl` 24, `--fs-2xl` 32, `--fs-3xl` 40, `--fs-4xl` 56) y dos fuentes (Bricolage Grotesque para títulos, Manrope para texto). Antes había 38 tamaños distintos. Quedan como excepción 4 cifras decorativas grandes (76 a 120 px).
+- Se quitó el zoom automático de escritorio: cada pantalla se reducía por separado entre 100 % y 60 % para evitar el scroll, y por eso el mismo texto se veía de tamaños distintos según la página. Ahora todas usan el mismo tamaño y hay scroll vertical solo cuando el contenido no cabe.
+- Regla para lo nuevo: usar siempre `var(--fs-…)`, nunca un número de píxeles suelto.

@@ -39,7 +39,7 @@ export function E3Notas() {
                 <span className={`isla-mini ${fila.estado === 'pendiente' ? 'isla-mini--pendiente' : ''}`}><Isla bioma={fila.bioma} /></span>
                 <div className="fila__texto">
                   <strong>{fila.titulo}</strong>
-                  <span className="meta" style={{ fontSize: 12 }}>{fila.meta}</span>
+                  <span className="meta" style={{ fontSize: 'var(--fs-xs)' }}>{fila.meta}</span>
                   {fila.chip && <div className="chips"><Pill variante={fila.chip.variante} pequena>{fila.chip.texto}</Pill></div>}
                 </div>
                 <span className={`fila__nota ${fila.estado === 'pendiente' || fila.nota === '—' ? 'fila__nota--atenuada' : ''}`} style={{ width: 'auto' }}>{fila.nota}</span>
