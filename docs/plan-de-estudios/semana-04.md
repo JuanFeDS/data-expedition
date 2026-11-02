@@ -5,7 +5,7 @@ Trabajo: **T3** Mismo análisis en Spark, con comparación (entrega al final de 
 Dimensiones: Producción, Datos, Análisis y Dirección de IA.
 Elasticidad: **elástica**. En la ruta de nivelación se reduce a concepto y un laboratorio corto.
 
-PySpark se ejecuta en Colab (`pip install pyspark`), así que no requiere instalación local.
+PySpark corre en modo local: requiere JDK 17 y `pip install pyspark` en el entorno del curso. La instalación se practica en la P3.
 
 ---
 
