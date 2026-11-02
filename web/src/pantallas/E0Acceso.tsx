@@ -88,7 +88,7 @@ export function E0Acceso() {
           <ol className="acceso__pasos">
             {PASOS_DE_ACCESO.map((paso) => <li key={paso.numero}><b>{paso.numero}</b><span><strong>{paso.titulo}</strong>{paso.texto}</span></li>)}
           </ol>
-          <small>Guardamos solo tu nombre, correo y grupo. Nada es público. Ley 1581 de 2012.</small>
+          <small>Guardamos solo tu nombre, correo y grupo. Nada es público. Ley 1581 de 2012. <a href={`${import.meta.env.BASE_URL}privacidad.html`}>Privacidad</a> · <a href={`${import.meta.env.BASE_URL}terminos.html`}>Condiciones</a></small>
         </div>
       </div>
     </Pantalla>

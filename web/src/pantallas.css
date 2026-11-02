@@ -1200,3 +1200,4 @@
 .acceso__boton--google { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; color: #1f1f1f; }
 .acceso__o { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; opacity: .8; }
 .acceso__o::before, .acceso__o::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: .4; }
+.acceso__hoja small a { text-decoration: underline; }
