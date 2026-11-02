@@ -1172,3 +1172,15 @@
   .son__play:active { transform: scale(.88); }
   .son__variantes li.suena .son__play { animation: latido .35s ease-in-out 2; }
 }
+
+/* Acceso real: boton, avisos y pantalla de carga */
+.acceso__boton { padding: 14px 22px; border-radius: 999px; font-size: 16px; font-weight: 800; text-align: center; background: rgb(255 255 255 / .16); color: #fff; }
+.acceso__boton--principal { background: var(--accent); color: var(--on-accent); font-family: var(--font-display); font-size: 19px; letter-spacing: -.03em; }
+.acceso__boton:disabled { opacity: .55; cursor: default; }
+.acceso__error { padding: 10px 14px; border-radius: 14px; background: #ffd9d4; color: #9b2a22; font-size: 14px; font-weight: 700; }
+.acceso__ok { font-size: 15px; line-height: 1.4; }
+.menu__salir { align-self: flex-start; margin-top: 8px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; background: var(--line); color: var(--ink); }
+.cargando { min-height: 100dvh; display: grid; place-content: center; justify-items: center; gap: 14px; background: var(--deep); color: #fff; font-weight: 800; }
+.cargando__rueda { width: 40px; height: 40px; border-radius: 50%; border: 4px solid rgb(255 255 255 / .25); border-top-color: var(--mint); }
+@media (prefers-reduced-motion: no-preference) { .cargando__rueda { animation: giro .8s linear infinite; } }
+.acceso__hoja .acceso__error { color: #9b2a22; background: #ffd9d4; }
