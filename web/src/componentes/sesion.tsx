@@ -118,7 +118,7 @@ export function SesionProvider({ children }: { children: ReactNode }) {
   const entrarConGoogle = useCallback(async (): Promise<ResultadoEnvio> => {
     if (!supabase) return { ok: false, mensaje: 'La conexión no está activa.' };
     setErrorDeEnlace(null);
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: direccionDeRetorno() } });
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: direccionDeRetorno(), queryParams: { prompt: 'select_account' } } });
     return error ? { ok: false, mensaje: 'No pudimos abrir Google. Intenta de nuevo.' } : { ok: true };
   }, []);
 

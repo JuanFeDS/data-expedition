@@ -1253,7 +1253,7 @@
   .acceso__hoja > p { font-size: 13px; }
 }
 @media (max-width: 1099px) and (max-height: 720px) {
-  .acceso__titulo p, .acceso__hoja > p { display: none; }
+  .acceso__titulo p, .acceso__hoja > p:not(.acceso__error) { display: none; }
 }
 
 /* ---------- Móvil: cabecera y dock más compactos, objetivos táctiles de 44 px ---------- */
