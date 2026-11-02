@@ -19,6 +19,7 @@ interface ValorSesion {
   persona: Persona | null;
   errorDeEnlace: string | null;
   enviarEnlace: (correo: string, crearCuenta: boolean) => Promise<ResultadoEnvio>;
+  entrarConGoogle: () => Promise<ResultadoEnvio>;
   cerrarSesion: () => Promise<void>;
   guardarPerfil: (nombre: string, usuario: string) => Promise<ResultadoEnvio>;
 }
@@ -29,6 +30,7 @@ const SIN_SESION: ValorSesion = {
   persona: null,
   errorDeEnlace: null,
   enviarEnlace: async () => ({ ok: false, mensaje: 'La conexión no está activa.' }),
+  entrarConGoogle: async () => ({ ok: false, mensaje: 'La conexión no está activa.' }),
   cerrarSesion: async () => undefined,
   guardarPerfil: async () => ({ ok: false, mensaje: 'La conexión no está activa.' }),
 };
@@ -42,9 +44,13 @@ const MENSAJES_DE_ENLACE: Record<string, string> = {
   access_denied: 'No pudimos validar ese enlace. Pide uno nuevo.',
 };
 
+const NO_AUTORIZADO = 'Ese correo no está autorizado. Pide a tu docente que lo agregue.';
+
 const leerErrorDeEnlace = () => {
   const fragmento = window.location.hash.replace(/^#\/?/, '');
-  if (!fragmento.includes('error')) return null;
+  const consulta = new URLSearchParams(window.location.search);
+  if (consulta.has('error') && /database error|correo_no_autorizado/i.test(consulta.get('error_description') ?? '')) return NO_AUTORIZADO;
+  if (!fragmento.includes('error')) return consulta.has('error') ? 'No pudimos validar el acceso. Intenta de nuevo.' : null;
   const parametros = new URLSearchParams(fragmento);
   const codigo = parametros.get('error_code') ?? parametros.get('error') ?? '';
   return MENSAJES_DE_ENLACE[codigo] ?? 'No pudimos validar ese enlace. Pide uno nuevo.';
@@ -59,6 +65,7 @@ const limpiarDireccion = () => {
 
 const traducirErrorDeEnvio = (mensaje: string, estado: number | undefined, crearCuenta: boolean) => {
   if (estado === 429 || /rate limit|too many/i.test(mensaje)) return 'Se enviaron muchos enlaces seguidos. Espera unos minutos e intenta de nuevo.';
+  if (/database error|correo_no_autorizado/i.test(mensaje)) return NO_AUTORIZADO;
   if (/signups not allowed|not allowed/i.test(mensaje)) return crearCuenta ? 'Ese correo no está autorizado para registrarse.' : 'No hay una cuenta con ese correo. Usa «Crear cuenta».';
   if (/invalid/i.test(mensaje) && /email/i.test(mensaje)) return 'Revisa el correo: no parece válido.';
   return 'No pudimos enviar el enlace. Intenta de nuevo en un momento.';
@@ -102,6 +109,13 @@ export function SesionProvider({ children }: { children: ReactNode }) {
     return error ? { ok: false, mensaje: traducirErrorDeEnvio(error.message, error.status, crearCuenta) } : { ok: true };
   }, []);
 
+  const entrarConGoogle = useCallback(async (): Promise<ResultadoEnvio> => {
+    if (!supabase) return { ok: false, mensaje: 'La conexión no está activa.' };
+    setErrorDeEnlace(null);
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: direccionDeRetorno() } });
+    return error ? { ok: false, mensaje: 'No pudimos abrir Google. Intenta de nuevo.' } : { ok: true };
+  }, []);
+
   const cerrarSesion = useCallback(async () => {
     if (supabase) await supabase.auth.signOut();
     setPersona(null);
@@ -119,8 +133,8 @@ export function SesionProvider({ children }: { children: ReactNode }) {
   }, [persona]);
 
   const valor = useMemo<ValorSesion>(
-    () => ({ modoDemo: !activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion, guardarPerfil }),
-    [activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion, guardarPerfil],
+    () => ({ modoDemo: !activo, cargando, persona, errorDeEnlace, enviarEnlace, entrarConGoogle, cerrarSesion, guardarPerfil }),
+    [activo, cargando, persona, errorDeEnlace, enviarEnlace, entrarConGoogle, cerrarSesion, guardarPerfil],
   );
 
   return <ContextoSesion.Provider value={valor}>{children}</ContextoSesion.Provider>;

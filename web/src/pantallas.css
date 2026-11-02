@@ -1197,3 +1197,6 @@
 .acceso__pestanas { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 999px; background: rgb(255 255 255 / .14); }
 .acceso__pestanas button { padding: 10px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; color: #fff; }
 .acceso__pestanas button[aria-selected='true'] { background: var(--accent); color: var(--on-accent); }
+.acceso__boton--google { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; color: #1f1f1f; }
+.acceso__o { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; opacity: .8; }
+.acceso__o::before, .acceso__o::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: .4; }
