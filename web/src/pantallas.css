@@ -1311,3 +1311,14 @@
   .pantalla--campamento .region__flecha { width: 44px; height: 44px; }
   .region__avance button { min-width: 22px; }
 }
+
+/* Docente en móvil: más ancho útil y atajos arriba en el menú */
+@media (max-width: 1099px) {
+  .pantalla--docente .cuerpo-mundo { padding-left: 14px; padding-right: 14px; }
+  .pantalla--docente .tarjeta { padding: 14px 12px; }
+  .menu__atajos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 4px 0 8px; border-bottom: 1px solid var(--line); }
+  .menu__atajos a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 2px; border-radius: 16px; min-height: 76px; text-align: center; }
+  .menu__atajos a[aria-current='page'] { background: var(--primary-soft); }
+  .menu__atajos .acceso-rapido__icono { width: 44px; height: 44px; border-color: transparent; }
+  .menu__atajos strong { font-size: 12.5px; font-weight: 800; line-height: 1.15; }
+}

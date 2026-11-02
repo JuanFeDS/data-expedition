@@ -63,3 +63,9 @@ Hecho:
 - Las pantallas de escritorio siguen sin scroll vertical (revisadas 12 rutas a 1755×851 y 1317×640).
 
 Sigue pendiente: lote 4 (teclado abierto, zonas seguras de iOS y prueba en un celular real), y los 13 objetivos que aún miden menos de 40 px (flechas del mapa y puntos de semana del inicio, chips del álbum en `e1`).
+
+## Docente en móvil (segunda ronda)
+
+- Las pantallas del docente ganan 20 px de ancho útil por lado y tarjetas con menos relleno (los datos densos respiran mejor).
+- El menú del docente abre con cuatro atajos grandes arriba (Panel, Entregas, Corrección, Estudiantes) y el resto agrupado debajo. Es la alternativa a la barra inferior, que sigue descartada porque choca con el botón de acción del dock.
+- Pendiente de decisión tuya: pasar las listas largas a vista compacta con filtros plegables (entregas, formularios, recursos).
