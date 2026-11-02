@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { BotonSalir } from './BotonSalir';
-import { SelectorCurso } from './curso';
 import { IconoSvg } from './Icono';
 import { NAVEGACION, esConectada, gruposVisibles, type Rol } from './navegacion';
 import { useSesion } from './sesion';
@@ -16,7 +15,6 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
   const { modoDemo, persona } = useSesion();
   return (
     <Hoja abierta={abierta} alCerrar={alCerrar} titulo="Menú">
-      <SelectorCurso />
       {rol === 'docente' && (
         <div className="menu__atajos">
           {OPCIONES_MENU(rol).filter((opcion) => ATAJOS_DOCENTE.includes(opcion.ruta) && (modoDemo || esConectada(opcion.ruta))).map((opcion) => (

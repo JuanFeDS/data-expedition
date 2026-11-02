@@ -1,7 +1,6 @@
 import { IconoSvg } from './Icono';
 import { INICIO_REAL } from './acceso';
 import { BotonSalir } from './BotonSalir';
-import { SelectorCurso } from './curso';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
 import { RUTAS_COMUNES, gruposVisibles, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
@@ -39,7 +38,6 @@ export function BarraLateral({ ruta }: { ruta: string }) {
         <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
       {!real && <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>}
-      <SelectorCurso />
       <nav className="lateral__nav">
         {gruposVisibles(rol, real).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
