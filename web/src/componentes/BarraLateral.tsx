@@ -1,5 +1,5 @@
 import { IconoSvg } from './Icono';
-import { InterruptorSonido, InterruptorTema } from './tema';
+import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
 import { NAVEGACION, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
 import { useSesion } from './sesion';
@@ -25,21 +25,21 @@ export function BarraLateral({ ruta }: { ruta: string }) {
   const { modoDemo, persona, cerrarSesion } = useSesion();
   const base = usuarioDeRol[rol];
   const real = !modoDemo && persona !== null;
-  const nombreVisible = persona?.nombre?.trim() || persona?.correo.split('@')[0] || '';
+  const nombreVisible = persona?.nombre?.trim() || persona?.usuario || '';
   const usuario = real
-    ? { ...base, iniciales: nombreVisible.slice(0, 2).toUpperCase(), nombre: nombreVisible, detalle: persona.correo }
+    ? { ...base, iniciales: nombreVisible.slice(0, 2).toUpperCase(), nombre: nombreVisible, detalle: persona.usuario ? `@${persona.usuario}` : base.detalle }
     : base;
   return (
     <aside className={`barra-lateral barra-lateral--${rol}`} aria-label="Navegación principal">
       <a className="lateral__marca" href={inicioDeRol[rol]}>
         <Jaguar pose="guia" ancho={44} />
-        <span>data-<br />expedicion</span>
+        <span>Data<br />Expedition</span>
       </a>
       <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>
       <nav className="lateral__nav">
         {NAVEGACION[rol].map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
-      <div className="lateral__ajustes"><InterruptorTema /><InterruptorSonido /></div>
+      <div className="lateral__ajustes"><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>
         <span className={`avatar avatar--${usuario.color}`}>{usuario.iniciales}</span>
         <span className="lateral__datos"><strong>{usuario.nombre}</strong><small>{usuario.detalle}</small></span>

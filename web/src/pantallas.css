@@ -968,6 +968,8 @@
 /* Docente, observador y estados: tono propio y pantallas */
 .pantalla--docente .mundo { background-color: #0b2f55; background-image: linear-gradient(rgb(11 47 85 / .66), rgb(11 47 85 / .66)), url('/fondos/hojas-suave.webp'); background-size: auto, 440px auto; }
 .pantalla--docente .mundo__atras, .pantalla--docente .mundo .kicker { color: #8ec5ff !important; }
+.pantalla--observador .mundo { background-color: #5c1511; background-image: linear-gradient(rgb(92 21 17 / .66), rgb(92 21 17 / .66)), url('/fondos/hojas-suave.webp'); background-size: auto, 440px auto; }
+.pantalla--observador .mundo__atras, .pantalla--observador .mundo .kicker { color: #ffb4a6 !important; }
 .d1__datos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .d1__columnas, .d2__columnas, .d3__columnas, .d4__columnas, .d5__columnas, .d6__columnas, .d8__columnas, .d10__columnas, .d11__columnas, .o2__columnas, .o3__columnas { display: flex; flex-direction: column; gap: 14px; }
 .d4__lado, .d5__lado, .d6__lado, .d8__lado, .d11__lado, .o2__lado { display: flex; flex-direction: column; gap: 14px; }
@@ -1184,3 +1186,14 @@
 .cargando__rueda { width: 40px; height: 40px; border-radius: 50%; border: 4px solid rgb(255 255 255 / .25); border-top-color: var(--mint); }
 @media (prefers-reduced-motion: no-preference) { .cargando__rueda { animation: giro .8s linear infinite; } }
 .acceso__hoja .acceso__error { color: #9b2a22; background: #ffd9d4; }
+
+.acceso__etiqueta { font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; opacity: .85; margin-bottom: -6px; }
+.marca { display: flex; flex-direction: column; gap: 6px; }
+.marca__logo { width: 96px; height: auto; filter: drop-shadow(0 4px 0 rgb(0 0 0 / .25)); }
+.marca__letras { width: min(100%, 380px); height: auto; filter: drop-shadow(0 4px 0 rgb(0 0 0 / .25)); }
+.marca__lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.marca__texto { font-size: 40px; line-height: 1; text-shadow: 0 4px 0 rgb(0 0 0 / .28); }
+.marca--escena, .acceso__pasos { display: none; }
+.acceso__pestanas { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 999px; background: rgb(255 255 255 / .14); }
+.acceso__pestanas button { padding: 10px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; color: #fff; }
+.acceso__pestanas button[aria-selected='true'] { background: var(--accent); color: var(--on-accent); }

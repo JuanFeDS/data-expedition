@@ -30,7 +30,8 @@
   .escenario .lateral__aviso { margin-left: auto; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #ff4d4d; color: #fff; font: 800 11px/20px var(--font-body); font-style: normal; text-align: center; }
   .escenario .lateral__usuario { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 22px; background: rgb(255 255 255 / .1); }
   .escenario .lateral__usuario[aria-current='page'] { outline: 2px solid var(--accent); }
-  .escenario .lateral__datos { display: flex; flex-direction: column; line-height: 1.2; }
+  .escenario .lateral__datos { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+  .escenario .lateral__datos strong, .escenario .lateral__datos small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .escenario .lateral__datos small { font-size: 12px; font-weight: 700; color: var(--mint); }
 
   /* ---------- Barra de accion y modales ---------- */
@@ -111,16 +112,25 @@
 
   /* ---------- Acceso: escena a la izquierda, formulario a la derecha ---------- */
   .escenario .p-e0.pantalla--acceso { background-image: none; }
-  .escenario .p-e0 .acceso { display: grid; height: 100%; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "escena titulo" "escena hoja"; }
+  .escenario .p-e0 .acceso { display: grid; height: 100%; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr); grid-template-areas: "escena ." "escena titulo" "escena hoja" "escena ."; background-color: var(--deep); background-image: linear-gradient(rgb(7 59 58 / .62), rgb(7 59 58 / .62)), url('/fondos/hojas-suave.webp'); background-size: auto, 440px auto; }
   .escenario .p-e0 .acceso__escena { grid-area: escena; position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 36px; padding: 0 40px 9vh;
     background: url('/fondos/campamento-panoramico.webp') center bottom / cover no-repeat, var(--deep); }
   .escenario .p-e0 .acceso__escena .acceso__guia { width: clamp(200px, 17vw, 280px); }
   .escenario .p-e0 .acceso__escena .acceso__mapa { width: clamp(150px, 12vw, 200px); margin-bottom: 4vh; }
-  .escenario .p-e0 .acceso__titulo { grid-area: titulo; justify-content: flex-end; padding: 9vh 56px 22px; border-radius: 0; }
+  .escenario .p-e0 .acceso__titulo { grid-area: titulo; justify-content: flex-end; padding: 0 56px 22px; border-radius: 0; background: none; }
   .escenario .p-e0 .acceso__titulo .titulo { font-size: clamp(46px, 4.4vw, 68px); }
   .escenario .p-e0 .acceso__titulo p { font-size: 17px; }
-  .escenario .p-e0 .acceso__hoja { grid-area: hoja; justify-content: flex-start; gap: 16px; padding: 22px 56px 9vh; border-radius: 0; }
+  .escenario .p-e0 .acceso__hoja { grid-area: hoja; justify-content: flex-start; gap: 16px; padding: 22px 56px 0; border-radius: 0; background: none; }
   .escenario .p-e0 .acceso__hoja > p { font-size: 16px; }
+  .escenario .p-e0 .marca--cabecera { display: none; }
+  .escenario .p-e0 .marca--escena { display: flex; align-items: center; position: absolute; top: 5vh; left: 0; right: 0; gap: 1.5vh; }
+  .escenario .p-e0 .marca--escena .marca__logo { width: auto; height: clamp(110px, 21vh, 230px); }
+  .escenario .p-e0 .marca--escena .marca__letras { width: auto; height: clamp(110px, 21vh, 230px); max-width: 90%; }
+  .escenario .p-e0 .marca--escena .marca__texto { font-size: clamp(46px, 4.4vw, 68px); }
+  .escenario .p-e0 .acceso__pasos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 4px 0 0; }
+  .escenario .p-e0 .acceso__pasos li { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.35; }
+  .escenario .p-e0 .acceso__pasos b { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-family: var(--font-display); font-size: 15px; }
+  .escenario .p-e0 .acceso__pasos strong { display: block; font-size: 14px; }
 
   /* ---------- Mapa del curso: archipielago en dos filas, en serpentina ---------- */
   .escenario .p-e1 .ruta__cab { padding: 46px max(48px, calc((100% - 1180px) / 2)) 14px; }
@@ -323,6 +333,8 @@
   /* ---------- Docente, observador y estados ---------- */
   .escenario .barra-lateral--docente { background-color: #0b2f55; background-image: linear-gradient(rgb(11 47 85 / .76), rgb(11 47 85 / .76)), url('/fondos/hojas-suave.webp'); }
   .escenario .barra-lateral--docente .lateral__titulo { color: #8ec5ff; }
+  .escenario .barra-lateral--observador { background-color: #5c1511; background-image: linear-gradient(rgb(92 21 17 / .76), rgb(92 21 17 / .76)), url('/fondos/hojas-suave.webp'); }
+  .escenario .barra-lateral--observador .lateral__titulo { color: #ffb4a6; }
   .escenario .d1__datos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .escenario .d1__columnas { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; align-items: start; }
   .escenario .d1__columnas > :first-child { grid-row: 1 / span 2; }

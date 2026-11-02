@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { IconoSvg } from './Icono';
 import { NAVEGACION, type Rol } from './navegacion';
 import { useSesion } from './sesion';
-import { InterruptorSonido, InterruptorTema } from './tema';
+import { InterruptorSonido } from './tema';
 import { Hoja, Kicker, ModoRol } from './ui';
 
 export const OPCIONES_MENU = (rol: Rol) => NAVEGACION[rol].flatMap((grupo) => grupo.enlaces);
@@ -22,7 +22,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
           </a>
         ))}
       </nav>
-      <div className="menu__ajustes"><InterruptorTema /><InterruptorSonido /></div>
+      <div className="menu__ajustes"><InterruptorSonido /></div>
       {!modoDemo && persona && <button className="menu__salir" onClick={() => void cerrarSesion()}>Cerrar sesión · {persona.correo}</button>}
     </Hoja>
   );

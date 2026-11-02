@@ -1,8 +1,8 @@
 :root {
   --bg: #f1f8f4;
   --surface: #ffffff;
-  --ink: #0b2a24;
-  --muted: #4a6660;
+  --ink: #0a0f0d;
+  --muted: #3d514b;
   --line: #d3e5db;
   --primary: #0a8057;
   --primary-soft: #d6f3e5;
@@ -209,37 +209,6 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   .avance__guia, .resultado__guia { animation: guia-respira 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
   @keyframes guia-respira { 50% { transform: scale(1.02) translateY(-3px); } }
 }
-
-/* ---------- Tema oscuro: se sobrescriben los tokens, no los componentes ---------- */
-:root[data-tema='oscuro'] {
-  color-scheme: dark;
-  --bg: #0a1b1a;
-  --surface: #10302d;
-  --ink: #e9f5f0;
-  --muted: #9fbab2;
-  --line: #244743;
-  --primary: #41d6a0;
-  --primary-soft: #12392f;
-  --on-primary: #05231a;
-  --fuera: #050f0e;
-  --papel: #17302f;
-  --fondo-suave: #0d2422;
-  --aviso: #3b3314;
-  --brillo: #1d4a44;
-  --e-alerta-bg: #4a1f1b;
-  --e-alerta: #ffb4a6;
-  --e-tarde-bg: #4a3a10;
-  --e-tarde: #ffd98a;
-  --e-info-bg: #14304f;
-  --e-info: #9cc8ff;
-}
-:root[data-tema='oscuro'] .pantalla { background: var(--bg); }
-:root[data-tema='oscuro'] .pantalla--oscura, :root[data-tema='oscuro'] .pantalla--campamento { background-color: var(--deep); }
-:root[data-tema='oscuro'] .pantalla--menta { background: #0f4a3b; color: #e9f5f0; }
-:root[data-tema='oscuro'] .pantalla--menta .titulo, :root[data-tema='oscuro'] .pantalla--menta .kicker { color: var(--mint); }
-:root[data-tema='oscuro'] .tarjeta--menta { background: #12392f; box-shadow: 0 0 0 2px #1f6a54; }
-:root[data-tema='oscuro'] .kicker { color: var(--mint); }
-:root[data-tema='oscuro'] .foto__imagen { filter: brightness(.92); }
 
 .interruptor-tema { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; color: inherit; background: rgb(127 127 127 / .14); }
 .interruptor-tema__pista { position: relative; width: 38px; height: 22px; border-radius: 11px; background: rgb(127 127 127 / .45); transition: background-color .2s; flex: none; }
