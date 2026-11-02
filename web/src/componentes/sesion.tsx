@@ -7,6 +7,7 @@ export interface Persona {
   id: string;
   correo: string;
   nombre: string | null;
+  usuario: string | null;
   rol: Rol;
 }
 
@@ -17,8 +18,9 @@ interface ValorSesion {
   cargando: boolean;
   persona: Persona | null;
   errorDeEnlace: string | null;
-  enviarEnlace: (correo: string) => Promise<ResultadoEnvio>;
+  enviarEnlace: (correo: string, crearCuenta: boolean) => Promise<ResultadoEnvio>;
   cerrarSesion: () => Promise<void>;
+  guardarPerfil: (nombre: string, usuario: string) => Promise<ResultadoEnvio>;
 }
 
 const SIN_SESION: ValorSesion = {
@@ -28,6 +30,7 @@ const SIN_SESION: ValorSesion = {
   errorDeEnlace: null,
   enviarEnlace: async () => ({ ok: false, mensaje: 'La conexión no está activa.' }),
   cerrarSesion: async () => undefined,
+  guardarPerfil: async () => ({ ok: false, mensaje: 'La conexión no está activa.' }),
 };
 
 const ContextoSesion = createContext<ValorSesion>(SIN_SESION);
@@ -54,9 +57,9 @@ const limpiarDireccion = () => {
   if (habia) window.history.replaceState(null, '', direccion.toString());
 };
 
-const traducirErrorDeEnvio = (mensaje: string, estado?: number) => {
+const traducirErrorDeEnvio = (mensaje: string, estado: number | undefined, crearCuenta: boolean) => {
   if (estado === 429 || /rate limit|too many/i.test(mensaje)) return 'Se enviaron muchos enlaces seguidos. Espera unos minutos e intenta de nuevo.';
-  if (/signups not allowed|not allowed/i.test(mensaje)) return 'Ese correo no está autorizado para entrar.';
+  if (/signups not allowed|not allowed/i.test(mensaje)) return crearCuenta ? 'Ese correo no está autorizado para registrarse.' : 'No hay una cuenta con ese correo. Usa «Crear cuenta».';
   if (/invalid/i.test(mensaje) && /email/i.test(mensaje)) return 'Revisa el correo: no parece válido.';
   return 'No pudimos enviar el enlace. Intenta de nuevo en un momento.';
 };
@@ -73,7 +76,7 @@ export function SesionProvider({ children }: { children: ReactNode }) {
       setCargando(false);
       return;
     }
-    const { data, error } = await supabase.from('perfiles').select('id, correo, nombre, rol').eq('id', sesion.user.id).maybeSingle();
+    const { data, error } = await supabase.from('perfiles').select('id, correo, nombre, usuario, rol').eq('id', sesion.user.id).maybeSingle();
     setPersona(error || !data ? null : (data as Persona));
     setCargando(false);
   }, []);
@@ -92,11 +95,11 @@ export function SesionProvider({ children }: { children: ReactNode }) {
     return () => suscripcion.subscription.unsubscribe();
   }, [activo, cargarPersona, errorDeEnlace]);
 
-  const enviarEnlace = useCallback(async (correo: string): Promise<ResultadoEnvio> => {
+  const enviarEnlace = useCallback(async (correo: string, crearCuenta: boolean): Promise<ResultadoEnvio> => {
     if (!supabase) return { ok: false, mensaje: 'La conexión no está activa.' };
     setErrorDeEnlace(null);
-    const { error } = await supabase.auth.signInWithOtp({ email: correo.trim(), options: { emailRedirectTo: direccionDeRetorno() } });
-    return error ? { ok: false, mensaje: traducirErrorDeEnvio(error.message, error.status) } : { ok: true };
+    const { error } = await supabase.auth.signInWithOtp({ email: correo.trim(), options: { emailRedirectTo: direccionDeRetorno(), shouldCreateUser: crearCuenta } });
+    return error ? { ok: false, mensaje: traducirErrorDeEnvio(error.message, error.status, crearCuenta) } : { ok: true };
   }, []);
 
   const cerrarSesion = useCallback(async () => {
@@ -105,9 +108,19 @@ export function SesionProvider({ children }: { children: ReactNode }) {
     window.location.hash = '#/e0';
   }, []);
 
+  const guardarPerfil = useCallback(async (nombre: string, usuario: string): Promise<ResultadoEnvio> => {
+    if (!supabase || !persona) return { ok: false, mensaje: 'La conexión no está activa.' };
+    const { error } = await supabase.from('perfiles').update({ nombre: nombre.trim(), usuario: usuario.trim().toLowerCase() }).eq('id', persona.id);
+    if (error) {
+      return { ok: false, mensaje: error.code === '23505' ? 'Ese usuario ya está en uso. Prueba con otro.' : 'No pudimos guardar tu perfil. Intenta de nuevo.' };
+    }
+    setPersona({ ...persona, nombre: nombre.trim(), usuario: usuario.trim().toLowerCase() });
+    return { ok: true };
+  }, [persona]);
+
   const valor = useMemo<ValorSesion>(
-    () => ({ modoDemo: !activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion }),
-    [activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion],
+    () => ({ modoDemo: !activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion, guardarPerfil }),
+    [activo, cargando, persona, errorDeEnlace, enviarEnlace, cerrarSesion, guardarPerfil],
   );
 
   return <ContextoSesion.Provider value={valor}>{children}</ContextoSesion.Provider>;

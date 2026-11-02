@@ -1,6 +1,85 @@
+import { useState } from 'react';
+import { Jaguar } from './Jaguar';
 import { inicioDeRol, type Rol } from './navegacion';
 import { Vacio } from './panel';
-import { Pantalla } from './ui';
+import { useSesion } from './sesion';
+import { Kicker, Pantalla } from './ui';
+
+export function Marca({ visual = false }: { visual?: boolean }) {
+  const [sinLetras, setSinLetras] = useState(false);
+  const [sinLogo, setSinLogo] = useState(false);
+  const base = import.meta.env.BASE_URL;
+  const Titulo = visual ? 'div' : 'h1';
+  return (
+    <div className={`marca ${visual ? 'marca--escena' : 'marca--cabecera'}`} aria-hidden={visual || undefined}>
+      {!sinLogo && <img className="marca__logo" src={`${base}marca/logo.webp`} alt="" onError={() => setSinLogo(true)} />}
+      {sinLetras ? (
+        <Titulo className="titulo marca__texto">Data Expedition</Titulo>
+      ) : (
+        <>
+          {!visual && <h1 className="marca__lectores">Data Expedition</h1>}
+          <img className="marca__letras" src={`${base}marca/letras.webp`} alt="" onError={() => setSinLetras(true)} />
+        </>
+      )}
+    </div>
+  );
+}
+
+export const PASOS_DE_ACCESO = [
+  { numero: '1', titulo: 'Entra', texto: 'Con tu correo, sin contraseña.' },
+  { numero: '2', titulo: 'Explora', texto: 'Una isla nueva cada semana.' },
+  { numero: '3', titulo: 'Gana gemas', texto: 'Cada reto pulido suma al radar.' },
+];
+
+const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
+
+export function CompletarPerfil() {
+  const { persona, guardarPerfil, cerrarSesion } = useSesion();
+  const [nombre, setNombre] = useState(persona?.nombre ?? '');
+  const [usuario, setUsuario] = useState(persona?.usuario ?? '');
+  const [error, setError] = useState<string | null>(null);
+  const [guardando, setGuardando] = useState(false);
+
+  const guardar = async () => {
+    if (nombre.trim().length < 2) {
+      setError('Escribe tu nombre.');
+      return;
+    }
+    if (!USUARIO_VALIDO.test(usuario.trim().toLowerCase())) {
+      setError('El usuario lleva de 3 a 20 letras minúsculas, números o guion bajo.');
+      return;
+    }
+    setError(null);
+    setGuardando(true);
+    const resultado = await guardarPerfil(nombre, usuario);
+    setGuardando(false);
+    if (!resultado.ok) setError(resultado.mensaje);
+  };
+
+  return (
+    <Pantalla tono="oscura" clase="pantalla--acceso p-e0">
+      <div className="pantalla__cuerpo acceso">
+        <header className="acceso__titulo">
+          <Kicker estilo={{ color: 'var(--accent)' }}>Tu primer ingreso</Kicker>
+          <h1 className="titulo">Completa tu perfil</h1>
+          <p>Así te verán tu docente y tu equipo. Lo puedes cambiar después.</p>
+        </header>
+        <div className="acceso__escena">
+          <Jaguar pose="saluda" ancho={150} clase="acceso__guia" />
+        </div>
+        <div className="acceso__hoja">
+          <label className="acceso__etiqueta" htmlFor="perfil-nombre">Nombre</label>
+          <input id="perfil-nombre" className="acceso__campo" autoComplete="name" placeholder="Ana Gómez" value={nombre} disabled={guardando} onChange={(evento) => { setNombre(evento.target.value); setError(null); }} />
+          <label className="acceso__etiqueta" htmlFor="perfil-usuario">Usuario</label>
+          <input id="perfil-usuario" className="acceso__campo" autoComplete="username" autoCapitalize="none" placeholder="ana_datos" value={usuario} disabled={guardando} onChange={(evento) => { setUsuario(evento.target.value); setError(null); }} onKeyDown={(evento) => { if (evento.key === 'Enter') void guardar(); }} />
+          {error && <p className="acceso__error" role="alert">{error}</p>}
+          <button className="acceso__boton acceso__boton--principal" disabled={guardando || nombre.trim() === '' || usuario.trim() === ''} onClick={() => void guardar()}>{guardando ? 'Guardando…' : 'Entrar a la expedición'}</button>
+          <button className="acceso__boton" onClick={() => void cerrarSesion()}>Usar otro correo</button>
+        </div>
+      </div>
+    </Pantalla>
+  );
+}
 
 export function Cargando() {
   return (

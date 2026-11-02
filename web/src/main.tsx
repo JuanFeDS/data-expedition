@@ -6,7 +6,7 @@ import { inicioDeRol, rolDeRuta } from './componentes/navegacion';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
-import { Cargando, OtroRol } from './componentes/acceso';
+import { Cargando, CompletarPerfil, OtroRol } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -56,7 +56,8 @@ function App() {
 
   const pantalla = PANTALLAS.find((candidata) => candidata.codigo === ruta);
   const inicio = persona ? inicioDeRol[persona.rol] : '#/e0';
-  const debeRedirigir = !modoDemo && persona !== null && (!pantalla || ruta === 'e0');
+  const perfilCompleto = Boolean(persona?.nombre && persona.usuario);
+  const debeRedirigir = !modoDemo && persona !== null && perfilCompleto && (!pantalla || ruta === 'e0');
 
   useEffect(() => {
     if (debeRedirigir) window.location.hash = inicio;
@@ -82,6 +83,14 @@ function App() {
     return (
       <ModoViva.Provider value>
         <div className="escenario escenario--sin-barra"><Acceso /></div>
+      </ModoViva.Provider>
+    );
+  }
+
+  if (!persona.nombre || !persona.usuario) {
+    return (
+      <ModoViva.Provider value>
+        <div className="escenario escenario--sin-barra"><CompletarPerfil /></div>
       </ModoViva.Provider>
     );
   }
