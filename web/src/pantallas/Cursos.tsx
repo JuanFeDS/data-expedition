@@ -41,6 +41,11 @@ export function Cursos() {
     window.location.hash = DESTINO[rol];
   };
 
+  const abrir = (id: string) => {
+    elegir(id);
+    window.location.hash = '#/curso';
+  };
+
   const crearCurso = async (evento: React.FormEvent) => {
     evento.preventDefault();
     if (!nombre.trim()) return;
@@ -83,10 +88,13 @@ export function Cursos() {
                       </div>
                     ) : (
                       <div className="cursos__tarjeta">
+                        <button className="cursos__abrir" onClick={() => abrir(candidato.id)} aria-label={`Ver información de ${candidato.nombre}`}>
                         <span className="cursos__nombre">{candidato.nombre}</span>
                         {candidato.periodo && <small>Periodo {candidato.periodo}</small>}
                         {esDocente && <small>{plural(conteo?.estudiantes ?? 0, 'estudiante', 'estudiantes')} · {plural(conteo?.grupos ?? 0, 'grupo', 'grupos')}</small>}
                         {candidato.id === curso?.id && <small>Último que usaste</small>}
+                          <span className="cursos__ver">Ver información ›</span>
+                        </button>
                         <div className="cursos__acciones">
                           <button className="cursos__entrar" onClick={() => entrar(candidato.id)}>Entrar ›</button>
                           {esDocente && <button className="cursos__secundaria" onClick={() => { setAviso(null); setEditando(candidato.id); }}>Editar</button>}

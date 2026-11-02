@@ -10,6 +10,7 @@ export interface ServicioCursos {
   actualizar: (id: string, datos: DatosCurso) => Promise<string | null>;
   eliminar: (id: string) => Promise<string | null>;
   contar: () => Promise<Record<string, ConteoCurso>>;
+  miGrupo: (cursoId: string) => Promise<string | null>;
 }
 
 export const servicioCursosSupabase: ServicioCursos = {
@@ -37,6 +38,13 @@ export const servicioCursosSupabase: ServicioCursos = {
     const { error } = await supabase!.from('ediciones').delete().eq('id', id);
     return error ? 'No pudimos eliminar el curso.' : null;
   },
+  async miGrupo(cursoId) {
+    const { data: sesion } = await supabase!.auth.getSession();
+    const yo = sesion.session?.user.id;
+    if (!yo) return null;
+    const { data } = await supabase!.from('matriculas').select('grupos(nombre)').eq('edicion_id', cursoId).eq('perfil_id', yo).maybeSingle();
+    return (data?.grupos as unknown as { nombre: string } | null)?.nombre ?? null;
+  },
   async contar() {
     const [matriculas, grupos] = await Promise.all([
       supabase!.from('matriculas').select('edicion_id, perfiles!inner(rol)').eq('perfiles.rol', 'estudiante'),
@@ -57,6 +65,7 @@ export function crearServicioCursosDemo(): ServicioCursos {
     crear: async (datos) => { cursos.push({ id: `demo-${cursos.length + 1}`, ...datos }); return null; },
     actualizar: async (id, datos) => { const indice = cursos.findIndex((curso) => curso.id === id); if (indice >= 0) cursos[indice] = { id, ...datos }; return null; },
     eliminar: async (id) => { const indice = cursos.findIndex((curso) => curso.id === id); if (indice >= 0) cursos.splice(indice, 1); return null; },
+    miGrupo: async () => 'Grupo A',
     contar: async () => Object.fromEntries(cursos.map((curso, indice) => [curso.id, { estudiantes: 12 - indice * 4, grupos: 3 - indice }])),
   };
 }

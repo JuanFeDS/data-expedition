@@ -116,11 +116,11 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
   ],
 };
 
-export const RUTAS_COMUNES = new Set(['cursos', 'inicio']);
-export const CONECTADAS = new Set(['e0', 'inicio', 'cursos', 'e5', 'e6', 'd3', 'd13', 'd14']);
+export const RUTAS_COMUNES = new Set(['cursos', 'curso', 'inicio']);
+export const CONECTADAS = new Set(['e0', 'inicio', 'cursos', 'curso', 'e5', 'e6', 'd3', 'd13', 'd14']);
 
 const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio'], color: 'accent' };
-const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Tus cursos y el que tienes activo', ruta: '#/cursos', activa: ['cursos'], color: 'claro' };
+const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Tus cursos y el que tienes activo', ruta: '#/cursos', activa: ['cursos', 'curso'], color: 'claro' };
 
 export const codigoDeRuta = (ruta: string) => ruta.replace(/^#\/?/, '');
 
