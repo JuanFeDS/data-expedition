@@ -1,38 +1,120 @@
 import { useState } from 'react';
 import { Kicker, Pantalla, Pill } from '../componentes/ui';
+import {
+  NOMBRE_FORMATO,
+  PreguntaCompletar,
+  PreguntaOpciones,
+  PreguntaOrdenar,
+  PreguntaUnir,
+  PreguntaVF,
+  type PreguntaDatos,
+  type Resultado,
+} from '../componentes/preguntas';
 import { dificultadPara, temaDeRepaso } from '../datos';
 
-const RESPUESTAS = [
-  'El promedio: suma todo y refleja a todos.',
-  'La mediana: el valor central no se mueve por un caso extremo.',
-  'El máximo: muestra hasta dónde llega una compra.',
-  'La suma: da el total de lo que se vendió.',
+export const SESION_MIXTA: PreguntaDatos[] = [
+  {
+    tipo: 'opciones',
+    enunciado: 'Un modelo acierta el 98 % de las veces, pero solo el 2 % de los casos son positivos. ¿Qué concluyes?',
+    opciones: ['Es un excelente modelo: casi no se equivoca.', 'La exactitud no basta: un modelo que siempre dice “negativo” ya acierta 98 %.', 'Hay que subir el umbral hasta no ver falsos positivos.', 'No se puede evaluar sin más datos de entrenamiento.'],
+    correcta: 1,
+    explicacion: 'Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Compáralo con un baseline y mira precisión y sensibilidad.',
+  },
+  {
+    tipo: 'vf',
+    enunciado: 'Un modelo con 0.99 de exactitud siempre es mejor que el baseline.',
+    verdadera: false,
+    justificaciones: ['Falso: depende de qué tan raro sea lo que se predice.', 'Falso: la exactitud solo sirve en regresión.', 'Verdadero: 0.99 es casi perfecto.'],
+    correctaJustificacion: 0,
+    explicacion: 'Si el 99 % de los casos son de una sola clase, el baseline “siempre esa clase” ya saca 0.99.',
+  },
+  {
+    tipo: 'unir',
+    enunciado: 'Une cada concepto con su definición',
+    pares: [
+      { concepto: 'Baseline', definicion: 'El modelo más simple contra el que se compara el tuyo' },
+      { concepto: 'Sobreajuste', definicion: 'Aprender el ruido de entrenamiento y fallar con datos nuevos' },
+      { concepto: 'Conjunto de prueba', definicion: 'Datos que el modelo no vio al entrenar, para medirlo' },
+      { concepto: 'Métrica', definicion: 'Un número que resume qué tan bien predice el modelo' },
+    ],
+    orden: [2, 0, 3, 1],
+    explicacion: 'Estos cuatro conceptos son la base de cualquier comparación de modelos.',
+  },
+  {
+    tipo: 'ordenar',
+    enunciado: 'Ordena el flujo para evaluar un modelo',
+    pasos: ['Partir los datos en entrenamiento y prueba', 'Entrenar el modelo con el entrenamiento', 'Predecir sobre el conjunto de prueba', 'Medir con la métrica y comparar con el baseline'],
+    mezcla: [2, 0, 3, 1],
+    explicacion: 'Primero se parte, luego se entrena, se predice sobre lo que no vio y al final se mide y se compara.',
+  },
+  {
+    tipo: 'completar',
+    antes: 'Un',
+    despues: 'es el modelo más simple contra el que se compara el tuyo.',
+    opciones: ['baseline', 'hiperparámetro', 'pipeline', 'sobreajuste'],
+    correcta: 0,
+    explicacion: 'Si tu modelo no supera al baseline, no aporta nada todavía.',
+  },
 ];
 
-export function E7Leccion() {
-  const [elegida, setElegida] = useState(1);
+function Pregunta({ datos, alCambiar, bloqueada }: { datos: PreguntaDatos; alCambiar: (resultado: Resultado | null) => void; bloqueada: boolean }) {
+  switch (datos.tipo) {
+    case 'opciones': return <PreguntaOpciones datos={datos} alCambiar={alCambiar} bloqueada={bloqueada} />;
+    case 'vf': return <PreguntaVF datos={datos} alCambiar={alCambiar} bloqueada={bloqueada} />;
+    case 'unir': return <PreguntaUnir datos={datos} alCambiar={alCambiar} bloqueada={bloqueada} />;
+    case 'ordenar': return <PreguntaOrdenar datos={datos} alCambiar={alCambiar} bloqueada={bloqueada} />;
+    default: return <PreguntaCompletar datos={datos} alCambiar={alCambiar} bloqueada={bloqueada} />;
+  }
+}
+
+export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
   const tema = temaDeRepaso();
   const dificultad = dificultadPara(tema.valor);
+  const [cola, setCola] = useState<number[]>(SESION_MIXTA.map((_, indice) => indice).slice(inicio));
+  const [hechas, setHechas] = useState(inicio);
+  const [repetidas, setRepetidas] = useState<number[]>([]);
+  const [resultado, setResultado] = useState<Resultado | null>(null);
+  const [revisando, setRevisando] = useState(false);
+
+  const actual = cola[0];
+  const datos = SESION_MIXTA[actual];
+  const esRepaso = repetidas.includes(actual);
+
+  const continuar = () => {
+    const falla = resultado?.correcta === false && !repetidas.includes(actual);
+    const siguiente = falla ? [...cola.slice(1), actual] : cola.slice(1);
+    if (falla) setRepetidas((previas) => [...previas, actual]);
+    else setHechas((previas) => previas + 1);
+    if (siguiente.length === 0) { window.location.hash = '#/e8'; return; }
+    setCola(siguiente);
+    setResultado(null);
+    setRevisando(false);
+  };
+
   return (
     <Pantalla tono="oscura" clase="p-e7">
       <div className="pantalla__cuerpo">
         <div className="leccion__barra">
           <a href="#/e15" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
-          <div className="leccion__prog">{[0, 1, 2, 3, 4].map((i) => <i key={i} className={i < 3 ? 'ok' : ''} />)}</div>
+          <div className="leccion__prog">{SESION_MIXTA.map((_, indice) => <i key={indice} className={indice < hechas ? 'ok' : ''} />)}</div>
           <Pill variante="accent">0:24</Pill>
         </div>
-        <div className="contenido" style={{ gap: 14, paddingTop: 18 }}>
-          <Kicker estilo={{ color: 'var(--mint)' }}>Práctica mixta · pregunta 4 de 5</Kicker>
+        <div className="contenido sesion__cuerpo" key={`${actual}-${esRepaso}`}>
+          <Kicker estilo={{ color: 'var(--mint)' }}>{esRepaso ? 'Repaso de lo que fallaste' : `Práctica mixta · ${NOMBRE_FORMATO[datos.tipo]} · pregunta ${actual + 1} de ${SESION_MIXTA.length}`}</Kicker>
           <p className="leccion__nivel"><img src={`${import.meta.env.BASE_URL}gemas/${tema.gema.gema}.webp`} alt="" />{tema.gema.nombre} · {tema.gema.dimension} · dificultad {dificultad}</p>
-          <h1 className="titulo" style={{ fontSize: 26, lineHeight: 1.12 }}>Nueve de cada diez clientes compran 20 USD y uno compra 2.000 USD. ¿Qué medida resume mejor la compra típica?</h1>
-          {RESPUESTAS.map((texto, indice) => (
-            <button key={texto} className="resp" aria-pressed={elegida === indice} onClick={() => setElegida(indice)}>
-              <b>{'ABCD'[indice]}</b><span>{texto}</span>
-            </button>
-          ))}
-          <p style={{ fontSize: 12, fontWeight: 600, opacity: .6 }}>Los valores de este ejercicio son distintos para cada estudiante.</p>
+          <Pregunta datos={datos} alCambiar={setResultado} bloqueada={revisando} />
         </div>
-        <a href="#/e8" style={{ padding: '8px 24px 34px' }}><Pill variante="accent" grande>Comprobar</Pill></a>
+        {revisando && resultado ? (
+          <div className={`sesion__fb ${resultado.correcta ? 'sesion__fb--ok' : 'sesion__fb--mal'}`} role="status">
+            <strong>{resultado.correcta ? '¡Correcto!' : 'Casi. Lo repasamos al final.'}</strong>
+            <p>{datos.explicacion}</p>
+            <button className="boton boton--accent" onClick={continuar}>Continuar</button>
+          </div>
+        ) : (
+          <div className="sesion__pie">
+            <button className="boton boton--accent sesion__comprobar" disabled={resultado === null} onClick={() => setRevisando(true)}>Comprobar</button>
+          </div>
+        )}
       </div>
     </Pantalla>
   );
