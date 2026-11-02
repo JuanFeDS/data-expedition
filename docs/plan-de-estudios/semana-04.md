@@ -5,7 +5,7 @@ Trabajo: **T3** Mismo análisis en Spark, con comparación (entrega al final de 
 Dimensiones: Producción, Datos, Análisis y Dirección de IA.
 Elasticidad: **elástica**. En la ruta de nivelación se reduce a concepto y un laboratorio corto.
 
-PySpark corre en modo local: requiere JDK 17 y `pip install pyspark` en el entorno del curso. La instalación se practica en la P3.
+**Sin instalación:** PySpark corre en un **GitHub Codespace** con Java y PySpark ya instalados (un contenedor de desarrollo incluido en el repo plantilla). Cada estudiante lo abre desde su cuenta personal, trabaja en el navegador o en su VS Code y lo detiene al terminar. La cuenta gratuita incluye 120 horas-núcleo al mes (60 h en una máquina de 2 núcleos). Respaldo: instalación local con JDK 17.
 
 ---
 
@@ -15,13 +15,20 @@ PySpark corre en modo local: requiere JDK 17 y `pip install pyspark` en el entor
 
 | Min | Dinámica | Detalle |
 |---|---|---|
-| 0–15 | Retro y votación | «¿Cuándo deja de bastar pandas?» |
-| 15–55 | Concepto | Las 3 V del Big Data, Hadoop y su lugar actual, escalabilidad horizontal, Spark, evaluación perezosa, transformaciones frente a acciones |
+| 0–15 | Retro y votación | Planning de la semana. «¿Cuándo deja de bastar pandas?» |
+| 15–55 | Concepto | Las 3 V del Big Data, Hadoop y su lugar actual, escalabilidad horizontal, Spark, evaluación perezosa, transformaciones frente a acciones. Una pregunta relámpago con bonificación |
 | 55–65 | Pausa | |
-| 65–115 | Laboratorio guiado | PySpark DataFrames: leer, filtrar, agrupar y contar, con un dataset de millones de filas |
+| 65–115 | Laboratorio guiado | Abrir el Codespace (10 min) y escribir PySpark DataFrames: leer, filtrar, agrupar y contar, con un dataset de millones de filas |
 | 115–125 | Pausa | |
 | 125–165 | Práctica por niveles | Base: repetir el laboratorio. Estándar: sumar uniones. Reto: medir el plan de ejecución |
-| 165–180 | Cierre | Resumen y anuncio del T3 |
+| 165–180 | Cierre | Resumen, recordatorio de detener el Codespace y anuncio del T3 |
+
+**Material complementario**
+- [EN] PySpark, primeros pasos (documentación oficial): [spark.apache.org](https://spark.apache.org/docs/latest/api/python/getting_started/index.html)
+- [EN] Guía de Spark SQL y DataFrames: [spark.apache.org](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+- [ES] Documentación de GitHub Codespaces: [docs.github.com](https://docs.github.com/es/codespaces)
+- [ES] Fundamentos de PySpark, en DataCamp (su página lo marca como gratuito; verificar al preparar la clase): [datacamp.com](https://www.datacamp.com/es/courses/foundations-of-pyspark)
+- Pendiente: un video en español sobre Hadoop frente a Spark.
 
 ## S8 — PySpark SQL y comparación con pandas (virtual, sesión B)
 
@@ -35,7 +42,12 @@ PySpark corre en modo local: requiere JDK 17 y `pip install pyspark` en el entor
 | 80–130 | Avance individual | Spark SQL, particiones, medición de tiempos de ejecución |
 | 130–140 | Pausa | |
 | 140–170 | Revisión al azar | 3 min por pareja: «¿qué te sorprendió al pasar a Spark?» |
-| 170–180 | Cierre | Plazo del PR y bitácora de IA |
+| 170–180 | Cierre | Plazo del PR y carga del enlace en la app, aprobación cruzada (sin fusionar) y encuesta de pulso |
+
+**Material complementario**
+- [EN] Guía de Spark SQL (ver S7).
+- [EN] Particiones y rendimiento: pendiente de elegir una fuente gratuita y verificada.
+- Pendiente: un video en español sobre Spark SQL.
 
 ## Rúbrica de T3 — Mismo análisis en Spark
 
