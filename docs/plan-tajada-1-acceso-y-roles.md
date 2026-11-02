@@ -154,3 +154,9 @@ Tamaños: S = media jornada, M = una jornada.
 - Reglas: al entrar a un curso, el estudiante ve Información y Entregas; el docente ve Información y Personas. El docente ve Trabajos al visitar Personas, y Entregas al visitar Trabajos.
 - Lo desbloqueado se guarda en el navegador, por usuario (`desbloqueos-<id>`). **Limitación:** no viaja entre dispositivos. Si hace falta, se mueve a una tabla en la base.
 - El panel de la app real ya no usa la compactación pensada para el menú completo de la demo: tiene más aire entre elementos.
+
+## El jaguar presenta cada sección nueva (2 nov)
+
+- Al desbloquearse una sección del panel, el jaguar aparece con un globo que explica qué se encuentra ahí («Nueva sección: Personas»), con «Siguiente» o «Entendido». Si se desbloquean varias a la vez (por ejemplo al entrar a un curso), las presenta en orden. La opción nueva del panel parpadea mientras tanto.
+- Los textos viven en `componentes/GuiaDesbloqueo.tsx` (por rol y por sección). Se anuncia solo la primera vez, porque lo desbloqueado queda guardado.
+- Vista de diseño en la galería: `#/guia-nueva`.

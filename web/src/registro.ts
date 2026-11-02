@@ -31,6 +31,7 @@ import { D13Personas } from './pantallas/D13Personas';
 import { D14Trabajos } from './pantallas/D14Trabajos';
 import { AyudaDocente, InicioEstudiante, InicioPorRol, InicioSinCurso } from './componentes/inicio';
 import { Cursos } from './pantallas/Cursos';
+import { MuestraGuiaDesbloqueo } from './componentes/GuiaDesbloqueo';
 import { CursoDetalle } from './pantallas/CursoDetalle';
 import { E32Sonidos } from './pantallas/E32Sonidos';
 import { E16UnirConceptos } from './pantallas/E16UnirConceptos';
@@ -116,6 +117,7 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'inicio-estudiante', titulo: 'Inicio del estudiante', grupo: 'Estudiante', componente: InicioEstudiante },
   { codigo: 'ayuda', titulo: 'Ayuda del docente', grupo: 'Docente', componente: AyudaDocente },
   { codigo: 'curso', titulo: 'Detalle del curso', grupo: 'Transversal', componente: CursoDetalle },
+  { codigo: 'guia-nueva', titulo: 'El jaguar presenta una sección', grupo: 'Transversal', componente: MuestraGuiaDesbloqueo },
   { codigo: 'cursos', titulo: 'Mis cursos', grupo: 'Transversal', componente: Cursos },
   { codigo: 'e33', titulo: 'Inicio sin curso (estudiante nuevo)', grupo: 'Transversal', componente: InicioSinCurso },
   { codigo: 'e32', titulo: 'Galería de sonidos', grupo: 'Transversal', componente: E32Sonidos },

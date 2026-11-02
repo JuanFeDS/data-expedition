@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useCurso } from './curso';
+import { GuiaDesbloqueo, anuncioDe } from './GuiaDesbloqueo';
 import { analizarRuta, type Rol } from './navegacion';
 import { useSesion } from './sesion';
 
@@ -44,6 +45,7 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   const { dentro } = useCurso();
   const [ruta, setRuta] = useState(leerRuta);
   const [estado, setEstado] = useState<{ para: string | null; valores: string[] }>({ para: null, valores: [] });
+  const [porAnunciar, setPorAnunciar] = useState<string[]>([]);
 
   useEffect(() => {
     const alCambiar = () => setRuta(leerRuta());
@@ -67,6 +69,8 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!idPersona || !cargadas || nuevas.every((valor) => estado.valores.includes(valor))) return;
     const union = [...new Set([...estado.valores, ...nuevas])];
+    const recienDesbloqueadas = nuevas.filter((valor) => !estado.valores.includes(valor));
+    setPorAnunciar((actual) => [...actual, ...recienDesbloqueadas.filter((valor) => !actual.includes(valor))]);
     setEstado({ para: idPersona, valores: union });
     guardar(idPersona, union);
   }, [idPersona, cargadas, nuevas, estado.valores]);
@@ -75,5 +79,26 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
     () => (modoDemo ? TODO : { todo: false, desbloqueadas: new Set([...(cargadas ? estado.valores : []), ...nuevas]) }),
     [modoDemo, cargadas, estado.valores, nuevas],
   );
-  return <ContextoDesbloqueos.Provider value={valor}>{children}</ContextoDesbloqueos.Provider>;
+  const rol = persona?.rol;
+  const anunciables = rol && !modoDemo ? porAnunciar.filter((clave) => anuncioDe(rol, clave)) : [];
+  const actual = rol && anunciables.length > 0 ? anuncioDe(rol, anunciables[0]) : null;
+  const avanzar = useCallback(() => setPorAnunciar((lista) => lista.slice(1)), []);
+
+  const claveActual = anunciables[0] ?? null;
+  useEffect(() => {
+    if (claveActual) document.body.dataset.nuevo = claveActual;
+    else delete document.body.dataset.nuevo;
+    return () => { delete document.body.dataset.nuevo; };
+  }, [claveActual]);
+
+  useEffect(() => {
+    if (porAnunciar.length > 0 && anunciables.length === 0) setPorAnunciar([]);
+  }, [porAnunciar, anunciables.length]);
+
+  return (
+    <ContextoDesbloqueos.Provider value={valor}>
+      {children}
+      {actual && <GuiaDesbloqueo anuncio={actual} quedan={anunciables.length} alAvanzar={avanzar} />}
+    </ContextoDesbloqueos.Provider>
+  );
 }

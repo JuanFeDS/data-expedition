@@ -14,7 +14,7 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
     <div className="lateral__grupo">
       <span className="lateral__titulo">{titulo}</span>
       {enlaces.map((enlace) => (
-        <a key={enlace.etiqueta} className="lateral__enlace" href={enlace.ruta} aria-current={enlace.activa.includes(ruta) ? 'page' : undefined}>
+        <a key={enlace.etiqueta} className="lateral__enlace" data-codigo={enlace.activa[0]} href={enlace.ruta} aria-current={enlace.activa.includes(ruta) ? 'page' : undefined}>
           <span className="lateral__icono"><IconoSvg tipo={enlace.tipo} /></span>
           <span>{enlace.etiqueta}</span>
           {enlace.aviso && <i className="lateral__aviso">{enlace.aviso}</i>}
