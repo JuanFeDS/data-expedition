@@ -72,8 +72,8 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .pill--grande { padding: 16px 24px; font-size: 16px; width: 100%; }
 .pill--deep { background: var(--deep); }
 
-.segmentado { display: flex; padding: 4px; gap: 2px; border-radius: 999px; background: rgb(11 42 36 / .08); }
-.segmentado button { flex: 1; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.segmentado { max-width: 100%; display: flex; padding: 4px; gap: 2px; border-radius: 999px; background: rgb(11 42 36 / .08); }
+.segmentado button { flex: 1 1 0; min-width: 0; padding: 8px 10px; line-height: 1.15; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--muted); }
 .segmentado button[aria-selected='true'] { background: var(--ink); color: var(--on-primary); }
 
 
@@ -170,8 +170,8 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .galeria h1 { font-family: var(--font-display); font-size: 40px; letter-spacing: -.05em; margin-bottom: 4px; }
 .galeria__grupo { margin-top: 36px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--primary); }
 .galeria__rejilla { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 16px; }
-.galeria__item a { display: block; font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
-.galeria__item a:hover { color: var(--primary); }
+.galeria__item > a { display: block; font-size: 14px; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+.galeria__item > a:hover { color: var(--primary); }
 
 @media (prefers-reduced-motion: no-preference) {
   .opcion, .resp, .pill { transition: background-color .15s, border-color .15s; }
@@ -246,4 +246,9 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .interruptor-tema__pista i { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; }
 .interruptor-tema[aria-checked='true'] .interruptor-tema__pista { background: var(--primary); }
 .interruptor-tema[aria-checked='true'] .interruptor-tema__pista i { transform: translateX(16px); }
-.hoja__menu + .interruptor-tema { align-self: flex-start; margin-top: 4px; color: var(--ink); }
+.menu__ajustes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; color: var(--ink); }
+.lateral__ajustes { display: flex; gap: 6px; }
+.lateral__ajustes .interruptor-tema { flex: 1; min-width: 0; padding: 6px 8px; gap: 6px; font-size: 12px; justify-content: center; }
+.lateral__ajustes .interruptor-tema__pista { width: 28px; height: 16px; border-radius: 8px; }
+.lateral__ajustes .interruptor-tema__pista i { top: 2px; left: 2px; width: 12px; height: 12px; }
+.lateral__ajustes .interruptor-tema[aria-checked='true'] .interruptor-tema__pista i { transform: translateX(12px); }

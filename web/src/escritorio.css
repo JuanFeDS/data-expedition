@@ -362,6 +362,51 @@
     .escenario .dato .num { font-size: 36px; }
   }
 
+  /* ---------- Respuestas incorrectas, historico, liga ---------- */
+  .escenario .fallos__columnas, .escenario .liga__columnas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+  .escenario .hist__columnas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .escenario .liga__columnas { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  .escenario .pulso { max-width: 720px; }
+  .escenario .pulso__paso { min-height: 180px; }
+  .escenario .pulso__ritmo button { width: 52px; height: 52px; }
+  .escenario .liga__fila { padding: 10px 16px; }
+  .escenario .d12__tabla { grid-column: 1 / -1; }
+  @media (max-height: 900px) {
+    .escenario .barra-lateral { gap: 8px; padding: 14px 16px 12px; }
+    .escenario .lateral__nav { gap: 6px; }
+    .escenario .lateral__enlace { padding: 2px 10px; font-size: 13.5px; }
+    .escenario .lateral__icono { width: 24px; height: 24px; }
+    .escenario .lateral__icono svg { width: 16px; height: 16px; }
+    .escenario .lateral__titulo { margin-bottom: 1px; }
+    .escenario .lateral__usuario { padding: 6px 12px; }
+    .escenario .lateral__semana { padding: 4px 12px; }
+  }
+
+  .escenario .d2__rutas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .escenario .d3__columnas .tabla__cab, .escenario .d3__columnas .tabla__fila { grid-template-columns: 1.3fr 1.5fr 60px 1fr 100px !important; }
+
+  /* ---------- Galeria de sonidos ---------- */
+  .escenario .son__columnas { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+  .escenario .son__rejilla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .escenario .son__evento { padding: 14px 16px; gap: 8px; }
+  .escenario .son__evento .tarjeta__cab h2 { font-size: 19px; }
+  .escenario .son__variantes li { padding: 5px 8px; }
+  .escenario .son__variantes small { display: none; }
+  .escenario .son__variantes strong { font-size: 13.5px; }
+  .escenario .son__resumen li { font-size: 12.5px; }
+
+  @media (max-height: 780px) {
+    .escenario .barra-lateral { gap: 6px; padding: 10px 16px 10px; }
+    .escenario .lateral__nav { gap: 4px; }
+    .escenario .lateral__enlace { padding: 1px 10px; font-size: 13px; gap: 10px; }
+    .escenario .lateral__icono { width: 22px; height: 22px; }
+    .escenario .lateral__icono svg { width: 14px; height: 14px; }
+    .escenario .lateral__titulo { font-size: 9.5px; margin: 2px 10px 0; }
+    .escenario .lateral__marca img { width: 34px; }
+    .escenario .lateral__usuario { padding: 4px 10px; }
+    .escenario .lateral__ajustes .interruptor-tema { padding: 4px 6px; }
+  }
+
   /* ---------- Leccion ---------- */
   .escenario .p-e7 .pantalla__cuerpo { align-items: center; }
   .escenario .p-e7 .pantalla__cuerpo > * { width: min(720px, 100%); }
