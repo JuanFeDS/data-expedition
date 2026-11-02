@@ -56,6 +56,10 @@ const leerErrorDeEnlace = () => {
   return MENSAJES_DE_ENLACE[codigo] ?? 'No pudimos validar ese enlace. Pide uno nuevo.';
 };
 
+const SIN_SESION_TRAS_REGRESO = 'No pudimos completar el ingreso en este navegador. Si usas una pestaña privada, abre el sitio en una pestaña normal e inténtalo de nuevo.';
+
+const regresaConCodigo = () => new URLSearchParams(window.location.search).has('code');
+
 const limpiarDireccion = () => {
   const direccion = new URL(window.location.href);
   const habia = ['code', 'error', 'error_code', 'error_description'].some((nombre) => direccion.searchParams.has(nombre));
@@ -92,8 +96,10 @@ export function SesionProvider({ children }: { children: ReactNode }) {
     if (!activo || !supabase) return undefined;
     if (errorDeEnlace) window.location.hash = '#/e0';
     const cliente = supabase;
+    const veniaDeUnEnlace = regresaConCodigo();
     void cliente.auth.getSession().then(({ data }) => {
       limpiarDireccion();
+      if (veniaDeUnEnlace && !data.session) setErrorDeEnlace(SIN_SESION_TRAS_REGRESO);
       void cargarPersona(data.session);
     });
     const { data: suscripcion } = cliente.auth.onAuthStateChange((_evento, sesion) => {
