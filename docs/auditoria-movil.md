@@ -11,7 +11,7 @@ Alcance: 56 vistas (todas las pantallas de estudiante, docente y observador, má
 ## Prioridad 1: afecta a casi todas las pantallas
 
 1. **Cabeceras demasiado grandes.** Título, subtítulo e ilustración ocupan 255–300 px de 812 (35–45 % a 640 px de alto). El contenido útil empieza bajo el pliegue. Caso grave: el relámpago (`e20`), donde la pregunta sale cortada y el botón Responder queda lejos. También en `d1`, `d3`, `d13`, `o1`.
-2. **Dock fijo de 92 px** en 44 pantallas. Tapa el final del contenido (en `d1` la lista de alertas se corta justo encima) y consume el 11 % de la pantalla (14 % a 640 px). En varias pantallas el botón es solo "Volver al panel".
+2. **Dock fijo de 92 px** en 44 pantallas. Reduce el espacio para el contenido (en `d1` la lista de alertas se corta justo encima): el 11 % de la pantalla, 14 % a 640 px. En varias pantallas el botón es solo "Volver al panel".
 3. **Menú.** Una lista única de 10–11 filas sin los grupos (Curso, Clase, Ajustes) que sí existen en escritorio. En 812 px se ven 8 de 10 filas, y a 640 px solo 6, sin pista de que hay más. Para el docente, con tantos destinos, una barra inferior de 4–5 destinos más "Más" sería más cómoda.
 4. **Objetivos táctiles pequeños.**
    - El enlace "← Inicio" de la cabecera mide 19 px de alto.
