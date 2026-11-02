@@ -544,3 +544,7 @@
 @media (min-width: 1100px) {
   .escenario .p-d13 .d13__personas li { grid-template-columns: auto minmax(0, 1fr) 120px 120px auto; }
 }
+
+@media (min-width: 1100px) {
+  .escenario .p-inicio .inicio__atencion { gap: 8px; }
+}

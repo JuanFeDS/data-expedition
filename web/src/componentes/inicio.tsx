@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BotonSalir } from './BotonSalir';
 import { CabeceraMundo } from './CabeceraMundo';
 import { Dock } from './Dock';
@@ -8,7 +8,9 @@ import { enCurso } from './navegacion';
 import { Tarjeta } from './panel';
 import { useSesion } from './sesion';
 import { Pantalla } from './ui';
-import { useServicioTrabajos } from '../servicios/trabajos';
+import { servicioSupabase as personasReal, type DatosPersonas } from '../servicios/personas';
+import { crearServicioDemo as personasDemo } from '../servicios/personasDemo';
+import { formatoFecha, useServicioTrabajos, type EntregaVista, type TrabajoCurso } from '../servicios/trabajos';
 
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 
@@ -105,6 +107,14 @@ function MiPerfil() {
   );
 }
 
+const LO_QUE_TE_ESPERA = [
+  { titulo: 'Tus trabajos y entregas', texto: 'Pega el enlace de tu PR y mira en qué estado va cada trabajo.' },
+  { titulo: 'Notas y retroalimentación', texto: 'La nota de cada trabajo con los comentarios de tu docente.' },
+  { titulo: 'Practicar', texto: 'Preguntas de repaso con racha y XP, sin límite.' },
+  { titulo: 'Tu radar de habilidades', texto: 'Cómo avanzas frente a tu punto de partida.' },
+  { titulo: 'Gemas y álbum de la expedición', texto: 'Cada isla que cierras desbloquea una gema.' },
+];
+
 export function InicioSinCurso() {
   const { persona } = useSesion();
   const { recargar, cargando } = useCurso();
@@ -125,6 +135,13 @@ export function InicioSinCurso() {
             <p className="meta">Tu docente debe invitarte a un curso con el correo <b>{persona?.correo}</b>. Cuando lo haga, aparecerá aquí.</p>
             <button className="acceso__boton acceso__boton--principal" disabled={revisando || cargando} onClick={() => void revisar()}>{revisando ? 'Revisando…' : 'Ya me invitaron, actualizar'}</button>
           </Tarjeta>
+          <Tarjeta kicker="Lo que te espera" titulo="Cuando entres a un curso">
+            <ul className="inicio__atencion">
+              {LO_QUE_TE_ESPERA.map((item) => (
+                <li key={item.titulo} className="pronto"><span>{item.titulo}<small>{item.texto}</small></span><em>Con tu primer curso</em></li>
+              ))}
+            </ul>
+          </Tarjeta>
           <Tutorial pasos={PASOS_ESTUDIANTE} />
           <MiPerfil />
           <BotonSalir clase="inicio__salir">Cerrar sesión</BotonSalir>
@@ -134,48 +151,132 @@ export function InicioSinCurso() {
   );
 }
 
-function PrimerosPasos() {
-  const { cursos, reciente: curso, conteos } = useCurso();
-  const servicio = useServicioTrabajos();
-  const [trabajos, setTrabajos] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (!curso) { setTrabajos(0); return; }
-    void servicio.cargarTrabajos(curso.id).then((lista) => setTrabajos(lista.length)).catch(() => setTrabajos(null));
-  }, [servicio, curso]);
-
-  const conteo = curso ? conteos[curso.id] : undefined;
-  const pasos = [
-    { hecho: cursos.length > 0, texto: 'Crear tu primer curso', ruta: '#/cursos' },
-    { hecho: (conteo?.grupos ?? 0) > 0, texto: 'Crear los grupos del curso', ruta: '#/d13' },
-    { hecho: (conteo?.estudiantes ?? 0) > 0, texto: 'Invitar a tus estudiantes', ruta: '#/d13' },
-    { hecho: (trabajos ?? 0) > 0, texto: 'Publicar el primer trabajo', ruta: '#/d14' },
-  ];
+function PrimerosPasos({ pasos }: { pasos: { hecho: boolean; texto: string; ruta: string }[] }) {
   const completos = pasos.filter((paso) => paso.hecho).length;
-
   return (
     <Tarjeta kicker={`${completos} de ${pasos.length} listos`} titulo="Primeros pasos">
       <ul className="inicio__lista">
         {pasos.map((paso) => (
           <li key={paso.texto} className={paso.hecho ? 'hecho' : ''}>
             <span className="inicio__marca" aria-hidden="true">{paso.hecho ? '✓' : ''}</span>
-            <a href={curso ? enCurso(paso.ruta, curso.id) : paso.ruta}>{paso.texto}</a>
+            <a href={paso.ruta}>{paso.texto}</a>
           </li>
         ))}
       </ul>
-      {completos === pasos.length && <p className="meta">Todo listo. Desde Entregas puedes seguir lo que llega.</p>}
     </Tarjeta>
   );
 }
 
+const PROXIMAMENTE = ['Calificar con rúbrica', 'Relámpagos y votaciones en clase', 'Radar de habilidades del grupo'];
+
+const diasHasta = (iso: string | null) => {
+  if (!iso) return null;
+  return Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000);
+};
+
 export function InicioDocente() {
-  const { persona } = useSesion();
+  const { persona, modoDemo } = useSesion();
+  const { cursos, reciente: curso, conteos, cargando } = useCurso();
+  const trabajosServicio = useServicioTrabajos();
+  const personas = useMemo(() => (modoDemo ? personasDemo() : personasReal), [modoDemo]);
+  const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
+  const [entregas, setEntregas] = useState<EntregaVista[]>([]);
+  const [datos, setDatos] = useState<DatosPersonas | null>(null);
+
+  useEffect(() => {
+    if (!curso) { setTrabajos(null); setEntregas([]); setDatos(null); return; }
+    void trabajosServicio.cargarTrabajos(curso.id).then(setTrabajos).catch(() => setTrabajos(null));
+    void trabajosServicio.entregasDelCurso(curso.id).then(setEntregas).catch(() => setEntregas([]));
+    void personas.cargar(curso.id).then(setDatos).catch(() => setDatos(null));
+  }, [curso, trabajosServicio, personas]);
+
+  const conteo = curso ? conteos[curso.id] : undefined;
+  const estudiantes = datos?.personas.filter((candidata) => candidata.rol === 'estudiante') ?? [];
+  const porRevisar = entregas.filter((entrega) => entrega.estado === 'entregada').length;
+  const porRegistrarse = datos?.invitaciones.length ?? 0;
+  const sinGrupo = estudiantes.filter((candidata) => !candidata.grupoId).length;
+  const proximos = (trabajos ?? []).filter((trabajo) => trabajo.venceEn && new Date(trabajo.venceEn).getTime() >= Date.now() - 86400000).slice(0, 4);
+  const entregaron = (trabajoId: string) => new Set(entregas.filter((entrega) => entrega.trabajoId === trabajoId).map((entrega) => entrega.usuario ?? entrega.estudiante)).size;
+  const ir = (ruta: string) => (curso ? enCurso(ruta, curso.id) : ruta);
+
+  const pasos = [
+    { hecho: cursos.length > 0, texto: 'Crear tu primer curso', ruta: '#/cursos' },
+    { hecho: (conteo?.grupos ?? 0) > 0, texto: 'Crear los grupos del curso', ruta: ir('#/d13') },
+    { hecho: (conteo?.estudiantes ?? 0) > 0, texto: 'Invitar a tus estudiantes', ruta: ir('#/d13') },
+    { hecho: (trabajos?.length ?? 0) > 0, texto: 'Publicar el primer trabajo', ruta: ir('#/d14') },
+  ];
+  const faltaArmar = pasos.some((paso) => !paso.hecho);
+
+  const atencion = [
+    { cantidad: porRevisar, texto: 'entregas por revisar', ruta: ir('#/d3') },
+    { cantidad: porRegistrarse, texto: 'invitaciones sin registrarse', ruta: ir('#/d13') },
+    { cantidad: sinGrupo, texto: 'estudiantes sin grupo', ruta: ir('#/d13') },
+  ].filter((item) => item.cantidad > 0);
+
   return (
     <Pantalla rol="docente" clase="p-inicio">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo kicker="Panel del docente" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo="Esto es lo que necesitas para arrancar el curso." objeto="mochila" />
+        <CabeceraMundo kicker="Tu panel" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo={curso ? `Así va ${curso.nombre}.` : 'Crea un curso para empezar.'} objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
-          <PrimerosPasos />
+          {faltaArmar && !cargando && <PrimerosPasos pasos={pasos} />}
+          <Tarjeta kicker="Hoy" titulo="Requiere tu atención">
+            <ul className="inicio__atencion">
+              {atencion.map((item) => (
+                <li key={item.texto}><a href={item.ruta}><b>{item.cantidad}</b><span>{item.texto}</span><i aria-hidden="true">›</i></a></li>
+              ))}
+              {atencion.length === 0 && <li className="vacio"><span>{curso ? 'Nada pendiente por ahora.' : 'Aún no hay un curso.'}</span></li>}
+              <li className="pronto"><span>Estudiantes en riesgo</span><em>Próximamente</em></li>
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="Lo que viene" titulo="Próximos vencimientos" accion={curso ? <a className="cursos__secundaria" href={ir('#/d14')}>Trabajos</a> : undefined}>
+            <ul className="inicio__atencion">
+              {proximos.map((trabajo) => {
+                const dias = diasHasta(trabajo.venceEn);
+                return (
+                  <li key={trabajo.id}>
+                    <a href={ir('#/d3')}>
+                      <b>{formatoFecha(trabajo.venceEn).numero}</b>
+                      <span>{trabajo.nombre}<small>{dias !== null && dias >= 0 ? (dias === 0 ? 'vence hoy' : `en ${dias} ${dias === 1 ? 'día' : 'días'}`) : 'ya venció'} · {entregaron(trabajo.id)} de {estudiantes.length} entregaron</small></span>
+                      <i aria-hidden="true">›</i>
+                    </a>
+                  </li>
+                );
+              })}
+              {proximos.length === 0 && <li className="vacio"><span>{curso ? 'No hay trabajos próximos.' : 'Cuando tengas un curso, verás aquí lo que vence.'}</span></li>}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="Tus cursos" titulo="Cursos" accion={<a className="cursos__secundaria" href="#/cursos">Ver todos</a>}>
+            <ul className="inicio__atencion">
+              {cursos.map((candidato) => (
+                <li key={candidato.id}>
+                  <a href={enCurso('#/curso', candidato.id)}>
+                    <b>{conteos[candidato.id]?.estudiantes ?? 0}</b>
+                    <span>{candidato.nombre}<small>{candidato.periodo ? `Periodo ${candidato.periodo} · ` : ''}{conteos[candidato.id]?.grupos ?? 0} grupos</small></span>
+                    <i aria-hidden="true">›</i>
+                  </a>
+                </li>
+              ))}
+              {cursos.length === 0 && <li className="vacio"><span>Aún no tienes cursos.</span></li>}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="En camino" titulo="Próximamente">
+            <ul className="inicio__atencion">
+              {PROXIMAMENTE.map((texto) => <li key={texto} className="pronto"><span>{texto}</span><em>Próximamente</em></li>)}
+            </ul>
+          </Tarjeta>
+        </div>
+      </div>
+      <Dock />
+    </Pantalla>
+  );
+}
+
+export function AyudaDocente() {
+  return (
+    <Pantalla rol="docente" clase="p-inicio">
+      <div className="pantalla__cuerpo">
+        <CabeceraMundo kicker="Ayuda" titulo="Cómo funciona" subtitulo="Un recorrido corto y tus datos de perfil." objeto="mochila" />
+        <div className="contenido cuerpo-mundo panel">
           <Tutorial pasos={PASOS_DOCENTE} />
           <MiPerfil />
         </div>
