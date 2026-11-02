@@ -2,8 +2,11 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
+import { inicioDeRol, rolDeRuta } from './componentes/navegacion';
+import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
+import { Cargando, OtroRol } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -42,6 +45,7 @@ function Galeria() {
 
 function App() {
   const [ruta, setRuta] = useState(rutaActual);
+  const { modoDemo, cargando, persona } = useSesion();
   useEffect(() => {
     const alCambiar = () => setRuta(rutaActual());
     window.addEventListener('hashchange', alCambiar);
@@ -51,16 +55,48 @@ function App() {
   useAjusteAltura(ruta);
 
   const pantalla = PANTALLAS.find((candidata) => candidata.codigo === ruta);
-  if (!pantalla) return <Galeria />;
+  const inicio = persona ? inicioDeRol[persona.rol] : '#/e0';
+  const debeRedirigir = !modoDemo && persona !== null && (!pantalla || ruta === 'e0');
+
+  useEffect(() => {
+    if (debeRedirigir) window.location.hash = inicio;
+  }, [debeRedirigir, inicio]);
+
+  if (modoDemo) {
+    if (!pantalla) return <Galeria />;
+    const Componente = pantalla.componente;
+    return (
+      <ModoViva.Provider value>
+        <div className="escenario">
+          <BarraLateral ruta={ruta} />
+          <Componente />
+        </div>
+      </ModoViva.Provider>
+    );
+  }
+
+  if (cargando || debeRedirigir) return <Cargando />;
+
+  if (!persona) {
+    const Acceso = PANTALLAS.find((candidata) => candidata.codigo === 'e0')!.componente;
+    return (
+      <ModoViva.Provider value>
+        <div className="escenario escenario--sin-barra"><Acceso /></div>
+      </ModoViva.Provider>
+    );
+  }
+
+  if (!pantalla) return <Cargando />;
   const Componente = pantalla.componente;
+  const permitido = rolDeRuta(ruta) === persona.rol;
   return (
     <ModoViva.Provider value>
       <div className="escenario">
-        <BarraLateral ruta={ruta} />
-        <Componente />
+        <BarraLateral ruta={permitido ? ruta : inicio.replace('#/', '')} />
+        {permitido ? <Componente /> : <OtroRol rol={persona.rol} />}
       </div>
     </ModoViva.Provider>
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><App /></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><App /></SesionProvider></StrictMode>);

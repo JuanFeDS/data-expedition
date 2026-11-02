@@ -2,6 +2,7 @@ import { IconoSvg } from './Icono';
 import { InterruptorSonido, InterruptorTema } from './tema';
 import { Jaguar } from './Jaguar';
 import { NAVEGACION, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
+import { useSesion } from './sesion';
 import { semanaActual, totalSemanas } from '../datos';
 
 function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; ruta: string }) {
@@ -21,7 +22,13 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
 
 export function BarraLateral({ ruta }: { ruta: string }) {
   const rol = rolDeRuta(ruta);
-  const usuario = usuarioDeRol[rol];
+  const { modoDemo, persona, cerrarSesion } = useSesion();
+  const base = usuarioDeRol[rol];
+  const real = !modoDemo && persona !== null;
+  const nombreVisible = persona?.nombre?.trim() || persona?.correo.split('@')[0] || '';
+  const usuario = real
+    ? { ...base, iniciales: nombreVisible.slice(0, 2).toUpperCase(), nombre: nombreVisible, detalle: persona.correo }
+    : base;
   return (
     <aside className={`barra-lateral barra-lateral--${rol}`} aria-label="Navegación principal">
       <a className="lateral__marca" href={inicioDeRol[rol]}>
@@ -37,6 +44,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
         <span className={`avatar avatar--${usuario.color}`}>{usuario.iniciales}</span>
         <span className="lateral__datos"><strong>{usuario.nombre}</strong><small>{usuario.detalle}</small></span>
       </a>
+      {real && <button className="lateral__salir" onClick={() => void cerrarSesion()}>Cerrar sesión</button>}
     </aside>
   );
 }
