@@ -127,7 +127,7 @@ export function InicioSinCurso() {
   };
 
   return (
-    <Pantalla clase="p-inicio">
+    <Pantalla clase="p-inicio p-inicio--sin-curso">
       <div className="pantalla__cuerpo">
         <CabeceraMundo kicker="Tu expedición empieza aquí" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo="Aún no estás en ningún curso." objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
@@ -211,7 +211,7 @@ export function InicioDocente() {
   ].filter((item) => item.cantidad > 0);
 
   return (
-    <Pantalla rol="docente" clase="p-inicio">
+    <Pantalla rol="docente" clase="p-inicio p-inicio--tablero">
       <div className="pantalla__cuerpo">
         <CabeceraMundo kicker="Tu panel" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo={curso ? `Así va ${curso.nombre}.` : 'Crea un curso para empezar.'} objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
@@ -270,7 +270,7 @@ export function InicioDocente() {
 
 export function AyudaDocente() {
   return (
-    <Pantalla rol="docente" clase="p-inicio">
+    <Pantalla rol="docente" clase="p-inicio p-inicio--tablero">
       <div className="pantalla__cuerpo">
         <CabeceraMundo kicker="Ayuda" titulo="Cómo funciona" subtitulo="Un recorrido corto y tus datos de perfil." objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
@@ -321,7 +321,7 @@ export function InicioEstudiante() {
   const nombreDe = (id: string) => trabajos?.find((trabajo) => trabajo.id === id)?.nombre ?? 'Trabajo';
 
   return (
-    <Pantalla clase="p-inicio">
+    <Pantalla clase="p-inicio p-inicio--tablero">
       <div className="pantalla__cuerpo">
         <CabeceraMundo kicker="Tu expedición" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo={curso ? `Esto es lo que sigue en ${curso.nombre}.` : 'Elige un curso para empezar.'} objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
