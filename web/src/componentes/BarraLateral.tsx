@@ -1,6 +1,7 @@
 import { IconoSvg } from './Icono';
 import { INICIO_REAL } from './acceso';
 import { useCurso } from './curso';
+import { useDesbloqueos } from './desbloqueos';
 import { BotonSalir } from './BotonSalir';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
@@ -25,7 +26,8 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
 
 export function BarraLateral({ ruta }: { ruta: string }) {
   const { modoDemo, persona } = useSesion();
-  const { curso, dentro } = useCurso();
+  const { curso, dentro, reciente } = useCurso();
+  const { todo, desbloqueadas } = useDesbloqueos();
   const rol = RUTAS_COMUNES.has(ruta) && persona ? persona.rol : rolDeRuta(ruta);
   const base = usuarioDeRol[rol];
   const real = !modoDemo && persona !== null;
@@ -34,14 +36,14 @@ export function BarraLateral({ ruta }: { ruta: string }) {
     ? { ...base, iniciales: nombreVisible.slice(0, 2).toUpperCase(), nombre: nombreVisible, detalle: persona.usuario ? `@${persona.usuario}` : base.detalle }
     : base;
   return (
-    <aside className={`barra-lateral barra-lateral--${rol}`} aria-label="Navegación principal">
+    <aside className={`barra-lateral barra-lateral--${rol} ${real ? 'barra-lateral--real' : ''}`} aria-label="Navegación principal">
       <a className="lateral__marca" href={real ? INICIO_REAL[rol] : inicioDeRol[rol]} aria-label="Data Expedition, ir al inicio">
         <img className="marca-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="" />
         <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
       {!real && <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>}
       <nav className="lateral__nav">
-        {gruposVisibles(rol, real, dentro ? curso : null).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
+        {gruposVisibles(rol, real, dentro ? curso : reciente, todo ? null : desbloqueadas).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
       <div className="lateral__ajustes"><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>

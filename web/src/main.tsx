@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from './componentes/navegacion';
 import { ConfirmarProvider } from './componentes/confirmar';
+import { DesbloqueosProvider } from './componentes/desbloqueos';
 import { CursoProvider, useCurso } from './componentes/curso';
 import { InicioSinCurso } from './componentes/inicio';
 import { SesionProvider, useSesion } from './componentes/sesion';
@@ -130,4 +131,4 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><ConfirmarProvider><App /></ConfirmarProvider></CursoProvider></SesionProvider></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><DesbloqueosProvider><ConfirmarProvider><App /></ConfirmarProvider></DesbloqueosProvider></CursoProvider></SesionProvider></StrictMode>);

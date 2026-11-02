@@ -147,3 +147,10 @@ Tamaños: S = media jornada, M = una jornada.
 
 - Los grupos ya no son una división fija del curso: la interfaz dejó de mostrarlos (invitaciones, Personas, CSV, detalle del curso, home y entregas). Las tablas `grupos` y `matriculas.grupo_id` siguen en la base sin uso. **Pendiente de diseño:** equipos o parejas **por trabajo**, para las entregas por equipo y la revisión en parejas (¿los arma el docente, se sortean o los forman los estudiantes?).
 - Las confirmaciones usan un cuadro propio (`componentes/confirmar.tsx`, con `useConfirmar()`), no el `confirm` del navegador. Se usa para cerrar sesión, quitar a alguien de un curso y eliminar un curso.
+
+## Panel izquierdo: desbloqueo progresivo y permanente (2 nov)
+
+- Al empezar, el panel solo trae lo general: Inicio y Cursos (más Ayuda para el docente). Las secciones de un curso aparecen poco a poco y, una vez desbloqueadas, **no vuelven a esconderse**, ni siquiera al salir del curso (siguen apuntando al curso más reciente).
+- Reglas: al entrar a un curso, el estudiante ve Información y Entregas; el docente ve Información y Personas. El docente ve Trabajos al visitar Personas, y Entregas al visitar Trabajos.
+- Lo desbloqueado se guarda en el navegador, por usuario (`desbloqueos-<id>`). **Limitación:** no viaja entre dispositivos. Si hace falta, se mueve a una tabla en la base.
+- El panel de la app real ya no usa la compactación pensada para el menú completo de la demo: tiene más aire entre elementos.

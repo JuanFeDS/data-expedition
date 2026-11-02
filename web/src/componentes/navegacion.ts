@@ -142,10 +142,18 @@ export const enCurso = (ruta: string, cursoId: string) => {
   return ENCURSO.has(codigo) ? rutaDeCurso(cursoId, codigo) : ruta;
 };
 
-export const gruposVisibles = (rol: Rol, soloConectadas: boolean, curso: { id: string; nombre: string } | null = null): GrupoEnlaces[] => {
+export const gruposVisibles = (
+  rol: Rol,
+  soloConectadas: boolean,
+  curso: { id: string; nombre: string } | null = null,
+  desbloqueadas: Set<string> | null = null,
+): GrupoEnlaces[] => {
   if (!soloConectadas) return NAVEGACION[rol];
   const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : rol === 'estudiante' ? [ENLACE_INICIO, ENLACE_CURSOS] : [ENLACE_CURSOS] };
   if (!curso) return [general];
-  const delCurso = NAVEGACION[rol].flatMap((grupo) => grupo.enlaces).filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)));
-  return [general, { titulo: curso.nombre, enlaces: [ENLACE_INFO, ...delCurso].map((enlace) => ({ ...enlace, ruta: enCurso(enlace.ruta, curso.id) })) }];
+  const delCurso = [ENLACE_INFO, ...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces)]
+    .filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)))
+    .filter((enlace) => !desbloqueadas || desbloqueadas.has(codigoDeRuta(enlace.ruta)))
+    .map((enlace) => ({ ...enlace, ruta: enCurso(enlace.ruta, curso.id) }));
+  return delCurso.length > 0 ? [general, { titulo: curso.nombre, enlaces: delCurso }] : [general];
 };

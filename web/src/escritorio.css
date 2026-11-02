@@ -552,3 +552,15 @@
 @media (min-width: 1100px) {
   .escenario .p-d13 .d13__personas li { grid-template-columns: auto minmax(0, 1fr) 140px auto; }
 }
+
+/* Panel izquierdo de la app real: tiene pocas opciones, así que respira */
+@media (min-width: 1100px) {
+  .escenario .barra-lateral--real { gap: 22px; padding: 26px 16px 20px; }
+  .escenario .barra-lateral--real .lateral__nav { gap: 22px; }
+  .escenario .barra-lateral--real .lateral__grupo { gap: 6px; }
+  .escenario .barra-lateral--real .lateral__titulo { margin: 0 12px 6px; }
+  .escenario .barra-lateral--real .lateral__enlace { padding: 9px 12px; gap: 12px; font-size: var(--fs-md); }
+  .escenario .barra-lateral--real .lateral__icono { width: 32px; height: 32px; }
+  .escenario .barra-lateral--real .lateral__icono svg { width: 20px; height: 20px; }
+  .escenario .barra-lateral--real .lateral__usuario { padding: 12px; }
+}
