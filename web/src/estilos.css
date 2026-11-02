@@ -232,3 +232,17 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
 .insignia-demo { position: fixed; top: 6px; left: 50%; transform: translateX(-50%); z-index: 80; display: flex; align-items: center; gap: 10px; padding: 5px 12px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 800; box-shadow: 0 2px 8px rgb(0 0 0 / .25); white-space: nowrap; max-width: calc(100vw - 16px); }
 .insignia-demo a { text-decoration: underline; }
+
+.selector-curso { position: relative; }
+.selector-curso__boton { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 32px; padding: 0; font-size: 15px; font-weight: 800; color: inherit; text-align: left; }
+.selector-curso__boton span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.selector-curso__boton svg { flex: none; transition: transform .15s; }
+.selector-curso__boton[aria-expanded='true'] svg { transform: rotate(180deg); }
+.selector-curso__lista { position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0; display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 6px; list-style: none; border-radius: 16px; background: var(--surface); color: var(--ink); box-shadow: 0 12px 32px rgb(0 0 0 / .35), 0 0 0 2px var(--line); max-height: 260px; overflow-y: auto; }
+.selector-curso__lista button { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 10px 12px; border-radius: 10px; font-size: 14px; font-weight: 800; text-align: left; color: var(--ink); }
+.selector-curso__lista button:hover { background: var(--primary-soft); }
+.selector-curso__lista li[aria-selected='true'] button { background: var(--accent); color: var(--on-accent); }
+@media (prefers-reduced-motion: no-preference) { .selector-curso__lista { animation: selector-abre .12s ease-out; } @keyframes selector-abre { from { opacity: 0; transform: translateY(-4px); } } }
+
+.selector-curso__crear { align-self: flex-start; margin-top: 2px; font-size: 13px; font-weight: 800; color: var(--accent); text-decoration: underline; }
+.hoja .selector-curso__crear { color: var(--primary); }

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { crearServicioCursosDemo, servicioCursosSupabase, type ConteoCurso, type Curso, type DatosCurso } from '../servicios/cursos';
 import { useSesion } from './sesion';
 
@@ -93,14 +93,48 @@ export function CursoProvider({ children }: { children: ReactNode }) {
 
 export function SelectorCurso({ clase = '' }: { clase?: string }) {
   const { cursos, curso, elegir } = useCurso();
-  if (cursos.length === 0) return null;
+  const { persona } = useSesion();
+  const [abierto, setAbierto] = useState(false);
+  const caja = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!abierto) return undefined;
+    const alPulsarFuera = (evento: MouseEvent) => { if (!caja.current?.contains(evento.target as Node)) setAbierto(false); };
+    const alTeclear = (evento: KeyboardEvent) => { if (evento.key === 'Escape') setAbierto(false); };
+    document.addEventListener('mousedown', alPulsarFuera);
+    document.addEventListener('keydown', alTeclear);
+    return () => { document.removeEventListener('mousedown', alPulsarFuera); document.removeEventListener('keydown', alTeclear); };
+  }, [abierto]);
+
+  if (cursos.length === 0) {
+    return (
+      <p className={`selector-curso selector-curso--unico ${clase}`}>
+        <small>Curso</small>
+        <strong>Aún no tienes cursos</strong>
+        {persona?.rol === 'docente' && <a className="selector-curso__crear" href="#/cursos">Crear uno ›</a>}
+      </p>
+    );
+  }
   if (cursos.length === 1) return <p className={`selector-curso selector-curso--unico ${clase}`}><small>Curso</small><strong>{cursos[0].nombre}</strong></p>;
   return (
-    <label className={`selector-curso ${clase}`}>
+    <div className={`selector-curso ${clase}`} ref={caja}>
       <small>Curso</small>
-      <select value={curso?.id ?? ''} onChange={(evento) => elegir(evento.target.value)} aria-label="Curso activo">
-        {cursos.map((candidato) => <option key={candidato.id} value={candidato.id}>{candidato.nombre}</option>)}
-      </select>
-    </label>
+      <button className="selector-curso__boton" aria-haspopup="listbox" aria-expanded={abierto} onClick={() => setAbierto((actual) => !actual)}>
+        <span>{curso?.nombre}</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
+      {abierto && (
+        <ul className="selector-curso__lista" role="listbox" aria-label="Curso activo">
+          {cursos.map((candidato) => (
+            <li key={candidato.id} role="option" aria-selected={candidato.id === curso?.id}>
+              <button onClick={() => { elegir(candidato.id); setAbierto(false); }}>
+                <span>{candidato.nombre}</span>
+                {candidato.id === curso?.id && <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.4 6.6 11.5 12.5 4.8" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
