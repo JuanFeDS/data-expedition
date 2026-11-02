@@ -1238,3 +1238,20 @@
 .d13__resumen { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
 .d13__errores { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; font-size: 12.5px; font-weight: 700; color: var(--e-alerta); }
 .d13__nota a { text-decoration: underline; }
+
+/* Acceso en celular: el bloque de marca va en una fila y la escena se adapta al espacio que sobra */
+@media (max-width: 1099px) {
+  .acceso { overflow-y: auto; }
+  .acceso__titulo { padding: 30px 20px 16px; gap: 8px; }
+  .marca--cabecera { flex-direction: row; align-items: center; gap: 10px; }
+  .marca--cabecera .marca__logo { width: 62px; flex: none; }
+  .marca--cabecera .marca__letras { width: auto; height: 78px; min-width: 0; max-width: calc(100% - 72px); object-fit: contain; }
+  .acceso__escena { overflow: hidden; min-height: 96px; }
+  .acceso__escena .acceso__guia { height: 100%; width: auto; max-height: 190px; }
+  .acceso__escena .acceso__mapa { height: 70%; width: auto; max-height: 120px; }
+  .acceso__hoja { gap: 10px; padding: 16px 20px max(20px, env(safe-area-inset-bottom)); }
+  .acceso__hoja > p { font-size: 13px; }
+}
+@media (max-width: 1099px) and (max-height: 720px) {
+  .acceso__titulo p, .acceso__hoja > p { display: none; }
+}
