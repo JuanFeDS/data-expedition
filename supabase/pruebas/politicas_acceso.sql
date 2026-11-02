@@ -1,5 +1,5 @@
 -- Pruebas de las politicas de acceso por fila. Se corren como el rol postgres (por ejemplo con el
--- editor SQL de Supabase) y deben devolver `ok = true` en las 20 filas.
+-- editor SQL de Supabase) y deben devolver `ok = true` en las 24 filas.
 -- Cada prueba ejecuta una operacion COMO un usuario (con su rol y su identificador) y compara el
 -- resultado con lo esperado. Los usuarios llevan el dominio @prueba.invalid y se borran al final.
 -- Ejecutar en 3 pasos: preparar, probar y limpiar.
@@ -12,6 +12,7 @@ insert into auth.users (id, email, instance_id, aud, role, email_confirmed_at) v
  ('a0000000-0000-0000-0000-000000000004', 'observador@prueba.invalid', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', now());
 update public.perfiles set rol = 'docente' where id = 'a0000000-0000-0000-0000-000000000003';
 update public.perfiles set rol = 'observador' where id = 'a0000000-0000-0000-0000-000000000004';
+update public.perfiles set usuario = 'est_uno' where id = 'a0000000-0000-0000-0000-000000000001';
 insert into public.ediciones (id, nombre) values ('b0000000-0000-0000-0000-000000000001', 'PRUEBA');
 insert into public.grupos (id, edicion_id, nombre) values ('b1000000-0000-0000-0000-000000000001', 'b0000000-0000-0000-0000-000000000001', 'G1');
 insert into public.matriculas (perfil_id, edicion_id, grupo_id) values
@@ -63,13 +64,17 @@ with c as (
   union all select 11, 'Estudiante: ve solo su edicion', 'filas=1', pg_temp.ejecutar(e1, 'authenticated', 'select * from public.ediciones') from c
   union all select 12, 'Anonimo: no lee perfiles', 'filas=0|error 42501%', pg_temp.ejecutar(e1, 'anon', 'select * from public.perfiles') from c
   union all select 13, 'Anonimo: no llama asignar_rol', 'error 42501%', pg_temp.ejecutar(e1, 'anon', format('select public.asignar_rol(%L, ''docente'')', e1)) from c
-  union all select 14, 'Docente: ve todos los perfiles', 'filas=4', pg_temp.ejecutar(doc, 'authenticated', 'select * from public.perfiles') from c
+  union all select 14, 'Docente: ve todos los perfiles', 'filas=' || (4 + (select count(*) from public.perfiles where correo not like '%@prueba.invalid')), pg_temp.ejecutar(doc, 'authenticated', 'select * from public.perfiles') from c
   union all select 15, 'Docente: asigna un rol', 'filas=1', pg_temp.ejecutar(doc, 'authenticated', format('select public.asignar_rol(%L, ''observador'')', e2)) from c
   union all select 16, 'Observador: solo ve su perfil', 'filas=1', pg_temp.ejecutar(obs, 'authenticated', 'select * from public.perfiles') from c
   union all select 17, 'Observador: no ve entregas', 'filas=0', pg_temp.ejecutar(obs, 'authenticated', 'select * from public.entregas') from c
   union all select 18, 'Observador: no ve ediciones', 'filas=0', pg_temp.ejecutar(obs, 'authenticated', 'select * from public.ediciones') from c
   union all select 19, 'Observador: resumen oculto con menos de 5 personas', 'filas=0', pg_temp.ejecutar(obs, 'authenticated', format('select * from public.resumen_dimensiones_por_grupo(%L)', ed)) from c
   union all select 20, 'Observador: no asigna roles', 'error P0001 Solo el docente%', pg_temp.ejecutar(obs, 'authenticated', format('select public.asignar_rol(%L, ''docente'')', e1)) from c
+  union all select 21, 'Estudiante: si elige su usuario', 'filas=1', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''est_dos'' where id = %L', e2)) from c
+  union all select 22, 'Estudiante: usuario repetido se rechaza', 'error 23505%', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''est_uno'' where id = %L', e2)) from c
+  union all select 23, 'Estudiante: usuario con formato invalido se rechaza', 'error 23514%', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''A'' where id = %L', e2)) from c
+  union all select 24, 'Estudiante: no cambia el usuario de otro', 'filas=0', pg_temp.ejecutar(e2, 'authenticated', format('update public.perfiles set usuario = ''robado'' where id = %L', e1)) from c
 )
 select n, prueba, esperado, r as obtenido, (r like any (string_to_array(esperado, '|'))) as ok from t order by n;
 
