@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
-import { CONECTADAS, rolDeRuta } from './componentes/navegacion';
+import { CONECTADAS, RUTAS_COMUNES, rolDeRuta } from './componentes/navegacion';
 import { CursoProvider, useCurso } from './componentes/curso';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
@@ -110,7 +110,7 @@ function App() {
 
   if (!pantalla) return <Cargando />;
   const Componente = pantalla.componente;
-  const permitido = rolDeRuta(ruta) === persona.rol;
+  const permitido = RUTAS_COMUNES.has(ruta) || rolDeRuta(ruta) === persona.rol;
   return (
     <ModoViva.Provider value>
       <div className="escenario">

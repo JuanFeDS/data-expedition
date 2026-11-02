@@ -3,7 +3,7 @@ import { BotonSalir } from './BotonSalir';
 import { SelectorCurso } from './curso';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
-import { gruposVisibles, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
+import { RUTAS_COMUNES, gruposVisibles, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
 import { useSesion } from './sesion';
 import { semanaActual, totalSemanas } from '../datos';
 
@@ -23,8 +23,8 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
 }
 
 export function BarraLateral({ ruta }: { ruta: string }) {
-  const rol = rolDeRuta(ruta);
   const { modoDemo, persona } = useSesion();
+  const rol = RUTAS_COMUNES.has(ruta) && persona ? persona.rol : rolDeRuta(ruta);
   const base = usuarioDeRol[rol];
   const real = !modoDemo && persona !== null;
   const nombreVisible = persona?.nombre?.trim() || persona?.usuario || '';

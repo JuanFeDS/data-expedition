@@ -33,7 +33,7 @@ export const PASOS_DE_ACCESO = [
   { numero: '3', titulo: 'Gana gemas', texto: 'Cada reto pulido suma al radar.' },
 ];
 
-export const INICIO_REAL: Record<Rol, string> = { estudiante: '#/e5', docente: '#/d13', observador: '#/o1' };
+export const INICIO_REAL: Record<Rol, string> = { estudiante: '#/cursos', docente: '#/cursos', observador: '#/cursos' };
 
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 
