@@ -269,8 +269,9 @@ export function InicioDocente() {
 }
 
 export function AyudaDocente() {
+  const { persona } = useSesion();
   return (
-    <Pantalla rol="docente" clase="p-inicio p-inicio--tablero">
+    <Pantalla rol={persona?.rol ?? 'docente'} clase="p-inicio p-inicio--tablero">
       <div className="pantalla__cuerpo">
         <CabeceraMundo kicker="Ayuda" titulo="Cómo funciona" subtitulo="Un recorrido corto y tus datos de perfil." objeto="mochila" />
         <div className="contenido cuerpo-mundo panel">
@@ -385,5 +386,12 @@ export function InicioEstudiante() {
 
 export function InicioPorRol() {
   const { persona } = useSesion();
+  const esObservador = persona?.rol === 'observador';
+
+  useEffect(() => {
+    if (esObservador) window.location.hash = '#/cursos';
+  }, [esObservador]);
+
+  if (esObservador) return null;
   return persona?.rol === 'estudiante' ? <InicioEstudiante /> : <InicioDocente />;
 }
