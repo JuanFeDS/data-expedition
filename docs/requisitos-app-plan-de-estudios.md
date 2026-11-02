@@ -21,9 +21,15 @@ Borrador del 2026-11-01. Reúne lo que el diseño del [plan de estudios](plan-de
 | E1 | Criterios transversales de rúbrica | F4 | Semana 2 |
 | E2 | Panel del docente: diagnóstico, rutas y seguimiento | | Semana 2 |
 
+Numeración propuesta para el RFC: **F22** es el módulo de formularios (B1 y B3) y **F23** son las preguntas relámpago (B2). Los demás requisitos no tienen número hasta que se incorporen.
+
+Las pantallas de cada requisito están listadas en [plan-de-accion-pantallas.md](plan-de-accion-pantallas.md).
+
 "Antes de la S1" significa que, si la app no llega, se cubre con el plan B del RFC (formulario externo y hoja de cálculo, hito H1).
 
 ## 2. Entrega por PR (extiende F21)
+
+**Alineación con el RFC:** el plan define 7 trabajos (T1 a T7), mientras que F5 del RFC dice "3 o 4". Al incorporar estos requisitos, F5 pasa a 7 trabajos, con el último como proyecto integrador. El prototipo ya usa los 7.
 
 **A1. Carga del enlace con plazo.**
 - El docente habilita cada trabajo con una fecha y hora límite. Los estudiantes cargan el enlace del PR en la app.
@@ -60,7 +66,7 @@ Un solo módulo para tres usos. La propuesta completa y la lista de 12 encuestas
 - respuesta correcta y explicación breve;
 - ventana de tiempo de 60 a 90 segundos, visible en pantalla;
 - un solo intento y parámetros opcionales distintos por estudiante, para que no se copien;
-- XP de bonificación solo para quien responde dentro de la ventana;
+- XP de bonificación solo para quien responde dentro de la ventana, por lo que **la relámpago siempre es identificada** (nunca anónima);
 - botón de "abrir ahora" en el panel del docente, que muestra el QR para compartir en pantalla.
 
 El registro de quién respondió dentro de la ventana sirve también como señal de presencia en la sesión.
@@ -88,7 +94,7 @@ El registro de quién respondió dentro de la ventana sirve también como señal
 
 **D2. Material complementario por sesión.** Cada recurso guarda: título, tipo (libro, capítulo, paper, video, documentación), idioma, si es gratuito, enlace, sesión, estado de verificación y fecha de la última verificación. Se muestra en la lección de cada sesión, con el idioma a la vista. Hay un recurso por verificar en varios lugares del plan (marcados «Pendiente»), así que el estado importa. Una comprobación periódica de enlaces rotos avisa al docente.
 
-**D3. Resumen en español de recursos en inglés.** Para los recursos marcados [EN], un resumen breve en español y un glosario de términos, dentro de la app. Es la nota que dejaste sobre promocionar la app con lo que ya se estaba construyendo para eso. Va después del arranque.
+**D3. Resumen en español de recursos en inglés.** Para los recursos marcados [EN], un resumen breve en español y un glosario de términos, dentro de la app. Aprovecha lo que ya se estaba construyendo para promocionar la app con resúmenes en español. Va después del arranque.
 
 ## 6. Rúbricas y panel del docente
 

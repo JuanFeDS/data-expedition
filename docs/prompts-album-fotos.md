@@ -51,18 +51,7 @@ Ambientación: páramo de altura con frailejones plateados, neblina suave y lagu
 5. El jaguar separa frutos buenos y dañados en dos cestas, entre frailejones.
 6. El jaguar mira cómo la neblina se levanta y deja ver una cima despejada.
 
-### 3. Costa de la Exploración · Topacio Faro (costa)
-
-Ambientación: playa, faro rojo y blanco, mar turquesa. Acento: amarillo topacio.
-
-1. El jaguar sube la escalera de un faro con una linterna en la mano.
-2. El jaguar mira el horizonte con unos binoculares, sobre una roca en la playa.
-3. El jaguar dibuja un gráfico de barras en la arena con un palo.
-4. El jaguar ordena caracolas por tamaño en una fila sobre la arena.
-5. El jaguar sigue un mapa del tesoro hacia una palmera.
-6. El jaguar rema en una pequeña barca de madera, con el faro al fondo.
-
-### 4. Desierto del Modelado · Zafiro del Oasis (desierto)
+### 3. Desierto del Modelado · Zafiro del Oasis (desierto)
 
 Ambientación: dunas, cactus, palmera y un oasis azul. Acento: azul zafiro.
 
@@ -73,7 +62,9 @@ Ambientación: dunas, cactus, palmera y un oasis azul. Acento: azul zafiro.
 5. El jaguar sigue huellas en la arena hacia una duna lejana.
 6. El jaguar clava una bandera pequeña en la cima de una duna, con el oasis abajo.
 
-### 5. Cueva de los Modelos · Ámbar Brasa (cueva)
+### 4. Cueva de la Escala · Ámbar Brasa (cueva)
+
+Tema: Big Data y Spark, qué pasa cuando los datos no caben en memoria.
 
 Ambientación: cueva con cristales, luz cálida de antorcha y paredes de ámbar. Acento: ámbar y naranja cálido.
 
@@ -84,18 +75,7 @@ Ambientación: cueva con cristales, luz cálida de antorcha y paredes de ámbar.
 5. El jaguar moldea arcilla en moldes de distinta forma sobre una mesa de piedra.
 6. El jaguar descubre una veta de ámbar brillante en la pared y sonríe.
 
-### 6. Ruinas de la Validación · Peridoto Centinela (ruinas)
-
-Ambientación: ruinas de piedra cubiertas de musgo, columnas, una puerta antigua. Acento: verde oliva peridoto.
-
-1. El jaguar examina una columna antigua con una lupa.
-2. El jaguar compara dos tablillas de piedra casi iguales, una al lado de otra.
-3. El jaguar prueba la solidez de un puente de piedra golpeándolo con un martillo pequeño.
-4. El jaguar pesa dos piedras idénticas en una balanza equilibrada.
-5. El jaguar vigila la entrada de las ruinas con una linterna encendida.
-6. El jaguar marca con una cuerda el contorno de un cuarto de las ruinas.
-
-### 7. Glaciar de la Comunicación · Aguamarina Eco (glaciar)
+### 5. Glaciar de la Comunicación · Aguamarina Eco (glaciar)
 
 Ambientación: glaciar azul claro, picos nevados, hielo brillante. Acento: aguamarina.
 
@@ -105,6 +85,30 @@ Ambientación: glaciar azul claro, picos nevados, hielo brillante. Acento: aguam
 4. El jaguar muestra un mapa a otro explorador pequeño y lejano, sin rostro definido.
 5. El jaguar hace un muñeco de nieve con su mismo pañuelo azul.
 6. El jaguar toca un cuerno de montaña sobre el glaciar, con ondas de sonido.
+
+### 6. Costa de los Ensambles · Topacio Faro (costa)
+
+Tema: árboles, ensambles y pipelines en equipo.
+
+Ambientación: playa, faro rojo y blanco, mar turquesa. Acento: amarillo topacio.
+
+1. El jaguar sube la escalera de un faro con una linterna en la mano.
+2. El jaguar mira el horizonte con unos binoculares, sobre una roca en la playa.
+3. El jaguar dibuja un gráfico de barras en la arena con un palo.
+4. El jaguar ordena caracolas por tamaño en una fila sobre la arena.
+5. El jaguar sigue un mapa del tesoro hacia una palmera.
+6. El jaguar rema en una pequeña barca de madera, con el faro al fondo.
+
+### 7. Ruinas de la Validación · Peridoto Centinela (ruinas)
+
+Ambientación: ruinas de piedra cubiertas de musgo, columnas, una puerta antigua. Acento: verde oliva peridoto.
+
+1. El jaguar examina una columna antigua con una lupa.
+2. El jaguar compara dos tablillas de piedra casi iguales, una al lado de otra.
+3. El jaguar prueba la solidez de un puente de piedra golpeándolo con un martillo pequeño.
+4. El jaguar pesa dos piedras idénticas en una balanza equilibrada.
+5. El jaguar vigila la entrada de las ruinas con una linterna encendida.
+6. El jaguar marca con una cuerda el contorno de un cuarto de las ruinas.
 
 ### 8. El Volcán · Rubí del Volcán (volcán)
 

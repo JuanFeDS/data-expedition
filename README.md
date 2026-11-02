@@ -54,7 +54,7 @@ El curso se repensó para la era de la IA: la evaluación se rediseña antes que
 
 ## 🗺️ 3. Estado del proyecto
 
-- ✅ **Prototipo de interfaz** (`web/`): 16 pantallas con datos de ejemplo, en móvil y en escritorio.
+- ✅ **Prototipo de interfaz** (`web/`): pantallas de estudiante, docente y observador con datos de ejemplo alineados con el plan de estudios, en móvil y en escritorio, con tema claro y oscuro. El mapa de pantallas y su estado están en [`docs/plan-de-accion-pantallas.md`](docs/plan-de-accion-pantallas.md).
 - ✅ **Dominio en TypeScript** (`src/`): nota, niveles y radar con pruebas, sin red ni base de datos.
 - 🏗️ **Migración inicial de Supabase** con políticas por fila, todavía sin aplicar a un proyecto real.
 - ⏳ **Pendiente:**

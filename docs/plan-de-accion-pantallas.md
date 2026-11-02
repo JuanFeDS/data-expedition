@@ -1,6 +1,6 @@
 # Plan de acción: pantallas de la app
 
-Borrador del 2026-11-01. Objetivo de esta línea de trabajo: **diseñar y maquetar todas las pantallas** que la app necesita, en móvil y en escritorio, con datos de ejemplo. Lo funcional (Supabase, login real, API de GitHub) queda fuera y se planea aparte.
+Borrador del 2026-11-01, **ejecutado el mismo día** (ver la bitácora al final). Objetivo de esta línea de trabajo: **diseñar y maquetar todas las pantallas** que la app necesita, en móvil y en escritorio, con datos de ejemplo. Lo funcional (Supabase, login real, API de GitHub) queda fuera y se planea aparte.
 
 Insumos: [requisitos-app-plan-de-estudios.md](requisitos-app-plan-de-estudios.md), [plan-de-estudios.md](plan-de-estudios.md), [RFC-010](RFC-010-app-expedicion.md) y el prototipo de `web/`.
 
@@ -122,3 +122,43 @@ Acceso por rol (T1), estados vacíos, de carga y de error (T2) y tema oscuro (T3
 
 ## 6. Pendientes de limpieza en los documentos
 Para dejar el plan consistente se debe corregir en `requisitos-app-plan-de-estudios.md`: definir F22 y F23 (propuesta: F22 = módulo de formularios, F23 = relámpago); aclarar que la relámpago es siempre identificada; quitar la frase conversacional de D3; reconciliar el número de trabajos (RFC: "3 o 4"; plan: 7); y añadir una tabla de pantallas que remita a este plan.
+
+## 7. Supuestos tomados durante la ejecución
+
+Las decisiones abiertas de la sección 5 no se detuvieron: se eligió un valor por defecto, que vive como dato (casi siempre en `web/src/datos.ts` o `web/src/datosPlan.ts`) y se cambia en una línea. Hay que confirmarlos.
+
+| # | Decisión abierta | Valor usado | Dónde está |
+|---|---|---|---|
+| 1 | Semanas frente a islas | La tabla de la fase 0.1, tal cual: Valle, Páramo, Desierto, Cueva de la Escala, Glaciar, Costa de los Ensambles, Ruinas y Volcán | `regionesCurso` en `datos.ts` |
+| 2 | PR en repo propio o del curso | **Repo propio** (lo que ya dice F21) | texto de `E6` y de `D4` |
+| 3 | Parejas de revisión | Un campo `pareja` por estudiante | `estudiantes` en `datosPlan.ts` |
+| 4 | Puntaje de Pylint | Un número simulado por entrega, con mínimos de 6, 7 y 8 (8 desde el T3) | `trabajos` en `datos.ts` |
+| 5 | Umbrales de ruta | Sobre el radar de Datos de 0 a 100: 50 y 80 | `UMBRAL_*` en `datosPlan.ts` |
+| 6 | Dimensiones sin isla | Producción queda ligada a la Costa de los Ensambles y Datos a la Cueva de la Escala; **Dirección de IA** es solo transversal, sin gema | `gemasCurso` |
+| 7 | Calendario real | Fechas de ejemplo (martes y jueves, 6:00 p. m.); aviso visible en las pantallas | `sesiones` en `datosPlan.ts` |
+| 8 | Estudiantes | 12 de muestra en 3 grupos de 4; el observador oculta los grupos de menos de 5 personas | `estudiantes` |
+| 9 | Tema oscuro | Opcional, desactivado por defecto, con interruptor en la barra lateral y en el menú | `componentes/tema.tsx` |
+
+## 8. Bitácora de ejecución
+
+Estado de cada pantalla al 2026-11-01. "Medida" quiere decir que se comprobó que no hay scroll vertical en escritorio (1755×851 y 1366×768) y que se vio una captura. Todas las rutas se abren con `#/<código>`.
+
+| Fase | Pantallas | Estado |
+|---|---|---|
+| 0 | Datos alineados con el plan (7 trabajos, 8 semanas, 8 islas, fechas) | Hecha |
+| Base | Roles, navegación por rol (barra lateral y menú móvil), componentes de panel, íconos nuevos | Hecha |
+| 1 | `e17` Diagnóstico, `e18` ejercicio, `e19` resultado | Hechas y medidas |
+| 1 | `e20` formulario y pulso, `e21` resultado de relámpago, `e25` votación de herramienta | Hechas y medidas |
+| 1 | `e22` calendario, `e23` detalle de sesión, `e24` ruta y equipo | Hechas y medidas |
+| 1 | `e5`, `e6`, `e12` con plazo, pareja, calidad de código y GitHub | Hechas y medidas |
+| 1b | `e7` sesión de 5 preguntas con 5 formatos y reintento, `e16` ejercicio de unir | Hechas y medidas |
+| 2 | `d1` a `d11` (panel, diagnóstico y rutas, entregas, corrección, formularios, calendario, equipos, ficha, material, configuración, en clase) | Hechas y medidas |
+| 3 | `o1`, `o2`, `o3` observador | Hechas y medidas |
+| 4 | `e0` con acceso por rol, `e26` estados del sistema, tema oscuro | Hechas; el tema oscuro cubre las pantallas revisadas (ver límites) |
+| 5 | Verificación en 3 tamaños y capturas en móvil | Hecha, con las salvedades de abajo |
+
+### Límites conocidos
+- **Tema oscuro:** se revisó en seis pantallas. No se recorrieron las 50 una por una; los colores fijos que quedan (por ejemplo, en el radar) son los de la marca y funcionan en ambos temas.
+- **Ventanas muy bajas:** a 1317×640 las pantallas densas se reducen hasta un 60 % de escala y algunas pueden quedar pequeñas.
+- **Animaciones:** se comprobaron los estados finales con capturas; la secuencia en movimiento no se pudo ver desde el entorno de pruebas.
+- **Todo es de muestra:** no hay datos reales, ni verificación contra GitHub, ni base de datos.
