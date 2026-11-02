@@ -3,6 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Kicker, Pantalla } from '../componentes/ui';
+import { trabajoActual } from '../datos';
 
 type Modo = 'sin_ia' | 'con_ia';
 type Verificacion = 'inicial' | 'verificando' | 'ok' | 'ajeno';
@@ -114,7 +115,7 @@ export function E6NuevaEntrega() {
   return (
     <Pantalla clase="p-e6">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker="Trabajo 2 · Modelo predictivo" titulo={enviado ? 'Entrega registrada' : TITULOS[nombrePaso]} objeto="cuaderno" />
+        <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker={`${trabajoActual.titulo} · ${trabajoActual.tema}`} titulo={enviado ? 'Entrega registrada' : TITULOS[nombrePaso]} objeto="cuaderno" />
         <div className="contenido cuerpo-mundo centrar" style={{ gap: 12 }}>
           <ol className="pasos" aria-label="Pasos de la entrega">
             {pasos.map((etiqueta, indice) => (
@@ -169,6 +170,9 @@ export function E6NuevaEntrega() {
                       <div><dt>Autor</dt><dd>@{dueno} <em>es tu usuario</em></dd></div>
                       <div><dt>Estado</dt><dd>Abierto</dd></div>
                       <div><dt>Último commit</dt><dd><code>{sha}</code> · hace 2 h</dd></div>
+                      <div><dt>Calidad de código</dt><dd>Black ✓ · Pylint 8.4 <em>mín. {trabajoActual.minPylint}</em></dd></div>
+                      <div><dt>Tu pareja</dt><dd>Julián Arias <em>aún no aprueba</em></dd></div>
+                      <div><dt>Plazo</dt><dd>{trabajoActual.vence.largo}, 11:59 p. m. <em>a tiempo</em></dd></div>
                     </dl>
                   </div>
                 )}
@@ -209,6 +213,8 @@ export function E6NuevaEntrega() {
                     <div><dt>Versión</dt><dd><code>{sha}</code> · hace 2 h</dd></div>
                     <div><dt>Declaración</dt><dd>{modo === 'con_ia' ? 'Con IA' : 'Sin IA'}</dd></div>
                     <div><dt>Bitácora</dt><dd>{modo === 'con_ia' ? 'Completa' : 'No aplica'}</dd></div>
+                    <div><dt>Plazo</dt><dd>A tiempo</dd></div>
+                    <div><dt>Revisión</dt><dd>Tu pareja aprueba · el docente fusiona</dd></div>
                   </dl>
                 </div>
                 <p className="meta" style={{ fontSize: 13 }}>Al entregar se guarda esta versión (<b>{sha}</b>). Si empujas más commits después, la revisión usa esta.</p>

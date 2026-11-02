@@ -20,6 +20,7 @@ export function E0Acceso() {
           <p>Entra con tu correo institucional. Te enviamos un enlace, sin contraseña.</p>
           <input className="acceso__campo" type="email" placeholder="tu.nombre@universidad.edu.co" value={correo} onChange={(evento) => setCorreo(evento.target.value)} aria-label="Correo institucional" />
           <a href="#/home"><Pill variante="accent" grande>Enviarme el enlace</Pill></a>
+          <div className="acceso__roles"><span>Entrar como</span><a href="#/home">Estudiante</a><a href="#/d1">Docente</a><a href="#/o1">Observador</a></div>
           <small>Guardamos solo tu nombre, correo y grupo. Nada es público. Ley 1581 de 2012.</small>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function E12Perfil() {
   return (
     <Pantalla clase="p-e12">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · camilo@uni…" objeto="mochila" jaguar="guia" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker="Perfil" titulo="Camilo Restrepo" subtitulo="Grupo 2 · GitHub @camilo-r ✓" objeto="mochila" jaguar="guia" />
         <div className="contenido cuerpo-mundo" style={{ gap: 4 }}>
           <Kicker>Tu rol de expedición hoy</Kicker>
           <div className="perfil__rol">
