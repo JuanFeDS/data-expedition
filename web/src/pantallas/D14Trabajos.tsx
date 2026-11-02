@@ -65,11 +65,11 @@ export function D14Trabajos() {
                 <form className="d14__formulario" onSubmit={(evento) => void crear(evento)}>
                   <input className="d13__campo" placeholder="Nombre (Trabajo 3)" value={formulario.nombre} onChange={cambiar('nombre')} aria-label="Nombre del trabajo" />
                   <input className="d13__campo" placeholder="Tema (Mismo análisis en Spark)" value={formulario.tema} onChange={cambiar('tema')} aria-label="Tema" />
-                  <div className="d13__fila">
-                    <input className="d13__campo" type="number" min={1} max={16} placeholder="Semana" value={formulario.semana} onChange={cambiar('semana')} aria-label="Semana" />
-                    <input className="d13__campo" type="number" min={0} max={10} placeholder="Pylint mín." value={formulario.minPylint} onChange={cambiar('minPylint')} aria-label="Pylint mínimo" />
+                  <div className="d14__par">
+                    <label className="d14__etiqueta">Semana<input className="d13__campo" type="number" min={1} max={16} placeholder="4" value={formulario.semana} onChange={cambiar('semana')} /></label>
+                    <label className="d14__etiqueta">Pylint mínimo<input className="d13__campo" type="number" min={0} max={10} placeholder="8" value={formulario.minPylint} onChange={cambiar('minPylint')} /></label>
                   </div>
-                  <label className="d14__fecha">Fecha de entrega<input className="d13__campo" type="date" value={formulario.fecha} onChange={cambiar('fecha')} /></label>
+                  <label className="d14__etiqueta">Fecha de entrega<input className="d13__campo" type="date" value={formulario.fecha} onChange={cambiar('fecha')} /></label>
                   <button className="acceso__boton acceso__boton--principal" disabled={!formulario.nombre.trim()}>Agregar trabajo</button>
                 </form>
               </Tarjeta>

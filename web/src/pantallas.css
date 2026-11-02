@@ -1330,3 +1330,8 @@
 }
 .d13__fila .acceso__boton:not(.acceso__boton--principal) { background: var(--deep); color: #fff; }
 .d13__fila .acceso__boton { flex: none; }
+
+.d14__formulario { display: flex; flex-direction: column; gap: 12px; }
+.d14__formulario .d13__campo { width: 100%; flex: none; }
+.d14__par { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.d14__etiqueta { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 700; color: var(--muted); }

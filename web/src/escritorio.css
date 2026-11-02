@@ -522,3 +522,9 @@
   .escenario .p-d13 .d13__sin { display: block; }
   .escenario .p-d13 .d13__quitar { grid-column: auto; grid-column-start: 4; justify-self: end; }
 }
+
+@media (min-width: 1100px) {
+  .escenario .p-d14 .d13__columnas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); align-items: start; }
+  .escenario .p-d14 .d13__personas li { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .escenario .p-d14 .d13__quitar { grid-column: auto; justify-self: end; }
+}
