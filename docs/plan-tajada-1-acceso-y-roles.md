@@ -142,3 +142,8 @@ Tamaños: S = media jornada, M = una jornada.
 - Una sola escala con 8 tamaños (`--fs-xs` 12, `--fs-sm` 13, `--fs-md` 14, `--fs-lg` 16, `--fs-xl` 20, `--fs-2xl` 24, `--fs-3xl` 32, `--fs-4xl` 44) y dos fuentes (Bricolage Grotesque para títulos, Manrope para texto). Antes había 38 tamaños distintos. Quedan como excepción 4 cifras decorativas grandes (76 a 120 px).
 - Se quitó el zoom automático de escritorio: cada pantalla se reducía por separado entre 100 % y 60 % para evitar el scroll, y por eso el mismo texto se veía de tamaños distintos según la página. Ahora todas usan el mismo tamaño y hay scroll vertical solo cuando el contenido no cabe.
 - Regla para lo nuevo: usar siempre `var(--fs-…)`, nunca un número de píxeles suelto.
+
+## Sin grupos de curso; confirmaciones diseñadas (2 nov)
+
+- Los grupos ya no son una división fija del curso: la interfaz dejó de mostrarlos (invitaciones, Personas, CSV, detalle del curso, home y entregas). Las tablas `grupos` y `matriculas.grupo_id` siguen en la base sin uso. **Pendiente de diseño:** equipos o parejas **por trabajo**, para las entregas por equipo y la revisión en parejas (¿los arma el docente, se sortean o los forman los estudiantes?).
+- Las confirmaciones usan un cuadro propio (`componentes/confirmar.tsx`, con `useConfirmar()`), no el `confirm` del navegador. Se usa para cerrar sesión, quitar a alguien de un curso y eliminar un curso.

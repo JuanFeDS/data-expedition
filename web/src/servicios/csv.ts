@@ -1,7 +1,7 @@
 import type { Rol } from '../componentes/navegacion';
 import { CORREO_VALIDO } from './personas';
 
-export interface FilaImportada { correo: string; rol: Rol; grupo: string }
+export interface FilaImportada { correo: string; rol: Rol }
 export interface ResultadoCsv { filas: FilaImportada[]; errores: string[] }
 
 const ROLES: Record<string, Rol> = { estudiante: 'estudiante', observador: 'observador', docente: 'docente' };
@@ -37,8 +37,7 @@ export function leerCsv(texto: string): ResultadoCsv {
   const conEncabezado = primera.some((celda) => COLUMNAS_CORREO.includes(celda));
   const indice = (nombres: string[]) => primera.findIndex((celda) => nombres.includes(celda));
   const columnaCorreo = conEncabezado ? indice(COLUMNAS_CORREO) : 0;
-  const columnaGrupo = conEncabezado ? indice(['grupo']) : 1;
-  const columnaRol = conEncabezado ? indice(['rol']) : 2;
+  const columnaRol = conEncabezado ? indice(['rol']) : 1;
 
   const filas = new Map<string, FilaImportada>();
   const errores: string[] = [];
@@ -49,9 +48,9 @@ export function leerCsv(texto: string): ResultadoCsv {
     const rolTexto = columnaRol >= 0 ? (celdas[columnaRol] ?? '').toLowerCase() : '';
     if (!CORREO_VALIDO.test(correo)) { errores.push(`Línea ${numero}: el correo «${correo || 'vacío'}» no es válido.`); return; }
     if (rolTexto && !ROLES[rolTexto]) { errores.push(`Línea ${numero}: el rol «${rolTexto}» no existe (usa estudiante, observador o docente).`); return; }
-    filas.set(correo, { correo, rol: ROLES[rolTexto] ?? 'estudiante', grupo: columnaGrupo >= 0 ? (celdas[columnaGrupo] ?? '') : '' });
+    filas.set(correo, { correo, rol: ROLES[rolTexto] ?? 'estudiante' });
   });
   return { filas: [...filas.values()], errores };
 }
 
-export const PLANTILLA_CSV = 'correo,grupo,rol\nana@gmail.com,Grupo A,estudiante\nluis@gmail.com,Grupo B,estudiante\n';
+export const PLANTILLA_CSV = ['correo,rol', 'ana@gmail.com,estudiante', 'luis@gmail.com,estudiante', ''].join('\n');

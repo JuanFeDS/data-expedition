@@ -194,14 +194,12 @@ export function InicioDocente() {
   const estudiantes = datos?.personas.filter((candidata) => candidata.rol === 'estudiante') ?? [];
   const porRevisar = entregas.filter((entrega) => entrega.estado === 'entregada').length;
   const porRegistrarse = datos?.invitaciones.length ?? 0;
-  const sinGrupo = estudiantes.filter((candidata) => !candidata.grupoId).length;
   const proximos = (trabajos ?? []).filter((trabajo) => trabajo.venceEn && new Date(trabajo.venceEn).getTime() >= Date.now() - 86400000).slice(0, 4);
   const entregaron = (trabajoId: string) => new Set(entregas.filter((entrega) => entrega.trabajoId === trabajoId).map((entrega) => entrega.usuario ?? entrega.estudiante)).size;
   const ir = (ruta: string) => (curso ? enCurso(ruta, curso.id) : ruta);
 
   const pasos = [
     { hecho: cursos.length > 0, texto: 'Crear tu primer curso', ruta: '#/cursos' },
-    { hecho: (conteo?.grupos ?? 0) > 0, texto: 'Crear los grupos del curso', ruta: ir('#/d13') },
     { hecho: (conteo?.estudiantes ?? 0) > 0, texto: 'Invitar a tus estudiantes', ruta: ir('#/d13') },
     { hecho: (trabajos?.length ?? 0) > 0, texto: 'Publicar el primer trabajo', ruta: ir('#/d14') },
   ];
@@ -210,7 +208,6 @@ export function InicioDocente() {
   const atencion = [
     { cantidad: porRevisar, texto: 'entregas por revisar', ruta: ir('#/d3') },
     { cantidad: porRegistrarse, texto: 'invitaciones sin registrarse', ruta: ir('#/d13') },
-    { cantidad: sinGrupo, texto: 'estudiantes sin grupo', ruta: ir('#/d13') },
   ].filter((item) => item.cantidad > 0);
 
   return (
@@ -251,7 +248,7 @@ export function InicioDocente() {
                 <li key={candidato.id}>
                   <a href={enCurso('#/curso', candidato.id)}>
                     <b>{conteos[candidato.id]?.estudiantes ?? 0}</b>
-                    <span>{candidato.nombre}<small>{candidato.periodo ? `Periodo ${candidato.periodo} · ` : ''}{conteos[candidato.id]?.grupos ?? 0} grupos</small></span>
+                    <span>{candidato.nombre}<small>{candidato.periodo ? `Periodo ${candidato.periodo} · ` : ''}{(conteos[candidato.id]?.estudiantes ?? 0) === 1 ? 'estudiante' : 'estudiantes'}</small></span>
                     <i aria-hidden="true">›</i>
                   </a>
                 </li>

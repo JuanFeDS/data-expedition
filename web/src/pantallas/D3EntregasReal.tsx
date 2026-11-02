@@ -61,7 +61,7 @@ export function D3EntregasReal() {
                       <span className="avatar avatar--verde">{entrega.estudiante.slice(0, 2).toUpperCase()}</span>
                       <span className="d13__datos">
                         <strong>{entrega.estudiante}{entrega.usuario && <em> @{entrega.usuario}</em>}</strong>
-                        <small>{entrega.grupo ?? 'Sin grupo'} · {entrega.modoIa === 'con_ia' ? 'Con IA' : 'Sin IA'}{entrega.entregadaEn ? ` · ${new Date(entrega.entregadaEn).toLocaleString('es-CO', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}` : ''}</small>
+                        <small>{entrega.modoIa === 'con_ia' ? 'Con IA' : 'Sin IA'}{entrega.entregadaEn ? ` · ${new Date(entrega.entregadaEn).toLocaleString('es-CO', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}` : ''}</small>
                       </span>
                       <Estado tipo={TIPO[entrega.estado]}>{TEXTO[entrega.estado]}</Estado>
                       {entrega.enlacePr && <a className="boton boton--suave" href={entrega.enlacePr} target="_blank" rel="noreferrer">Abrir PR</a>}

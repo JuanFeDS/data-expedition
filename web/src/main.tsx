@@ -2,6 +2,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from './componentes/navegacion';
+import { ConfirmarProvider } from './componentes/confirmar';
 import { CursoProvider, useCurso } from './componentes/curso';
 import { InicioSinCurso } from './componentes/inicio';
 import { SesionProvider, useSesion } from './componentes/sesion';
@@ -129,4 +130,4 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><App /></CursoProvider></SesionProvider></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><ConfirmarProvider><App /></ConfirmarProvider></CursoProvider></SesionProvider></StrictMode>);

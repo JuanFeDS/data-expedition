@@ -1398,3 +1398,5 @@
 .inicio__atencion li.pronto small { display: block; margin-top: 2px; font-size: var(--fs-xs); font-weight: 600; color: var(--muted); }
 .inicio__atencion li.pronto span { flex: 1; min-width: 0; }
 .inicio__atencion li.pronto em { flex: none; }
+
+.detalle__datos--dos { grid-template-columns: repeat(2, minmax(0, 1fr)); }

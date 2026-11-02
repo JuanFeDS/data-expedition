@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
+import { useConfirmar } from '../componentes/confirmar';
 import { useCurso } from '../componentes/curso';
 import { enCurso, rutaDeCurso } from '../componentes/navegacion';
 import { Tarjeta } from '../componentes/panel';
@@ -30,6 +31,7 @@ function EditorCurso({ curso, alGuardar, alCancelar }: { curso: Curso; alGuardar
 export function Cursos() {
   const { persona } = useSesion();
   const { cursos, conteos, reciente, crear, actualizar, eliminar, cargando } = useCurso();
+  const confirmar = useConfirmar();
   const [nombre, setNombre] = useState('');
   const [periodo, setPeriodo] = useState('');
   const [editando, setEditando] = useState<string | null>(null);
@@ -60,8 +62,12 @@ export function Cursos() {
   };
 
   const quitar = async (candidato: Curso) => {
-    if (!window.confirm(`¿Eliminar el curso «${candidato.nombre}»? Solo se puede si no tiene personas ni trabajos.`)) return;
-    setAviso(await eliminar(candidato.id));
+    const aceptado = await confirmar({
+      titulo: '¿Eliminar este curso?',
+      texto: `«${candidato.nombre}» se borra para siempre. Solo se puede si no tiene personas ni trabajos.`,
+      confirmar: 'Eliminar curso',
+    });
+    if (aceptado) setAviso(await eliminar(candidato.id));
   };
 
   return (
@@ -90,7 +96,7 @@ export function Cursos() {
                         <button className="cursos__abrir" onClick={() => abrir(candidato.id)} aria-label={`Ver información de ${candidato.nombre}`}>
                         <span className="cursos__nombre">{candidato.nombre}</span>
                         {candidato.periodo && <small>Periodo {candidato.periodo}</small>}
-                        {esDocente && <small>{plural(conteo?.estudiantes ?? 0, 'estudiante', 'estudiantes')} · {plural(conteo?.grupos ?? 0, 'grupo', 'grupos')}</small>}
+                        {esDocente && <small>{plural(conteo?.estudiantes ?? 0, 'estudiante', 'estudiantes')}</small>}
                         {candidato.id === reciente?.id && <small>Último que usaste</small>}
                           <span className="cursos__ver">Ver información ›</span>
                         </button>
