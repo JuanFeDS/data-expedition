@@ -7,16 +7,16 @@ Elasticidad: **elástica**. Si el curso va atrasado, el pipeline se acorta y el 
 
 ---
 
-## S11 — Scrum, equipos y arranque del integrador (presencial, sesión A)
+## S11 — Scrum, equipos y arranque del integrador (virtual, sesión A)
 
-**Objetivo:** formar equipos, repartir roles y dejar listo el backlog y el sprint 1 del proyecto integrador.
+**Objetivo:** repasar Scrum, ajustar los equipos formados en la P2 y dejar listo el backlog y el sprint 1 del proyecto integrador.
 
 | Min | Dinámica | Detalle |
 |---|---|---|
 | 0–15 | Retro y votación | Cómo vas con el curso. Votación en vivo: «¿qué rol te cuesta más asumir?» |
 | 15–45 | Concepto | Scrum aplicado a ciencia de datos: roles, backlog, sprints, definición de terminado |
 | 45–55 | Pausa | |
-| 55–95 | Formación de equipos | Equipos equilibrados con el radar de entrada y los roles que cada uno prefiere. Cada equipo elige un problema y un dataset |
+| 55–95 | Ajuste de equipos | Los equipos formados en la P2 revisan roles y reparten el trabajo. Quien no estuvo en la P2 se integra a un equipo |
 | 95–105 | Pausa | |
 | 105–165 | Planificación del sprint 1 | Cada equipo escribe su backlog en el tablero, estima tareas y define el objetivo del sprint |
 | 165–180 | Cierre | Cada equipo presenta su objetivo en una frase |
