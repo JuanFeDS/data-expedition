@@ -24,13 +24,13 @@
   --e-info-bg: #d6e8ff;
   --e-info: #1d4f9c;
   --fs-xs: 12px;
-  --fs-sm: 14px;
-  --fs-md: 16px;
-  --fs-lg: 20px;
-  --fs-xl: 24px;
-  --fs-2xl: 32px;
-  --fs-3xl: 40px;
-  --fs-4xl: 56px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 32px;
+  --fs-4xl: 44px;
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body: 'Manrope', system-ui, sans-serif;
 }

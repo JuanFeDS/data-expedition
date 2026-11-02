@@ -139,6 +139,6 @@ Tamaños: S = media jornada, M = una jornada.
 
 ## Escala tipográfica única (2 nov)
 
-- Una sola escala con 8 tamaños (`--fs-xs` 12, `--fs-sm` 14, `--fs-md` 16, `--fs-lg` 20, `--fs-xl` 24, `--fs-2xl` 32, `--fs-3xl` 40, `--fs-4xl` 56) y dos fuentes (Bricolage Grotesque para títulos, Manrope para texto). Antes había 38 tamaños distintos. Quedan como excepción 4 cifras decorativas grandes (76 a 120 px).
+- Una sola escala con 8 tamaños (`--fs-xs` 12, `--fs-sm` 13, `--fs-md` 14, `--fs-lg` 16, `--fs-xl` 20, `--fs-2xl` 24, `--fs-3xl` 32, `--fs-4xl` 44) y dos fuentes (Bricolage Grotesque para títulos, Manrope para texto). Antes había 38 tamaños distintos. Quedan como excepción 4 cifras decorativas grandes (76 a 120 px).
 - Se quitó el zoom automático de escritorio: cada pantalla se reducía por separado entre 100 % y 60 % para evitar el scroll, y por eso el mismo texto se veía de tamaños distintos según la página. Ahora todas usan el mismo tamaño y hay scroll vertical solo cuando el contenido no cabe.
 - Regla para lo nuevo: usar siempre `var(--fs-…)`, nunca un número de píxeles suelto.
