@@ -96,7 +96,7 @@ export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
     <Pantalla tono="oscura" clase="p-e7">
       <div className="pantalla__cuerpo">
         <div className="leccion__barra">
-          <a href="#/e15" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
+          <a className="cerrar-practica" href="#/e15" aria-label="Salir de la práctica" style={{ fontSize: 20, fontWeight: 700, opacity: .8 }}>✕</a>
           <div className="leccion__prog">{SESION_MIXTA.map((_, indice) => <i key={indice} className={indice < hechas ? 'ok' : ''} />)}</div>
           <Pill variante="accent">0:24</Pill>
         </div>

@@ -95,7 +95,7 @@ export function E1Ruta() {
                   )}
                 </div>
                 <div className="isla-fila__texto">
-                  <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 10 }}>Semana {region.semanas} · {region.modulo}</Kicker>
+                  <Kicker estilo={{ color: region.estado === 'actual' ? 'var(--accent)' : 'var(--mint)', fontSize: 12 }}>Semana {region.semanas} · {region.modulo}</Kicker>
                   <h2 className="isla-fila__nombre">{region.nombre}</h2>
                   <ul className="mapa__hitos">
                     {hitos.length === 0 && (

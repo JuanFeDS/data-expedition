@@ -8,7 +8,7 @@ export function E14Tutorial() {
     <Pantalla tono="oscura" clase="p-tutorial">
       <div className="pantalla__cuerpo">
         <header className="tutorial__cab">
-          <a href="#/home" style={{ fontSize: 14, fontWeight: 700, color: 'var(--mint)' }}>‹ Inicio</a>
+          <a className="cerrar-practica" href="#/home" style={{ fontSize: 14, fontWeight: 700, color: 'var(--mint)', justifyContent: 'flex-start' }}>‹ Inicio</a>
           <Kicker estilo={{ color: 'var(--mint)' }}>Tutorial</Kicker>
           <h1 className="titulo" style={{ fontSize: 36, lineHeight: 1.05, maxWidth: 220 }}>Así se usa la expedición</h1>
           <Jaguar pose="saluda" ancho={120} clase="tutorial__guia" />

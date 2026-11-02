@@ -20,7 +20,7 @@ export function E4DetalleNota() {
             <div className="criterio" key={criterio.nombre}>
               <div style={{ flex: 1 }}>
                 <strong style={{ fontSize: 14, display: 'block' }}>{criterio.nombre}</strong>
-                <span className="meta" style={{ fontSize: 11 }}>{criterio.dimension} · peso {criterio.peso}</span>
+                <span className="meta" style={{ fontSize: 12 }}>{criterio.dimension} · peso {criterio.peso}</span>
               </div>
               <Niveles nivel={criterio.nivel} />
               <span className="criterio__valor">{criterio.nivel}</span>
