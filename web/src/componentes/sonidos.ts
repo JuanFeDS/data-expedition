@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from 'react';
+
 type Onda = OscillatorType;
 
 export interface Nota {
@@ -179,3 +181,74 @@ export const EVENTOS: EventoSonido[] = [
 ];
 
 export const CATEGORIAS: Categoria[] = ['Práctica', 'Premios', 'Clase y avisos'];
+
+export const ELECCION: Record<string, number> = {
+  clic: 0, acierto: 1, error: 1, sesion: 0, foto: 1, racha: 2, liga: 2, entrega: 2, relampago: 0, tic: 0, aviso: 2, verificacion: 0,
+};
+
+const DE_CLASE = ['relampago', 'tic'];
+const CLAVE_AJUSTES = 'sonido-ajustes';
+
+interface Ajustes {
+  activo: boolean;
+  clase: boolean;
+}
+
+const leerAjustes = (): Ajustes => {
+  try {
+    return { activo: true, clase: false, ...(JSON.parse(window.localStorage.getItem(CLAVE_AJUSTES) ?? '{}') as Partial<Ajustes>) };
+  } catch {
+    return { activo: true, clase: false };
+  }
+};
+
+let ajustes: Ajustes = leerAjustes();
+const oyentes = new Set<() => void>();
+
+const cambiarAjustes = (nuevos: Ajustes) => {
+  ajustes = nuevos;
+  try {
+    window.localStorage.setItem(CLAVE_AJUSTES, JSON.stringify(ajustes));
+  } catch {
+    // sin almacenamiento: el ajuste vale solo para esta visita
+  }
+  oyentes.forEach((oyente) => oyente());
+};
+
+export const alternarSonido = () => cambiarAjustes({ ...ajustes, activo: !ajustes.activo });
+export const alternarSonidoDeClase = () => cambiarAjustes({ ...ajustes, clase: !ajustes.clase });
+
+export const useSonido = () =>
+  useSyncExternalStore(
+    (aviso) => {
+      oyentes.add(aviso);
+      return () => oyentes.delete(aviso);
+    },
+    () => ajustes,
+  );
+
+export function sonar(id: string, solo?: number) {
+  if (!ajustes.activo || (DE_CLASE.includes(id) && !ajustes.clase)) return;
+  if (window.location.hash.replace(/^#\/?/, '') === 'todas') return;
+  if (!contexto && !navigator.userActivation?.hasBeenActive) return;
+  const evento = EVENTOS.find((candidato) => candidato.id === id);
+  if (!evento) return;
+  let notas = evento.variantes[ELECCION[id]].notas;
+  if (solo !== undefined) notas = [{ ...notas[Math.min(solo, notas.length - 1)], t: 0 }];
+  try {
+    reproducir(notas);
+  } catch {
+    // sin audio disponible: la app sigue en silencio
+  }
+}
+
+const TOCABLES = '.opcion, .resp, .segmentado button, .diag__chip, .ficha, .pulso__ritmo button, .pulso__estrellas button, .album__pestana, .dock__menu, .dock__accion, .camp__guia-boton, .acceso-rapido, .d2__ruta, .d8__lista button, .interruptor-tema';
+const SILENCIADOS = '.son__variantes, .sesion__comprobar, .sesion__fb, .dock__accion[disabled]';
+
+export function instalarSonidoDeClic() {
+  document.addEventListener('click', (evento) => {
+    const objetivo = evento.target as Element | null;
+    if (!objetivo?.closest(TOCABLES) || objetivo.closest(SILENCIADOS)) return;
+    sonar('clic');
+  }, true);
+}

@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Dato, Estado, Tarjeta } from '../componentes/panel';
+import { sonar } from '../componentes/sonidos';
 import { Contador, Pantalla } from '../componentes/ui';
 
 const FALLADAS = [
@@ -10,6 +12,7 @@ const FALLADAS = [
 ];
 
 export function E27PracticaFallos() {
+  useEffect(() => { sonar('sesion'); }, []);
   return (
     <Pantalla clase="p-e27">
       <div className="pantalla__cuerpo">

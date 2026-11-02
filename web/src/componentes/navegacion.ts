@@ -40,8 +40,8 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
         { tipo: 'ruta', etiqueta: 'Mapa del curso', detalle: 'Tu recorrido por el curso', ruta: '#/e1', activa: ['e1'], color: 'mint' },
         { tipo: 'radar', etiqueta: 'Radar', detalle: 'Cómo vas frente a tu punto de partida', ruta: '#/e2', activa: ['e2'], color: 'accent' },
         { tipo: 'notas', etiqueta: 'Notas', detalle: 'Tus trabajos y retroalimentación', ruta: '#/e3', activa: ['e3', 'e4'], color: 'azul' },
-        { tipo: 'entregas', etiqueta: 'Entregas', detalle: 'Pendientes y entregadas', ruta: '#/e5', activa: ['e5', 'e6'], color: 'mint' },
-        { tipo: 'leccion', etiqueta: 'Practicar', detalle: 'Racha, XP y repaso sin límite', ruta: '#/e15', activa: ['e15', 'e7', 'e8', 'e16'], color: 'accent' },
+        { tipo: 'entregas', etiqueta: 'Entregas', detalle: 'Pendientes y entregadas', ruta: '#/e5', activa: ['e5', 'e6', 'e29'], color: 'mint' },
+        { tipo: 'leccion', etiqueta: 'Practicar', detalle: 'Racha, XP y repaso sin límite', ruta: '#/e15', activa: ['e15', 'e7', 'e8', 'e16', 'e27'], color: 'accent' },
       ],
     },
     {
@@ -50,19 +50,24 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
         { tipo: 'calendario', etiqueta: 'Calendario', detalle: 'Sesiones, plazos y material', ruta: '#/e22', activa: ['e22', 'e23'], color: 'azul' },
         { tipo: 'formulario', etiqueta: 'Diagnóstico', detalle: 'Tu punto de partida, con y sin IA', ruta: '#/e17', activa: ['e17', 'e18', 'e19'], color: 'mint' },
         { tipo: 'equipo', etiqueta: 'Mi ruta y equipo', detalle: 'Tu ruta asignada y tu equipo', ruta: '#/e24', activa: ['e24'], color: 'accent' },
+        { tipo: 'historico', etiqueta: 'Mis resultados', detalle: 'Relámpagos, encuestas y votaciones', ruta: '#/e30', activa: ['e30'], color: 'claro' },
       ],
     },
     {
       titulo: 'Mi grupo',
       enlaces: [
-        { tipo: 'votar', etiqueta: 'Votación', detalle: 'Cómo juega tu grupo', ruta: '#/e9', activa: ['e9', 'e13', 'e20', 'e21'], color: 'accent', aviso: '1' },
+        { tipo: 'votar', etiqueta: 'Votación', detalle: 'Cómo juega tu grupo', ruta: '#/e9', activa: ['e9', 'e13', 'e20', 'e21', 'e25', 'e28'], color: 'accent', aviso: '1' },
+        { tipo: 'liga', etiqueta: 'Mi liga', detalle: 'Ranking del modo competitivo', ruta: '#/e31', activa: ['e31'], color: 'mint' },
         { tipo: 'equipo', etiqueta: 'Misión en equipo', detalle: 'El proyecto final', ruta: '#/e10', activa: ['e10'], color: 'azul' },
         { tipo: 'resumen', etiqueta: 'Resumen semanal', detalle: 'Tu semana en una página', ruta: '#/e11', activa: ['e11'], color: 'mint', aviso: '•' },
       ],
     },
     {
       titulo: 'Ayuda',
-      enlaces: [{ tipo: 'ayuda', etiqueta: 'Tutorial', detalle: 'Cómo se usa la expedición', ruta: '#/tutorial', activa: ['tutorial', 'e26'], color: 'azul' }],
+      enlaces: [
+        { tipo: 'ayuda', etiqueta: 'Tutorial', detalle: 'Cómo se usa la expedición', ruta: '#/tutorial', activa: ['tutorial', 'e26'], color: 'azul' },
+        { tipo: 'sonido', etiqueta: 'Sonidos', detalle: 'Galería para elegir los sonidos', ruta: '#/e32', activa: ['e32'], color: 'accent' },
+      ],
     },
   ],
   docente: [
@@ -82,6 +87,7 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
       enlaces: [
         { tipo: 'leccion', etiqueta: 'En clase', detalle: 'Abrir una relámpago con QR', ruta: '#/d11', activa: ['d11'], color: 'accent' },
         { tipo: 'formulario', etiqueta: 'Formularios', detalle: 'Encuestas, votaciones y relámpago', ruta: '#/d5', activa: ['d5'], color: 'azul' },
+        { tipo: 'historico', etiqueta: 'Resultados', detalle: 'Histórico de encuestas y votaciones', ruta: '#/d12', activa: ['d12'], color: 'mint' },
         { tipo: 'calendario', etiqueta: 'Calendario', detalle: 'Sesiones y plazos', ruta: '#/d6', activa: ['d6'], color: 'mint' },
         { tipo: 'material', etiqueta: 'Material', detalle: 'Recursos por sesión', ruta: '#/d9', activa: ['d9'], color: 'claro' },
       ],

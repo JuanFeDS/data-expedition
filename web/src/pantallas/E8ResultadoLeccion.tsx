@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Jaguar } from '../componentes/Jaguar';
+import { sonar } from '../componentes/sonidos';
 import { Contador, Kicker, Pantalla, Pill } from '../componentes/ui';
 import { temaDeRepaso } from '../datos';
 
@@ -10,6 +12,12 @@ const METRICAS = [
 ];
 
 export function E8ResultadoLeccion() {
+  useEffect(() => {
+    sonar('sesion');
+    const foto = window.setTimeout(() => sonar('foto'), 1000);
+    const racha = window.setTimeout(() => sonar('racha'), 2000);
+    return () => { window.clearTimeout(foto); window.clearTimeout(racha); };
+  }, []);
   return (
     <Pantalla tono="menta" clase="p-e8">
       <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>

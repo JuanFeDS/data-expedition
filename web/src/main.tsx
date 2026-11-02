@@ -2,11 +2,14 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
+import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
 import './escritorio.css';
+
+instalarSonidoDeClic();
 
 if (window.location.search.includes('completo')) document.documentElement.classList.add('modo-completo');
 

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
+import { sonar } from '../componentes/sonidos';
 import { Kicker, Pantalla } from '../componentes/ui';
 import { trabajoActual } from '../datos';
 
@@ -86,9 +87,9 @@ export function E6NuevaEntrega() {
     setFase(0);
     temporizadores.current.forEach(window.clearTimeout);
     temporizadores.current = [
-      window.setTimeout(() => setFase(1), 750),
-      window.setTimeout(() => setFase(2), 1500),
-      window.setTimeout(() => setFase(3), 2250),
+      window.setTimeout(() => { setFase(1); sonar('verificacion', 0); }, 750),
+      window.setTimeout(() => { setFase(2); sonar('verificacion', 1); }, 1500),
+      window.setTimeout(() => { setFase(3); sonar('verificacion', 2); }, 2250),
       window.setTimeout(() => setVerificacion(dueno === USUARIO_GITHUB ? 'ok' : 'ajeno'), 2550),
     ];
   };
@@ -108,7 +109,7 @@ export function E6NuevaEntrega() {
       return { etiqueta, texto: 'Verificar enlace', alPulsar: verificar, deshabilitada: enlace.trim() === '' };
     }
     if (nombrePaso === 'Bitácora') return { etiqueta, texto: 'Continuar', alPulsar: () => ir(paso + 1), deshabilitada: bitacora[0].trim() === '' };
-    if (nombrePaso === 'Confirmar') return { etiqueta, texto: 'Entregar trabajo', alPulsar: () => setEnviado(true) };
+    if (nombrePaso === 'Confirmar') return { etiqueta, texto: 'Entregar trabajo', alPulsar: () => { setEnviado(true); sonar('entrega'); } };
     return { etiqueta, texto: 'Continuar', alPulsar: () => ir(paso + 1) };
   })();
 
@@ -116,7 +117,7 @@ export function E6NuevaEntrega() {
     <Pantalla clase="p-e6">
       <div className="pantalla__cuerpo">
         <CabeceraMundo atras={{ texto: 'Entregas', ruta: '#/e5' }} kicker={`${trabajoActual.titulo} · ${trabajoActual.tema}`} titulo={enviado ? 'Entrega registrada' : TITULOS[nombrePaso]} objeto="cuaderno" />
-        <div className="contenido cuerpo-mundo centrar" style={{ gap: 12 }}>
+        <div className="contenido cuerpo-mundo" style={{ gap: 12 }}>
           <ol className="pasos" aria-label="Pasos de la entrega">
             {pasos.map((etiqueta, indice) => (
               <li key={etiqueta} className={enviado || indice < paso ? 'hecho' : indice === paso ? 'actual' : ''}>
@@ -153,6 +154,17 @@ export function E6NuevaEntrega() {
                   <label htmlFor="pr">Enlace del PR</label>
                   <input id="pr" value={enlace} placeholder="https://github.com/camilo-r/trabajo-2/pull/1" disabled={verificacion === 'verificando'} onChange={(evento) => { setEnlace(evento.target.value); setErrorEnlace(false); if (verificacion !== 'inicial') setVerificacion('inicial'); }} />
                 </div>
+                {verificacion === 'inicial' && !errorEnlace && (
+                  <div className="verif__previa">
+                    <Kicker>Qué revisamos al verificar</Kicker>
+                    <ul>
+                      <li><i>1</i>Que el PR exista y sea de tu usuario de GitHub</li>
+                      <li><i>2</i>Su estado y el último commit, que queda guardado como tu versión</li>
+                      <li><i>3</i>Black y Pylint, con mínimo de {trabajoActual.minPylint} en este trabajo</li>
+                      <li><i>4</i>Si tu pareja ya aprobó y quién fusiona</li>
+                    </ul>
+                  </div>
+                )}
                 {errorEnlace && <p className="entrega__error" role="alert">Ese enlace no parece un PR. Debe verse como github.com/usuario/repo/pull/1</p>}
                 {verificacion !== 'inicial' && (
                   <ul className="verif" aria-live="polite">

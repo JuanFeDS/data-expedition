@@ -1,5 +1,5 @@
 import { IconoSvg } from './Icono';
-import { InterruptorTema } from './tema';
+import { InterruptorSonido, InterruptorTema } from './tema';
 import { Jaguar } from './Jaguar';
 import { NAVEGACION, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
 import { semanaActual, totalSemanas } from '../datos';
@@ -32,7 +32,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
       <nav className="lateral__nav">
         {NAVEGACION[rol].map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
-      <InterruptorTema />
+      <div className="lateral__ajustes"><InterruptorTema /><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>
         <span className={`avatar avatar--${usuario.color}`}>{usuario.iniciales}</span>
         <span className="lateral__datos"><strong>{usuario.nombre}</strong><small>{usuario.detalle}</small></span>

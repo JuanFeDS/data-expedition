@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta } from '../componentes/panel';
+import { sonar } from '../componentes/sonidos';
 import { Pantalla } from '../componentes/ui';
 import { semanaActual, trabajoActual } from '../datos';
 import { dimensionesDiagnostico, estudiantes, formularios, rutaPropuesta } from '../datosPlan';
@@ -12,7 +14,14 @@ const ALERTAS = [
   { tipo: 'info' as const, texto: 'La votación de dashboards (S9) sigue en borrador', accion: 'Abrir formulario', ruta: '#/d5' },
 ];
 
+let avisado = false;
+
 export function D1Panel() {
+  useEffect(() => {
+    if (avisado) return undefined;
+    const espera = window.setTimeout(() => { avisado = true; sonar('aviso'); }, 1200);
+    return () => window.clearTimeout(espera);
+  }, []);
   const cargadas = estudiantes.filter((estudiante) => estudiante.entrega !== 'sin_cargar').length;
   const sinCargar = estudiantes.length - cargadas;
   const porFusionar = estudiantes.filter((estudiante) => estudiante.entrega === 'aprobada' || estudiante.entrega === 'cargada').length;

@@ -10,6 +10,7 @@ import {
   type PreguntaDatos,
   type Resultado,
 } from '../componentes/preguntas';
+import { sonar } from '../componentes/sonidos';
 import { dificultadPara, temaDeRepaso } from '../datos';
 
 export const SESION_MIXTA: PreguntaDatos[] = [
@@ -85,7 +86,7 @@ export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
     const siguiente = falla ? [...cola.slice(1), actual] : cola.slice(1);
     if (falla) setRepetidas((previas) => [...previas, actual]);
     else setHechas((previas) => previas + 1);
-    if (siguiente.length === 0) { window.location.hash = '#/e8'; return; }
+    if (siguiente.length === 0) { window.location.hash = repetidas.length > 0 || falla ? '#/e27' : '#/e8'; return; }
     setCola(siguiente);
     setResultado(null);
     setRevisando(false);
@@ -112,7 +113,7 @@ export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
           </div>
         ) : (
           <div className="sesion__pie">
-            <button className="boton boton--accent sesion__comprobar" disabled={resultado === null} onClick={() => setRevisando(true)}>Comprobar</button>
+            <button className="boton boton--accent sesion__comprobar" disabled={resultado === null} onClick={() => { setRevisando(true); sonar(resultado?.correcta ? 'acierto' : 'error'); }}>Comprobar</button>
           </div>
         )}
       </div>

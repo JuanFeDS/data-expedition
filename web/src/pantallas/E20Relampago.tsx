@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Cuenta, Estado, Tarjeta } from '../componentes/panel';
+import { sonar } from '../componentes/sonidos';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 
 const OPCIONES = ['filter()', 'select()', 'count()', 'withColumn()'];
@@ -86,6 +87,7 @@ function Pulso() {
 export function E20Relampago() {
   const [tipo, setTipo] = useState(0);
   const [elegida, setElegida] = useState<number | null>(null);
+  useEffect(() => { if (tipo === 0) sonar('relampago'); }, [tipo]);
   const irAResultado = () => { window.location.hash = '#/e21'; };
   const accion = tipo === 0
     ? { etiqueta: 'Un solo intento', texto: 'Responder', alPulsar: irAResultado, deshabilitada: elegida === null }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { sonar } from './sonidos';
 import { Kicker } from './ui';
 
 export function Tarjeta({ kicker, titulo, accion, tono = 'clara', clase = '', children }: { kicker?: string; titulo?: string; accion?: ReactNode; tono?: 'clara' | 'oscura' | 'aviso' | 'menta'; clase?: string; children?: ReactNode }) {
@@ -74,6 +75,7 @@ export function Cuenta({ segundos, total = segundos, detenida = false }: { segun
     reloj.current = window.setInterval(() => setRestante((actual) => Math.max(0, actual - 1)), 1000);
     return () => window.clearInterval(reloj.current);
   }, [detenida]);
+  useEffect(() => { if (!detenida && restante > 0 && restante <= 10) sonar('tic'); }, [restante, detenida]);
   const progreso = restante / total;
   const circunferencia = 2 * Math.PI * 44;
   return (

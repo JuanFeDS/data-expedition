@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { IconoSvg } from './Icono';
 import { NAVEGACION, type Rol } from './navegacion';
-import { InterruptorTema } from './tema';
+import { InterruptorSonido, InterruptorTema } from './tema';
 import { Hoja, Kicker, ModoRol } from './ui';
 
 export const OPCIONES_MENU = (rol: Rol) => NAVEGACION[rol].flatMap((grupo) => grupo.enlaces);
@@ -20,7 +20,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
           </a>
         ))}
       </nav>
-      <InterruptorTema />
+      <div className="menu__ajustes"><InterruptorTema /><InterruptorSonido /></div>
     </Hoja>
   );
 }

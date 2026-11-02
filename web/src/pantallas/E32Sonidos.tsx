@@ -3,6 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { CATEGORIAS, EVENTOS, reproducir } from '../componentes/sonidos';
+import { InterruptorSonido, InterruptorSonidoDeClase } from '../componentes/tema';
 import { Pantalla, Segmentado } from '../componentes/ui';
 
 const CLAVE = 'sonidos-elegidos';
@@ -80,6 +81,10 @@ export function E32Sonidos() {
               ))}
             </div>
             <div className="son__lado">
+              <Tarjeta kicker="En la app" titulo="Ajustes de sonido">
+                <p className="meta">Tu elección ya suena en la app. Los sonidos de clase (relámpago y cuenta regresiva) vienen apagados.</p>
+                <div className="acciones"><InterruptorSonido /><InterruptorSonidoDeClase /></div>
+              </Tarjeta>
               <Tarjeta tono="menta" kicker="Atajo" titulo="Un estilo para todo">
                 <p className="meta">Marca los 12 momentos con el mismo estilo y después cambia los que quieras.</p>
                 <div className="acciones">{ESTILOS.map((estilo, indice) => <button key={estilo} className="boton boton--suave" onClick={() => elegirEstilo(indice)}>{estilo}</button>)}</div>

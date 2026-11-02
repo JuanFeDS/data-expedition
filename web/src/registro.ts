@@ -21,6 +21,13 @@ import { O1ResumenGrupos } from './pantallas/O1ResumenGrupos';
 import { O2DimensionesTrabajos } from './pantallas/O2DimensionesTrabajos';
 import { O3QueVeObservador } from './pantallas/O3QueVeObservador';
 import { E26Estados } from './pantallas/E26Estados';
+import { E27PracticaFallos } from './pantallas/E27PracticaFallos';
+import { E28RelampagoIncorrecta } from './pantallas/E28RelampagoIncorrecta';
+import { E29EntregaConProblemas } from './pantallas/E29EntregaConProblemas';
+import { E30Historico } from './pantallas/E30Historico';
+import { E31Liga } from './pantallas/E31Liga';
+import { D12Resultados } from './pantallas/D12Resultados';
+import { E32Sonidos } from './pantallas/E32Sonidos';
 import { E16UnirConceptos } from './pantallas/E16UnirConceptos';
 import { E17Diagnostico } from './pantallas/E17Diagnostico';
 import { E18EjercicioDiagnostico } from './pantallas/E18EjercicioDiagnostico';
@@ -92,4 +99,11 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'o2', titulo: 'Dimensiones y trabajos', grupo: 'Observador', componente: O2DimensionesTrabajos },
   { codigo: 'o3', titulo: 'Qué puede ver', grupo: 'Observador', componente: O3QueVeObservador },
   { codigo: 'e26', titulo: 'Estados del sistema', grupo: 'Transversal', componente: E26Estados },
+  { codigo: 'e27', titulo: 'Práctica con fallos', grupo: 'Estudiante', componente: E27PracticaFallos },
+  { codigo: 'e28', titulo: 'Relámpago incorrecta', grupo: 'Estudiante', componente: E28RelampagoIncorrecta },
+  { codigo: 'e29', titulo: 'Entrega con problemas', grupo: 'Estudiante', componente: E29EntregaConProblemas },
+  { codigo: 'e30', titulo: 'Mis resultados (histórico)', grupo: 'Estudiante', componente: E30Historico },
+  { codigo: 'e31', titulo: 'Liga del modo competitivo', grupo: 'Estudiante', componente: E31Liga },
+  { codigo: 'd12', titulo: 'Resultados de formularios', grupo: 'Docente', componente: D12Resultados },
+  { codigo: 'e32', titulo: 'Galería de sonidos', grupo: 'Transversal', componente: E32Sonidos },
 ];
