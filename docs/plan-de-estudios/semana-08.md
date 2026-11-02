@@ -13,13 +13,18 @@ Elasticidad: **núcleo fijo**.
 
 | Min | Dinámica | Detalle |
 |---|---|---|
-| 0–20 | Verificación sin IA (forma B) | Ejercicios paralelos a los de la S2, con los mismos criterios |
+| 0–20 | Verificación sin IA (forma B) | Ejercicios paralelos a los de la S2, con los mismos criterios, con cámara y pantalla compartida |
 | 20–30 | Pausa | |
-| 30–90 | Sprint final | Los equipos cierran el proyecto: modelo, interpretación, dashboard o informe y repositorio ordenado |
+| 30–90 | Sprint final | Los equipos cierran el proyecto: modelo, interpretación, dashboard o informe y repositorio ordenado. Revisión del sprint en el tablero |
 | 90–100 | Pausa | |
 | 100–150 | Ensayo de la presentación | Cada equipo ensaya 8 min frente a otro equipo. El otro equipo da retroalimentación con una pauta de tres preguntas |
 | 150–165 | Ajustes | Los equipos aplican la retroalimentación |
-| 165–180 | Cierre | Logística de la presentación y reparto de turnos |
+| 165–180 | Cierre | Logística de la presentación, reparto de turnos y retro final del sprint |
+
+**Material complementario**
+- [ES] La Guía de Scrum 2020: Revisión del Sprint y Retrospectiva del Sprint: [scrumguides.org](https://www.Scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Spanish-Latin-South-American.pdf)
+- [ES] README profesional para el repositorio del integrador: [docs.github.com](https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
+- Pendiente: un video en español sobre cómo presentar resultados técnicos a una audiencia no técnica.
 
 ## S16 — Presentación del integrador (virtual, sesión B)
 
@@ -43,6 +48,7 @@ Elasticidad: **núcleo fijo**.
 | Modelo | Modelado | Modelo adecuado con baseline y comparación |
 | Validación | Validación | Validación cruzada, sin fuga y con interpretación de resultados |
 | Comunicación | Comunicación | Presentación clara para una audiencia no técnica y repositorio como portafolio |
+| Calidad del código y tablero | Producción | Pasa Black y Pylint; sprints con tablero actualizado y PR enlazados |
 | Uso de IA | Dirección de IA | Bitácora del equipo que muestra decisiones, correcciones y verificaciones |
 
 ## Habilidades para el empleo
