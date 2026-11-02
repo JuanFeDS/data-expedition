@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { crearServicioCursosDemo, servicioCursosSupabase, type Curso } from '../servicios/cursos';
+import { crearServicioCursosDemo, servicioCursosSupabase, type ConteoCurso, type Curso } from '../servicios/cursos';
 import { useSesion } from './sesion';
 
 const CLAVE = 'curso-activo';
@@ -8,13 +8,14 @@ const servicioDemo = crearServicioCursosDemo();
 interface ValorCurso {
   cargando: boolean;
   cursos: Curso[];
+  conteos: Record<string, ConteoCurso>;
   curso: Curso | null;
   elegir: (id: string) => void;
   crear: (nombre: string) => Promise<string | null>;
   recargar: () => Promise<void>;
 }
 
-const SIN_CURSO: ValorCurso = { cargando: false, cursos: [], curso: null, elegir: () => undefined, crear: async () => 'Sin conexión', recargar: async () => undefined };
+const SIN_CURSO: ValorCurso = { cargando: false, cursos: [], conteos: {}, curso: null, elegir: () => undefined, crear: async () => 'Sin conexión', recargar: async () => undefined };
 const ContextoCurso = createContext<ValorCurso>(SIN_CURSO);
 
 export const useCurso = () => useContext(ContextoCurso);
@@ -33,6 +34,7 @@ export function CursoProvider({ children }: { children: ReactNode }) {
   const hayUsuario = modoDemo || persona !== null;
   const [cargando, setCargando] = useState(true);
   const [cursos, setCursos] = useState<Curso[]>([]);
+  const [conteos, setConteos] = useState<Record<string, ConteoCurso>>({});
   const [activo, setActivo] = useState<string | null>(leerGuardado);
 
   const recargar = useCallback(async () => {
@@ -42,8 +44,15 @@ export function CursoProvider({ children }: { children: ReactNode }) {
     } catch {
       setCursos([]);
     }
+    if (persona?.rol === 'docente' || modoDemo) {
+      try {
+        setConteos(await servicio.contar());
+      } catch {
+        setConteos({});
+      }
+    }
     setCargando(false);
-  }, [servicio, hayUsuario]);
+  }, [servicio, hayUsuario, persona?.rol, modoDemo]);
 
   useEffect(() => { void recargar(); }, [recargar]);
 
@@ -64,7 +73,7 @@ export function CursoProvider({ children }: { children: ReactNode }) {
     return error;
   }, [servicio, recargar]);
 
-  const valor = useMemo(() => ({ cargando, cursos, curso, elegir, crear, recargar }), [cargando, cursos, curso, elegir, crear, recargar]);
+  const valor = useMemo(() => ({ cargando, cursos, conteos, curso, elegir, crear, recargar }), [cargando, cursos, conteos, curso, elegir, crear, recargar]);
   return <ContextoCurso.Provider value={valor}>{children}</ContextoCurso.Provider>;
 }
 

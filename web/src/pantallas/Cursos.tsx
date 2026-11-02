@@ -10,7 +10,7 @@ const DESTINO = { estudiante: '#/e5', docente: '#/d13', observador: '#/o1' } as 
 
 export function Cursos() {
   const { persona } = useSesion();
-  const { cursos, curso, elegir, crear, cargando } = useCurso();
+  const { cursos, conteos, curso, elegir, crear, cargando } = useCurso();
   const [nombre, setNombre] = useState('');
   const [aviso, setAviso] = useState<string | null>(null);
   const rol = persona?.rol ?? 'estudiante';
@@ -45,6 +45,7 @@ export function Cursos() {
                 <li key={candidato.id}>
                   <button className="cursos__tarjeta" onClick={() => entrar(candidato.id)}>
                     <span className="cursos__nombre">{candidato.nombre}</span>
+                    {rol === 'docente' && <small>{(conteos[candidato.id]?.estudiantes ?? 0)} {(conteos[candidato.id]?.estudiantes ?? 0) === 1 ? 'estudiante' : 'estudiantes'} · {(conteos[candidato.id]?.grupos ?? 0)} {(conteos[candidato.id]?.grupos ?? 0) === 1 ? 'grupo' : 'grupos'}</small>}
                     {candidato.id === curso?.id && <small>Último que usaste</small>}
                     <span className="cursos__entrar">Entrar ›</span>
                   </button>
