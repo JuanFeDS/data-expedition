@@ -21,13 +21,13 @@ Elasticidad: **núcleo fijo**.
 | 150–165 | Ajustes | Los equipos aplican la retroalimentación |
 | 165–180 | Cierre | Logística de la presentación y reparto de turnos |
 
-## S16 — Presentación del integrador (presencial, sesión B)
+## S16 — Presentación del integrador (virtual, sesión B)
 
 **Objetivo:** presentar la solución y cerrar el curso con retroalimentación y lectura del progreso.
 
 | Min | Dinámica | Detalle |
 |---|---|---|
-| 0–10 | Llegada y orden | Se confirma el orden y se prueba la proyección |
+| 0–10 | Conexión y orden | Se confirma el orden y se prueba la pantalla compartida |
 | 10–115 | Presentaciones | 10 min por equipo (8 de presentación y 2 de preguntas), con pausa de 10 min a la mitad. El grupo vota en vivo la claridad del mensaje |
 | 115–125 | Pausa | |
 | 125–155 | Retroalimentación | Cada equipo recibe comentarios del docente y de otro equipo |
