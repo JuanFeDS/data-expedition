@@ -3,7 +3,7 @@ import { BotonSalir } from './BotonSalir';
 import { SelectorCurso } from './curso';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
-import { NAVEGACION, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
+import { gruposVisibles, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
 import { useSesion } from './sesion';
 import { semanaActual, totalSemanas } from '../datos';
 
@@ -37,10 +37,10 @@ export function BarraLateral({ ruta }: { ruta: string }) {
         <img className="marca-logo" src={`${import.meta.env.BASE_URL}marca/logo.webp`} alt="" />
         <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
-      <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>
+      {!real && <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>}
       <SelectorCurso />
       <nav className="lateral__nav">
-        {NAVEGACION[rol].map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
+        {gruposVisibles(rol, real).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
       <div className="lateral__ajustes"><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>

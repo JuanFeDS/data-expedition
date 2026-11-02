@@ -115,3 +115,14 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
     },
   ],
 };
+
+export const CONECTADAS = new Set(['e0', 'e5', 'e6', 'd3', 'd13', 'd14']);
+
+export const codigoDeRuta = (ruta: string) => ruta.replace(/^#\/?/, '');
+
+export const esConectada = (ruta: string) => CONECTADAS.has(codigoDeRuta(ruta));
+
+export const gruposVisibles = (rol: Rol, soloConectadas: boolean) =>
+  NAVEGACION[rol]
+    .map((grupo) => ({ ...grupo, enlaces: soloConectadas ? grupo.enlaces.filter((enlace) => esConectada(enlace.ruta)) : grupo.enlaces }))
+    .filter((grupo) => grupo.enlaces.length > 0);

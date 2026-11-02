@@ -34,7 +34,6 @@ export const PASOS_DE_ACCESO = [
 ];
 
 export const INICIO_REAL: Record<Rol, string> = { estudiante: '#/e5', docente: '#/d13', observador: '#/o1' };
-export const CONECTADAS = new Set(['e0', 'e5', 'e6', 'd3', 'd13', 'd14']);
 
 const USUARIO_VALIDO = /^[a-z0-9_]{3,20}$/;
 

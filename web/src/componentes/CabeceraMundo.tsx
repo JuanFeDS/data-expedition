@@ -1,6 +1,8 @@
 import { useContext, type ReactNode } from 'react';
 import { Jaguar, type PoseJaguar } from './Jaguar';
 import { Isla } from './Region';
+import { esConectada } from './navegacion';
+import { useSesion } from './sesion';
 import { Kicker, ModoModal } from './ui';
 
 interface PropsCabecera {
@@ -16,9 +18,10 @@ interface PropsCabecera {
 
 export function CabeceraMundo({ atras, kicker, titulo, subtitulo, isla, objeto, jaguar, children }: PropsCabecera) {
   const modal = useContext(ModoModal);
+  const { modoDemo } = useSesion();
   return (
     <header className="mundo">
-      {atras && !modal && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
+      {atras && !modal && (modoDemo || esConectada(atras.ruta)) && <a className="mundo__atras" href={atras.ruta}>‹ {atras.texto}</a>}
       <div className="mundo__texto">
         {kicker && <Kicker estilo={{ color: 'var(--mint)' }}>{kicker}</Kicker>}
         <h1 className={`titulo ${titulo.split(' ').some((palabra) => palabra.length > 11) ? 'titulo--largo' : ''}`}>{titulo}</h1>
