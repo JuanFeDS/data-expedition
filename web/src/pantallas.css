@@ -1402,3 +1402,6 @@
 .detalle__datos--dos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 .d13__personas li .d13__selector { grid-column: 1 / -1; }
+
+.inicio__fecha { flex: none; min-width: 34px; padding: 4px 8px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-align: center; font-size: var(--fs-md); font-weight: 800; }
+.inicio__atencion li.vacio span small { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--muted); }

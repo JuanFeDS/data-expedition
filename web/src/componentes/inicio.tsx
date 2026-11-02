@@ -384,14 +384,78 @@ export function InicioEstudiante() {
   );
 }
 
-export function InicioPorRol() {
+const RESUMENES_OBSERVADOR = [
+  { titulo: 'Avance del curso', texto: 'Cuántos trabajos se entregan a tiempo, sin nombres.' },
+  { titulo: 'Dimensiones y trabajos', texto: 'Cómo avanza el grupo en cada dimensión de habilidades.' },
+  { titulo: 'Participación', texto: 'Asistencia y respuestas en clase, solo en conjunto.' },
+];
+
+export function InicioObservador() {
   const { persona } = useSesion();
-  const esObservador = persona?.rol === 'observador';
+  const { cursos, reciente: curso } = useCurso();
+  const servicio = useServicioTrabajos();
+  const [trabajos, setTrabajos] = useState<TrabajoCurso[] | null>(null);
 
   useEffect(() => {
-    if (esObservador) window.location.hash = '#/cursos';
-  }, [esObservador]);
+    if (!curso) { setTrabajos(null); return; }
+    void servicio.cargarTrabajos(curso.id).then(setTrabajos).catch(() => setTrabajos(null));
+  }, [curso, servicio]);
 
-  if (esObservador) return null;
+  const proximos = (trabajos ?? []).filter((trabajo) => trabajo.venceEn && new Date(trabajo.venceEn).getTime() >= Date.now() - 86400000).slice(0, 4);
+
+  return (
+    <Pantalla rol="observador" clase="p-inicio p-inicio--tablero">
+      <div className="pantalla__cuerpo">
+        <CabeceraMundo kicker="Tu vista" titulo={`Hola, ${persona?.nombre?.split(' ')[0] ?? persona?.usuario ?? ''}`} subtitulo={curso ? `Esto es lo que puedes ver de ${curso.nombre}.` : 'Elige un curso para empezar.'} objeto="binoculares" />
+        <div className="contenido cuerpo-mundo panel">
+          <Tarjeta kicker="Tu curso" titulo={curso?.nombre ?? 'Sin curso'}>
+            <ul className="inicio__atencion">
+              <li className="vacio"><span>{curso ? `${trabajos?.length ?? 0} ${trabajos?.length === 1 ? 'trabajo publicado' : 'trabajos publicados'}${curso.periodo ? ` · Periodo ${curso.periodo}` : ''}` : 'Aún no hay un curso.'}</span></li>
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="Privacidad" titulo="Qué puedes ver">
+            <p className="meta">Solo datos del grupo en conjunto: <b>sin nombres, correos ni textos de las entregas</b>. Si un grupo tiene menos de 5 personas, ese dato no se muestra, para que nadie quede identificable.</p>
+          </Tarjeta>
+          <Tarjeta kicker="Lo que viene" titulo="Próximos vencimientos">
+            <ul className="inicio__atencion">
+              {proximos.map((trabajo) => (
+                <li key={trabajo.id} className="vacio">
+                  <span>{trabajo.nombre}<small>{vencimiento(trabajo.venceEn)}</small></span>
+                  <b className="inicio__fecha">{formatoFecha(trabajo.venceEn).numero}</b>
+                </li>
+              ))}
+              {proximos.length === 0 && <li className="vacio"><span>{curso ? 'No hay trabajos próximos.' : 'Cuando tengas un curso, verás aquí lo que vence.'}</span></li>}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="En camino" titulo="Resúmenes del grupo">
+            <ul className="inicio__atencion">
+              {RESUMENES_OBSERVADOR.map((item) => (
+                <li key={item.titulo} className="pronto"><span>{item.titulo}<small>{item.texto}</small></span><em>Próximamente</em></li>
+              ))}
+            </ul>
+          </Tarjeta>
+          <Tarjeta kicker="Tus cursos" titulo="Cursos" accion={<a className="cursos__secundaria" href="#/cursos">Ver todos</a>}>
+            <ul className="inicio__atencion">
+              {cursos.map((candidato) => (
+                <li key={candidato.id}>
+                  <a href={enCurso('#/curso', candidato.id)}>
+                    <span>{candidato.nombre}{candidato.periodo && <small>Periodo {candidato.periodo}</small>}</span>
+                    <i aria-hidden="true">›</i>
+                  </a>
+                </li>
+              ))}
+              {cursos.length === 0 && <li className="vacio"><span>Aún no estás en ningún curso.</span></li>}
+            </ul>
+          </Tarjeta>
+        </div>
+      </div>
+      <Dock />
+    </Pantalla>
+  );
+}
+
+export function InicioPorRol() {
+  const { persona } = useSesion();
+  if (persona?.rol === 'observador') return <InicioObservador />;
   return persona?.rol === 'estudiante' ? <InicioEstudiante /> : <InicioDocente />;
 }

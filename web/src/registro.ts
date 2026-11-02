@@ -29,7 +29,7 @@ import { E31Liga } from './pantallas/E31Liga';
 import { D12Resultados } from './pantallas/D12Resultados';
 import { D13Personas } from './pantallas/D13Personas';
 import { D14Trabajos } from './pantallas/D14Trabajos';
-import { AyudaDocente, InicioEstudiante, InicioPorRol, InicioSinCurso } from './componentes/inicio';
+import { AyudaDocente, InicioEstudiante, InicioObservador, InicioPorRol, InicioSinCurso } from './componentes/inicio';
 import { Cursos } from './pantallas/Cursos';
 import { MuestraGuiaDesbloqueo } from './componentes/GuiaDesbloqueo';
 import { CursoDetalle } from './pantallas/CursoDetalle';
@@ -114,6 +114,7 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'd13', titulo: 'Personas y grupos', grupo: 'Docente', componente: D13Personas },
   { codigo: 'd14', titulo: 'Trabajos del curso', grupo: 'Docente', componente: D14Trabajos },
   { codigo: 'inicio', titulo: 'Inicio (según el rol)', grupo: 'Transversal', componente: InicioPorRol },
+  { codigo: 'inicio-observador', titulo: 'Inicio del observador', grupo: 'Observador', componente: InicioObservador },
   { codigo: 'inicio-estudiante', titulo: 'Inicio del estudiante', grupo: 'Estudiante', componente: InicioEstudiante },
   { codigo: 'ayuda', titulo: 'Ayuda del docente', grupo: 'Docente', componente: AyudaDocente },
   { codigo: 'curso', titulo: 'Detalle del curso', grupo: 'Transversal', componente: CursoDetalle },

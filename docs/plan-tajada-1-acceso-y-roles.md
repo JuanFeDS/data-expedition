@@ -160,3 +160,8 @@ Tamaños: S = media jornada, M = una jornada.
 - Al desbloquearse una sección del panel, el jaguar aparece con un globo que explica qué se encuentra ahí («Nueva sección: Personas»), con «Siguiente» o «Entendido». Si se desbloquean varias a la vez (por ejemplo al entrar a un curso), las presenta en orden. La opción nueva del panel parpadea mientras tanto.
 - Los textos viven en `componentes/GuiaDesbloqueo.tsx` (por rol y por sección). Se anuncia solo la primera vez, porque lo desbloqueado queda guardado.
 - Vista de diseño en la galería: `#/guia-nueva`.
+
+## Inicio del observador (2 nov)
+
+- El observador tiene su propio inicio (`#/inicio`, cabecera roja): su curso con cuántos trabajos hay, una tarjeta de privacidad («Qué puedes ver»: solo datos en conjunto, sin nombres ni correos, y nada de grupos de menos de 5 personas), próximos vencimientos, los resúmenes del grupo como «Próximamente», y sus cursos.
+- Los resúmenes agregados (avance, dimensiones, participación) se conectan después, con las funciones de la base que ya respetan el mínimo de anonimato.

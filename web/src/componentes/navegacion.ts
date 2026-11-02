@@ -149,7 +149,7 @@ export const gruposVisibles = (
   desbloqueadas: Set<string> | null = null,
 ): GrupoEnlaces[] => {
   if (!soloConectadas) return NAVEGACION[rol];
-  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : rol === 'estudiante' ? [ENLACE_INICIO, ENLACE_CURSOS] : [ENLACE_CURSOS] };
+  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : [ENLACE_INICIO, ENLACE_CURSOS] };
   if (!curso) return [general];
   const delCurso = [ENLACE_INFO, ...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces)]
     .filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)))
