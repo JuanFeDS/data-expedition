@@ -121,3 +121,11 @@ Tamaños: S = media jornada, M = una jornada.
 - **Modo real:** las pantallas no conectadas muestran «Esta sección aún no está conectada». Los inicios reales son `e5` (estudiante), `d13` (docente) y `o1` (observador).
 - Un estudiante solo ve los trabajos si está **matriculado** (se asigna un grupo en Personas); las reglas de acceso se probaron en la base (un no matriculado ve 0 trabajos y no puede entregar).
 - **Siguiente:** calificar con rúbrica (`d4`) y ver la nota (`e3`/`e4`), el radar, y las pantallas de inicio.
+
+## Modelo por cursos (2 nov)
+
+- **Curso = una cohorte** (la tabla `ediciones`, que en la app se llama «curso»). El **rol sigue siendo global**; si luego hace falta ser docente en un curso y estudiante en otro, el rol pasa a la matrícula.
+- **Migración `0006`:** tabla `invitaciones` (correo, curso, grupo, rol). Una persona puede estar invitada a varios cursos. `correos_autorizados` queda solo para cuentas sin curso (por ejemplo el docente). El registro se autoriza si el correo está en cualquiera de las dos, y al registrarse la persona queda matriculada en todos sus cursos.
+- **Selector de curso** en la barra lateral y en el menú móvil (`componentes/curso.tsx`); Personas, Trabajos y Entregas leen el curso activo.
+- **Estudiante u observador sin curso:** ve una sola pantalla de bienvenida («Casi listo…»), sin menú ni pestañas, con «Ya me invitaron, actualizar» y «Cerrar sesión». También está en la galería como `e33`.
+- Pruebas de políticas: 30 en verde, más la comprobación de que un correo no autorizado no se registra.

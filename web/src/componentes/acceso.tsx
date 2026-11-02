@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Jaguar } from './Jaguar';
+import { BotonSalir } from './BotonSalir';
+import { useCurso } from './curso';
 import { inicioDeRol, type Rol } from './navegacion';
 import { Vacio } from './panel';
 import { useSesion } from './sesion';
@@ -91,6 +93,38 @@ export function Cargando() {
       <span className="cargando__rueda" aria-hidden="true" />
       <span>Entrando a la expedición…</span>
     </div>
+  );
+}
+
+export function SinCurso() {
+  const { persona } = useSesion();
+  const { recargar, cargando } = useCurso();
+  const [revisando, setRevisando] = useState(false);
+
+  const revisar = async () => {
+    setRevisando(true);
+    await recargar();
+    setRevisando(false);
+  };
+
+  return (
+    <Pantalla tono="oscura" clase="pantalla--acceso p-e0">
+      <div className="pantalla__cuerpo acceso">
+        <header className="acceso__titulo">
+          <Kicker estilo={{ color: 'var(--accent)' }}>Bienvenida y bienvenido</Kicker>
+          <h1 className="titulo">Casi listo, {persona?.nombre?.split(' ')[0] ?? persona?.usuario}</h1>
+          <p>Aún no estás en ningún curso.</p>
+        </header>
+        <div className="acceso__escena">
+          <Jaguar pose="pensando" ancho={150} clase="acceso__guia" />
+        </div>
+        <div className="acceso__hoja">
+          <p>Tu docente debe invitarte a un curso con el correo <b>{persona?.correo}</b>. Cuando lo haga, aparecerá aquí.</p>
+          <button className="acceso__boton acceso__boton--principal" disabled={revisando || cargando} onClick={() => void revisar()}>{revisando ? 'Revisando…' : 'Ya me invitaron, actualizar'}</button>
+          <BotonSalir clase="acceso__boton">Cerrar sesión</BotonSalir>
+        </div>
+      </div>
+    </Pantalla>
   );
 }
 

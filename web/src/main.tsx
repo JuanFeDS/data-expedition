@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { useAjusteAltura } from './componentes/ajusteAltura';
 import { rolDeRuta } from './componentes/navegacion';
-import { CursoProvider } from './componentes/curso';
+import { CursoProvider, useCurso } from './componentes/curso';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
 import { ModoViva } from './componentes/ui';
-import { Cargando, CompletarPerfil, CONECTADAS, INICIO_REAL, OtroRol, SinDatos } from './componentes/acceso';
+import { Cargando, CompletarPerfil, CONECTADAS, INICIO_REAL, OtroRol, SinCurso, SinDatos } from './componentes/acceso';
 import { PANTALLAS } from './registro';
 import './estilos.css';
 import './pantallas.css';
@@ -47,6 +47,7 @@ function Galeria() {
 function App() {
   const [ruta, setRuta] = useState(rutaActual);
   const { modoDemo, cargando, persona } = useSesion();
+  const { cargando: cargandoCursos, cursos } = useCurso();
   useEffect(() => {
     const alCambiar = () => setRuta(rutaActual());
     window.addEventListener('hashchange', alCambiar);
@@ -92,6 +93,16 @@ function App() {
     return (
       <ModoViva.Provider value>
         <div className="escenario escenario--sin-barra"><CompletarPerfil /></div>
+      </ModoViva.Provider>
+    );
+  }
+
+  if (cargandoCursos && persona.rol !== 'docente') return <Cargando />;
+
+  if (persona.rol !== 'docente' && cursos.length === 0) {
+    return (
+      <ModoViva.Provider value>
+        <div className="escenario escenario--sin-barra"><SinCurso /></div>
       </ModoViva.Provider>
     );
   }
