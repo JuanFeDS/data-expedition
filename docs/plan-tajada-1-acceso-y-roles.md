@@ -98,6 +98,7 @@ Tamaños: S = media jornada, M = una jornada.
 | 5. Pantalla de acceso real | **Hecha** (`e0`): validación del correo, enviando, "revisa tu correo" con reenvío tras 60 s, enlace vencido y errores traducidos. **El envío real del correo no se ha probado**: depende de la configuración de Auth y del correo (ver abajo) |
 | 6. Guardas por rol | **Hecho y probado** con usuarios de prueba (ya borrados): sin sesión todo cae en el acceso; cada rol entra a su inicio; las pantallas de otro rol muestran un aviso; `#/e0` y la galería redirigen al inicio |
 | 7. Perfil y cerrar sesión | **Parcial.** "Cerrar sesión" en la barra lateral y en el menú móvil, y el nombre y el correo reales en la tarjeta de usuario. Falta editar el nombre |
+| 7b. Ronda de feedback (2 nov) | **Hecho en código, sin publicar:** se quitó el modo oscuro (letras casi negras), la tarjeta de usuario muestra nombre y `@usuario` con puntos suspensivos, el observador tiene tono rojo (docente azul), y el acceso tiene franja de islas, pasos y huecos para logo y letras (`docs/prompts-marca.md`). El primer ingreso pide nombre y usuario (`CompletarPerfil`). **Requiere aplicar `0002_usuario_en_perfiles.sql` antes de publicar**: sin la columna `usuario` el perfil no carga y nadie puede entrar |
 | 8 a 10 | Pendientes (personas y matrícula, despliegue con variables, cierre) |
 
 **Lo que no puede hacer Claude y debes hacer tú en el panel de Supabase** (Authentication):
