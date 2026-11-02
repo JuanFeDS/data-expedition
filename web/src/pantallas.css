@@ -1201,3 +1201,14 @@
 .acceso__o { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; opacity: .8; }
 .acceso__o::before, .acceso__o::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: .4; }
 .acceso__hoja small a { text-decoration: underline; }
+.salir__velo { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgb(7 59 58 / .65); }
+.salir { position: relative; width: min(100%, 400px); display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 64px 26px 26px; border-radius: 28px; background: var(--surface); color: var(--ink); text-align: center; box-shadow: 0 24px 60px rgb(0 0 0 / .35); }
+.salir__guia { position: absolute; top: -54px; left: 50%; translate: -50% 0; height: auto; }
+.salir .titulo { font-size: 28px; line-height: 1.1; }
+.salir p { font-size: 15px; font-weight: 600; line-height: 1.45; color: var(--muted); }
+.salir__acciones { align-self: stretch; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.salir__confirmar { padding: 12px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; background: var(--e-alerta-bg); color: var(--e-alerta); }
+@media (prefers-reduced-motion: no-preference) {
+  .salir { animation: salir-entra .22s ease-out both; }
+  @keyframes salir-entra { from { transform: translateY(14px) scale(.97); opacity: 0; } }
+}

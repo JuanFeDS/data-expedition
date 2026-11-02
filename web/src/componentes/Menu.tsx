@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { BotonSalir } from './BotonSalir';
 import { IconoSvg } from './Icono';
 import { NAVEGACION, type Rol } from './navegacion';
 import { useSesion } from './sesion';
@@ -9,7 +10,7 @@ export const OPCIONES_MENU = (rol: Rol) => NAVEGACION[rol].flatMap((grupo) => gr
 
 export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCerrar: () => void; omitir?: string }) {
   const rol = useContext(ModoRol);
-  const { modoDemo, persona, cerrarSesion } = useSesion();
+  const { modoDemo, persona } = useSesion();
   return (
     <Hoja abierta={abierta} alCerrar={alCerrar} titulo="Menú">
       <Kicker>{rol === 'estudiante' ? 'Explorar' : rol === 'docente' ? 'Panel del docente' : 'Observación'}</Kicker>
@@ -23,7 +24,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
         ))}
       </nav>
       <div className="menu__ajustes"><InterruptorSonido /></div>
-      {!modoDemo && persona && <button className="menu__salir" onClick={() => void cerrarSesion()}>Cerrar sesión · {persona.correo}</button>}
+      {!modoDemo && persona && <BotonSalir clase="menu__salir">Cerrar sesión · @{persona.usuario}</BotonSalir>}
     </Hoja>
   );
 }

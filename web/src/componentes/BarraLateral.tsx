@@ -1,4 +1,5 @@
 import { IconoSvg } from './Icono';
+import { BotonSalir } from './BotonSalir';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
 import { NAVEGACION, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
@@ -22,7 +23,7 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
 
 export function BarraLateral({ ruta }: { ruta: string }) {
   const rol = rolDeRuta(ruta);
-  const { modoDemo, persona, cerrarSesion } = useSesion();
+  const { modoDemo, persona } = useSesion();
   const base = usuarioDeRol[rol];
   const real = !modoDemo && persona !== null;
   const nombreVisible = persona?.nombre?.trim() || persona?.usuario || '';
@@ -44,7 +45,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
         <span className={`avatar avatar--${usuario.color}`}>{usuario.iniciales}</span>
         <span className="lateral__datos"><strong>{usuario.nombre}</strong><small>{usuario.detalle}</small></span>
       </a>
-      {real && <button className="lateral__salir" onClick={() => void cerrarSesion()}>Cerrar sesión</button>}
+      {real && <BotonSalir clase="lateral__salir">Cerrar sesión</BotonSalir>}
     </aside>
   );
 }
