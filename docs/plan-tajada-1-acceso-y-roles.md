@@ -1,0 +1,87 @@
+# Plan de la tajada 1: acceso y roles
+
+Borrador del 2026-11-01. Es la primera parte **funcional** de la app: pasar del prototipo con datos de ejemplo a una app donde alguien entra con su correo, la base de datos sabe quién es y qué rol tiene, y cada rol ve solo lo suyo. Todo lo demás (entrega por PR, diagnóstico, radar real) se apoya en esto.
+
+Insumos: [RFC-010](RFC-010-app-expedicion.md) (F1, 5.2, 5.3), la migración `supabase/migrations/0001_modelo_inicial.sql` y el [plan de acción de pantallas](plan-de-accion-pantallas.md).
+
+## 1. Qué incluye
+
+- Entrar con el correo institucional por **enlace mágico**, sin contraseña.
+- Un perfil por persona con su rol (estudiante, docente u observador), guardado en la base de datos y no en el navegador.
+- Cada rol cae en su pantalla de inicio y no puede abrir las de otro rol.
+- Cerrar sesión, y ver y cambiar el propio nombre.
+- Que el docente asigne roles y matricule a las personas en una edición del curso.
+- Pruebas de que las políticas de acceso por fila funcionan de verdad.
+- Despliegue en GitHub Pages con las variables de entorno.
+
+**No incluye:** entrega por PR, diagnóstico, radar con datos reales, formularios ni correos del resumen semanal. Los datos de las pantallas siguen siendo de ejemplo hasta sus tajadas.
+
+## 2. Lo que ya existe
+
+| Pieza | Estado |
+|---|---|
+| Migración con tablas, `rol_actual()`, `es_docente()`, trigger que crea el perfil al registrarse y políticas por fila | Escrita, **nunca aplicada** a ningún proyecto |
+| `asignar_rol()` (solo el docente) y funciones del observador con mínimo de personas | Escritas, sin probar contra una base real |
+| Dominio hexagonal (`src/`) con nota, niveles y radar, y 30 pruebas | Hecho, sin adaptador de Supabase |
+| Pantallas de acceso, perfil y tres roles con navegación | Hechas con datos de ejemplo |
+| Proyecto de Supabase para esta app | **No hay.** Los 4 proyectos de la cuenta son de otras apps (3 inactivos y `nailong`, activo) |
+
+## 3. Hallazgos que cambian el plan
+
+1. **El enlace mágico choca con el router por `#`.** Supabase devuelve la sesión en el fragmento de la dirección (`#access_token=…`), y la app usa ese mismo fragmento para sus rutas (`#/home`). Se pisarían. Solución: usar el flujo **PKCE**, que devuelve un `?code=` en la consulta, y cambiar de ruta después de canjearlo.
+2. **El correo integrado de Supabase no alcanza.** El plan gratuito limita los envíos a unos pocos por hora y por proyecto, y 36 estudiantes pidiendo su enlace a la vez los agotan. Hace falta un **servidor de correo propio (SMTP)** antes de la primera clase. Está pendiente la pregunta 17 del RFC (proveedor y revisión del docente).
+3. **Nadie puede ser el primer docente.** El trigger crea a todos como estudiantes, y `asignar_rol()` exige ser docente. Hay que **promover una vez, a mano con SQL**, el correo de Juan. Y no va dentro de la migración, para no dejar un correo fijo en el repositorio.
+4. **Cualquiera con un correo podría registrarse.** Hay que limitar el acceso a los correos de la universidad, o a una lista de matriculados, y decidir cuál de las dos.
+5. **Pausa por inactividad.** El plan gratuito pausa los proyectos inactivos; el RFC ya lo anticipa y propone una consulta periódica durante los recesos.
+
+## 4. Decisiones que necesito de ti
+
+| # | Decisión | Mi recomendación |
+|---|---|---|
+| 1 | **Crear el proyecto de Supabase** (gratuito, región São Paulo, como dice el RFC). Crearlo es una acción de tu cuenta y puede tener costo | Aprobarlo y crearlo yo, con el nombre `data-expedicion` |
+| 2 | **Quién puede entrar**: dominio de correo de la universidad, o lista de matriculados | Lista de matriculados que carga el docente: es más estricta y sirve para los grupos |
+| 3 | **Servidor de correo (SMTP)** | Una cuenta de envío gratuita (por ejemplo Resend o un SMTP institucional) antes de la S1; mientras tanto, el correo integrado solo para pruebas con pocas personas |
+| 4 | **Tu correo de docente** para la promoción inicial | Lo escribes tú en el SQL, no se guarda en el repositorio |
+| 5 | **Demo pública**: mantener el prototipo con datos de ejemplo en juanfeds.com | Sí, detrás de `?demo`, para seguir enseñándolo sin cuenta |
+
+## 5. Pasos, en orden
+
+Cada paso termina con un criterio de "hecho" que se comprueba, no que se supone.
+
+| # | Paso | Hecho cuando | Tamaño |
+|---|---|---|---|
+| 0 | **Proyecto de Supabase** creado (decisión 1) y sus claves guardadas en `web/.env.local` (no se sube). Solo la clave pública va al repositorio, nunca la de servicio | `.env.example` documenta las variables y el proyecto responde | S |
+| 1 | **Aplicar la migración y el seed**; correr los avisos de seguridad de Supabase | Las 10 tablas existen y los avisos no marcan tablas sin RLS | S |
+| 2 | **Pruebas de las políticas** con tres usuarios de prueba (estudiante, docente, observador) | Un estudiante no lee a otro; no puede cambiar su rol; el observador solo llama a las funciones agregadas; el docente lee todo | M |
+| 3 | **Promoción del primer docente** con una sentencia SQL única (decisión 4) | Tu correo entra con rol `docente` | S |
+| 4 | **Cliente en la web**: `@supabase/supabase-js` con flujo PKCE, un contexto de sesión (`persona`, `rol`, `cargando`) y la dirección de redirección con la base `/data-expedition/` | Entrar y recargar mantiene la sesión; el router por `#` sigue funcionando | M |
+| 5 | **Pantalla de acceso real** (`e0`): correo, envío, "revisa tu correo" con reenvío tras 60 s, enlace vencido y correo no permitido | Un correo real recibe el enlace y entra | M |
+| 6 | **Guardas por rol**: inicio según rol (`#/home`, `#/d1` o `#/o1`) y bloqueo con la pantalla de otro rol (`e26`) | Un estudiante que escribe `#/d1` no ve el panel del docente | M |
+| 7 | **Perfil y cierre de sesión** con datos reales: nombre editable, correo y salir | Cambiar el nombre persiste y salir limpia la sesión | S |
+| 8 | **Personas y matrícula** para el docente (pantalla nueva `d13`): lista de perfiles, cambiar rol y matricular en un grupo; carga de la lista de matriculados | El docente asigna a alguien como observador y esa persona ve su vista | M |
+| 9 | **Despliegue**: variables en GitHub Actions, direcciones permitidas en Supabase Auth, y el modo `?demo` | La versión publicada deja entrar con un enlace real y la demo sigue accesible | S |
+| 10 | **Cierre**: pruebas del dominio y del adaptador, lista de pruebas manuales por rol, y documentación | `npm run check` pasa y la lista se recorre sin fallos | S |
+
+Tamaños: S = media jornada, M = una jornada.
+
+## 6. Cómo encaja en la arquitectura
+
+- **`src/puertos`** define lo que el resto necesita: `RepositorioPersonas` (leer el perfil propio, cambiar el nombre, listar y cambiar roles).
+- **`src/adaptadores/supabase`** lo implementa con el cliente de Supabase. El dominio no se entera.
+- **`web/`** solo consume el contexto de sesión; no contiene reglas de negocio. La regla de dependencias del lint se mantiene.
+- El **rol** nunca se lee de lo que el usuario puede editar: siempre de `perfiles`, a través de `rol_actual()`.
+
+## 7. Riesgos y qué hacer si ocurren
+
+| Riesgo | Plan |
+|---|---|
+| El correo no llega o se limita | SMTP propio (decisión 3) y un código de un solo uso como respaldo |
+| La migración falla al aplicarse | Se corrige en un archivo nuevo (`0002`), sin editar el ya aplicado |
+| Una política deja ver datos de más | Las pruebas del paso 2 son obligatorias antes de cargar a una sola persona real |
+| El proyecto se pausa en un receso | Consulta periódica programada, ya prevista en el RFC |
+| La sesión no sobrevive a la redirección | Canjear el `?code=` antes de leer la ruta y limpiar la dirección después |
+
+## 8. Qué se hace sin tu aprobación y qué no
+
+- **Sin preguntar:** escribir el código, las pruebas y la documentación en el repositorio.
+- **Con tu aprobación explícita:** crear el proyecto de Supabase, aplicar la migración, crear usuarios de prueba, promover el docente, configurar el SMTP y hacer cualquier push.
