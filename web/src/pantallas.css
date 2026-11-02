@@ -1328,3 +1328,5 @@
   .d11__enlace { overflow-wrap: anywhere; max-width: 100%; }
   .qr { width: min(168px, 56vw); height: auto; aspect-ratio: 1; }
 }
+.d13__fila .acceso__boton:not(.acceso__boton--principal) { background: var(--deep); color: #fff; }
+.d13__fila .acceso__boton { flex: none; }
