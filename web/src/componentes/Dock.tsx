@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
 import { IconoSvg } from './Icono';
 import { MenuHoja } from './Menu';
-import { ModoModal } from './ui';
+import { ModoModal, ModoRol } from './ui';
+import { inicioDeRol } from './navegacion';
 
 interface AccionDock {
   etiqueta: string;
@@ -14,6 +15,7 @@ interface AccionDock {
 export function Dock({ accion }: { accion?: AccionDock }) {
   const [abierto, setAbierto] = useState(false);
   const modal = useContext(ModoModal);
+  const rol = useContext(ModoRol);
   if (modal) return null;
   return (
     <>
@@ -32,7 +34,7 @@ export function Dock({ accion }: { accion?: AccionDock }) {
             </a>
           )
         ) : (
-          <a className="dock__inicio" href="#/home">Volver al campamento</a>
+          <a className="dock__inicio" href={inicioDeRol[rol]}>{rol === 'estudiante' ? 'Volver al campamento' : rol === 'docente' ? 'Volver al panel' : 'Volver al resumen'}</a>
         )}
       </footer>
       <MenuHoja abierta={abierto} alCerrar={() => setAbierto(false)} />

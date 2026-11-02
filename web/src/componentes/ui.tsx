@@ -2,14 +2,15 @@ import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState
 
 export const ModoViva = createContext(false);
 export const ModoModal = createContext(false);
+export const ModoRol = createContext<'estudiante' | 'docente' | 'observador'>('estudiante');
 
 type Tono = 'claro' | 'oscura' | 'verde' | 'menta';
 
-export function Pantalla({ tono = 'claro', clase = '', children }: { tono?: Tono; clase?: string; children: ReactNode }) {
+export function Pantalla({ tono = 'claro', clase = '', rol = 'estudiante', children }: { tono?: Tono; clase?: string; rol?: 'estudiante' | 'docente' | 'observador'; children: ReactNode }) {
   const viva = useContext(ModoViva);
   const modal = useContext(ModoModal);
   const tonoClase = tono === 'claro' ? '' : `pantalla--${tono}`;
-  return <div className={`pantalla ${tonoClase} ${viva ? 'pantalla--viva' : ''} ${modal ? 'pantalla--modal' : ''} ${clase}`}>{children}</div>;
+  return <ModoRol.Provider value={rol}><div className={`pantalla ${tonoClase} ${viva ? 'pantalla--viva' : ''} ${modal ? 'pantalla--modal' : ''} ${rol !== 'estudiante' ? `pantalla--${rol}` : ''} ${clase}`}>{children}</div></ModoRol.Provider>;
 }
 
 export function Kicker({ children, estilo }: { children: ReactNode; estilo?: React.CSSProperties }) {
