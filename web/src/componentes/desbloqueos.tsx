@@ -21,20 +21,20 @@ const ContextoDesbloqueos = createContext<ValorDesbloqueos>(TODO);
 
 export const useDesbloqueos = () => useContext(ContextoDesbloqueos);
 
-const clave = (id: string) => `desbloqueos-${id}`;
+const clave = (id: string, nombre = 'desbloqueos') => `${nombre}-${id}`;
 
-const leer = (id: string): string[] => {
+const leer = (id: string, nombre = 'desbloqueos'): string[] => {
   try {
-    const guardado = JSON.parse(window.localStorage.getItem(clave(id)) ?? '[]');
+    const guardado = JSON.parse(window.localStorage.getItem(clave(id, nombre)) ?? '[]');
     return Array.isArray(guardado) ? guardado.filter((valor): valor is string => typeof valor === 'string') : [];
   } catch {
     return [];
   }
 };
 
-const guardar = (id: string, valores: string[]) => {
+const guardar = (id: string, valores: string[], nombre = 'desbloqueos') => {
   try {
-    window.localStorage.setItem(clave(id), JSON.stringify(valores));
+    window.localStorage.setItem(clave(id, nombre), JSON.stringify(valores));
   } catch {
     // sin almacenamiento: lo desbloqueado vale solo para esta visita
   }
@@ -47,7 +47,7 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   const { dentro } = useCurso();
   const [ruta, setRuta] = useState(leerRuta);
   const [estado, setEstado] = useState<{ para: string | null; valores: string[] }>({ para: null, valores: [] });
-  const [porAnunciar, setPorAnunciar] = useState<string[]>([]);
+  const [presentadas, setPresentadas] = useState<{ para: string | null; valores: string[] }>({ para: null, valores: [] });
 
   useEffect(() => {
     const alCambiar = () => setRuta(leerRuta());
@@ -58,7 +58,19 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   const idPersona = persona?.id ?? null;
   useEffect(() => {
     setEstado({ para: idPersona, valores: idPersona ? leer(idPersona) : [] });
+    setPresentadas({ para: idPersona, valores: idPersona ? leer(idPersona, 'presentadas') : [] });
     if (!idPersona || modoDemo) return;
+    void leerProgreso<{ claves?: string[] }>('presentadas').then((remoto) => {
+      const claves = remoto?.claves;
+      if (!Array.isArray(claves) || claves.length === 0) return;
+      setPresentadas((actual) => {
+        if (actual.para !== idPersona) return actual;
+        const union = [...new Set([...actual.valores, ...claves])];
+        if (union.length === actual.valores.length) return actual;
+        guardar(idPersona, union, 'presentadas');
+        return { para: idPersona, valores: union };
+      });
+    });
     void leerProgreso<{ claves?: string[] }>('desbloqueos').then((remoto) => {
       const claves = remoto?.claves;
       if (!Array.isArray(claves) || claves.length === 0) return;
@@ -86,7 +98,6 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
     if (!idPersona || !cargadas || nuevas.every((valor) => estado.valores.includes(valor))) return;
     const union = [...new Set([...estado.valores, ...nuevas])];
     const recienDesbloqueadas = nuevas.filter((valor) => !estado.valores.includes(valor));
-    setPorAnunciar((actual) => [...actual, ...recienDesbloqueadas.filter((valor) => !actual.includes(valor))]);
     setEstado({ para: idPersona, valores: union });
     guardar(idPersona, union);
     void guardarProgreso('desbloqueos', { claves: union });
@@ -98,28 +109,33 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
     [modoDemo, cargadas, estado.valores, nuevas],
   );
   const rol = persona?.rol;
-  const anunciables = rol && !modoDemo ? porAnunciar.filter((clave) => anuncioDe(rol, clave)) : [];
-  const actual = rol && anunciables.length > 0 ? anuncioDe(rol, anunciables[0]) : null;
+  const presentadasListas = presentadas.para === idPersona;
+  const visibles = new Set([...(cargadas ? estado.valores : []), ...nuevas]);
+  const anuncioActual = rol && !modoDemo && dentro && presentadasListas && DE_CURSO.has(codigo) && visibles.has(codigo) && !presentadas.valores.includes(codigo) ? anuncioDe(rol, codigo) : null;
+  const pendientes = rol && !modoDemo ? estado.valores.filter((seccion) => seccion !== codigo && DE_CURSO.has(seccion) && !presentadas.valores.includes(seccion) && anuncioDe(rol, seccion)) : [];
+  const pistaNueva = anuncioActual ? null : (pendientes[0] ?? null);
 
-  const claveActual = anunciables[0] ?? null;
   const avanzar = useCallback(() => {
-    if (claveActual) registrarEvento('seccion_presentada', { entidad: 'seccion', entidadId: claveActual });
-    setPorAnunciar((lista) => lista.slice(1));
-  }, [claveActual]);
+    if (!idPersona) return;
+    registrarEvento('seccion_presentada', { entidad: 'seccion', entidadId: codigo });
+    setPresentadas((actual) => {
+      const union = [...new Set([...actual.valores, codigo])];
+      guardar(idPersona, union, 'presentadas');
+      void guardarProgreso('presentadas', { claves: union });
+      return { para: idPersona, valores: union };
+    });
+  }, [idPersona, codigo]);
+
   useEffect(() => {
-    if (claveActual) document.body.dataset.nuevo = claveActual;
+    if (pistaNueva) document.body.dataset.nuevo = pistaNueva;
     else delete document.body.dataset.nuevo;
     return () => { delete document.body.dataset.nuevo; };
-  }, [claveActual]);
-
-  useEffect(() => {
-    if (porAnunciar.length > 0 && anunciables.length === 0) setPorAnunciar([]);
-  }, [porAnunciar, anunciables.length]);
+  }, [pistaNueva]);
 
   return (
     <ContextoDesbloqueos.Provider value={valor}>
       {children}
-      {actual && <GuiaDesbloqueo anuncio={actual} quedan={anunciables.length} alAvanzar={avanzar} />}
+      {anuncioActual && <GuiaDesbloqueo anuncio={anuncioActual} quedan={1} alAvanzar={avanzar} />}
     </ContextoDesbloqueos.Provider>
   );
 }
