@@ -190,6 +190,14 @@ html, body { height: 100%; background: #04201f; overflow: hidden; font-family: v
 .pregunta-g b { color: var(--accent); margin-right: 24px; }
 .slide:not([class*="slide--"]) .pregunta-g b { color: var(--primary); }
 
+/* Pasos: los elementos salen uno a uno con las flechas */
+.paso-oculto { opacity: 0 !important; visibility: hidden; }
+.slide.activa .paso-oculto, .slide.activa .paso-oculto * { animation: none !important; }
+.pasos { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); display: flex; gap: 12px; z-index: 6; mix-blend-mode: difference; }
+.pasos i { width: 14px; height: 14px; border-radius: 50%; background: #fff; opacity: .3; }
+.pasos i.on { opacity: 1; }
+@media print { .pasos { display: none; } .paso-oculto { opacity: 1 !important; visibility: visible; } }
+
 /* Animaciones: solo si la persona no pidió menos movimiento */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes subir { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
@@ -213,6 +221,12 @@ html, body { height: 100%; background: #04201f; overflow: hidden; font-family: v
   .slide.activa .a-crece-x { animation: crece-x 1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.4s + var(--i, 0) * .15s); }
   .slide.activa .a-corre { animation: corre 2.2s linear infinite; animation-delay: calc(var(--i, 0) * .35s); }
   .slide.activa .a-radar { animation: radar-crece 1.4s cubic-bezier(.2, .8, .2, 1) .5s both; transform-origin: 350px 350px; }
+  @keyframes paso-entra { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+  .slide.activa .paso-visible { animation: paso-entra .55s cubic-bezier(.2, .8, .2, 1) both !important; }
+  .slide.activa .peldano.paso-visible { animation: crece-y .8s cubic-bezier(.2, .8, .2, 1) both !important; }
+  .slide.activa .union.paso-visible { animation: crece-x .5s ease-out both !important; }
+  .slide.activa .banda.paso-visible { animation: aparecer .5s ease both !important; }
+  .slide.activa svg .paso-visible { animation-name: pop !important; transform-box: fill-box; transform-origin: center; }
   .slide.activa .a-dibuja { animation: dibuja 1.6s ease-in-out .5s both; }
   .slide.activa .fila-g { animation: subir .6s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.3s + var(--i, 0) * .16s); }
   .slide.activa .banda { animation: aparecer .6s ease both; animation-delay: calc(.2s + var(--i, 0) * .2s); }

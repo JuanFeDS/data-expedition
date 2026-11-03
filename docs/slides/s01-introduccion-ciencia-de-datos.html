@@ -76,8 +76,8 @@
       </div>
       <svg class="visual" viewBox="-80 -20 860 780" role="img" aria-label="Radar de siete dimensiones, ahora frente al inicio">
         <polygon points="350.0,287.5 398.9,311.0 410.9,363.9 377.1,406.3 322.9,406.3 289.1,363.9 301.1,311.0" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,225.0 447.7,272.1 471.9,377.8 404.2,462.6 295.8,462.6 228.1,377.8 252.3,272.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,162.5 496.6,233.1 532.8,391.7 431.4,518.9 268.6,518.9 167.2,391.7 203.4,233.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,100.0 545.5,194.1 593.7,405.6 458.5,575.2 241.5,575.2 106.3,405.6 154.5,194.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="350.0" y2="100.0" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="545.5" y2="194.1" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="593.7" y2="405.6" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="458.5" y2="575.2" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="241.5" y2="575.2" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="106.3" y2="405.6" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="154.5" y2="194.1" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/>
-        <polygon class="a-radar" points="350.0,195.0 457.5,264.3 442.6,371.1 421.6,498.7 293.6,467.1 240.3,375.0 236.6,259.6" fill="#ffd23f" fill-opacity=".38" stroke="#ffd23f" stroke-width="7" stroke-linejoin="round"/>
-        <polygon points="350.0,262.5 408.6,303.2 398.7,361.1 393.4,440.1 317.5,417.6 289.1,363.9 291.4,303.2" fill="none" stroke="#5eeab0" stroke-width="6" stroke-dasharray="14 12" stroke-linejoin="round"/>
+        <polygon data-paso="2" class="a-radar" points="350.0,195.0 457.5,264.3 442.6,371.1 421.6,498.7 293.6,467.1 240.3,375.0 236.6,259.6" fill="#ffd23f" fill-opacity=".38" stroke="#ffd23f" stroke-width="7" stroke-linejoin="round"/>
+        <polygon data-paso="1" points="350.0,262.5 408.6,303.2 398.7,361.1 393.4,440.1 317.5,417.6 289.1,363.9 291.4,303.2" fill="none" stroke="#5eeab0" stroke-width="6" stroke-dasharray="14 12" stroke-linejoin="round"/>
         <text x="350.0" y="60.0" text-anchor="middle" font-size="34" fill="#fff">Datos</text><text x="584.5" y="173.0" text-anchor="start" font-size="34" fill="#fff">Análisis</text><text x="642.5" y="426.8" text-anchor="start" font-size="34" fill="#fff">Modelado</text><text x="480.2" y="630.3" text-anchor="start" font-size="34" fill="#fff">Validación</text><text x="219.8" y="630.3" text-anchor="end" font-size="34" fill="#fff">Comunicación</text><text x="57.5" y="426.8" text-anchor="end" font-size="34" fill="#fff">Producción</text><text x="115.5" y="173.0" text-anchor="end" font-size="34" fill="#fff">Dirección de IA</text>
       </svg>
     </div>
@@ -153,14 +153,14 @@
     <p class="sub">Nace donde se cruzan tres cosas.</p>
       </div>
       <svg class="visual" viewBox="0 0 800 780" role="img" aria-label="Estadística, programación y conocimiento del problema">
-        <circle class="a-pop" style="--i:0" cx="400" cy="270" r="235" fill="#0a8057" fill-opacity=".82"/>
-        <circle class="a-pop" style="--i:1" cx="250" cy="520" r="235" fill="#1f6bff" fill-opacity=".72"/>
-        <circle class="a-pop" style="--i:2" cx="550" cy="520" r="235" fill="#ffd23f" fill-opacity=".8"/>
-        <text x="400" y="150" text-anchor="middle" font-size="44" fill="#fff">Estadística</text>
-        <text x="165" y="585" text-anchor="middle" font-size="38" fill="#fff">Programación</text>
+        <g data-paso="1"><circle class="a-pop" style="--i:0" cx="400" cy="270" r="235" fill="#0a8057" fill-opacity=".82"/>
+        <text x="400" y="150" text-anchor="middle" font-size="44" fill="#fff">Estadística</text></g>
+        <g data-paso="2"><circle class="a-pop" style="--i:0" cx="250" cy="520" r="235" fill="#1f6bff" fill-opacity=".72"/>
+        <text x="165" y="585" text-anchor="middle" font-size="38" fill="#fff">Programación</text></g>
+        <g data-paso="3"><circle class="a-pop" style="--i:0" cx="550" cy="520" r="235" fill="#ffd23f" fill-opacity=".8"/>
         <text x="618" y="585" text-anchor="middle" font-size="34" fill="#0b2a24">Conocimiento</text>
-        <text x="618" y="626" text-anchor="middle" font-size="34" fill="#0b2a24">del problema</text>
-        <g class="a-pop" style="--i:4"><rect x="290" y="372" width="220" height="108" rx="54" fill="#073b3a"/>
+        <text x="618" y="626" text-anchor="middle" font-size="34" fill="#0b2a24">del problema</text></g>
+        <g data-paso="4" class="a-pop" style="--i:1"><rect x="290" y="372" width="220" height="108" rx="54" fill="#073b3a"/>
         <text x="400" y="420" text-anchor="middle" font-size="36" fill="#ffd23f">Ciencia</text>
         <text x="400" y="462" text-anchor="middle" font-size="36" fill="#ffd23f">de datos</text></g>
       </svg>
@@ -344,19 +344,19 @@
     <span class="kicker">Dónde entra la IA</span>
     <h2 class="titulo titulo--sm">Tres capas, de lo general a lo específico</h2>
         <ul class="lista" style="font-size:38px; gap:20px">
-          <li><span><b>IA:</b> sistemas que hacen tareas que parecen requerir inteligencia</span></li>
-          <li><span><b>Machine learning:</b> aprende patrones de los datos</span></li>
-          <li><span><b>IA generativa:</b> crea texto, imágenes o código nuevos</span></li>
+          <li data-paso="1"><span><b>IA:</b> sistemas que hacen tareas que parecen requerir inteligencia</span></li>
+          <li data-paso="2"><span><b>Machine learning:</b> aprende patrones de los datos</span></li>
+          <li data-paso="3"><span><b>IA generativa:</b> crea texto, imágenes o código nuevos</span></li>
         </ul>
       </div>
       <svg class="visual" viewBox="0 0 760 760" role="img" aria-label="IA, machine learning e IA generativa">
-        <circle class="a-pop" style="--i:0" cx="380" cy="380" r="360" fill="#d6f3e5"/>
-        <circle class="a-pop" style="--i:1" cx="380" cy="470" r="265" fill="#5eeab0"/>
-        <circle class="a-pop" style="--i:2" cx="380" cy="560" r="170" fill="#ffd23f"/>
-        <text x="380" y="85" text-anchor="middle" font-size="44" fill="#073b3a">Inteligencia artificial</text>
-        <text x="380" y="240" text-anchor="middle" font-size="44" fill="#073b3a">Machine learning</text>
+        <g data-paso="1"><circle class="a-pop" style="--i:0" cx="380" cy="380" r="360" fill="#d6f3e5"/>
+        <text x="380" y="85" text-anchor="middle" font-size="44" fill="#073b3a">Inteligencia artificial</text></g>
+        <g data-paso="2"><circle class="a-pop" style="--i:0" cx="380" cy="470" r="265" fill="#5eeab0"/>
+        <text x="380" y="240" text-anchor="middle" font-size="44" fill="#073b3a">Machine learning</text></g>
+        <g data-paso="3"><circle class="a-pop" style="--i:0" cx="380" cy="560" r="170" fill="#ffd23f"/>
         <text x="380" y="545" text-anchor="middle" font-size="40" fill="#0b2a24">IA</text>
-        <text x="380" y="595" text-anchor="middle" font-size="40" fill="#0b2a24">generativa</text>
+        <text x="380" y="595" text-anchor="middle" font-size="40" fill="#0b2a24">generativa</text></g>
       </svg>
     </div>
   </section>
@@ -452,28 +452,28 @@
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Cuenta de GitHub</h3></div>
+      <div class="banda banda--deep sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Cuenta de GitHub</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Entra a github.com y crea tu cuenta.</p>
       <ul class="lista" style="font-size:40px; margin-top:24px"><li>Usa un correo que revises</li><li>Elige un usuario sobrio: será tu portafolio</li><li>Activa la verificación en dos pasos</li></ul></div>
     </div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Git</h3></div>
+      <div class="banda banda--verde sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Git</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Instálalo desde git-scm.com y comprueba que responde.</p>
       <div class="codigo" style="margin-top:40px; font-size:40px">git --version</div><div class="resultado" style="margin-top:20px">git version 2.xx</div></div>
     </div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Python 3.12</h3></div>
+      <div class="banda banda--deep sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Python 3.12</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Descárgalo desde python.org y marca la opción de agregarlo al PATH.</p>
       <div class="codigo" style="margin-top:40px; font-size:40px">python --version</div><div class="resultado" style="margin-top:20px">Python 3.12.x</div></div>
     </div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>VS Code y sus extensiones</h3></div>
+      <div class="banda banda--verde sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>VS Code y sus extensiones</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><ul class="lista" style="font-size:42px; gap:30px; margin-top:0">
         <li><span><b>Python:</b> reconoce y ejecuta tu código</span></li><li><span><b>Jupyter:</b> notebooks dentro del editor</span></li>
         <li><span><b>Black Formatter:</b> da formato al guardar</span></li><li><span><b>Pylint:</b> avisa errores y malas prácticas</span></li></ul></div>
@@ -571,18 +571,19 @@ x = {"a": 1, "b": 2}</div></div>
     <span class="kicker">Concepto</span>
     <h2 class="titulo titulo--sm">¿Qué es un pull request?</h2>
     <p class="sub">Una propuesta de cambios: «mira lo que hice en mi rama y súmalo». Es también la forma de entregar en este curso.</p>
-        <ul class="lista" style="font-size:38px; gap:20px"><li>Tiene un enlace propio que cargas en la app</li><li>Deja la historia de tus cambios a la vista</li><li>Es lo que un equipo real usa para revisar código</li></ul>
+        <ul class="lista" style="font-size:38px; gap:20px"><li data-paso="1">Tiene un enlace propio que cargas en la app</li><li data-paso="2">Deja la historia de tus cambios a la vista</li><li data-paso="3">Es lo que un equipo real usa para revisar código</li></ul>
       </div>
       <svg class="visual" viewBox="0 0 820 620" role="img" aria-label="Una rama que se propone para fusionar con la principal">
         <path d="M40 460 L780 460" stroke="#ffffff" stroke-opacity=".5" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path class="a-dibuja" pathLength="1" style="stroke-dasharray:1; --i:1" d="M200 460 C 250 460 260 220 340 220 L 560 220 C 640 220 650 460 700 460" stroke="#5eeab0" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <g data-paso="1"><path class="a-dibuja" pathLength="1" style="stroke-dasharray:1; --i:1" d="M200 460 C 250 460 260 220 340 220 L 560 220 C 640 220 650 460 700 460" stroke="#5eeab0" stroke-width="12" stroke-linecap="round" fill="none"/>
         <circle class="a-pop" style="--i:2" cx="340" cy="220" r="26" fill="#ffd23f"/>
         <circle class="a-pop" style="--i:3" cx="450" cy="220" r="26" fill="#ffd23f"/>
         <circle class="a-pop" style="--i:4" cx="560" cy="220" r="26" fill="#ffd23f"/>
-        <circle cx="200" cy="460" r="22" fill="#fff"/><circle class="a-pop" style="--i:6" cx="700" cy="460" r="30" fill="#5eeab0"/>
+        <text x="450" y="160" text-anchor="middle" font-size="38" fill="#5eeab0">tu rama · tus commits</text></g>
+        <circle cx="200" cy="460" r="22" fill="#fff"/>
         <text x="40" y="530" font-size="38" fill="#fff">rama principal</text>
-        <text x="450" y="160" text-anchor="middle" font-size="38" fill="#5eeab0">tu rama · tus commits</text>
-        <text class="a-pop" style="--i:5" x="700" y="545" text-anchor="middle" font-size="40" fill="#ffd23f">Pull request ↑</text>
+        <g data-paso="3"><circle class="a-pop" style="--i:1" cx="700" cy="460" r="30" fill="#5eeab0"/>
+        <text class="a-pop" style="--i:2" x="700" y="545" text-anchor="middle" font-size="40" fill="#ffd23f">Pull request ↑</text></g>
       </svg>
     </div>
   </section>
@@ -599,14 +600,14 @@ x = {"a": 1, "b": 2}</div></div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Crea un repositorio público</h3></div>
+      <div class="banda banda--deep sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Crea un repositorio público</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">En GitHub: <b>New repository</b>. Ponle un nombre sencillo y marca la opción de agregar un README.</p>
       <ul class="lista" style="font-size:40px; margin-top:24px"><li>Debe ser <b>público</b> para que se pueda revisar</li><li>Nombre sugerido: <code>datos-expedicion</code></li></ul></div>
     </div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Clónalo y crea una rama</h3></div>
+      <div class="banda banda--verde sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Clónalo y crea una rama</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Trabajas en una rama, nunca directo en la principal.</p>
       <div class="codigo" style="margin-top:32px; font-size:30px">git clone https://github.com/TU-USUARIO/datos-expedicion.git
 cd datos-expedicion
@@ -615,7 +616,7 @@ git checkout -b prueba-pr</div></div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Escribe tu README de prueba</h3></div>
+      <div class="banda banda--deep sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Escribe tu README de prueba</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Abre README.md en VS Code y agrega tu nombre y tres líneas sobre ti.</p>
       <div class="codigo" style="margin-top:32px; font-size:32px"># Mi nombre es Camila
 
@@ -626,7 +627,7 @@ git checkout -b prueba-pr</div></div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>Guarda y sube tus cambios</h3></div>
+      <div class="banda banda--verde sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>Guarda y sube tus cambios</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><div class="codigo" style="font-size:32px">git add README.md
 git commit -m "docs: agrega mi README de prueba"
 git push -u origin prueba-pr</div>
@@ -635,13 +636,13 @@ git push -u origin prueba-pr</div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 5</span><div class="gigante" style="color:var(--accent); font-size:340px">5</div><h3>Abre el pull request</h3></div>
+      <div class="banda banda--deep sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 5</span><div class="gigante" style="color:var(--accent); font-size:340px">5</div><h3>Abre el pull request</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><ol class="lista lista--num" style="font-size:42px; margin-top:0"><li>Entra a tu repositorio: GitHub te muestra <b>Compare &amp; pull request</b></li><li>Escribe un título y una descripción corta</li><li>Pulsa <b>Create pull request</b></li></ol></div>
     </div>
   </section>
   <section class="slide ">
     <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
-      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 6</span><div class="gigante" style="color:var(--accent); font-size:340px">6</div><h3>Copia el enlace del PR</h3></div>
+      <div class="banda banda--verde sin-paso" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 6</span><div class="gigante" style="color:var(--accent); font-size:340px">6</div><h3>Copia el enlace del PR</h3></div>
       <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">El enlace de un PR termina en <code>/pull/</code> y un número. Ese es el que se carga en la app.</p>
       <div class="codigo" style="margin-top:32px; font-size:30px">https://github.com/TU-USUARIO/datos-expedicion/pull/1</div></div>
     </div>

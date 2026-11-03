@@ -12,13 +12,23 @@ Slides en HTML con la marca de Data Expedition (colores, tipografías, jaguar y 
 
 | Tecla | Acción |
 |---|---|
-| `→` `Espacio` `Enter` o clic | Siguiente |
-| `←` `Retroceso` o clic en el cuarto izquierdo | Anterior |
+| `→` `Espacio` `Enter` o clic | Revela el siguiente elemento; cuando ya salió todo, pasa a la slide siguiente |
+| `←` `Retroceso` o clic en el cuarto izquierdo | Oculta el último elemento; si no hay, vuelve a la slide anterior |
+| `Shift` + `→` / `←` | Salta de slide sin revelar ni ocultar elementos |
+| `S` | Activa o desactiva los pasos (desactivados, todo sale de una vez) |
 | `F` | Pantalla completa |
 | `J` | Mostrar u ocultar al jaguar en toda la presentación |
 | `Inicio` / `Fin` | Primera / última |
 
 Para exportar a PDF abre el archivo en Chrome y usa Imprimir → Guardar como PDF (una slide por página, 1920×1080, con fondos).
+
+## Pasos con las flechas
+
+Cada slide se explica poco a poco: la flecha derecha va mostrando, en orden, cada punto de una lista, cada fila, banda, barra, peldaño, opción de relámpago o paso del ciclo. Unos puntos abajo al centro indican cuántos pasos tiene la slide y cuántos van.
+
+- Los elementos salen solos en orden del documento. Para agruparlos o ordenarlos a mano, pon `data-paso="1"`, `"2"`… (varios elementos con el mismo número salen juntos; sirve también para partes de un SVG).
+- Para que algo esté visible desde el inicio, añade la clase `sin-paso`.
+- Al imprimir a PDF salen todos los elementos.
 
 ## Decks
 
