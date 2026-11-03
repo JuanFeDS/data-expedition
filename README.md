@@ -28,7 +28,7 @@ App de seguimiento, calificación y gamificación para un curso de ciencia de da
 
 ## 🎯 1. Contexto y motivación
 
-El curso se repensó para la era de la IA: la evaluación se rediseña antes que la clase, se permite la IA con declaración obligatoria y cada estudiante construye un perfil de habilidades que evoluciona con el trabajo. Ninguna herramienta conocida une rúbricas por niveles que alimentan un radar, nota tradicional aparte, declaración de IA por entrega, lecciones tipo Duolingo y votaciones por grupo. Un LMS califica pero no calcula el radar ni gamifica; una hoja de cálculo no ofrece lecciones en el celular ni vistas privadas. De ahí esta app. El diseño completo está en [`docs/RFC-010-app-expedicion.md`](docs/RFC-010-app-expedicion.md).
+El curso se repensó para la era de la IA: la evaluación se rediseña antes que la clase, se permite la IA con declaración obligatoria y cada estudiante construye un perfil de habilidades que evoluciona con el trabajo. Ninguna herramienta conocida une rúbricas por niveles que alimentan un radar, nota tradicional aparte, declaración de IA por entrega, lecciones tipo Duolingo y votaciones por grupo. Un LMS califica pero no calcula el radar ni gamifica; una hoja de cálculo no ofrece lecciones en el celular ni vistas privadas. De ahí esta app. El diseño completo está en [`docs/RFC-010-app-expedicion.md`](docs/producto/RFC-010-app-expedicion.md).
 
 ---
 
@@ -54,94 +54,79 @@ El curso se repensó para la era de la IA: la evaluación se rediseña antes que
 
 ## 🗺️ 3. Estado del proyecto
 
-- ✅ **Prototipo de interfaz** (`web/`): pantallas de estudiante, docente y observador con datos de ejemplo alineados con el plan de estudios, en móvil y en escritorio, con tema claro y oscuro. El mapa de pantallas y su estado están en [`docs/plan-de-accion-pantallas.md`](docs/plan-de-accion-pantallas.md).
-- ✅ **Dominio en TypeScript** (`src/`): nota, niveles y radar con pruebas, sin red ni base de datos.
-- 🏗️ **Migración inicial de Supabase** con políticas por fila, todavía sin aplicar a un proyecto real.
-- ⏳ **Pendiente:**
-  - Autenticación, conexión de la interfaz con la base de datos, panel del docente y vista del observador.
-  - **Entrega por enlace de PR** (todos los trabajos, uno por persona, en el repo público de cada estudiante). Flujo: enlace del PR, declaración de IA, bitácora si usó IA y confirmación. Falta pasar de la interfaz a lo funcional: verificación contra la API de GitHub desde una función de servidor (repo, autor, estado y SHA del último commit al entregar), y guardar el usuario de GitHub en el perfil para comprobar la autoría.
+- ✅ **App conectada a Supabase** (`web/`): acceso con Google o enlace por correo, roles (estudiante, docente, observador), cursos con invitaciones, trabajos y entregas por PR, rúbricas y calificación, formularios (relámpagos, votaciones y encuestas), calendario y material, equipos por trabajo, diagnóstico y radar, práctica con XP y racha, liga semanal, asistencia con QR rotativo y vistas agregadas para observadores.
+- ✅ **Modo demo** (`?demo`): las mismas pantallas con datos ficticios, como referencia de diseño.
+- ✅ **Seguridad en la base:** RLS en todas las tablas y funciones de servidor para lo sensible; hay pruebas SQL en [`supabase/pruebas/`](supabase/pruebas/funciones_y_politicas.sql).
+- ⏳ **Pendiente:** álbum de gemas, misión en equipo, verificación del PR contra la API de GitHub, correo propio para los enlaces de ingreso, pruebas de interfaz con navegador y el análisis general de los datos recopilados.
+
+El producto y sus decisiones están en [`docs/producto/`](docs/producto/RFC-010-app-expedicion.md); el mapa de pantallas, en [`docs/producto/plan-de-accion-pantallas.md`](docs/producto/plan-de-accion-pantallas.md).
 
 ---
 
 ## 🏛️ 4. Arquitectura
 
-Hexagonal: el dominio no conoce la base de datos ni la interfaz, y todo lo que sale al exterior pasa por un puerto. Un lint de fronteras vigila las dependencias.
+La guía completa está en [`docs/arquitectura.md`](docs/arquitectura.md). En resumen:
 
 ```
 data-expedicion/
-├── src/
-│   ├── dominio/        # reglas puras: niveles, nota, radar
-│   ├── puertos/        # interfaces (p. ej. repositorio de evidencias)
-│   ├── casos-de-uso/   # calcular-radar
-│   └── adaptadores/    # supabase/ y banco/ (por implementar)
-├── web/                # prototipo de interfaz (React + Vite + TypeScript)
+├── web/                    # la app (React 19 + Vite + TypeScript)
 │   └── src/
-│       ├── pantallas/      # una pantalla por archivo (E0 … E14)
-│       ├── componentes/    # barra lateral, radar, isla, jaguar, menús
-│       ├── datos.ts        # datos de ejemplo del curso
-│       ├── estilos.css     # tokens de diseño
-│       ├── pantallas.css   # estilos de las pantallas (diseño móvil)
-│       └── escritorio.css  # capa para pantallas de 1100 px o más
-├── supabase/           # migraciones y datos semilla
-├── test/               # espeja src/
-└── docs/               # RFC-010
+│       ├── app/            # arranque, rutas y registro de pantallas
+│       ├── compartido/     # ui/, estado/ (sesión, curso, desbloqueos), navegacion/
+│       ├── dominio/        # reglas puras y sus pruebas: niveles, nota, radar, reglas
+│       ├── servicios/      # acceso a Supabase y lógica de datos
+│       ├── funciones/      # una carpeta por tema, con pantallas docente/, estudiante/ y comun/
+│       ├── demo/           # datos y pantallas de ejemplo (solo modo demo)
+│       └── estilos/        # tokens, pantallas y capa de escritorio
+├── supabase/               # migraciones numeradas y pruebas SQL
+├── docs/                   # producto/, curso/, diseno/, historial/ y arquitectura.md
+└── .github/workflows/      # despliegue a Pages y revisión de ramas
 ```
 
-**Regla de dependencias:** `dominio` no importa nada; `puertos` solo importa `dominio`; `casos-de-uso` solo `dominio` y `puertos`.
-
-**Interfaz:** se diseñó primero para el celular. Desde 1100 px de ancho se activa una capa de escritorio (barra lateral fija, escenas panorámicas y modales); por debajo de ese ancho nada cambia.
+**Reglas clave:** las pantallas no hablan con Supabase (usan `servicios/`); el dominio no importa nada de fuera de sí mismo y puede correr también en una función de servidor; la seguridad vive en la base de datos.
 
 ---
 
 ## 🗄️ 5. Modelo de datos
 
-La migración [`supabase/migrations/0001_modelo_inicial.sql`](supabase/migrations/0001_modelo_inicial.sql) define las tablas principales, con políticas por fila: cada estudiante lee solo lo suyo y el docente lee todo.
+Las migraciones en [`supabase/migrations/`](supabase/migrations/) se aplican en orden (0001 en adelante). Cada estudiante lee solo lo suyo, el docente lee su curso y el observador solo recibe agregados con mínimo de 5 personas.
 
-| Tabla | Rol |
+| Área | Tablas |
 |---|---|
-| `ediciones` | Cada vez que se dicta el curso; la plantilla es una edición |
-| `perfiles`, `grupos`, `matriculas` | Usuarios con rol, grupos y su inscripción |
-| `dimensiones`, `trabajos`, `criterios` | Catálogo configurable del curso y sus rúbricas |
-| `entregas`, `calificaciones` | Lo entregado y el nivel por criterio |
-| `evidencias_radar` | La evidencia que alimenta el radar |
+| Cursos y personas | `ediciones`, `perfiles`, `matriculas`, `invitaciones`, `correos_autorizados` |
+| Trabajos y calificación | `trabajos`, `criterios`, `entregas`, `entregas_versiones`, `calificaciones`, `dimensiones` |
+| Radar y diagnóstico | `evidencias_radar`, `diagnosticos` |
+| Clase | `sesiones`, `recursos`, `formularios`, `preguntas_formulario`, `respuestas_formulario`, `asistencias`, `equipos_trabajo` |
+| Práctica | `banco_preguntas`, `practica_sesiones`, `practica_respuestas` |
+| Registro | `eventos`, `progreso_usuario` |
 
 ---
 
 ## ⚙️ 6. Guía de uso
 
 ### Requisitos
-- Node.js 22 o superior (la versión que usa el flujo de despliegue)
+- Node.js 22 o superior
 
-### Instalación
+### Ejecutar la app
 ```bash
 git clone https://github.com/JuanFeDS/data-expedition.git
-cd data-expedition
-cd web && npm install
-```
-
-### Ejecutar la interfaz
-```bash
-cd web
+cd data-expedition/web
+npm install
 npm run dev
 ```
-Se abre en `http://localhost:5173`. La navegación usa rutas con `#`: `#/home`, `#/e1` … `#/e14`, `#/tutorial`, y `#/todas` para la galería de todas las pantallas. Agrega `?completo` para ver las pantallas a altura completa.
+Se abre en `http://localhost:5173`. Sin variables de Supabase (`VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` en `web/.env.local`) arranca en modo demo; con `?demo` lo fuerza. En modo demo, `#/todas` muestra la galería de todas las pantallas.
 
-### Dominio y pruebas
-```bash
-npm install
-npm run check     # tipos, lint de fronteras y pruebas
-```
-
-### Otros comandos
-| Comando | Dónde | Qué hace |
-|---|---|---|
-| `npm run build` | `web/` | Revisa tipos y construye la interfaz |
-| `npm run typecheck` | raíz o `web/` | Revisa tipos |
-| `npm test` | raíz | Ejecuta las pruebas del dominio |
-| `npm run lint` | raíz | Verifica las fronteras de la arquitectura |
+### Comprobaciones
+| Comando (en `web/`) | Qué hace |
+|---|---|
+| `npm run check` | Tipos, lint y pruebas, todo junto |
+| `npm run typecheck` | Revisa tipos |
+| `npm run lint` | Busca errores probables (oxlint) |
+| `npm test` | Pruebas de lógica, dominio y estructura (Vitest) |
+| `npm run build` | `check` y construye la app |
 
 ### Despliegue
-Cada push a `main` construye `web/` y lo publica en GitHub Pages con [`.github/workflows/pages.yml`](.github/workflows/pages.yml). La variable `VITE_BASE` define la ruta base (`/data-expedition/` en producción).
+Cada push a `main` construye `web/` y lo publica en GitHub Pages con [`.github/workflows/pages.yml`](.github/workflows/pages.yml). `VITE_BASE` define la ruta base (`/data-expedition/`). Las ramas y pull requests corren [`revision.yml`](.github/workflows/revision.yml).
 
 ---
 

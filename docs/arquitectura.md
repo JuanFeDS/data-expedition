@@ -10,39 +10,45 @@ Guía corta para quien vaya a tocar el código. Describe cómo está organizada 
 
 ```
 web/src
-├─ main.tsx            arranque, enrutado por fragmento, proveedores globales
-├─ config.ts           reglas de negocio ajustables (XP, umbrales, tiempos)
-├─ registro.ts         catálogo de pantallas (cada una se descarga al abrirla)
-├─ componentes/        piezas compartidas: navegación, sesión, curso, desbloqueos, tutorial, UI
-├─ pantallas/          una pantalla por archivo (X.tsx = envoltorio, XReal.tsx = versión con datos)
-├─ servicios/          acceso a datos y lógica pura (sin JSX)
-└─ datos.ts, datosPlan.ts   datos ficticios del modo demo
+├─ app/            arranque (main.tsx), enrutado y registro de pantallas
+├─ compartido/
+│  ├─ ui/          piezas de interfaz (jaguar, selector, radar, paneles, errores…)
+│  ├─ estado/      sesión, curso, desbloqueos, actividad, confirmaciones
+│  └─ navegacion/  rutas, panel lateral, menú, guía de desbloqueo
+├─ dominio/        reglas puras y sus pruebas (niveles, nota, radar, reglas.ts)
+├─ servicios/      acceso a Supabase y adaptación de datos
+├─ funciones/      una carpeta por tema (entregas, formularios, asistencia…)
+│  └─ <tema>/      docente/, estudiante/, observador/ o comun/; X.tsx elige entre demo y real
+├─ demo/           datos ficticios y pantallas de ejemplo (se descargan solo en modo demo)
+└─ estilos/        tokens y estilos globales, de pantallas y de escritorio
 supabase/
-├─ migrations/         esquema numerado y aplicado en orden (0001…)
-└─ pruebas/            pruebas SQL de políticas y funciones
+├─ migrations/     esquema numerado y aplicado en orden (0001…)
+└─ pruebas/        pruebas SQL de políticas y funciones
+docs/              producto/, curso/, diseno/, historial/
 ```
 
 ## Capas y reglas
 
 1. **Las pantallas no hablan con Supabase.** Usan funciones de `servicios/`. Un servicio devuelve datos ya tipados y mapeados (de `snake_case` de la base a `camelCase`).
 2. **Servicios con dos implementaciones** (personas, trabajos, cursos, rúbricas): una real y otra en memoria para el modo demo, elegidas por un hook `useServicio…()`. Los servicios nuevos son solo reales; su pantalla demo usa datos ficticios.
-3. **Pantalla con demo y real.** `conModoDemo(XEjemplo, XReal)` elige según `?demo`. La versión demo solo sirve de referencia visual.
+3. **Pantalla con demo y real.** `conModoDemo(() => import('demo/…'), 'XEjemplo', XReal)` elige según `?demo`; la versión demo vive en `demo/` y solo se descarga en ese modo.
 4. **Seguridad en la base.** Cada tabla tiene RLS. Lo que no se puede expresar como política (calificar, responder, abrir asistencia, agregados para observadores) es una función `security definer` con `search_path = ''`, revocada para `anon` y verificando el rol dentro.
-5. **Privacidad.** En formularios anónimos las respuestas no llevan perfil ni hora que las una con quien las dio. Observadores solo reciben agregados con mínimo de 5 personas (lo impone la base).
-6. **Una regla de negocio, un lugar.** Lo ajustable está en `config.ts`; si también existe en SQL, el archivo lo dice.
-7. **Estilos.** Variables y escala tipográfica en `estilos.css` (`--fs-*`), nada de tamaños sueltos; `pantallas.css` para pantallas; `escritorio.css` para ≥ 1100 px. Los controles usan componentes propios (`Selector`, `Segmentado`, confirmaciones), no los nativos.
-8. **Movimiento.** Toda animación va dentro de `prefers-reduced-motion: no-preference`.
+5. **Dominio portable.** `dominio/` solo importa de `dominio/` (lo comprueba una prueba) para poder correr también en una función de servidor.
+6. **Privacidad.** En formularios anónimos las respuestas no llevan perfil ni hora que las una con quien las dio. Observadores solo reciben agregados con mínimo de 5 personas (lo impone la base).
+7. **Una regla de negocio, un lugar.** Lo ajustable está en `dominio/reglas.ts`; si también existe en SQL, el archivo lo dice.
+8. **Estilos.** Variables y escala tipográfica en `estilos.css` (`--fs-*`), nada de tamaños sueltos; `pantallas.css` para pantallas; `escritorio.css` para ≥ 1100 px. Los controles usan componentes propios (`Selector`, `Segmentado`, confirmaciones), no los nativos.
+9. **Movimiento.** Toda animación va dentro de `prefers-reduced-motion: no-preference`.
 
 ## Navegación y desbloqueo
 
-- `componentes/navegacion.ts` define el panel: en modo real se agrupa por trabajo (`GRUPOS_CURSO`) y las secciones aún no abiertas pasan a «Descubrir».
+- `compartido/navegacion/navegacion.ts` define el panel: en modo real se agrupa por trabajo (`GRUPOS_CURSO`) y las secciones aún no abiertas pasan a «Descubrir».
 - Cada persona desbloquea una sección al entrar a ella; el jaguar la explica la primera vez (`GuiaDesbloqueo.tsx`). Estado en `localStorage` y en `progreso_usuario`.
-- `servicios/ruta.ts` fija el orden recomendado por rol. La prueba `estructura.test.ts` exige que toda sección de la ruta esté en el panel, tenga mensaje del jaguar y esté registrada.
+- `servicios/ruta.ts` fija el orden recomendado por rol. La prueba `compartido/navegacion/estructura.test.ts` exige que toda sección de la ruta esté en el panel, tenga mensaje del jaguar y esté registrada.
 
 ## Cómo agregar una pantalla
 
-1. Crea `pantallas/Xyz.tsx` (y `XyzReal.tsx` si tiene datos).
-2. Regístrala en `registro.ts` y, si es de curso, añade el código a `ENCURSO` y `CONECTADAS` en `navegacion.ts`.
+1. Crea `funciones/<tema>/<rol>/Xyz.tsx` (y `XyzReal.tsx` si tiene datos; su versión de ejemplo va en `demo/pantallas/`).
+2. Regístrala en `app/registro.ts` y, si es de curso, añade el código a `ENCURSO` y `CONECTADAS` en `navegacion.ts`.
 3. Si va en el panel: añádela a `GRUPOS_CURSO`, a la ruta de su rol en `servicios/ruta.ts` y escribe su mensaje en `GuiaDesbloqueo.tsx`.
 4. Corre `npm run check`; las pruebas de estructura te dicen qué falta.
 
