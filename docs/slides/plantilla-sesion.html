@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plantilla de sesión · Data Expedition</title>
+<link rel="stylesheet" href="marca.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--selva">
+    <span class="kicker">Semana 4 de 8 · Sesión 8</span>
+    <h1 class="titulo titulo--xl">PySpark<br>SQL</h1>
+    <p class="sub">Consultar datos grandes con lo que ya sabes de SQL.</p>
+    <div class="pills"><span class="pill pill--accent">Isla: Cueva de la Escala</span><span class="pill pill--suave">90 min</span></div>
+    <img class="jaguar" src="img/saluda.png" alt="">
+    <img class="marca" src="img/letras.webp" alt="Data Expedition">
+  </section>
+
+  <!-- 2 · AGENDA / HOJA DE RUTA -->
+  <section class="slide">
+    <span class="kicker">Hoy en la expedición</span>
+    <h2 class="titulo">Hoja de ruta</h2>
+    <ol class="lista lista--num">
+      <li><span>Calentamiento: relámpago de la sesión anterior<small>10 min</small></span></li>
+      <li><span>Del DataFrame a la vista temporal<small>25 min</small></span></li>
+      <li><span>Practica guiada con spark.sql<small>30 min</small></span></li>
+      <li><span>Trabajo en equipos y pulso semanal<small>25 min</small></span></li>
+    </ol>
+    <img class="objeto" src="img/mapa.webp" alt="">
+    <img class="marca" src="img/logo.webp" alt="">
+  </section>
+
+  <!-- 3 · OBJETIVO DE LA SESIÓN -->
+  <section class="slide slide--verde">
+    <span class="kicker">Al terminar podrás</span>
+    <h2 class="titulo">Escribir una consulta SQL sobre un DataFrame de Spark y explicar qué hace Spark por debajo.</h2>
+    <div class="pills empuja"><span class="pill pill--accent">Datos</span><span class="pill pill--accent">Modelado</span></div>
+    <img class="jaguar jaguar--sm" src="img/guia.png" alt="">
+  </section>
+
+  <!-- 4 · CONCEPTO (idea + jaguar) -->
+  <section class="slide slide--densa">
+    <span class="kicker">Concepto</span>
+    <h2 class="titulo">Una acción dispara el trabajo</h2>
+    <div class="con-jaguar">
+      <p class="sub">Las transformaciones solo anotan el plan. Spark empieza a ejecutar cuando pides una <span class="resalta">acción</span>: <code>count</code>, <code>show</code>, <code>collect</code>.</p>
+      <ul class="lista">
+        <li>Transformación: <span class="resalta">filter</span>, <span class="resalta">select</span>, <span class="resalta">join</span></li>
+        <li>Acción: <span class="resalta">count</span>, <span class="resalta">show</span>, <span class="resalta">write</span></li>
+      </ul>
+    </div>
+    <img class="jaguar" src="img/pensando.png" alt="">
+  </section>
+
+  <!-- 5 · NÚMERO GRANDE (un dato que se recuerda) -->
+  <section class="slide slide--menta">
+    <span class="kicker">Para recordar</span>
+    <div class="num-grande" style="color: var(--deep)"><span data-contar="1000">1000</span>×</div>
+    <h2 class="titulo titulo--sm">más rápido leer solo las columnas que necesitas que traer la tabla completa.</h2>
+    <img class="objeto" src="img/brujula.webp" alt="">
+  </section>
+
+  <!-- 6 · DOS COLUMNAS (comparación) -->
+  <section class="slide">
+    <span class="kicker">Comparación</span>
+    <h2 class="titulo">DataFrame API o spark.sql</h2>
+    <div class="dos">
+      <div class="bloque"><h3>DataFrame API</h3><p>Encadenas métodos. Cómodo para código que se arma por partes.</p></div>
+      <div class="bloque bloque--verde"><h3>spark.sql</h3><p>Escribes SQL sobre una vista temporal. Cómodo para consultas largas.</p></div>
+    </div>
+    <img class="marca" src="img/logo.webp" alt="">
+  </section>
+
+  <!-- GRÁFICO · BARRAS HORIZONTALES (los números cuentan y las barras crecen) -->
+  <section class="slide slide--selva">
+    <span class="kicker">Datos · radar del curso</span>
+    <h2 class="titulo titulo--sm">Cómo está el grupo por dimensión</h2>
+    <div class="grafico">
+      <div class="hbar" style="--i:0"><span>Datos</span><div class="pista"><span class="relleno" style="--w:54%"></span></div><b data-contar="54">54</b></div>
+      <div class="hbar" style="--i:1"><span>Análisis</span><div class="pista"><span class="relleno" style="--w:49%"></span></div><b data-contar="49">49</b></div>
+      <div class="hbar" style="--i:2"><span>Modelado</span><div class="pista"><span class="relleno" style="--w:33%"></span></div><b data-contar="33">33</b></div>
+      <div class="hbar" style="--i:3"><span>Validación</span><div class="pista"><span class="relleno" style="--w:61%"></span></div><b data-contar="61">61</b></div>
+    </div>
+    <div class="leyenda empuja"><span><i></i>Promedio del grupo hoy (0–100)</span></div>
+  </section>
+
+  <!-- GRÁFICO · LÍNEA que se dibuja + DONA que se llena -->
+  <section class="slide">
+    <span class="kicker">Rendimiento y participación</span>
+    <h2 class="titulo titulo--sm">Más particiones no siempre es mejor</h2>
+    <div class="dos" style="grid-template-columns: 1.5fr 1fr; align-items: stretch;">
+      <svg class="linea" viewBox="0 0 800 420" role="img" aria-label="Tiempo contra número de particiones">
+        <line class="eje" x1="40" y1="380" x2="780" y2="380"/><line class="eje" x1="40" y1="20" x2="40" y2="380"/>
+        <polyline class="trazo" pathLength="1" points="40,330 190,220 340,120 490,90 640,160 780,260"/>
+        <text x="780" y="412" text-anchor="end" font-size="26" font-weight="700" fill="#3d514b">particiones →</text><text x="52" y="28" font-size="26" font-weight="700" fill="#3d514b">tiempo ↑</text><circle class="punto" style="--i:0" cx="40" cy="330" r="14"/><circle class="punto" style="--i:1" cx="190" cy="220" r="14"/>
+        <circle class="punto" style="--i:2" cx="340" cy="120" r="14"/><circle class="punto" style="--i:3" cx="490" cy="90" r="14"/>
+        <circle class="punto" style="--i:4" cx="640" cy="160" r="14"/><circle class="punto" style="--i:5" cx="780" cy="260" r="14"/>
+      </svg>
+      <div style="display:grid; place-items:center; gap:24px; align-content:center;">
+        <div class="dona-caja">
+          <svg class="dona" viewBox="0 0 42 42"><circle class="base" cx="21" cy="21" r="15.915"/><circle class="arco" style="--p:58" pathLength="100" cx="21" cy="21" r="15.915"/></svg>
+          <b data-contar="58" data-sufijo="%">58%</b>
+        </div>
+        <p class="sub" style="text-align:center; margin:0; font-size:36px;">respondieron el relámpago a tiempo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRÁFICO · COLUMNAS que crecen -->
+  <section class="slide slide--menta">
+    <span class="kicker">Notas del Trabajo 2</span>
+    <h2 class="titulo titulo--sm">Distribución de notas</h2>
+    <div class="columnas">
+      <div class="columna" style="--i:0"><span style="--h:18%"></span>2.0–2.9</div>
+      <div class="columna" style="--i:1"><span style="--h:46%"></span>3.0–3.4</div>
+      <div class="columna columna--acento" style="--i:2"><span style="--h:100%"></span>3.5–3.9</div>
+      <div class="columna" style="--i:3"><span style="--h:72%"></span>4.0–4.4</div>
+      <div class="columna" style="--i:4"><span style="--h:30%"></span>4.5–5.0</div>
+    </div>
+  </section>
+
+  <!-- 7 · TRES BLOQUES (pasos / ideas) -->
+  <section class="slide slide--selva">
+    <span class="kicker">Tres pasos</span>
+    <h2 class="titulo">De la tabla a la respuesta</h2>
+    <div class="tres">
+      <div class="bloque"><h3>1 · Leer</h3><p>spark.read.parquet con la ruta del lago.</p></div>
+      <div class="bloque"><h3>2 · Registrar</h3><p>createOrReplaceTempView le da nombre a la vista.</p></div>
+      <div class="bloque bloque--acento"><h3>3 · Consultar</h3><p>spark.sql devuelve otro DataFrame.</p></div>
+    </div>
+  </section>
+
+  <!-- 8 · CÓDIGO + RESULTADO -->
+  <section class="slide">
+    <span class="kicker">Código</span>
+    <h2 class="titulo titulo--sm">Ventas por región</h2>
+    <div class="dos" style="grid-template-columns: 1.5fr 1fr; gap: 48px;">
+<div class="codigo"><span class="c"># registra la vista</span>
+ventas.<span class="f">createOrReplaceTempView</span>(<span class="s">"ventas"</span>)
+
+resultado = spark.<span class="f">sql</span>(<span class="s">"""</span>
+<span class="s">  SELECT region, SUM(total) AS total</span>
+<span class="s">  FROM ventas</span>
+<span class="s">  GROUP BY region</span>
+<span class="s">  ORDER BY total DESC</span>
+<span class="s">"""</span>)
+resultado.<span class="f">show</span>()</div>
+<div class="resultado">+--------+-------+
+|region  |total  |
++--------+-------+
+|Costa   |184200 |
+|Andes   |121850 |
+|Selva   | 76400 |
++--------+-------+</div>
+    </div>
+  </section>
+
+  <!-- 9 · PREGUNTA RELÁMPAGO (con QR) -->
+  <section class="slide slide--densa">
+    <div style="display:flex; align-items:center; gap:32px;">
+      <div class="anillo-caja"><svg class="anillo" viewBox="0 0 42 42"><circle class="base" cx="21" cy="21" r="15.915"/><circle class="arco" style="--dur:60s" pathLength="100" cx="21" cy="21" r="15.915"/></svg><b data-segundos="60">1:00</b></div>
+      <span class="kicker">⚡ Relámpago · 60 segundos · +20 XP</span>
+    </div>
+    <div style="display:flex; gap:100px; align-items:center; flex:1;">
+      <div style="flex:1">
+        <h2 class="titulo titulo--sm">¿Qué es una acción en Spark?</h2>
+        <div class="opciones">
+          <div class="opcion"><b>A</b>filter</div>
+          <div class="opcion"><b>B</b>select</div>
+          <div class="opcion"><b>C</b>count</div>
+          <div class="opcion"><b>D</b>withColumn</div>
+        </div>
+      </div>
+      <div class="qr"><span>Escanea<small>pega aquí el QR de En clase</small></span></div>
+    </div>
+  </section>
+
+  <!-- 10 · ACTIVIDAD EN EQUIPOS (con reloj) -->
+  <section class="slide slide--amarilla">
+    <span class="kicker">Actividad en equipos</span>
+    <h2 class="titulo">Respondan con una sola consulta</h2>
+    <p class="sub">¿Cuál es el producto más vendido por región? Abran el cuaderno y compartan la consulta en su PR.</p>
+    <div class="reloj empuja" data-segundos="900">15:00</div>
+    <img class="objeto" src="img/cuaderno.webp" alt="">
+  </section>
+
+  <!-- 11 · PULSO / PREGUNTA ABIERTA -->
+  <section class="slide slide--verde">
+    <span class="kicker">Pulso semanal · anónimo</span>
+    <h2 class="titulo">¿Qué parte te costó más hoy?</h2>
+    <p class="sub">Responde desde tu celular. Nadie ve quién contestó qué.</p>
+    <img class="jaguar jaguar--sm" src="img/pensando.png" alt="">
+  </section>
+
+  <!-- 12 · CIERRE -->
+  <section class="slide slide--campamento">
+    <span class="kicker">Lo que nos llevamos</span>
+    <h2 class="titulo">Spark planea y una acción ejecuta.</h2>
+    <ul class="lista">
+      <li>Registrar una vista permite usar SQL sobre un DataFrame</li>
+      <li>Leer solo las columnas necesarias ahorra tiempo</li>
+    </ul>
+    <img class="jaguar" src="img/celebra.png" alt="">
+  </section>
+
+  <!-- 13 · TAREA Y RECURSOS -->
+  <section class="slide">
+    <span class="kicker">Para la próxima</span>
+    <h2 class="titulo">Tarea y recursos</h2>
+    <div class="dos">
+      <div class="bloque bloque--acento"><h3>Trabajo 3</h3><p>Entrega por PR. Vence el viernes 27 de noviembre.</p></div>
+      <div class="bloque"><h3>Practicar</h3><p>Una sesión de 5 preguntas en la app para sostener la racha.</p></div>
+    </div>
+    <img class="marca" src="img/logo.webp" alt="">
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
