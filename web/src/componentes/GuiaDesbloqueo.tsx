@@ -51,6 +51,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Perfil',
       texto: 'Tu punto fuerte, tu XP y tu nivel. El XP no es nota: se gana practicando.',
     },
+    home: {
+      titulo: 'Campamento',
+      texto: 'Tu base de operaciones: la isla donde vas, tu próximo paso y accesos rápidos. Toca al jaguar y te da un consejo.',
+    },
     e1: {
       titulo: 'Mapa del curso',
       texto: 'Cada trabajo es una isla del mapa. Entregas, y avanzas a la siguiente: aquí ves dónde estás y cuánto te falta.',

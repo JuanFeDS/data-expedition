@@ -6,6 +6,8 @@ import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
 import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Contador, Hoja, Kicker, ModoModal, Pantalla, Pill } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E1HomeReal } from './E1HomeReal';
 import { E9Votacion } from './E9Votacion';
 import { E10Mision } from './E10Mision';
 import { E11Resumen } from './E11Resumen';
@@ -46,7 +48,7 @@ const PASOS = ['Declara si usaste IA (con o sin IA).', 'Si usaste IA, cuenta tu 
 
 const regionActual = Math.max(0, regionesCurso.findIndex((region) => region.estado === 'actual'));
 
-export function E1Home() {
+export function E1HomeEjemplo() {
   const [hoja, setHoja] = useState<'paso' | 'menu' | Modal | null>(null);
   const [vista, setVista] = useState(regionActual);
   const [consejo, setConsejo] = useState(0);
@@ -183,4 +185,9 @@ export function E1Home() {
       <MenuHoja abierta={hoja === 'menu'} alCerrar={cerrar} omitir="#/home" />
     </Pantalla>
   );
+}
+
+export function E1Home() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E1HomeEjemplo /> : <E1HomeReal />;
 }

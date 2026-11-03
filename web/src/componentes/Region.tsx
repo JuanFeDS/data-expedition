@@ -30,11 +30,12 @@ interface PropsRegion {
   vista: number;
   alCambiar: (indice: number) => void;
   alAbrirAlbum?: (indice: number) => void;
+  rutaMapa?: string;
 }
 
 const UMBRAL_DESLIZAR = 40;
 
-export function Region({ regiones, actual, vista, alCambiar, alAbrirAlbum }: PropsRegion) {
+export function Region({ regiones, actual, vista, alCambiar, alAbrirAlbum, rutaMapa = '#/e1' }: PropsRegion) {
   const region = regiones[vista];
   const total = regiones.length;
   const [direccion, setDireccion] = useState(0);
@@ -73,7 +74,7 @@ export function Region({ regiones, actual, vista, alCambiar, alAbrirAlbum }: Pro
     <div className={`region region--${region.estado}`}>
       <div className="region__fila">
       <button className="region__flecha region__flecha--izq" onClick={() => ir(vista - 1)} disabled={vista === 0} aria-label="Isla anterior">‹</button>
-      <a className="region__enlace" href="#/e1" onPointerDown={alPresionar} onPointerUp={alSoltar} onClick={alHacerClic} aria-label={`${region.nombre}, semana ${region.semanas}. Abrir el mapa`}>
+      <a className="region__enlace" href={rutaMapa} onPointerDown={alPresionar} onPointerUp={alSoltar} onClick={alHacerClic} aria-label={`${region.nombre}, semana ${region.semanas}. Abrir el mapa`}>
         <div className="region__escena" key={vista} data-dir={direccion}>
           <Isla bioma={region.bioma} />
           {region.estado === 'pendiente' && (
