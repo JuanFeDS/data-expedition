@@ -23,7 +23,7 @@ Para exportar a PDF abre el archivo en Chrome y usa Imprimir → Guardar como PD
 ## Decks
 
 - `plantilla-sesion.html`: todos los layouts con contenido de relleno.
-- `s01-introduccion-ciencia-de-datos.html`: la sesión 1 (introducción, entorno y tarea diagnóstica), con el jaguar solo en portada y cierre.
+- `s01-introduccion-ciencia-de-datos.html`: la sesión 1 completa (70 slides, 180 min): bienvenida, introducción, entorno, guía de PR y cierre, con pausas y actividades con reloj y el jaguar solo en portada y despedida.
 
 ## Layouts incluidos
 
