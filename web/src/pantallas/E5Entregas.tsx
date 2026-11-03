@@ -4,6 +4,7 @@ import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Isla } from '../componentes/Region';
 import { useCurso, useRutaCurso } from '../componentes/curso';
+import { useSesion } from '../componentes/sesion';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
 
@@ -22,6 +23,7 @@ const ESTADO_TEXTO = { entregada: 'Entregada, en revisión', calificada: 'Califi
 
 export function E5Entregas() {
   const servicio = useServicioTrabajos();
+  const { modoDemo } = useSesion();
   const { curso, cargando: cargandoCursos } = useCurso();
   const rutaCurso = useRutaCurso();
   const [vista, setVista] = useState(0);
@@ -53,7 +55,7 @@ export function E5Entregas() {
   return (
     <Pantalla clase="p-e5">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Inicio', ruta: '#/home' }} kicker={kicker} titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
+        <CabeceraMundo atras={{ texto: 'Inicio', ruta: modoDemo ? '#/home' : '#/inicio' }} kicker={kicker} titulo="Entregas" subtitulo="Lo que debes entregar y lo que ya enviaste." objeto="cuaderno" />
         <div className="contenido cuerpo-mundo centrar" style={{ gap: 8 }}>
           {fallo && <p className="acceso__error" role="alert">No pudimos cargar tus entregas. <button onClick={() => void cargar()}>Reintentar</button></p>}
           <Segmentado opciones={['Pendientes', 'Entregadas']} activa={vista} alCambiar={setVista} />
