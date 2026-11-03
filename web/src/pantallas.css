@@ -1439,3 +1439,56 @@
 .trabajo__enlace:hover strong { text-decoration: underline; }
 .bloque-actual__detalle { font-size: var(--fs-sm); font-weight: 800; text-decoration: underline; }
 .fila__titulo a { color: inherit; }
+
+.p-resultado-practica { background: var(--mint); color: var(--deep); overflow-y: auto; }
+.rp { display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center; min-height: 100%; padding: 56px 24px 32px; max-width: 1040px; margin: 0 auto; }
+.rp__texto { display: flex; flex-direction: column; gap: 14px; }
+.rp__kicker { color: var(--deep); }
+.rp__titulo { font-size: var(--fs-3xl); line-height: 1; color: var(--deep); }
+.rp__sub { font-size: var(--fs-md); font-weight: 600; line-height: 1.4; }
+.rp__preguntas { list-style: none; display: flex; gap: 10px; padding: 0; }
+.rp__preguntas li { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--deep); color: var(--mint); }
+.rp__preguntas li.repaso { background: rgb(7 59 58 / .12); color: var(--deep); box-shadow: inset 0 0 0 2px rgb(7 59 58 / .35); }
+.rp__xp { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 20px; background: rgb(255 255 255 / .55); }
+.rp__xp-cifra { display: flex; align-items: center; gap: 14px; }
+.rp__xp-cifra .num { font-size: var(--fs-4xl); line-height: 1; }
+.rp__xp-cifra strong { display: block; font-size: var(--fs-md); font-weight: 800; }
+.rp__xp-cifra small, .rp__barra-pie { font-size: var(--fs-xs); font-weight: 700; opacity: .8; }
+.rp__barra { position: relative; height: 12px; border-radius: 6px; background: rgb(7 59 58 / .15); overflow: hidden; }
+.rp__barra i { position: absolute; inset: 0 auto 0 0; border-radius: 6px; }
+.rp__barra-antes { background: var(--deep); z-index: 1; }
+.rp__barra-nueva { background: var(--accent); }
+.rp__racha { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 12px 16px; border-radius: 20px; background: rgb(255 255 255 / .35); }
+.rp__racha-cifra { display: flex; align-items: baseline; gap: 6px; }
+.rp__racha-cifra b { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 800; }
+.rp__racha-cifra span { font-size: var(--fs-sm); font-weight: 800; }
+.rp__dias { list-style: none; display: flex; gap: 8px; padding: 0; }
+.rp__dias li { display: grid; justify-items: center; gap: 3px; font-size: var(--fs-xs); font-weight: 800; }
+.rp__dias b { width: 18px; height: 18px; border-radius: 50%; background: rgb(7 59 58 / .15); }
+.rp__dias .hecho b { background: var(--deep); }
+.rp__dias .hoy b { box-shadow: 0 0 0 3px var(--accent); }
+.rp__acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+.rp__escena { position: relative; display: grid; place-items: center; min-height: 260px; order: -1; }
+.rp__jaguar { position: relative; z-index: 2; width: min(60vw, 260px); height: auto; }
+.rp__aro { position: absolute; border-radius: 50%; background: rgb(255 255 255 / .35); }
+.rp__aro--1 { width: min(70vw, 340px); aspect-ratio: 1; }
+.rp__aro--2 { width: min(50vw, 230px); aspect-ratio: 1; background: rgb(255 255 255 / .45); }
+@media (min-width: 860px) {
+  .rp { grid-template-columns: 1.1fr .9fr; gap: 40px; padding: 8vh 40px 40px; }
+  .rp__titulo { font-size: var(--fs-4xl); }
+  .rp__escena { order: 0; min-height: 420px; }
+  .rp__jaguar { width: 340px; }
+  .rp__aro--1 { width: 440px; } .rp__aro--2 { width: 300px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rp__texto > * { animation: paso-sube .5s both ease-out; }
+  .rp__texto > *:nth-child(2) { animation-delay: .1s; } .rp__texto > *:nth-child(3) { animation-delay: .18s; }
+  .rp__texto > *:nth-child(4) { animation-delay: .26s; } .rp__texto > *:nth-child(5) { animation-delay: .4s; }
+  .rp__texto > *:nth-child(6) { animation-delay: .52s; } .rp__texto > *:nth-child(7) { animation-delay: .62s; }
+  .rp__preguntas li { animation: pop .35s both calc(.35s + var(--i) * 90ms) cubic-bezier(.3, 1.6, .5, 1); }
+  .rp__jaguar { animation: guia-salta .7s .2s both cubic-bezier(.3, 1.6, .5, 1), guia-respira 3.2s 1s ease-in-out infinite; }
+  .rp__aro--1 { animation: rp-pulso 4s ease-in-out infinite; } .rp__aro--2 { animation: rp-pulso 4s 1s ease-in-out infinite; }
+  @keyframes rp-pulso { 50% { transform: scale(1.06); } }
+  .rp__barra-nueva { animation: rp-llena 1s .5s both ease-out; }
+  @keyframes rp-llena { from { width: 0; } }
+}

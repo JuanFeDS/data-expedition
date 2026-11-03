@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Jaguar } from '../componentes/Jaguar';
 import {
   NOMBRE_FORMATO, PreguntaCompletar, PreguntaOpciones, PreguntaOrdenar, PreguntaUnir, PreguntaVF, type PreguntaDatos, type Resultado,
 } from '../componentes/preguntas';
 import { useCurso, useRutaCurso } from '../componentes/curso';
 import { sonar } from '../componentes/sonidos';
-import { Contador, Kicker, Pantalla } from '../componentes/ui';
-import { armarSesion, cargarBancoActivo, terminarPractica, type PreguntaBanco, type ResultadoSesion } from '../servicios/practica';
+import { ResultadoPractica } from '../componentes/ResultadoPractica';
+import { Kicker, Pantalla } from '../componentes/ui';
+import { armarSesion, cargarBancoActivo, miPractica, terminarPractica, type PreguntaBanco, type ResultadoSesion, type ResumenPractica } from '../servicios/practica';
 import { dimensionesDelCurso, miRadar } from '../servicios/radar';
 
 function Pregunta({ datos, alCambiar, bloqueada }: { datos: PreguntaDatos; alCambiar: (resultado: Resultado | null) => void; bloqueada: boolean }) {
@@ -32,11 +32,12 @@ export function E7PracticaReal() {
   const [hechas, setHechas] = useState(0);
   const [resultado, setResultado] = useState<Resultado | null>(null);
   const [revisando, setRevisando] = useState(false);
-  const [fin, setFin] = useState<ResultadoSesion | null>(null);
-  const [errorFin, setErrorFin] = useState<string | null>(null);
+  const [fin, setFin] = useState<(ResultadoSesion & { primeraVez: boolean[]; resumen: ResumenPractica | null; guardado: boolean }) | null>(null);
+  const [intento, setIntento] = useState(0);
 
   useEffect(() => {
     if (!curso) return;
+    setSesion(null); setVacio(false); setFallo(false); setCola([]); setFallidas(new Set()); setHechas(0); setResultado(null); setRevisando(false); setFin(null);
     Promise.all([cargarBancoActivo(curso.id), miRadar(curso.id), dimensionesDelCurso(curso.id)]).then(([banco, radar, dimensiones]) => {
       const elegidas = armarSesion(banco, radar);
       if (elegidas.length === 0) { setVacio(true); return; }
@@ -44,14 +45,16 @@ export function E7PracticaReal() {
       setSesion(elegidas);
       setCola(elegidas.map((_, indice) => indice));
     }).catch(() => setFallo(true));
-  }, [curso]);
+  }, [curso, intento]);
 
   const terminar = async (aciertos: Set<number>, total: number) => {
     if (!curso || !sesion) return;
-    const respuestas = sesion.map((pregunta, indice) => ({ preguntaId: pregunta.id, primerIntento: !aciertos.has(indice) }));
+    const primeraVez = sesion.map((_, indice) => !aciertos.has(indice));
+    const respuestas = sesion.map((pregunta, indice) => ({ preguntaId: pregunta.id, primerIntento: primeraVez[indice] }));
     const { resultado: guardado, error } = await terminarPractica(curso.id, respuestas);
-    if (error || !guardado) { setErrorFin(error); setFin({ xp: 0, aciertos: total - aciertos.size, total }); return; }
-    setFin(guardado);
+    if (error || !guardado) { setFin({ xp: 0, aciertos: primeraVez.filter(Boolean).length, total, primeraVez, resumen: null, guardado: false }); return; }
+    const resumen = await miPractica(curso.id).catch(() => null);
+    setFin({ ...guardado, primeraVez, resumen, guardado: true });
     sonar('sesion');
   };
 
@@ -71,23 +74,9 @@ export function E7PracticaReal() {
 
   if (fin) {
     return (
-      <Pantalla tono="menta" clase="p-e8">
-        <div className="pantalla__cuerpo contenido resultado__practica">
-          <Kicker estilo={{ color: 'var(--deep)' }}>Sesión terminada</Kicker>
-          <h1 className="titulo resultado__titulo">{fin.aciertos} de {fin.total} a la primera</h1>
-          <div className="resultado__remate">
-            <p className="resultado__texto">{fin.aciertos === fin.total ? '¡Sesión perfecta!' : 'Lo que fallaste lo repasaste al final: así se aprende.'}</p>
-            <Jaguar pose="celebra" ancho={136} clase="resultado__guia" />
-          </div>
-          {errorFin ? <p className="acceso__error" role="alert">No pudimos guardar tu sesión, así que no sumó XP. Intenta de nuevo más tarde.</p> : (
-            <div className="metrica">
-              <span className="num"><Contador valor={fin.xp} prefijo="+" /></span>
-              <div><strong className="metrica__titulo">XP</strong><span className="metrica__detalle">Por esta sesión. El XP no es nota.</span></div>
-            </div>
-          )}
-          <div className="acciones">
-            <a className="boton boton--accent" href={volver}>Volver a practicar</a>
-          </div>
+      <Pantalla tono="menta" clase="p-resultado-practica">
+        <div className="pantalla__cuerpo">
+          <ResultadoPractica aciertos={fin.aciertos} total={fin.total} xp={fin.xp} primeraVez={fin.primeraVez} resumen={fin.resumen} guardado={fin.guardado} alOtraSesion={() => setIntento((previo) => previo + 1)} rutaVolver={volver} />
         </div>
       </Pantalla>
     );

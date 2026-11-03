@@ -3,7 +3,8 @@ import { BotonSalir } from './BotonSalir';
 import { IconoSvg } from './Icono';
 import { useCurso } from './curso';
 import { useDesbloqueos } from './desbloqueos';
-import { NAVEGACION, esConectada, gruposVisibles, type Rol } from './navegacion';
+import { NAVEGACION, esConectada, gruposVisibles, separarBloqueadas, type Rol } from './navegacion';
+import { rutaDeRol } from '../servicios/ruta';
 import { useSesion } from './sesion';
 import { InterruptorSonido } from './tema';
 import { RutaProgreso } from './RutaProgreso';
@@ -18,6 +19,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
   const { modoDemo, persona } = useSesion();
   const { curso, dentro, reciente } = useCurso();
   const { todo, desbloqueadas } = useDesbloqueos();
+  const { abiertas, porDescubrir } = separarBloqueadas(gruposVisibles(rol, !modoDemo, dentro ? curso : reciente, todo ? null : desbloqueadas), rutaDeRol(rol));
   return (
     <Hoja abierta={abierta} alCerrar={alCerrar} titulo="Menú">
       {rol === 'docente' && (
@@ -31,22 +33,34 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
         </div>
       )}
       <nav className="hoja__menu">
-        {gruposVisibles(rol, !modoDemo, dentro ? curso : reciente, todo ? null : desbloqueadas).map((grupo) => {
+        {abiertas.map((grupo) => {
           const enlaces = grupo.enlaces.filter((opcion) => opcion.ruta !== omitir && !(rol === 'docente' && ATAJOS_DOCENTE.includes(opcion.ruta)));
           if (enlaces.length === 0) return null;
           return (
             <section key={grupo.titulo} className="menu__grupo">
               <Kicker>{grupo.titulo}</Kicker>
               {enlaces.map((opcion) => (
-                <a key={opcion.etiqueta} href={opcion.ruta} className={`menu-fila ${opcion.bloqueada ? 'menu-fila--bloqueada' : ''}`}>
+                <a key={opcion.etiqueta} href={opcion.ruta} className="menu-fila">
                   <span className={`acceso-rapido__icono acceso-rapido__icono--${opcion.color}`}><IconoSvg tipo={opcion.tipo} /></span>
                   <span className="menu-fila__texto"><strong>{opcion.etiqueta}</strong><small>{opcion.detalle}</small></span>
-                  <span aria-hidden="true">{opcion.bloqueada ? '🔒' : '›'}</span>
+                  <span aria-hidden="true">›</span>
                 </a>
               ))}
             </section>
           );
         })}
+        {porDescubrir.length > 0 && (
+          <section className="menu__grupo">
+            <Kicker>Descubrir</Kicker>
+            {porDescubrir.map((opcion) => (
+              <a key={opcion.etiqueta} href={opcion.ruta} className="menu-fila">
+                <span className={`acceso-rapido__icono acceso-rapido__icono--${opcion.color}`}><IconoSvg tipo={opcion.tipo} /></span>
+                <span className="menu-fila__texto"><strong>{opcion.etiqueta}</strong><small>{opcion.detalle}</small></span>
+                <span aria-hidden="true">›</span>
+              </a>
+            ))}
+          </section>
+        )}
       </nav>
       {!modoDemo && <RutaProgreso />}
       <div className="menu__ajustes"><InterruptorSonido /></div>

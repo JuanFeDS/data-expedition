@@ -163,3 +163,10 @@ export const gruposVisibles = (
     .map((enlace) => ({ ...enlace, aviso: undefined, bloqueada: desbloqueadas !== null && !desbloqueadas.has(codigoDeRuta(enlace.ruta)), ruta: enCurso(enlace.ruta, curso.id) }));
   return delCurso.length > 0 ? [general, { titulo: curso.nombre, enlaces: delCurso }] : [general];
 };
+
+export const separarBloqueadas = (grupos: GrupoEnlaces[], orden: string[]) => {
+  const abiertas = grupos.map((grupo) => ({ ...grupo, enlaces: grupo.enlaces.filter((enlace) => !enlace.bloqueada) })).filter((grupo) => grupo.enlaces.length > 0);
+  const posicion = (enlace: Enlace) => { const indice = orden.indexOf(codigoDeRuta(enlace.ruta.replace(/^#\/c\/[^/]+\//, '#/'))); return indice === -1 ? orden.length : indice; };
+  const porDescubrir = grupos.flatMap((grupo) => grupo.enlaces).filter((enlace) => enlace.bloqueada).sort((a, b) => posicion(a) - posicion(b));
+  return { abiertas, porDescubrir };
+};
