@@ -2,6 +2,7 @@ import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from './componentes/BarraLateral';
 import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from './componentes/navegacion';
+import { ActividadProvider } from './componentes/actividad';
 import { ConfirmarProvider } from './componentes/confirmar';
 import { DesbloqueosProvider } from './componentes/desbloqueos';
 import { CursoProvider, useCurso } from './componentes/curso';
@@ -131,4 +132,4 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><DesbloqueosProvider><ConfirmarProvider><App /></ConfirmarProvider></DesbloqueosProvider></CursoProvider></SesionProvider></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><ActividadProvider><DesbloqueosProvider><ConfirmarProvider><App /></ConfirmarProvider></DesbloqueosProvider></ActividadProvider></CursoProvider></SesionProvider></StrictMode>);

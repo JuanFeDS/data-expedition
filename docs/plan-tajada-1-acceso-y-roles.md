@@ -165,3 +165,15 @@ Tamaños: S = media jornada, M = una jornada.
 
 - El observador tiene su propio inicio (`#/inicio`, cabecera roja): su curso con cuántos trabajos hay, una tarjeta de privacidad («Qué puedes ver»: solo datos en conjunto, sin nombres ni correos, y nada de grupos de menos de 5 personas), próximos vencimientos, los resúmenes del grupo como «Próximamente», y sus cursos.
 - Los resúmenes agregados (avance, dimensiones, participación) se conectan después, con las funciones de la base que ya respetan el mínimo de anonimato.
+
+## Registro completo de la actividad (2 nov)
+
+La idea es que todo quede guardado, para poder analizarlo después. La migración `0007` y el código nuevo lo hacen en tres capas:
+
+- **Eventos de negocio (en la base, con disparadores):** cada cambio en cursos, matrículas, trabajos, entregas, calificaciones, perfiles, invitaciones, lista de autorizados y evidencias del radar deja un evento (`<tabla>_<insert|update|delete>`), con el antes y el después. No guardan correos, nombres, usuario, enlace del PR ni el texto de la bitácora. Cada ingreso de una persona también queda registrado (`sesion_iniciada`).
+- **Eventos de uso (desde la app, `servicios/eventos.ts`):** `pantalla_vista` (con el curso), `tutorial_paso`, `seccion_desbloqueada`, `seccion_presentada`. Es de mejor esfuerzo: nunca interrumpe la app, va por lotes, y se apaga solo tras 3 fallos seguidos.
+- **Historial de entregas (`entregas_versiones`):** cada envío o cambio es una versión, con su enlace, bitácora, declaración de IA, estado y nota. Los reenvíos ya no pisan lo anterior.
+- **Progreso por persona (`progreso_usuario`):** lo desbloqueado en el panel pasa a la base y viaja con la cuenta (sigue guardándose también en el navegador).
+- **Fechas:** `creada_en` o `creado_en` y `actualizado_en` en las tablas principales.
+- Los eventos no tienen llaves foráneas a propósito: sobreviven aunque se borre la persona, el curso o el trabajo.
+- **Pendiente:** vistas para análisis con identificadores anonimizados (sin nombres ni correos), y definir qué eventos de práctica, relámpagos y votaciones se guardan cuando esas pantallas se conecten. La política de privacidad ya dice que se guarda la actividad y que se analiza con datos anonimizados.

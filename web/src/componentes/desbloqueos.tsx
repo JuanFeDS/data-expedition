@@ -1,6 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { useCurso } from './curso';
 import { GuiaDesbloqueo, anuncioDe } from './GuiaDesbloqueo';
+import { registrarEvento } from '../servicios/eventos';
+import { guardarProgreso, leerProgreso } from '../servicios/progreso';
 import { analizarRuta, type Rol } from './navegacion';
 import { useSesion } from './sesion';
 
@@ -54,7 +56,21 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const idPersona = persona?.id ?? null;
-  useEffect(() => { setEstado({ para: idPersona, valores: idPersona ? leer(idPersona) : [] }); }, [idPersona]);
+  useEffect(() => {
+    setEstado({ para: idPersona, valores: idPersona ? leer(idPersona) : [] });
+    if (!idPersona || modoDemo) return;
+    void leerProgreso<{ claves?: string[] }>('desbloqueos').then((remoto) => {
+      const claves = remoto?.claves;
+      if (!Array.isArray(claves) || claves.length === 0) return;
+      setEstado((actual) => {
+        if (actual.para !== idPersona) return actual;
+        const union = [...new Set([...actual.valores, ...claves])];
+        if (union.length === actual.valores.length) return actual;
+        guardar(idPersona, union);
+        return { para: idPersona, valores: union };
+      });
+    });
+  }, [idPersona, modoDemo]);
 
   const codigo = analizarRuta(ruta).codigo;
   const nuevas = useMemo(() => {
@@ -73,6 +89,8 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
     setPorAnunciar((actual) => [...actual, ...recienDesbloqueadas.filter((valor) => !actual.includes(valor))]);
     setEstado({ para: idPersona, valores: union });
     guardar(idPersona, union);
+    void guardarProgreso('desbloqueos', { claves: union });
+    recienDesbloqueadas.forEach((clave) => registrarEvento('seccion_desbloqueada', { entidad: 'seccion', entidadId: clave }));
   }, [idPersona, cargadas, nuevas, estado.valores]);
 
   const valor = useMemo<ValorDesbloqueos>(
@@ -82,9 +100,12 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   const rol = persona?.rol;
   const anunciables = rol && !modoDemo ? porAnunciar.filter((clave) => anuncioDe(rol, clave)) : [];
   const actual = rol && anunciables.length > 0 ? anuncioDe(rol, anunciables[0]) : null;
-  const avanzar = useCallback(() => setPorAnunciar((lista) => lista.slice(1)), []);
 
   const claveActual = anunciables[0] ?? null;
+  const avanzar = useCallback(() => {
+    if (claveActual) registrarEvento('seccion_presentada', { entidad: 'seccion', entidadId: claveActual });
+    setPorAnunciar((lista) => lista.slice(1));
+  }, [claveActual]);
   useEffect(() => {
     if (claveActual) document.body.dataset.nuevo = claveActual;
     else delete document.body.dataset.nuevo;

@@ -3,6 +3,7 @@ import { BotonSalir } from './BotonSalir';
 import { CabeceraMundo } from './CabeceraMundo';
 import { Dock } from './Dock';
 import { Jaguar, type PoseJaguar } from './Jaguar';
+import { registrarEvento } from '../servicios/eventos';
 import { useCurso } from './curso';
 import { enCurso } from './navegacion';
 import { Tarjeta } from './panel';
@@ -54,6 +55,10 @@ const PASOS_DOCENTE: PasoTutorial[] = [
 
 function Tutorial({ pasos }: { pasos: PasoTutorial[] }) {
   const [paso, setPaso] = useState(0);
+  const irAlPaso = (nuevo: number) => {
+    setPaso(nuevo);
+    registrarEvento('tutorial_paso', { entidad: 'tutorial', entidadId: pasos[nuevo].titulo, datos: { paso: nuevo + 1, total: pasos.length } });
+  };
   return (
     <Tarjeta kicker={`Paso ${paso + 1} de ${pasos.length}`} titulo="Cómo funciona">
       <div className="inicio__tuto">
@@ -71,8 +76,8 @@ function Tutorial({ pasos }: { pasos: PasoTutorial[] }) {
         {pasos.map((_, indice) => <i key={indice} className={indice === paso ? 'actual' : ''} />)}
       </div>
       <div className="d13__fila">
-        <button className="acceso__boton" disabled={paso === 0} onClick={() => setPaso(paso - 1)}>Atrás</button>
-        <button className="acceso__boton acceso__boton--principal" disabled={paso === pasos.length - 1} onClick={() => setPaso(paso + 1)}>Siguiente</button>
+        <button className="acceso__boton" disabled={paso === 0} onClick={() => irAlPaso(paso - 1)}>Atrás</button>
+        <button className="acceso__boton acceso__boton--principal" disabled={paso === pasos.length - 1} onClick={() => irAlPaso(paso + 1)}>Siguiente</button>
       </div>
     </Tarjeta>
   );
