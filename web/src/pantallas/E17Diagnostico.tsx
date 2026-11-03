@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
+import { useSesion } from '../componentes/sesion';
+import { E17DiagnosticoReal } from './E17DiagnosticoReal';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 
 const PASOS = [
@@ -10,7 +12,7 @@ const PASOS = [
   { titulo: 'Verificación sin IA', detalle: 'Por videollamada, con cámara encendida, al inicio de la S2.', fecha: 'Hecha el 5 nov', minutos: '20 min' },
 ];
 
-export function E17Diagnostico() {
+export function E17DiagnosticoEjemplo() {
   const [forma, setForma] = useState(0);
   return (
     <Pantalla clase="p-e17">
@@ -47,4 +49,9 @@ export function E17Diagnostico() {
       <Dock accion={{ etiqueta: forma === 0 ? 'Diagnóstico completo' : 'Forma B', texto: forma === 0 ? 'Ver mi resultado' : 'Ver el calendario', ruta: forma === 0 ? '#/e19' : '#/e22' }} />
     </Pantalla>
   );
+}
+
+export function E17Diagnostico() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E17DiagnosticoEjemplo /> : <E17DiagnosticoReal />;
 }

@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tarjeta } from '../componentes/panel';
+import { useSesion } from '../componentes/sesion';
+import { D2DiagnosticoReal } from './D2DiagnosticoReal';
 import { Pantalla } from '../componentes/ui';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION, dimensionesDiagnostico, estudiantes, porcentajeDatos, rutaPropuesta } from '../datosPlan';
 
 const RUTAS = ['Nivelación', 'Estándar', 'Profundización'] as const;
 
-export function D2DiagnosticoRutas() {
+export function D2DiagnosticoRutasEjemplo() {
   const [ruta, setRuta] = useState<(typeof RUTAS)[number]>(rutaPropuesta);
   const [confirmada, setConfirmada] = useState(false);
   const cuenta = (nombre: (typeof RUTAS)[number]) => estudiantes.filter((estudiante) => estudiante.ruta === nombre).length;
@@ -52,4 +54,9 @@ export function D2DiagnosticoRutas() {
       <Dock accion={{ etiqueta: `Ruta ${ruta.toLowerCase()}`, texto: confirmada ? 'Volver al panel' : 'Confirmar ruta', alPulsar: () => (confirmada ? (window.location.hash = '#/d1') : setConfirmada(true)) }} />
     </Pantalla>
   );
+}
+
+export function D2DiagnosticoRutas() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D2DiagnosticoRutasEjemplo /> : <D2DiagnosticoReal />;
 }

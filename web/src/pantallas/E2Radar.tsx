@@ -1,10 +1,12 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Radar } from '../componentes/Radar';
+import { useSesion } from '../componentes/sesion';
+import { E2RadarReal } from './E2RadarReal';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 import { dimensiones, temaDeRepaso } from '../datos';
 
-export function E2Radar() {
+export function E2RadarEjemplo() {
   const porCambio = [...dimensiones].sort((a, b) => b.ahora - b.inicio - (a.ahora - a.inicio));
   const repaso = temaDeRepaso().gema.dimension;
   const subieron = dimensiones.filter((dimension) => dimension.ahora > dimension.inicio).length;
@@ -40,4 +42,9 @@ export function E2Radar() {
       <Dock accion={{ etiqueta: 'Para repasar', texto: `Practicar ${repaso}`, ruta: '#/e15' }} />
     </Pantalla>
   );
+}
+
+export function E2Radar() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E2RadarEjemplo /> : <E2RadarReal />;
 }

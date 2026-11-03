@@ -19,6 +19,14 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Entregas',
       texto: 'Aquí están tus trabajos: lo que debes entregar, cuándo vence y lo que ya enviaste. Entregas pegando el enlace de tu Pull Request.',
     },
+    e17: {
+      titulo: 'Diagnóstico',
+      texto: 'Aquí haces tu autoinforme y ves tu punto de partida, con y sin IA, cuando tu docente registre el resultado.',
+    },
+    e2: {
+      titulo: 'Radar',
+      texto: 'Aquí ves cómo avanzas en cada dimensión frente a tu punto de partida. Se llena con tus notas.',
+    },
     e24: {
       titulo: 'Mi equipo',
       texto: 'Aquí ves con quién haces cada trabajo en equipo. Tu docente los sortea y los ajusta.',
@@ -44,6 +52,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
     d14: {
       titulo: 'Trabajos',
       texto: 'Aquí publicas lo que se entrega y su fecha límite. Los estudiantes lo verán en sus Entregas.',
+    },
+    d2: {
+      titulo: 'Diagnóstico y rutas',
+      texto: 'Aquí registras el diagnóstico de entrada de cada estudiante, con y sin IA, y confirmas la ruta del curso.',
     },
     d7: {
       titulo: 'Equipos',
