@@ -2,6 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Jaguar } from '../componentes/Jaguar';
+import { useSesion } from '../componentes/sesion';
+import { E24EquipoReal } from './E24EquipoReal';
 import { Pantalla } from '../componentes/ui';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION, equiposCurso, estudiantes } from '../datosPlan';
 
@@ -9,7 +11,7 @@ const NIVELES = ['Base', 'Estándar', 'Reto'];
 const yo = estudiantes[0];
 const equipo = equiposCurso.find((candidato) => candidato.nombre === yo.equipo)!;
 
-export function E24RutaEquipo() {
+export function E24RutaEquipoEjemplo() {
   const nivelActivo = yo.ruta === 'Nivelación' ? 0 : yo.ruta === 'Estándar' ? 1 : 2;
   return (
     <Pantalla clase="p-e24">
@@ -55,4 +57,9 @@ export function E24RutaEquipo() {
       <Dock accion={{ etiqueta: 'Trabajo 3', texto: 'Ir a mis entregas', ruta: '#/e5' }} />
     </Pantalla>
   );
+}
+
+export function E24RutaEquipo() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E24RutaEquipoEjemplo /> : <E24EquipoReal />;
 }

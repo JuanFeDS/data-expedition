@@ -19,6 +19,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Entregas',
       texto: 'Aquí están tus trabajos: lo que debes entregar, cuándo vence y lo que ya enviaste. Entregas pegando el enlace de tu Pull Request.',
     },
+    e24: {
+      titulo: 'Mi equipo',
+      texto: 'Aquí ves con quién haces cada trabajo en equipo. Tu docente los sortea y los ajusta.',
+    },
     e22: {
       titulo: 'Calendario',
       texto: 'Aquí ves las sesiones semana a semana, los plazos de tus trabajos y el material de cada clase.',
@@ -40,6 +44,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
     d14: {
       titulo: 'Trabajos',
       texto: 'Aquí publicas lo que se entrega y su fecha límite. Los estudiantes lo verán en sus Entregas.',
+    },
+    d7: {
+      titulo: 'Equipos',
+      texto: 'Aquí defines el tamaño de los equipos de cada trabajo, los sorteas y los ajustas a mano si hace falta.',
     },
     d6: {
       titulo: 'Calendario',
