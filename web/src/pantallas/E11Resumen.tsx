@@ -1,6 +1,8 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Kicker, Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E11ResumenReal } from './E11ResumenReal';
 import { rangoSemanaActual, semanaActual, temaDeRepaso, trabajoActual } from '../datos';
 
 const SUBIDAS = [
@@ -15,7 +17,7 @@ const TAREAS = [
   { titulo: `Haz 3 lecciones de ${temaDeRepaso().gema.dimension}`, detalle: 'Cuentan como práctica verificada ligera, con tope.', ruta: '#/e15' },
 ];
 
-export function E11Resumen() {
+export function E11ResumenEjemplo() {
   return (
     <Pantalla clase="p-e11">
       <div className="pantalla__cuerpo">
@@ -62,4 +64,9 @@ export function E11Resumen() {
       <Dock accion={{ etiqueta: 'Para esta semana', texto: 'Abrir el álbum', ruta: '#/e15' }} />
     </Pantalla>
   );
+}
+
+export function E11Resumen() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E11ResumenEjemplo /> : <E11ResumenReal />;
 }

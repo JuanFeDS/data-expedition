@@ -35,6 +35,18 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Mi equipo',
       texto: 'Aquí ves con quién haces cada trabajo en equipo. Tu docente los sortea y los ajusta.',
     },
+    e11: {
+      titulo: 'Resumen',
+      texto: 'Tu semana en una página: lo que subió en tu radar, lo que conviene vigilar y qué hacer ahora.',
+    },
+    e30: {
+      titulo: 'Mis resultados',
+      texto: 'Todo lo que has respondido en clase: relámpagos, encuestas y votaciones.',
+    },
+    e12: {
+      titulo: 'Perfil',
+      texto: 'Tu punto fuerte, tu XP y tu nivel. El XP no es nota: se gana practicando.',
+    },
     e1: {
       titulo: 'Mapa del curso',
       texto: 'Cada trabajo es una isla del mapa. Entregas, y avanzas a la siguiente: aquí ves dónde estás y cuánto te falta.',

@@ -1,6 +1,8 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E12PerfilReal } from './E12PerfilReal';
 import { dimensiones, gemasGanadas } from '../datos';
 
 const HISTORIAL = [
@@ -24,7 +26,7 @@ function nivelDeGema(valor?: number): NivelGema {
 const XP = 340;
 const META_XP = 500;
 
-export function E12Perfil() {
+export function E12PerfilEjemplo() {
   return (
     <Pantalla clase="p-e12">
       <div className="pantalla__cuerpo">
@@ -73,4 +75,9 @@ export function E12Perfil() {
       <Dock />
     </Pantalla>
   );
+}
+
+export function E12Perfil() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E12PerfilEjemplo /> : <E12PerfilReal />;
 }

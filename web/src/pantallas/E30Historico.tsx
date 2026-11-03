@@ -3,6 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E30HistoricoReal } from './E30HistoricoReal';
 import { historicoEncuestas, historicoRelampagos, pulsoSemanal } from '../datosPlan';
 
 const TEXTO: Record<string, { tipo: TipoEstado; texto: string }> = {
@@ -11,7 +13,7 @@ const TEXTO: Record<string, { tipo: TipoEstado; texto: string }> = {
   fuera: { tipo: 'tarde', texto: 'Fuera de tiempo' },
 };
 
-export function E30Historico() {
+export function E30HistoricoEjemplo() {
   const [vista, setVista] = useState(0);
   const aciertos = historicoRelampagos.filter((registro) => registro.resultado === 'acierto').length;
   const xp = historicoRelampagos.reduce((suma, registro) => suma + registro.xp, 0);
@@ -83,4 +85,9 @@ export function E30Historico() {
       <Dock accion={{ etiqueta: 'Sigue sumando', texto: 'Ver mi liga', ruta: '#/e31' }} />
     </Pantalla>
   );
+}
+
+export function E30Historico() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E30HistoricoEjemplo /> : <E30HistoricoReal />;
 }
