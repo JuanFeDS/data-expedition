@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S1 · Introducción a la ciencia de datos · Data Expedition</title>
+<link rel="stylesheet" href="marca.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--selva">
+    <span class="kicker">Semana 1 de 8 · Sesión 1</span>
+    <h1 class="titulo titulo--xl">Introducción a la ciencia<br>de datos</h1>
+    <p class="sub">Qué es, cómo se trabaja y dónde entra la IA.</p>
+    <div class="pills"><span class="pill pill--accent">Bienvenida a la expedición</span><span class="pill pill--suave">180 min</span></div>
+    <img class="jaguar" src="img/saluda.png" alt="">
+    <img class="marca" src="img/letras.webp" alt="Data Expedition">
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide">
+    <span class="kicker">Hoy en la expedición</span>
+    <h2 class="titulo">Hoja de ruta</h2>
+    <ol class="lista lista--num">
+      <li><span>Bienvenida: cómo funciona el curso<small>15 min</small></span></li>
+      <li><span>Introducción a la ciencia de datos<small>40 min</small></span></li>
+      <li><span>Entorno: GitHub, Git, Python y VS Code<small>45 min</small></span></li>
+      <li><span>Guía de entrega por PR<small>45 min</small></span></li>
+      <li><span>Cierre y tarea diagnóstica<small>15 min</small></span></li>
+    </ol>
+    <img class="objeto" src="img/mapa.webp" alt="">
+    <img class="marca" src="img/logo.webp" alt="">
+  </section>
+
+  <!-- 3 · CÓMO FUNCIONA EL CURSO -->
+  <section class="slide slide--verde">
+    <span class="kicker">Cómo funciona el curso</span>
+    <h2 class="titulo titulo--sm">Cuatro reglas del juego</h2>
+    <div class="dos" style="grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
+      <div class="bloque"><h3>Islas y radar</h3><p>Avanzas por islas y tu radar de 7 dimensiones se compara con tu propio punto de partida.</p></div>
+      <div class="bloque"><h3>IA con declaración</h3><p>Se permite usarla. Lo que no se permite es ocultarla.</p></div>
+      <div class="bloque"><h3>Entrega por PR</h3><p>Cada trabajo se entrega con el enlace de tu pull request, cargado en la app.</p></div>
+      <div class="bloque bloque--acento"><h3>Diagnóstico sin nota</h3><p>Fija tu punto de partida. No cuenta para aprobar.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 · SONDEO (pregunta abierta con QR) -->
+  <section class="slide slide--densa">
+    <span class="kicker">Para empezar · anónimo</span>
+    <div style="display:flex; gap:100px; align-items:center; flex:1;">
+      <div style="flex:1">
+        <h2 class="titulo">¿Dónde cruzas datos en tu día?</h2>
+        <p class="sub">Una app del celular, una compra, una ruta, un pedido… Escribe un ejemplo.</p>
+      </div>
+      <div class="qr"><span>Escanea<small>pega aquí el QR de En clase</small></span></div>
+    </div>
+  </section>
+
+  <!-- 5 · QUÉ ES -->
+  <section class="slide">
+    <span class="kicker">Concepto</span>
+    <h2 class="titulo">Ciencia de datos es convertir datos en decisiones</h2>
+    <div class="tres">
+      <div class="bloque"><h3>Estadística</h3><p>Para saber qué tan confiable es lo que ves.</p></div>
+      <div class="bloque"><h3>Programación</h3><p>Para repetir y escalar el análisis, sin hacerlo a mano.</p></div>
+      <div class="bloque bloque--acento"><h3>Conocimiento del problema</h3><p>Para saber qué pregunta vale la pena hacer.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 · EL CICLO (pasos que se conectan) -->
+  <section class="slide slide--selva">
+    <span class="kicker">El ciclo de un proyecto de datos</span>
+    <h2 class="titulo titulo--sm">Seis pasos, y el último trae preguntas nuevas</h2>
+    <div class="ciclo">
+      <div class="paso-ciclo" style="--i:0"><b>1</b>Pregunta<small>qué decidir</small></div>
+      <div class="union" style="--i:0"></div>
+      <div class="paso-ciclo" style="--i:1"><b>2</b>Datos<small>de dónde salen</small></div>
+      <div class="union" style="--i:1"></div>
+      <div class="paso-ciclo" style="--i:2"><b>3</b>Limpieza<small>nulos, duplicados</small></div>
+      <div class="union" style="--i:2"></div>
+      <div class="paso-ciclo" style="--i:3"><b>4</b>Análisis<small>explorar y medir</small></div>
+      <div class="union" style="--i:3"></div>
+      <div class="paso-ciclo" style="--i:4"><b>5</b>Modelo<small>predecir o agrupar</small></div>
+      <div class="union" style="--i:4"></div>
+      <div class="paso-ciclo" style="--i:5"><b>6</b>Comunicar<small>para quien decide</small></div>
+    </div>
+    <p class="sub empuja">Cada resultado abre preguntas nuevas, y el ciclo vuelve a empezar.</p>
+  </section>
+
+  <!-- 7 · RELÁMPAGO -->
+  <section class="slide slide--densa">
+    <div style="display:flex; align-items:center; gap:32px;">
+      <div class="anillo-caja"><svg class="anillo" viewBox="0 0 42 42"><circle class="base" cx="21" cy="21" r="15.915"/><circle class="arco" style="--dur:60s" pathLength="100" cx="21" cy="21" r="15.915"/></svg><b data-segundos="60">1:00</b></div>
+      <span class="kicker">⚡ Relámpago · 60 segundos · +20 XP</span>
+    </div>
+    <div style="display:flex; gap:100px; align-items:center; flex:1;">
+      <div style="flex:1">
+        <h2 class="titulo titulo--sm">¿Qué paso va justo antes de analizar?</h2>
+        <div class="opciones">
+          <div class="opcion"><b>A</b>Comunicar los resultados</div>
+          <div class="opcion"><b>B</b>Limpiar y preparar los datos</div>
+          <div class="opcion"><b>C</b>Entrenar un modelo</div>
+          <div class="opcion"><b>D</b>Publicar en producción</div>
+        </div>
+      </div>
+      <div class="qr"><span>Escanea<small>pega aquí el QR de En clase</small></span></div>
+    </div>
+  </section>
+
+  <!-- 8 · ROLES -->
+  <section class="slide">
+    <span class="kicker">Quién hace qué</span>
+    <h2 class="titulo">Tres roles que se cruzan</h2>
+    <div class="tres">
+      <div class="bloque"><h3>Ingeniería de datos</h3><p>Construye los flujos que traen los datos y los dejan listos.</p></div>
+      <div class="bloque"><h3>Análisis de datos</h3><p>Explora, mide y cuenta lo que pasa con gráficos y números.</p></div>
+      <div class="bloque bloque--verde"><h3>Ciencia de datos</h3><p>Construye modelos que predicen o descubren patrones.</p></div>
+    </div>
+  </section>
+
+  <!-- 8b · BIG DATA -->
+  <section class="slide slide--verde">
+    <span class="kicker">Big Data</span>
+    <h2 class="titulo titulo--sm">Cuando los datos ya no caben en tu computador</h2>
+    <div class="tres">
+      <div class="bloque"><h3>Volumen</h3><p>Muchísimos registros.</p></div>
+      <div class="bloque"><h3>Velocidad</h3><p>Llegan sin parar.</p></div>
+      <div class="bloque bloque--acento"><h3>Variedad</h3><p>Tablas, texto, imágenes, sensores.</p></div>
+    </div>
+  </section>
+
+  <!-- 9 · DOS CAMINOS -->
+  <section class="slide">
+    <span class="kicker">Dónde lo vemos en el curso</span>
+    <h2 class="titulo">Elegir la herramienta por el tamaño</h2>
+    <div class="dos">
+      <div class="bloque"><h3>Cabe en memoria</h3><p>Python y pandas, directo en tu computador.</p></div>
+      <div class="bloque bloque--verde"><h3>No cabe</h3><p>Spark, con un entorno ya armado en un Codespace de GitHub (sesión 7).</p></div>
+    </div>
+  </section>
+
+  <!-- 10 · LA IA -->
+  <section class="slide slide--densa">
+    <span class="kicker">Dónde entra la IA</span>
+    <h2 class="titulo titulo--sm">Una herramienta que se declara</h2>
+    <ul class="lista">
+      <li>Puedes usarla para trabajar: explicar, depurar, proponer.</li>
+      <li>Cada entrega dice si fue con IA o sin IA.</li>
+      <li>Si la usaste, anotas qué pediste, qué corregiste y qué rechazaste.</li>
+      <li>Además medimos qué haces sin ella: sin IA no es peor, es información.</li>
+    </ul>
+  </section>
+
+  <!-- 11 · CIERRE DEL BLOQUE -->
+  <section class="slide slide--campamento">
+    <span class="kicker">Lo que nos llevamos</span>
+    <h2 class="titulo">Datos, decisión y criterio.</h2>
+    <ul class="lista">
+      <li>Un proyecto de datos es un ciclo, no una receta</li>
+      <li>Los roles se cruzan: lo importante es la pregunta</li>
+      <li>La IA ayuda, y la declaras</li>
+    </ul>
+    <img class="jaguar" src="img/celebra.png" alt="">
+  </section>
+
+  <!-- 12 · ENTORNO (lista de verificación) -->
+  <section class="slide slide--selva">
+    <span class="kicker">Ahora, a armar el entorno · 45 min</span>
+    <h2 class="titulo titulo--sm">Lista de verificación</h2>
+    <ul class="lista lista--check">
+      <li>Cuenta de GitHub</li>
+      <li>Git instalado</li>
+      <li>Python 3.12</li>
+      <li>VS Code con Jupyter, Black y Pylint</li>
+      <li>Primer script: <code>import this</code></li>
+    </ul>
+    <img class="objeto" src="img/brujula.webp" alt="">
+  </section>
+
+  <!-- 13 · TAREA DIAGNÓSTICA -->
+  <section class="slide slide--amarilla">
+    <span class="kicker">Tarea diagnóstica · máximo 60 min · por PR</span>
+    <h2 class="titulo">Tu punto de partida</h2>
+    <ol class="lista lista--num">
+      <li><span>Autoinforme de confianza<small>5 min</small></span></li>
+      <li><span>Preguntas cortas con corrección automática<small>15 min</small></span></li>
+      <li><span>Mini tarea en un notebook con un dataset sucio<small>40 min · IA permitida con bitácora de 3 líneas</small></span></li>
+    </ol>
+    <p class="sub empuja">Se entrega antes de la sesión 2, con el enlace del PR en la app.</p>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>

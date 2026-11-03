@@ -15,13 +15,19 @@ Slides en HTML con la marca de Data Expedition (colores, tipografías, jaguar y 
 | `→` `Espacio` `Enter` o clic | Siguiente |
 | `←` `Retroceso` o clic en el cuarto izquierdo | Anterior |
 | `F` | Pantalla completa |
+| `J` | Mostrar u ocultar al jaguar en toda la presentación |
 | `Inicio` / `Fin` | Primera / última |
 
 Para exportar a PDF abre el archivo en Chrome y usa Imprimir → Guardar como PDF (una slide por página, 1920×1080, con fondos).
 
+## Decks
+
+- `plantilla-sesion.html`: todos los layouts con contenido de relleno.
+- `s01-introduccion-ciencia-de-datos.html`: la sesión 1 (introducción, entorno y tarea diagnóstica), con el jaguar solo en portada y cierre.
+
 ## Layouts incluidos
 
-Portada · hoja de ruta · objetivo · concepto con jaguar · número grande · comparación en dos columnas · gráfico de barras · línea y dona · columnas · tres bloques · código con resultado · relámpago con QR y cuenta atrás · actividad en equipos con reloj · pulso · cierre · tarea y recursos.
+Ciclo de pasos conectados · lista de verificación · portada · hoja de ruta · objetivo · concepto con jaguar · número grande · comparación en dos columnas · gráfico de barras · línea y dona · columnas · tres bloques · código con resultado · relámpago con QR y cuenta atrás · actividad en equipos con reloj · pulso · cierre · tarea y recursos.
 
 Fondos disponibles (clase en `<section>`): `slide--selva`, `slide--densa`, `slide--verde`, `slide--menta`, `slide--amarilla`, `slide--campamento`; sin clase queda el fondo claro.
 

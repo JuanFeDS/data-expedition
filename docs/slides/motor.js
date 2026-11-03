@@ -66,6 +66,7 @@
     else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(evento.key)) { evento.preventDefault(); ir(actual - 1); }
     else if (evento.key === 'Home') ir(0);
     else if (evento.key === 'End') ir(slides.length - 1);
+    else if (evento.key.toLowerCase() === 'j') document.body.classList.toggle('sin-jaguar');
     else if (evento.key.toLowerCase() === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   });
   document.addEventListener('click', (evento) => ir(actual + (evento.clientX < window.innerWidth * 0.25 ? -1 : 1)));
