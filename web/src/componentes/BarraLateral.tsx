@@ -45,6 +45,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
         <img className="marca-letras" src={`${import.meta.env.BASE_URL}marca/letras.webp`} alt="" />
       </a>
       {!real && <span className="lateral__semana">{rol === 'estudiante' ? `Semana ${semanaActual} de ${totalSemanas}` : `${rol === 'docente' ? 'Docente' : 'Observación'} · semana ${semanaActual}`}</span>}
+      {real && dentro && curso && <span className="lateral__curso">{curso.nombre}</span>}
       <nav className="lateral__nav">
         {abiertas.map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
         {porDescubrir.length > 0 && (

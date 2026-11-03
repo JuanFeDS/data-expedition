@@ -326,3 +326,7 @@ body[data-nuevo='curso'] .lateral__enlace[data-codigo='curso'], body[data-nuevo=
 .lateral__descubrir summary::-webkit-details-marker { display: none; }
 .lateral__descubrir summary i { font-style: normal; min-width: 20px; padding: 1px 6px; border-radius: 10px; text-align: center; font-size: var(--fs-xs); background: var(--accent); color: var(--on-accent); }
 .lateral__descubrir p { padding: 6px 12px; font-size: var(--fs-xs); font-weight: 600; opacity: .75; }
+
+.lateral__curso { padding: 4px 12px 0; font-size: var(--fs-xs); font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--mint); }
+.camp__curso { font-size: var(--fs-sm); font-weight: 800; color: var(--mint); text-decoration: none; }
+.camp__curso:hover { text-decoration: underline; }

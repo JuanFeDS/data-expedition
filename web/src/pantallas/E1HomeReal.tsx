@@ -5,26 +5,19 @@ import { MenuHoja } from '../componentes/Menu';
 import { Region } from '../componentes/Region';
 import { useCurso, useRutaCurso } from '../componentes/curso';
 import { useSesion } from '../componentes/sesion';
-import { Contador, Hoja, Kicker, ModoModal, Pantalla, Pill } from '../componentes/ui';
+import { Contador, Hoja, Kicker, Pantalla, Pill } from '../componentes/ui';
 import { consejosJaguar } from '../datos';
 import type { RegionCurso } from '../datos';
 import { miPerfil, type PerfilEstudiante } from '../servicios/estudiante';
 import { miRadar, type PuntoRadar } from '../servicios/radar';
 import { formatoFecha, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
-import { E11ResumenReal } from './E11ResumenReal';
-import { E12PerfilReal } from './E12PerfilReal';
-import { E20Responder } from './E20Responder';
-import { E24EquipoReal } from './E24EquipoReal';
 
-type Modal = 'clase' | 'resumen' | 'equipo' | 'perfil';
-
-const ACCESOS: { tipo: Icono; etiqueta: string; modal: Modal; color: string }[] = [
-  { tipo: 'votar', etiqueta: 'En clase', modal: 'clase', color: 'accent' },
-  { tipo: 'resumen', etiqueta: 'Resumen', modal: 'resumen', color: 'mint' },
-  { tipo: 'equipo', etiqueta: 'Equipo', modal: 'equipo', color: 'azul' },
-  { tipo: 'perfil', etiqueta: 'Perfil', modal: 'perfil', color: 'claro' },
+const ACCESOS: { tipo: Icono; etiqueta: string; ruta: string; color: string }[] = [
+  { tipo: 'votar', etiqueta: 'En clase', ruta: '#/e20', color: 'accent' },
+  { tipo: 'resumen', etiqueta: 'Resumen', ruta: '#/e11', color: 'mint' },
+  { tipo: 'equipo', etiqueta: 'Equipo', ruta: '#/e24', color: 'azul' },
+  { tipo: 'perfil', etiqueta: 'Perfil', ruta: '#/e12', color: 'claro' },
 ];
-const CONTENIDO_MODAL: Record<Modal, () => React.ReactElement> = { clase: E20Responder, resumen: E11ResumenReal, equipo: E24EquipoReal, perfil: E12PerfilReal };
 const BIOMAS = ['selva', 'paramo', 'desierto', 'cueva', 'glaciar', 'costa', 'ruinas', 'volcan'] as const;
 const PASOS = ['Declara si usaste IA (con o sin IA).', 'Si usaste IA, cuenta tu bitácora: qué pediste, qué aceptaste y qué descartaste.', 'Responde las preguntas de decisión del trabajo.'];
 
@@ -55,7 +48,7 @@ export function E1HomeReal() {
   const [entregas, setEntregas] = useState<EntregaPropia[]>([]);
   const [perfil, setPerfil] = useState<PerfilEstudiante | null>(null);
   const [radar, setRadar] = useState<PuntoRadar[]>([]);
-  const [hoja, setHoja] = useState<'paso' | 'menu' | Modal | null>(null);
+  const [hoja, setHoja] = useState<'paso' | 'menu' | null>(null);
   const [vista, setVista] = useState<number | null>(null);
   const [consejo, setConsejo] = useState(0);
   const [frase, setFrase] = useState<string | null>(null);
@@ -161,10 +154,10 @@ export function E1HomeReal() {
           </div>
           <nav className="camp__accesos" aria-label="Accesos rápidos">
             {ACCESOS.map((acceso) => (
-              <button key={acceso.etiqueta} className="acceso-rapido" onClick={() => setHoja(acceso.modal)}>
+              <a key={acceso.etiqueta} className="acceso-rapido" href={rutaCurso(acceso.ruta)}>
                 <span className={`acceso-rapido__icono acceso-rapido__icono--${acceso.color}`}><IconoSvg tipo={acceso.tipo} /></span>
                 <span>{acceso.etiqueta}</span>
-              </button>
+              </a>
             ))}
           </nav>
         </div>
@@ -180,6 +173,7 @@ export function E1HomeReal() {
             ))}
             {trabajos.length > 0 && pendientes.length === 0 && <li className="camp__lateral-hecho"><strong>¡Entregaste todo!</strong><small>Practica para subir tu radar</small></li>}
           </ol>
+          <a className="camp__curso" href={rutaCurso('#/curso')}>Ver el curso completo ›</a>
           {trabajoActual && (
             <button className="camp__paso camp__paso--lateral" onClick={() => setHoja('paso')}>
               <small>Siguiente paso · vence {vence.dia.toLowerCase()} {vence.numero}</small>
@@ -216,15 +210,6 @@ export function E1HomeReal() {
           </>
         )}
       </Hoja>
-
-      {(Object.keys(CONTENIDO_MODAL) as Modal[]).map((modal) => {
-        const Contenido = CONTENIDO_MODAL[modal];
-        return (
-          <Hoja key={modal} abierta={hoja === modal} alCerrar={cerrar} titulo={ACCESOS.find((acceso) => acceso.modal === modal)?.etiqueta ?? ''} clase="hoja--pantalla">
-            {hoja === modal && <ModoModal.Provider value><Contenido /></ModoModal.Provider>}
-          </Hoja>
-        );
-      })}
 
       <MenuHoja abierta={hoja === 'menu'} alCerrar={cerrar} omitir="#/home" />
     </Pantalla>

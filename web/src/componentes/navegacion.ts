@@ -50,7 +50,7 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
       enlaces: [
         { tipo: 'calendario', etiqueta: 'Calendario', detalle: 'Sesiones, plazos y material', ruta: '#/e22', activa: ['e22', 'e23'], color: 'azul' },
         { tipo: 'formulario', etiqueta: 'Diagnóstico', detalle: 'Tu punto de partida, con y sin IA', ruta: '#/e17', activa: ['e17', 'e18', 'e19'], color: 'mint' },
-        { tipo: 'equipo', etiqueta: 'Mi ruta y equipo', detalle: 'Tu ruta asignada y tu equipo', ruta: '#/e24', activa: ['e24'], color: 'accent' },
+        { tipo: 'equipo', etiqueta: 'Mi equipo', detalle: 'Con quién haces cada trabajo', ruta: '#/e24', activa: ['e24'], color: 'accent' },
         { tipo: 'historico', etiqueta: 'Mis resultados', detalle: 'Relámpagos, encuestas y votaciones', ruta: '#/e30', activa: ['e30'], color: 'claro' },
       ],
     },
@@ -80,7 +80,7 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
         { tipo: 'votar', etiqueta: 'Corrección', detalle: 'Rúbrica de una entrega', ruta: '#/d4', activa: ['d4'], color: 'accent' },
         { tipo: 'radar', etiqueta: 'Diagnóstico y rutas', detalle: 'Resultados y ruta propuesta', ruta: '#/d2', activa: ['d2'], color: 'azul' },
         { tipo: 'perfil', etiqueta: 'Estudiantes', detalle: 'Ficha de cada estudiante', ruta: '#/d8', activa: ['d8'], color: 'mint' },
-        { tipo: 'equipo', etiqueta: 'Equipos', detalle: 'Formación y roles', ruta: '#/d7', activa: ['d7'], color: 'accent' },
+        { tipo: 'equipo', etiqueta: 'Equipos', detalle: 'Sorteo y ajuste de equipos', ruta: '#/d7', activa: ['d7'], color: 'accent' },
       ],
     },
     {
@@ -98,9 +98,9 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
     {
       titulo: 'Ajustes',
       enlaces: [
-        { tipo: 'equipo', etiqueta: 'Personas', detalle: 'Invitaciones, roles y grupos', ruta: '#/d13', activa: ['d13'], color: 'mint' },
+        { tipo: 'equipo', etiqueta: 'Personas', detalle: 'Invitaciones y roles', ruta: '#/d13', activa: ['d13'], color: 'mint' },
         { tipo: 'entregas', etiqueta: 'Trabajos', detalle: 'Qué se entrega y cuándo', ruta: '#/d14', activa: ['d14'], color: 'accent' },
-        { tipo: 'ajustes', etiqueta: 'Configuración', detalle: 'Dimensiones, rúbricas y umbrales', ruta: '#/d10', activa: ['d10'], color: 'azul' },
+        { tipo: 'ajustes', etiqueta: 'Rúbricas', detalle: 'Dimensiones y criterios de calificación', ruta: '#/d10', activa: ['d10'], color: 'azul' },
       ],
     },
   ],
@@ -151,6 +151,24 @@ export const enCurso = (ruta: string, cursoId: string) => {
   return ENCURSO.has(codigo) ? rutaDeCurso(cursoId, codigo) : ruta;
 };
 
+const GRUPOS_CURSO: Record<Rol, { titulo: string; codigos: string[] }[]> = {
+  estudiante: [
+    { titulo: 'Mi progreso', codigos: ['home', 'e2', 'e3', 'e15', 'e31'] },
+    { titulo: 'Hacer', codigos: ['e5', 'e20', 'asistir', 'e11'] },
+    { titulo: 'Curso', codigos: ['e22', 'e17', 'e24', 'e30'] },
+  ],
+  docente: [
+    { titulo: 'Clase hoy', codigos: ['d1', 'd11', 'd16'] },
+    { titulo: 'Evaluar', codigos: ['d3', 'd8', 'd12', 'd2'] },
+    { titulo: 'Preparar', codigos: ['d14', 'd10', 'd6', 'd9', 'd15', 'd5', 'd7', 'd13'] },
+  ],
+  observador: [{ titulo: 'Observación', codigos: ['o1', 'o2', 'o3'] }],
+};
+
+const AJUSTES_REALES: Record<string, Partial<Enlace>> = {
+  home: { etiqueta: 'Campamento', detalle: 'Tu isla, tu próximo paso y tu avance' },
+};
+
 export const gruposVisibles = (
   rol: Rol,
   soloConectadas: boolean,
@@ -158,12 +176,18 @@ export const gruposVisibles = (
   desbloqueadas: Set<string> | null = null,
 ): GrupoEnlaces[] => {
   if (!soloConectadas) return NAVEGACION[rol];
-  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : [ENLACE_INICIO, ENLACE_CURSOS] };
-  if (!curso) return [general];
-  const delCurso = [ENLACE_INFO, ...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces), ...(rol === 'estudiante' ? [ENLACE_EN_CLASE, ENLACE_ASISTENCIA] : [])]
-    .filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)))
-    .map((enlace) => ({ ...enlace, etiqueta: codigoDeRuta(enlace.ruta) === 'home' ? 'Campamento' : enlace.etiqueta, aviso: undefined, bloqueada: desbloqueadas !== null && !desbloqueadas.has(codigoDeRuta(enlace.ruta)), ruta: enCurso(enlace.ruta, curso.id) }));
-  return delCurso.length > 0 ? [general, { titulo: curso.nombre, enlaces: delCurso }] : [general];
+  if (!curso) return [{ titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_INICIO, ENLACE_CURSOS, ENLACE_AYUDA] : [ENLACE_INICIO, ENLACE_CURSOS] }];
+  const general: GrupoEnlaces = { titulo: 'General', enlaces: rol === 'docente' ? [ENLACE_CURSOS, ENLACE_AYUDA] : [ENLACE_CURSOS] };
+  const catalogo = new Map<string, Enlace>();
+  [...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces), ENLACE_EN_CLASE, ENLACE_ASISTENCIA].forEach((enlace) => catalogo.set(codigoDeRuta(enlace.ruta), enlace));
+  const delCurso = GRUPOS_CURSO[rol].map((grupo) => ({
+    titulo: grupo.titulo,
+    enlaces: grupo.codigos
+      .map((codigo) => catalogo.get(codigo))
+      .filter((enlace): enlace is Enlace => enlace !== undefined && ENCURSO.has(codigoDeRuta(enlace.ruta)))
+      .map((enlace) => ({ ...enlace, ...AJUSTES_REALES[codigoDeRuta(enlace.ruta)], aviso: undefined, bloqueada: desbloqueadas !== null && !desbloqueadas.has(codigoDeRuta(enlace.ruta)), ruta: enCurso(enlace.ruta, curso.id) })),
+  })).filter((grupo) => grupo.enlaces.length > 0);
+  return [general, ...delCurso];
 };
 
 export const separarBloqueadas = (grupos: GrupoEnlaces[], orden: string[]) => {

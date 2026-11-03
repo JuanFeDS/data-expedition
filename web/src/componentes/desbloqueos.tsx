@@ -116,7 +116,7 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
 
   const nuevas = useMemo(() => {
     if (!persona || !dentro || pasos.length === 0) return [];
-    return pasos.includes(codigo) ? [...new Set(['curso', codigo])] : ['curso'];
+    return pasos.includes(codigo) ? [...new Set([pasos[0], codigo])] : [pasos[0]];
   }, [persona, dentro, pasos, codigo]);
 
   useEffect(() => {

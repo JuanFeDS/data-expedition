@@ -81,7 +81,7 @@ export function D1PanelReal() {
             <Tarjeta tono="oscura"><Dato valor={abierto ? `${abierto.participantes}/${estudiantes.length}` : '—'} etiqueta={abierto ? 'Formulario abierto' : 'Sin formulario abierto'} nota={abierto ? abierto.titulo : 'Ábrelo en En clase'} /></Tarjeta>
           </div>
           <div className="d1__columnas">
-            <Tarjeta kicker="Requiere tu atención" titulo="Alertas" accion={<Estado tipo={alertas.length > 0 ? 'alerta' : 'ok'}>{alertas.length > 0 ? `${alertas.length} abiertas` : 'Todo al día'}</Estado>}>
+            <Tarjeta kicker="Requiere tu atención" titulo="Alertas" accion={<><Estado tipo={alertas.length > 0 ? 'alerta' : 'ok'}>{alertas.length > 0 ? `${alertas.length} abiertas` : 'Todo al día'}</Estado><a className="cursos__secundaria" href={rutaCurso('#/curso')}>Ver el curso</a></>}>
               <ul className="d1__alertas">
                 {alertas.map((alerta) => (
                   <li key={alerta.texto}>
