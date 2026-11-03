@@ -3,10 +3,12 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla, Pill, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E22CalendarioReal } from './E22CalendarioReal';
 import { trabajos } from '../datos';
 import { calendarioProvisional, presenciales, sesiones } from '../datosPlan';
 
-export function E22Calendario() {
+export function E22CalendarioEjemplo() {
   const [vista, setVista] = useState(0);
   const semanas = [...new Set(sesiones.map((sesion) => sesion.semana))];
   return (
@@ -62,4 +64,9 @@ export function E22Calendario() {
       <Dock accion={{ etiqueta: 'Hoy · S8', texto: 'Ver la sesión', ruta: '#/e23' }} />
     </Pantalla>
   );
+}
+
+export function E22Calendario() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E22CalendarioEjemplo /> : <E22CalendarioReal />;
 }

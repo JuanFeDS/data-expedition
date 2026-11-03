@@ -3,11 +3,13 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Dato, Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { D9MaterialReal } from './D9MaterialReal';
 import { recursos } from '../datosPlan';
 
 const FILTROS = ['Todos', 'Por verificar', 'En inglés'];
 
-export function D9Material() {
+export function D9MaterialEjemplo() {
   const [filtro, setFiltro] = useState(1);
   const [revisado, setRevisado] = useState(false);
   const lista = recursos.filter((recurso) => (filtro === 1 ? !recurso.verificado : filtro === 2 ? recurso.idioma === 'EN' : true));
@@ -42,4 +44,9 @@ export function D9Material() {
       <Dock accion={{ etiqueta: `${porVerificar} por verificar`, texto: 'Comprobar enlaces', alPulsar: () => setRevisado(true), deshabilitada: revisado }} />
     </Pantalla>
   );
+}
+
+export function D9Material() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D9MaterialEjemplo /> : <D9MaterialReal />;
 }

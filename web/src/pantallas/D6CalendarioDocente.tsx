@@ -3,12 +3,14 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { D6CalendarioReal } from './D6CalendarioReal';
 import { trabajos } from '../datos';
 import { calendarioProvisional, presenciales, sesiones } from '../datosPlan';
 
 const RANGOS = ['Semanas 1–2', 'Semanas 3–4', 'Semanas 5–6', 'Semanas 7–8'];
 
-export function D6CalendarioDocente() {
+export function D6CalendarioDocenteEjemplo() {
   const [rango, setRango] = useState(1);
   const visibles = sesiones.filter((sesion) => sesion.semana > rango * 2 && sesion.semana <= rango * 2 + 2);
   return (
@@ -52,4 +54,9 @@ export function D6CalendarioDocente() {
       <Dock accion={{ etiqueta: 'Importar fechas', texto: 'Agregar sesión', ruta: '#/d6' }} />
     </Pantalla>
   );
+}
+
+export function D6CalendarioDocente() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D6CalendarioDocenteEjemplo /> : <D6CalendarioReal />;
 }

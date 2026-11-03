@@ -1420,3 +1420,5 @@
 .resultados__pregunta > strong { font-size: var(--fs-md); }
 .resultados__textos { list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0; font-size: var(--fs-sm); }
 .resultados__textos li { padding: 8px 10px; border-radius: 10px; background: rgb(255 255 255 / .08); }
+
+.estado-boton { padding: 0; background: none; cursor: pointer; }

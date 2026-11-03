@@ -2,6 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E23SesionReal } from './E23SesionReal';
 import { recursos } from '../datosPlan';
 
 const DINAMICA = [
@@ -13,7 +15,7 @@ const DINAMICA = [
   { min: '165–180', dinamica: 'Cierre', detalle: 'Pulso semanal y recordatorio de detener el Codespace' },
 ];
 
-export function E23DetalleSesion() {
+export function E23DetalleSesionEjemplo() {
   const material = recursos.filter((recurso) => recurso.sesion === 'S7' || recurso.sesion === 'S8');
   return (
     <Pantalla clase="p-e23">
@@ -50,4 +52,9 @@ export function E23DetalleSesion() {
       <Dock accion={{ etiqueta: 'Después de la sesión', texto: 'Practicar este tema', ruta: '#/e15' }} />
     </Pantalla>
   );
+}
+
+export function E23DetalleSesion() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E23DetalleSesionEjemplo /> : <E23SesionReal />;
 }
