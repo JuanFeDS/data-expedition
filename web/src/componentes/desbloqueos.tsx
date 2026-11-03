@@ -8,8 +8,8 @@ import { useSesion } from './sesion';
 
 // Secciones de un curso que se van mostrando poco a poco y, una vez desbloqueadas, no vuelven a esconderse.
 const AL_ENTRAR_A_UN_CURSO: Record<Rol, string[]> = { estudiante: ['curso', 'e5'], docente: ['curso', 'd13'], observador: [] };
-const AL_VISITAR: Record<string, string> = { d13: 'd14', d14: 'd3', d3: 'd10', d10: 'd5', d5: 'd11', d11: 'd6', d6: 'd9', d9: 'd7', d7: 'd2', e5: 'e3', e3: 'e20', e20: 'e22', e22: 'e24', e24: 'e17', e17: 'e2' };
-const DE_CURSO = new Set(['curso', 'e3', 'e5', 'e20', 'e2', 'e17', 'e22', 'e24', 'd2', 'd3', 'd5', 'd6', 'd7', 'd9', 'd10', 'd11', 'd13', 'd14']);
+const AL_VISITAR: Record<string, string> = { d13: 'd14', d14: 'd3', d3: 'd10', d10: 'd5', d5: 'd11', d11: 'd6', d6: 'd9', d9: 'd7', d7: 'd2', d2: 'd15', e5: 'e3', e3: 'e20', e20: 'e22', e22: 'e24', e24: 'e17', e17: 'e2', e2: 'e15' };
+const DE_CURSO = new Set(['curso', 'e3', 'e5', 'e20', 'e2', 'e15', 'e17', 'e22', 'e24', 'd2', 'd3', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
 
 interface ValorDesbloqueos {
   todo: boolean;

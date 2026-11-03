@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSesion } from '../componentes/sesion';
+import { E7PracticaReal } from './E7PracticaReal';
 import { Kicker, Pantalla, Pill } from '../componentes/ui';
 import {
   NOMBRE_FORMATO,
@@ -68,7 +70,7 @@ function Pregunta({ datos, alCambiar, bloqueada }: { datos: PreguntaDatos; alCam
   }
 }
 
-export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
+export function E7LeccionEjemplo({ inicio = 0 }: { inicio?: number }) {
   const tema = temaDeRepaso();
   const dificultad = dificultadPara(tema.valor);
   const [cola, setCola] = useState<number[]>(SESION_MIXTA.map((_, indice) => indice).slice(inicio));
@@ -119,4 +121,9 @@ export function E7Leccion({ inicio = 0 }: { inicio?: number }) {
       </div>
     </Pantalla>
   );
+}
+
+export function E7Leccion(props: { inicio?: number }) {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E7LeccionEjemplo {...props} /> : <E7PracticaReal />;
 }

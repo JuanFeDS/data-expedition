@@ -1422,3 +1422,13 @@
 .resultados__textos li { padding: 8px 10px; border-radius: 10px; background: rgb(255 255 255 / .08); }
 
 .estado-boton { padding: 0; background: none; cursor: pointer; }
+
+.resultado__practica { padding: 80px 24px 24px; gap: 12px; }
+.resultado__titulo { font-size: var(--fs-3xl); line-height: 1; color: var(--deep); }
+.resultado__texto { font-size: var(--fs-md); font-weight: 600; line-height: 21px; color: var(--deep); }
+.metrica__titulo { display: block; font-size: var(--fs-sm); font-weight: 800; }
+.metrica__detalle { font-size: var(--fs-xs); font-weight: 600; opacity: .8; }
+.cerrar-practica { font-size: var(--fs-lg); font-weight: 700; opacity: .8; }
+.banco__texto { width: 100%; font-family: ui-monospace, Consolas, monospace; font-size: var(--fs-xs); }
+.banco__subir { cursor: pointer; }
+.banco__revision { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }

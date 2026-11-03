@@ -1,9 +1,11 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { useSesion } from '../componentes/sesion';
+import { E15PracticarReal } from './E15PracticarReal';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
 import { Dock } from '../componentes/Dock';
 import { dificultadPara, dimensiones, gemasGanadas, nivelDePulido, rachaPractica, temaDeRepaso } from '../datos';
 
-export function E15Practicar() {
+export function E15PracticarEjemplo() {
   const racha = rachaPractica.hechos.filter(Boolean).length;
   const cumplida = rachaPractica.sesionesHoy >= rachaPractica.metaHoy;
   const temas = gemasGanadas.map((gema) => ({ gema, valor: dimensiones.find((dimension) => dimension.nombre === gema.dimension)?.ahora ?? 0 }));
@@ -68,4 +70,9 @@ export function E15Practicar() {
       <Dock accion={{ etiqueta: 'Sesión de 5 preguntas', texto: 'Empezar a practicar', ruta: '#/e7' }} />
     </Pantalla>
   );
+}
+
+export function E15Practicar() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E15PracticarEjemplo /> : <E15PracticarReal />;
 }
