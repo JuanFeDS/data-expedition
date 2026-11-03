@@ -18,11 +18,12 @@ App de seguimiento, calificación y gamificación para un curso de ciencia de da
 
 1. [Contexto y motivación](#-1-contexto-y-motivación)
 2. [Funcionalidades](#-2-funcionalidades)
-3. [Estado del proyecto](#-3-estado-del-proyecto)
-4. [Arquitectura](#-4-arquitectura)
-5. [Modelo de datos](#-5-modelo-de-datos)
-6. [Guía de uso](#-6-guía-de-uso)
-7. [Contacto](#-7-contacto)
+3. [Pantallas](#-3-pantallas)
+4. [Estado del proyecto](#-4-estado-del-proyecto)
+5. [Arquitectura](#-5-arquitectura)
+6. [Modelo de datos](#-6-modelo-de-datos)
+7. [Guía de uso](#-7-guía-de-uso)
+8. [Contacto](#-8-contacto)
 
 ---
 
@@ -52,18 +53,68 @@ El curso se repensó para la era de la IA: la evaluación se rediseña antes que
 
 ---
 
-## 🗺️ 3. Estado del proyecto
+## 📸 3. Pantallas
+
+Capturas del modo demo (`?demo`, datos ficticios). La misma app tiene un centro para cada rol: el estudiante entra por el campamento y el docente por el panel del curso.
+
+### Estudiante
+
+<p align="center">
+  <img alt="Campamento: la isla de la semana, el jaguar guía y lo que sigue" src="docs/capturas/home.png" width="860" />
+</p>
+<p align="center"><sub><b>Campamento.</b> La isla de la semana, el siguiente paso y el jaguar con sus consejos.</sub></p>
+
+<p align="center">
+  <img alt="Radar de habilidades frente al punto de partida" src="docs/capturas/radar.png" width="860" />
+</p>
+<p align="center"><sub><b>Radar.</b> Cada dimensión se compara con el punto de partida del propio estudiante, no con el resto.</sub></p>
+
+<p align="center">
+  <img alt="Practicar: racha, XP semanal y mezcla de repaso por gema" src="docs/capturas/practicar.png" width="860" />
+</p>
+<p align="center"><sub><b>Practicar.</b> Racha por días, XP de la semana y una mezcla de repaso que pesa más lo que va más flojo.</sub></p>
+
+<table align="center">
+  <tr>
+    <td align="center"><img alt="Campamento en el celular" src="docs/capturas/home-movil.png" width="230" /><br /><sub>Campamento</sub></td>
+    <td align="center"><img alt="Lección en el celular" src="docs/capturas/leccion-movil.png" width="230" /><br /><sub>Lección</sub></td>
+    <td align="center"><img alt="Radar en el celular" src="docs/capturas/radar-movil.png" width="230" /><br /><sub>Radar</sub></td>
+  </tr>
+</table>
+
+### Docente
+
+<p align="center">
+  <img alt="Panel del curso con alertas, relámpago del día y diagnóstico" src="docs/capturas/panel.png" width="860" />
+</p>
+<p align="center"><sub><b>Panel del curso.</b> Entregas cargadas, alertas que piden atención, la clase de hoy y el diagnóstico de entrada.</sub></p>
+
+<p align="center">
+  <img alt="Corrección de una entrega con rúbrica de cinco niveles" src="docs/capturas/correccion.png" width="860" />
+</p>
+<p align="center"><sub><b>Corrección.</b> Rúbrica de 5 niveles con medios puntos, datos del pull request, declaración de IA y retroalimentación.</sub></p>
+
+<p align="center">
+  <img alt="En clase: abrir un relámpago y mostrar el QR" src="docs/capturas/enclase.png" width="860" />
+</p>
+<p align="center"><sub><b>En clase.</b> Abre una relámpago o un pulso y muestra el enlace y el QR en pantalla.</sub></p>
+
+---
+
+## 🗺️ 4. Estado del proyecto
 
 - ✅ **App conectada a Supabase** (`web/`): acceso con Google o enlace por correo, roles (estudiante, docente, observador), cursos con invitaciones, trabajos y entregas por PR, rúbricas y calificación, formularios (relámpagos, votaciones y encuestas), calendario y material, equipos por trabajo, diagnóstico y radar, práctica con XP y racha, liga semanal, asistencia con QR rotativo y vistas agregadas para observadores.
 - ✅ **Modo demo** (`?demo`): las mismas pantallas con datos ficticios, como referencia de diseño.
 - ✅ **Seguridad en la base:** RLS en todas las tablas y funciones de servidor para lo sensible; hay pruebas SQL en [`supabase/pruebas/`](supabase/pruebas/funciones_y_politicas.sql).
-- ⏳ **Pendiente:** álbum de gemas, misión en equipo, verificación del PR contra la API de GitHub, correo propio para los enlaces de ingreso, pruebas de interfaz con navegador y el análisis general de los datos recopilados.
+- ✅ **Pruebas:** 221 pruebas unitarias (dominio, servicios, componentes y pantallas clave) con mínimos de cobertura exigidos en CI.
+- ⚠️ **Sin validar con sesiones reales:** las pantallas se probaron con datos simulados y en modo demo; falta el recorrido por rol contra Supabase real, descrito en [`docs/verificacion-real.md`](docs/verificacion-real.md).
+- ⏳ **Pendiente:** álbum de gemas, misión en equipo, verificación del PR contra la API de GitHub, correo propio para los enlaces de ingreso, pruebas de punta a punta con navegador, las pruebas SQL en CI y el análisis general de los datos recopilados.
 
 El producto y sus decisiones están en [`docs/producto/`](docs/producto/RFC-010-app-expedicion.md); el mapa de pantallas, en [`docs/producto/plan-de-accion-pantallas.md`](docs/producto/plan-de-accion-pantallas.md).
 
 ---
 
-## 🏛️ 4. Arquitectura
+## 🏛️ 5. Arquitectura
 
 La guía completa está en [`docs/arquitectura.md`](docs/arquitectura.md). En resumen:
 
@@ -87,7 +138,7 @@ data-expedicion/
 
 ---
 
-## 🗄️ 5. Modelo de datos
+## 🗄️ 6. Modelo de datos
 
 Las migraciones en [`supabase/migrations/`](supabase/migrations/) se aplican en orden (0001 en adelante). Cada estudiante lee solo lo suyo, el docente lee su curso y el observador solo recibe agregados con mínimo de 5 personas.
 
@@ -102,7 +153,7 @@ Las migraciones en [`supabase/migrations/`](supabase/migrations/) se aplican en 
 
 ---
 
-## ⚙️ 6. Guía de uso
+## ⚙️ 7. Guía de uso
 
 ### Requisitos
 - Node.js 22 o superior
@@ -131,6 +182,6 @@ Cada push a `main` construye `web/` y lo publica en GitHub Pages con [`.github/w
 
 ---
 
-## 📬 7. Contacto
+## 📬 8. Contacto
 
 JuanFe — [jmartinezbernal02@gmail.com](mailto:jmartinezbernal02@gmail.com)
