@@ -17,6 +17,8 @@ import { D8Estudiantes } from './pantallas/D8Estudiantes';
 import { D9Material } from './pantallas/D9Material';
 import { D15Banco } from './pantallas/D15Banco';
 import { DetalleTrabajoPantalla } from './pantallas/DetalleTrabajo';
+import { D16Asistencia } from './pantallas/D16Asistencia';
+import { Asistir } from './pantallas/Asistir';
 import { D10Configuracion } from './pantallas/D10Configuracion';
 import { D11EnClase } from './pantallas/D11EnClase';
 import { O1ResumenGrupos } from './pantallas/O1ResumenGrupos';
@@ -102,6 +104,8 @@ export const PANTALLAS: RegistroPantalla[] = [
   { codigo: 'd8', titulo: 'Ficha de estudiante', grupo: 'Docente', componente: D8Estudiantes },
   { codigo: 'd9', titulo: 'Material', grupo: 'Docente', componente: D9Material },
   { codigo: 'd15', titulo: 'Banco de preguntas', grupo: 'Docente', componente: D15Banco },
+  { codigo: 'd16', titulo: 'Asistencia', grupo: 'Docente', componente: D16Asistencia },
+  { codigo: 'asistir', titulo: 'Registrar asistencia', grupo: 'Estudiante', componente: Asistir },
   { codigo: 'trabajo', titulo: 'Detalle de un trabajo', grupo: 'Transversal', componente: DetalleTrabajoPantalla },
   { codigo: 'd10', titulo: 'Configuración', grupo: 'Docente', componente: D10Configuracion },
   { codigo: 'd11', titulo: 'En clase (relámpago y QR)', grupo: 'Docente', componente: D11EnClase },

@@ -35,6 +35,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Mi equipo',
       texto: 'Aquí ves con quién haces cada trabajo en equipo. Tu docente los sortea y los ajusta.',
     },
+    asistir: {
+      titulo: 'Asistencia',
+      texto: 'Aquí registras tu asistencia con el código que proyecta tu docente en clase, y ves cuántas clases llevas.',
+    },
     e22: {
       titulo: 'Calendario',
       texto: 'Aquí ves las sesiones semana a semana, los plazos de tus trabajos y el material de cada clase.',
@@ -68,6 +72,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
     d7: {
       titulo: 'Equipos',
       texto: 'Aquí defines el tamaño de los equipos de cada trabajo, los sorteas y los ajustas a mano si hace falta.',
+    },
+    d16: {
+      titulo: 'Asistencia',
+      texto: 'Aquí abres la asistencia de cada clase: proyectas un QR y un código que cambian cada 20 segundos, y ves quién llegó.',
     },
     d6: {
       titulo: 'Calendario',

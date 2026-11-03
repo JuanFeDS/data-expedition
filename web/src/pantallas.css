@@ -1545,3 +1545,20 @@
   .cd__lista li { animation: paso-sube .4s both ease-out; animation-delay: calc(.1s + var(--i) * 60ms); }
   .cd__dato { animation: paso-sube .45s both ease-out; } .cd__dato:nth-child(2) { animation-delay: .08s; } .cd__dato:nth-child(3) { animation-delay: .16s; }
 }
+
+.asist__columnas { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: start; }
+.asist__lado { display: flex; flex-direction: column; gap: 14px; }
+.asist__proyeccion { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 28px; }
+.asist__qr { width: min(60vw, 260px); aspect-ratio: 1; border-radius: 18px; background: #fff; padding: 8px; }
+.asist__qr--cargando { opacity: .5; }
+.asist__codigo { display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+.asist__codigo strong { font-family: var(--font-display); font-size: var(--fs-4xl); font-weight: 800; letter-spacing: .12em; color: var(--accent); }
+.asist__codigo small { font-size: var(--fs-xs); font-weight: 700; opacity: .8; }
+.asist__tiempo { width: 160px; height: 8px; border-radius: 4px; background: rgb(255 255 255 / .2); overflow: hidden; }
+.asist__tiempo i { display: block; height: 100%; border-radius: 4px; background: var(--accent); transition: width 1s linear; }
+.asist__barra { height: 8px; border-radius: 4px; background: rgb(7 59 58 / .12); overflow: hidden; }
+.asist__barra i { display: block; height: 100%; border-radius: 4px; background: var(--primary); transition: width .4s; }
+.asist__entrada { font-family: var(--font-display); font-size: var(--fs-xl); letter-spacing: .2em; text-transform: uppercase; max-width: 200px; text-align: center; }
+
+.p-d16 .contenido { container: asistencia / inline-size; }
+@container asistencia (min-width: 760px) { .asist__columnas { grid-template-columns: 1fr 1fr; } }
