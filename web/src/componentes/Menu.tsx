@@ -6,6 +6,7 @@ import { useDesbloqueos } from './desbloqueos';
 import { NAVEGACION, esConectada, gruposVisibles, type Rol } from './navegacion';
 import { useSesion } from './sesion';
 import { InterruptorSonido } from './tema';
+import { RutaProgreso } from './RutaProgreso';
 import { Hoja, Kicker, ModoRol } from './ui';
 
 const ATAJOS_DOCENTE = ['#/d1', '#/d3', '#/d4', '#/d8'];
@@ -47,6 +48,7 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
           );
         })}
       </nav>
+      {!modoDemo && <RutaProgreso />}
       <div className="menu__ajustes"><InterruptorSonido /></div>
       {!modoDemo && persona && <BotonSalir clase="menu__salir">Cerrar sesión · @{persona.usuario}</BotonSalir>}
     </Hoja>

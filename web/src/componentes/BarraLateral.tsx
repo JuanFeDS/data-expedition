@@ -5,6 +5,7 @@ import { useDesbloqueos } from './desbloqueos';
 import { BotonSalir } from './BotonSalir';
 import { InterruptorSonido } from './tema';
 import { Jaguar } from './Jaguar';
+import { RutaProgreso } from './RutaProgreso';
 import { RUTAS_COMUNES, gruposVisibles, inicioDeRol, rolDeRuta, usuarioDeRol, type Enlace } from './navegacion';
 import { useSesion } from './sesion';
 import { semanaActual, totalSemanas } from '../datos';
@@ -45,6 +46,7 @@ export function BarraLateral({ ruta }: { ruta: string }) {
       <nav className="lateral__nav">
         {gruposVisibles(rol, real, dentro ? curso : reciente, todo ? null : desbloqueadas).map((grupo) => <Grupo key={grupo.titulo} titulo={grupo.titulo} enlaces={grupo.enlaces} ruta={ruta} />)}
       </nav>
+      {real && <RutaProgreso />}
       <div className="lateral__ajustes"><InterruptorSonido /></div>
       <a className="lateral__usuario" href={usuario.ruta} aria-current={ruta === usuario.ruta.replace('#/', '') ? 'page' : undefined}>
         <span className={`avatar avatar--${usuario.color}`}>{usuario.iniciales}</span>

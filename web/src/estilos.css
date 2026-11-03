@@ -301,3 +301,17 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   @keyframes enlace-nuevo { 50% { box-shadow: 0 0 0 4px var(--accent); background: rgb(255 210 63 / .25); } }
 }
 body[data-nuevo='curso'] .lateral__enlace[data-codigo='curso'], body[data-nuevo='e3'] .lateral__enlace[data-codigo='e3'], body[data-nuevo='e15'] .lateral__enlace[data-codigo='e15'], body[data-nuevo='d15'] .lateral__enlace[data-codigo='d15'], body[data-nuevo='e2'] .lateral__enlace[data-codigo='e2'], body[data-nuevo='e17'] .lateral__enlace[data-codigo='e17'], body[data-nuevo='d2'] .lateral__enlace[data-codigo='d2'], body[data-nuevo='e24'] .lateral__enlace[data-codigo='e24'], body[data-nuevo='d7'] .lateral__enlace[data-codigo='d7'], body[data-nuevo='e22'] .lateral__enlace[data-codigo='e22'], body[data-nuevo='d6'] .lateral__enlace[data-codigo='d6'], body[data-nuevo='d9'] .lateral__enlace[data-codigo='d9'], body[data-nuevo='e20'] .lateral__enlace[data-codigo='e20'], body[data-nuevo='d5'] .lateral__enlace[data-codigo='d5'], body[data-nuevo='d11'] .lateral__enlace[data-codigo='d11'], body[data-nuevo='e5'] .lateral__enlace[data-codigo='e5'], body[data-nuevo='d13'] .lateral__enlace[data-codigo='d13'], body[data-nuevo='d14'] .lateral__enlace[data-codigo='d14'], body[data-nuevo='d3'] .lateral__enlace[data-codigo='d3'], body[data-nuevo='d10'] .lateral__enlace[data-codigo='d10'] { box-shadow: 0 0 0 2px var(--accent); }
+
+.ruta-progreso { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 14px; background: rgb(255 255 255 / .1); }
+.ruta-progreso__cab { display: flex; justify-content: space-between; align-items: baseline; }
+.ruta-progreso__cab strong { font-size: var(--fs-sm); font-weight: 800; }
+.ruta-progreso__cab small { font-size: var(--fs-xs); font-weight: 700; opacity: .8; }
+.ruta-progreso__barra { height: 6px; border-radius: 3px; background: rgb(255 255 255 / .18); overflow: hidden; }
+.ruta-progreso__barra i { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+.ruta-progreso__pista { font-size: var(--fs-xs); font-weight: 600; line-height: 1.35; opacity: .9; }
+.ruta-progreso__todo { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 700; opacity: .85; cursor: pointer; }
+.hoja .ruta-progreso { background: var(--bg); }
+.logro { position: fixed; z-index: 60; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border-radius: 18px; background: var(--deep); color: #fff; box-shadow: 0 8px 24px rgb(0 0 0 / .25); }
+.logro small { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--mint); }
+.logro strong { font-size: var(--fs-md); font-weight: 800; }
+@media (prefers-reduced-motion: no-preference) { .logro { animation: logro-entra .35s ease-out; } @keyframes logro-entra { from { opacity: 0; transform: translateY(12px); } } }
