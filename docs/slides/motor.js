@@ -82,8 +82,17 @@
     });
   };
 
+  const actualizarSolos = () => {
+    slides[actual].querySelectorAll('[data-solo]').forEach((el) => {
+      const activo = Number(el.dataset.solo) === paso;
+      el.classList.toggle('paso-oculto', !activo);
+      el.classList.toggle('paso-visible', activo);
+    });
+  };
+
   const pintarPips = () => {
     const total = pasosDe.get(slides[actual]).length;
+    actualizarSolos();
     pips.innerHTML = modoPasos && total ? Array.from({ length: total }, (_, i) => `<i class="${i < paso ? 'on' : ''}"></i>`).join('') : '';
   };
 
@@ -135,7 +144,7 @@
   });
 
   window.addEventListener('resize', ajustar);
-  window.addEventListener('beforeprint', () => slides.forEach((slide) => pasosDe.get(slide).flat().forEach((el) => el.classList.remove('paso-oculto', 'paso-visible'))));
+  window.addEventListener('beforeprint', () => document.querySelectorAll('.paso-oculto').forEach((el) => el.classList.remove('paso-oculto')));
   window.addEventListener('afterprint', () => ir(actual));
   window.addEventListener('keydown', (evento) => {
     const tecla = evento.key;

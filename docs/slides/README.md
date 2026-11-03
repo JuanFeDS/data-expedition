@@ -27,6 +27,7 @@ Para exportar a PDF abre el archivo en Chrome y usa Imprimir → Guardar como PD
 Cada slide se explica poco a poco: la flecha derecha va mostrando, en orden, cada punto de una lista, cada fila, banda, barra, peldaño, opción de relámpago o paso del ciclo. Unos puntos abajo al centro indican cuántos pasos tiene la slide y cuántos van.
 
 - Los elementos salen solos en orden del documento. Para agruparlos o ordenarlos a mano, pon `data-paso="1"`, `"2"`… (varios elementos con el mismo número salen juntos; sirve también para partes de un SVG).
+- `data-solo="n"` muestra un elemento solo mientras va el paso `n` (el `0` es antes del primero) y lo reemplaza al siguiente: sirve para un texto que cambia por paso, como la definición de cada dimensión del radar.
 - Para que algo esté visible desde el inicio, añade la clase `sin-paso`.
 - Al imprimir a PDF salen todos los elementos.
 

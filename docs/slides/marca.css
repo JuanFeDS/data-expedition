@@ -191,6 +191,9 @@ html, body { height: 100%; background: #04201f; overflow: hidden; font-family: v
 .slide:not([class*="slide--"]) .pregunta-g b { color: var(--primary); }
 
 /* Pasos: los elementos salen uno a uno con las flechas */
+.solos { display: grid; }
+.solos > * { grid-area: 1 / 1; }
+.dimension { font-family: var(--font-display); font-weight: 800; font-size: 84px; letter-spacing: -.045em; line-height: 1; color: var(--accent); }
 .paso-oculto { opacity: 0 !important; visibility: hidden; }
 .slide.activa .paso-oculto, .slide.activa .paso-oculto * { animation: none !important; }
 .pasos { position: absolute; left: 50%; bottom: 52px; transform: translateX(-50%); display: flex; gap: 12px; z-index: 6; mix-blend-mode: difference; }
