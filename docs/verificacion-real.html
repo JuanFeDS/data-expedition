@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verificación real · Data Expedition</title>
+<style>
+  :root {
+    --fondo: #f1f7f4; --tarjeta: #fff; --texto: #12302a; --suave: #5b7770; --linea: #d3e3dc;
+    --verde: #0e8a5f; --verde-fondo: #dff4ea; --rojo: #c8372d; --rojo-fondo: #fde8e6;
+    --oro: #f5c33b; --oscuro: #0d3b33;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #0b1f1b; --tarjeta: #12302a; --texto: #e6f3ee; --suave: #93b3aa; --linea: #24493f;
+      --verde: #3ecf94; --verde-fondo: #12432f; --rojo: #ff8a80; --rojo-fondo: #4a1f1c; --oscuro: #06130f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { background: var(--oscuro); color: #fff; padding: 28px 16px 20px; }
+  .ancho { max-width: 920px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+  header p { margin: 0; color: #b8d6cb; }
+  .progreso { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .barra { flex: 1; height: 10px; background: #ffffff26; border-radius: 99px; overflow: hidden; }
+  .barra > span { display: block; height: 100%; width: 0; background: var(--oro); transition: width .25s; }
+  .cuenta { font-weight: 700; white-space: nowrap; }
+  nav { position: sticky; top: 0; z-index: 5; background: var(--fondo); border-bottom: 1px solid var(--linea); }
+  nav .ancho { display: flex; gap: 6px; overflow-x: auto; padding: 10px 16px; }
+  nav button { flex: none; border: 1px solid var(--linea); background: var(--tarjeta); color: var(--texto); padding: 8px 14px; border-radius: 99px; font: inherit; font-size: .9rem; cursor: pointer; }
+  nav button[aria-selected="true"] { background: var(--oscuro); color: #fff; border-color: var(--oscuro); }
+  nav .n { opacity: .7; font-size: .8rem; margin-left: 4px; }
+  main { padding: 20px 16px 80px; }
+  .nota { color: var(--suave); margin: 0 0 16px; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .btn { border: 1px solid var(--linea); background: var(--tarjeta); color: var(--texto); padding: 8px 14px; border-radius: 10px; font: inherit; font-size: .9rem; cursor: pointer; }
+  .btn:hover { border-color: var(--verde); }
+  .btn.primario { background: var(--oro); border-color: var(--oro); color: #3a2c00; font-weight: 700; }
+  .punto { background: var(--tarjeta); border: 1px solid var(--linea); border-left: 5px solid var(--linea); border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+  .punto.ok { border-left-color: var(--verde); }
+  .punto.falla { border-left-color: var(--rojo); }
+  .fila { display: flex; gap: 12px; align-items: flex-start; }
+  .fila input[type=checkbox] { width: 22px; height: 22px; margin-top: 3px; accent-color: var(--verde); flex: none; cursor: pointer; }
+  .num { font-weight: 700; color: var(--suave); margin-right: 6px; }
+  .paso { font-weight: 600; }
+  .esperado { color: var(--suave); font-size: .92rem; margin-top: 2px; }
+  .pantalla { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: var(--verde-fondo); color: var(--verde); padding: 2px 8px; border-radius: 99px; margin-bottom: 4px; }
+  .estado { margin-top: 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .estado button { border: 1px solid var(--linea); background: transparent; color: var(--texto); padding: 4px 12px; border-radius: 99px; font: inherit; font-size: .85rem; cursor: pointer; }
+  .estado button.activo-falla { background: var(--rojo-fondo); border-color: var(--rojo); color: var(--rojo); font-weight: 700; }
+  textarea { width: 100%; margin-top: 10px; min-height: 42px; resize: vertical; border: 1px solid var(--linea); border-radius: 8px; background: transparent; color: var(--texto); font: inherit; font-size: .92rem; padding: 8px 10px; }
+  textarea:focus { outline: 2px solid var(--verde); outline-offset: 1px; }
+  .lista-prep { padding-left: 20px; }
+  .lista-prep li { margin-bottom: 6px; }
+  .aviso { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--oscuro); color: #fff; padding: 10px 18px; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .aviso.visible { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="ancho">
+    <h1>Verificación con sesiones reales</h1>
+    <p>Marca cada paso, anota lo que viste y copia el informe al final. Se guarda solo en este navegador.</p>
+    <div class="progreso">
+      <div class="barra"><span id="barra"></span></div>
+      <span class="cuenta" id="cuenta">0 / 0</span>
+    </div>
+  </div>
+</header>
+<nav><div class="ancho" id="pestanas" role="tablist"></div></nav>
+<main><div class="ancho" id="contenido"></div></main>
+<div class="aviso" id="aviso"></div>
+
+<script>
+const SECCIONES = [
+  { id: 'prep', titulo: 'Preparación', preparacion: true },
+  { id: 'acceso', titulo: '1 · Acceso y roles', pasos: [
+    ['1.1', 'Acceso', 'Docente entra con Google o enlace por correo', 'Llega a la lista de cursos'],
+    ['1.2', 'Acceso', 'Docente invita a Estudiante A con un código de invitación', 'El código se genera'],
+    ['1.3', 'Acceso', 'Estudiante A entra y usa el código', 'Queda matriculado y ve el campamento'],
+    ['1.4', 'Acceso', 'Estudiante A intenta abrir #/c/<curso>/d1 (panel docente)', 'No ve nada del docente'],
+    ['1.5', 'Acceso', 'Observador entra y usa su código', 'Ve solo vistas agregadas'],
+  ]},
+  { id: 'docente', titulo: '2 · Docente', pasos: [
+    ['2.1', 'Panel (d1)', 'Abrir el panel', 'Cifras y alertas sin error en la consola'],
+    ['2.2', 'Trabajos / Rúbricas', 'Editar un criterio y recargar', 'El cambio persiste'],
+    ['2.3', 'Calendario y Material', 'Crear una sesión y un recurso', 'Aparecen y los ve el estudiante'],
+    ['2.4', 'Formularios', 'Pasar un formulario de borrador a abierto', 'El estudiante lo ve'],
+    ['2.5', 'En clase', 'Abrir una relámpago', 'Salen el enlace y el QR; el contador de respuestas sube en vivo'],
+    ['2.6', 'Asistencia', 'Abrir asistencia', 'El código rota cada 20 segundos'],
+    ['2.7', 'Equipos', 'Hacer el sorteo de un trabajo', 'Los equipos se guardan y el estudiante ve el suyo'],
+    ['2.8', 'Entregas y Corrección', 'Abrir una entrega y calificar con la rúbrica', 'La nota coincide con el cálculo visible y queda guardada'],
+    ['2.9', 'Personas y Estudiantes', 'Abrir la ficha de A', 'Ve su radar, notas y actividad'],
+    ['2.10', 'Banco de preguntas', 'Añadir una pregunta', 'Entra en la práctica del estudiante'],
+  ]},
+  { id: 'estudiante', titulo: '3 · Estudiante', pasos: [
+    ['3.1', 'Campamento', 'Entrar por primera vez', 'Solo está abierto el campamento; el jaguar lo explica'],
+    ['3.2', 'Desbloqueo', 'Visitar otra sección', 'Se abre y el jaguar la presenta una sola vez; al recargar sigue abierta'],
+    ['3.3', 'Diagnóstico', 'Hacerlo completo', 'Se guarda y el radar muestra el punto de partida'],
+    ['3.4', 'Relámpago', 'Responder desde el enlace o QR', 'Una sola respuesta por persona; resultado correcto'],
+    ['3.5', 'Votación', 'Votar y ver resultados', 'Se ve el recuento sin poder votar dos veces'],
+    ['3.6', 'Asistir', 'Registrar asistencia con el código', 'Funciona con el código vigente y falla con uno vencido'],
+    ['3.7', 'Entregas', 'Cargar una entrega por PR', 'Queda con la declaración de IA y se ve en la lista del docente'],
+    ['3.8', 'Notas', 'Ver la nota que puso el docente', 'Coincide con la corrección y se explica la regla'],
+    ['3.9', 'Practicar', 'Hacer una sesión de 5 preguntas', 'Suma 30 XP y la racha del día'],
+    ['3.10', 'Liga y Mi equipo', 'Abrir las pantallas', 'Sin errores; solo datos de su grupo'],
+  ]},
+  { id: 'privacidad', titulo: '4 · Privacidad y RLS', nota: 'Lo más importante. Hazlo con el Estudiante B (o A en otro curso).', pasos: [
+    ['4.1', 'Notas, entregas y radar', 'Ver las notas, entregas y radar de A', 'No aparecen'],
+    ['4.2', 'API (consola Red)', 'Pedir una entrega de A cambiando el id', 'Respuesta vacía o 403'],
+    ['4.3', 'Observador', 'Abrir la vista de un grupo con menos de 5 personas', 'No muestra datos individuales'],
+    ['4.4', 'Sin sesión', 'Intentar leer cualquier tabla como anónimo', 'Sin datos'],
+  ]},
+  { id: 'movil', titulo: '5 · Móvil', nota: 'En el celular o a 390 px de ancho. Nada se desborda y los botones se pulsan con comodidad.', pasos: [
+    ['5.1', 'Campamento', 'Repetir 3.1 en móvil', 'Se ve y funciona bien'],
+    ['5.2', 'Relámpago', 'Repetir 3.4 en móvil', 'Se ve y funciona bien'],
+    ['5.3', 'Practicar', 'Repetir 3.9 en móvil', 'Se ve y funciona bien'],
+    ['5.4', 'Liga y Mi equipo', 'Repetir 3.10 en móvil', 'Se ve y funciona bien'],
+  ]},
+];
+
+const PREPARACION = [
+  ['prep-1', 'La app corre contra Supabase real (web/.env.local con VITE_SUPABASE_URL y VITE_SUPABASE_PUBLISHABLE_KEY), sin ?demo'],
+  ['prep-2', 'Tengo tres cuentas distintas, cada una en su perfil o ventana de incógnito: Docente, Estudiante A (y B si se puede) y Observador'],
+  ['prep-3', 'El curso «Prueba» tiene los datos de ejemplo cargados'],
+  ['prep-4', 'Tengo la consola (F12) abierta con la pestaña Red: cualquier 401, 403 o 400 de supabase.co es un hallazgo'],
+];
+
+const CLAVE = 'verificacion-real-v1';
+let datos = {};
+try { datos = JSON.parse(localStorage.getItem(CLAVE) || '{}'); } catch { datos = {}; }
+let activa = 'prep';
+
+const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch {} };
+const estado = (id) => datos[id] || { ok: false, falla: false, nota: '' };
+const todos = () => [
+  ...PREPARACION.map(([id, texto]) => ({ id, texto, seccion: 'Preparación' })),
+  ...SECCIONES.filter((s) => s.pasos).flatMap((s) => s.pasos.map(([num, pantalla, paso, esperado]) => ({ id: num, texto: `${pantalla}: ${paso}`, esperado, seccion: s.titulo }))),
+];
+const idsDe = (seccion) => seccion.preparacion ? PREPARACION.map(([id]) => id) : seccion.pasos.map(([id]) => id);
+
+function aviso(texto) {
+  const el = document.getElementById('aviso');
+  el.textContent = texto; el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 1800);
+}
+
+function actualizarProgreso() {
+  const lista = todos();
+  const hechos = lista.filter((p) => estado(p.id).ok).length;
+  document.getElementById('cuenta').textContent = `${hechos} / ${lista.length}`;
+  document.getElementById('barra').style.width = `${(hechos / lista.length) * 100}%`;
+  document.querySelectorAll('#pestanas button').forEach((boton) => {
+    const seccion = SECCIONES.find((s) => s.id === boton.dataset.id);
+    const ids = idsDe(seccion);
+    const marcados = ids.filter((id) => estado(id).ok).length;
+    const fallas = ids.filter((id) => estado(id).falla).length;
+    boton.querySelector('.n').textContent = `${marcados}/${ids.length}${fallas ? ` · ❌${fallas}` : ''}`;
+  });
+}
+
+function actualizar(id, cambios) {
+  datos[id] = { ...estado(id), ...cambios };
+  guardar();
+  const tarjeta = document.querySelector(`[data-punto="${id}"]`);
+  if (tarjeta) {
+    tarjeta.classList.toggle('ok', datos[id].ok);
+    tarjeta.classList.toggle('falla', datos[id].falla);
+    tarjeta.querySelector('.btn-falla')?.classList.toggle('activo-falla', datos[id].falla);
+    tarjeta.querySelector('input[type=checkbox]').checked = datos[id].ok;
+  }
+  actualizarProgreso();
+}
+
+function tarjeta(id, titulo, esperado, pantalla) {
+  const dato = estado(id);
+  const div = document.createElement('div');
+  div.className = `punto${dato.ok ? ' ok' : ''}${dato.falla ? ' falla' : ''}`;
+  div.dataset.punto = id;
+  div.innerHTML = `
+    <div class="fila">
+      <input type="checkbox" id="c-${id}" ${dato.ok ? 'checked' : ''} aria-label="Marcar ${id} como hecho">
+      <label for="c-${id}">
+        ${pantalla ? `<span class="pantalla"></span><br>` : ''}
+        <span class="num"></span><span class="paso"></span>
+        ${esperado ? `<div class="esperado"><b>Esperado:</b> <span class="esp"></span></div>` : ''}
+      </label>
+    </div>
+    <div class="estado"><button class="btn-falla ${dato.falla ? 'activo-falla' : ''}" type="button">❌ Falla</button></div>
+    <textarea placeholder="Comentario: qué viste, el error de la consola…" aria-label="Comentario de ${id}"></textarea>`;
+  if (pantalla) div.querySelector('.pantalla').textContent = pantalla;
+  div.querySelector('.num').textContent = `${id} `;
+  div.querySelector('.paso').textContent = titulo;
+  if (esperado) div.querySelector('.esp').textContent = esperado;
+  div.querySelector('textarea').value = dato.nota;
+  div.querySelector('input').addEventListener('change', (e) => actualizar(id, { ok: e.target.checked, falla: e.target.checked ? false : estado(id).falla }));
+  div.querySelector('.btn-falla').addEventListener('click', () => { const nueva = !estado(id).falla; actualizar(id, { falla: nueva, ok: nueva ? false : estado(id).ok }); });
+  div.querySelector('textarea').addEventListener('input', (e) => { datos[id] = { ...estado(id), nota: e.target.value }; guardar(); });
+  return div;
+}
+
+function pintar() {
+  const seccion = SECCIONES.find((s) => s.id === activa);
+  const cont = document.getElementById('contenido');
+  cont.innerHTML = '';
+  document.querySelectorAll('#pestanas button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.id === activa)));
+  if (seccion.nota) { const p = document.createElement('p'); p.className = 'nota'; p.textContent = seccion.nota; cont.append(p); }
+  const acciones = document.createElement('div');
+  acciones.className = 'acciones';
+  acciones.innerHTML = `<button class="btn" data-a="todo">✅ Marcar todo esta pestaña</button><button class="btn" data-a="nada">Desmarcar</button>`;
+  if (activa === 'prep') acciones.innerHTML += `<button class="btn primario" data-a="informe">Copiar informe</button><button class="btn" data-a="reiniciar">Borrar todo</button>`;
+  acciones.addEventListener('click', (e) => {
+    const accion = e.target.dataset.a;
+    if (accion === 'todo') { idsDe(seccion).forEach((id) => { datos[id] = { ...estado(id), ok: true, falla: false }; }); guardar(); pintar(); actualizarProgreso(); }
+    if (accion === 'nada') { idsDe(seccion).forEach((id) => { datos[id] = { ...estado(id), ok: false }; }); guardar(); pintar(); actualizarProgreso(); }
+    if (accion === 'informe') copiarInforme();
+    if (accion === 'reiniciar' && confirm('¿Borrar todas las marcas y comentarios?')) { datos = {}; guardar(); pintar(); actualizarProgreso(); }
+  });
+  cont.append(acciones);
+  if (seccion.preparacion) {
+    PREPARACION.forEach(([id, texto]) => cont.append(tarjeta(id, texto)));
+    const guia = document.createElement('p');
+    guia.className = 'nota';
+    guia.textContent = 'Si algo falla, márcalo con ❌ y anota pantalla, rol, qué esperabas y el error de la consola. Al terminar, copia el informe y pégalo en el chat.';
+    cont.append(guia);
+  } else {
+    seccion.pasos.forEach(([id, pantalla, paso, esperado]) => cont.append(tarjeta(id, paso, esperado, pantalla)));
+  }
+}
+
+function copiarInforme() {
+  const lista = todos();
+  const fallas = lista.filter((p) => estado(p.id).falla);
+  const comentados = lista.filter((p) => estado(p.id).nota.trim() && !estado(p.id).falla);
+  const pendientes = lista.filter((p) => !estado(p.id).ok && !estado(p.id).falla);
+  const linea = (p) => `- **${p.id}** (${p.seccion}) ${p.texto}${p.esperado ? ` — esperado: ${p.esperado}` : ''}${estado(p.id).nota.trim() ? `\n  - Comentario: ${estado(p.id).nota.trim()}` : ''}`;
+  const hechos = lista.filter((p) => estado(p.id).ok).length;
+  const texto = [
+    `# Informe de verificación real`,
+    `Hechos: ${hechos}/${lista.length} · Fallas: ${fallas.length} · Pendientes: ${pendientes.length}`,
+    fallas.length ? `\n## ❌ Fallas\n${fallas.map(linea).join('\n')}` : '',
+    comentados.length ? `\n## 💬 Con comentario\n${comentados.map(linea).join('\n')}` : '',
+    pendientes.length ? `\n## ⏳ Sin revisar\n${pendientes.map((p) => `- ${p.id} ${p.texto}`).join('\n')}` : '',
+  ].filter(Boolean).join('\n');
+  (navigator.clipboard ? navigator.clipboard.writeText(texto) : Promise.reject()).then(
+    () => aviso('Informe copiado'),
+    () => { const area = document.createElement('textarea'); area.value = texto; document.body.append(area); area.select(); document.execCommand('copy'); area.remove(); aviso('Informe copiado'); },
+  );
+}
+
+const pestanas = document.getElementById('pestanas');
+SECCIONES.forEach((s) => {
+  const boton = document.createElement('button');
+  boton.dataset.id = s.id; boton.role = 'tab';
+  boton.innerHTML = `${s.titulo} <span class="n"></span>`;
+  boton.addEventListener('click', () => { activa = s.id; pintar(); window.scrollTo({ top: 0 }); });
+  pestanas.append(boton);
+});
+pintar();
+actualizarProgreso();
+</script>
+</body>
+</html>
