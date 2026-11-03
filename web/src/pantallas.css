@@ -1405,3 +1405,8 @@
 
 .inicio__fecha { flex: none; min-width: 34px; padding: 4px 8px; border-radius: 999px; background: var(--accent); color: var(--on-accent); text-align: center; font-size: var(--fs-md); font-weight: 800; }
 .inicio__atencion li.vacio span small { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--muted); }
+
+.rubrica__editor { width: 100%; padding: 12px; border-radius: 14px; background: var(--surface); box-shadow: 0 0 0 2px var(--primary); }
+.rubrica__nivel { resize: vertical; min-height: 56px; font-family: inherit; }
+.rubrica__nueva { margin-top: 10px; }
+.d13__personas li:has(.rubrica__editor) { display: block; padding: 0; background: none; }

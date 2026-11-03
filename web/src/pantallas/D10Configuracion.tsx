@@ -3,7 +3,9 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { trabajos } from '../datos';
+import { D10Rubricas } from './D10Rubricas';
 
 const DIMENSIONES = [
   { nombre: 'Datos', transversal: false }, { nombre: 'Análisis', transversal: false }, { nombre: 'Modelado', transversal: false },
@@ -11,7 +13,7 @@ const DIMENSIONES = [
   { nombre: 'Producción', transversal: true }, { nombre: 'Dirección de IA', transversal: true },
 ];
 
-export function D10Configuracion() {
+export function D10ConfiguracionEjemplo() {
   const [nivelacion, setNivelacion] = useState(50);
   const [profundizacion, setProfundizacion] = useState(80);
   const [minimos, setMinimos] = useState(trabajos.map((trabajo) => trabajo.minPylint));
@@ -56,4 +58,9 @@ export function D10Configuracion() {
       <Dock accion={{ etiqueta: guardado ? 'Cambios guardados' : 'Hay cambios sin guardar', texto: guardado ? 'Listo' : 'Guardar cambios', alPulsar: () => setGuardado(true), deshabilitada: guardado }} />
     </Pantalla>
   );
+}
+
+export function D10Configuracion() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D10ConfiguracionEjemplo /> : <D10Rubricas />;
 }

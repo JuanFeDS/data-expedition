@@ -29,6 +29,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Trabajos',
       texto: 'Aquí publicas lo que se entrega y su fecha límite. Los estudiantes lo verán en sus Entregas.',
     },
+    d10: {
+      titulo: 'Rúbricas',
+      texto: 'Aquí defines las dimensiones del radar y los criterios con que calificas cada trabajo, con sus cinco niveles.',
+    },
     d3: {
       titulo: 'Entregas',
       texto: 'Aquí llegan las entregas de tus estudiantes: quién entregó, con o sin IA, y el enlace a su Pull Request.',
