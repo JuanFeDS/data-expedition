@@ -1562,3 +1562,5 @@
 
 .p-d16 .contenido { container: asistencia / inline-size; }
 @container asistencia (min-width: 760px) { .asist__columnas { grid-template-columns: 1fr 1fr; } }
+
+.tarjeta:has([aria-expanded="true"]), .rubrica__editor:has([aria-expanded="true"]), .d13__personas li:has([aria-expanded="true"]) { position: relative; z-index: 40; }
