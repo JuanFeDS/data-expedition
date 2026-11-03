@@ -38,10 +38,10 @@ export function MenuHoja({ abierta, alCerrar, omitir }: { abierta: boolean; alCe
             <section key={grupo.titulo} className="menu__grupo">
               <Kicker>{grupo.titulo}</Kicker>
               {enlaces.map((opcion) => (
-                <a key={opcion.etiqueta} href={opcion.ruta} className="menu-fila">
+                <a key={opcion.etiqueta} href={opcion.ruta} className={`menu-fila ${opcion.bloqueada ? 'menu-fila--bloqueada' : ''}`}>
                   <span className={`acceso-rapido__icono acceso-rapido__icono--${opcion.color}`}><IconoSvg tipo={opcion.tipo} /></span>
                   <span className="menu-fila__texto"><strong>{opcion.etiqueta}</strong><small>{opcion.detalle}</small></span>
-                  <span aria-hidden="true">›</span>
+                  <span aria-hidden="true">{opcion.bloqueada ? '🔒' : '›'}</span>
                 </a>
               ))}
             </section>

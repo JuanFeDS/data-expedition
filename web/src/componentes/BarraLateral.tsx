@@ -15,10 +15,11 @@ function Grupo({ titulo, enlaces, ruta }: { titulo: string; enlaces: Enlace[]; r
     <div className="lateral__grupo">
       <span className="lateral__titulo">{titulo}</span>
       {enlaces.map((enlace) => (
-        <a key={enlace.etiqueta} className="lateral__enlace" data-codigo={enlace.activa[0]} href={enlace.ruta} aria-current={enlace.activa.includes(ruta) ? 'page' : undefined}>
+        <a key={enlace.etiqueta} className={`lateral__enlace ${enlace.bloqueada ? 'lateral__enlace--bloqueada' : ''}`} data-codigo={enlace.activa[0]} href={enlace.ruta} aria-current={enlace.activa.includes(ruta) ? 'page' : undefined}>
           <span className="lateral__icono"><IconoSvg tipo={enlace.tipo} /></span>
           <span>{enlace.etiqueta}</span>
           {enlace.aviso && <i className="lateral__aviso">{enlace.aviso}</i>}
+          {enlace.bloqueada && <span className="lateral__candado" aria-label="Se desbloquea al entrar"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="currentColor" /><path d="M4.5 6V4.5a2.5 2.5 0 0 1 5 0V6" stroke="currentColor" strokeWidth="1.6" /></svg></span>}
         </a>
       ))}
     </div>

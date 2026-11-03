@@ -8,11 +8,8 @@ export function RutaProgreso() {
   const porcentaje = Math.round((ruta.abiertas / ruta.total) * 100);
   return (
     <div className="ruta-progreso">
-      <div className="ruta-progreso__cab"><strong>Tu ruta</strong><small>{ruta.abiertas} de {ruta.total}</small></div>
+      <div className="ruta-progreso__cab"><strong>Tu ruta</strong><small>{ruta.abiertas} de {ruta.total} exploradas</small></div>
       <div className="ruta-progreso__barra" role="progressbar" aria-valuenow={ruta.abiertas} aria-valuemax={ruta.total} aria-label="Secciones abiertas"><i style={{ width: `${porcentaje}%` }} /></div>
-      {ruta.siguiente
-        ? <p className="ruta-progreso__pista"><b>Para abrir {ruta.siguiente.nombre}:</b> {ruta.siguiente.pista}</p>
-        : <p className="ruta-progreso__pista">¡Abriste toda la ruta!</p>}
       <label className="ruta-progreso__todo"><input type="checkbox" checked={mostrarTodo} onChange={alternarMostrarTodo} /> Mostrar todo</label>
     </div>
   );

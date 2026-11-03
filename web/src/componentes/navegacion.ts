@@ -10,6 +10,7 @@ export interface Enlace {
   activa: string[];
   color: string;
   aviso?: string;
+  bloqueada?: boolean;
 }
 
 export interface GrupoEnlaces {
@@ -159,7 +160,6 @@ export const gruposVisibles = (
   if (!curso) return [general];
   const delCurso = [ENLACE_INFO, ...NAVEGACION[rol].flatMap((grupo) => grupo.enlaces), ...(rol === 'estudiante' ? [ENLACE_EN_CLASE] : [])]
     .filter((enlace) => ENCURSO.has(codigoDeRuta(enlace.ruta)))
-    .filter((enlace) => !desbloqueadas || desbloqueadas.has(codigoDeRuta(enlace.ruta)))
-    .map((enlace) => ({ ...enlace, aviso: undefined, ruta: enCurso(enlace.ruta, curso.id) }));
+    .map((enlace) => ({ ...enlace, aviso: undefined, bloqueada: desbloqueadas !== null && !desbloqueadas.has(codigoDeRuta(enlace.ruta)), ruta: enCurso(enlace.ruta, curso.id) }));
   return delCurso.length > 0 ? [general, { titulo: curso.nombre, enlaces: delCurso }] : [general];
 };

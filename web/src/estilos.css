@@ -315,3 +315,8 @@ body[data-nuevo='curso'] .lateral__enlace[data-codigo='curso'], body[data-nuevo=
 .logro small { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--mint); }
 .logro strong { font-size: var(--fs-md); font-weight: 800; }
 @media (prefers-reduced-motion: no-preference) { .logro { animation: logro-entra .35s ease-out; } @keyframes logro-entra { from { opacity: 0; transform: translateY(12px); } } }
+
+.lateral__enlace--bloqueada { opacity: .55; }
+.lateral__enlace--bloqueada:hover { opacity: .9; }
+.lateral__candado { margin-left: auto; display: inline-flex; opacity: .8; }
+.menu-fila--bloqueada { opacity: .6; }
