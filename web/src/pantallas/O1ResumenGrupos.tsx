@@ -2,6 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { O1ResumenReal } from './ObservadorReal';
 import { semanaActual } from '../datos';
 import { estudiantes } from '../datosPlan';
 
@@ -11,7 +13,7 @@ const total = estudiantes.length;
 const alDia = Math.round((estudiantes.filter((estudiante) => estudiante.entrega !== 'sin_cargar' && !estudiante.tarde).length / total) * 100);
 const avance = Math.round(estudiantes.reduce((suma, estudiante) => suma + estudiante.datos, 0) / total);
 
-export function O1ResumenGrupos() {
+export function O1ResumenGruposEjemplo() {
   return (
     <Pantalla rol="observador" clase="p-o1">
       <div className="pantalla__cuerpo">
@@ -38,4 +40,9 @@ export function O1ResumenGrupos() {
       <Dock accion={{ etiqueta: 'Qué puedes ver', texto: 'Ver las reglas', ruta: '#/o3' }} />
     </Pantalla>
   );
+}
+
+export function O1ResumenGrupos() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <O1ResumenGruposEjemplo /> : <O1ResumenReal />;
 }

@@ -147,8 +147,8 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   }, [rol, pasos, visibles, modoDemo]);
 
   const valor = useMemo<ValorDesbloqueos>(
-    () => (modoDemo ? TODO : { todo: mostrarTodo, desbloqueadas: visibles, ruta: progreso, mostrarTodo, alternarMostrarTodo }),
-    [modoDemo, mostrarTodo, visibles, progreso, alternarMostrarTodo],
+    () => (modoDemo ? TODO : { todo: mostrarTodo || pasos.length === 0, desbloqueadas: visibles, ruta: progreso, mostrarTodo, alternarMostrarTodo }),
+    [modoDemo, mostrarTodo, pasos.length, visibles, progreso, alternarMostrarTodo],
   );
 
   const anuncioActual = rol && !modoDemo && dentro && presentadasListas && pasos.includes(codigo) && !presentadas.valores.includes(codigo) ? anuncioDe(rol, codigo) : null;

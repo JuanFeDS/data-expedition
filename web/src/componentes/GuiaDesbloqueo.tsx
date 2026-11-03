@@ -43,6 +43,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Mis resultados',
       texto: 'Todo lo que has respondido en clase: relámpagos, encuestas y votaciones.',
     },
+    e31: {
+      titulo: 'Mi liga',
+      texto: 'Una competencia sana con tu curso: gana más XP practicando esta semana. El lunes se reinicia y el XP no es nota.',
+    },
     e12: {
       titulo: 'Perfil',
       texto: 'Tu punto fuerte, tu XP y tu nivel. El XP no es nota: se gana practicando.',

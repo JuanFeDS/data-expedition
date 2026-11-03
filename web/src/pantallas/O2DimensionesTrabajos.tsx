@@ -2,6 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { O2DimensionesReal } from './ObservadorReal';
 import { dimensiones, trabajos } from '../datos';
 
 const DISTRIBUCION = [
@@ -11,7 +13,7 @@ const DISTRIBUCION = [
   { etiqueta: '4.6 a 5.0', valor: 17 },
 ];
 
-export function O2DimensionesTrabajos() {
+export function O2DimensionesTrabajosEjemplo() {
   return (
     <Pantalla rol="observador" clase="p-o2">
       <div className="pantalla__cuerpo">
@@ -41,4 +43,9 @@ export function O2DimensionesTrabajos() {
       <Dock accion={{ etiqueta: 'Datos agregados', texto: 'Volver al resumen', ruta: '#/o1' }} />
     </Pantalla>
   );
+}
+
+export function O2DimensionesTrabajos() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <O2DimensionesTrabajosEjemplo /> : <O2DimensionesReal />;
 }

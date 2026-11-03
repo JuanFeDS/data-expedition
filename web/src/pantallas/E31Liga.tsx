@@ -3,9 +3,11 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Contador, Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { E31LigaReal } from './E31LigaReal';
 import { ligaActual } from '../datosPlan';
 
-export function E31Liga() {
+export function E31LigaEjemplo() {
   const [vista, setVista] = useState(0);
   const lista = ligaActual.participantes;
   const total = lista.length;
@@ -67,4 +69,9 @@ export function E31Liga() {
       <Dock accion={{ etiqueta: 'Esta semana', texto: 'Sumar XP', ruta: '#/e15' }} />
     </Pantalla>
   );
+}
+
+export function E31Liga() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E31LigaEjemplo /> : <E31LigaReal />;
 }
