@@ -117,23 +117,26 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
 };
 
 export const RUTAS_COMUNES = new Set(['cursos', 'curso', 'inicio', 'ayuda']);
-export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', 'e5', 'e6', 'd3', 'd10', 'd13', 'd14']);
+export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', 'e3', 'e4', 'e5', 'e6', 'd3', 'd4', 'd10', 'd13', 'd14']);
 
 const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio', 'inicio-estudiante'], color: 'accent' };
 const ENLACE_AYUDA: Enlace = { tipo: 'ayuda', etiqueta: 'Ayuda', detalle: 'Tutorial y tu perfil', ruta: '#/ayuda', activa: ['ayuda'], color: 'claro' };
 const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Todos tus cursos', ruta: '#/cursos', activa: ['cursos'], color: 'claro' };
 const ENLACE_INFO: Enlace = { tipo: 'panel', etiqueta: 'Información', detalle: 'Resumen del curso', ruta: '#/curso', activa: ['curso'], color: 'claro' };
 
-export const ENCURSO = new Set(['curso', 'e5', 'e6', 'd3', 'd10', 'd13', 'd14']);
+export const ENCURSO = new Set(['curso', 'e3', 'e4', 'e5', 'e6', 'd3', 'd4', 'd10', 'd13', 'd14']);
 
 export const codigoDeRuta = (ruta: string) => ruta.replace(/^#\/?/, '');
 
 export const esConectada = (ruta: string) => CONECTADAS.has(codigoDeRuta(ruta));
 
 export const analizarRuta = (ruta: string): { cursoId: string | null; codigo: string } => {
-  const coincidencia = /^c\/([^/]+)\/(.+)$/.exec(ruta);
-  return coincidencia ? { cursoId: coincidencia[1], codigo: coincidencia[2] } : { cursoId: null, codigo: ruta };
+  const sinConsulta = ruta.split('?')[0];
+  const coincidencia = /^c\/([^/]+)\/(.+)$/.exec(sinConsulta);
+  return coincidencia ? { cursoId: coincidencia[1], codigo: coincidencia[2] } : { cursoId: null, codigo: sinConsulta };
 };
+
+export const parametroDeRuta = (nombre: string) => new URLSearchParams(window.location.hash.split('?')[1] ?? '').get(nombre);
 
 export const rutaDeCurso = (cursoId: string, codigo: string) => `#/c/${cursoId}/${codigo}`;
 

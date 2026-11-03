@@ -7,7 +7,7 @@ import { useCurso, useRutaCurso } from '../componentes/curso';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
 
-const BIOMA_POR_SEMANA: Record<number, string> = { 1: 'selva', 2: 'paramo', 3: 'desierto', 4: 'cueva', 5: 'glaciar', 6: 'costa', 7: 'ruinas', 8: 'volcan' };
+export const BIOMA_POR_SEMANA: Record<number, string> = { 1: 'selva', 2: 'paramo', 3: 'desierto', 4: 'cueva', 5: 'glaciar', 6: 'costa', 7: 'ruinas', 8: 'volcan' };
 
 function Candado() {
   return (

@@ -19,6 +19,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Entregas',
       texto: 'Aquí están tus trabajos: lo que debes entregar, cuándo vence y lo que ya enviaste. Entregas pegando el enlace de tu Pull Request.',
     },
+    e3: {
+      titulo: 'Notas',
+      texto: 'Aquí ves tus calificaciones, cómo se calculó cada una y lo que tu docente te comenta para mejorar.',
+    },
   },
   docente: {
     d13: {

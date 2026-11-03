@@ -2,7 +2,9 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Isla } from '../componentes/Region';
 import { Contador, Pantalla, Pill } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { calificados, promedioNotas, trabajos } from '../datos';
+import { E3NotasReal } from './E3NotasReal';
 
 interface FilaNota {
   nota: string;
@@ -22,7 +24,7 @@ const FILAS: FilaNota[] = [
   { nota: '—', titulo: 'Diagnóstico', meta: 'Semana 1 · fijó tu punto de partida, no cuenta para aprobar', bioma: 'selva', estado: 'hecha' },
 ];
 
-export function E3Notas() {
+export function E3NotasEjemplo() {
   return (
     <Pantalla clase="p-e3">
       <div className="pantalla__cuerpo">
@@ -54,4 +56,9 @@ export function E3Notas() {
       <Dock accion={{ etiqueta: 'Tu radar', texto: 'Ver cómo vas', ruta: '#/e2' }} />
     </Pantalla>
   );
+}
+
+export function E3Notas() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E3NotasEjemplo /> : <E3NotasReal />;
 }

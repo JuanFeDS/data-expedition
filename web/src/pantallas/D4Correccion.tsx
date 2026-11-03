@@ -3,7 +3,9 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Niveles, Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { trabajoActual } from '../datos';
+import { D4Calificar } from './D4Calificar';
 
 interface Criterio {
   nombre: string;
@@ -20,7 +22,7 @@ const CRITERIOS: Criterio[] = [
   { nombre: 'Calidad del código y tablero', dimension: 'Producción', peso: 1, transversal: true },
 ];
 
-export function D4Correccion() {
+export function D4CorreccionEjemplo() {
   const [niveles, setNiveles] = useState([4, 3.5, 3, 4, 4.5]);
   const [guardada, setGuardada] = useState(false);
   const suma = CRITERIOS.reduce((total, criterio, indice) => total + niveles[indice] * criterio.peso, 0);
@@ -80,4 +82,9 @@ export function D4Correccion() {
       <Dock accion={{ etiqueta: `Nota ${nota.toFixed(1)}`, texto: 'Calificar y fusionar', alPulsar: () => { window.location.hash = '#/d3'; } }} />
     </Pantalla>
   );
+}
+
+export function D4Correccion() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D4CorreccionEjemplo /> : <D4Calificar />;
 }

@@ -65,6 +65,7 @@ export function D3EntregasReal() {
                       </span>
                       <Estado tipo={TIPO[entrega.estado]}>{TEXTO[entrega.estado]}</Estado>
                       {entrega.enlacePr && <a className="boton boton--suave" href={entrega.enlacePr} target="_blank" rel="noreferrer">Abrir PR</a>}
+                      <a className="boton boton--accent" href={`${rutaCurso('#/d4')}?entrega=${entrega.id}`}>{entrega.estado === 'calificada' ? `Nota ${entrega.nota?.toFixed(1) ?? ''}` : 'Calificar'}</a>
                     </li>
                   ))}
                   {deEste.length === 0 && <li><span className="d13__datos"><small>Nadie ha entregado este trabajo todavía.</small></span></li>}

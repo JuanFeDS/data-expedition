@@ -2,9 +2,11 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Contador, Kicker, Niveles, Pantalla, Pill } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { criteriosTrabajo1 } from '../datos';
+import { E4NotaReal } from './E4NotaReal';
 
-export function E4DetalleNota() {
+export function E4DetalleNotaEjemplo() {
   return (
     <Pantalla clase="p-e4">
       <div className="pantalla__cuerpo">
@@ -39,4 +41,9 @@ export function E4DetalleNota() {
       <Dock accion={{ etiqueta: 'Sigue la ruta', texto: 'Ir al Trabajo 3', ruta: '#/e6' }} />
     </Pantalla>
   );
+}
+
+export function E4DetalleNota() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E4DetalleNotaEjemplo /> : <E4NotaReal />;
 }
