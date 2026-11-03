@@ -1,4 +1,4 @@
-import type { Rol } from '../componentes/navegacion';
+import type { Rol } from '../compartido/navegacion/navegacion';
 import { supabase } from './supabase';
 
 export interface Grupo { id: string; nombre: string }

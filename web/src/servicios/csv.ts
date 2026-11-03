@@ -1,4 +1,4 @@
-import type { Rol } from '../componentes/navegacion';
+import type { Rol } from '../compartido/navegacion/navegacion';
 import { CORREO_VALIDO } from './personas';
 
 export interface FilaImportada { correo: string; rol: Rol }

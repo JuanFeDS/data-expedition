@@ -1,3 +1,4 @@
+import { calcularNota } from '../dominio/nota.ts';
 import { registrarEvento } from './eventos';
 import { supabase } from './supabase';
 import type { EstadoEntrega, ModoIa } from './trabajos';
@@ -28,12 +29,10 @@ export interface EntregaCalificable {
 
 const FALLO = 'No pudimos guardar la calificación. Intenta de nuevo.';
 
-export const notaPonderada = (criterios: CriterioCalificable[], niveles: Record<string, number>) => {
-  const pesos = criterios.reduce((total, criterio) => total + criterio.peso, 0);
-  if (pesos === 0) return 0;
-  const suma = criterios.reduce((total, criterio) => total + (niveles[criterio.id] ?? 1) * criterio.peso, 0);
-  return Math.round((suma / pesos) * 10) / 10;
-};
+// La regla de la nota vive en el dominio; aquí solo se adapta la rúbrica (sin criterios, la nota es 0).
+export const notaPonderada = (criterios: CriterioCalificable[], niveles: Record<string, number>) => (
+  criterios.length === 0 ? 0 : calcularNota(criterios.map((criterio) => ({ nivel: niveles[criterio.id] ?? 1, peso: criterio.peso })))
+);
 
 const cargarCriterios = async (trabajoId: string, modoIa: ModoIa): Promise<CriterioCalificable[]> => {
   const { data, error } = await supabase!.from('criterios')

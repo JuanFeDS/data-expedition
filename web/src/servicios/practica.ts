@@ -1,5 +1,5 @@
-import type { PreguntaDatos } from '../componentes/preguntas';
-import { META_XP_SEMANA, PREGUNTAS_POR_SESION, XP_POR_SESION } from '../config';
+import type { PreguntaDatos } from '../compartido/ui/preguntas';
+import { META_XP_SEMANA, PREGUNTAS_POR_SESION, XP_POR_SESION } from '../dominio/reglas';
 import { registrarEvento } from './eventos';
 import type { DimensionCurso, PuntoRadar } from './radar';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION } from './radar';

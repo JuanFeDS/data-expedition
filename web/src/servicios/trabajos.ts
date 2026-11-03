@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useSesion } from '../componentes/sesion';
-import { crearServicioTrabajosDemo } from './trabajosDemo';
+import { useSesion } from '../compartido/estado/sesion';
+import { crearServicioTrabajosDemo } from '../demo/trabajosDemo';
 import { supabase } from './supabase';
 
 export type EstadoEntrega = 'borrador' | 'entregada' | 'calificada' | 'no_presento';

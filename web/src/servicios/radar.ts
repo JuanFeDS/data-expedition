@@ -1,4 +1,5 @@
-import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION } from '../config';
+import { valorDimension } from '../dominio/radar.ts';
+import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION } from '../dominio/reglas';
 import { registrarEvento } from './eventos';
 import { supabase } from './supabase';
 
@@ -26,10 +27,7 @@ export const dimensionesDelCurso = async (cursoId: string): Promise<DimensionCur
 
 interface Evidencia { dimension_id: string; fuente: string; valor: number | string; peso: number | string }
 
-const promedio = (filas: Evidencia[]) => {
-  const pesos = filas.reduce((total, fila) => total + Number(fila.peso), 0);
-  return pesos === 0 ? 0 : filas.reduce((total, fila) => total + Number(fila.valor) * Number(fila.peso), 0) / pesos;
-};
+const promedio = (filas: Evidencia[]) => valorDimension(filas.map((fila) => ({ valor: Number(fila.valor), peso: Number(fila.peso) }))) ?? 0;
 
 export const calcularRadar = (dimensiones: DimensionCurso[], evidencias: Evidencia[]): PuntoRadar[] => dimensiones.map((dimension) => {
   const propias = evidencias.filter((evidencia) => evidencia.dimension_id === dimension.id);

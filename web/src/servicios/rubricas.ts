@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useSesion } from '../componentes/sesion';
+import { useSesion } from '../compartido/estado/sesion';
 import type { ModoIa } from './trabajos';
 import { supabase } from './supabase';
 

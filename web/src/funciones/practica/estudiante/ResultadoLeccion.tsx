@@ -1,0 +1,43 @@
+import { useEffect } from 'react';
+import { Jaguar } from '../../../compartido/ui/Jaguar';
+import { sonar } from '../../../compartido/ui/sonidos';
+import { Contador, Kicker, Pantalla, Pill } from '../../../compartido/ui/ui';
+import { temaDeRepaso } from '../../../demo/datos';
+
+const tema = temaDeRepaso();
+
+const METRICAS = [
+  { valor: 30, decimales: 0, etiqueta: 'XP', detalle: 'Por esta lección. El XP no es nota.' },
+  { valor: 1.5, decimales: 1, etiqueta: tema.gema.dimension, gema: tema.gema.gema, detalle: 'Práctica verificada ligera · tope de 5 por semana (te quedan 3.5)' },
+];
+
+export function E8ResultadoLeccion() {
+  useEffect(() => {
+    sonar('sesion');
+    const foto = window.setTimeout(() => sonar('foto'), 1000);
+    const racha = window.setTimeout(() => sonar('racha'), 2000);
+    return () => { window.clearTimeout(foto); window.clearTimeout(racha); };
+  }, []);
+  return (
+    <Pantalla tono="menta" clase="p-e8">
+      <div className="pantalla__cuerpo contenido" style={{ padding: '80px 24px 24px', gap: 12 }}>
+        <Kicker estilo={{ color: 'var(--deep)' }}>Correcto</Kicker>
+        <h1 className="titulo" style={{ fontSize: 'var(--fs-3xl)', lineHeight: 1, color: 'var(--deep)' }}>Buen ojo: la exactitud engaña.</h1>
+        <div className="resultado__remate">
+          <p style={{ fontSize: 'var(--fs-md)', fontWeight: 600, lineHeight: '21px', color: 'var(--deep)' }}>Con clases muy desbalanceadas, un modelo que nunca predice la clase rara ya parece bueno. Compáralo siempre con un baseline.</p>
+          <Jaguar pose="celebra" ancho={136} clase="resultado__guia" />
+        </div>
+        <hr className="sep" style={{ background: 'var(--deep)' }} />
+        {METRICAS.map((metrica) => (
+          <div className="metrica" key={metrica.etiqueta}>
+            <span className="num"><Contador valor={metrica.valor} decimales={metrica.decimales} prefijo="+" /></span>
+            <div><strong style={{ fontSize: 'var(--fs-sm)', fontWeight: 800, display: 'block' }}>{metrica.etiqueta}</strong><span style={{ fontSize: 'var(--fs-xs)', fontWeight: 600, opacity: .8 }}>{metrica.detalle}</span></div>
+            {'gema' in metrica && <img className="metrica__gema" src={`${import.meta.env.BASE_URL}gemas/${metrica.gema}.webp`} alt="" />}
+          </div>
+        ))}
+        <div style={{ flex: 1 }} />
+        <a href="#/e15"><Pill variante="deep" grande>Seguir practicando</Pill></a>
+      </div>
+    </Pantalla>
+  );
+}
