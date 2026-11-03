@@ -125,7 +125,6 @@ export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', '
 const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio', 'inicio-estudiante'], color: 'accent' };
 const ENLACE_AYUDA: Enlace = { tipo: 'ayuda', etiqueta: 'Ayuda', detalle: 'Tutorial y tu perfil', ruta: '#/ayuda', activa: ['ayuda'], color: 'claro' };
 const ENLACE_CURSOS: Enlace = { tipo: 'inicio', etiqueta: 'Cursos', detalle: 'Todos tus cursos', ruta: '#/cursos', activa: ['cursos'], color: 'claro' };
-const ENLACE_INFO: Enlace = { tipo: 'panel', etiqueta: 'Información', detalle: 'Resumen del curso', ruta: '#/curso', activa: ['curso'], color: 'claro' };
 
 const ENLACE_ASISTENCIA: Enlace = { tipo: 'calendario', etiqueta: 'Asistencia', detalle: 'Registra tu asistencia a clase', ruta: '#/asistir', activa: ['asistir'], color: 'mint' };
 const ENLACE_EN_CLASE: Enlace = { tipo: 'votar', etiqueta: 'En clase', detalle: 'Relámpagos, votaciones y encuestas', ruta: '#/e20', activa: ['e20'], color: 'accent' };
@@ -151,7 +150,7 @@ export const enCurso = (ruta: string, cursoId: string) => {
   return ENCURSO.has(codigo) ? rutaDeCurso(cursoId, codigo) : ruta;
 };
 
-const GRUPOS_CURSO: Record<Rol, { titulo: string; codigos: string[] }[]> = {
+export const GRUPOS_CURSO: Record<Rol, { titulo: string; codigos: string[] }[]> = {
   estudiante: [
     { titulo: 'Mi progreso', codigos: ['home', 'e2', 'e3', 'e15', 'e31'] },
     { titulo: 'Hacer', codigos: ['e5', 'e20', 'asistir', 'e11'] },

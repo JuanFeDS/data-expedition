@@ -6,7 +6,7 @@ import { BarraDato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
 import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../servicios/personas';
 import {
-  UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION, confirmarRuta, diagnosticosDelCurso, dimensionesDelCurso, registrarDiagnostico, rutaDeEstudiante, rutaGuardada, rutaPropuestaDelCurso,
+  UMBRAL_NIVELACION, confirmarRuta, diagnosticosDelCurso, dimensionesDelCurso, registrarDiagnostico, rutaDeEstudiante, rutaGuardada, rutaPropuestaDelCurso,
   type Diagnostico, type DimensionCurso, type RutaCurso,
 } from '../servicios/radar';
 
@@ -16,7 +16,7 @@ type Entrada = Record<string, { conIa: string; sinIa: string }>;
 
 const aEntrada = (dimensiones: DimensionCurso[], filas: Diagnostico[]): Entrada => Object.fromEntries(dimensiones.map((dimension) => {
   const fila = filas.find((candidata) => candidata.dimensionId === dimension.id);
-  return [dimension.id, { conIa: fila?.conIa != null ? String(fila.conIa) : '', sinIa: fila?.sinIa != null ? String(fila.sinIa) : '' }];
+  return [dimension.id, { conIa: typeof fila?.conIa === 'number' ? String(fila.conIa) : '', sinIa: typeof fila?.sinIa === 'number' ? String(fila.sinIa) : '' }];
 }));
 
 const numeroOCero = (texto: string) => (texto.trim() === '' ? null : Math.min(100, Math.max(0, Number(texto))));

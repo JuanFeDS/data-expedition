@@ -48,7 +48,7 @@ export function E17DiagnosticoReal() {
   });
   const brechas = dimensiones.map((dimension) => {
     const fila = filas.find((candidata) => candidata.dimensionId === dimension.id);
-    return { nombre: dimension.nombre, brecha: fila && fila.conIa !== null && fila.sinIa !== null ? Math.round(fila.conIa - fila.sinIa) : null, dijiste: fila?.autoinforme ?? null, real: fila?.sinIa != null ? Math.round((fila.sinIa / 20) * 10) / 10 : null };
+    return { nombre: dimension.nombre, brecha: fila && fila.conIa !== null && fila.sinIa !== null ? Math.round(fila.conIa - fila.sinIa) : null, dijiste: fila?.autoinforme ?? null, real: fila?.sinIa !== null && fila?.sinIa !== undefined ? Math.round((fila.sinIa / 20) * 10) / 10 : null };
   });
   const mayor = [...brechas].filter((fila) => fila.brecha !== null).sort((a, b) => (b.brecha ?? 0) - (a.brecha ?? 0))[0];
 

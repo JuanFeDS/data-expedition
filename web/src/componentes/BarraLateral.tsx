@@ -4,7 +4,6 @@ import { useCurso } from './curso';
 import { useDesbloqueos } from './desbloqueos';
 import { BotonSalir } from './BotonSalir';
 import { InterruptorSonido } from './tema';
-import { Jaguar } from './Jaguar';
 import { RutaProgreso } from './RutaProgreso';
 import { RUTAS_COMUNES, gruposVisibles, inicioDeRol, rolDeRuta, separarBloqueadas, usuarioDeRol, type Enlace } from './navegacion';
 import { rutaDeRol } from '../servicios/ruta';

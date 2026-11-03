@@ -39,15 +39,16 @@ export function D11EnClaseReal() {
 
   useEffect(() => { void cargar(); }, [cargar]);
 
+  const idAbierto = abierto?.id ?? null;
   useEffect(() => {
-    if (!abierto) return undefined;
+    if (!idAbierto) return undefined;
     const reloj = window.setInterval(() => {
       void cargar();
-      participantesFormulario(abierto.id).then((lista) => setParticiparon(new Set(lista.map((participante) => participante.perfilId)))).catch(() => undefined);
+      participantesFormulario(idAbierto).then((lista) => setParticiparon(new Set(lista.map((participante) => participante.perfilId)))).catch(() => undefined);
     }, 3000);
-    participantesFormulario(abierto.id).then((lista) => setParticiparon(new Set(lista.map((participante) => participante.perfilId)))).catch(() => undefined);
+    participantesFormulario(idAbierto).then((lista) => setParticiparon(new Set(lista.map((participante) => participante.perfilId)))).catch(() => undefined);
     return () => window.clearInterval(reloj);
-  }, [abierto?.id, cargar]);
+  }, [idAbierto, cargar]);
 
   const abrir = async (formulario: Formulario) => {
     if (!curso) return;

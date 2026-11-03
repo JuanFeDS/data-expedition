@@ -58,7 +58,6 @@ export function E6NuevaEntrega() {
   const { modoDemo } = useSesion();
   const { curso } = useCurso();
   const [trabajo, setTrabajo] = useState<TrabajoCurso | null>(null);
-  const [cargado, setCargado] = useState(false);
   const [errorEntrega, setErrorEntrega] = useState<string | null>(null);
   const [guardando, setGuardando] = useState(false);
   const [paso, setPaso] = useState(0);
@@ -78,8 +77,7 @@ export function E6NuevaEntrega() {
     if (!curso) return;
     void Promise.all([servicio.cargarTrabajos(curso.id), servicio.misEntregas(curso.id)])
       .then(([lista, entregas]) => setTrabajo(trabajoPorEntregar(lista, entregas)))
-      .catch(() => setTrabajo(null))
-      .finally(() => setCargado(true));
+      .catch(() => setTrabajo(null));
   }, [servicio, curso]);
 
   const coincidencia = PATRON_PR.exec(enlace.trim());

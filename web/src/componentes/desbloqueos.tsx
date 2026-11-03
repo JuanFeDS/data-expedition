@@ -9,7 +9,6 @@ import { useSesion } from './sesion';
 
 // Cada persona desbloquea las secciones de un curso al entrar a ellas, según lo que necesite; el jaguar la
 // presenta la primera vez, y una vez desbloqueada no vuelve a bloquearse.
-const DE_CURSO = new Set(['curso', 'e3', 'e5', 'e20', 'e2', 'e15', 'e17', 'e22', 'e24', 'd2', 'd3', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
 
 export interface ProgresoRuta {
   total: number;
@@ -60,7 +59,7 @@ const leerRuta = () => window.location.hash.replace(/^#\/?/, '');
 
 export function DesbloqueosProvider({ children }: { children: ReactNode }) {
   const { modoDemo, persona } = useSesion();
-  const { dentro, curso } = useCurso();
+  const { dentro } = useCurso();
   const [ruta, setRuta] = useState(leerRuta);
   const [estado, setEstado] = useState<{ para: string | null; valores: string[] }>({ para: null, valores: [] });
   const [presentadas, setPresentadas] = useState<{ para: string | null; valores: string[] }>({ para: null, valores: [] });
@@ -74,7 +73,6 @@ export function DesbloqueosProvider({ children }: { children: ReactNode }) {
 
   const idPersona = persona?.id ?? null;
   const rol = persona?.rol;
-  const idCurso = dentro && curso ? curso.id : null;
 
   useEffect(() => {
     setEstado({ para: idPersona, valores: idPersona ? leer(idPersona) : [] });
