@@ -177,3 +177,5 @@ La idea es que todo quede guardado, para poder analizarlo después. La migració
 - **Fechas:** `creada_en` o `creado_en` y `actualizado_en` en las tablas principales.
 - Los eventos no tienen llaves foráneas a propósito: sobreviven aunque se borre la persona, el curso o el trabajo.
 - **Pendiente:** vistas para análisis con identificadores anonimizados (sin nombres ni correos), y definir qué eventos de práctica, relámpagos y votaciones se guardan cuando esas pantallas se conecten. La política de privacidad ya dice que se guarda la actividad y que se analiza con datos anonimizados.
+
+**Estado de la migración `0007`:** aplicada y verificada en la base real (2 nov). Comprobado con un estudiante de prueba que se deshizo al terminar: cada tabla de negocio deja su evento; los reenvíos de una entrega generan versiones (2 versiones, la segunda con el PR nuevo); un estudiante no puede crear eventos a nombre de otro, ni borrar o editar los suyos, ni escribir versiones a mano; y otro estudiante no ve los eventos, versiones ni progreso ajenos. Desde ese momento todo queda registrado; no hay datos anteriores a esa fecha.
