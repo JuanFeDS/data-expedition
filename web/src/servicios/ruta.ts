@@ -5,7 +5,7 @@ export type Condiciones = Record<Exclude<CondicionRuta, 'visita'>, boolean>;
 export interface PasoRuta { codigo: string; completa: CondicionRuta; pista: string }
 
 // Cada paso se completa con algo que la persona hace, y completarlo abre el siguiente.
-// Las dos primeras secciones se abren al entrar al curso.
+// La primera sección es el curso; cada una se abre al entrar, una vez completado el paso anterior.
 export const RUTA_DOCENTE: PasoRuta[] = [
   { codigo: 'curso', completa: 'visita', pista: 'Mira el resumen de tu curso' },
   { codigo: 'd13', completa: 'estudiantes', pista: 'Invita al menos a una persona al curso' },
@@ -33,8 +33,6 @@ export const RUTA_ESTUDIANTE: PasoRuta[] = [
   { codigo: 'e15', completa: 'visita', pista: 'Haz tu primera práctica' },
 ];
 
-export const SECCIONES_INICIALES = 2;
-
 export const rutaDeRol = (rol: string): PasoRuta[] => (rol === 'docente' ? RUTA_DOCENTE : rol === 'estudiante' ? RUTA_ESTUDIANTE : []);
 
 // Si una consulta falla, esa condición cuenta como no cumplida: «Mostrar todo» evita que alguien quede bloqueado.
@@ -47,10 +45,10 @@ const contar = async (consulta: PromiseLike<{ count: number | null; error: unkno
   }
 };
 
-const VACIAS: Condiciones = { estudiantes: false, trabajos: false, criterios: false, formularios: false, abierto: false, sesiones: false, recursos: false, diagnosticos: false, entrega: false, autoinforme: false };
+export const CONDICIONES_VACIAS: Condiciones = { estudiantes: false, trabajos: false, criterios: false, formularios: false, abierto: false, sesiones: false, recursos: false, diagnosticos: false, entrega: false, autoinforme: false };
 
 export const cargarCondiciones = async (rol: string, cursoId: string): Promise<Condiciones> => {
-  if (!supabase) return VACIAS;
+  if (!supabase) return CONDICIONES_VACIAS;
   const cabeza = { count: 'exact' as const, head: true };
   if (rol === 'docente') {
     const [matriculados, invitados, trabajos, criterios, formularios, abierto, sesiones, recursos, diagnosticos] = await Promise.all([
@@ -64,26 +62,26 @@ export const cargarCondiciones = async (rol: string, cursoId: string): Promise<C
       contar(supabase.from('recursos').select('id', cabeza).eq('edicion_id', cursoId)),
       contar(supabase.from('diagnosticos').select('perfil_id, dimensiones!inner(edicion_id)', cabeza).eq('dimensiones.edicion_id', cursoId).or('con_ia.not.is.null,sin_ia.not.is.null')),
     ]);
-    return { ...VACIAS, estudiantes: matriculados || invitados, trabajos, criterios, formularios, abierto, sesiones, recursos, diagnosticos };
+    return { ...CONDICIONES_VACIAS, estudiantes: matriculados || invitados, trabajos, criterios, formularios, abierto, sesiones, recursos, diagnosticos };
   }
   if (rol === 'estudiante') {
     const { data: sesion } = await supabase.auth.getSession();
     const yo = sesion.session?.user.id;
-    if (!yo) return VACIAS;
+    if (!yo) return CONDICIONES_VACIAS;
     const [entrega, autoinforme] = await Promise.all([
       contar(supabase.from('entregas').select('id, trabajos!inner(edicion_id)', cabeza).eq('perfil_id', yo).eq('trabajos.edicion_id', cursoId).neq('estado', 'borrador')),
       contar(supabase.from('diagnosticos').select('dimension_id, dimensiones!inner(edicion_id)', cabeza).eq('perfil_id', yo).eq('dimensiones.edicion_id', cursoId).not('autoinforme', 'is', null)),
     ]);
-    return { ...VACIAS, entrega, autoinforme };
+    return { ...CONDICIONES_VACIAS, entrega, autoinforme };
   }
-  return VACIAS;
+  return CONDICIONES_VACIAS;
 };
 
-// Cuántas secciones de la ruta están abiertas según lo que la persona ya hizo.
+// Secciones a las que la persona ya puede entrar: la primera siempre, y cada una cuando completó el paso anterior.
 export const seccionesAbiertas = (ruta: PasoRuta[], condiciones: Condiciones, visitadas: string[]): string[] => {
   const hecho = (paso: PasoRuta) => (paso.completa === 'visita' ? visitadas.includes(paso.codigo) : condiciones[paso.completa]);
-  let abiertas = Math.min(SECCIONES_INICIALES, ruta.length);
-  for (let i = 1; i < ruta.length - 1; i += 1) {
+  let abiertas = Math.min(1, ruta.length);
+  for (let i = 0; i < ruta.length - 1; i += 1) {
     if (!hecho(ruta[i])) break;
     abiertas = i + 2;
   }
