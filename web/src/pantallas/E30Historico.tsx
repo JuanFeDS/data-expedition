@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E30HistoricoReal } from './E30HistoricoReal';
 import { historicoEncuestas, historicoRelampagos, pulsoSemanal } from '../datosPlan';
 
@@ -87,7 +87,4 @@ export function E30HistoricoEjemplo() {
   );
 }
 
-export function E30Historico() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E30HistoricoEjemplo /> : <E30HistoricoReal />;
-}
+export const E30Historico = conModoDemo(E30HistoricoEjemplo, E30HistoricoReal);

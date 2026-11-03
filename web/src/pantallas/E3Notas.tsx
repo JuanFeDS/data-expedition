@@ -2,8 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Isla } from '../componentes/Region';
 import { Contador, Pantalla, Pill } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { calificados, promedioNotas, trabajos } from '../datos';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E3NotasReal } from './E3NotasReal';
 
 interface FilaNota {
@@ -58,7 +58,4 @@ export function E3NotasEjemplo() {
   );
 }
 
-export function E3Notas() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E3NotasEjemplo /> : <E3NotasReal />;
-}
+export const E3Notas = conModoDemo(E3NotasEjemplo, E3NotasReal);

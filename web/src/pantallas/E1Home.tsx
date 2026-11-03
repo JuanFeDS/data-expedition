@@ -6,7 +6,7 @@ import { Region } from '../componentes/Region';
 import { MenuHoja } from '../componentes/Menu';
 import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Contador, Hoja, Kicker, ModoModal, Pantalla, Pill } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E1HomeReal } from './E1HomeReal';
 import { E9Votacion } from './E9Votacion';
 import { E10Mision } from './E10Mision';
@@ -187,7 +187,4 @@ export function E1HomeEjemplo() {
   );
 }
 
-export function E1Home() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E1HomeEjemplo /> : <E1HomeReal />;
-}
+export const E1Home = conModoDemo(E1HomeEjemplo, E1HomeReal);

@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla, Pill, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E22CalendarioReal } from './E22CalendarioReal';
 import { trabajos } from '../datos';
 import { calendarioProvisional, presenciales, sesiones } from '../datosPlan';
@@ -66,7 +66,4 @@ export function E22CalendarioEjemplo() {
   );
 }
 
-export function E22Calendario() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E22CalendarioEjemplo /> : <E22CalendarioReal />;
-}
+export const E22Calendario = conModoDemo(E22CalendarioEjemplo, E22CalendarioReal);

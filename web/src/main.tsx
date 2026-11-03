@@ -9,6 +9,7 @@ import { CursoProvider, useCurso } from './componentes/curso';
 import { InicioSinCurso } from './componentes/inicio';
 import { SesionProvider, useSesion } from './componentes/sesion';
 import { instalarSonidoDeClic } from './componentes/sonidos';
+import { LimiteDeErrores, PantallaCargada } from './componentes/LimiteDeErrores';
 import { ModoViva } from './componentes/ui';
 import { Cargando, CompletarPerfil, INICIO_REAL, InsigniaDemo, OtroRol, SinDatos } from './componentes/acceso';
 import { PANTALLAS } from './registro';
@@ -37,7 +38,7 @@ function Galeria() {
             {PANTALLAS.filter((pantalla) => pantalla.grupo === grupo).map(({ codigo, titulo, componente: Componente }) => (
               <div className="galeria__item" key={codigo}>
                 <a href={`#/${codigo}`}>{codigo.toUpperCase()} · {titulo}</a>
-                <Componente />
+                <PantallaCargada componente={Componente} />
               </div>
             ))}
           </div>
@@ -84,7 +85,7 @@ function App() {
         <InsigniaDemo />
         <div className="escenario">
           <BarraLateral ruta={codigo} />
-          <Componente />
+          <PantallaCargada componente={Componente} />
         </div>
       </ModoViva.Provider>
     );
@@ -96,7 +97,7 @@ function App() {
     const Acceso = PANTALLAS.find((candidata) => candidata.codigo === 'e0')!.componente;
     return (
       <ModoViva.Provider value>
-        <div className="escenario escenario--sin-barra"><Acceso /></div>
+        <div className="escenario escenario--sin-barra"><PantallaCargada componente={Acceso} /></div>
       </ModoViva.Provider>
     );
   }
@@ -126,10 +127,10 @@ function App() {
     <ModoViva.Provider value>
       <div className="escenario">
         <BarraLateral ruta={permitido ? codigo : inicio.replace('#/', '')} />
-        {!permitido ? <OtroRol rol={persona.rol} /> : CONECTADAS.has(codigo) ? <Componente /> : <SinDatos rol={persona.rol} />}
+        {!permitido ? <OtroRol rol={persona.rol} /> : CONECTADAS.has(codigo) ? <PantallaCargada componente={Componente} /> : <SinDatos rol={persona.rol} />}
       </div>
     </ModoViva.Provider>
   );
 }
 
-createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><ActividadProvider><DesbloqueosProvider><ConfirmarProvider><App /></ConfirmarProvider></DesbloqueosProvider></ActividadProvider></CursoProvider></SesionProvider></StrictMode>);
+createRoot(document.getElementById('raiz')!).render(<StrictMode><SesionProvider><CursoProvider><ActividadProvider><DesbloqueosProvider><ConfirmarProvider><LimiteDeErrores><App /></LimiteDeErrores></ConfirmarProvider></DesbloqueosProvider></ActividadProvider></CursoProvider></SesionProvider></StrictMode>);

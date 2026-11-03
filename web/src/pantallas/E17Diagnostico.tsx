@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E17DiagnosticoReal } from './E17DiagnosticoReal';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 
@@ -51,7 +51,4 @@ export function E17DiagnosticoEjemplo() {
   );
 }
 
-export function E17Diagnostico() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E17DiagnosticoEjemplo /> : <E17DiagnosticoReal />;
-}
+export const E17Diagnostico = conModoDemo(E17DiagnosticoEjemplo, E17DiagnosticoReal);

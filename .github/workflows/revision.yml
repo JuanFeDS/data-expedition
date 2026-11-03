@@ -1,0 +1,35 @@
+name: Revisión
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: web
+      - name: Tipos
+        run: npm run typecheck
+        working-directory: web
+      - name: Lint
+        run: npm run lint
+        working-directory: web
+      - name: Pruebas
+        run: npm run test
+        working-directory: web
+      - name: Construir
+        run: npx vite build
+        working-directory: web

@@ -3,8 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { trabajoActual } from '../datos';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D3EntregasReal } from './D3EntregasReal';
 import { estudiantes, textoEntrega, type EstadoEntrega } from '../datosPlan';
 
@@ -46,7 +46,4 @@ export function D3EntregasEjemplo() {
   );
 }
 
-export function D3Entregas() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D3EntregasEjemplo /> : <D3EntregasReal />;
-}
+export const D3Entregas = conModoDemo(D3EntregasEjemplo, D3EntregasReal);

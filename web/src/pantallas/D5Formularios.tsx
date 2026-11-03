@@ -3,8 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tabla, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { formularios, type TipoFormulario } from '../datosPlan';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D5FormulariosReal } from './D5FormulariosReal';
 
 const TIPO_ESTADO: Record<string, TipoEstado> = { abierto: 'ok', cerrado: 'pendiente', borrador: 'info', programado: 'tarde' };
@@ -62,7 +62,4 @@ export function D5FormulariosEjemplo() {
   );
 }
 
-export function D5Formularios() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D5FormulariosEjemplo /> : <D5FormulariosReal />;
-}
+export const D5Formularios = conModoDemo(D5FormulariosEjemplo, D5FormulariosReal);

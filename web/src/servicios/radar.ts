@@ -1,3 +1,4 @@
+import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION } from '../config';
 import { registrarEvento } from './eventos';
 import { supabase } from './supabase';
 
@@ -6,8 +7,7 @@ export interface PuntoRadar { id: string; nombre: string; inicio: number; ahora:
 export interface Diagnostico { dimensionId: string; autoinforme: number | null; conIa: number | null; sinIa: number | null }
 export type RutaCurso = 'nivelacion' | 'estandar' | 'profundizacion';
 
-export const UMBRAL_NIVELACION = 50;
-export const UMBRAL_PROFUNDIZACION = 80;
+export { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION };
 
 const FALLO = 'No pudimos guardar el cambio. Intenta de nuevo.';
 

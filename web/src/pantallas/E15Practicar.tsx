@@ -1,5 +1,5 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E15PracticarReal } from './E15PracticarReal';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
 import { Dock } from '../componentes/Dock';
@@ -72,7 +72,4 @@ export function E15PracticarEjemplo() {
   );
 }
 
-export function E15Practicar() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E15PracticarEjemplo /> : <E15PracticarReal />;
-}
+export const E15Practicar = conModoDemo(E15PracticarEjemplo, E15PracticarReal);

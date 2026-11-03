@@ -2,7 +2,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Jaguar } from '../componentes/Jaguar';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E24EquipoReal } from './E24EquipoReal';
 import { Pantalla } from '../componentes/ui';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION, equiposCurso, estudiantes } from '../datosPlan';
@@ -59,7 +59,4 @@ export function E24RutaEquipoEjemplo() {
   );
 }
 
-export function E24RutaEquipo() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E24RutaEquipoEjemplo /> : <E24EquipoReal />;
-}
+export const E24RutaEquipo = conModoDemo(E24RutaEquipoEjemplo, E24EquipoReal);

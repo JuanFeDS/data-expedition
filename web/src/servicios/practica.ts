@@ -1,4 +1,5 @@
 import type { PreguntaDatos } from '../componentes/preguntas';
+import { META_XP_SEMANA, PREGUNTAS_POR_SESION, XP_POR_SESION } from '../config';
 import { registrarEvento } from './eventos';
 import type { DimensionCurso, PuntoRadar } from './radar';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION } from './radar';
@@ -13,9 +14,7 @@ export interface ResultadoImportacion { filas: PreguntaImportada[]; errores: str
 export interface ResumenPractica { dias: boolean[]; hoy: number; racha: number; sesionesHoy: number; sesionesSemana: number; xpSemana: number }
 export interface ResultadoSesion { xp: number; aciertos: number; total: number }
 
-export const XP_POR_SESION = 30;
-export const META_XP_SEMANA = 200;
-export const PREGUNTAS_POR_SESION = 5;
+export { META_XP_SEMANA, PREGUNTAS_POR_SESION, XP_POR_SESION };
 export const NOMBRE_DIFICULTAD: Record<Dificultad, string> = { base: 'Base', estandar: 'Estándar', reto: 'Reto' };
 
 const FALLO = 'No pudimos guardar el cambio. Intenta de nuevo.';

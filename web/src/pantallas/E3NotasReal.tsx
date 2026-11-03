@@ -5,7 +5,7 @@ import { Isla } from '../componentes/Region';
 import { useCurso, useRutaCurso } from '../componentes/curso';
 import { Contador, Pantalla, Pill } from '../componentes/ui';
 import { useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
-import { BIOMA_POR_SEMANA } from './E5Entregas';
+import { BIOMA_POR_SEMANA } from '../componentes/biomas';
 
 export function E3NotasReal() {
   const servicio = useServicioTrabajos();

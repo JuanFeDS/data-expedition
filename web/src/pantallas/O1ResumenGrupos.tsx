@@ -2,7 +2,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { O1ResumenReal } from './ObservadorReal';
 import { semanaActual } from '../datos';
 import { estudiantes } from '../datosPlan';
@@ -42,7 +42,4 @@ export function O1ResumenGruposEjemplo() {
   );
 }
 
-export function O1ResumenGrupos() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <O1ResumenGruposEjemplo /> : <O1ResumenReal />;
-}
+export const O1ResumenGrupos = conModoDemo(O1ResumenGruposEjemplo, O1ResumenReal);

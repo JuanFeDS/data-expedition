@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Contador, Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E31LigaReal } from './E31LigaReal';
 import { ligaActual } from '../datosPlan';
 
@@ -71,7 +71,4 @@ export function E31LigaEjemplo() {
   );
 }
 
-export function E31Liga() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E31LigaEjemplo /> : <E31LigaReal />;
-}
+export const E31Liga = conModoDemo(E31LigaEjemplo, E31LigaReal);

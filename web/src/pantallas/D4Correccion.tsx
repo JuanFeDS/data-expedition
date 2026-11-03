@@ -3,8 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Niveles, Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { trabajoActual } from '../datos';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D4Calificar } from './D4Calificar';
 
 interface Criterio {
@@ -84,7 +84,4 @@ export function D4CorreccionEjemplo() {
   );
 }
 
-export function D4Correccion() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D4CorreccionEjemplo /> : <D4Calificar />;
-}
+export const D4Correccion = conModoDemo(D4CorreccionEjemplo, D4Calificar);

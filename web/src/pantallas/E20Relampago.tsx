@@ -4,8 +4,8 @@ import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Cuenta, Estado, Tarjeta } from '../componentes/panel';
 import { sonar } from '../componentes/sonidos';
-import { useSesion } from '../componentes/sesion';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E20Responder } from './E20Responder';
 
 const OPCIONES = ['filter()', 'select()', 'count()', 'withColumn()'];
@@ -130,7 +130,4 @@ export function E20RelampagoEjemplo() {
   );
 }
 
-export function E20Relampago() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E20RelampagoEjemplo /> : <E20Responder />;
-}
+export const E20Relampago = conModoDemo(E20RelampagoEjemplo, E20Responder);

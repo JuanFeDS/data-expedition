@@ -2,7 +2,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E23SesionReal } from './E23SesionReal';
 import { recursos } from '../datosPlan';
 
@@ -54,7 +54,4 @@ export function E23DetalleSesionEjemplo() {
   );
 }
 
-export function E23DetalleSesion() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E23DetalleSesionEjemplo /> : <E23SesionReal />;
-}
+export const E23DetalleSesion = conModoDemo(E23DetalleSesionEjemplo, E23SesionReal);

@@ -3,8 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { trabajos } from '../datos';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D10Rubricas } from './D10Rubricas';
 
 const DIMENSIONES = [
@@ -60,7 +60,4 @@ export function D10ConfiguracionEjemplo() {
   );
 }
 
-export function D10Configuracion() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D10ConfiguracionEjemplo /> : <D10Rubricas />;
-}
+export const D10Configuracion = conModoDemo(D10ConfiguracionEjemplo, D10Rubricas);

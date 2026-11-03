@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { REFRESCO_EN_VIVO_MS, SEGUNDOS_CODIGO_ASISTENCIA } from '../config';
 import { CodigoQR } from '../componentes/CodigoQR';
 import { Dock } from '../componentes/Dock';
 import { Selector } from '../componentes/Selector';
@@ -84,7 +85,7 @@ function D16Real() {
     if (!abierta) return undefined;
     void pedirCodigo();
     const reloj = window.setInterval(() => setRestante((actual) => Math.max(0, actual - 1)), 1000);
-    const lista = window.setInterval(() => void cargarSesion(), 3000);
+    const lista = window.setInterval(() => void cargarSesion(), REFRESCO_EN_VIVO_MS);
     return () => { window.clearInterval(reloj); window.clearInterval(lista); };
   }, [abierta, pedirCodigo, cargarSesion]);
 
@@ -133,7 +134,7 @@ function D16Real() {
                       {enlace ? <CodigoQR valor={enlace} etiqueta="Código QR para registrar asistencia" /> : <div className="asist__qr asist__qr--cargando" />}
                       <div className="asist__codigo">
                         <strong aria-live="off">{vigente?.codigo ?? '······'}</strong>
-                        <div className="asist__tiempo" role="progressbar" aria-valuenow={restante} aria-valuemax={20} aria-label="Segundos para que cambie el código"><i style={{ width: `${(restante / 20) * 100}%` }} /></div>
+                        <div className="asist__tiempo" role="progressbar" aria-valuenow={restante} aria-valuemax={SEGUNDOS_CODIGO_ASISTENCIA} aria-label="Segundos para que cambie el código"><i style={{ width: `${(restante / SEGUNDOS_CODIGO_ASISTENCIA) * 100}%` }} /></div>
                         <small>Cambia en {restante} s</small>
                       </div>
                     </div>

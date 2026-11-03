@@ -2,7 +2,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { O2DimensionesReal } from './ObservadorReal';
 import { dimensiones, trabajos } from '../datos';
 
@@ -45,7 +45,4 @@ export function O2DimensionesTrabajosEjemplo() {
   );
 }
 
-export function O2DimensionesTrabajos() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <O2DimensionesTrabajosEjemplo /> : <O2DimensionesReal />;
-}
+export const O2DimensionesTrabajos = conModoDemo(O2DimensionesTrabajosEjemplo, O2DimensionesReal);

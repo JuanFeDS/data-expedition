@@ -1,7 +1,7 @@
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Isla } from '../componentes/Region';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E1RutaReal } from './E1RutaReal';
 import { Dock } from '../componentes/Dock';
 import { Kicker, ModoViva, Pantalla, Pill } from '../componentes/ui';
@@ -127,7 +127,4 @@ export function E1RutaEjemplo() {
   );
 }
 
-export function E1Ruta() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E1RutaEjemplo /> : <E1RutaReal />;
-}
+export const E1Ruta = conModoDemo(E1RutaEjemplo, E1RutaReal);

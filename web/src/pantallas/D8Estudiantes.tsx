@@ -4,7 +4,7 @@ import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Radar } from '../componentes/Radar';
 import { Pantalla, Pill } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D8FichaReal } from './D8FichaReal';
 import { dimensiones as radarBase, trabajos } from '../datos';
 import { estudiantes, textoEntrega } from '../datosPlan';
@@ -64,7 +64,4 @@ export function D8EstudiantesEjemplo() {
   );
 }
 
-export function D8Estudiantes() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D8EstudiantesEjemplo /> : <D8FichaReal />;
-}
+export const D8Estudiantes = conModoDemo(D8EstudiantesEjemplo, D8FichaReal);

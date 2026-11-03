@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D12ResultadosReal } from './D12ResultadosReal';
 import { formularios, pulsoSemanal } from '../datosPlan';
 
@@ -69,7 +69,4 @@ export function D12ResultadosEjemplo() {
   );
 }
 
-export function D12Resultados() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D12ResultadosEjemplo /> : <D12ResultadosReal />;
-}
+export const D12Resultados = conModoDemo(D12ResultadosEjemplo, D12ResultadosReal);

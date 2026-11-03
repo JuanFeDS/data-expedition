@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D6CalendarioReal } from './D6CalendarioReal';
 import { trabajos } from '../datos';
 import { calendarioProvisional, presenciales, sesiones } from '../datosPlan';
@@ -56,7 +56,4 @@ export function D6CalendarioDocenteEjemplo() {
   );
 }
 
-export function D6CalendarioDocente() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D6CalendarioDocenteEjemplo /> : <D6CalendarioReal />;
-}
+export const D6CalendarioDocente = conModoDemo(D6CalendarioDocenteEjemplo, D6CalendarioReal);

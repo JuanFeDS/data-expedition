@@ -3,8 +3,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Cuenta, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { estudiantes } from '../datosPlan';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D11EnClaseReal } from './D11EnClaseReal';
 
 type Fase = 'lista' | 'abierta' | 'cerrada';
@@ -94,7 +94,4 @@ export function D11EnClaseEjemplo() {
   );
 }
 
-export function D11EnClase() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D11EnClaseEjemplo /> : <D11EnClaseReal />;
-}
+export const D11EnClase = conModoDemo(D11EnClaseEjemplo, D11EnClaseReal);

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tarjeta } from '../componentes/panel';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D2DiagnosticoReal } from './D2DiagnosticoReal';
 import { Pantalla } from '../componentes/ui';
 import { UMBRAL_NIVELACION, UMBRAL_PROFUNDIZACION, dimensionesDiagnostico, estudiantes, porcentajeDatos, rutaPropuesta } from '../datosPlan';
@@ -56,7 +56,4 @@ export function D2DiagnosticoRutasEjemplo() {
   );
 }
 
-export function D2DiagnosticoRutas() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D2DiagnosticoRutasEjemplo /> : <D2DiagnosticoReal />;
-}
+export const D2DiagnosticoRutas = conModoDemo(D2DiagnosticoRutasEjemplo, D2DiagnosticoReal);

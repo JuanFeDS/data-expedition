@@ -3,7 +3,7 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Dato, Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D9MaterialReal } from './D9MaterialReal';
 import { recursos } from '../datosPlan';
 
@@ -46,7 +46,4 @@ export function D9MaterialEjemplo() {
   );
 }
 
-export function D9Material() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D9MaterialEjemplo /> : <D9MaterialReal />;
-}
+export const D9Material = conModoDemo(D9MaterialEjemplo, D9MaterialReal);

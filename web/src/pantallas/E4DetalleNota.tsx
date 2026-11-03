@@ -2,8 +2,8 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Contador, Kicker, Niveles, Pantalla, Pill } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
 import { criteriosTrabajo1 } from '../datos';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E4NotaReal } from './E4NotaReal';
 
 export function E4DetalleNotaEjemplo() {
@@ -43,7 +43,4 @@ export function E4DetalleNotaEjemplo() {
   );
 }
 
-export function E4DetalleNota() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E4DetalleNotaEjemplo /> : <E4NotaReal />;
-}
+export const E4DetalleNota = conModoDemo(E4DetalleNotaEjemplo, E4NotaReal);

@@ -4,7 +4,7 @@ import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { sonar } from '../componentes/sonidos';
 import { Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D1PanelReal } from './D1PanelReal';
 import { semanaActual, trabajoActual } from '../datos';
 import { dimensionesDiagnostico, estudiantes, formularios, rutaPropuesta } from '../datosPlan';
@@ -67,7 +67,4 @@ export function D1PanelEjemplo() {
   );
 }
 
-export function D1Panel() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D1PanelEjemplo /> : <D1PanelReal />;
-}
+export const D1Panel = conModoDemo(D1PanelEjemplo, D1PanelReal);

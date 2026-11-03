@@ -6,9 +6,9 @@ import { Isla } from '../componentes/Region';
 import { useCurso, useRutaCurso } from '../componentes/curso';
 import { useSesion } from '../componentes/sesion';
 import { Kicker, Pantalla, Pill, Segmentado } from '../componentes/ui';
+import { BIOMA_POR_SEMANA } from '../componentes/biomas';
 import { formatoFecha, trabajoPorEntregar, useServicioTrabajos, type EntregaPropia, type TrabajoCurso } from '../servicios/trabajos';
 
-export const BIOMA_POR_SEMANA: Record<number, string> = { 1: 'selva', 2: 'paramo', 3: 'desierto', 4: 'cueva', 5: 'glaciar', 6: 'costa', 7: 'ruinas', 8: 'volcan' };
 
 function Candado() {
   return (

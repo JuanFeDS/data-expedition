@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { useCurso } from '../componentes/curso';
+import { XP_POR_NIVEL } from '../config';
 import { useSesion } from '../componentes/sesion';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
 import { miPerfil, type PerfilEstudiante } from '../servicios/estudiante';
-
-const XP_POR_NIVEL = 500;
 
 export function E12PerfilReal() {
   const { persona } = useSesion();

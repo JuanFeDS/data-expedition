@@ -1,7 +1,7 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Kicker, Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E11ResumenReal } from './E11ResumenReal';
 import { rangoSemanaActual, semanaActual, temaDeRepaso, trabajoActual } from '../datos';
 
@@ -66,7 +66,4 @@ export function E11ResumenEjemplo() {
   );
 }
 
-export function E11Resumen() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E11ResumenEjemplo /> : <E11ResumenReal />;
-}
+export const E11Resumen = conModoDemo(E11ResumenEjemplo, E11ResumenReal);

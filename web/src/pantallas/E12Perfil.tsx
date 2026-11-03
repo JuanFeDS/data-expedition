@@ -1,7 +1,7 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Contador, Kicker, Pantalla } from '../componentes/ui';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E12PerfilReal } from './E12PerfilReal';
 import { dimensiones, gemasGanadas } from '../datos';
 
@@ -77,7 +77,4 @@ export function E12PerfilEjemplo() {
   );
 }
 
-export function E12Perfil() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E12PerfilEjemplo /> : <E12PerfilReal />;
-}
+export const E12Perfil = conModoDemo(E12PerfilEjemplo, E12PerfilReal);

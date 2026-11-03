@@ -1,7 +1,7 @@
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Radar } from '../componentes/Radar';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { E2RadarReal } from './E2RadarReal';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
 import { dimensiones, temaDeRepaso } from '../datos';
@@ -44,7 +44,4 @@ export function E2RadarEjemplo() {
   );
 }
 
-export function E2Radar() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <E2RadarEjemplo /> : <E2RadarReal />;
-}
+export const E2Radar = conModoDemo(E2RadarEjemplo, E2RadarReal);

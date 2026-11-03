@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
-import { useSesion } from '../componentes/sesion';
+import { conModoDemo } from '../componentes/conModoDemo';
 import { D7EquiposReal } from './D7EquiposReal';
 import { Pantalla } from '../componentes/ui';
 import { ROLES_EQUIPO, equiposCurso, estudiantes } from '../datosPlan';
@@ -43,7 +43,4 @@ export function D7EquiposEjemplo() {
   );
 }
 
-export function D7Equipos() {
-  const { modoDemo } = useSesion();
-  return modoDemo ? <D7EquiposEjemplo /> : <D7EquiposReal />;
-}
+export const D7Equipos = conModoDemo(D7EquiposEjemplo, D7EquiposReal);
