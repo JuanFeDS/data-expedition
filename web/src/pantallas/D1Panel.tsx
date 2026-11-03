@@ -4,6 +4,8 @@ import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { sonar } from '../componentes/sonidos';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { D1PanelReal } from './D1PanelReal';
 import { semanaActual, trabajoActual } from '../datos';
 import { dimensionesDiagnostico, estudiantes, formularios, rutaPropuesta } from '../datosPlan';
 
@@ -16,7 +18,7 @@ const ALERTAS = [
 
 let avisado = false;
 
-export function D1Panel() {
+export function D1PanelEjemplo() {
   useEffect(() => {
     if (avisado) return undefined;
     const espera = window.setTimeout(() => { avisado = true; sonar('aviso'); }, 1200);
@@ -63,4 +65,9 @@ export function D1Panel() {
       <Dock accion={{ etiqueta: 'Hoy · S8', texto: 'Abrir una relámpago', ruta: '#/d11' }} />
     </Pantalla>
   );
+}
+
+export function D1Panel() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D1PanelEjemplo /> : <D1PanelReal />;
 }

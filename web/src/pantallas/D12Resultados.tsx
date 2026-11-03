@@ -3,9 +3,11 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Dato, Estado, Tabla, Tarjeta } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { D12ResultadosReal } from './D12ResultadosReal';
 import { formularios, pulsoSemanal } from '../datosPlan';
 
-export function D12Resultados() {
+export function D12ResultadosEjemplo() {
   const [vista, setVista] = useState(0);
   const cerrados = formularios.filter((formulario) => formulario.estado === 'cerrado');
   return (
@@ -65,4 +67,9 @@ export function D12Resultados() {
       <Dock accion={{ etiqueta: 'Histórico', texto: 'Exportar a CSV', ruta: '#/d12' }} />
     </Pantalla>
   );
+}
+
+export function D12Resultados() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D12ResultadosEjemplo /> : <D12ResultadosReal />;
 }

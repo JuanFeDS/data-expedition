@@ -120,7 +120,7 @@ export const NAVEGACION: Record<Rol, GrupoEnlaces[]> = {
 };
 
 export const RUTAS_COMUNES = new Set(['cursos', 'curso', 'inicio', 'ayuda', 'trabajo', 'asistir']);
-export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', 'e1', 'trabajo', 'asistir', 'd16', 'e3', 'e4', 'e5', 'e6', 'e2', 'e7', 'e15', 'e17', 'e20', 'e22', 'e23', 'e24', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
+export const CONECTADAS = new Set(['e0', 'inicio', 'ayuda', 'cursos', 'curso', 'd1', 'd8', 'd12', 'e1', 'trabajo', 'asistir', 'd16', 'e3', 'e4', 'e5', 'e6', 'e2', 'e7', 'e15', 'e17', 'e20', 'e22', 'e23', 'e24', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
 
 const ENLACE_INICIO: Enlace = { tipo: 'panel', etiqueta: 'Inicio', detalle: 'Tus primeros pasos', ruta: '#/inicio', activa: ['inicio', 'inicio-estudiante'], color: 'accent' };
 const ENLACE_AYUDA: Enlace = { tipo: 'ayuda', etiqueta: 'Ayuda', detalle: 'Tutorial y tu perfil', ruta: '#/ayuda', activa: ['ayuda'], color: 'claro' };
@@ -130,7 +130,7 @@ const ENLACE_INFO: Enlace = { tipo: 'panel', etiqueta: 'Información', detalle: 
 const ENLACE_ASISTENCIA: Enlace = { tipo: 'calendario', etiqueta: 'Asistencia', detalle: 'Registra tu asistencia a clase', ruta: '#/asistir', activa: ['asistir'], color: 'mint' };
 const ENLACE_EN_CLASE: Enlace = { tipo: 'votar', etiqueta: 'En clase', detalle: 'Relámpagos, votaciones y encuestas', ruta: '#/e20', activa: ['e20'], color: 'accent' };
 
-export const ENCURSO = new Set(['curso', 'e1', 'trabajo', 'asistir', 'd16', 'e3', 'e4', 'e5', 'e6', 'e2', 'e7', 'e15', 'e17', 'e20', 'e22', 'e23', 'e24', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
+export const ENCURSO = new Set(['curso', 'd1', 'd8', 'd12', 'e1', 'trabajo', 'asistir', 'd16', 'e3', 'e4', 'e5', 'e6', 'e2', 'e7', 'e15', 'e17', 'e20', 'e22', 'e23', 'e24', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd9', 'd15', 'd10', 'd11', 'd13', 'd14']);
 
 export const codigoDeRuta = (ruta: string) => ruta.replace(/^#\/?/, '');
 

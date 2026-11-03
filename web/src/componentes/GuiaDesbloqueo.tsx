@@ -77,6 +77,18 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Equipos',
       texto: 'Aquí defines el tamaño de los equipos de cada trabajo, los sorteas y los ajustas a mano si hace falta.',
     },
+    d1: {
+      titulo: 'Panel del curso',
+      texto: 'Un vistazo a tu curso: entregas por cargar y calificar, lo que requiere tu atención y la próxima clase.',
+    },
+    d8: {
+      titulo: 'Estudiantes',
+      texto: 'La ficha de cada estudiante: su radar, sus notas, su asistencia y su práctica en un solo lugar.',
+    },
+    d12: {
+      titulo: 'Resultados',
+      texto: 'El histórico de encuestas, votaciones y relámpagos, con la opción de exportarlos a CSV.',
+    },
     d16: {
       titulo: 'Asistencia',
       texto: 'Aquí abres la asistencia de cada clase: proyectas un QR y un código que cambian cada 20 segundos, y ves quién llegó.',

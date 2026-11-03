@@ -4,10 +4,12 @@ import { Dock } from '../componentes/Dock';
 import { Estado, Tarjeta } from '../componentes/panel';
 import { Radar } from '../componentes/Radar';
 import { Pantalla, Pill } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
+import { D8FichaReal } from './D8FichaReal';
 import { dimensiones as radarBase, trabajos } from '../datos';
 import { estudiantes, textoEntrega } from '../datosPlan';
 
-export function D8Estudiantes() {
+export function D8EstudiantesEjemplo() {
   const [id, setId] = useState('e1');
   const estudiante = estudiantes.find((candidato) => candidato.id === id)!;
   const ajuste = Math.round((estudiante.datos - 62) / 2);
@@ -60,4 +62,9 @@ export function D8Estudiantes() {
       <Dock accion={{ etiqueta: estudiante.nombre.split(' ')[0], texto: 'Corregir su entrega', ruta: '#/d4' }} />
     </Pantalla>
   );
+}
+
+export function D8Estudiantes() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D8EstudiantesEjemplo /> : <D8FichaReal />;
 }
