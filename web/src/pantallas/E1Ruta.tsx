@@ -1,6 +1,8 @@
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ModalAlbum } from '../componentes/AlbumIsla';
 import { Isla } from '../componentes/Region';
+import { useSesion } from '../componentes/sesion';
+import { E1RutaReal } from './E1RutaReal';
 import { Dock } from '../componentes/Dock';
 import { Kicker, ModoViva, Pantalla, Pill } from '../componentes/ui';
 import { albumDeIsla, hitosRuta, regionesCurso, semanaActual, totalSemanas, trabajoActual } from '../datos';
@@ -19,7 +21,7 @@ function Candado() {
   );
 }
 
-export function E1Ruta() {
+export function E1RutaEjemplo() {
   const viva = useContext(ModoViva);
   const indiceActual = regionesCurso.findIndex((region) => region.estado === 'actual');
   const regiones = regionesCurso.map((region, indice) => ({
@@ -123,4 +125,9 @@ export function E1Ruta() {
       <Dock accion={{ etiqueta: `Estás en la semana ${semanaActual}`, texto: `Continuar ${trabajoActual.titulo}`, ruta: '#/e6' }} />
     </Pantalla>
   );
+}
+
+export function E1Ruta() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E1RutaEjemplo /> : <E1RutaReal />;
 }

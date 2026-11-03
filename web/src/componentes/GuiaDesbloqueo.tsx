@@ -35,6 +35,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Mi equipo',
       texto: 'Aquí ves con quién haces cada trabajo en equipo. Tu docente los sortea y los ajusta.',
     },
+    e1: {
+      titulo: 'Mapa del curso',
+      texto: 'Cada trabajo es una isla del mapa. Entregas, y avanzas a la siguiente: aquí ves dónde estás y cuánto te falta.',
+    },
     asistir: {
       titulo: 'Asistencia',
       texto: 'Aquí registras tu asistencia con el código que proyecta tu docente en clase, y ves cuántas clases llevas.',

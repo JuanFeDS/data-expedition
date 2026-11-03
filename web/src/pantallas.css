@@ -1564,3 +1564,8 @@
 @container asistencia (min-width: 760px) { .asist__columnas { grid-template-columns: 1fr 1fr; } }
 
 .tarjeta:has([aria-expanded="true"]), .rubrica__editor:has([aria-expanded="true"]), .d13__personas li:has([aria-expanded="true"]) { position: relative; z-index: 40; }
+
+.ruta__volver { font-weight: 700; color: var(--mint); }
+.ruta__titulo { font-size: var(--fs-3xl); line-height: 1.05; }
+.isla-fila__nombre a { color: inherit; text-decoration: none; }
+.isla-fila__nombre a:hover { text-decoration: underline; }
