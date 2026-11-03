@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { CodigoQR } from '../componentes/CodigoQR';
 import { Dock } from '../componentes/Dock';
 import { ResultadosFormulario, useResultados } from '../componentes/ResultadosFormulario';
 import { useCurso, useRutaCurso } from '../componentes/curso';
@@ -76,8 +77,9 @@ export function D11EnClaseReal() {
             {abierto ? (
               <Tarjeta tono="oscura" kicker="Abierto ahora" titulo={abierto.titulo} accion={<Estado tipo="ok">En vivo</Estado>}>
                 <div className="d11__qr">
+                  {enlace && <CodigoQR valor={enlace} etiqueta="Código QR para responder el formulario" />}
                   <div className="d11__lado-qr">
-                    <small>Comparte este enlace o pide que abran «Responder» en su menú</small>
+                    <small>Escanea el QR o comparte este enlace</small>
                     <input className="d13__campo" readOnly value={enlace} onFocus={(evento) => evento.target.select()} aria-label="Enlace para responder" />
                     {restante !== null && <Cuenta key={abierto.id + String(abierto.cierraEn)} segundos={restante} total={abierto.duracionSegundos ?? restante} />}
                   </div>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import QRCode from 'qrcode';
 import { CabeceraMundo } from '../componentes/CabeceraMundo';
+import { CodigoQR } from '../componentes/CodigoQR';
 import { Dock } from '../componentes/Dock';
 import { Selector } from '../componentes/Selector';
 import { useCurso, useRutaCurso } from '../componentes/curso';
@@ -30,16 +30,6 @@ const sesionInicial = (sesiones: Sesion[]) => {
   const proxima = sesiones.find((sesion) => sesion.iniciaEn && new Date(sesion.iniciaEn).getTime() > ahora);
   return (proxima ?? sesiones[sesiones.length - 1])?.id ?? '';
 };
-
-function CodigoQR({ valor }: { valor: string }) {
-  const [imagen, setImagen] = useState<string | null>(null);
-  useEffect(() => {
-    let activo = true;
-    QRCode.toDataURL(valor, { width: 320, margin: 1, color: { dark: '#073b3a', light: '#ffffff' } }).then((url) => { if (activo) setImagen(url); }).catch(() => undefined);
-    return () => { activo = false; };
-  }, [valor]);
-  return imagen ? <img className="asist__qr" src={imagen} alt="Código QR para registrar asistencia" /> : <div className="asist__qr asist__qr--cargando" />;
-}
 
 function D16Real() {
   const { curso } = useCurso();
@@ -140,7 +130,7 @@ function D16Real() {
                 {abierta ? (
                   <Tarjeta tono="oscura" kicker="Abierta ahora" titulo="Escanea o escribe el código" accion={<Estado tipo="ok">En vivo</Estado>}>
                     <div className="asist__proyeccion">
-                      {enlace ? <CodigoQR valor={enlace} /> : <div className="asist__qr asist__qr--cargando" />}
+                      {enlace ? <CodigoQR valor={enlace} etiqueta="Código QR para registrar asistencia" /> : <div className="asist__qr asist__qr--cargando" />}
                       <div className="asist__codigo">
                         <strong aria-live="off">{vigente?.codigo ?? '······'}</strong>
                         <div className="asist__tiempo" role="progressbar" aria-valuenow={restante} aria-valuemax={20} aria-label="Segundos para que cambie el código"><i style={{ width: `${(restante / 20) * 100}%` }} /></div>
