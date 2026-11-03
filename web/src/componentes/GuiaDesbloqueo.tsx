@@ -19,6 +19,10 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
       titulo: 'Entregas',
       texto: 'Aquí están tus trabajos: lo que debes entregar, cuándo vence y lo que ya enviaste. Entregas pegando el enlace de tu Pull Request.',
     },
+    e20: {
+      titulo: 'En clase',
+      texto: 'Cuando tu docente abra un relámpago, una votación o una encuesta, aparecerá aquí para que respondas.',
+    },
     e3: {
       titulo: 'Notas',
       texto: 'Aquí ves tus calificaciones, cómo se calculó cada una y lo que tu docente te comenta para mejorar.',
@@ -32,6 +36,14 @@ const POR_ROL: Record<Rol, Record<string, AnuncioSeccion>> = {
     d14: {
       titulo: 'Trabajos',
       texto: 'Aquí publicas lo que se entrega y su fecha límite. Los estudiantes lo verán en sus Entregas.',
+    },
+    d5: {
+      titulo: 'Formularios',
+      texto: 'Aquí creas relámpagos, votaciones y encuestas, con su respuesta correcta, su tiempo y si son anónimos.',
+    },
+    d11: {
+      titulo: 'En clase',
+      texto: 'Aquí abres un formulario para que tus estudiantes lo respondan, y ves la participación y los resultados en vivo.',
     },
     d10: {
       titulo: 'Rúbricas',

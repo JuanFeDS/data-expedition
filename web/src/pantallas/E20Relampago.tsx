@@ -4,7 +4,9 @@ import { Dock } from '../componentes/Dock';
 import { Jaguar } from '../componentes/Jaguar';
 import { Cuenta, Estado, Tarjeta } from '../componentes/panel';
 import { sonar } from '../componentes/sonidos';
+import { useSesion } from '../componentes/sesion';
 import { Kicker, Pantalla, Segmentado } from '../componentes/ui';
+import { E20Responder } from './E20Responder';
 
 const OPCIONES = ['filter()', 'select()', 'count()', 'withColumn()'];
 const RITMO = ['Muy lento', 'Lento', 'Justo', 'Rápido', 'Muy rápido'];
@@ -84,7 +86,7 @@ function Pulso() {
   );
 }
 
-export function E20Relampago() {
+export function E20RelampagoEjemplo() {
   const [tipo, setTipo] = useState(0);
   const [elegida, setElegida] = useState<number | null>(null);
   useEffect(() => { if (tipo === 0) sonar('relampago'); }, [tipo]);
@@ -126,4 +128,9 @@ export function E20Relampago() {
       <Dock accion={accion} />
     </Pantalla>
   );
+}
+
+export function E20Relampago() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <E20RelampagoEjemplo /> : <E20Responder />;
 }

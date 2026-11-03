@@ -3,7 +3,9 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Cuenta, Dato, Estado, Tarjeta } from '../componentes/panel';
 import { Pantalla } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { estudiantes } from '../datosPlan';
+import { D11EnClaseReal } from './D11EnClaseReal';
 
 type Fase = 'lista' | 'abierta' | 'cerrada';
 
@@ -32,7 +34,7 @@ function CodigoQR() {
   );
 }
 
-export function D11EnClase() {
+export function D11EnClaseEjemplo() {
   const [fase, setFase] = useState<Fase>('lista');
   const [respuestas, setRespuestas] = useState(0);
   const reloj = useRef<number>(0);
@@ -90,4 +92,9 @@ export function D11EnClase() {
       <Dock accion={{ etiqueta: fase === 'lista' ? 'Ninguna abierta' : fase === 'abierta' ? 'En vivo' : 'Cerrada', texto: fase === 'lista' ? 'Abrir relámpago' : fase === 'abierta' ? 'Cerrar ahora' : 'Volver a la lista', alPulsar: () => (fase === 'lista' ? abrir() : fase === 'abierta' ? setFase('cerrada') : setFase('lista')) }} />
     </Pantalla>
   );
+}
+
+export function D11EnClase() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D11EnClaseEjemplo /> : <D11EnClaseReal />;
 }

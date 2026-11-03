@@ -3,13 +3,15 @@ import { CabeceraMundo } from '../componentes/CabeceraMundo';
 import { Dock } from '../componentes/Dock';
 import { BarraDato, Estado, Tabla, Tarjeta, type TipoEstado } from '../componentes/panel';
 import { Pantalla, Segmentado } from '../componentes/ui';
+import { useSesion } from '../componentes/sesion';
 import { formularios, type TipoFormulario } from '../datosPlan';
+import { D5FormulariosReal } from './D5FormulariosReal';
 
 const TIPO_ESTADO: Record<string, TipoEstado> = { abierto: 'ok', cerrado: 'pendiente', borrador: 'info', programado: 'tarde' };
 const TIPOS: TipoFormulario[] = ['Encuesta', 'Votación', 'Relámpago'];
 const RESULTADOS = [{ opcion: 'count()', votos: 14 }, { opcion: 'filter()', votos: 4 }, { opcion: 'select()', votos: 2 }, { opcion: 'withColumn()', votos: 1 }];
 
-export function D5Formularios() {
+export function D5FormulariosEjemplo() {
   const [vista, setVista] = useState(0);
   const [tipo, setTipo] = useState<TipoFormulario>('Relámpago');
   const [anonimo, setAnonimo] = useState(false);
@@ -58,4 +60,9 @@ export function D5Formularios() {
       <Dock accion={{ etiqueta: 'Relámpago abierto', texto: 'Ver en clase', ruta: '#/d11' }} />
     </Pantalla>
   );
+}
+
+export function D5Formularios() {
+  const { modoDemo } = useSesion();
+  return modoDemo ? <D5FormulariosEjemplo /> : <D5FormulariosReal />;
 }
