@@ -82,7 +82,7 @@ export function D14Trabajos() {
                   {trabajos.map((trabajo) => (
                     <li key={trabajo.id}>
                       <span className="avatar avatar--verde">{trabajo.semana ?? '·'}</span>
-                      <span className="d13__datos"><strong>{trabajo.nombre}</strong><small>{trabajo.tema || 'Sin tema'} · vence {formatoFecha(trabajo.venceEn).largo} · Pylint {trabajo.minPylint}</small></span>
+                      <a className="d13__datos trabajo__enlace" href={`${rutaCurso('#/trabajo')}?trabajo=${trabajo.id}`}><strong>{trabajo.nombre}</strong><small>{trabajo.tema || 'Sin tema'} · vence {formatoFecha(trabajo.venceEn).largo} · Pylint {trabajo.minPylint}</small></a>
                       <button className="d13__quitar" onClick={() => void quitar(trabajo.id)}>Quitar</button>
                     </li>
                   ))}

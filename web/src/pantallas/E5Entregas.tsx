@@ -74,7 +74,8 @@ export function E5Entregas() {
               {actual && (
                 <section className="bloque-actual">
                   <Kicker>Entrega en curso{actual.semana ? ` · semana ${actual.semana}` : ''}</Kicker>
-                  <h2 className="titulo">{actual.nombre}</h2>
+                  <h2 className="titulo"><a href={`${rutaCurso('#/trabajo')}?trabajo=${actual.id}`}>{actual.nombre}</a></h2>
+                  <a className="bloque-actual__detalle" href={`${rutaCurso('#/trabajo')}?trabajo=${actual.id}`}>Ver qué se pide</a>
                   <p>{actual.tema || 'Pega el enlace de tu PR cuando esté listo'}{borrador ? '. Tienes un borrador guardado.' : '.'}</p>
                   <span className="hoja__fecha bloque-actual__fecha"><small>{vence.dia}</small><b>{vence.numero}</b></span>
                   <a className="bloque-actual__accion" href={rutaCurso('#/e6')}><Pill variante="deep" boton>{borrador ? 'Continuar entrega' : 'Empezar entrega'}</Pill></a>
@@ -119,7 +120,7 @@ export function E5Entregas() {
                     <span className="isla-mini"><Isla bioma={BIOMA_POR_SEMANA[trabajo?.semana ?? 1] ?? 'selva'} /></span>
                     <div className="fila__texto">
                       <Kicker>{fecha ? `Entregado el ${fecha}` : 'Entregado'}{trabajo?.semana ? ` · semana ${trabajo.semana}` : ''}</Kicker>
-                      <strong className="fila__titulo">{trabajo?.nombre}</strong>
+                      <strong className="fila__titulo">{trabajo ? <a href={`${rutaCurso('#/trabajo')}?trabajo=${trabajo.id}`}>{trabajo.nombre}</a> : null}</strong>
                       <div className="chips">
                         <Pill variante="azul" pequena>{entrega.modoIa === 'con_ia' ? 'Con IA' : 'Sin IA'}</Pill>
                         {entrega.nota !== null && <Pill variante="accent" pequena>{entrega.nota.toFixed(1)}</Pill>}
