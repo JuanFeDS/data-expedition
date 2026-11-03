@@ -27,8 +27,8 @@ jobs:
       - name: Lint
         run: npm run lint
         working-directory: web
-      - name: Pruebas
-        run: npm run test
+      - name: Pruebas y cobertura
+        run: npm run test:cobertura
         working-directory: web
       - name: Construir
         run: npx vite build

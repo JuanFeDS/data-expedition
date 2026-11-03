@@ -1,0 +1,507 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for servicios/trabajos.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../theme.js"></script>
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        
+        <label class="theme-select quiet">
+            Theme
+            <select id="themeSelect" autocomplete="off">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="legacy">Legacy</option>
+            </select>
+        </label>
+
+        <h1><a href="../index.html">All files</a> / <a href="index.html">servicios</a> trabajos.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">36.36% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>20/55</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">8.88% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>4/45</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">33.33% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>6/18</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">36.58% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>15/41</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useMemo } from 'react';
+import { useSesion } from '../compartido/estado/sesion';
+import { crearServicioTrabajosDemo } from '../demo/trabajosDemo';
+import { supabase } from './supabase';
+&nbsp;
+export type EstadoEntrega = 'borrador' | 'entregada' | 'calificada' | 'no_presento';
+export type ModoIa = 'sin_ia' | 'con_ia';
+&nbsp;
+export interface TrabajoCurso {
+  id: string;
+  nombre: string;
+  tema: string;
+  semana: number | null;
+  venceEn: string | null;
+  minPylint: number;
+}
+&nbsp;
+export interface EntregaPropia {
+  trabajoId: string;
+  estado: EstadoEntrega;
+  modoIa: ModoIa;
+  enlacePr: string | null;
+  entregadaEn: string | null;
+  nota: number | null;
+}
+&nbsp;
+export interface EntregaVista {
+  id: string;
+  trabajoId: string;
+  estudiante: string;
+  usuario: string | null;
+  grupo: string | null;
+  estado: EstadoEntrega;
+  modoIa: ModoIa;
+  enlacePr: string | null;
+  entregadaEn: string | null;
+  nota: number | null;
+}
+&nbsp;
+export interface NuevoTrabajo { nombre: string; tema: string; semana: number | null; venceEn: string | null; minPylint: number }
+export interface NuevaEntrega { trabajoId: string; enlacePr: string; modoIa: ModoIa; bitacora: string | null }
+&nbsp;
+export interface ServicioTrabajos {
+  cargarTrabajos: (cursoId: string) =&gt; Promise&lt;TrabajoCurso[]&gt;;
+  crearTrabajo: (cursoId: string, datos: NuevoTrabajo) =&gt; Promise&lt;string | null&gt;;
+  eliminarTrabajo: (id: string) =&gt; Promise&lt;string | null&gt;;
+  misEntregas: (cursoId: string) =&gt; Promise&lt;EntregaPropia[]&gt;;
+  entregar: (entrega: NuevaEntrega) =&gt; Promise&lt;string | null&gt;;
+  entregasDelCurso: (cursoId: string) =&gt; Promise&lt;EntregaVista[]&gt;;
+}
+&nbsp;
+const FALLO = 'No pudimos guardar el cambio. Intenta de nuevo.';
+const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+&nbsp;
+export const formatoFecha = (iso: string | null) =&gt; {
+  if (!iso) return { dia: '—', numero: '', largo: 'sin fecha' };
+  const fecha = new Date(iso);
+  const dia = DIAS[fecha.getDay()];
+  return { dia: dia.slice(0, 3).toUpperCase(), numero: String(fecha.getDate()), largo: `${dia} ${fecha.getDate()} ${MESES[fecha.getMonth()]}` };
+};
+&nbsp;
+export const finDelDia = (fechaLocal: string) =&gt; new Date(`${fechaLocal}T23:59:00`).toISOString();
+&nbsp;
+export const trabajoPorEntregar = (trabajos: TrabajoCurso[], entregas: EntregaPropia[]) =&gt; {
+  const hechos = new Set(entregas.filter((entrega) =&gt; entrega.estado !== 'borrador').map((entrega) =&gt; entrega.trabajoId));
+  return trabajos.find((trabajo) =&gt; !hechos.has(trabajo.id)) ?? null;
+};
+&nbsp;
+const servicioSupabase: ServicioTrabajos = {
+  async <span class="fstat-no" title="function not covered" >cargarTrabajos(c</span>ursoId) {
+    const { data, error } = <span class="cstat-no" title="statement not covered" >await supabase!.from('trabajos').select('id, nombre, tema, semana, vence_en, min_pylint').eq('edicion_id', cursoId).eq('es_diagnostico', false).order('semana').order('vence_en');</span>
+<span class="cstat-no" title="statement not covered" >    if (error) <span class="cstat-no" title="statement not covered" >throw error;</span></span>
+<span class="cstat-no" title="statement not covered" >    return (data ?? []).<span class="fstat-no" title="function not covered" >map((f</span>ila) =&gt; (<span class="cstat-no" title="statement not covered" >{ id: fila.id as string, nombre: fila.nombre as string, tema: (fila.tema as string | null) ?? '', semana: fila.semana as number | null, venceEn: fila.vence_en as string | null, minPylint: fila.min_pylint as number }))</span>;</span>
+  },
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >crearTrabajo(c</span>ursoId, datos) {
+    const { error } = <span class="cstat-no" title="statement not covered" >await supabase!.from('trabajos').insert({ edicion_id: cursoId, nombre: datos.nombre, tema: datos.tema || null, semana: datos.semana, vence_en: datos.venceEn, min_pylint: datos.minPylint });</span>
+<span class="cstat-no" title="statement not covered" >    return error ? FALLO : null;</span>
+  },
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >eliminarTrabajo(i</span>d) {
+    const { error } = <span class="cstat-no" title="statement not covered" >await supabase!.from('trabajos').delete().eq('id', id);</span>
+<span class="cstat-no" title="statement not covered" >    return error ? 'No se pudo eliminar. Si ya tiene entregas, no se puede borrar.' : null;</span>
+  },
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >misEntregas(c</span>ursoId) {
+    const { data: sesion } = <span class="cstat-no" title="statement not covered" >await supabase!.auth.getSession();</span>
+    const yo = <span class="cstat-no" title="statement not covered" >sesion.session?.user.id;</span>
+<span class="cstat-no" title="statement not covered" >    if (!yo) <span class="cstat-no" title="statement not covered" >return [];</span></span>
+    const { data, error } = <span class="cstat-no" title="statement not covered" >await supabase!.from('entregas').select('trabajo_id, estado, modo_ia, enlace_pr, entregada_en, nota, trabajos!inner(edicion_id)').eq('perfil_id', yo).eq('trabajos.edicion_id', cursoId);</span>
+<span class="cstat-no" title="statement not covered" >    if (error) <span class="cstat-no" title="statement not covered" >throw error;</span></span>
+<span class="cstat-no" title="statement not covered" >    return (data ?? []).<span class="fstat-no" title="function not covered" >map((f</span>ila) =&gt; (<span class="cstat-no" title="statement not covered" >{ trabajoId: fila.trabajo_id as string, estado: fila.estado as EstadoEntrega, modoIa: fila.modo_ia as ModoIa, enlacePr: fila.enlace_pr as string | null, entregadaEn: fila.entregada_en as string | null, nota: fila.nota as number | null }))</span>;</span>
+  },
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >entregar(e</span>ntrega) {
+    const { data: sesion } = <span class="cstat-no" title="statement not covered" >await supabase!.auth.getSession();</span>
+    const yo = <span class="cstat-no" title="statement not covered" >sesion.session?.user.id;</span>
+<span class="cstat-no" title="statement not covered" >    if (!yo) <span class="cstat-no" title="statement not covered" >return 'Tu sesión venció. Vuelve a entrar.';</span></span>
+    const { error } = <span class="cstat-no" title="statement not covered" >await supabase!.from('entregas').upsert(</span>
+      { trabajo_id: entrega.trabajoId, perfil_id: yo, modo_ia: entrega.modoIa, bitacora: entrega.bitacora, estado: 'entregada', enlace_pr: entrega.enlacePr, entregada_en: new Date().toISOString() },
+      { onConflict: 'trabajo_id,perfil_id' },
+    );
+<span class="cstat-no" title="statement not covered" >    return error ? FALLO : null;</span>
+  },
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >entregasDelCurso(c</span>ursoId) {
+    const [entregas, matriculas] = <span class="cstat-no" title="statement not covered" >await Promise.all([</span>
+      supabase!.from('entregas').select('id, trabajo_id, perfil_id, modo_ia, estado, enlace_pr, entregada_en, nota, perfiles(nombre, usuario, correo), trabajos!inner(edicion_id)').eq('trabajos.edicion_id', cursoId).neq('estado', 'borrador').order('entregada_en', { ascending: false }),
+      supabase!.from('matriculas').select('perfil_id, grupos(nombre)').eq('edicion_id', cursoId),
+    ]);
+<span class="cstat-no" title="statement not covered" >    if (entregas.error || matriculas.error) <span class="cstat-no" title="statement not covered" >throw new Error('Consulta fallida');</span></span>
+    const grupoDe = <span class="cstat-no" title="statement not covered" >new Map((matriculas.data ?? []).<span class="fstat-no" title="function not covered" >map((f</span>ila) =&gt; <span class="cstat-no" title="statement not covered" >[fila.perfil_id as string, (fila.grupos as unknown as { nombre: string } | null)?.nombre ?? null])</span>);</span>
+<span class="cstat-no" title="statement not covered" >    return (entregas.data ?? []).<span class="fstat-no" title="function not covered" >map((f</span>ila) =&gt; {</span>
+      const perfil = <span class="cstat-no" title="statement not covered" >fila.perfiles as unknown as { nombre: string | null; usuario: string | null; correo: string } | null;</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        id: fila.id as string,
+        trabajoId: fila.trabajo_id as string,
+        estudiante: perfil?.nombre ?? perfil?.correo ?? 'Sin nombre',
+        usuario: perfil?.usuario ?? null,
+        grupo: grupoDe.get(fila.perfil_id as string) ?? null,
+        estado: fila.estado as EstadoEntrega,
+        modoIa: fila.modo_ia as ModoIa,
+        enlacePr: fila.enlace_pr as string | null,
+        entregadaEn: fila.entregada_en as string | null,
+        nota: fila.nota as number | null,
+      };
+    });
+  },
+};
+&nbsp;
+const servicioDemo = crearServicioTrabajosDemo();
+&nbsp;
+export const <span class="fstat-no" title="function not covered" >useServicioTrabajos = (): ServicioTrabajos =&gt; {</span>
+  const { modoDemo } = <span class="cstat-no" title="statement not covered" >useSesion()</span>;
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >useMemo(() =&gt; (<span class="cstat-no" title="statement not covered" >m</span>odoDemo ? servicioDemo : servicioSupabase), [</span>modoDemo]);</span>
+};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-11-03T02:27:14.653Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    

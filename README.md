@@ -122,7 +122,8 @@ Se abre en `http://localhost:5173`. Sin variables de Supabase (`VITE_SUPABASE_UR
 | `npm run check` | Tipos, lint y pruebas, todo junto |
 | `npm run typecheck` | Revisa tipos |
 | `npm run lint` | Busca errores probables (oxlint) |
-| `npm test` | Pruebas de lógica, dominio y estructura (Vitest) |
+| `npm test` | Pruebas unitarias de dominio, servicios, componentes y pantallas (Vitest) |
+| `npm run test:cobertura` | Pruebas con cobertura y mínimos exigidos |
 | `npm run build` | `check` y construye la app |
 
 ### Despliegue

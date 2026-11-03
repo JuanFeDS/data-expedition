@@ -69,7 +69,8 @@ export function E20Responder() {
   const elegido = abiertos?.find((formulario) => formulario.id === eligeId) ?? null;
   const yaRespondio = elegido ? respondidos.has(elegido.id) : false;
   const { resultados, fallo: falloResultados } = useResultados(yaRespondio && elegido ? elegido.id : null, elegido?.tipo === 'votacion');
-  const unicoPendiente = abiertos && abiertos.filter((formulario) => !respondidos.has(formulario.id)).length === 1 ? abiertos.find((formulario) => !respondidos.has(formulario.id))?.id ?? null : null;
+  const pendientes = abiertos?.filter((formulario) => !respondidos.has(formulario.id)) ?? [];
+  const unicoPendiente = abiertos?.length === 1 ? abiertos[0].id : pendientes.length === 1 ? pendientes[0].id : null;
 
   useEffect(() => {
     if (!elegido && unicoPendiente) setEligeId(unicoPendiente);

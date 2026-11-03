@@ -61,17 +61,30 @@ docs/              producto/, curso/, diseno/, historial/
 
 ## Comprobaciones
 
-| Comando | Qué revisa |
+| Comando (en `web/`) | Qué revisa |
 |---|---|
 | `npm run typecheck` | Tipos estrictos, variables y parámetros sin uso |
 | `npm run lint` | Errores probables (oxlint) |
-| `npm test` | Lógica pura y consistencia de navegación/registro (Vitest) |
-| `npm run check` | Los tres anteriores |
+| `npm test` | Todas las pruebas unitarias (Vitest + Testing Library) |
+| `npm run test:cobertura` | Lo anterior con cobertura y mínimos exigidos |
+| `npm run check` | Tipos, lint y pruebas |
 | `npm run build` | `check` + empaquetado |
+
+### Pruebas unitarias
+
+- **Dominio** (`dominio/*.test.ts`): reglas puras de nota, niveles y radar, y que el dominio no importe de fuera.
+- **Servicios** (`servicios/*.test.ts`): cada función que habla con Supabase se prueba con un cliente falso (`pruebas/supabaseSimulado.ts`): qué consulta arma, cómo mapea la respuesta y cómo traduce los errores. También los servicios de demostración, el registro de eventos y el almacenamiento de la sesión.
+- **Componentes** (`compartido/**/*.test.tsx`): selector, preguntas, paneles, resultados, manejo de errores y el desbloqueo de secciones con sus proveedores.
+- **Pantallas** (`funciones/*.test.tsx`): flujos de las pantallas clave, con los servicios simulados (`pruebas/contexto.ts` simula sesión y curso).
+- **Estructura** (`compartido/navegacion/estructura.test.ts`): consistencia entre el registro, el panel y la ruta de desbloqueo.
+- **Base de datos**: `supabase/pruebas/funciones_y_politicas.sql`, que se corre aparte contra Supabase.
+- **Mínimos de cobertura** (que no pueden bajar): dominio 90 % de líneas, servicios 80 %.
+
+Al agregar un servicio o una pantalla con lógica, agrega su prueba junto al archivo (`X.test.ts` / `X.test.tsx`).
 
 ## Deuda conocida
 
-- Las pruebas de interfaz con navegador (flujos completos por rol) no existen; lo que hoy protege las pantallas son los tipos, las pruebas de estructura y las pruebas SQL.
+- No hay pruebas con un navegador real (flujos completos por rol). Las pantallas sin prueba unitaria son sobre todo las de calendario, equipos, diagnóstico, observador y el campamento.
 - Hay políticas RLS permisivas múltiples por tabla (una para docente y otra para el dueño); funcionan, pero el asesor de rendimiento de Supabase las marca. Se pueden fusionar si el volumen lo pide.
 - Las funciones `resumen_*_por_grupo` de la migración inicial ya no se usan desde el cliente.
 - Activar en el panel de Supabase la protección contra contraseñas filtradas si algún día se habilitan contraseñas (hoy solo hay Google y enlace por correo).
