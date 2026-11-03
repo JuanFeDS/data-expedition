@@ -51,3 +51,15 @@ Todas parten solas al llegar a la slide y se apagan si el sistema pide menos mov
 ## QR de la relámpago
 
 El QR real lo genera la pantalla **En clase** de la app. Pega aquí una captura o reemplaza el bloque `.qr` por una imagen.
+
+## Layouts sin tarjetas
+
+Para slides de concepto hay layouts que evitan la tarjeta blanca con texto:
+
+- **Filas** (`.filas` con `.fila-g`): un objeto de la marca o un número grande, título y texto, separados por una línea.
+- **Bandas a sangre** (`.bandas` con `.banda--verde|deep|acento|menta|claro`): paneles de color de lado a lado con un gráfico animado (`.glifo`) o una palabra gigante (`.gigante`).
+- **Partido con visual** (`.split`): texto a un lado y un SVG animado al otro (radar, Venn, círculos anidados, diagrama de ramas).
+- **Escalera** (`.escalera` con `.peldano`): peldaños que crecen para ideas que escalan.
+- **Cita** (`.cita`, `.pregunta-g`): frase enorme con marcador, para una sola idea.
+
+Las clases `a-pop`, `a-sube`, `a-crece-y`, `a-crece-x`, `a-corre` y `a-dibuja` animan elementos de un SVG o de una slide; `--i` define el orden de aparición.

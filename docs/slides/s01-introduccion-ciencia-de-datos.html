@@ -48,11 +48,11 @@
   <section class="slide slide--verde">
     <span class="kicker">Cómo funciona el curso</span>
     <h2 class="titulo titulo--sm">Cuatro reglas del juego</h2>
-    <div class="dos" style="grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
-      <div class="bloque"><h3>Islas y radar</h3><p>Avanzas por islas y tu radar de 7 dimensiones se compara con tu propio punto de partida.</p></div>
-      <div class="bloque"><h3>IA con declaración</h3><p>Se permite usarla. Lo que no se permite es ocultarla.</p></div>
-      <div class="bloque"><h3>Entrega por PR</h3><p>Cada trabajo se entrega con el enlace de tu pull request, cargado en la app.</p></div>
-      <div class="bloque bloque--acento"><h3>Diagnóstico sin nota</h3><p>Fija tu punto de partida. No cuenta para aprobar.</p></div>
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><img src="img/mapa.webp" alt=""><div><h3>Islas y radar</h3><p>Avanzas por islas y tu radar de 7 dimensiones se compara con tu propio punto de partida.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/cuaderno.webp" alt=""><div><h3>IA con declaración</h3><p>Se permite usarla. Lo que no se permite es ocultarla.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/carta.webp" alt=""><div><h3>Entrega por PR</h3><p>Cada trabajo se entrega con el enlace de tu pull request, cargado en la app.</p></div></div>
+      <div class="fila-g" style="--i:3"><img src="img/binoculares.webp" alt=""><div><h3>Diagnóstico sin nota</h3><p>Fija tu punto de partida. No cuenta para aprobar.</p></div></div>
     </div>
   </section>
   <section class="slide ">
@@ -66,63 +66,79 @@
     <img class="marca" src="img/logo.webp" alt="">
   </section>
   <section class="slide slide--selva">
+    <div class="split">
+      <div>
     <span class="kicker">Tu radar</span>
     <h2 class="titulo titulo--sm">Siete dimensiones</h2>
-    <p class="sub">Cada trabajo y cada práctica alimentan una o varias. Tú te comparas con tu punto de partida, no con nadie más.</p>
-    <div class="pills" style="margin-top:56px; gap:24px">
-      <span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Datos</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Análisis</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Modelado</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Validación</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Comunicación</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Producción</span><span class="pill pill--accent" style="font-size:44px; padding:20px 40px">Dirección de IA</span>
+    <p class="sub">Cada trabajo y cada práctica alimentan una o varias. Te comparas con tu punto de partida, no con nadie más.</p>
+        <div class="leyenda" style="margin-top:40px; font-size:32px"><span><i></i>Ahora</span><span><i class="antes" style="background:none; border:5px dashed var(--mint)"></i>Tu inicio</span></div>
+        <p class="sub" style="font-size:28px; margin-top:16px">Datos de ejemplo</p>
+      </div>
+      <svg class="visual" viewBox="-80 -20 860 780" role="img" aria-label="Radar de siete dimensiones, ahora frente al inicio">
+        <polygon points="350.0,287.5 398.9,311.0 410.9,363.9 377.1,406.3 322.9,406.3 289.1,363.9 301.1,311.0" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,225.0 447.7,272.1 471.9,377.8 404.2,462.6 295.8,462.6 228.1,377.8 252.3,272.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,162.5 496.6,233.1 532.8,391.7 431.4,518.9 268.6,518.9 167.2,391.7 203.4,233.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><polygon points="350.0,100.0 545.5,194.1 593.7,405.6 458.5,575.2 241.5,575.2 106.3,405.6 154.5,194.1" fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="350.0" y2="100.0" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="545.5" y2="194.1" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="593.7" y2="405.6" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="458.5" y2="575.2" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="241.5" y2="575.2" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="106.3" y2="405.6" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/><line x1="350" y1="350" x2="154.5" y2="194.1" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/>
+        <polygon class="a-radar" points="350.0,195.0 457.5,264.3 442.6,371.1 421.6,498.7 293.6,467.1 240.3,375.0 236.6,259.6" fill="#ffd23f" fill-opacity=".38" stroke="#ffd23f" stroke-width="7" stroke-linejoin="round"/>
+        <polygon points="350.0,262.5 408.6,303.2 398.7,361.1 393.4,440.1 317.5,417.6 289.1,363.9 291.4,303.2" fill="none" stroke="#5eeab0" stroke-width="6" stroke-dasharray="14 12" stroke-linejoin="round"/>
+        <text x="350.0" y="60.0" text-anchor="middle" font-size="34" fill="#fff">Datos</text><text x="584.5" y="173.0" text-anchor="start" font-size="34" fill="#fff">Análisis</text><text x="642.5" y="426.8" text-anchor="start" font-size="34" fill="#fff">Modelado</text><text x="480.2" y="630.3" text-anchor="start" font-size="34" fill="#fff">Validación</text><text x="219.8" y="630.3" text-anchor="end" font-size="34" fill="#fff">Comunicación</text><text x="57.5" y="426.8" text-anchor="end" font-size="34" fill="#fff">Producción</text><text x="115.5" y="173.0" text-anchor="end" font-size="34" fill="#fff">Dirección de IA</text>
+      </svg>
     </div>
-    <img class="objeto" src="img/brujula.webp" alt="">
   </section>
   <section class="slide ">
+    <div class="split">
+      <div>
     <span class="kicker">Cómo se evalúa</span>
     <h2 class="titulo titulo--sm">Rúbricas de 5 niveles</h2>
-    <p class="sub">Cada criterio tiene niveles descritos. La nota va de 1.0 a 5.0 y la regla siempre es visible.</p>
-    <div class="tres">
-      <div class="bloque"><h3>Criterios con peso</h3><p>Cada trabajo se divide en criterios, y cada criterio pesa distinto.</p></div>
-      <div class="bloque"><h3>Medios puntos</h3><p>Puedes quedar entre dos niveles: 3.5 existe.</p></div>
-      <div class="bloque bloque--verde"><h3>Retroalimentación</h3><p>Cada nota llega con comentarios sobre qué funcionó y qué mejorar.</p></div>
+    <p class="sub">La nota va de 1.0 a 5.0 y la regla siempre es visible. Puedes quedar entre dos niveles.</p>
+        <div class="pesos" style="margin-top:56px"><span style="--w:40%; background:var(--primary); --i:0">Criterio A · 40 %</span><span style="--w:35%; background:var(--secondary); --i:1">B · 35 %</span><span style="--w:25%; background:var(--deep); --i:2">C · 25 %</span></div>
+        <p class="sub" style="font-size:30px; margin-top:16px">Cada criterio pesa distinto.</p>
+      </div>
+      <div style="position:relative">
+        <div class="nv" style="--i:0"><span>Nivel 1</span><i style="--w:20%"></i><b>1.0</b></div>
+        <div class="nv" style="--i:1"><span>Nivel 2</span><i style="--w:40%"></i><b>2.0</b></div>
+        <div class="nv" style="--i:2"><span>Nivel 3</span><i style="--w:60%"></i><b>3.0</b></div>
+        <div class="nv nv--tu" style="--i:3"><span>Tu trabajo</span><i style="--w:70%"></i><b style="color:var(--primary)">3.5</b></div>
+        <div class="nv" style="--i:4"><span>Nivel 4</span><i style="--w:80%"></i><b>4.0</b></div>
+        <div class="nv" style="--i:5"><span>Nivel 5</span><i style="--w:100%"></i><b>5.0</b></div>
+      </div>
     </div>
+    <img class="marca" src="img/logo.webp" alt="">
   </section>
   <section class="slide slide--densa">
     <span class="kicker">Sobre la IA</span>
     <h2 class="titulo titulo--sm">Se permite, y se declara</h2>
-    <div class="dos">
-      <div class="bloque"><h3>Con IA</h3><p>La usaste: lo dices y dejas una bitácora de tres líneas.</p></div>
-      <div class="bloque bloque--acento"><h3>Sin IA</h3><p>No la usaste: también lo declaras.</p></div>
+    <p class="sub">Lo que importa es la honestidad: se declara, no se oculta.</p>
+    <div class="bandas" style="--n:2;">
+      <div class="banda banda--verde" style="--i:0"><div class="gigante">Con<br>IA</div><p>La usaste: lo dices y dejas una bitácora de tres líneas.</p></div>
+      <div class="banda banda--acento" style="--i:1"><div class="gigante">Sin<br>IA</div><p>No la usaste: también lo declaras.</p></div>
     </div>
-    <p class="sub empuja">Lo que importa es la honestidad: se declara, no se oculta.</p>
   </section>
   <section class="slide slide--verde">
     <span class="kicker">Cómo se entrega</span>
     <h2 class="titulo titulo--sm">Todo por pull request</h2>
     <p class="sub">No recojo nada: tú cargas el enlace de tu PR en la app antes de la fecha límite.</p>
-    <ol class="lista lista--num">
-      <li>Trabajas en tu repositorio</li>
-      <li>Abres un pull request</li>
-      <li>Copias el enlace y lo cargas en la app</li>
-    </ol>
+    <div class="ciclo" style="margin-top:96px">
+      <div class="paso-ciclo" style="--i:0"><b>1</b>Trabajas<small>en tu repositorio</small></div><div class="union" style="--i:0"></div>
+      <div class="paso-ciclo" style="--i:1"><b>2</b>Abres<small>un pull request</small></div><div class="union" style="--i:1"></div>
+      <div class="paso-ciclo" style="--i:2"><b>3</b>Cargas<small>el enlace en la app</small></div>
+    </div>
+    <img class="objeto" src="img/carta.webp" alt="">
   </section>
   <section class="slide ">
     <span class="kicker">Antes de empezar</span>
     <h2 class="titulo titulo--sm">El diagnóstico no cuenta para aprobar</h2>
-    <p class="sub">Solo fija tu punto de partida. Así el curso se ajusta a lo que ya sabes y mide cuánto avanzas.</p>
-    <div class="dos">
-      <div class="bloque"><h3>Qué mide</h3><p>Python, SQL, estadística, Git, machine learning y uso de IA.</p></div>
-      <div class="bloque bloque--acento"><h3>Cómo se hace</h3><p>Después de esta sesión, en máximo 60 minutos y entregado por PR.</p></div>
+    <div class="bandas" style="--n:2;">
+      <div class="banda banda--verde" style="--i:0"><h3>Qué mide</h3><div class="pills" style="margin-top:8px"><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">Python</span><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">SQL</span><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">Estadística</span><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">Git</span><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">Machine learning</span><span class="pill pill--accent" style="font-size:32px; padding:10px 26px">Uso de IA</span></div><p style="margin-top:24px">Fija tu punto de partida para que el curso se ajuste a ti.</p></div>
+      <div class="banda banda--acento" style="--i:1"><div class="gigante">60</div><h3>minutos máximo</h3><p>Después de esta sesión, entregado por PR.</p></div>
     </div>
-    <img class="objeto" src="img/cuaderno.webp" alt="">
   </section>
   <section class="slide slide--selva">
     <span class="kicker">La app del curso</span>
     <h2 class="titulo titulo--sm">Todo está en un solo lugar</h2>
-    <ul class="lista">
-      <li><b>Radar y notas:</b> dónde estás y cómo vas</li>
-      <li><b>Practicar:</b> sesiones cortas de 5 preguntas con XP y racha</li>
-      <li><b>Relámpagos y votaciones:</b> participas desde el celular en clase</li>
-      <li><b>Calendario y material:</b> qué toca cada sesión</li>
-    </ul>
-    <img class="objeto" src="img/mapa.webp" alt="">
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><img src="img/brujula.webp" alt=""><div><h3>Radar y notas</h3><p>Dónde estás y cómo vas.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/linterna.webp" alt=""><div><h3>Practicar</h3><p>Sesiones cortas de 5 preguntas con XP y racha.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/urna.webp" alt=""><div><h3>Relámpagos y votaciones</h3><p>Participas desde el celular en clase.</p></div></div>
+      <div class="fila-g" style="--i:3"><img src="img/mochila.webp" alt=""><div><h3>Calendario y material</h3><p>Qué toca cada sesión.</p></div></div>
+    </div>
   </section>
   <section class="slide slide--densa">
     <span class="kicker">Bloque 2 · minutos 15–55</span>
@@ -130,33 +146,45 @@
     <img class="marca" src="img/logo.webp" alt="">
   </section>
   <section class="slide ">
+    <div class="split">
+      <div>
     <span class="kicker">Concepto</span>
     <h2 class="titulo titulo--sm">Ciencia de datos es convertir datos en decisiones</h2>
-    <div class="tres">
-      <div class="bloque"><h3>Estadística</h3><p>Para saber qué tan confiable es lo que ves.</p></div>
-      <div class="bloque"><h3>Programación</h3><p>Para repetir y escalar el análisis, sin hacerlo a mano.</p></div>
-      <div class="bloque bloque--acento"><h3>Conocimiento del problema</h3><p>Para saber qué pregunta vale la pena hacer.</p></div>
+    <p class="sub">Nace donde se cruzan tres cosas.</p>
+      </div>
+      <svg class="visual" viewBox="0 0 800 780" role="img" aria-label="Estadística, programación y conocimiento del problema">
+        <circle class="a-pop" style="--i:0" cx="400" cy="270" r="235" fill="#0a8057" fill-opacity=".82"/>
+        <circle class="a-pop" style="--i:1" cx="250" cy="520" r="235" fill="#1f6bff" fill-opacity=".72"/>
+        <circle class="a-pop" style="--i:2" cx="550" cy="520" r="235" fill="#ffd23f" fill-opacity=".8"/>
+        <text x="400" y="150" text-anchor="middle" font-size="44" fill="#fff">Estadística</text>
+        <text x="175" y="650" text-anchor="middle" font-size="40" fill="#fff">Programación</text>
+        <text x="635" y="640" text-anchor="middle" font-size="36" fill="#0b2a24">Conocimiento</text>
+        <text x="635" y="682" text-anchor="middle" font-size="36" fill="#0b2a24">del problema</text>
+        <g class="a-pop" style="--i:4"><rect x="290" y="372" width="220" height="108" rx="54" fill="#073b3a"/>
+        <text x="400" y="420" text-anchor="middle" font-size="36" fill="#ffd23f">Ciencia</text>
+        <text x="400" y="462" text-anchor="middle" font-size="36" fill="#ffd23f">de datos</text></g>
+      </svg>
     </div>
+    <img class="marca" src="img/logo.webp" alt="">
   </section>
   <section class="slide slide--verde">
     <span class="kicker">Tu día en datos</span>
     <h2 class="titulo titulo--sm">Generas datos todo el tiempo</h2>
-    <ul class="lista">
-      <li>Tu celular guarda dónde estuviste y a qué hora</li>
-      <li>Cada compra queda registrada con monto y producto</li>
-      <li>Cada búsqueda y cada «me gusta» dice qué te interesa</li>
-      <li>Un pedido de domicilio deja hora, ruta y tiempo de entrega</li>
-    </ul>
-    <img class="objeto" src="img/mochila.webp" alt="">
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><img src="img/mapa.webp" alt=""><div><h3>Tu celular</h3><p>Guarda dónde estuviste y a qué hora.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/carta.webp" alt=""><div><h3>Tus compras</h3><p>Cada una queda registrada con monto y producto.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/binoculares.webp" alt=""><div><h3>Tus búsquedas y «me gusta»</h3><p>Dicen qué te interesa.</p></div></div>
+      <div class="fila-g" style="--i:3"><img src="img/mochila.webp" alt=""><div><h3>Un domicilio</h3><p>Deja hora, ruta y tiempo de entrega.</p></div></div>
+    </div>
   </section>
   <section class="slide ">
     <span class="kicker">Preguntas</span>
-    <h2 class="titulo titulo--sm">Cuatro tipos de preguntas que los datos pueden responder</h2>
-    <div class="dos" style="grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
-      <div class="bloque"><h3>Descriptiva</h3><p>¿Qué pasó? Cuántos pedidos hubo la semana pasada.</p></div>
-      <div class="bloque"><h3>Diagnóstica</h3><p>¿Por qué pasó? Por qué subieron los retrasos.</p></div>
-      <div class="bloque"><h3>Predictiva</h3><p>¿Qué pasará? Qué pedidos van a llegar tarde.</p></div>
-      <div class="bloque bloque--acento"><h3>Prescriptiva</h3><p>¿Qué hacemos? Cómo asignar repartidores.</p></div>
+    <h2 class="titulo titulo--sm">Cuatro preguntas, cada vez más valiosas</h2>
+    <div class="escalera">
+      <div class="peldano peldano--claro" style="--h:38%; --c:var(--mint); --i:0"><b>Descriptiva</b><span>¿Qué pasó? Cuántos pedidos hubo la semana pasada.</span></div>
+      <div class="peldano" style="--h:58%; --c:var(--primary); --i:1"><b>Diagnóstica</b><span>¿Por qué pasó? Por qué subieron los retrasos.</span></div>
+      <div class="peldano" style="--h:79%; --c:var(--secondary); --i:2"><b>Predictiva</b><span>¿Qué pasará? Qué pedidos llegarán tarde.</span></div>
+      <div class="peldano peldano--claro" style="--h:100%; --c:var(--accent); --i:3"><b>Prescriptiva</b><span>¿Qué hacemos? Cómo asignar repartidores.</span></div>
     </div>
   </section>
   <section class="slide slide--selva">
@@ -176,20 +204,20 @@
     <span class="kicker">Paso 1 del ciclo · ejemplo: pedidos que llegan tarde</span>
     <h2 class="titulo titulo--sm">Pregunta</h2>
     <p class="sub">Una buena pregunta es concreta, se puede medir y cambia una decisión.</p>
-    <div class="dos">
-      <div class="bloque"><h3>Floja</h3><p>«¿Cómo mejoramos el servicio?»</p></div>
-      <div class="bloque bloque--verde"><h3>Buena</h3><p>«¿En qué franja horaria llegan más pedidos tarde, y por qué?»</p></div>
+    <div style="margin-top:56px; display:grid; gap:48px">
+      <div class="pregunta-g tachado" style="--i:0">«¿Cómo mejoramos el servicio?»</div>
+      <div class="pregunta-g" style="--i:1"><b>→</b><mark style="background:linear-gradient(transparent 58%, var(--mint) 58%); color:inherit">«¿En qué franja llegan más pedidos tarde, y por qué?»</mark></div>
     </div>
   </section>
   <section class="slide ">
     <span class="kicker">Paso 2 del ciclo · ejemplo: pedidos que llegan tarde</span>
     <h2 class="titulo titulo--sm">Datos</h2>
     <p class="sub">¿Qué datos necesito y de dónde los saco?</p>
-    <ul class="lista">
-      <li><b>Base de datos</b> de la empresa: pedidos, horas, direcciones</li>
-      <li><b>API</b> externa: clima y tráfico</li>
-      <li><b>Archivos</b> CSV o Excel de otras áreas</li>
-    </ul>
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><img src="img/urna.webp" alt=""><div><h3>Base de datos de la empresa</h3><p>Pedidos, horas, direcciones.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/mapa.webp" alt=""><div><h3>API externa</h3><p>Clima y tráfico.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/cuaderno.webp" alt=""><div><h3>Archivos</h3><p>CSV o Excel de otras áreas.</p></div></div>
+    </div>
   </section>
   <section class="slide ">
     <span class="kicker">Paso 3 del ciclo · ejemplo: pedidos que llegan tarde</span>
@@ -223,17 +251,20 @@
     <span class="kicker">Paso 5 del ciclo · ejemplo: pedidos que llegan tarde</span>
     <h2 class="titulo titulo--sm">Modelo</h2>
     <p class="sub">Cuando hace falta, un modelo aprende patrones para predecir.</p>
-    <div class="dos">
-      <div class="bloque"><h3>Entra</h3><p>Franja, distancia, clima, tiempo de preparación.</p></div>
-      <div class="bloque bloque--verde"><h3>Sale</h3><p>La probabilidad de que el pedido llegue tarde.</p></div>
+    <div class="flujo">
+      <div class="chips"><span class="chip a-sube" style="--i:0">Franja horaria</span><span class="chip a-sube" style="--i:1">Distancia</span><span class="chip a-sube" style="--i:2">Clima</span><span class="chip a-sube" style="--i:3">Preparación</span></div>
+      <span class="flecha">→</span>
+      <div class="motor a-pop" style="--i:4"><span>Modelo<small>aprende patrones</small></span></div>
+      <span class="flecha">→</span>
+      <div class="salida a-pop" style="--i:6">78 %<small>probabilidad de llegar tarde · ejemplo</small></div>
     </div>
   </section>
   <section class="slide ">
     <span class="kicker">Paso 6 del ciclo · ejemplo: pedidos que llegan tarde</span>
     <h2 class="titulo titulo--sm">Comunicar</h2>
-    <p class="sub">El análisis no sirve si quien decide no lo entiende.</p>
-    <div class="dos">
-      <div class="bloque bloque--acento"><h3>Para quien decide</h3><p>Una frase y un gráfico: «En el almuerzo se retrasan más: conviene reforzar repartidores entre 12 y 2».</p></div>
+    <div style="flex:1; display:grid; align-content:center">
+      <p class="cita">En el almuerzo se retrasan más: <mark>refuerza repartidores entre 12 y 2.</mark></p>
+      <p class="sub" style="margin-top:40px">Una frase y un gráfico para quien decide. El análisis no sirve si no se entiende.</p>
     </div>
   </section>
   <section class="slide slide--densa">
@@ -257,36 +288,36 @@
   <section class="slide ">
     <span class="kicker">Datos</span>
     <h2 class="titulo titulo--sm">Tres formas en que llegan los datos</h2>
-    <div class="tres">
-      <div class="bloque"><h3>Estructurados</h3><p>Tablas con filas y columnas. Una base de datos de pedidos.</p></div>
-      <div class="bloque"><h3>Semiestructurados</h3><p>Con etiquetas pero sin forma fija. Un archivo JSON de una API.</p></div>
-      <div class="bloque bloque--acento"><h3>No estructurados</h3><p>Texto libre, imágenes, audio. Las reseñas de los clientes.</p></div>
+    <div class="bandas" style="--n:3;">
+      <div class="banda banda--claro" style="--i:0"><div class="glifo"><svg viewBox="0 0 340 300"><rect x="10" y="20" width="320" height="260" rx="18" fill="none" stroke="#073b3a" stroke-width="10"/><line class="a-sube" style="--i:1" x1="10" y1="85" x2="330" y2="85" stroke="#073b3a" stroke-width="8"/><line class="a-sube" style="--i:2" x1="10" y1="150" x2="330" y2="150" stroke="#073b3a" stroke-width="8"/><line class="a-sube" style="--i:3" x1="10" y1="215" x2="330" y2="215" stroke="#073b3a" stroke-width="8"/><line x1="116" y1="20" x2="116" y2="280" stroke="#073b3a" stroke-width="8"/><line x1="224" y1="20" x2="224" y2="280" stroke="#073b3a" stroke-width="8"/></svg></div><h3>Estructurados</h3><p>Tablas con filas y columnas. Una base de datos de pedidos.</p></div>
+      <div class="banda banda--deep" style="--i:1"><div class="glifo"><span class="gigante" style="font-family:var(--font-code); font-size:230px; color:#ffd23f">{ }</span></div><h3>Semiestructurados</h3><p>Con etiquetas pero sin forma fija. Un archivo JSON de una API.</p></div>
+      <div class="banda banda--acento" style="--i:2"><div class="glifo"><svg viewBox="0 0 340 300"><rect x="10" y="20" width="320" height="260" rx="22" fill="#073b3a"/><circle class="a-pop" style="--i:1" cx="250" cy="100" r="34" fill="#ffd23f"/><polygon class="a-pop" style="--i:0" points="10,280 120,130 200,230 250,170 330,280" fill="#5eeab0"/></svg></div><h3>No estructurados</h3><p>Texto libre, imágenes, audio. Las reseñas de los clientes.</p></div>
     </div>
   </section>
   <section class="slide slide--verde">
     <span class="kicker">Quién hace qué</span>
     <h2 class="titulo titulo--sm">Tres roles que se cruzan</h2>
-    <div class="tres">
-      <div class="bloque"><h3>Ingeniería de datos</h3><p>Construye los flujos que traen los datos y los dejan listos.</p></div>
-      <div class="bloque"><h3>Análisis de datos</h3><p>Explora, mide y cuenta lo que pasa con gráficos y números.</p></div>
-      <div class="bloque bloque--acento"><h3>Ciencia de datos</h3><p>Construye modelos que predicen o descubren patrones.</p></div>
+    <div class="filas">
+      <div class="fila-g" style="--i:0"><img src="img/mochila.webp" alt=""><div><h3>Ingeniería de datos</h3><p>Construye los flujos que traen los datos y los dejan listos.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/binoculares.webp" alt=""><div><h3>Análisis de datos</h3><p>Explora, mide y cuenta lo que pasa con gráficos y números.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/brujula.webp" alt=""><div><h3>Ciencia de datos</h3><p>Construye modelos que predicen o descubren patrones.</p></div></div>
     </div>
   </section>
   <section class="slide ">
     <span class="kicker">Big Data</span>
     <h2 class="titulo titulo--sm">Cuando los datos ya no caben en tu computador</h2>
-    <div class="tres">
-      <div class="bloque"><h3>Volumen</h3><p>Muchísimos registros.</p></div>
-      <div class="bloque"><h3>Velocidad</h3><p>Llegan sin parar.</p></div>
-      <div class="bloque bloque--acento"><h3>Variedad</h3><p>Tablas, texto, imágenes, sensores.</p></div>
+    <div class="bandas" style="--n:3;">
+      <div class="banda banda--verde" style="--i:0"><div class="glifo"><svg viewBox="0 0 340 300"><rect class="a-crece-y" style="--i:0" x="10" y="250" width="40" height="40" rx="8" fill="#ffd23f"/><rect class="a-crece-y" style="--i:1" x="64" y="212" width="40" height="78" rx="8" fill="#ffd23f"/><rect class="a-crece-y" style="--i:2" x="118" y="174" width="40" height="116" rx="8" fill="#ffd23f"/><rect class="a-crece-y" style="--i:3" x="172" y="136" width="40" height="154" rx="8" fill="#ffd23f"/><rect class="a-crece-y" style="--i:4" x="226" y="98" width="40" height="192" rx="8" fill="#ffd23f"/><rect class="a-crece-y" style="--i:5" x="280" y="60" width="40" height="230" rx="8" fill="#ffd23f"/></svg></div><h3>Volumen</h3><p>Muchísimos registros.</p></div>
+      <div class="banda banda--deep" style="--i:1"><div class="glifo"><svg viewBox="0 0 340 300"><circle class="a-corre" style="--i:0" cx="30" cy="50" r="14" fill="#ffd23f"/><circle class="a-corre" style="--i:1" cx="130" cy="50" r="20" fill="#ffd23f"/><circle class="a-corre" style="--i:2" cx="230" cy="50" r="14" fill="#ffd23f"/><circle class="a-corre" style="--i:3" cx="30" cy="120" r="14" fill="#5eeab0"/><circle class="a-corre" style="--i:4" cx="130" cy="120" r="20" fill="#5eeab0"/><circle class="a-corre" style="--i:0" cx="230" cy="120" r="14" fill="#5eeab0"/><circle class="a-corre" style="--i:1" cx="30" cy="190" r="14" fill="#ffd23f"/><circle class="a-corre" style="--i:2" cx="130" cy="190" r="20" fill="#ffd23f"/><circle class="a-corre" style="--i:3" cx="230" cy="190" r="14" fill="#ffd23f"/><circle class="a-corre" style="--i:4" cx="30" cy="260" r="14" fill="#5eeab0"/><circle class="a-corre" style="--i:0" cx="130" cy="260" r="20" fill="#5eeab0"/><circle class="a-corre" style="--i:1" cx="230" cy="260" r="14" fill="#5eeab0"/></svg></div><h3>Velocidad</h3><p>Llegan sin parar.</p></div>
+      <div class="banda banda--acento" style="--i:2"><div class="glifo"><svg viewBox="0 0 340 300"><circle class="a-pop" style="--i:0" cx="80" cy="90" r="64" fill="#0a8057"/><rect class="a-pop" style="--i:1" x="170" y="30" width="130" height="130" rx="14" fill="#1f6bff"/><polygon class="a-pop" style="--i:2" points="80,290 150,170 220,290" fill="#073b3a"/><circle class="a-pop" style="--i:3" cx="270" cy="230" r="44" fill="#ffd23f"/></svg></div><h3>Variedad</h3><p>Tablas, texto, imágenes, sensores.</p></div>
     </div>
   </section>
-  <section class="slide slide--selva">
+  <section class="slide ">
     <span class="kicker">Dónde lo vemos en el curso</span>
     <h2 class="titulo titulo--sm">Elegir la herramienta por el tamaño</h2>
-    <div class="dos">
-      <div class="bloque"><h3>Cabe en memoria</h3><p>Python y pandas, directo en tu computador.</p></div>
-      <div class="bloque bloque--acento"><h3>No cabe</h3><p>Spark, con un entorno ya armado en un Codespace de GitHub (sesión 7).</p></div>
+    <div class="bandas" style="--n:2;">
+      <div class="banda banda--menta" style="--i:0"><div class="glifo"><svg viewBox="0 0 340 300"><rect x="30" y="40" width="280" height="200" rx="24" fill="none" stroke="#073b3a" stroke-width="12"/><circle class="a-pop" style="--i:0" cx="80" cy="100" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:1" cx="142" cy="100" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:2" cx="204" cy="100" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:3" cx="266" cy="100" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:4" cx="80" cy="160" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:5" cx="142" cy="160" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:6" cx="204" cy="160" r="16" fill="#0a8057"/><circle class="a-pop" style="--i:7" cx="266" cy="160" r="16" fill="#0a8057"/></svg></div><h3>Cabe en memoria</h3><p>Python y pandas, directo en tu computador.</p></div>
+      <div class="banda banda--deep" style="--i:1"><div class="glifo"><svg viewBox="0 0 340 300"><rect x="10" y="20" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:0" cx="36" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:1" cx="84" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:2" cx="36" cy="102" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:3" cx="84" cy="102" r="11" fill="#5eeab0"/><rect x="10" y="150" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:3" cx="36" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:4" cx="84" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:5" cx="36" cy="232" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:0" cx="84" cy="232" r="11" fill="#5eeab0"/><rect x="122" y="20" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:1" cx="148" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:2" cx="196" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:3" cx="148" cy="102" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:4" cx="196" cy="102" r="11" fill="#5eeab0"/><rect x="122" y="150" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:4" cx="148" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:5" cx="196" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:0" cx="148" cy="232" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:1" cx="196" cy="232" r="11" fill="#5eeab0"/><rect x="234" y="20" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:2" cx="260" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:3" cx="308" cy="58" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:4" cx="260" cy="102" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:5" cx="308" cy="102" r="11" fill="#5eeab0"/><rect x="234" y="150" width="100" height="110" rx="14" fill="none" stroke="#ffd23f" stroke-width="8"/><circle class="a-pop" style="--i:5" cx="260" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:0" cx="308" cy="188" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:1" cx="260" cy="232" r="11" fill="#5eeab0"/><circle class="a-pop" style="--i:2" cx="308" cy="232" r="11" fill="#5eeab0"/></svg></div><h3>No cabe</h3><p>Spark, con un entorno ya armado en un Codespace de GitHub (sesión 7).</p></div>
     </div>
   </section>
   <section class="slide slide--densa">
@@ -307,43 +338,55 @@
       <div class="qr"><span>Escanea<small>pega aquí el QR de En clase</small></span></div>
     </div>
   </section>
-  <section class="slide ">
+  <section class="slide slide--selva">
+    <div class="split">
+      <div>
     <span class="kicker">Dónde entra la IA</span>
     <h2 class="titulo titulo--sm">Tres capas, de lo general a lo específico</h2>
-    <ul class="lista">
-      <li><b>Inteligencia artificial:</b> sistemas que hacen tareas que parecen requerir inteligencia</li>
-      <li><b>Machine learning:</b> aprende patrones a partir de los datos</li>
-      <li><b>IA generativa:</b> crea texto, imágenes o código nuevos</li>
-    </ul>
-    <img class="objeto" src="img/brujula.webp" alt="">
+        <ul class="lista" style="font-size:38px; gap:20px">
+          <li><span><b>IA:</b> sistemas que hacen tareas que parecen requerir inteligencia</span></li>
+          <li><span><b>Machine learning:</b> aprende patrones de los datos</span></li>
+          <li><span><b>IA generativa:</b> crea texto, imágenes o código nuevos</span></li>
+        </ul>
+      </div>
+      <svg class="visual" viewBox="0 0 760 760" role="img" aria-label="IA, machine learning e IA generativa">
+        <circle class="a-pop" style="--i:0" cx="380" cy="380" r="360" fill="#d6f3e5"/>
+        <circle class="a-pop" style="--i:1" cx="380" cy="470" r="265" fill="#5eeab0"/>
+        <circle class="a-pop" style="--i:2" cx="380" cy="560" r="170" fill="#ffd23f"/>
+        <text x="380" y="85" text-anchor="middle" font-size="44" fill="#073b3a">Inteligencia artificial</text>
+        <text x="380" y="240" text-anchor="middle" font-size="44" fill="#073b3a">Machine learning</text>
+        <text x="380" y="545" text-anchor="middle" font-size="40" fill="#0b2a24">IA</text>
+        <text x="380" y="595" text-anchor="middle" font-size="40" fill="#0b2a24">generativa</text>
+      </svg>
+    </div>
   </section>
   <section class="slide slide--densa">
     <span class="kicker">La IA en el ciclo</span>
     <h2 class="titulo titulo--sm">Puede ayudarte en cada paso</h2>
-    <ul class="lista">
-      <li><b>Pregunta:</b> te ayuda a ordenar y afinar lo que quieres saber</li>
-      <li><b>Limpieza y análisis:</b> propone código que tú revisas</li>
-      <li><b>Comunicar:</b> te da borradores que tú corriges</li>
-    </ul>
+    <div class="filas">
+      <div class="fila-g" style="--i:0"><span class="n">1</span><div><h3>Pregunta</h3><p>Te ayuda a ordenar y afinar lo que quieres saber.</p></div></div>
+      <div class="fila-g" style="--i:1"><span class="n">2</span><div><h3>Limpieza y análisis</h3><p>Propone código que tú revisas.</p></div></div>
+      <div class="fila-g" style="--i:2"><span class="n">3</span><div><h3>Comunicar</h3><p>Te da borradores que tú corriges.</p></div></div>
+    </div>
   </section>
   <section class="slide ">
     <span class="kicker">Buenas prácticas</span>
     <h2 class="titulo titulo--sm">Úsala bien</h2>
-    <div class="dos">
-      <div class="bloque bloque--verde"><h3>Sí</h3><p>Pedirle que explique un error. Comparar su respuesta con la documentación. Probar lo que propone.</p></div>
-      <div class="bloque bloque--acento"><h3>No</h3><p>Copiar sin entender. Confiar sin verificar. Ocultar que la usaste.</p></div>
+    <div class="bandas" style="--n:2;">
+      <div class="banda banda--verde" style="--i:0"><div class="gigante">Sí</div><p>Pedirle que explique un error. Comparar su respuesta con la documentación. Probar lo que propone.</p></div>
+      <div class="banda banda--acento" style="--i:1"><div class="gigante">No</div><p>Copiar sin entender. Confiar sin verificar. Ocultar que la usaste.</p></div>
     </div>
   </section>
   <section class="slide slide--selva">
     <span class="kicker">Criterio</span>
     <h2 class="titulo titulo--sm">Los datos no son neutros</h2>
     <p class="sub">Reflejan a quién se midió y cómo. Un modelo entrenado con datos sesgados repite ese sesgo.</p>
-    <ul class="lista">
-      <li>¿Quién falta en estos datos?</li>
-      <li>¿Qué decisión se toma con ellos?</li>
-      <li>¿A quién afecta si me equivoco?</li>
-    </ul>
-    <img class="objeto" src="img/mapa.webp" alt="">
+    <div style="display:grid; gap:36px; margin-top:64px">
+      <div class="pregunta-g" style="--i:1"><b>1</b>¿Quién falta en estos datos?</div>
+      <div class="pregunta-g" style="--i:2"><b>2</b>¿Qué decisión se toma con ellos?</div>
+      <div class="pregunta-g" style="--i:3"><b>3</b>¿A quién afecta si me equivoco?</div>
+    </div>
+    <img class="objeto" src="img/binoculares.webp" alt="">
   </section>
   <section class="slide slide--densa">
     <div style="display:flex; align-items:center; gap:32px;">
@@ -385,14 +428,14 @@
     <h2 class="titulo titulo--xl">Entorno</h2>
     <img class="marca" src="img/logo.webp" alt="">
   </section>
-  <section class="slide ">
+  <section class="slide slide--selva">
     <span class="kicker">Qué vamos a instalar</span>
     <h2 class="titulo titulo--sm">Cuatro herramientas, cada una con su trabajo</h2>
-    <div class="dos" style="grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
-      <div class="bloque"><h3>GitHub</h3><p>Tu cuenta y tu portafolio: aquí vive tu código.</p></div>
-      <div class="bloque"><h3>Git</h3><p>Guarda cada cambio de tu código con su historia.</p></div>
-      <div class="bloque"><h3>Python 3.12</h3><p>El lenguaje del curso.</p></div>
-      <div class="bloque bloque--acento"><h3>VS Code</h3><p>El editor, con Jupyter, Black y Pylint.</p></div>
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><img src="img/trofeo.webp" alt=""><div><h3>GitHub</h3><p>Tu cuenta y tu portafolio: aquí vive tu código.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/mapa.webp" alt=""><div><h3>Git</h3><p>Guarda cada cambio de tu código con su historia.</p></div></div>
+      <div class="fila-g" style="--i:2"><img src="img/cuaderno.webp" alt=""><div><h3>Python 3.12</h3><p>El lenguaje del curso.</p></div></div>
+      <div class="fila-g" style="--i:3"><img src="img/linterna.webp" alt=""><div><h3>VS Code</h3><p>El editor, con Jupyter, Black y Pylint.</p></div></div>
     </div>
   </section>
   <section class="slide slide--selva">
@@ -408,42 +451,33 @@
     <img class="objeto" src="img/brujula.webp" alt="">
   </section>
   <section class="slide ">
-    <span class="kicker">Paso 1 de 4</span>
-    <h2 class="titulo titulo--sm">Cuenta de GitHub</h2>
-    <p class="sub">Entra a github.com y crea tu cuenta con un nombre de usuario que puedas mostrar en una entrevista.</p>
-    <ul class="lista">
-      <li>Usa un correo que revises</li>
-      <li>Elige un usuario sobrio: será tu portafolio</li>
-      <li>Activa la verificación en dos pasos</li>
-    </ul>
-  </section>
-  <section class="slide slide--densa">
-    <span class="kicker">Paso 2 de 4</span>
-    <h2 class="titulo titulo--sm">Git</h2>
-    <p class="sub">Instálalo desde git-scm.com y comprueba que responde.</p>
-    <div class="dos" style="grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; margin-top: 48px; flex: none;">
-      <div class="codigo">git --version</div>
-      <div class="resultado">git version 2.xx</div>
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Cuenta de GitHub</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Entra a github.com y crea tu cuenta.</p>
+      <ul class="lista" style="font-size:40px; margin-top:24px"><li>Usa un correo que revises</li><li>Elige un usuario sobrio: será tu portafolio</li><li>Activa la verificación en dos pasos</li></ul></div>
     </div>
   </section>
   <section class="slide ">
-    <span class="kicker">Paso 3 de 4</span>
-    <h2 class="titulo titulo--sm">Python 3.12</h2>
-    <p class="sub">Descárgalo desde python.org e instálalo marcando la opción de agregarlo al PATH.</p>
-    <div class="dos" style="grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; margin-top: 48px; flex: none;">
-      <div class="codigo">python --version</div>
-      <div class="resultado">Python 3.12.x</div>
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Git</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Instálalo desde git-scm.com y comprueba que responde.</p>
+      <div class="codigo" style="margin-top:40px; font-size:40px">git --version</div><div class="resultado" style="margin-top:20px">git version 2.xx</div></div>
     </div>
   </section>
-  <section class="slide slide--densa">
-    <span class="kicker">Paso 4 de 4</span>
-    <h2 class="titulo titulo--sm">VS Code y sus extensiones</h2>
-    <ul class="lista">
-      <li><b>Python:</b> reconoce y ejecuta tu código</li>
-      <li><b>Jupyter:</b> notebooks dentro del editor</li>
-      <li><b>Black Formatter:</b> da formato al guardar</li>
-      <li><b>Pylint:</b> avisa errores y malas prácticas</li>
-    </ul>
+  <section class="slide ">
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Python 3.12</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Descárgalo desde python.org y marca la opción de agregarlo al PATH.</p>
+      <div class="codigo" style="margin-top:40px; font-size:40px">python --version</div><div class="resultado" style="margin-top:20px">Python 3.12.x</div></div>
+    </div>
+  </section>
+  <section class="slide ">
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4 de 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>VS Code y sus extensiones</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><ul class="lista" style="font-size:42px; gap:30px; margin-top:0">
+        <li><span><b>Python:</b> reconoce y ejecuta tu código</span></li><li><span><b>Jupyter:</b> notebooks dentro del editor</span></li>
+        <li><span><b>Black Formatter:</b> da formato al guardar</span></li><li><span><b>Pylint:</b> avisa errores y malas prácticas</span></li></ul></div>
+    </div>
   </section>
   <section class="slide ">
     <span class="kicker">Tu primer script</span>
@@ -457,12 +491,21 @@ Explicit is better than implicit.
 Simple is better than complex.</div>
     </div>
   </section>
-  <section class="slide slide--verde">
+  <section class="slide ">
     <span class="kicker">Calidad del código</span>
     <h2 class="titulo titulo--sm">Black y Pylint trabajan por ti</h2>
-    <div class="dos">
-      <div class="bloque"><h3>Black</h3><p>Da formato al código al guardar. Todos escribimos igual.</p></div>
-      <div class="bloque bloque--acento"><h3>Pylint</h3><p>Revisa el código y avisa errores y estilo.</p></div>
+    <div class="bandas" style="--n:2;">
+      <div class="banda banda--deep" style="--i:0"><h3>Black</h3><p>Da formato al código al guardar. Todos escribimos igual.</p><div class="codigo"># antes
+x = {  'a':1,'b' :2 }
+
+# después
+x = {"a": 1, "b": 2}</div></div>
+      <div class="banda banda--acento" style="--i:1"><h3>Pylint</h3><p>Revisa el código y avisa errores y estilo.</p><div class="codigo">def sumar(a, b):
+    resultado = a + b
+    return a
+
+# W0612: variable no usada
+#        "resultado"</div></div>
     </div>
   </section>
   <section class="slide slide--densa">
@@ -479,10 +522,10 @@ Simple is better than complex.</div>
     <span class="kicker">Apoyo</span>
     <h2 class="titulo titulo--sm">Salas de apoyo por sistema operativo</h2>
     <p class="sub">Si algo falla, pasa a la sala que corresponda a tu computador.</p>
-    <div class="tres">
-      <div class="bloque"><h3>Windows</h3><p>Sala 1</p></div>
-      <div class="bloque"><h3>macOS</h3><p>Sala 2</p></div>
-      <div class="bloque bloque--acento"><h3>Linux</h3><p>Sala 3</p></div>
+    <div class="bandas" style="--n:3;">
+      <div class="banda banda--verde" style="--i:0"><div class="gigante">1</div><h3>Windows</h3></div>
+      <div class="banda banda--deep" style="--i:1"><div class="gigante" style="color:var(--accent)">2</div><h3>macOS</h3></div>
+      <div class="banda banda--acento" style="--i:2"><div class="gigante">3</div><h3>Linux</h3></div>
     </div>
   </section>
   <section class="slide slide--amarilla">
@@ -522,15 +565,26 @@ Simple is better than complex.</div>
     <h2 class="titulo titulo--xl">Guía de entrega por PR</h2>
     <img class="marca" src="img/logo.webp" alt="">
   </section>
-  <section class="slide ">
+  <section class="slide slide--selva">
+    <div class="split">
+      <div>
     <span class="kicker">Concepto</span>
     <h2 class="titulo titulo--sm">¿Qué es un pull request?</h2>
     <p class="sub">Una propuesta de cambios: «mira lo que hice en mi rama y súmalo». Es también la forma de entregar en este curso.</p>
-    <ul class="lista">
-      <li>Tiene un enlace propio que cargas en la app</li>
-      <li>Deja la historia de tus cambios a la vista</li>
-      <li>Es lo que un equipo real usa para revisar código</li>
-    </ul>
+        <ul class="lista" style="font-size:38px; gap:20px"><li>Tiene un enlace propio que cargas en la app</li><li>Deja la historia de tus cambios a la vista</li><li>Es lo que un equipo real usa para revisar código</li></ul>
+      </div>
+      <svg class="visual" viewBox="0 0 820 620" role="img" aria-label="Una rama que se propone para fusionar con la principal">
+        <path d="M40 460 L780 460" stroke="#ffffff" stroke-opacity=".5" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path class="a-dibuja" pathLength="1" style="stroke-dasharray:1; --i:1" d="M200 460 C 250 460 260 220 340 220 L 560 220 C 640 220 650 460 700 460" stroke="#5eeab0" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <circle class="a-pop" style="--i:2" cx="340" cy="220" r="26" fill="#ffd23f"/>
+        <circle class="a-pop" style="--i:3" cx="450" cy="220" r="26" fill="#ffd23f"/>
+        <circle class="a-pop" style="--i:4" cx="560" cy="220" r="26" fill="#ffd23f"/>
+        <circle cx="200" cy="460" r="22" fill="#fff"/><circle class="a-pop" style="--i:6" cx="700" cy="460" r="30" fill="#5eeab0"/>
+        <text x="40" y="530" font-size="38" fill="#fff">rama principal</text>
+        <text x="450" y="160" text-anchor="middle" font-size="38" fill="#5eeab0">tu rama · tus commits</text>
+        <text class="a-pop" style="--i:5" x="700" y="545" text-anchor="middle" font-size="40" fill="#ffd23f">Pull request ↑</text>
+      </svg>
+    </div>
   </section>
   <section class="slide slide--selva">
     <span class="kicker">El flujo de entrega</span>
@@ -544,62 +598,62 @@ Simple is better than complex.</div>
     </div>
   </section>
   <section class="slide ">
-    <span class="kicker">Paso 1</span>
-    <h2 class="titulo titulo--sm">Crea un repositorio público</h2>
-    <p class="sub">En GitHub: New repository. Ponle un nombre sencillo y marca la opción de agregar un README.</p>
-    <ul class="lista">
-      <li>Debe ser <b>público</b> para que se pueda revisar</li>
-      <li>Nombre sugerido: <code>datos-expedicion</code></li>
-    </ul>
-  </section>
-  <section class="slide slide--densa">
-    <span class="kicker">Paso 2</span>
-    <h2 class="titulo titulo--sm">Clónalo y crea una rama</h2>
-    <p class="sub">Trabajas en una rama, nunca directo en la principal.</p>
-    <div style="margin-top:48px"><div class="codigo">git clone https://github.com/TU-USUARIO/datos-expedicion.git
-cd datos-expedicion
-git checkout -b prueba-pr</div></div>
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 1</span><div class="gigante" style="color:var(--accent); font-size:340px">1</div><h3>Crea un repositorio público</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">En GitHub: <b>New repository</b>. Ponle un nombre sencillo y marca la opción de agregar un README.</p>
+      <ul class="lista" style="font-size:40px; margin-top:24px"><li>Debe ser <b>público</b> para que se pueda revisar</li><li>Nombre sugerido: <code>datos-expedicion</code></li></ul></div>
+    </div>
   </section>
   <section class="slide ">
-    <span class="kicker">Paso 3</span>
-    <h2 class="titulo titulo--sm">Escribe tu README de prueba</h2>
-    <p class="sub">Abre README.md en VS Code y agrega tu nombre y tres líneas sobre ti.</p>
-    <div style="margin-top:48px"><div class="codigo"># Mi nombre es Camila
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 2</span><div class="gigante" style="color:var(--accent); font-size:340px">2</div><h3>Clónalo y crea una rama</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Trabajas en una rama, nunca directo en la principal.</p>
+      <div class="codigo" style="margin-top:32px; font-size:30px">git clone https://github.com/TU-USUARIO/datos-expedicion.git
+cd datos-expedicion
+git checkout -b prueba-pr</div></div>
+    </div>
+  </section>
+  <section class="slide ">
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 3</span><div class="gigante" style="color:var(--accent); font-size:340px">3</div><h3>Escribe tu README de prueba</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">Abre README.md en VS Code y agrega tu nombre y tres líneas sobre ti.</p>
+      <div class="codigo" style="margin-top:32px; font-size:32px"># Mi nombre es Camila
 
 - Estudio ciencia de datos.
 - Quiero aprender a contar historias con datos.
 - Mi primera meta: entregar mi primer PR.</div></div>
-  </section>
-  <section class="slide slide--densa">
-    <span class="kicker">Paso 4</span>
-    <h2 class="titulo titulo--sm">Guarda y sube tus cambios</h2>
-    <div style="margin-top:48px"><div class="codigo">git add README.md
-git commit -m "docs: agrega mi README de prueba"
-git push -u origin prueba-pr</div></div>
+    </div>
   </section>
   <section class="slide ">
-    <span class="kicker">Paso 5</span>
-    <h2 class="titulo titulo--sm">Abre el pull request en GitHub</h2>
-    <ol class="lista lista--num">
-      <li>Entra a tu repositorio: GitHub te muestra el botón <b>Compare &amp; pull request</b></li>
-      <li>Escribe un título y una descripción corta</li>
-      <li>Pulsa <b>Create pull request</b></li>
-    </ol>
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 4</span><div class="gigante" style="color:var(--accent); font-size:340px">4</div><h3>Guarda y sube tus cambios</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><div class="codigo" style="font-size:32px">git add README.md
+git commit -m "docs: agrega mi README de prueba"
+git push -u origin prueba-pr</div>
+      <p style="font-size:38px; margin-top:32px">Add prepara, commit guarda y push lo sube a GitHub.</p></div>
+    </div>
   </section>
-  <section class="slide slide--verde">
-    <span class="kicker">Paso 6</span>
-    <h2 class="titulo titulo--sm">Copia el enlace del PR</h2>
-    <p class="sub">El enlace de un PR termina en /pull/ y un número. Ese es el que se carga en la app.</p>
-    <div style="margin-top:48px"><div class="codigo">https://github.com/TU-USUARIO/datos-expedicion/pull/1</div></div>
+  <section class="slide ">
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--deep" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 5</span><div class="gigante" style="color:var(--accent); font-size:340px">5</div><h3>Abre el pull request</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><ol class="lista lista--num" style="font-size:42px; margin-top:0"><li>Entra a tu repositorio: GitHub te muestra <b>Compare &amp; pull request</b></li><li>Escribe un título y una descripción corta</li><li>Pulsa <b>Create pull request</b></li></ol></div>
+    </div>
+  </section>
+  <section class="slide ">
+    <div class="bandas" style="--n:2; grid-template-columns: .8fr 1.2fr; margin: -96px -120px -96px;">
+      <div class="banda banda--verde" style="--i:0; justify-content:center; padding-bottom:48px"><span class="kicker" style="color:var(--accent)">Paso 6</span><div class="gigante" style="color:var(--accent); font-size:340px">6</div><h3>Copia el enlace del PR</h3></div>
+      <div class="banda banda--claro" style="--i:1; justify-content:center; padding-bottom:48px"><p style="font-size:44px">El enlace de un PR termina en <code>/pull/</code> y un número. Ese es el que se carga en la app.</p>
+      <div class="codigo" style="margin-top:32px; font-size:30px">https://github.com/TU-USUARIO/datos-expedicion/pull/1</div></div>
+    </div>
   </section>
   <section class="slide ">
     <span class="kicker">Tu tablero</span>
     <h2 class="titulo titulo--sm">Un issue por cada tarea</h2>
     <p class="sub">En GitHub Projects tienes un tablero personal. Cada trabajo es un issue, y el PR lo cierra.</p>
-    <ul class="lista">
-      <li>Enlaza tu PR con el issue escribiendo <code>Closes #1</code> en la descripción</li>
-      <li>Al fusionar el PR, el issue se cierra solo</li>
-    </ul>
+    <div class="filas">
+      <div class="fila-g" style="--i:0"><img src="img/carta.webp" alt=""><div><h3>Enlaza tu PR con el issue</h3><p>Escribe <code>Closes #1</code> en la descripción del PR.</p></div></div>
+      <div class="fila-g" style="--i:1"><img src="img/trofeo.webp" alt=""><div><h3>Se cierra solo</h3><p>Al fusionar el PR, el issue se cierra.</p></div></div>
+    </div>
   </section>
   <section class="slide slide--selva">
     <span class="kicker">Demostración</span>
@@ -617,22 +671,22 @@ git push -u origin prueba-pr</div></div>
   <section class="slide slide--densa">
     <span class="kicker">Errores comunes</span>
     <h2 class="titulo titulo--sm">Si algo no funciona, mira esto primero</h2>
-    <ul class="lista">
-      <li>El repositorio es <b>privado</b>: nadie puede revisarlo</li>
-      <li>Copiaste el enlace del repositorio y no el del <b>pull request</b></li>
-      <li>Hiciste los cambios en la rama principal y no en una rama aparte</li>
-      <li>Olvidaste el <code>git push</code>: los cambios siguen solo en tu computador</li>
-    </ul>
+    <div class="filas filas--compacta">
+      <div class="fila-g" style="--i:0"><span class="n">1</span><div><h3>Repositorio privado</h3><p>Nadie puede revisarlo: debe ser público.</p></div></div>
+      <div class="fila-g" style="--i:1"><span class="n">2</span><div><h3>Enlace equivocado</h3><p>Copiaste el del repositorio y no el del pull request.</p></div></div>
+      <div class="fila-g" style="--i:2"><span class="n">3</span><div><h3>Rama principal</h3><p>Hiciste los cambios ahí y no en una rama aparte.</p></div></div>
+      <div class="fila-g" style="--i:3"><span class="n">4</span><div><h3>Faltó el push</h3><p>Los cambios siguen solo en tu computador.</p></div></div>
+    </div>
   </section>
-  <section class="slide ">
+  <section class="slide slide--verde">
     <span class="kicker">Entrega</span>
     <h2 class="titulo titulo--sm">Carga el enlace en la app</h2>
-    <p class="sub">En la app, en Entregas, pega el enlace de tu PR. Queda habilitado hasta la fecha límite.</p>
-    <ol class="lista lista--num">
-      <li>Abre Entregas</li>
-      <li>Elige el trabajo</li>
-      <li>Pega el enlace y confirma</li>
-    </ol>
+    <p class="sub">En Entregas, pega el enlace de tu PR. Queda habilitado hasta la fecha límite.</p>
+    <div class="ciclo" style="margin-top:96px">
+      <div class="paso-ciclo" style="--i:0"><b>1</b>Abre<small>Entregas</small></div><div class="union" style="--i:0"></div>
+      <div class="paso-ciclo" style="--i:1"><b>2</b>Elige<small>el trabajo</small></div><div class="union" style="--i:1"></div>
+      <div class="paso-ciclo" style="--i:2"><b>3</b>Pega<small>el enlace y confirma</small></div>
+    </div>
     <img class="objeto" src="img/trofeo.webp" alt="">
   </section>
   <section class="slide slide--verde">
@@ -653,11 +707,11 @@ git push -u origin prueba-pr</div></div>
   <section class="slide ">
     <span class="kicker">La regla de la IA</span>
     <h2 class="titulo titulo--sm">En la mini tarea puedes usarla, y la declaras</h2>
-    <ul class="lista">
-      <li>Anota qué pediste</li>
-      <li>Anota qué corregiste</li>
-      <li>Anota qué rechazaste</li>
-    </ul>
+    <div class="filas">
+      <div class="fila-g" style="--i:0"><span class="n">1</span><div><h3>Qué pediste</h3><p>Anótalo en tu bitácora.</p></div></div>
+      <div class="fila-g" style="--i:1"><span class="n">2</span><div><h3>Qué corregiste</h3><p>Lo que la IA dijo y tú arreglaste.</p></div></div>
+      <div class="fila-g" style="--i:2"><span class="n">3</span><div><h3>Qué rechazaste</h3><p>Y por qué.</p></div></div>
+    </div>
     <p class="sub empuja">Son tres líneas. En la sesión 2 hay una verificación corta sin IA.</p>
   </section>
   <section class="slide slide--selva">
