@@ -59,6 +59,14 @@ docs/              producto/, curso/, diseno/, historial/
 3. Agrega su bloque a `supabase/pruebas/funciones_y_politicas.sql` y córrelo (cada bloque termina en `OK …` o `FALLO …`).
 4. Aplica la migración solo con aprobación explícita.
 
+## Observabilidad
+
+- **Errores del navegador:** `servicios/errores.ts` guarda en `errores_cliente` las excepciones sin atrapar, las promesas rechazadas y los fallos de dibujo, con tope por sesión y sin repetir el mismo mensaje. Solo el docente los lee.
+- **Uso y cambios de datos:** la tabla `eventos` (ver `servicios/eventos.ts` y la migración 0007).
+- **Despliegue y calidad:** el despliegue solo ocurre si pasan tipos, lint, pruebas con cobertura y la auditoría de dependencias (`pages.yml`); las ramas y los PR corren lo mismo en `revision.yml`.
+- **Qué mirar si algo falla:** [operacion.md](operacion.md).
+- **Decisiones:** [decisiones/](decisiones/).
+
 ## Comprobaciones
 
 | Comando (en `web/`) | Qué revisa |
