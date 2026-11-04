@@ -171,3 +171,24 @@ begin
   if (r ->> 'estudiantes')::int < 5 and (r ->> 'visible')::boolean then raise exception 'FALLO: mostró datos con menos de 5 estudiantes'; end if;
   raise exception 'OK agregados';
 end $$;
+
+-- 9. Errores del cliente: cada persona registra los suyos y solo el docente los lee
+do $$
+declare d uuid; e uuid; ajeno boolean := false; largo boolean := false; vistos_estudiante int; vistos_docente int;
+begin
+  select id into d from public.perfiles where rol = 'docente' limit 1;
+  select id into e from public.perfiles where rol = 'estudiante' limit 1;
+  perform set_config('request.jwt.claims', json_build_object('sub', e, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  insert into public.errores_cliente (perfil_id, origen, mensaje) values (e, 'ventana', '__prueba');
+  begin insert into public.errores_cliente (perfil_id, origen, mensaje) values (d, 'ventana', '__ajeno'); ajeno := true; exception when others then null; end;
+  begin insert into public.errores_cliente (perfil_id, origen, mensaje) values (e, 'ventana', repeat('x', 501)); largo := true; exception when others then null; end;
+  select count(*) into vistos_estudiante from public.errores_cliente;
+  perform set_config('request.jwt.claims', json_build_object('sub', d, 'role', 'authenticated')::text, true);
+  select count(*) into vistos_docente from public.errores_cliente where mensaje = '__prueba';
+  if ajeno then raise exception 'FALLO: registró un error a nombre de otra persona'; end if;
+  if largo then raise exception 'FALLO: aceptó un mensaje de más de 500 caracteres'; end if;
+  if vistos_estudiante <> 0 then raise exception 'FALLO: un estudiante lee los errores'; end if;
+  if vistos_docente <> 1 then raise exception 'FALLO: el docente no lee los errores (%)', vistos_docente; end if;
+  raise exception 'OK errores del cliente';
+end $$;
