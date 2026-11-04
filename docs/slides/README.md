@@ -34,7 +34,7 @@ Cada slide se explica poco a poco: la flecha derecha va mostrando, en orden, cad
 ## Decks
 
 - `plantilla-sesion.html`: todos los layouts con contenido de relleno.
-- `s01-introduccion-ciencia-de-datos.html`: la sesión 1 completa (70 slides, 180 min): bienvenida, introducción, entorno, guía de PR y cierre, con pausas y actividades con reloj y el jaguar solo en portada y despedida.
+- `s01-introduccion-ciencia-de-datos.html`: la sesión 1 completa (78 slides, 180 min): bienvenida, introducción con hilo narrativo (cada idea nace de una pregunta que dejó la anterior, con slides de transición), entorno, guía de PR y cierre, con pausas y actividades con reloj y el jaguar solo en portada y despedida.
 
 ## Layouts incluidos
 
