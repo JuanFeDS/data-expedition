@@ -8,6 +8,7 @@ import { DesbloqueosProvider } from '../compartido/estado/desbloqueos';
 import { CursoProvider, useCurso } from '../compartido/estado/curso';
 import { InicioSinCurso } from '../funciones/inicio/comun/Inicio';
 import { SesionProvider, useSesion } from '../compartido/estado/sesion';
+import { instalarReporteDeErrores } from '../servicios/errores';
 import { instalarSonidoDeClic } from '../compartido/ui/sonidos';
 import { LimiteDeErrores, PantallaCargada } from '../compartido/ui/LimiteDeErrores';
 import { ModoViva } from '../compartido/ui/ui';
@@ -18,6 +19,7 @@ import '../estilos/pantallas.css';
 import '../estilos/escritorio.css';
 
 instalarSonidoDeClic();
+instalarReporteDeErrores();
 
 if (window.location.search.includes('completo')) document.documentElement.classList.add('modo-completo');
 

@@ -1,5 +1,5 @@
 import { Component, Suspense, type ComponentType, type ErrorInfo, type ReactNode } from 'react';
-import { registrarEvento } from '../../servicios/eventos';
+import { reportarError } from '../../servicios/errores';
 import { Cargando } from '../../funciones/acceso/comun/EstadosDeAcceso';
 
 interface Props { children: ReactNode }
@@ -16,7 +16,7 @@ export class LimiteDeErrores extends Component<Props, Estado> {
   }
 
   override componentDidCatch(error: Error, info: ErrorInfo) {
-    registrarEvento('error_interfaz', { datos: { mensaje: error.message.slice(0, 200), pantalla: window.location.hash.replace(/^#\/?/, '').slice(0, 80), pila: (info.componentStack ?? '').slice(0, 300) } });
+    void reportarError('interfaz', error, `\n${info.componentStack ?? ''}`);
   }
 
   override render() {
