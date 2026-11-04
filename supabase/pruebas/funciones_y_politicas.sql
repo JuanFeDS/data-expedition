@@ -192,3 +192,12 @@ begin
   if vistos_docente <> 1 then raise exception 'FALLO: el docente no lee los errores (%)', vistos_docente; end if;
   raise exception 'OK errores del cliente';
 end $$;
+
+-- 10. Ninguna política queda abierta al rol público: todas son para authenticated
+do $$
+declare abiertas int;
+begin
+  select count(*) into abiertas from pg_policies where schemaname = 'public' and 'public' = any (roles);
+  if abiertas > 0 then raise exception 'FALLO: % políticas abiertas al rol público', abiertas; end if;
+  raise exception 'OK políticas solo para authenticated';
+end $$;
