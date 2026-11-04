@@ -27,8 +27,20 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
         working-directory: web
+      - name: Tipos
+        run: npm run typecheck
+        working-directory: web
+      - name: Lint
+        run: npm run lint
+        working-directory: web
+      - name: Pruebas y cobertura
+        run: npm run test:cobertura
+        working-directory: web
+      - name: Auditoría de dependencias
+        run: npm audit --audit-level=high
+        working-directory: web
       - name: Construir
-        run: npm run build
+        run: npx vite build
         working-directory: web
         env:
           VITE_BASE: /data-expedition/

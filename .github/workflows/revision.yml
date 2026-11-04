@@ -30,6 +30,9 @@ jobs:
       - name: Pruebas y cobertura
         run: npm run test:cobertura
         working-directory: web
+      - name: Auditoría de dependencias
+        run: npm audit --audit-level=high
+        working-directory: web
       - name: Construir
         run: npx vite build
         working-directory: web

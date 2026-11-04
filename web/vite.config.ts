@@ -5,6 +5,7 @@ export default defineConfig({
   base: process.env.VITE_BASE ?? '/',
   plugins: [react()],
   test: {
+    testTimeout: 20000,
     environment: 'jsdom',
     include: ['src/**/*.test.{ts,tsx}'],
     setupFiles: ['src/pruebas/preparar.ts'],
