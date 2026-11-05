@@ -190,6 +190,12 @@ html, body { height: 100%; background: #04201f; overflow: hidden; font-family: v
 .pregunta-g b { color: var(--accent); margin-right: 24px; }
 .slide:not([class*="slide--"]) .pregunta-g b { color: var(--primary); }
 
+/* Capturas de la app en marco */
+.capturas { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 24px; flex: 1; align-content: center; }
+.marco { margin: 0; border-radius: 28px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px rgb(0 0 0 / .4); border: 6px solid rgb(255 255 255 / .92); }
+.marco img { display: block; width: 100%; height: auto; }
+.marco figcaption { padding: 16px 28px; font-size: 30px; font-weight: 700; color: var(--deep); background: #fff; }
+
 /* Pasos: los elementos salen uno a uno con las flechas */
 .solos { display: grid; }
 .solos > * { grid-area: 1 / 1; }

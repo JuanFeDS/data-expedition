@@ -5,7 +5,7 @@
   const AUTO = [
     '.lista > li', '.filas > .fila-g', '.bandas > .banda', '.escalera > .peldano', '.grafico > .hbar',
     '.columnas > .columna', '.opciones > .opcion', '.ciclo > .paso-ciclo', '.ciclo > .union', '.pregunta-g',
-    '.chips > .chip', '.flujo > *', '.nv', '.tres > *', '.dos > *',
+    '.chips > .chip', '.capturas > .marco', '.flujo > *', '.nv', '.tres > *', '.dos > *',
   ].join(',');
   const LIGADOS = '.union, .flecha';
 
