@@ -1,6 +1,7 @@
+import { useEffect, useRef } from 'react';
 import { inicioDeRol, rolDeRuta, type Rol } from '../compartido/navegacion/navegacion';
 import { Jaguar } from '../compartido/ui/Jaguar';
-import { entrarComo, irAlPaso, iniciarRecorrido, siguienteRolSinVer, terminarRecorrido, useEstadoDemo } from './estado';
+import { entrarComo, iniciarRecorrido, irA, marcarExplorado, pendientesDe, siguienteRolSinVer, terminarRecorrido, useEstadoDemo } from './estado';
 import { RECORRIDO, ROLES_DEMO } from './recorrido';
 
 const objeto = (nombre: string) => `${import.meta.env.BASE_URL}objetos/${nombre}.webp`;
@@ -48,28 +49,49 @@ export function BarraDemo({ codigo }: { codigo: string }) {
 }
 
 export function RecorridoDemo({ codigo }: { codigo?: string }) {
-  const { rol, paso } = useEstadoDemo();
-  if (rol === null) return null;
-  if (codigo !== undefined && (codigo === '' || rolDeRuta(codigo) !== rol)) return null;
-  const pasos = RECORRIDO[rol];
-  const actual = pasos[paso];
-  const ultimo = paso === pasos.length - 1;
-  const otro = ultimo ? siguienteRolSinVer() : null;
+  const { rol, explorados } = useEstadoDemo();
+  const visible = rol !== null && (codigo === undefined || (codigo !== '' && rolDeRuta(codigo) === rol));
+  const pasos = rol ? RECORRIDO[rol] : [];
+  const pendientes = rol ? pendientesDe(rol, explorados) : [];
+  const sugerido = pendientes.find((paso) => paso.ruta !== codigo) ?? null;
+  const comentario = visible && codigo ? pasos.find((paso) => paso.ruta === codigo && !explorados.includes(paso.ruta)) ?? null : null;
+
+  const comentada = useRef<string | null>(null);
+  useEffect(() => {
+    const ruta = comentario?.ruta ?? null;
+    if (comentada.current && comentada.current !== ruta) marcarExplorado(comentada.current);
+    comentada.current = ruta;
+  }, [comentario]);
+
+  useEffect(() => {
+    if (!visible || !sugerido) return undefined;
+    const enlaces = [...document.querySelectorAll(`.lateral__enlace[href="#/${sugerido.ruta}"], .menu-fila[href="#/${sugerido.ruta}"]`)];
+    enlaces.forEach((enlace) => enlace.classList.add('sugerido-demo'));
+    return () => enlaces.forEach((enlace) => enlace.classList.remove('sugerido-demo'));
+  }, [visible, sugerido, codigo]);
+
+  if (!visible || rol === null) return null;
+  const hechos = pasos.length - pendientes.length;
+  const otro = pendientes.length === 0 ? siguienteRolSinVer() : null;
   const etiquetaOtro = otro ? ROLES_DEMO.find((candidato) => candidato.rol === otro)?.etiqueta.toLowerCase() : null;
   return (
     <aside className="recorrido-demo" aria-live="polite">
-      <Jaguar pose={ultimo ? 'celebra' : 'guia'} ancho={72} clase="recorrido-demo__jaguar" />
-      <div className="recorrido-demo__cuerpo">
-        <span className="recorrido-demo__paso">Recorrido · {paso + 1} de {pasos.length}</span>
-        <h2 className="recorrido-demo__titulo">{actual.titulo}</h2>
-        <p className="recorrido-demo__texto">{actual.texto}</p>
-        <div className="recorrido-demo__acciones">
-          <button type="button" className="boton boton--suave" onClick={terminarRecorrido}>Saltar</button>
-          {paso > 0 ? <button type="button" className="boton boton--suave" onClick={() => irAlPaso(paso - 1)}>Anterior</button> : null}
-          {ultimo
-            ? <button type="button" className="boton boton--accent" onClick={() => { terminarRecorrido(); if (otro) entrarComo(otro); else window.location.hash = inicioDeRol[rol]; }}>{otro ? `Ver como ${etiquetaOtro}` : 'Terminar'}</button>
-            : <button type="button" className="boton boton--accent" onClick={() => irAlPaso(paso + 1)}>Siguiente</button>}
+      {comentario ? (
+        <div className="recorrido-demo__burbuja">
+          <Jaguar pose="guia" ancho={64} clase="recorrido-demo__jaguar" />
+          <div>
+            <h2 className="recorrido-demo__titulo">{comentario.titulo}</h2>
+            <p className="recorrido-demo__texto">{comentario.texto}</p>
+            <button type="button" className="boton boton--accent" onClick={() => marcarExplorado(comentario.ruta)}>Entendido</button>
+          </div>
         </div>
+      ) : null}
+      <div className="recorrido-demo__barra">
+        <span className="recorrido-demo__paso">Recorrido · {hechos} de {pasos.length}</span>
+        {sugerido
+          ? <button type="button" className="boton boton--suave" onClick={() => irA(sugerido.ruta)}>Ver: {sugerido.titulo}</button>
+          : <button type="button" className="boton boton--accent" onClick={() => { terminarRecorrido(); if (otro) entrarComo(otro); else window.location.hash = inicioDeRol[rol]; }}>{otro ? `Ver como ${etiquetaOtro}` : 'Terminar'}</button>}
+        <button type="button" className="recorrido-demo__cerrar" onClick={terminarRecorrido} aria-label="Cerrar el recorrido">×</button>
       </div>
     </aside>
   );

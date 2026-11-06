@@ -61,7 +61,7 @@ docs/              producto/, curso/, diseno/, historial/
 
 ## Demo
 
-El modo demo (`?demo`, o sin variables de Supabase) es una experiencia aparte, cargada bajo demanda: `demo/ExperienciaDemo.tsx` (portada, barra «Ver como…» y recorrido), `demo/recorrido.ts` (los pasos de cada rol) y `demo/estado.ts` (un almacén pequeño que guarda el avance en `sessionStorage`). Las pantallas siguen siendo las de `demo/pantallas/` con datos de `demo/datos*.ts`. Para añadir un paso al recorrido basta una entrada en `recorrido.ts`; una prueba comprueba que la pantalla exista y sea del rol.
+El modo demo (`?demo`, o sin variables de Supabase) es una experiencia aparte, cargada bajo demanda: `demo/ExperienciaDemo.tsx` (portada, barra «Ver como…» y un jaguar que comenta cada pantalla la primera vez que se entra, sin mover a nadie), `demo/recorrido.ts` (las pantallas y el comentario de cada rol) y `demo/estado.ts` (un almacén pequeño que guarda en `sessionStorage` qué pantallas ya se comentaron). Las pantallas siguen siendo las de `demo/pantallas/` con datos de `demo/datos*.ts`. Para añadir un paso al recorrido basta una entrada en `recorrido.ts`; una prueba comprueba que la pantalla exista y sea del rol.
 
 ## Observabilidad
 

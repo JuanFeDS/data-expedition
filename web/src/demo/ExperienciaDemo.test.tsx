@@ -1,11 +1,25 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useEffect, useState } from 'react';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { rolDeRuta } from '../compartido/navegacion/navegacion';
+import { codigoDeRuta, rolDeRuta } from '../compartido/navegacion/navegacion';
 import { PANTALLAS } from '../app/registro';
-import { reiniciarEstadoDemo } from './estado';
+import { iniciarRecorrido, reiniciarEstadoDemo } from './estado';
 import { BarraDemo, PortadaDemo, RecorridoDemo } from './ExperienciaDemo';
 import { RECORRIDO, ROLES_DEMO } from './recorrido';
+
+function Escena() {
+  const [codigo, setCodigo] = useState(codigoDeRuta(window.location.hash));
+  useEffect(() => {
+    const alCambiar = () => setCodigo(codigoDeRuta(window.location.hash));
+    window.addEventListener('hashchange', alCambiar);
+    return () => window.removeEventListener('hashchange', alCambiar);
+  }, []);
+  return <><BarraDemo codigo={codigo} /><RecorridoDemo codigo={codigo} /></>;
+}
+
+const enPortada = (rol: string) => within(screen.getByRole('main')).getByRole('button', { name: new RegExp(rol) });
+const irAPantalla = (ruta: string) => act(() => { window.location.hash = `#/${ruta}`; });
 
 beforeEach(() => {
   window.sessionStorage.clear();
@@ -39,59 +53,112 @@ describe('portada de la demo', () => {
     expect(screen.getByRole('link', { name: /todas las pantallas/i })).toHaveAttribute('href', '#/todas');
   });
 
-  it('elegir un rol abre su primera pantalla y arranca el recorrido', async () => {
-    render(<><PortadaDemo /><RecorridoDemo /></>);
-    await userEvent.click(screen.getByRole('button', { name: /Docente/ }));
+  it('elegir un rol abre su primera pantalla y el jaguar la comenta', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Docente'));
     expect(window.location.hash).toBe('#/d1');
-    expect(screen.getByText('Recorrido · 1 de 7')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Tu panel' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Tu panel' })).toBeInTheDocument();
+    expect(screen.getByText('Recorrido · 0 de 7')).toBeInTheDocument();
   });
 });
 
-describe('recorrido guiado', () => {
-  it('avanza, retrocede y navega a la pantalla de cada paso', async () => {
-    render(<><PortadaDemo /><RecorridoDemo /></>);
-    await userEvent.click(screen.getByRole('button', { name: /Estudiante/ }));
-    expect(window.location.hash).toBe('#/home');
-    expect(screen.queryByRole('button', { name: 'Anterior' })).toBeNull();
-    await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
-    expect(window.location.hash).toBe('#/e1');
-    expect(screen.getByText('Recorrido · 2 de 7')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('button', { name: 'Anterior' }));
-    expect(window.location.hash).toBe('#/home');
+describe('exploración con el jaguar', () => {
+  it('«Entendido» cierra el comentario, cuenta la pantalla y sugiere la siguiente', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Docente'));
+    await userEvent.click(await screen.findByRole('button', { name: 'Entendido' }));
+    expect(screen.queryByRole('heading', { name: 'Tu panel' })).toBeNull();
+    expect(screen.getByText('Recorrido · 1 de 7')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Ver: Diagnóstico y rutas' })).toBeInTheDocument();
   });
 
-  it('saltar cierra el recorrido sin cambiar de pantalla', async () => {
-    render(<><PortadaDemo /><RecorridoDemo /></>);
-    await userEvent.click(screen.getByRole('button', { name: /Estudiante/ }));
-    await userEvent.click(screen.getByRole('button', { name: 'Saltar' }));
-    expect(screen.queryByText(/Recorrido ·/)).toBeNull();
-    expect(window.location.hash).toBe('#/home');
+  it('la sugerencia lleva a esa pantalla y el jaguar la comenta, sin moverte antes', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Docente'));
+    await userEvent.click(await screen.findByRole('button', { name: 'Entendido' }));
+    expect(window.location.hash).toBe('#/d1');
+    await userEvent.click(screen.getByRole('button', { name: 'Ver: Diagnóstico y rutas' }));
+    expect(window.location.hash).toBe('#/d2');
+    expect(await screen.findByRole('heading', { name: 'Diagnóstico y rutas' })).toBeInTheDocument();
   });
 
-  it('al llegar al último paso propone ver como otro rol', async () => {
-    render(<><PortadaDemo /><RecorridoDemo /></>);
-    await userEvent.click(screen.getByRole('button', { name: /Observador/ }));
-    await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
-    expect(screen.getByText('Recorrido · 3 de 3')).toBeInTheDocument();
-    await userEvent.click(screen.getByRole('button', { name: 'Ver como estudiante' }));
-    expect(window.location.hash).toBe('#/home');
+  it('navegar por tu cuenta sin cerrar el comentario también cuenta la pantalla', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Docente'));
+    await screen.findByRole('heading', { name: 'Tu panel' });
+    irAPantalla('d3');
+    expect(await screen.findByRole('heading', { name: 'Entregas' })).toBeInTheDocument();
     expect(screen.getByText('Recorrido · 1 de 7')).toBeInTheDocument();
   });
 
-  it('sin roles pendientes el último paso termina la visita', async () => {
-    render(<><PortadaDemo /><RecorridoDemo /></>);
-    for (const etiqueta of [/Estudiante/, /Docente/]) {
-      await userEvent.click(screen.getByRole('button', { name: etiqueta }));
-      await userEvent.click(screen.getByRole('button', { name: 'Saltar' }));
+  it('no repite el comentario de una pantalla ya vista', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Docente'));
+    await userEvent.click(await screen.findByRole('button', { name: 'Entendido' }));
+    irAPantalla('d3');
+    await screen.findByRole('heading', { name: 'Entregas' });
+    irAPantalla('d1');
+    await screen.findByText('Recorrido · 1 de 7');
+    expect(screen.queryByRole('heading', { name: 'Tu panel' })).toBeNull();
+  });
+
+  it('al ver todo ofrece otro rol, y sin roles pendientes termina la visita', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    for (const etiqueta of ['Estudiante', 'Docente']) {
+      await userEvent.click(enPortada(etiqueta));
+      await userEvent.click(await screen.findByRole('button', { name: 'Cerrar el recorrido' }));
     }
-    await userEvent.click(screen.getByRole('button', { name: /Observador/ }));
-    await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
-    await userEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+    await userEvent.click(enPortada('Observador'));
+    await screen.findByRole('heading', { name: 'Resumen por grupo' });
+    irAPantalla('o2');
+    await screen.findByRole('heading', { name: 'Dimensiones y trabajos' });
+    irAPantalla('o3');
+    await userEvent.click(await screen.findByRole('button', { name: 'Entendido' }));
+    expect(screen.getByText('Recorrido · 3 de 3')).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: 'Terminar' }));
     expect(screen.queryByText(/Recorrido ·/)).toBeNull();
     expect(window.location.hash).toBe('#/o1');
+  });
+
+  it('al completar un rol propone ver como el siguiente sin ver', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Observador'));
+    await screen.findByRole('heading', { name: 'Resumen por grupo' });
+    irAPantalla('o2');
+    await screen.findByRole('heading', { name: 'Dimensiones y trabajos' });
+    irAPantalla('o3');
+    await userEvent.click(await screen.findByRole('button', { name: 'Entendido' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Ver como estudiante' }));
+    expect(window.location.hash).toBe('#/home');
+    expect(await screen.findByRole('heading', { name: 'Tu campamento' })).toBeInTheDocument();
+  });
+
+  it('la × cierra el recorrido sin cambiar de pantalla', async () => {
+    render(<><PortadaDemo /><Escena /></>);
+    await userEvent.click(enPortada('Estudiante'));
+    await userEvent.click(await screen.findByRole('button', { name: 'Cerrar el recorrido' }));
+    expect(screen.queryByText(/Recorrido ·/)).toBeNull();
+    expect(window.location.hash).toBe('#/home');
+  });
+
+  it('no se muestra en la portada ni en pantallas de otro rol', () => {
+    act(() => iniciarRecorrido('observador'));
+    const vista = (codigo: string) => <RecorridoDemo codigo={codigo} />;
+    const { rerender } = render(vista('o1'));
+    expect(screen.getByText('Recorrido · 0 de 3')).toBeInTheDocument();
+    rerender(vista('d1'));
+    expect(screen.queryByText(/Recorrido ·/)).toBeNull();
+    rerender(vista(''));
+    expect(screen.queryByText(/Recorrido ·/)).toBeNull();
+    rerender(vista('o2'));
+    expect(screen.getByText('Recorrido · 1 de 3')).toBeInTheDocument();
+  });
+
+  it('resalta en el menú la pantalla que sugiere', () => {
+    act(() => iniciarRecorrido('estudiante'));
+    render(<><a className="lateral__enlace" href="#/e1">Ruta</a><a className="lateral__enlace" href="#/e2">Radar</a><RecorridoDemo codigo="home" /></>);
+    expect(screen.getByRole('link', { name: 'Ruta' })).toHaveClass('sugerido-demo');
+    expect(screen.getByRole('link', { name: 'Radar' })).not.toHaveClass('sugerido-demo');
   });
 });
 
@@ -109,24 +176,10 @@ describe('barra de la demo', () => {
     screen.getAllByRole('button').forEach((boton) => expect(boton).toHaveAttribute('aria-pressed', 'false'));
   });
 
-  it('el recorrido de un rol no se muestra en la portada ni en pantallas de otro rol', async () => {
-    const vista = (codigo: string) => <><BarraDemo codigo="o1" /><RecorridoDemo codigo={codigo} /></>;
-    const { rerender } = render(vista('o1'));
-    await userEvent.click(screen.getByRole('button', { name: 'Recorrido' }));
-    expect(screen.getByText('Recorrido · 1 de 3')).toBeInTheDocument();
-    rerender(vista('d1'));
-    expect(screen.queryByText(/Recorrido · 1/)).toBeNull();
-    rerender(vista(''));
-    expect(screen.queryByText(/Recorrido · 1/)).toBeNull();
-    rerender(vista('o2'));
-    expect(screen.getByText('Recorrido · 1 de 3')).toBeInTheDocument();
-  });
-
   it('permite volver al inicio y reiniciar el recorrido del rol actual', async () => {
-    render(<><BarraDemo codigo="d3" /><RecorridoDemo /></>);
+    render(<><BarraDemo codigo="d3" /><RecorridoDemo codigo="d3" /></>);
     expect(screen.getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '#/');
     await userEvent.click(screen.getByRole('button', { name: 'Recorrido' }));
     expect(window.location.hash).toBe('#/d1');
-    expect(screen.getByText('Recorrido · 1 de 7')).toBeInTheDocument();
   });
 });
