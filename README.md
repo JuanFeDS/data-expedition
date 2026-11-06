@@ -104,7 +104,7 @@ Capturas del modo demo (`?demo`, datos ficticios). La misma app tiene un centro 
 ## 🗺️ 4. Estado del proyecto
 
 - ✅ **App conectada a Supabase** (`web/`): acceso con Google o enlace por correo, roles (estudiante, docente, observador), cursos con invitaciones, trabajos y entregas por PR, rúbricas y calificación, formularios (relámpagos, votaciones y encuestas), calendario y material, equipos por trabajo, diagnóstico y radar, práctica con XP y racha, liga semanal, asistencia con QR rotativo y vistas agregadas para observadores.
-- ✅ **Modo demo** (`?demo`): las mismas pantallas con datos ficticios, como referencia de diseño.
+- ✅ **Modo demo** (`?demo`): una portada con tres roles (estudiante, docente y observador), un selector «Ver como…» y un recorrido guiado con el jaguar, sobre las mismas pantallas con datos ficticios. Nada se guarda. Es el enlace para mostrar la app a otros docentes y universidades: https://juanfeds.com/data-expedition/?demo
 - ✅ **Seguridad en la base:** RLS en todas las tablas y funciones de servidor para lo sensible; hay pruebas SQL en [`supabase/pruebas/`](supabase/pruebas/funciones_y_politicas.sql).
 - ✅ **Pruebas:** 221 pruebas unitarias (dominio, servicios, componentes y pantallas clave) con mínimos de cobertura exigidos en CI.
 - ⚠️ **Sin validar con sesiones reales:** las pantallas se probaron con datos simulados y en modo demo; falta el recorrido por rol contra Supabase real, descrito en [`docs/verificacion-real.md`](docs/verificacion-real.md).
@@ -165,7 +165,7 @@ cd data-expedition/web
 npm install
 npm run dev
 ```
-Se abre en `http://localhost:5173`. Sin variables de Supabase (`VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` en `web/.env.local`) arranca en modo demo; con `?demo` lo fuerza. En modo demo, `#/todas` muestra la galería de todas las pantallas.
+Se abre en `http://localhost:5173`. Sin variables de Supabase (`VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` en `web/.env.local`) arranca en modo demo; con `?demo` lo fuerza. En modo demo, la portada está en `?demo` y `#/todas` muestra la galería de todas las pantallas.
 
 ### Comprobaciones
 | Comando (en `web/`) | Qué hace |

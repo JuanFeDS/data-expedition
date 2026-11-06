@@ -59,6 +59,10 @@ docs/              producto/, curso/, diseno/, historial/
 3. Agrega su bloque a `supabase/pruebas/funciones_y_politicas.sql` y córrelo (cada bloque termina en `OK …` o `FALLO …`).
 4. Aplica la migración solo con aprobación explícita.
 
+## Demo
+
+El modo demo (`?demo`, o sin variables de Supabase) es una experiencia aparte, cargada bajo demanda: `demo/ExperienciaDemo.tsx` (portada, barra «Ver como…» y recorrido), `demo/recorrido.ts` (los pasos de cada rol) y `demo/estado.ts` (un almacén pequeño que guarda el avance en `sessionStorage`). Las pantallas siguen siendo las de `demo/pantallas/` con datos de `demo/datos*.ts`. Para añadir un paso al recorrido basta una entrada en `recorrido.ts`; una prueba comprueba que la pantalla exista y sea del rol.
+
 ## Observabilidad
 
 - **Errores del navegador:** `servicios/errores.ts` guarda en `errores_cliente` las excepciones sin atrapar, las promesas rechazadas y los fallos de dibujo, con tope por sesión y sin repetir el mismo mensaje. Solo el docente los lee.
