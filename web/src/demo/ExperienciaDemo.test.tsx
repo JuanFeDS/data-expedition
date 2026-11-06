@@ -176,9 +176,9 @@ describe('barra de la demo', () => {
     screen.getAllByRole('button').forEach((boton) => expect(boton).toHaveAttribute('aria-pressed', 'false'));
   });
 
-  it('permite volver al inicio y reiniciar el recorrido del rol actual', async () => {
+  it('no lleva enlaces de más y permite reiniciar el recorrido del rol actual', async () => {
     render(<><BarraDemo codigo="d3" /><RecorridoDemo codigo="d3" /></>);
-    expect(screen.getByRole('link', { name: 'Inicio' })).toHaveAttribute('href', '#/');
+    expect(screen.queryByRole('link')).toBeNull();
     await userEvent.click(screen.getByRole('button', { name: 'Recorrido' }));
     expect(window.location.hash).toBe('#/d1');
   });

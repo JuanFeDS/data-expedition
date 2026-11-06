@@ -5,7 +5,7 @@
 .barra-demo__roles { display: inline-flex; gap: 2px; padding: 2px; border-radius: 999px; background: rgb(11 42 36 / .14); }
 .barra-demo__roles button { padding: 5px 12px; border-radius: 999px; font-size: var(--fs-xs); font-weight: 800; color: inherit; }
 .barra-demo__roles button[aria-pressed='true'] { background: var(--deep); color: var(--accent); }
-.barra-demo__enlace { padding: 4px 8px; font-size: var(--fs-xs); font-weight: 800; text-decoration: underline; color: inherit; }
+.barra-demo__enlace { padding: 4px 10px; font-size: var(--fs-xs); font-weight: 800; text-decoration: underline; color: inherit; }
 @media (max-width: 720px) {
   .barra-demo { gap: 4px; padding-left: 8px; }
   .barra-demo__marca { display: none; }
@@ -61,4 +61,9 @@
   .recorrido-demo__burbuja { animation: demo-sube .45s cubic-bezier(.2, .8, .2, 1) both; }
   @keyframes demo-pulso { 0%, 100% { outline-color: var(--accent); } 50% { outline-color: transparent; } }
   .sugerido-demo { animation: demo-pulso 1.6s ease-in-out infinite; }
+}
+
+/* En escritorio la barra lateral ya lleva a todos lados: el botón amarillo de abajo solo satura la demo. */
+@media (min-width: 1100px) {
+  .modo-demo .dock { display: none; }
 }

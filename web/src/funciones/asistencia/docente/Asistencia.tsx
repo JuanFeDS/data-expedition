@@ -6,7 +6,7 @@ import { Dock } from '../../../compartido/ui/Dock';
 import { Selector } from '../../../compartido/ui/Selector';
 import { useCurso, useRutaCurso } from '../../../compartido/estado/curso';
 import { Estado, Tarjeta } from '../../../compartido/ui/panel';
-import { useSesion } from '../../../compartido/estado/sesion';
+import { conModoDemo } from '../../../compartido/ui/conModoDemo';
 import { Pantalla } from '../../../compartido/ui/ui';
 import {
   abrirAsistencia, asistenciaAbierta, cerrarAsistencia, codigoVigente, marcarAsistencia, registrosDeSesion,
@@ -173,15 +173,4 @@ function D16Real() {
   );
 }
 
-export function D16Asistencia() {
-  const { modoDemo } = useSesion();
-  if (!modoDemo) return <D16Real />;
-  return (
-    <Pantalla rol="docente" clase="p-d16">
-      <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Panel', ruta: '#/d1' }} kicker="Clase" titulo="Asistencia" subtitulo="Disponible en la versión con datos reales." objeto="mapa" />
-      </div>
-      <Dock />
-    </Pantalla>
-  );
-}
+export const D16Asistencia = conModoDemo(() => import('../../../demo/pantallas/asistencia/docente/Asistencia'), 'D16Ejemplo', D16Real);

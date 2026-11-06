@@ -32,7 +32,6 @@ export function PortadaDemo() {
 export function BarraDemo({ codigo }: { codigo: string }) {
   const { rol: enRecorrido } = useEstadoDemo();
   const rolActual: Rol | null = codigo ? rolDeRuta(codigo) : null;
-  const salir = `${window.location.pathname}${window.location.hash}`;
   return (
     <div className="barra-demo" role="navigation" aria-label="Demostración">
       <span className="barra-demo__marca">Demo · datos de ejemplo</span>
@@ -42,8 +41,6 @@ export function BarraDemo({ codigo }: { codigo: string }) {
         ))}
       </span>
       {rolActual && enRecorrido !== rolActual ? <button type="button" className="barra-demo__enlace" onClick={() => iniciarRecorrido(rolActual)}>Recorrido</button> : null}
-      <a className="barra-demo__enlace" href="#/">Inicio</a>
-      <a className="barra-demo__enlace" href={salir}>Salir</a>
     </div>
   );
 }
@@ -98,5 +95,9 @@ export function RecorridoDemo({ codigo }: { codigo?: string }) {
 }
 
 export default function ExperienciaDemo({ codigo }: { codigo: string }) {
+  useEffect(() => {
+    document.documentElement.classList.add('modo-demo');
+    return () => document.documentElement.classList.remove('modo-demo');
+  }, []);
   return <><BarraDemo codigo={codigo} /><RecorridoDemo codigo={codigo} /></>;
 }
