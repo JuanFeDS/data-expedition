@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from 'react';
+import { StrictMode, Suspense, lazy, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BarraLateral } from '../compartido/navegacion/BarraLateral';
 import { CONECTADAS, ENCURSO, RUTAS_COMUNES, analizarRuta, rolDeRuta, rutaDeCurso } from '../compartido/navegacion/navegacion';
@@ -12,11 +12,15 @@ import { instalarReporteDeErrores } from '../servicios/errores';
 import { instalarSonidoDeClic } from '../compartido/ui/sonidos';
 import { LimiteDeErrores, PantallaCargada } from '../compartido/ui/LimiteDeErrores';
 import { ModoViva } from '../compartido/ui/ui';
-import { Cargando, CompletarPerfil, INICIO_REAL, InsigniaDemo, OtroRol, SinDatos } from '../funciones/acceso/comun/EstadosDeAcceso';
+import { Cargando, CompletarPerfil, INICIO_REAL, OtroRol, SinDatos } from '../funciones/acceso/comun/EstadosDeAcceso';
 import { PANTALLAS } from './registro';
 import '../estilos/estilos.css';
 import '../estilos/pantallas.css';
 import '../estilos/escritorio.css';
+import '../estilos/demo.css';
+
+const CapaDemo = lazy(() => import('../demo/ExperienciaDemo'));
+const PortadaDemo = lazy(() => import('../demo/ExperienciaDemo').then((modulo) => ({ default: modulo.PortadaDemo })));
 
 instalarSonidoDeClic();
 instalarReporteDeErrores();
@@ -24,7 +28,7 @@ instalarReporteDeErrores();
 if (window.location.search.includes('completo')) document.documentElement.classList.add('modo-completo');
 
 function rutaActual() {
-  return window.location.hash.replace(/^#\/?/, '') || 'todas';
+  return window.location.hash.replace(/^#\/?/, '');
 }
 
 function Galeria() {
@@ -80,11 +84,12 @@ function App() {
   }, [destino]);
 
   if (modoDemo) {
-    if (!pantalla) return <><InsigniaDemo /><Galeria /></>;
+    if (codigo === 'todas') return <Suspense fallback={null}><CapaDemo codigo="" /><Galeria /></Suspense>;
+    if (!pantalla) return <Suspense fallback={null}><CapaDemo codigo="" /><PortadaDemo /></Suspense>;
     const Componente = pantalla.componente;
     return (
       <ModoViva.Provider value>
-        <InsigniaDemo />
+        <Suspense fallback={null}><CapaDemo codigo={codigo} /></Suspense>
         <div className="escenario">
           <BarraLateral ruta={codigo} />
           <PantallaCargada componente={Componente} />
