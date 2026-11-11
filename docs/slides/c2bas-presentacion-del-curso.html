@@ -21,24 +21,30 @@
     <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
   </section>
 
-  <!-- 2 · GANCHO: un modelo que acierta el 98 % -->
+  <!-- 2 · GANCHO: un promedio que engaña -->
   <section class="slide slide--azul slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · El reto"></div>
     <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
     <span class="etiqueta">Una pregunta para empezar</span>
     <div class="dividido">
       <div>
-        <p class="enorme" data-paso="1" style="font-size: 104px">Un modelo acierta el 98 % de las veces.</p>
-        <p class="enorme" data-paso="2" style="font-size: 104px; color: var(--naranja); margin-top: 34px">¿Es un buen modelo?</p>
-        <p class="sub" data-paso="3" style="font-size: 42px">Solo 2 de cada 100 casos importaban. El modelo siempre responde «todo bien»: acierta el 98 % y no detecta ni uno.</p>
+        <p class="enorme" data-paso="1" style="font-size: 96px">El tiempo promedio de espera es de 50 minutos.</p>
+        <p class="enorme" data-paso="2" style="font-size: 96px; color: var(--naranja); margin-top: 34px">¿Lo creerías?</p>
+        <p class="sub" data-paso="3" style="font-size: 42px">Ocho de nueve personas esperaron entre 10 y 20 minutos. Una sola esperó 335 y arrastró el promedio. La mediana dice 15.</p>
       </div>
-      <div class="p100-caja" style="position: relative; justify-self: center; width: 720px">
-        <div class="puntos100" id="p100"></div>
-        <div class="resaltados" data-paso="3"><b style="left: 444px; top: 148px"></b><b style="left: 74px; top: 444px"></b></div>
-      </div>
+      <svg viewBox="0 0 760 380" style="justify-self: center; width: 760px; height: 380px" role="img" aria-label="Nueve esperas: ocho agrupadas cerca de 15 minutos y una de 335 que mueve el promedio a 50">
+        <path d="M40 320H730" stroke="#8a93ad" stroke-width="4"/>
+        <g fill="#c9d3ee" font-size="26"><text x="40" y="362">0</text><text x="226" y="362">100</text><text x="426" y="362">200</text><text x="626" y="362">300 min</text></g>
+        <g data-paso="1"><circle cx="70" cy="290" r="11" fill="#11c9ee"/><circle cx="70" cy="264" r="11" fill="#11c9ee"/><circle cx="70" cy="238" r="11" fill="#11c9ee"/><circle cx="70" cy="212" r="11" fill="#11c9ee"/><circle cx="70" cy="186" r="11" fill="#11c9ee"/><circle cx="70" cy="160" r="11" fill="#11c9ee"/><circle cx="70" cy="134" r="11" fill="#11c9ee"/><circle cx="70" cy="108" r="11" fill="#11c9ee"/><circle cx="710" cy="290" r="11" fill="#cb318e"/></g>
+        <g data-paso="3">
+          <path d="M70 60V320" stroke="#7fc200" stroke-width="6" stroke-dasharray="3 0"/>
+          <text x="90" y="50" font-size="32" font-weight="700" fill="#7fc200">Mediana 15</text>
+          <path d="M140 110V320" stroke="#ff7c1a" stroke-width="6"/>
+          <text x="160" y="104" font-size="32" font-weight="700" fill="#ff7c1a">Promedio 50</text>
+        </g>
+      </svg>
     </div>
     <p class="etiqueta" data-paso="4" style="margin-top: auto; color: #fff">Este curso trata de aprender a hacerse esa pregunta.</p>
-    <script>document.getElementById('p100').innerHTML = '<i></i>'.repeat(100);</script>
   </section>
 
   <!-- 3 · QUÉ ES ESTE CURSO -->
@@ -68,11 +74,11 @@
     <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
     <span class="etiqueta">Al terminar podrás</span>
     <div class="escalon">
-      <div style="--i: 0; --c: #11c9ee" data-paso="1"><b>Diseñar</b><span>una arquitectura de datos y justificar su costo</span></div>
-      <div style="--i: 1; --c: #7fc200" data-paso="2"><b>Construir</b><span>un pipeline reproducible y un modelo que supera una referencia</span></div>
-      <div style="--i: 2; --c: #ff7c1a" data-paso="3"><b>Evaluar</b><span>sin fuga de información, con incertidumbre y con sus límites</span></div>
-      <div style="--i: 3; --c: #e0509e" data-paso="4"><b>Operar</b><span>con versiones, entorno y monitoreo para que otra persona lo repita</span></div>
-      <div style="--i: 4; --c: #ffffff" data-paso="5"><b>Defender</b><span>una recomendación ante una audiencia técnica y gerencial</span></div>
+      <div style="--i: 0; --c: #11c9ee" data-paso="1"><b>Preguntar</b><span>con un usuario, una decisión y datos que puedan responder</span></div>
+      <div style="--i: 1; --c: #7fc200" data-paso="2"><b>Consultar</b><span>con SQL y comprobar que los conteos conservan el significado</span></div>
+      <div style="--i: 2; --c: #ff7c1a" data-paso="3"><b>Preparar</b><span>los datos con un procedimiento que otra persona pueda repetir</span></div>
+      <div style="--i: 3; --c: #e0509e" data-paso="4"><b>Mostrar</b><span>indicadores verificados en un tablero que se lee solo</span></div>
+      <div style="--i: 4; --c: #ffffff" data-paso="5"><b>Defender</b><span>hallazgos con sus límites, en un portafolio reproducible</span></div>
     </div>
   </section>
 
@@ -82,20 +88,20 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <span class="etiqueta">Un proyecto, cinco fases</span>
     <div class="dividido" style="grid-template-columns: 1.7fr 1fr; margin-top: 0">
-      <svg viewBox="0 0 1100 800" style="width: 1060px; height: 770px" role="img" aria-label="Ciclo de cinco fases: oportunidad, datos y línea base, modelo y evaluación, operación y decisión, defensa">
+      <svg viewBox="0 0 1100 800" style="width: 1060px; height: 770px" role="img" aria-label="Ciclo de cinco fases: oportunidad, datos y consultas, indicadores y tablero, hallazgos y límites, portafolio y defensa">
         <circle class="t-dibuja" pathLength="1" cx="550" cy="400" r="290" fill="none" stroke="#ff7c1a" stroke-width="6"/>
         <text x="550" y="392" text-anchor="middle" font-size="58" font-weight="700" fill="#16181d">Tu</text>
         <text x="550" y="456" text-anchor="middle" font-size="58" font-weight="700" fill="#16181d">proyecto</text>
         <g data-paso="1"><circle cx="550" cy="110" r="42" fill="#ff7c1a"/><text x="550" y="126" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">1</text>
           <text x="614" y="58" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 1</text><text x="614" y="104" font-size="42" font-weight="700" fill="#16181d">Oportunidad</text></g>
         <g data-paso="2"><circle cx="826" cy="310" r="42" fill="#cb318e"/><text x="826" y="326" text-anchor="middle" font-size="44" font-weight="700" fill="#fff">2</text>
-          <text x="890" y="296" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 2</text><text x="890" y="342" font-size="42" font-weight="700" fill="#16181d">Datos y</text><text x="890" y="388" font-size="42" font-weight="700" fill="#16181d">línea base</text></g>
+          <text x="890" y="296" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 2</text><text x="890" y="342" font-size="42" font-weight="700" fill="#16181d">Datos y</text><text x="890" y="388" font-size="42" font-weight="700" fill="#16181d">consultas</text></g>
         <g data-paso="3"><circle cx="720" cy="635" r="42" fill="#7fc200"/><text x="720" y="651" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">3</text>
-          <text x="784" y="621" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 3</text><text x="784" y="667" font-size="42" font-weight="700" fill="#16181d">Modelo y</text><text x="784" y="713" font-size="42" font-weight="700" fill="#16181d">evaluación</text></g>
+          <text x="784" y="621" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 3</text><text x="784" y="667" font-size="42" font-weight="700" fill="#16181d">Indicadores</text><text x="784" y="713" font-size="42" font-weight="700" fill="#16181d">y tablero</text></g>
         <g data-paso="4"><circle cx="380" cy="635" r="42" fill="#11c9ee"/><text x="380" y="651" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">4</text>
-          <text x="316" y="621" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 4</text><text x="316" y="667" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Operación</text><text x="316" y="713" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">y decisión</text></g>
+          <text x="316" y="621" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 4</text><text x="316" y="667" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Hallazgos</text><text x="316" y="713" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">y límites</text></g>
         <g data-paso="5"><circle cx="274" cy="310" r="42" fill="#16181d"/><text x="274" y="326" text-anchor="middle" font-size="44" font-weight="700" fill="#fff">5</text>
-          <text x="210" y="296" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 5</text><text x="210" y="342" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Defensa</text></g>
+          <text x="210" y="296" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 5</text><text x="210" y="342" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Portafolio</text><text x="210" y="388" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">y defensa</text></g>
       </svg>
       <div>
         <p class="cuerpo" style="font-size: 44px; line-height: 1.3">Un solo proyecto recorre las cinco fases.</p>
@@ -137,7 +143,7 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <span class="etiqueta">Tu proyecto, el eje del curso</span>
     <div class="dividido" style="grid-template-columns: 1.25fr 1fr; margin-top: 0">
-      <svg viewBox="0 0 1000 760" style="width: 960px; height: 730px" role="img" aria-label="Radar de seis criterios: pertinencia, arquitectura y datos, método, evaluación, operación y defensa">
+      <svg viewBox="0 0 1000 760" style="width: 960px; height: 730px" role="img" aria-label="Radar de seis áreas: pregunta, datos y consultas, preparación, indicadores, tablero y portafolio">
         <g transform="translate(50 0)">
           <polygon points="450,130 667,255 667,505 450,630 233,505 233,255" fill="none" stroke="#d9d9d9" stroke-width="3"/>
           <polygon points="450,215 593,298 593,462 450,545 307,462 307,298" fill="none" stroke="#d9d9d9" stroke-width="3"/>
@@ -146,12 +152,12 @@
           <polygon data-paso="1" points="450,280 526,336 547,436 450,455 407,405 385,342" fill="none" stroke="#5b6170" stroke-width="5" stroke-dasharray="14 10"/>
           <polygon data-paso="2" points="450,168 623,280 645,492 450,568 298,468 266,274" fill="#ff7c1a" fill-opacity=".32" stroke="#ff7c1a" stroke-width="7" stroke-linejoin="round"/>
           <g font-size="38" font-weight="700" fill="#16181d">
-            <text x="450" y="76" text-anchor="middle">Pertinencia</text>
-            <text x="714" y="232">Arquitectura</text><text x="714" y="274">y datos</text>
-            <text x="714" y="540">Método</text>
-            <text x="450" y="704" text-anchor="middle">Evaluación</text>
-            <text x="186" y="540" text-anchor="end">Operación</text>
-            <text x="186" y="232" text-anchor="end">Defensa</text>
+            <text x="450" y="76" text-anchor="middle">Pregunta</text>
+            <text x="714" y="232">Datos y</text><text x="714" y="274">consultas</text>
+            <text x="714" y="540">Preparación</text>
+            <text x="450" y="704" text-anchor="middle">Indicadores</text>
+            <text x="186" y="540" text-anchor="end">Tablero</text>
+            <text x="186" y="232" text-anchor="end">Portafolio</text>
           </g>
         </g>
       </svg>
@@ -159,7 +165,7 @@
         <h2 class="titulo titulo--sm" style="font-size: 62px">Seis cosas que tu proyecto debe poder demostrar</h2>
         <p class="cuerpo" style="margin-top: 30px">Cada encuentro lo acerca un paso. Verás tu avance frente a tu propio punto de partida.</p>
         <p class="cuerpo" style="margin-top: 26px; font-weight: 700">Veamos cada área, una por una.</p>
-        <p class="nota" style="margin-top: 34px">Ilustración con valores de ejemplo. Los criterios son los del portafolio de la guía del profesor.</p>
+        <p class="nota" style="margin-top: 34px">Ilustración con valores de ejemplo. Las seis áreas agrupan las evidencias de los diez encuentros del nivel básico.</p>
       </div>
     </div>
     <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
@@ -171,41 +177,41 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 1 de 6</span>
-      <h2>Pertinencia</h2>
-      <p>Actor, decisión, costo de error y criterios de aceptación verificables.</p>
+      <h2>Pregunta y decisión</h2>
+      <p>Usuario, decisión y una pregunta que los datos puedan responder.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="30" fill="currentColor" opacity=".22"/><circle cx="160" cy="40" r="15" fill="currentColor"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 1</i><span>Oportunidad con actor, decisión e incertidumbre</span></div>
-        <div data-paso="2"><i>Enc. 2</i><span>Brief con alcance incluido y excluido</span></div>
-        <div data-paso="3"><i>Enc. 8</i><span>Memo con decisión, evidencia, alternativa y límites</span></div>
+        <div data-paso="1"><i>Enc. 1</i><span>Dos oportunidades con usuario, decisión e incertidumbre</span></div>
+        <div data-paso="2"><i>Enc. 2</i><span>Ficha de alcance con usuario, periodo, unidad de fila y fuentes</span></div>
+        <div data-paso="3"><i>Enc. 2</i><span>Mínimo, ampliaciones y asuntos fuera de alcance acordados</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 1</small>«¿Qué decisión concreta cambiaría con el resultado?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Querer transformar toda una organización. Mejor una decisión y una parte del proceso que puedas observar.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 1</small>«¿Qué decisión podría cambiar al ver el análisis?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Querer mejorar toda la ciudad. Mejor un servicio, una pregunta y un periodo.</p>
     </div>
   </section>
 
-  <!-- 7.2 · ÁREA: Arquitectura y datos -->
+  <!-- 7.2 · ÁREA: Datos y consultas -->
   <section class="slide slide--area slide--ruta" style="--c: #cb318e; --ct: #ffffff">
     <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 2 de 6</span>
-      <h2>Arquitectura y datos</h2>
-      <p>Procedencia, controles y flujo repetible, con recursos proporcionados al problema.</p>
+      <h2>Datos y consultas</h2>
+      <p>Consultas SQL que responden la pregunta y relaciones que conservan el significado.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="30" fill="currentColor" opacity=".22"/><circle cx="255" cy="95" r="15" fill="currentColor"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 2</i><span>Unidad, instante de disponibilidad y acceso a los datos definidos</span></div>
-        <div data-paso="2"><i>Enc. 3</i><span>Arquitectura justificada por volumen, frecuencia y recursos</span></div>
-        <div data-paso="3"><i>Enc. 3</i><span>Pipeline pequeño ejecutado con controles de esquema y conteos</span></div>
+        <div data-paso="1"><i>Enc. 2</i><span>Fuentes, permisos y qué representa cada fila, definidos</span></div>
+        <div data-paso="2"><i>Enc. 3</i><span>Una tabla base y un resumen por una dimensión o periodo</span></div>
+        <div data-paso="3"><i>Enc. 3</i><span>Conteos antes y después de la unión, y un total contrastado</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 3</small>«¿Qué ocurre si la fuente cambia de esquema?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Borrar columnas para que el flujo no falle, sin preguntar qué significado se pierde.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 3</small>«¿Qué representa una fila del resultado?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Una suma inflada después de un JOIN. Se cuentan las coincidencias por clave y se miran dos registros antes y después.</p>
     </div>
   </section>
 
@@ -215,19 +221,19 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 3 de 6</span>
-      <h2>Método</h2>
-      <p>Técnica principal pertinente, referencia comparable y prevención de fuga de información.</p>
+      <h2>Preparación y calidad</h2>
+      <p>Un procedimiento que otra persona pueda repetir, con reglas de limpieza documentadas.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="30" fill="currentColor" opacity=".22"/><circle cx="255" cy="205" r="15" fill="currentColor"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 4</i><span>Referencia pertinente y evaluación conservadas</span></div>
-        <div data-paso="2"><i>Enc. 5</i><span>Experimento con cambio y comparación explícitos</span></div>
-        <div data-paso="3"><i>Enc. 5</i><span>Registro del resultado, incluso cuando no mejora</span></div>
+        <div data-paso="1"><i>Enc. 4</i><span>Datos originales preservados y reglas documentadas</span></div>
+        <div data-paso="2"><i>Enc. 4</i><span>Bitácora con conteos reconciliados por cada regla</span></div>
+        <div data-paso="3"><i>Enc. 4</i><span>Tipos, fechas, nulos y claves revisados; salida limpia</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 5</small>«¿Qué evidencia contradice la hipótesis?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Probar muchas configuraciones sobre la evaluación final. Se valida para elegir y se reserva la prueba para estimar.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 4</small>«¿Qué significa cada ausencia?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Reemplazar todos los ausentes por cero. Una fecha faltante, un costo desconocido y una cantidad cero son cosas distintas.</p>
     </div>
   </section>
 
@@ -237,19 +243,19 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 4 de 6</span>
-      <h2>Evaluación</h2>
-      <p>Procedimiento adecuado, análisis de fallas, estabilidad y límites.</p>
+      <h2>Indicadores</h2>
+      <p>Indicadores con fórmula, población y unidad, comprobados de forma independiente.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="30" fill="currentColor" opacity=".22"/><circle cx="160" cy="260" r="15" fill="currentColor"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 4</i><span>Error interpretado y una hipótesis de mejora</span></div>
-        <div data-paso="2"><i>Enc. 6</i><span>Evaluación habitual y prueba difícil, adecuadas a la ruta</span></div>
-        <div data-paso="3"><i>Enc. 6</i><span>Análisis de errores y limitaciones con evidencia</span></div>
+        <div data-paso="1"><i>Enc. 5</i><span>Cuatro indicadores con fórmula, población, periodo y unidad</span></div>
+        <div data-paso="2"><i>Enc. 5</i><span>Dos comprobaciones independientes, a mano o con otra herramienta</span></div>
+        <div data-paso="3"><i>Enc. 5</i><span>Una medida de posición y una de dispersión pertinentes</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 6</small>«¿En qué población se degrada? ¿Qué conclusión no permiten los datos?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Creer que una métrica alta garantiza buen uso. Se vuelve a un error concreto y a su consecuencia.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 5</small>«¿Cuál es el denominador y de qué población sale?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Comparar 48 horas con 30 minutos sin convertir, o quitar un extremo legítimo porque incomoda el gráfico.</p>
     </div>
   </section>
 
@@ -259,19 +265,19 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 5 de 6</span>
-      <h2>Operación</h2>
-      <p>Versiones, entorno, forma de uso y criterio de monitoreo identificados.</p>
+      <h2>Tablero</h2>
+      <p>Un tablero que el usuario puede leer sin que el autor lo explique.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="30" fill="currentColor" opacity=".22"/><circle cx="65" cy="205" r="15" fill="currentColor"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 7</i><span>Procedimiento repetible con versiones y entorno documentados</span></div>
-        <div data-paso="2"><i>Enc. 7</i><span>Validación de entrada y señal de monitoreo vinculadas al caso</span></div>
-        <div data-paso="3"><i>Enc. 7</i><span>Estado real de la interfaz, la automatización o el despliegue, explícito</span></div>
+        <div data-paso="1"><i>Enc. 6</i><span>Cuatro indicadores y dos visualizaciones legibles</span></div>
+        <div data-paso="2"><i>Enc. 6</i><span>Un filtro funcional y dos preguntas de uso respondidas por un par</span></div>
+        <div data-paso="3"><i>Enc. 6</i><span>Una cifra del tablero contrastada con la consulta de origen</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 7</small>«¿Puede otra persona reproducir el resultado? ¿Qué alertaría de una degradación?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Resultados que dependen de un estado oculto del notebook. Se ejecuta todo desde el inicio.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 6</small>«¿Qué va a comparar el usuario con este gráfico?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Un gráfico atractivo que no responde ninguna pregunta. Si no se sabe qué compara, se retira.</p>
     </div>
   </section>
 
@@ -281,19 +287,19 @@
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <div class="area-lado">
       <span class="area-num">Área 6 de 6</span>
-      <h2>Defensa</h2>
-      <p>Resultados reproducibles, recomendación ejecutiva y condiciones de adopción.</p>
+      <h2>Hallazgos y portafolio</h2>
+      <p>Hallazgos con sus límites, en un trabajo que otra persona pueda reproducir y entender.</p>
       <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="30" fill="currentColor" opacity=".22"/><circle cx="65" cy="95" r="15" fill="currentColor"/></svg>
     </div>
     <div class="area-cuerpo">
       <span class="area-et">Cómo se ve</span>
       <div class="evid">
-        <div data-paso="1"><i>Enc. 9</i><span>Resultado reproducido, o alcance de la revisión declarado</span></div>
-        <div data-paso="2"><i>Enc. 10</i><span>Explicación individual del método, la comparación y la decisión</span></div>
-        <div data-paso="3"><i>Enc. 10</i><span>Demostración con resultados y límites identificados</span></div>
+        <div data-paso="1"><i>Enc. 8</i><span>Tres hallazgos y dos recomendaciones, con sus límites</span></div>
+        <div data-paso="2"><i>Enc. 9</i><span>README con fuentes, ejecución, controles y límites</span></div>
+        <div data-paso="3"><i>Enc. 10</i><span>Una cifra verificada y una decisión técnica justificada</span></div>
       </div>
-      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 10</small>«¿Qué recomendarías desplegar mañana y qué mantendrías en piloto?»</div>
-      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Presentar como lista para producción una solución que no ha comprobado condiciones esenciales.</p>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 10</small>«¿Qué decidió el usuario y qué evidencia lo respalda?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Defender con un recorrido por botones, o afirmar causas y predicciones que un conteo no sostiene.</p>
     </div>
   </section>
 
