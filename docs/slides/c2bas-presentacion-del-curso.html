@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Del dato a la decisión · Presentación del curso · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Análisis de datos · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Del dato a la decisión</h1>
+      <p class="docente" style="font-size: 46px">Presentación del curso</p>
+      <p class="docente" style="margin-top: 6px">Juan Felipe Martínez Bernal</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · GANCHO: un modelo que acierta el 98 % -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · El reto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Una pregunta para empezar</span>
+    <div class="dividido">
+      <div>
+        <p class="enorme" data-paso="1" style="font-size: 104px">Un modelo acierta el 98 % de las veces.</p>
+        <p class="enorme" data-paso="2" style="font-size: 104px; color: var(--naranja); margin-top: 34px">¿Es un buen modelo?</p>
+        <p class="sub" data-paso="3" style="font-size: 42px">Solo 2 de cada 100 casos importaban. El modelo siempre responde «todo bien»: acierta el 98 % y no detecta ni uno.</p>
+      </div>
+      <div class="p100-caja" style="position: relative; justify-self: center; width: 720px">
+        <div class="puntos100" id="p100"></div>
+        <div class="resaltados" data-paso="3"><b style="left: 444px; top: 148px"></b><b style="left: 74px; top: 444px"></b></div>
+      </div>
+    </div>
+    <p class="etiqueta" data-paso="4" style="margin-top: auto; color: #fff">Este curso trata de aprender a hacerse esa pregunta.</p>
+    <script>document.getElementById('p100').innerHTML = '<i></i>'.repeat(100);</script>
+  </section>
+
+  <!-- 3 · QUÉ ES ESTE CURSO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · El reto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Qué es este curso</span>
+    <p class="mensaje" style="font-size: 100px; margin-top: 26px; max-width: 1500px">Este curso lleva una idea hasta una solución que puedes <span class="resalta">defender</span>.</p>
+    <svg class="nodos-deco" viewBox="0 0 700 44" width="700" height="44" aria-hidden="true">
+      <path class="t-dibuja" pathLength="1" d="M0 8H640" stroke="#ff7c1a" stroke-width="6" fill="none"/><circle class="a-pop" style="--i:3" cx="652" cy="8" r="9" fill="#ff7c1a"/>
+      <path class="t-dibuja" pathLength="1" d="M0 22H520" stroke="#cb318e" stroke-width="6" fill="none"/><circle class="a-pop" style="--i:4" cx="532" cy="22" r="9" fill="#cb318e"/>
+      <path class="t-dibuja" pathLength="1" d="M0 36H400" stroke="#7fc200" stroke-width="6" fill="none"/><circle class="a-pop" style="--i:5" cx="412" cy="36" r="9" fill="#7fc200"/>
+    </svg>
+    <p class="nota" style="margin-top: 24px">Análisis de datos nivel básico · SQL, pandas, tableros, estadística y portafolio</p>
+    <div class="stats">
+      <div data-paso="1"><b>5</b><span>semanas de trabajo</span></div>
+      <div data-paso="2"><b>10</b><span>encuentros de tres horas</span></div>
+      <div data-paso="3"><b>42</b><span>horas: 30 sincrónicas y 12 en Platzi</span></div>
+      <div data-paso="4"><b>1</b><span>proyecto propio, de principio a fin</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · AL TERMINAR PODRÁS -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · El reto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Al terminar podrás</span>
+    <div class="escalon">
+      <div style="--i: 0; --c: #11c9ee" data-paso="1"><b>Diseñar</b><span>una arquitectura de datos y justificar su costo</span></div>
+      <div style="--i: 1; --c: #7fc200" data-paso="2"><b>Construir</b><span>un pipeline reproducible y un modelo que supera una referencia</span></div>
+      <div style="--i: 2; --c: #ff7c1a" data-paso="3"><b>Evaluar</b><span>sin fuga de información, con incertidumbre y con sus límites</span></div>
+      <div style="--i: 3; --c: #e0509e" data-paso="4"><b>Operar</b><span>con versiones, entorno y monitoreo para que otra persona lo repita</span></div>
+      <div style="--i: 4; --c: #ffffff" data-paso="5"><b>Defender</b><span>una recomendación ante una audiencia técnica y gerencial</span></div>
+    </div>
+  </section>
+
+  <!-- 5 · EL CICLO DEL PROYECTO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un proyecto, cinco fases</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; margin-top: 0">
+      <svg viewBox="0 0 1100 800" style="width: 1060px; height: 770px" role="img" aria-label="Ciclo de cinco fases: oportunidad, datos y línea base, modelo y evaluación, operación y decisión, defensa">
+        <circle class="t-dibuja" pathLength="1" cx="550" cy="400" r="290" fill="none" stroke="#ff7c1a" stroke-width="6"/>
+        <text x="550" y="392" text-anchor="middle" font-size="58" font-weight="700" fill="#16181d">Tu</text>
+        <text x="550" y="456" text-anchor="middle" font-size="58" font-weight="700" fill="#16181d">proyecto</text>
+        <g data-paso="1"><circle cx="550" cy="110" r="42" fill="#ff7c1a"/><text x="550" y="126" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">1</text>
+          <text x="614" y="58" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 1</text><text x="614" y="104" font-size="42" font-weight="700" fill="#16181d">Oportunidad</text></g>
+        <g data-paso="2"><circle cx="826" cy="310" r="42" fill="#cb318e"/><text x="826" y="326" text-anchor="middle" font-size="44" font-weight="700" fill="#fff">2</text>
+          <text x="890" y="296" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 2</text><text x="890" y="342" font-size="42" font-weight="700" fill="#16181d">Datos y</text><text x="890" y="388" font-size="42" font-weight="700" fill="#16181d">línea base</text></g>
+        <g data-paso="3"><circle cx="720" cy="635" r="42" fill="#7fc200"/><text x="720" y="651" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">3</text>
+          <text x="784" y="621" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 3</text><text x="784" y="667" font-size="42" font-weight="700" fill="#16181d">Modelo y</text><text x="784" y="713" font-size="42" font-weight="700" fill="#16181d">evaluación</text></g>
+        <g data-paso="4"><circle cx="380" cy="635" r="42" fill="#11c9ee"/><text x="380" y="651" text-anchor="middle" font-size="44" font-weight="700" fill="#16181d">4</text>
+          <text x="316" y="621" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 4</text><text x="316" y="667" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Operación</text><text x="316" y="713" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">y decisión</text></g>
+        <g data-paso="5"><circle cx="274" cy="310" r="42" fill="#16181d"/><text x="274" y="326" text-anchor="middle" font-size="44" font-weight="700" fill="#fff">5</text>
+          <text x="210" y="296" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#5b6170">SEMANA 5</text><text x="210" y="342" text-anchor="end" font-size="42" font-weight="700" fill="#16181d">Defensa</text></g>
+      </svg>
+      <div>
+        <p class="cuerpo" style="font-size: 44px; line-height: 1.3">Un solo proyecto recorre las cinco fases.</p>
+        <p class="cuerpo" style="margin-top: 28px">Si los datos no sostienen la pregunta, el ciclo vuelve atrás. Eso también es parte del trabajo.</p>
+        <p class="nota" style="margin-top: 36px">Inspirado en el ciclo CRISP-DM (Chapman et al., 2000), adaptado a cinco semanas.</p>
+      </div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · PROGRAMA: DOS RIELES -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Programa</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Dos rieles en paralelo: encuentros y Platzi</h2>
+    <div class="prog">
+      <div class="col" data-paso="1"><div class="sem">Semana 1</div><div class="riel" style="--c: #ff7c1a"></div>
+        <div class="encs"><div class="enc"><b>Encuentro 1</b>Comunidad, pacto y oportunidades analíticas</div><div class="enc"><b>Encuentro 2</b>Delimitación de proyectos, fuentes y calidad</div></div>
+        <div class="riel" style="--c: #7fc200; margin-top: 30px"></div><div class="enc"><b>Platzi · M1</b>SQL para análisis de negocio</div></div>
+      <div class="col" data-paso="2"><div class="sem">Semana 2</div><div class="riel" style="--c: #ff7c1a"></div>
+        <div class="encs"><div class="enc"><b>Encuentro 3</b>Consultas SQL y relaciones que conservan el significado</div><div class="enc"><b>Encuentro 4</b>Preparación reproducible y decisiones de calidad</div></div>
+        <div class="riel" style="--c: #7fc200; margin-top: 30px"></div><div class="enc"><b>Platzi · M2</b>Transformaciones avanzadas con pandas</div></div>
+      <div class="col" data-paso="3"><div class="sem">Semana 3</div><div class="riel" style="--c: #ff7c1a"></div>
+        <div class="encs"><div class="enc"><b>Encuentro 5</b>Indicadores descriptivos y comprobación</div><div class="enc"><b>Encuentro 6</b>Diseño de un tablero para el usuario</div></div>
+        <div class="riel" style="--c: #7fc200; margin-top: 30px"></div><div class="enc"><b>Platzi · M3</b>Visualización avanzada: Power BI y Tableau</div></div>
+      <div class="col" data-paso="4"><div class="sem">Semana 4</div><div class="riel" style="--c: #ff7c1a"></div>
+        <div class="encs"><div class="enc"><b>Encuentro 7</b>Clínicas de profundización y coherencia entre herramientas</div><div class="enc"><b>Encuentro 8</b>Interpretación, recomendaciones y límites</div></div>
+        <div class="riel" style="--c: #7fc200; margin-top: 30px"></div><div class="enc"><b>Platzi · M4</b>Estadística descriptiva aplicada a negocio</div></div>
+      <div class="col" data-paso="5"><div class="sem">Semana 5</div><div class="riel" style="--c: #ff7c1a"></div>
+        <div class="encs"><div class="enc"><b>Encuentro 9</b>Reproducibilidad, documentación y portafolio</div><div class="enc"><b>Encuentro 10</b>Demostración, defensa y proyección</div></div>
+        <div class="riel" style="--c: #7fc200; margin-top: 30px"></div><div class="enc"><b>Platzi · M5</b>Documentación y portafolio analítico</div></div>
+    </div>
+  </section>
+
+  <!-- 7 · EL PROYECTO: SEIS COSAS QUE DEBE DEMOSTRAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Tu proyecto, el eje del curso</span>
+    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; margin-top: 0">
+      <svg viewBox="0 0 1000 760" style="width: 960px; height: 730px" role="img" aria-label="Radar de seis criterios: pertinencia, arquitectura y datos, método, evaluación, operación y defensa">
+        <g transform="translate(50 0)">
+          <polygon points="450,130 667,255 667,505 450,630 233,505 233,255" fill="none" stroke="#d9d9d9" stroke-width="3"/>
+          <polygon points="450,215 593,298 593,462 450,545 307,462 307,298" fill="none" stroke="#d9d9d9" stroke-width="3"/>
+          <polygon points="450,298 521,339 521,421 450,462 379,421 379,339" fill="none" stroke="#d9d9d9" stroke-width="3"/>
+          <path d="M450 380V130M450 380L667 255M450 380L667 505M450 380V630M450 380L233 505M450 380L233 255" stroke="#d9d9d9" stroke-width="3"/>
+          <polygon data-paso="1" points="450,280 526,336 547,436 450,455 407,405 385,342" fill="none" stroke="#5b6170" stroke-width="5" stroke-dasharray="14 10"/>
+          <polygon data-paso="2" points="450,168 623,280 645,492 450,568 298,468 266,274" fill="#ff7c1a" fill-opacity=".32" stroke="#ff7c1a" stroke-width="7" stroke-linejoin="round"/>
+          <g font-size="38" font-weight="700" fill="#16181d">
+            <text x="450" y="76" text-anchor="middle">Pertinencia</text>
+            <text x="714" y="232">Arquitectura</text><text x="714" y="274">y datos</text>
+            <text x="714" y="540">Método</text>
+            <text x="450" y="704" text-anchor="middle">Evaluación</text>
+            <text x="186" y="540" text-anchor="end">Operación</text>
+            <text x="186" y="232" text-anchor="end">Defensa</text>
+          </g>
+        </g>
+      </svg>
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 62px">Seis cosas que tu proyecto debe poder demostrar</h2>
+        <p class="cuerpo" style="margin-top: 30px">Cada encuentro lo acerca un paso. Verás tu avance frente a tu propio punto de partida.</p>
+        <p class="cuerpo" style="margin-top: 26px; font-weight: 700">Veamos cada área, una por una.</p>
+        <p class="nota" style="margin-top: 34px">Ilustración con valores de ejemplo. Los criterios son los del portafolio de la guía del profesor.</p>
+      </div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 7.1 · ÁREA: Pertinencia -->
+  <section class="slide slide--area slide--ruta" style="--c: #ff7c1a; --ct: #000000">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 1 de 6</span>
+      <h2>Pertinencia</h2>
+      <p>Actor, decisión, costo de error y criterios de aceptación verificables.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="30" fill="currentColor" opacity=".22"/><circle cx="160" cy="40" r="15" fill="currentColor"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 1</i><span>Oportunidad con actor, decisión e incertidumbre</span></div>
+        <div data-paso="2"><i>Enc. 2</i><span>Brief con alcance incluido y excluido</span></div>
+        <div data-paso="3"><i>Enc. 8</i><span>Memo con decisión, evidencia, alternativa y límites</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 1</small>«¿Qué decisión concreta cambiaría con el resultado?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Querer transformar toda una organización. Mejor una decisión y una parte del proceso que puedas observar.</p>
+    </div>
+  </section>
+
+  <!-- 7.2 · ÁREA: Arquitectura y datos -->
+  <section class="slide slide--area slide--ruta" style="--c: #cb318e; --ct: #ffffff">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 2 de 6</span>
+      <h2>Arquitectura y datos</h2>
+      <p>Procedencia, controles y flujo repetible, con recursos proporcionados al problema.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="30" fill="currentColor" opacity=".22"/><circle cx="255" cy="95" r="15" fill="currentColor"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 2</i><span>Unidad, instante de disponibilidad y acceso a los datos definidos</span></div>
+        <div data-paso="2"><i>Enc. 3</i><span>Arquitectura justificada por volumen, frecuencia y recursos</span></div>
+        <div data-paso="3"><i>Enc. 3</i><span>Pipeline pequeño ejecutado con controles de esquema y conteos</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 3</small>«¿Qué ocurre si la fuente cambia de esquema?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Borrar columnas para que el flujo no falle, sin preguntar qué significado se pierde.</p>
+    </div>
+  </section>
+
+  <!-- 7.3 · ÁREA: Método -->
+  <section class="slide slide--area slide--ruta" style="--c: #7fc200; --ct: #000000">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 3 de 6</span>
+      <h2>Método</h2>
+      <p>Técnica principal pertinente, referencia comparable y prevención de fuga de información.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="30" fill="currentColor" opacity=".22"/><circle cx="255" cy="205" r="15" fill="currentColor"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 4</i><span>Referencia pertinente y evaluación conservadas</span></div>
+        <div data-paso="2"><i>Enc. 5</i><span>Experimento con cambio y comparación explícitos</span></div>
+        <div data-paso="3"><i>Enc. 5</i><span>Registro del resultado, incluso cuando no mejora</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 5</small>«¿Qué evidencia contradice la hipótesis?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Probar muchas configuraciones sobre la evaluación final. Se valida para elegir y se reserva la prueba para estimar.</p>
+    </div>
+  </section>
+
+  <!-- 7.4 · ÁREA: Evaluación -->
+  <section class="slide slide--area slide--ruta" style="--c: #11c9ee; --ct: #000000">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 4 de 6</span>
+      <h2>Evaluación</h2>
+      <p>Procedimiento adecuado, análisis de fallas, estabilidad y límites.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="30" fill="currentColor" opacity=".22"/><circle cx="160" cy="260" r="15" fill="currentColor"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 4</i><span>Error interpretado y una hipótesis de mejora</span></div>
+        <div data-paso="2"><i>Enc. 6</i><span>Evaluación habitual y prueba difícil, adecuadas a la ruta</span></div>
+        <div data-paso="3"><i>Enc. 6</i><span>Análisis de errores y limitaciones con evidencia</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 6</small>«¿En qué población se degrada? ¿Qué conclusión no permiten los datos?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Creer que una métrica alta garantiza buen uso. Se vuelve a un error concreto y a su consecuencia.</p>
+    </div>
+  </section>
+
+  <!-- 7.5 · ÁREA: Operación -->
+  <section class="slide slide--area slide--ruta" style="--c: #0a3bd1; --ct: #ffffff">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 5 de 6</span>
+      <h2>Operación</h2>
+      <p>Versiones, entorno, forma de uso y criterio de monitoreo identificados.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="30" fill="currentColor" opacity=".22"/><circle cx="65" cy="205" r="15" fill="currentColor"/><circle cx="65" cy="95" r="7" fill="currentColor" opacity=".55"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 7</i><span>Procedimiento repetible con versiones y entorno documentados</span></div>
+        <div data-paso="2"><i>Enc. 7</i><span>Validación de entrada y señal de monitoreo vinculadas al caso</span></div>
+        <div data-paso="3"><i>Enc. 7</i><span>Estado real de la interfaz, la automatización o el despliegue, explícito</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 7</small>«¿Puede otra persona reproducir el resultado? ¿Qué alertaría de una degradación?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Resultados que dependen de un estado oculto del notebook. Se ejecuta todo desde el inicio.</p>
+    </div>
+  </section>
+
+  <!-- 7.6 · ÁREA: Defensa -->
+  <section class="slide slide--area slide--ruta" style="--c: #16181d; --ct: #ffffff">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · El camino"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <div class="area-lado">
+      <span class="area-num">Área 6 de 6</span>
+      <h2>Defensa</h2>
+      <p>Resultados reproducibles, recomendación ejecutiva y condiciones de adopción.</p>
+      <svg viewBox="0 0 320 300" aria-hidden="true"><polygon points="160,40 255,95 255,205 160,260 65,205 65,95" fill="none" stroke="currentColor" stroke-width="3" opacity=".55"/><circle cx="160" cy="40" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="95" r="7" fill="currentColor" opacity=".55"/><circle cx="255" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="160" cy="260" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="205" r="7" fill="currentColor" opacity=".55"/><circle cx="65" cy="95" r="30" fill="currentColor" opacity=".22"/><circle cx="65" cy="95" r="15" fill="currentColor"/></svg>
+    </div>
+    <div class="area-cuerpo">
+      <span class="area-et">Cómo se ve</span>
+      <div class="evid">
+        <div data-paso="1"><i>Enc. 9</i><span>Resultado reproducido, o alcance de la revisión declarado</span></div>
+        <div data-paso="2"><i>Enc. 10</i><span>Explicación individual del método, la comparación y la decisión</span></div>
+        <div data-paso="3"><i>Enc. 10</i><span>Demostración con resultados y límites identificados</span></div>
+      </div>
+      <div class="pregunta-area" data-paso="4"><small>Te preguntaremos · Encuentro 10</small>«¿Qué recomendarías desplegar mañana y qué mantendrías en piloto?»</div>
+      <p class="trampa" data-paso="5"><b>La trampa frecuente.</b> Presentar como lista para producción una solución que no ha comprobado condiciones esenciales.</p>
+    </div>
+  </section>
+
+  <!-- 8 · MARCO TEÓRICO: DE LA IDEA A LA PRÁCTICA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Cómo aprendemos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Marco teórico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 60px">Cuatro ideas sobre cómo se aprende, y cómo las usamos</h2>
+    <div class="puente">
+      <div data-paso="1" style="--c: #f26a00"><div class="idea">Hacer<small>Dewey (1938) · Kolb (1984)</small></div><div class="enlace"></div><div class="practica">Un proyecto propio, de principio a fin</div></div>
+      <div data-paso="2" style="--c: #cb318e"><div class="idea">Andamiar<small>Vygotsky (1978)</small></div><div class="enlace"></div><div class="practica">Práctica guiada primero, aplicada después</div></div>
+      <div data-paso="3" style="--c: #5c9100"><div class="idea">Retroalimentar<small>Black y Wiliam (1998) · Hattie y Timperley (2007)</small></div><div class="enlace"></div><div class="practica">Revisión entre pares y mentoría en cada encuentro</div></div>
+      <div data-paso="4" style="--c: #0a3bd1"><div class="idea">Recuperar<small>Roediger y Karpicke (2006)</small></div><div class="enlace"></div><div class="practica">Kahoots relámpago: practicar respondiendo</div></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 9 · UN ENCUENTRO POR DENTRO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Cómo aprendemos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Metodología · un encuentro por dentro</span>
+    <h2 class="titulo" style="font-size: 96px">De 180 minutos, 95 son para <span style="color: var(--naranja)">practicar</span></h2>
+    <div class="bt">
+      <div class="seg" style="--m: 15"><i style="--c: #11c9ee">15</i><span>Apertura y revisión del avance</span></div>
+      <div class="seg" style="--m: 25"><i style="--c: #ff7c1a">25</i><span>Microtaller o modelado</span></div>
+      <div class="seg" style="--m: 30"><i style="--c: #e0509e">30</i><span>Práctica guiada</span></div>
+      <div class="seg seg--chica" style="--m: 10"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 65"><i style="--c: #7fc200">65</i><span>Construcción y mentoría con tu proyecto</span></div>
+      <div class="seg" style="--m: 25"><i style="--c: #0a3bd1; color: #fff">25</i><span>Contraste y retroalimentación</span></div>
+      <div class="seg seg--chica" style="--m: 10"><i style="--c: #9aa0b0">10</i><span>Cierre</span></div>
+    </div>
+    <div class="llaves">
+      <div style="--m: 40" data-paso="1">40 min<small>apertura y modelado</small></div>
+      <div style="--m: 105" data-paso="2">95 min practicando<small>guiada y con tu proyecto, con una pausa en medio</small></div>
+      <div style="--m: 25" data-paso="3">25 min<small>compartir y mejorar</small></div>
+      <div style="--m: 10"></div>
+    </div>
+  </section>
+
+  <!-- 10 · PACTO: PREGUNTA INICIAL -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">Antes de acordar</span>
+    <h2 class="mensaje" style="font-size: 108px; margin-top: 30px">¿Qué necesitas para aprender y participar con confianza?</h2>
+    <p class="sub">Piensa en una experiencia que te haya ayudado a aprender. Responde por voz o por chat.</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="120">2:00</div>
+      <span class="bono" style="color: var(--negro)">Escuchamos antes de definir los acuerdos</span>
+    </div>
+  </section>
+
+  <!-- 11 · LOS SEIS ACUERDOS -->
+  <section class="slide slide--azul slide--ruta slide--foto">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <div class="foto-lado"><div class="texto-foto">Seis acuerdos para aprender juntos</div></div>
+    <div class="foto-cuerpo">
+      <div class="acuerdos">
+        <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Nos tratamos con respeto</b><span>Comentamos el trabajo sin descalificar a su autor.</span></div></div>
+        <div data-paso="2" style="--c: #e0509e"><i>2</i><div><b>Participamos por distintos medios</b><span>Voz, chat o escrito. La cámara encendida no es condición.</span></div></div>
+        <div data-paso="3" style="--c: #7fc200"><i>3</i><div><b>Cuidamos el tiempo común</b><span>Avisamos de las dificultades y acordamos cómo retomar.</span></div></div>
+        <div data-paso="4" style="--c: #11c9ee"><i>4</i><div><b>Aprendemos de los errores</b><span>Los usamos para formular hipótesis, probar y mejorar.</span></div></div>
+        <div data-paso="5" style="--c: #ff7c1a"><i>5</i><div><b>Protegemos datos y usamos IA con criterio</b><span>Datos permitidos, credenciales a salvo, y verificamos lo que sugiere la IA.</span></div></div>
+        <div data-paso="6" style="--c: #ffffff"><i>6</i><div><b>Escuchamos y reconocemos aportes</b><span>Respetamos turnos y reconocemos lo que aporta cada persona.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · IA CON CRITERIO -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">La IA en este curso</span>
+    <h2 class="mensaje" style="font-size: 96px; margin-top: 26px">Usar IA, sí. Entender lo que entregas, siempre.</h2>
+    <div class="verbos">
+      <div class="v" data-paso="1"><b>Pedir</b><span>Di con claridad qué necesitas y con qué datos.</span></div>
+      <div class="v" data-paso="2"><b>Revisar</b><span>Trata la respuesta como un borrador, no como un hecho.</span></div>
+      <div class="v" data-paso="3"><b>Corregir</b><span>Ejecuta, prueba y contrasta con la documentación.</span></div>
+      <div class="v" data-paso="4"><b>Explicar</b><span>Cuéntalo con tus palabras y declara cómo la usaste.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="margin-top: auto; font-size: 54px; font-weight: 700; opacity: 1">Si no puedes explicarlo, todavía no es tuyo.</p>
+  </section>
+
+  <!-- 13 · SITUACIÓN PARA CONVERSAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Una situación para conversar</span>
+    <div class="chat">
+      <div class="burbuja" data-paso="1"><small>Una compañera</small>«Lo hice con IA, pero todavía no sé explicarlo.»</div>
+      <div class="burbuja burbuja--der" data-paso="2">¿Qué le pediste a la IA, exactamente?</div>
+      <div class="burbuja burbuja--der m" data-paso="3">Cuéntame con tus palabras qué hace esta parte.</div>
+      <div class="burbuja burbuja--der v" data-paso="4">¿Cómo podemos comprobar que el resultado es correcto?</div>
+    </div>
+    <p class="sub" data-paso="5" style="margin-top: 0; font-size: 42px; color: var(--tinta); font-weight: 700">¿Qué acuerdo del pacto nos orienta aquí?</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 14 · COMPROMISOS: PROFESOR Y GRUPO -->
+  <section class="slide slide--azul slide--ruta slide--diagonal">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">El pacto va en las dos direcciones</span>
+    <div class="compromisos" style="grid-template-columns: .8fr 1.2fr">
+      <div>
+        <h3>Yo me comprometo a</h3>
+        <ul style="max-width: 640px">
+          <li data-paso="1">Explicar el propósito de cada actividad y cómo revisar el resultado</li>
+          <li data-paso="2">Escuchar tus preguntas y orientarte para continuar</li>
+          <li data-paso="3">Darte retroalimentación concreta y tiempo para usarla</li>
+          <li data-paso="4">Ajustar el apoyo cuando aparezcan barreras de acceso o de comprensión</li>
+        </ul>
+      </div>
+      <div class="der">
+        <h3>Te pido</h3>
+        <ul>
+          <li data-paso="1">Participar por el medio que prefieras</li>
+          <li data-paso="2">Avisar si hay dificultades de acceso</li>
+          <li data-paso="3">Proteger los datos y comprobar lo que sugiere la IA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · NUESTRO PACTO DE GRUPO -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">Nuestro pacto de grupo</span>
+    <h2 class="titulo titulo--sm">Los acuerdos se construyen y se revisan juntos</h2>
+    <div class="dividido" style="grid-template-columns: 1.5fr 1fr">
+      <div class="preguntas" style="margin-top: 0">
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">1</b>¿Qué acuerdo conservamos tal como está?</div>
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">2</b>¿Qué necesitamos ajustar o agregar?</div>
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">3</b>¿Dónde consultaremos la versión acordada y cómo la revisaremos?</div>
+      </div>
+      <div class="reloj sin-paso" style="text-align: center" data-segundos="240">4:00</div>
+    </div>
+  </section>
+
+  <!-- 16 · LA APP EN TRES USOS -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Herramientas</span>
+    <h2 class="titulo titulo--sm">Data Expedition, la app que usaremos en cada encuentro</h2>
+    <div class="vbandas">
+      <div class="vb" data-paso="1">
+        <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><rect x="10" y="48" width="24" height="42" rx="3"/><rect x="38" y="16" width="24" height="74" rx="3"/><rect x="66" y="62" width="24" height="28" rx="3"/></svg>
+        <h3>Competencias</h3><p>Una liga semanal y un marcador en vivo. Y tu radar, frente a tu propio punto de partida.</p>
+      </div>
+      <div class="vb" data-paso="2">
+        <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M12 12h76a6 6 0 0 1 6 6v46a6 6 0 0 1-6 6H44L24 90V70h-12a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6z"/><rect x="22" y="28" width="56" height="6" rx="3" fill="#cb318e"/><rect x="22" y="44" width="38" height="6" rx="3" fill="#cb318e"/></svg>
+        <h3>Encuestas</h3><p>Pulso de tres preguntas, votaciones y censos. Anónimas cuando importa.</p>
+      </div>
+      <div class="vb" data-paso="3">
+        <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M58 4L16 56h26l-8 40 46-56H54z"/></svg>
+        <h3>Kahoots</h3><p>Relámpagos en vivo de 60 segundos. Entras con un apodo, sin crear cuenta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 · COMPETENCIAS -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Competencias</span>
+    <div class="dividido" style="grid-template-columns: 1.2fr 1fr">
+      <div>
+        <h2 class="titulo" style="font-size: 92px">Compites contra tu punto de partida</h2>
+        <ul class="lista" style="font-size: 42px; gap: 24px">
+          <li>Liga semanal: sumas XP practicando</li>
+          <li>Marcador en vivo en cada kahoot</li>
+          <li>Radar: tu avance, frente a ti mismo</li>
+        </ul>
+      </div>
+      <div style="justify-self: center; text-align: center">
+        <div class="telefono telefono--img"><div class="pantalla"><img src="estudia/img/app-liga.webp" alt="Liga semanal con ranking de XP"></div></div>
+        <p class="ilus" style="margin-top: 18px">Pantalla real de la app, con datos de ejemplo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 · ENCUESTAS -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Encuestas</span>
+    <div class="dividido" style="grid-template-columns: 740px 1fr; gap: 90px">
+      <div style="text-align: center">
+        <div class="duo">
+          <div class="telefono telefono--img telefono--s"><div class="pantalla"><img src="estudia/img/app-pulso.webp" alt="Pulso de la semana, anónimo"></div></div>
+          <div class="telefono telefono--img telefono--s"><div class="pantalla"><img src="estudia/img/app-votacion.webp" alt="Votación de herramienta"></div></div>
+        </div>
+        <p class="ilus" style="margin-top: 18px">Pantallas reales de la app, con datos de ejemplo</p>
+      </div>
+      <div>
+        <h2 class="titulo" style="font-size: 92px">Tu voz mueve el curso</h2>
+        <ul class="lista" style="font-size: 42px; gap: 26px">
+          <li>Un pulso anónimo de tres preguntas para ajustar el siguiente encuentro</li>
+          <li>Votaciones para decidir las herramientas del curso</li>
+          <li>Censo de equipos y entorno</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 · KAHOOTS -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <span class="etiqueta">Kahoots</span>
+    <div class="dividido" style="grid-template-columns: 1fr 740px; gap: 90px">
+      <div>
+        <h2 class="titulo" style="font-size: 100px">60 segundos. Un intento.</h2>
+        <ul class="lista" style="font-size: 42px; gap: 22px">
+          <li>Escaneas el QR o escribes el código</li>
+          <li>Entras con un apodo, sin crear cuenta</li>
+          <li>Ves el marcador en vivo</li>
+          <li>Es práctica: sirve para recordar y para ajustar la clase</li>
+        </ul>
+      </div>
+      <div style="text-align: center">
+        <div class="duo">
+          <div class="telefono telefono--img telefono--s"><div class="pantalla"><img src="estudia/img/app-relampago.webp" alt="Pregunta relámpago con ventana de 60 segundos"></div></div>
+          <div class="telefono telefono--img telefono--s"><div class="pantalla"><img src="estudia/img/app-resultado.webp" alt="Resultado de la relámpago con XP de bonificación"></div></div>
+        </div>
+        <p class="ilus" style="margin-top: 18px; color: var(--negro)">Pantallas reales de la app, con datos de ejemplo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19.1 · DEL OTRO LADO DE LA PANTALLA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Del otro lado de la pantalla</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Yo abro la pregunta y veo al grupo, sin nombres en las encuestas</h2>
+    <div class="navegadores">
+      <figure style="margin: 0" data-paso="1"><div class="navegador"><b></b><img src="estudia/img/app-enclase.webp" alt="Vista En clase del docente"></div>
+        <figcaption>En clase<small>Abro un relámpago o un pulso y muestro el QR</small></figcaption></figure>
+      <figure style="margin: 0" data-paso="2"><div class="navegador"><b></b><img src="estudia/img/app-resultados.webp" alt="Vista de resultados del pulso semanal"></div>
+        <figcaption>Resultados<small>Anónimo, con un mínimo de 5 personas</small></figcaption></figure>
+    </div>
+    <p class="ilus" style="margin-top: auto">Pantallas reales de la app, con datos de ejemplo</p>
+  </section>
+
+  <!-- 20 · PROBEMOS AHORA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Nuestra app"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Probemos ahora</span>
+    <div class="dividido" style="grid-template-columns: 1.2fr 520px">
+      <div>
+        <h2 class="titulo" style="font-size: 100px">Tres preguntas de calentamiento</h2>
+        <p class="sub" style="font-size: 44px">Sin presión: solo para ver cómo funciona.</p>
+        <ol class="lista lista--num" style="font-size: 46px; gap: 26px">
+          <li>Escanea el QR</li>
+          <li>Elige tu apodo</li>
+          <li>Responde en 60 segundos</li>
+        </ol>
+      </div>
+      <div class="qr"><span>Escanea<small>pega aquí el QR de la clase abierta</small></span></div>
+    </div>
+  </section>
+
+  <!-- 21 · QUÉ SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Arrancamos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Antes del encuentro 1</span>
+    <h2 class="titulo" style="font-size: 96px">Tres cosas para arrancar</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Entra a la app</h3><p>Con el correo con el que te inscribiste. En clase también puedes entrar con un apodo.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>Abre el módulo M1 en Platzi</h3><p>SQL para análisis de negocio. Llega con una pregunta de aplicación.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>Trae dos oportunidades</h3><p>Una decisión, los datos que tendrías y lo que todavía no sabes.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 22 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en el encuentro 1</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Comunidad, pacto y oportunidades analíticas</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
