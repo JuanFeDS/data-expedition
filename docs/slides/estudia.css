@@ -373,3 +373,38 @@ html, body { height: 100%; background: #0b0d12; overflow: hidden; font-family: v
   .slide.activa .marcador .barra { animation: crece-x 1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.5s + var(--i, 0) * .12s); transform-origin: left; }
   .slide.activa svg .paso-visible { animation-name: pop !important; transform-box: fill-box; transform-origin: center; }
 }
+
+/* Áreas del proyecto: una slide por vértice del radar */
+.slide--area { padding: 0; --ct: #000; }
+.slide--area.activa { display: flex; flex-direction: row; }
+.slide--area .ruta-cap { --acento: var(--ct); --base: color-mix(in srgb, var(--ct) 28%, transparent); }
+.area-lado { width: 700px; flex: none; background: var(--c); color: var(--ct); padding: 128px 60px 80px 110px; display: flex; flex-direction: column; }
+.area-num { font-size: 26px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.area-lado h2 { font-size: 100px; line-height: 1; letter-spacing: -.03em; margin-top: 16px; }
+.area-lado p { font-size: 38px; line-height: 1.3; margin-top: 28px; max-width: 540px; }
+.area-lado svg { width: 400px; margin-top: auto; align-self: flex-start; }
+.slide--area .ruta-cap::before { color: var(--ct); }
+.area-cuerpo { flex: 1; padding: 140px 110px 80px 90px; display: flex; flex-direction: column; }
+.area-et { font-size: 26px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+.evid { display: grid; gap: 22px; margin-top: 24px; }
+.evid > div { display: grid; grid-template-columns: 150px 1fr; align-items: baseline; padding-bottom: 18px; border-bottom: 3px solid var(--gris-claro); }
+.evid i { font-style: normal; font-size: 26px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gris); }
+.evid span { font-size: 38px; line-height: 1.2; }
+.pregunta-area { margin-top: 40px; padding-left: 34px; border-left: 12px solid var(--c); font-size: 46px; font-weight: 700; line-height: 1.2; }
+.pregunta-area small { display: block; font-size: 24px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); margin-bottom: 8px; }
+.trampa { margin-top: auto; font-size: 30px; line-height: 1.3; color: var(--oscuro); }
+.trampa b { color: var(--tinta); }
+
+/* Capturas reales de la app dentro de marcos */
+.telefono--img::before { display: none; }
+.telefono--img .pantalla { padding: 0; background: #0b0d12; border-radius: 44px; }
+.telefono--img .pantalla img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.telefono--s { width: 330px; height: 642px; padding: 13px; border-radius: 54px; }
+.telefono--s .pantalla { border-radius: 42px; }
+.duo { display: flex; gap: 34px; justify-content: center; align-items: flex-start; }
+.navegador { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 40px 80px rgb(0 0 0 / .4); border: 3px solid #1d2027; }
+.navegador > b { display: block; height: 36px; background: #1d2027; background-image: radial-gradient(circle, #ff5f57 7px, transparent 8px), radial-gradient(circle, #febc2e 7px, transparent 8px), radial-gradient(circle, #28c840 7px, transparent 8px); background-size: 28px 36px; background-position: 14px 50%, 42px 50%, 70px 50%; background-repeat: no-repeat; }
+.navegador img { display: block; width: 100%; height: auto; }
+.navegadores { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 36px; align-items: start; }
+.navegadores figcaption { font-size: 32px; line-height: 1.25; margin-top: 18px; font-weight: 700; }
+.navegadores figcaption small { display: block; font-size: 26px; font-weight: 400; opacity: .8; margin-top: 4px; }
