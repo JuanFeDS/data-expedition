@@ -46,6 +46,12 @@ jobs:
           VITE_BASE: /data-expedition/
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      - name: Publicar slides de las sesiones
+        run: |
+          mkdir -p web/dist/slides
+          cp docs/slides/marca.css docs/slides/motor.js web/dist/slides/
+          cp -r docs/slides/img web/dist/slides/img
+          cp docs/slides/s*.html web/dist/slides/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
