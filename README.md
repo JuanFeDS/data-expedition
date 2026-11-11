@@ -104,6 +104,7 @@ Capturas del modo demo (`?demo`, datos ficticios). La misma app tiene un centro 
 ## 🗺️ 4. Estado del proyecto
 
 - ✅ **App conectada a Supabase** (`web/`): acceso con Google o enlace por correo, roles (estudiante, docente, observador), cursos con invitaciones, trabajos y entregas por PR, rúbricas y calificación, formularios (relámpagos, votaciones y encuestas), calendario y material, equipos por trabajo, diagnóstico y radar, práctica con XP y racha, liga semanal, asistencia con QR rotativo y vistas agregadas para observadores.
+- ✅ **Clase abierta a invitados** (migración 0020): el docente proyecta un QR y un código, cada persona entra con un apodo sin correo ni cuenta, responde relámpagos, votaciones y encuestas y compite en un marcador en vivo. Pasos en [`docs/operacion.md`](docs/operacion.md).
 - ✅ **Modo demo** (`?demo`): una portada con tres roles (estudiante, docente y observador), un selector «Ver como…» y un recorrido libre: cada quien navega por el menú y el jaguar comenta cada pantalla la primera vez que entra, con una sugerencia de qué mirar después. Son las mismas pantallas con datos ficticios. Nada se guarda. Es el enlace para mostrar la app a otros docentes y universidades: https://juanfeds.com/data-expedition/?demo
 - ✅ **Seguridad en la base:** RLS en todas las tablas y funciones de servidor para lo sensible; hay pruebas SQL en [`supabase/pruebas/`](supabase/pruebas/funciones_y_politicas.sql).
 - ✅ **Pruebas:** 221 pruebas unitarias (dominio, servicios, componentes y pantallas clave) con mínimos de cobertura exigidos en CI.

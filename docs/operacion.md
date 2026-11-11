@@ -26,6 +26,23 @@ order by ultimo desc;
 
 Más contexto: los logs de la API y de la base en Supabase (Logs) y la tabla `eventos`, que guarda el uso y cada cambio de datos.
 
+## Clase abierta a invitados (sin registro)
+
+Para una clase en la que nadie tiene cuenta todavía.
+
+**Antes (una sola vez)**
+1. En Supabase: Authentication → Sign In / Providers → activa **Allow anonymous sign-ins**.
+2. En Authentication → Rate Limits revisa el límite de **inicios de sesión anónimos por hora y por IP**. Si toda la clase entra por la misma red (el wifi de la universidad comparte una sola IP), el valor por defecto puede quedarse corto: súbelo por encima del tamaño del grupo.
+3. Prepara los relámpagos de la competencia en **Formularios**: pregunta de opción, con la respuesta correcta marcada y un tiempo límite (por ejemplo 30 segundos).
+
+**Durante la clase**
+1. Abre **En clase** y pulsa **Abrir la clase**: aparecen un QR y un código de 5 caracteres. Proyéctalos.
+2. Cada persona escanea el QR (o entra a la app, pulsa «Entra con un código») y escribe un apodo. Queda matriculada en el curso y cae en la pantalla de relámpagos.
+3. Abre cada relámpago desde la misma pantalla. El marcador de la derecha se actualiza solo: 100 puntos por acierto y hasta 50 más por responder rápido.
+4. Al terminar, **Cerrar clase**: el código deja de servir. Los invitados que ya entraron conservan su sesión en su navegador.
+
+**Qué se guarda:** el apodo y las respuestas, sin correo. Los invitados cuentan como estudiantes en los resúmenes del curso, así que si luego quieres cifras solo de estudiantes registrados hay que filtrarlos (`perfiles.es_invitado`).
+
 ## Pendientes de configurar a mano
 
 - Aviso al canal de Slack cuando falle el despliegue o `revision.yml` (integración de GitHub con Slack: `/github subscribe` con el filtro de workflows).
