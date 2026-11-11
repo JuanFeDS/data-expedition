@@ -201,3 +201,40 @@ begin
   if abiertas > 0 then raise exception 'FALLO: % políticas abiertas al rol público', abiertas; end if;
   raise exception 'OK políticas solo para authenticated';
 end $$;
+
+-- 11. Modo invitado: con el código y un apodo se entra a la clase, se compite en el marcador y no se escala nada
+do $$
+declare d uuid; ed uuid; inv uuid := gen_random_uuid(); f uuid; q uuid; cod text; entrada uuid; malo boolean := false; cerrado boolean := false; abrio boolean := false; filas int; pts int; rol_final text;
+begin
+  select id into d from public.perfiles where rol = 'docente' limit 1;
+  select edicion_id into ed from public.matriculas limit 1;
+  insert into auth.users (id, aud, role, is_anonymous) values (inv, 'authenticated', 'authenticated', true);
+  if not exists (select 1 from public.perfiles where id = inv and es_invitado and correo is null) then raise exception 'FALLO: la sesión anónima no creó un perfil de invitado'; end if;
+  insert into public.formularios (edicion_id, tipo, titulo, anonimo, duracion_segundos) values (ed, 'relampago', '__prueba', false, 60) returning id into f;
+  insert into public.preguntas_formulario (formulario_id, orden, tipo, enunciado, opciones) values (f, 1, 'opcion', 'x', '{a,b}') returning id into q;
+  insert into public.claves_formulario values (q, 1);
+  perform set_config('request.jwt.claims', json_build_object('sub', inv, 'role', 'authenticated')::text, true);
+  set local role authenticated;
+  begin perform public.unirse_como_invitado('XXXXX', 'Ana'); exception when others then malo := true; end;
+  begin perform public.abrir_clase_invitados(ed); abrio := true; exception when others then null; end;
+  perform set_config('request.jwt.claims', json_build_object('sub', d, 'role', 'authenticated')::text, true);
+  cod := public.abrir_clase_invitados(ed);
+  perform public.abrir_formulario(f);
+  perform set_config('request.jwt.claims', json_build_object('sub', inv, 'role', 'authenticated')::text, true);
+  entrada := public.unirse_como_invitado(lower(cod), 'Ana');
+  perform public.responder_formulario(f, jsonb_build_array(jsonb_build_object('pregunta_id', q, 'opcion', 1)));
+  select count(*), max(puntos) into filas, pts from public.marcador_clase(ed);
+  perform set_config('request.jwt.claims', json_build_object('sub', d, 'role', 'authenticated')::text, true);
+  perform public.cerrar_clase_invitados(ed);
+  perform set_config('request.jwt.claims', json_build_object('sub', inv, 'role', 'authenticated')::text, true);
+  begin perform public.unirse_como_invitado(cod, 'Ana'); exception when others then cerrado := true; end;
+  reset role;
+  select rol::text into rol_final from public.perfiles where id = inv;
+  if not malo then raise exception 'FALLO: aceptó un código inválido'; end if;
+  if abrio then raise exception 'FALLO: un invitado pudo abrir la clase'; end if;
+  if entrada <> ed then raise exception 'FALLO: no lo matriculó en el curso'; end if;
+  if filas <> 1 or pts < 100 or pts > 150 then raise exception 'FALLO: marcador filas=% puntos=%', filas, pts; end if;
+  if not cerrado then raise exception 'FALLO: entró con la clase cerrada'; end if;
+  if rol_final <> 'estudiante' then raise exception 'FALLO: el invitado tiene rol %', rol_final; end if;
+  raise exception 'OK modo invitado';
+end $$;
