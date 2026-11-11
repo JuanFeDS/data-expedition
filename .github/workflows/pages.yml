@@ -52,6 +52,9 @@ jobs:
           cp docs/slides/marca.css docs/slides/motor.js web/dist/slides/
           cp -r docs/slides/img web/dist/slides/img
           cp docs/slides/s*.html web/dist/slides/
+          cp docs/slides/estudia.css web/dist/slides/
+          cp -r docs/slides/estudia web/dist/slides/estudia
+          cp docs/slides/c2av-presentacion-*.html web/dist/slides/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
