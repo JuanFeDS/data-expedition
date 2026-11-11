@@ -58,33 +58,46 @@ Tomado de la ruta de hitos. La columna Platzi indica los módulos que respaldan 
 
 El encuentro 1 incluye un pacto pedagógico de 20 minutos (participación, autoría, datos, IA y colaboración).
 
+**Estructura de cada encuentro (guía del profesor):** apertura y revisión del avance (15 min), microtaller o modelado (25), práctica guiada (30), pausa (10), construcción y mentoría (65), contraste y retroalimentación (25) y cierre (10). Es la misma en los diez.
+
+**Ajustes propuestos para las semanas 1 y 2.** La guía permite adaptar el acompañamiento a las necesidades del grupo, conservando aprendizajes, comprobación y alcance viable, y documentando las equivalencias.
+
+| Enc. | Ajuste | Por qué |
+|---|---|---|
+| 1 | Después del pacto, usar el diagnóstico como muestra de trabajo real (individual y privada) y dedicar el resto a explorar la fuente de datos de cada proyecto, en lugar de una lluvia de ideas general | La guía pide partir de una muestra de trabajo o una pregunta pequeña. Así el primer encuentro ya toca datos |
+| 2 | Se conserva tal cual: fuga de información, partición temporal y plan de evaluación antes de entrenar | Es el núcleo conceptual de las dos semanas y donde suelen fallar los proyectos |
+| 3 | Orientarlo a lo nuevo para quien viene del Intermedio: arquitectura en la nube, lakehouse, costos y Spark. El pipeline básico, con comprobaciones de calidad, se resuelve con clínicas por necesidad | El Intermedio ya cubre APIs, GitHub Actions, dbt y Great Expectations en Platzi. Quien entra por experiencia puede necesitar ese tramo |
+
+El diagnóstico (con IA y sin IA) decide quién pasa a cada clínica, siguiendo el enfoque de curso dinámico del plan de 8 semanas.
+
 ## 4. Cómo se carga en la app (propuesta)
 
 La edición lleva dimensiones, trabajos, criterios y sesiones propios (cada uno cuelga de la edición). Todo lo que sigue está por decidir.
 
-**Dimensiones** (salen del perfil de salida del curso):
+**Dimensiones.** Se toman los seis criterios del apartado «Producto de portafolio y criterios de revisión» de la guía del profesor, más Dirección de IA como transversal:
 
-| Dimensión | Qué evalúa | Módulo |
+| Dimensión | Qué puede demostrar el estudiante | Encuentros donde se ve |
 |---|---|---|
-| Arquitectura y pipelines | Diseñar y justificar la arquitectura, con costos, y un pipeline reproducible | M1 |
-| Modelado y evaluación | Técnica avanzada con línea base, sin fuga de información, con evaluación robusta | M2 |
-| Series de tiempo y anomalías | Descomposición, pronóstico con incertidumbre y detección de anomalías | M3 |
-| Experimentación y segmentación | Diseño de experimentos, cohortes y agrupamiento con criterio estadístico | M4 |
-| Liderazgo analítico | Traducir un problema en una decisión, comunicarla, ética y sesgo | M5 |
-| Dirección de IA | Uso de IA declarado y verificado (transversal) | Todos |
+| Pertinencia | Actor, decisión, costo de error y criterios de aceptación verificables | 1, 2, 8 |
+| Arquitectura y datos | Procedencia, controles, flujo repetible y recursos proporcionados al problema | 2, 3 |
+| Método | Técnica principal pertinente, referencia comparable y prevención de fuga de información | 4, 5 |
+| Evaluación | Procedimiento adecuado, análisis de fallas, estabilidad y límites | 4, 6 |
+| Operación | Versiones, entorno, forma de uso y criterio de monitoreo | 7 |
+| Defensa | Resultados reproducibles, recomendación ejecutiva y condiciones de adopción | 8, 9, 10 |
+| Dirección de IA | Uso de IA declarado y verificado | Todos |
 
-Como cada estudiante elige una técnica principal, no todos alimentan todas las dimensiones; el radar de cada persona se calcula con la evidencia que tenga.
+Como cada estudiante elige una técnica principal (clasificación, series, segmentación o anomalías), las dimensiones son las mismas para todos y lo que cambia es la técnica con que las demuestran. El radar de cada persona se calcula con la evidencia que tenga.
 
-**Trabajos con nota.** El curso dice que los hitos no son entregas por encuentro, así que propongo pocas evidencias con rúbrica y dejar el resto como seguimiento:
+**Evidencias con rúbrica, sin nota por defecto.** La guía dice que no se convierta en «una base nominal de calificaciones», que no se creen entregas que no se hayan acordado con el grupo y que la pauta de portafolio «no fija ponderaciones, reglas de certificación ni entregas institucionales adicionales». Por eso propongo pocas evidencias, que coinciden con hitos de la ruta oficial, revisadas con la rúbrica de 5 niveles y alimentando el radar:
 
-| Evidencia | Encuentro | Qué se califica |
+| Evidencia | Encuentro | Dimensiones que alimenta |
 |---|---|---|
-| E1. Brief, datos y arquitectura | 3 | Pregunta y decisión, contrato de datos, arquitectura y primer pipeline |
-| E2. Experimento evaluado | 6 | Línea base, técnica avanzada, evaluación, incertidumbre y limitaciones |
-| E3. Solución reproducible con memo ejecutivo | 9 | Reproducibilidad, documentación y recomendación |
-| E4. Demostración y defensa | 10 | Sustentación de valor, decisiones técnicas y límites |
+| E1. Brief, datos y arquitectura | 3 | Pertinencia, Arquitectura y datos |
+| E2. Experimento evaluado | 6 | Método, Evaluación |
+| E3. Solución reproducible con memo ejecutivo | 9 | Operación, Defensa |
+| E4. Demostración y defensa | 10 | Defensa, Pertinencia |
 
-Los demás hitos se registran como puntos de control sin nota.
+Los demás hitos se registran como puntos de control sin rúbrica. La nota de 1.0 a 5.0 del RFC (F5) solo se activaría si la universidad confirma que el curso se califica (sección 5).
 
 **Reuso de lo que ya existe en la app.** La entrega por PR (cada proyecto vive en un repo), el diagnóstico con y sin IA, las encuestas y votaciones, las preguntas relámpago, el calendario de sesiones y el material por sesión. Lo que cambia es el contenido: islas y gemas (cinco módulos en lugar de ocho), lecciones y frases del jaguar.
 
@@ -96,5 +109,7 @@ Los demás hitos se registran como puntos de control sin nota.
 2. Qué encuentros son presenciales, según la programación institucional.
 3. Acceso a GCP para los estudiantes. La guía acepta ejecución local o en nube autorizada, nunca claves públicas.
 4. Tamaño de los grupos y cuántos proyectos en equipo habrá.
-5. Si las dimensiones propuestas sirven, y si los cuatro trabajos con nota son los correctos.
-6. Qué pasa con el curso de 8 semanas: queda congelado, sin cambios.
+5. **Si el curso se califica.** La guía sugiere que no hay base nominal de calificaciones ni ponderaciones definidas. Hay que preguntarle a la universidad antes de usar la nota de 1.0 a 5.0.
+6. Si las siete dimensiones y las cuatro evidencias propuestas son las correctas.
+7. Qué pasa con el curso de 8 semanas: queda congelado, sin cambios.
+8. Cuánto del encuentro 3 se dedica a quien necesita el pipeline básico, según el perfil real de entrada (Intermedio aprobado frente a experiencia laboral).
