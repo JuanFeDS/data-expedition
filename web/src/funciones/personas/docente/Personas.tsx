@@ -8,7 +8,7 @@ import { useCurso } from '../../../compartido/estado/curso';
 import { Tarjeta } from '../../../compartido/ui/panel';
 import { useSesion } from '../../../compartido/estado/sesion';
 import { Pantalla } from '../../../compartido/ui/ui';
-import { CORREO_VALIDO, correosDeTexto, servicioSupabase, type DatosPersonas, type PersonaCurso, type ServicioPersonas } from '../../../servicios/personas';
+import { CORREO_VALIDO, correosDeTexto, etiquetaPersona, servicioSupabase, type DatosPersonas, type PersonaCurso, type ServicioPersonas } from '../../../servicios/personas';
 import { leerCsv, PLANTILLA_CSV, type ResultadoCsv } from '../../../servicios/csv';
 import { crearServicioDemo } from '../../../demo/personasDemo';
 
@@ -18,7 +18,7 @@ const ROLES: { valor: Rol; etiqueta: string }[] = [
   { valor: 'docente', etiqueta: 'Docente' },
 ];
 
-const iniciales = (persona: PersonaCurso) => (persona.nombre ?? persona.correo).trim().slice(0, 2).toUpperCase();
+const iniciales = (persona: PersonaCurso) => etiquetaPersona(persona).trim().slice(0, 2).toUpperCase();
 
 export function D13Personas() {
   const { modoDemo, persona: yo } = useSesion();

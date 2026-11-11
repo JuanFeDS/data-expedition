@@ -7,7 +7,7 @@ import { PanelInvitados } from './ClaseInvitados';
 import { useCurso, useRutaCurso } from '../../../compartido/estado/curso';
 import { BarraDato, Cuenta, Dato, Estado, Tarjeta } from '../../../compartido/ui/panel';
 import { Pantalla } from '../../../compartido/ui/ui';
-import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
+import { etiquetaPersona, servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
 import { abrirFormulario, cerrarFormulario, listarFormularios, participantesFormulario, type Formulario } from '../../../servicios/formularios';
 
 const NOMBRE_TIPO = { relampago: 'Relámpago', votacion: 'Votación', encuesta: 'Encuesta' } as const;
@@ -111,8 +111,8 @@ export function D11EnClaseReal() {
                     <ul className="d11__presencia">
                       {estudiantes.map((estudiante) => (
                         <li key={estudiante.id} className={participaron.has(estudiante.id) ? 'si' : ''}>
-                          <span className="avatar avatar--verde">{(estudiante.nombre ?? estudiante.correo).slice(0, 2).toUpperCase()}</span>
-                          <small>{(estudiante.nombre ?? estudiante.correo).split(' ')[0]}</small>
+                          <span className="avatar avatar--verde">{etiquetaPersona(estudiante).slice(0, 2).toUpperCase()}</span>
+                          <small>{etiquetaPersona(estudiante).split(' ')[0]}</small>
                         </li>
                       ))}
                     </ul>

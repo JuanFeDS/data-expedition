@@ -7,7 +7,7 @@ import { parametroDeRuta } from '../../../compartido/navegacion/navegacion';
 import { Dato, Estado, Tarjeta } from '../../../compartido/ui/panel';
 import { Pantalla, Pill } from '../../../compartido/ui/ui';
 import { cargarFicha, type FichaEstudiante } from '../../../servicios/ficha';
-import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
+import { etiquetaPersona, servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
 
 export function D8FichaReal() {
   const { curso } = useCurso();
@@ -48,7 +48,7 @@ export function D8FichaReal() {
   return (
     <Pantalla rol="docente" clase="p-d8">
       <div className="pantalla__cuerpo">
-        <CabeceraMundo atras={{ texto: 'Panel', ruta: '#/d1' }} kicker={estudiante?.usuario ? `@${estudiante.usuario}` : 'Estudiante'} titulo={estudiante ? (estudiante.nombre ?? estudiante.correo) : 'Estudiantes'} subtitulo={estudiante ? 'Su radar, sus notas, su asistencia y su práctica en un solo lugar.' : 'Elige a un estudiante de la lista.'} objeto="binoculares" />
+        <CabeceraMundo atras={{ texto: 'Panel', ruta: '#/d1' }} kicker={estudiante?.usuario ? `@${estudiante.usuario}` : 'Estudiante'} titulo={estudiante ? etiquetaPersona(estudiante) : 'Estudiantes'} subtitulo={estudiante ? 'Su radar, sus notas, su asistencia y su práctica en un solo lugar.' : 'Elige a un estudiante de la lista.'} objeto="binoculares" />
         <div className="contenido cuerpo-mundo panel">
           {fallo && <p className="acceso__error" role="alert">No pudimos cargar la ficha. <button onClick={() => void cargarLista()}>Reintentar</button></p>}
           {estudiantes.length === 0 && !fallo && <Tarjeta kicker="Por ahora" titulo="Sin estudiantes"><p className="meta">Invita a tus estudiantes en <a href={rutaCurso('#/d13') ?? '#/d13'}><u>Personas</u></a>.</p></Tarjeta>}
@@ -59,7 +59,7 @@ export function D8FichaReal() {
                   {estudiantes.map((candidato) => (
                     <li key={candidato.id}>
                       <button aria-pressed={candidato.id === id} onClick={() => setId(candidato.id)}>
-                        <span className="avatar avatar--verde">{(candidato.nombre ?? candidato.correo).slice(0, 2).toUpperCase()}</span>
+                        <span className="avatar avatar--verde">{etiquetaPersona(candidato).slice(0, 2).toUpperCase()}</span>
                         <span>{candidato.nombre ?? candidato.correo}</span>
                       </button>
                     </li>
@@ -109,7 +109,7 @@ export function D8FichaReal() {
           )}
         </div>
       </div>
-      <Dock accion={estudiante ? { etiqueta: (estudiante.nombre ?? estudiante.correo).split(' ')[0], texto: 'Ver sus entregas', ruta: rutaCurso('#/d3') ?? '#/d3' } : undefined} />
+      <Dock accion={estudiante ? { etiqueta: etiquetaPersona(estudiante).split(' ')[0], texto: 'Ver sus entregas', ruta: rutaCurso('#/d3') ?? '#/d3' } : undefined} />
     </Pantalla>
   );
 }

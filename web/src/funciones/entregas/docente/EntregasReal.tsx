@@ -4,7 +4,7 @@ import { Dock } from '../../../compartido/ui/Dock';
 import { useCurso, useRutaCurso } from '../../../compartido/estado/curso';
 import { Estado, Tarjeta, type TipoEstado } from '../../../compartido/ui/panel';
 import { Pantalla, Segmentado } from '../../../compartido/ui/ui';
-import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
+import { etiquetaPersona, servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
 import { formatoFecha, useServicioTrabajos, type EntregaVista, type EstadoEntrega, type TrabajoCurso } from '../../../servicios/trabajos';
 
 const TIPO: Record<EstadoEntrega, TipoEstado> = { borrador: 'pendiente', entregada: 'info', calificada: 'ok', no_presento: 'alerta' };
@@ -38,7 +38,7 @@ export function D3EntregasReal() {
   const trabajo = trabajos[indice];
   const deEste = trabajo ? entregas.filter((entrega) => entrega.trabajoId === trabajo.id) : [];
   const quienEntrego = new Set(deEste.map((entrega) => entrega.usuario ?? entrega.estudiante));
-  const faltan = estudiantes.filter((persona) => !quienEntrego.has(persona.usuario ?? persona.nombre ?? persona.correo));
+  const faltan = estudiantes.filter((persona) => !quienEntrego.has(persona.usuario ?? etiquetaPersona(persona)));
 
   return (
     <Pantalla rol="docente" clase="p-d3">
@@ -75,7 +75,7 @@ export function D3EntregasReal() {
                 <ul className="d3__faltan">
                   {faltan.map((persona) => (
                     <li key={persona.id}>
-                      <span className="avatar avatar--verde">{(persona.nombre ?? persona.correo).slice(0, 2).toUpperCase()}</span>
+                      <span className="avatar avatar--verde">{etiquetaPersona(persona).slice(0, 2).toUpperCase()}</span>
                       <div><strong>{persona.nombre ?? persona.correo}</strong><small>{persona.usuario ? `@${persona.usuario}` : 'Aún no completa su perfil'}</small></div>
                     </li>
                   ))}

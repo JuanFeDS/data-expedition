@@ -4,7 +4,7 @@ import { crearServicioTrabajosDemo } from '../demo/trabajosDemo';
 import { llamo, operacionesDe, simular, supabaseSimulado } from '../pruebas/supabaseSimulado';
 import { almacenamientoDeSesion } from './almacenamiento';
 import { crearServicioCursosDemo, servicioCursosSupabase } from './cursos';
-import { CORREO_VALIDO, correosDeTexto, servicioSupabase } from './personas';
+import { CORREO_VALIDO, correosDeTexto, etiquetaPersona, servicioSupabase } from './personas';
 import { guardarProgreso, leerProgreso } from './progreso';
 
 vi.mock('./supabase', async () => ({ supabase: (await import('../pruebas/supabaseSimulado')).supabaseSimulado, modoDemo: false, hayConexion: true }));
@@ -33,6 +33,17 @@ describe('personas (Supabase)', () => {
     expect(datos.personas.map((persona) => persona.id).sort()).toEqual(['d1', 'p1']);
     expect(datos.personas.find((persona) => persona.id === 'p1')?.grupoId).toBe('g1');
     expect(datos.invitaciones.map((invitacion) => invitacion.correo)).toEqual(['nuevo@x.com']);
+  });
+
+  it('carga a los invitados, que no tienen correo, sin romper la lista', async () => {
+    simular({ tablas: {
+      matriculas: { data: [{ grupo_id: null, perfiles: { id: 'i1', correo: null, nombre: 'Ana', usuario: 'inv_1', rol: 'estudiante' } }] },
+      perfiles: { data: [] },
+    } });
+    const datos = await servicioSupabase.cargar('c1');
+    expect(datos.personas).toHaveLength(1);
+    expect(etiquetaPersona(datos.personas[0])).toBe('Ana');
+    expect(etiquetaPersona({ nombre: null, correo: null, usuario: null })).toBe('Invitado');
   });
 
   it('falla si alguna consulta falla', async () => {

@@ -13,7 +13,7 @@ import {
   type CodigoVigente, type EstadoAsistencia, type RegistroAsistencia,
 } from '../../../servicios/asistencia';
 import { fechaCorta, horaLocal, listarSesiones, type Sesion } from '../../../servicios/calendario';
-import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
+import { etiquetaPersona, servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
 
 const SIN_MARCA = '__sin';
 const OPCIONES = [
@@ -154,7 +154,7 @@ function D16Real() {
                     const registro = registros.get(persona.id);
                     return (
                       <li key={persona.id}>
-                        <span className="avatar avatar--verde">{(persona.nombre ?? persona.correo).slice(0, 2).toUpperCase()}</span>
+                        <span className="avatar avatar--verde">{etiquetaPersona(persona).slice(0, 2).toUpperCase()}</span>
                         <span className="d13__datos"><strong>{persona.nombre ?? persona.correo}</strong><small>{registro ? `${registro.origen === 'codigo' ? 'Con el código' : 'A mano'} · ${horaLocal(registro.registradaEn)}` : 'Aún sin registrar'}</small></span>
                         {registro && <Estado tipo={TIPO_ESTADO[registro.estado]}>{registro.estado === 'presente' ? 'Presente' : registro.estado === 'ausente' ? 'Ausente' : 'Justificado'}</Estado>}
                         <Selector valor={registro?.estado ?? SIN_MARCA} opciones={OPCIONES} alCambiar={(valor) => void marcar(persona.id, valor)} etiqueta={`Asistencia de ${persona.nombre ?? persona.correo}`} />

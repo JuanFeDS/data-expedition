@@ -7,7 +7,7 @@ import { useCurso, useRutaCurso } from '../../../compartido/estado/curso';
 import { Estado, Tarjeta } from '../../../compartido/ui/panel';
 import { Pantalla } from '../../../compartido/ui/ui';
 import { equiposDeTrabajo, fijarTamanoEquipo, moverMiembro, sortearEquipos, trabajosConEquipo, type Equipo, type TrabajoConEquipo } from '../../../servicios/equipos';
-import { servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
+import { etiquetaPersona, servicioSupabase as servicioPersonas, type PersonaCurso } from '../../../servicios/personas';
 
 const SIN_EQUIPO = '__sin';
 
@@ -82,7 +82,7 @@ export function D7EquiposReal() {
 
   const fila = (persona: PersonaCurso, actual: string) => (
     <li key={persona.id}>
-      <span className="avatar avatar--verde">{(persona.nombre ?? persona.correo).slice(0, 2).toUpperCase()}</span>
+      <span className="avatar avatar--verde">{etiquetaPersona(persona).slice(0, 2).toUpperCase()}</span>
       <div><strong>{persona.nombre ?? persona.correo}</strong><small>{persona.usuario ? `@${persona.usuario}` : 'Aún no completa su perfil'}</small></div>
       <Selector valor={actual} opciones={opcionesMover} alCambiar={(destino) => void mover(persona.id, destino)} etiqueta={`Equipo de ${persona.nombre ?? persona.correo}`} />
     </li>

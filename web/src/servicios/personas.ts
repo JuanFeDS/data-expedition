@@ -4,7 +4,7 @@ import { supabase } from './supabase';
 export interface Grupo { id: string; nombre: string }
 export interface PersonaCurso {
   id: string;
-  correo: string;
+  correo: string | null;
   nombre: string | null;
   usuario: string | null;
   rol: Rol;
@@ -50,7 +50,7 @@ export const servicioSupabase: ServicioPersonas = {
       const perfil = fila.perfiles as unknown as Omit<PersonaCurso, 'grupoId'> | null;
       if (perfil) porId.set(perfil.id, { ...perfil, grupoId: fila.grupo_id as string | null });
     });
-    const registrados = new Set([...porId.values()].map((persona) => persona.correo.toLowerCase()));
+    const registrados = new Set([...porId.values()].flatMap((persona) => (persona.correo ? [persona.correo.toLowerCase()] : [])));
     return {
       grupos: (grupos.data ?? []) as Grupo[],
       personas: [...porId.values()],
@@ -106,3 +106,5 @@ export const correosDeTexto = (texto: string) =>
   [...new Set(texto.split(/[\s,;]+/).map((parte) => parte.trim().toLowerCase()).filter(Boolean))];
 
 export const CORREO_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+export const etiquetaPersona = (persona: Pick<PersonaCurso, 'nombre' | 'correo' | 'usuario'>) => persona.nombre ?? persona.correo ?? persona.usuario ?? 'Invitado';
