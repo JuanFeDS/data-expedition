@@ -35,6 +35,7 @@ Cada slide se explica poco a poco: la flecha derecha va mostrando, en orden, cad
 
 - `plantilla-sesion.html`: todos los layouts con contenido de relleno.
 - `metodologia-data-expedition.html`: la metodología de enseñanza para presentar a otros docentes y universidades (27 slides): el problema, las cinco decisiones, la app, los pros, los límites dichos de frente y una propuesta de piloto. El correo de contacto de la última slide está como marcador.
+- `c2av-e01-comunidad-pacto-oportunidades.html`: encuentro 1 del curso oficial EstudIA (Análisis de datos, Capa 2, nivel Avanzado), 35 slides con la estructura de la guía del profesor. Usa el tema `estudia.css` (el kit de plantillas oficial: Arial, negro, naranja, magenta, verde, portada azul y pie con los logos institucionales; recursos en `estudia/img/`) sobre el mismo `motor.js`. Los QR de los relámpagos y del pulso son marcadores para pegar la captura de la pantalla En clase.
 - `s01-introduccion-ciencia-de-datos.html`: la sesión 1 completa (78 slides, 180 min): bienvenida, introducción con hilo narrativo (cada idea nace de una pregunta que dejó la anterior, con slides de transición), entorno, guía de PR y cierre, con pausas y actividades con reloj y el jaguar solo en portada y despedida.
 
 ## Layouts incluidos
