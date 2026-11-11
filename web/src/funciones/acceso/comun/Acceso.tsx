@@ -85,6 +85,7 @@ export function E0Acceso() {
               <button className="acceso__boton acceso__boton--principal" disabled={fase === 'enviando' || correo.trim() === ''} onClick={() => void enviar()}>{fase === 'enviando' ? 'Enviando…' : modo === 'entrar' ? 'Entrar con enlace' : 'Crear mi cuenta'}</button>
             </>
           )}
+          {!modoDemo && fase !== 'enviado' && <p className="acceso__invitado">¿Vienes a una clase abierta? <a href="#/entrar">Entra con un código</a></p>}
           <ol className="acceso__pasos">
             {PASOS_DE_ACCESO.map((paso) => <li key={paso.numero}><b>{paso.numero}</b><span><strong>{paso.titulo}</strong>{paso.texto}</span></li>)}
           </ol>

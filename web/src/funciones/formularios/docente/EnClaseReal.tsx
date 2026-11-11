@@ -3,6 +3,7 @@ import { CabeceraMundo } from '../../../compartido/ui/CabeceraMundo';
 import { CodigoQR } from '../../../compartido/ui/CodigoQR';
 import { Dock } from '../../../compartido/ui/Dock';
 import { ResultadosFormulario, useResultados } from '../comun/ResultadosFormulario';
+import { PanelInvitados } from './ClaseInvitados';
 import { useCurso, useRutaCurso } from '../../../compartido/estado/curso';
 import { BarraDato, Cuenta, Dato, Estado, Tarjeta } from '../../../compartido/ui/panel';
 import { Pantalla } from '../../../compartido/ui/ui';
@@ -74,6 +75,7 @@ export function D11EnClaseReal() {
         <div className="contenido cuerpo-mundo panel">
           {fallo && <p className="acceso__error" role="alert">No pudimos cargar la clase. <button onClick={() => void cargar()}>Reintentar</button></p>}
           {aviso && <p className="acceso__error" role="alert">{aviso}</p>}
+          {curso && <PanelInvitados cursoId={curso.id} />}
           <div className="d11__columnas">
             {abierto ? (
               <Tarjeta tono="oscura" kicker="Abierto ahora" titulo={abierto.titulo} accion={<Estado tipo="ok">En vivo</Estado>}>

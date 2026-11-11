@@ -13,7 +13,7 @@ export const consultas: ConsultaRegistrada[] = [];
 export const supabaseSimulado = {
   from: vi.fn(),
   rpc: vi.fn(),
-  auth: { getSession: vi.fn() },
+  auth: { getSession: vi.fn(), signInAnonymously: vi.fn() },
 };
 
 const completar = (resultado: Resultado) => ({ data: null, error: null, count: null, ...resultado });
@@ -39,6 +39,7 @@ export function simular(opciones: { tablas?: Record<string, Definicion>; rpc?: R
   supabaseSimulado.from.mockReset();
   supabaseSimulado.rpc.mockReset();
   supabaseSimulado.auth.getSession.mockReset();
+  supabaseSimulado.auth.signInAnonymously.mockReset().mockResolvedValue({ data: {}, error: null });
   supabaseSimulado.from.mockImplementation((tabla: string) => {
     const operaciones: Operacion[] = [];
     consultas.push({ tabla, operaciones });

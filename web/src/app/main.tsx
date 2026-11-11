@@ -20,6 +20,7 @@ import '../estilos/escritorio.css';
 import '../estilos/demo.css';
 
 const CapaDemo = lazy(() => import('../demo/ExperienciaDemo'));
+const EntrarInvitado = lazy(() => import('../funciones/acceso/comun/EntrarComoInvitado').then((modulo) => ({ default: modulo.EntrarComoInvitadoPantalla })));
 const PortadaDemo = lazy(() => import('../demo/ExperienciaDemo').then((modulo) => ({ default: modulo.PortadaDemo })));
 
 instalarSonidoDeClic();
@@ -99,6 +100,14 @@ function App() {
   }
 
   if (cargando || destino) return <Cargando />;
+
+  if (codigo === 'entrar') {
+    return (
+      <ModoViva.Provider value>
+        <div className="escenario escenario--sin-barra"><Suspense fallback={<Cargando />}><EntrarInvitado /></Suspense></div>
+      </ModoViva.Provider>
+    );
+  }
 
   if (!persona) {
     const Acceso = PANTALLAS.find((candidata) => candidata.codigo === 'e0')!.componente;

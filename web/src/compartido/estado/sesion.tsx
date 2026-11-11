@@ -5,7 +5,7 @@ import type { Rol } from '../navegacion/navegacion';
 
 export interface Persona {
   id: string;
-  correo: string;
+  correo: string | null;
   nombre: string | null;
   usuario: string | null;
   rol: Rol;
