@@ -33,7 +33,8 @@
       <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Git</b><span>Guarda la historia de tu trabajo</span></div>
       <div data-paso="5" style="--c: #0a3bd1"><i>5</i><b>GitHub</b><span>Donde lo compartes y lo revisan</span></div>
     </div>
-    <p class="nota" style="margin-top: 34px">Esta guía es para Windows. Si usas Mac o Linux, avísale a tu profesor.</p>
+    <p class="nota" style="margin-top: 34px">Docker y Airflow van al final y son solo para nivel intermedio: si eres de básico, no son obligatorios.</p>
+    <p class="nota" style="margin-top: 10px">Esta guía es para Windows. Si usas Mac o Linux, avísale a tu profesor.</p>
     <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
   </section>
 
@@ -231,7 +232,85 @@
     <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
   </section>
 
-  <!-- 15 · AYUDA -->
+  <!-- 15 · OPCIONAL: DOCKER Y AIRFLOW -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <p class="mensaje" style="font-size: 110px; margin-top: 30px">Docker y Airflow</p>
+    <p class="sub" style="font-size: 44px; max-width: 1560px; margin-top: 26px">Los usa el nivel intermedio. Si eres de nivel básico y te da curiosidad, puedes instalarlos, pero <b>no es obligatorio</b> y no los necesitas para el curso.</p>
+  </section>
+
+  <!-- 16 · OPCIONAL: INSTALAR DOCKER -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Instala Docker Desktop</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 20px; margin-top: 20px">
+        <li><span>Entra a <b>docker.com/products/docker-desktop</b> y descarga <b>Docker Desktop</b> para Windows.</span></li>
+        <li><span>Abre el instalador y deja marcada la opción de <b>WSL 2</b>.<br><small style="font-size: 28px; opacity: .7">Es lo que permite a Docker correr en Windows.</small></span></li>
+        <li><span>Reinicia el computador si te lo pide.</span></li>
+        <li><span>Abre Docker Desktop y acepta los términos.<br><small style="font-size: 28px; opacity: .7">Déjalo abierto: Docker trabaja mientras la aplicación está corriendo.</small></span></li>
+    </ol>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 17 · OPCIONAL: VERIFICAR DOCKER -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">¿Quedó funcionando?</h2>
+    <div class="consola" style="margin-top: 26px; font-size: 28px"><span class="m">PS&gt;</span> <span class="h">docker</span> --version
+<span class="v">Docker version 27.0.3</span>
+<span class="m">PS&gt;</span> <span class="h">docker</span> run hello-world
+<span class="v">Hello from Docker!</span></div>
+    <p class="nota" style="margin-top: 26px; color: #e6e7ea">Para Airflow, en Docker Desktop entra a <b>Settings → Resources</b> y asigna al menos 4 GB de memoria (mejor 8 GB).</p>
+  </section>
+
+  <!-- 18 · OPCIONAL: AIRFLOW, DESCARGAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Airflow: descarga su configuración</h2>
+    <p class="sub" style="font-size: 36px">Lo corremos con Docker, así que solo necesitas un archivo y cuatro carpetas.</p>
+    <div class="consola" style="margin-top: 22px; font-size: 24px; padding: 24px 30px"><span class="m">PS&gt;</span> <span class="h">mkdir</span> airflow
+<span class="m">PS&gt;</span> <span class="h">cd</span> airflow
+<span class="m">PS&gt;</span> <span class="h">curl.exe</span> -LfO <span class="v">'https://airflow.apache.org/docs/apache-airflow/3.4.0/docker-compose.yaml'</span>
+<span class="m">PS&gt;</span> <span class="h">mkdir</span> dags, logs, plugins, config</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">En PowerShell, <b>curl.exe</b> es el comando; <b>curl</b> a secas es otra cosa.</p>
+  </section>
+
+  <!-- 19 · OPCIONAL: AIRFLOW, INICIAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Airflow: inicialízalo y ábrelo</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 26px; padding: 24px 30px"><span class="m">PS&gt;</span> <span class="h">docker</span> compose up airflow-init
+<span class="m">PS&gt;</span> <span class="h">docker</span> compose up</div>
+    <ol class="lista lista--num" style="font-size: 32px; gap: 14px; margin-top: 22px">
+      <li><span>Espera a que el primer comando termine con <b>exited with code 0</b>.</span></li>
+      <li><span>Con el segundo corriendo, abre <b>http://localhost:8080</b> en el navegador.</span></li>
+      <li><span>Entra con usuario <b>airflow</b> y contraseña <b>airflow</b>.</span></li>
+    </ol>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Si te avisa de <b>AIRFLOW_UID</b>, es normal. Para silenciarlo, crea un archivo <b>.env</b> con <b>AIRFLOW_UID=50000</b>.</p>
+  </section>
+
+  <!-- 20 · OPCIONAL: APAGAR AIRFLOW -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Opcional · intermedio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Solo nivel intermedio · opcional si eres básico</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Y cuando termines, apágalo</h2>
+    <p class="sub" style="font-size: 38px; max-width: 1500px">Airflow consume bastante memoria. En la terminal donde está corriendo, presiona <b>Ctrl + C</b>, y después:</p>
+    <div class="consola" style="margin-top: 26px; font-size: 30px"><span class="m">PS&gt;</span> <span class="h">docker</span> compose down</div>
+    <p class="nota" style="margin-top: 26px">Para volver a usarlo, repite <b>docker compose up</b> dentro de la carpeta airflow.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 21 · AYUDA -->
   <section class="slide slide--verde slide--ruta">
     <div class="ruta-cap" style="--c: 6" data-nombre="Verificación"></div>
     <span class="etiqueta">¿Algo no instaló bien?</span>
