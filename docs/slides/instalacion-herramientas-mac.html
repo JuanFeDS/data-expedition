@@ -15,7 +15,7 @@
     <span class="etiqueta" style="margin-top: 130px">Prework · Instalación de herramientas</span>
     <div class="portada-titulo" style="margin-top: 26px">
       <h1 class="titulo" style="font-size: 118px; line-height: 1.02">Instala todo antes del encuentro</h1>
-      <p class="docente" style="font-size: 44px">Cinco herramientas, una guía paso a paso, para Mac</p>
+      <p class="docente" style="font-size: 44px">Seis herramientas, una guía paso a paso, para Mac</p>
     </div>
     <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
   </section>
@@ -25,13 +25,14 @@
     <div class="ruta-cap" style="--c: 1" data-nombre="Qué vamos a instalar"></div>
     <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
     <span class="etiqueta">El plan</span>
-    <h2 class="titulo" style="font-size: 88px">Cinco herramientas, en este orden</h2>
-    <div class="rail" style="--n: 5">
+    <h2 class="titulo" style="font-size: 88px">Seis herramientas, en este orden</h2>
+    <div class="rail" style="--n: 6">
       <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Terminal</b><span>Para dar instrucciones al computador</span></div>
       <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Python</b><span>El lenguaje que usaremos</span></div>
       <div data-paso="3" style="--c: #7fc200"><i>3</i><b>VS Code</b><span>Donde escribirás el código</span></div>
       <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Git</b><span>Guarda la historia de tu trabajo</span></div>
       <div data-paso="5" style="--c: #0a3bd1"><i>5</i><b>GitHub</b><span>Donde lo compartes y lo revisan</span></div>
+      <div data-paso="6" style="--c: #cb318e"><i>6</i><b>Tableros</b><span>Tableau Public o Power BI web</span></div>
     </div>
     <p class="nota" style="margin-top: 34px">Docker y Airflow van al final y son solo para nivel intermedio: si eres de básico, no son obligatorios.</p>
     <p class="nota" style="margin-top: 10px">Esta guía es para Mac. Si usas Windows, hay otra guía en el índice de slides.</p>
@@ -211,6 +212,42 @@
     <p class="nota" style="margin-top: 30px; color: #e6e7ea">Ya está todo conectado. Lo que falta, tu primer commit, lo hacemos en el encuentro.</p>
   </section>
 
+  <!-- 14 · TABLERO: DOS CAMINOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tableros"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">6 · Power BI y Tableau</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">En Mac no existe Power BI Desktop</h2>
+    <p class="sub" style="font-size: 38px">El curso permite usar Power BI o Tableau. En Mac tienes dos caminos:</p>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; margin-top: 20px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #0a3bd1; font-size: 64px">Tableau Public</p>
+        <p class="cuerpo" style="font-size: 34px; margin-top: 14px">Gratis y funciona en Mac. Es lo más sencillo si no tienes cuenta institucional.</p>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #f26a00; font-size: 64px">Power BI en el navegador</p>
+        <p class="cuerpo" style="font-size: 34px; margin-top: 14px">En app.powerbi.com. Pide una cuenta de trabajo o de estudio; un correo personal no sirve.</p>
+      </div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · TABLEAU PUBLIC -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tableros"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">6 · Tableau Public</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Instala Tableau Public</h2>
+    <ol class="lista lista--num" style="font-size: 34px; gap: 18px; margin-top: 20px">
+      <li><span>Entra a <b>public.tableau.com</b> y descarga la aplicación para Mac.</span></li>
+      <li><span>Abre el archivo .dmg y arrastra Tableau Public a <b>Aplicaciones</b>.</span></li>
+      <li><span>Ábrela. Si te pide iniciar sesión, crea una cuenta gratis con tu correo.</span></li>
+      <li><span>Para verificar: <b>Conectar → Archivo de texto</b>, elige un .csv y comprueba que ves la tabla.</span></li>
+    </ol>
+    <p class="nota" style="margin-top: 22px">Si tienes cuenta institucional de Microsoft, también puedes usar Power BI en app.powerbi.com.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
   <!-- 14 · CHECKLIST -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 6" data-nombre="Verificación"></div>
@@ -223,6 +260,7 @@
       <li data-paso="3"><span>VS Code abre y puede crear un archivo</span></li>
       <li data-paso="4"><span><b>git --version</b> responde</span></li>
       <li data-paso="5"><span>Tienes tu cuenta de GitHub y <b>gh auth status</b> muestra tu usuario</span></li>
+      <li data-paso="6"><span>Tableau Public (o Power BI en el navegador) abre y carga un CSV</span></li>
     </ul>
     <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
   </section>
