@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slides del curso · EstudIA</title>
+<style>
+:root {
+  --fondo: #ffffff; --tinta: #16181d; --gris: #5b6170; --linea: #d9d9d9; --suave: #f2f2f2;
+  --naranja: #ff7c1a; --magenta: #cb318e; --verde: #7fc200; --cian: #11c9ee; --azul: #011a61;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --fondo: #0b0d12; --tinta: #f2f2f2; --gris: #a4a9b6; --linea: #2a2e38; --suave: #151821; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: Arial, Helvetica, sans-serif; line-height: 1.4; }
+.pagina { max-width: 980px; margin: 0 auto; padding: 40px 16px 64px; }
+.cabecera { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.cabecera img { height: 44px; width: auto; }
+.cabecera .logo-oscuro { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cabecera .logo-claro { display: none; }
+  :root:not([data-theme="light"]) .cabecera .logo-oscuro { display: block; }
+}
+.etiqueta { margin: 44px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+h1 { margin: 6px 0 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.02em; }
+.intro { margin: 14px 0 0; font-size: 18px; color: var(--gris); max-width: 640px; }
+.lista { list-style: none; margin: 40px 0 0; padding: 0; }
+.fila { display: grid; grid-template-columns: 64px 1fr auto; gap: 8px 20px; align-items: center; padding: 22px 0; border-top: 1px solid var(--linea); }
+.fila:last-child { border-bottom: 1px solid var(--linea); }
+.num { font-size: 44px; font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--c); }
+.cuando { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); }
+.fila h2 { margin: 2px 0 4px; font-size: 22px; line-height: 1.2; }
+.fila p { margin: 0; font-size: 15px; color: var(--gris); }
+.meta { display: block; margin-top: 6px; font-size: 13px; color: var(--gris); }
+.abrir { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.abrir:hover, .abrir:focus-visible { background: var(--naranja); color: #000; outline: none; }
+.uso { margin-top: 44px; padding: 24px 28px; border-radius: 16px; background: var(--suave); }
+.uso h3 { margin: 0 0 12px; font-size: 16px; }
+.uso ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 24px; }
+.uso li { font-size: 15px; color: var(--gris); }
+kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6px; border: 1px solid var(--linea); background: var(--fondo); color: var(--tinta); font: 700 13px Arial, sans-serif; text-align: center; }
+.pie { margin-top: 36px; font-size: 13px; color: var(--gris); }
+@media (max-width: 620px) {
+  .fila { grid-template-columns: 48px 1fr; }
+  .num { font-size: 34px; }
+  .abrir { grid-column: 2; justify-self: start; }
+}
+</style>
+</head>
+<body>
+<main class="pagina">
+  <div class="cabecera">
+    <img class="logo-claro" src="estudia/img/logo-estudia-claro.png" alt="Estud-IA">
+    <img class="logo-oscuro" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+  </div>
+
+  <p class="etiqueta">Análisis de datos · Nivel básico</p>
+  <h1>Slides del curso</h1>
+  <p class="intro">Aquí está todo en un solo lugar, en el orden en que lo vas a necesitar. Se irán sumando slides a medida que avance el curso.</p>
+
+  <ol class="lista">
+    <li class="fila" style="--c: #ff7c1a">
+      <span class="num">1</span>
+      <div>
+        <span class="cuando">Antes del encuentro 1</span>
+        <h2>Presentación del curso</h2>
+        <p>Qué vamos a hacer, cómo se organiza el programa, el marco de trabajo, los acuerdos y cómo usaremos la app.</p>
+        <span class="meta">30 slides</span>
+      </div>
+      <a class="abrir" href="c2bas-presentacion-del-curso.html">Abrir slides</a>
+    </li>
+    <li class="fila" style="--c: #cb318e">
+      <span class="num">2</span>
+      <div>
+        <span class="cuando">Antes del encuentro 1 · prework</span>
+        <h2>Instalación de herramientas</h2>
+        <p>Guía paso a paso para Windows: terminal, Python, VS Code, Git y tu cuenta de GitHub. Termina con una lista para verificar que todo funciona.</p>
+        <span class="meta">15 slides</span>
+      </div>
+      <a class="abrir" href="instalacion-herramientas.html">Abrir slides</a>
+    </li>
+    <li class="fila" style="--c: #5c9100">
+      <span class="num">3</span>
+      <div>
+        <span class="cuando">Encuentro 1</span>
+        <h2>De la situación a la decisión</h2>
+        <p>Oportunidades analíticas: cómo pasar de una idea vaga a una oportunidad con usuario, decisión y datos que se pueden defender.</p>
+        <span class="meta">28 slides</span>
+      </div>
+      <a class="abrir" href="c2av-e01-oportunidades-analiticas.html">Abrir slides</a>
+    </li>
+    <li class="fila" style="--c: #0a8fb0">
+      <span class="num">4</span>
+      <div>
+        <span class="cuando">Si lo necesitas · encuentro 1</span>
+        <h2>Clínica de Git</h2>
+        <p>Repaso de 30 minutos: commits, ramas, pull requests y conflictos, con una hoja de comandos para tener a mano.</p>
+        <span class="meta">13 slides</span>
+      </div>
+      <a class="abrir" href="c2av-clinica-git.html">Abrir slides</a>
+    </li>
+  </ol>
+
+  <section class="uso" aria-labelledby="uso-titulo">
+    <h3 id="uso-titulo">Cómo moverte por las slides</h3>
+    <ul>
+      <li><kbd>→</kbd> o clic: siguiente paso</li>
+      <li><kbd>←</kbd>: paso anterior</li>
+      <li><kbd>F</kbd>: pantalla completa</li>
+      <li><kbd>S</kbd>: mostrar todo de una vez</li>
+    </ul>
+  </section>
+
+  <p class="pie">Opera: Corpogem · Apoya: Nodo y Universidad EAFIT · Organiza: Alcaldía de Medellín</p>
+</main>
+</body>
+</html>
