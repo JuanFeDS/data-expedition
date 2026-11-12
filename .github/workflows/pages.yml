@@ -56,7 +56,7 @@ jobs:
           cp -r docs/slides/estudia web/dist/slides/estudia
           cp docs/slides/c2av-presentacion-*.html web/dist/slides/
           cp docs/slides/c2bas-presentacion-*.html web/dist/slides/
-          cp docs/slides/c2int-presentacion-*.html web/dist/slides/
+          cp docs/slides/c2int-*.html web/dist/slides/
           cp docs/slides/instalacion-herramientas*.html web/dist/slides/
           cp docs/slides/index.html web/dist/slides/
           cp docs/slides/c2av-clinica-git.html web/dist/slides/

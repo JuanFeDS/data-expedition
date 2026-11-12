@@ -29,6 +29,11 @@ body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: Ar
 h1 { margin: 6px 0 0; font-size: clamp(30px, 5vw, 42px); line-height: 1.05; letter-spacing: -.02em; }
 .intro { margin: 12px 0 0; font-size: 16px; color: var(--gris); max-width: 640px; }
 
+.niveles { display: flex; gap: 8px; margin-top: 28px; }
+.niveles button { padding: 10px 22px; border-radius: 999px; border: 2px solid var(--tinta); background: transparent; color: var(--tinta); font: 700 15px Arial, sans-serif; cursor: pointer; }
+.niveles button[aria-selected="true"] { background: var(--tinta); color: var(--fondo); }
+.niveles button:focus-visible { outline: 3px solid var(--naranja); outline-offset: 2px; }
+.panel[hidden] { display: none; }
 .nav { position: sticky; top: 0; z-index: 5; margin: 28px -16px 0; padding: 12px 16px; background: var(--fondo); border-bottom: 1px solid var(--linea); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
 .nav a { flex: none; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--linea); color: var(--tinta); font-size: 14px; font-weight: 700; text-decoration: none; }
@@ -75,10 +80,16 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
     <img class="logo-oscuro" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
   </div>
 
-  <p class="etiqueta">Análisis de datos · Nivel básico</p>
+  <p class="etiqueta">Análisis de datos</p>
   <h1>Slides del curso</h1>
-  <p class="intro">Todo en un solo lugar, organizado por semanas. Cada semana trae sus dos encuentros y el módulo de Platzi que la acompaña. Las slides aparecen aquí a medida que avanza el curso.</p>
+  <p class="intro">Todo en un solo lugar, organizado por semanas. Elige tu nivel: cada semana trae sus dos encuentros y el módulo de Platzi que la acompaña. Las slides aparecen aquí a medida que avanza el curso.</p>
 
+  <div class="niveles" role="tablist" aria-label="Nivel del curso">
+    <button type="button" role="tab" id="tab-basico" data-nivel="basico" aria-selected="true">Nivel básico</button>
+    <button type="button" role="tab" id="tab-intermedio" data-nivel="intermedio" aria-selected="false">Nivel intermedio</button>
+  </div>
+
+  <div class="panel" id="panel-basico" data-panel="basico" role="tabpanel" aria-labelledby="tab-basico">
   <nav class="nav" aria-label="Secciones del curso">
     <a href="#inicio" style="--c: #ff7c1a">Antes de empezar</a>
     <a href="#semana-1" style="--c: #ff7c1a">Semana 1</a>
@@ -165,6 +176,92 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
     </ul>
   </section>
 
+  </div>
+
+  <div class="panel" id="panel-intermedio" data-panel="intermedio" role="tabpanel" aria-labelledby="tab-intermedio" hidden>
+  <nav class="nav" aria-label="Secciones del curso, nivel intermedio">
+    <a href="#i-inicio" style="--c: #ff7c1a">Antes de empezar</a>
+    <a href="#i-semana-1" style="--c: #ff7c1a">Semana 1</a>
+    <a href="#i-semana-2" style="--c: #cb318e">Semana 2</a>
+    <a href="#i-semana-3" style="--c: #7fc200">Semana 3</a>
+    <a href="#i-semana-4" style="--c: #11c9ee">Semana 4</a>
+    <a href="#i-semana-5" style="--c: #ff7c1a">Semana 5</a>
+  </nav>
+
+  <section class="seccion" id="i-inicio" style="--c: var(--tinta)">
+    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez, antes del encuentro 1</p></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="cuando">Curso</span>
+        <div>
+          <h3>Presentación del curso</h3>
+          <p>Qué vamos a hacer, cómo se organiza el programa, el marco de trabajo, los acuerdos y cómo usaremos la app.</p>
+          <span class="meta">30 slides</span>
+        </div>
+        <a class="abrir" href="c2int-presentacion-del-curso.html">Abrir slides</a>
+      </li>
+      <li class="fila">
+        <span class="cuando">Prework</span>
+        <div>
+          <h3>Instalación de herramientas</h3>
+          <p>Terminal, Python, VS Code, Git y GitHub, paso a paso. En tu nivel también necesitas Docker y Airflow: están en las slides 17 a 22 de cada guía. Power BI no lo necesitas.</p>
+          <span class="meta">23 slides por sistema</span>
+        </div>
+        <div class="acciones"><a class="abrir" href="instalacion-herramientas.html">Windows</a><a class="abrir" href="instalacion-herramientas-mac.html">Mac</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="i-semana-1" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Semana 1</h2><p>Platzi M1 · Ingeniería de datos: APIs y automatización</p><span class="actual">Esta semana</span></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="cuando">Encuentro 1</span>
+        <div>
+          <h3>Inducción y oportunidades de industria</h3>
+          <p>El pacto del curso, qué es una API y cómo viaja un dato de la fuente a la decisión, y tus dos primeras oportunidades de industria.</p>
+          <span class="meta">39 slides</span>
+        </div>
+        <a class="abrir" href="c2int-e01-induccion-oportunidades.html">Abrir slides</a>
+      </li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 2</span><div><h3>Brief, datos y criterios de aceptación</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="i-semana-2" style="--c: var(--magenta)">
+    <div class="seccion-cab"><h2>Semana 2</h2><p>Platzi M2 · dbt para transformación de datos analíticos</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 3</span><div><h3>Extracción REST y manejo de fallas</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 4</span><div><h3>Staging y transformación con dbt</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="i-semana-3" style="--c: var(--verde)">
+    <div class="seccion-cab"><h2>Semana 3</h2><p>Platzi M3 · SQL avanzado y modelado dimensional</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 5</span><div><h3>Modelo dimensional y SQL analítico</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 6</span><div><h3>Automatización y pruebas del pipeline</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="i-semana-4" style="--c: var(--cian)">
+    <div class="seccion-cab"><h2>Semana 4</h2><p>Platzi M4 · Estadística aplicada al análisis de negocio</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 7</span><div><h3>Calidad, gobernanza y acceso</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 8</span><div><h3>Estadística inferencial y decisión</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="i-semana-5" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Semana 5</h2><p>Platzi M5 · Calidad y gobernanza de datos</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 9</span><div><h3>Auditoría técnica y portafolio</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 10</span><div><h3>Demostración y defensa profesional</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  </div>
+
   <section class="uso" aria-labelledby="uso-titulo">
     <h2 id="uso-titulo">Cómo moverte por las slides</h2>
     <ul>
@@ -177,5 +274,27 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
 
   <p class="pie">Opera: Corpogem · Apoya: Nodo y Universidad EAFIT · Organiza: Alcaldía de Medellín</p>
 </main>
+<script>
+(function () {
+  var pestanas = document.querySelectorAll('[data-nivel]');
+  var paneles = document.querySelectorAll('[data-panel]');
+  function mostrar(nivel) {
+    pestanas.forEach(function (p) { p.setAttribute('aria-selected', String(p.dataset.nivel === nivel)); });
+    paneles.forEach(function (p) { p.hidden = p.dataset.panel !== nivel; });
+  }
+  function nivelDeHash() {
+    var h = location.hash;
+    return h === '#intermedio' || h.indexOf('#i-') === 0 ? 'intermedio' : 'basico';
+  }
+  pestanas.forEach(function (p) {
+    p.addEventListener('click', function () {
+      mostrar(p.dataset.nivel);
+      history.replaceState(null, '', '#' + p.dataset.nivel);
+    });
+  });
+  window.addEventListener('hashchange', function () { mostrar(nivelDeHash()); });
+  mostrar(nivelDeHash());
+})();
+</script>
 </body>
 </html>
