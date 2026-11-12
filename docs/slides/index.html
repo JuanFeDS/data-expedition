@@ -7,44 +7,64 @@
 <style>
 :root {
   --fondo: #ffffff; --tinta: #16181d; --gris: #5b6170; --linea: #d9d9d9; --suave: #f2f2f2;
-  --naranja: #ff7c1a; --magenta: #cb318e; --verde: #7fc200; --cian: #11c9ee; --azul: #011a61;
+  --naranja: #ff7c1a; --magenta: #cb318e; --verde: #5c9100; --cian: #0a8fb0; --azul: #011a61;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --fondo: #0b0d12; --tinta: #f2f2f2; --gris: #a4a9b6; --linea: #2a2e38; --suave: #151821; }
+  :root:not([data-theme="light"]) { --fondo: #0b0d12; --tinta: #f2f2f2; --gris: #a4a9b6; --linea: #2a2e38; --suave: #151821; --verde: #7fc200; --cian: #11c9ee; }
 }
+:root[data-theme="dark"] { --fondo: #0b0d12; --tinta: #f2f2f2; --gris: #a4a9b6; --linea: #2a2e38; --suave: #151821; --verde: #7fc200; --cian: #11c9ee; }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: Arial, Helvetica, sans-serif; line-height: 1.4; }
 .pagina { max-width: 980px; margin: 0 auto; padding: 40px 16px 64px; }
-.cabecera { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.logo-oscuro { display: none; }
 .cabecera img { height: 44px; width: auto; }
-.cabecera .logo-oscuro { display: none; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .cabecera .logo-claro { display: none; }
-  :root:not([data-theme="light"]) .cabecera .logo-oscuro { display: block; }
+  :root:not([data-theme="light"]) .logo-claro { display: none; }
+  :root:not([data-theme="light"]) .logo-oscuro { display: block; }
 }
-.etiqueta { margin: 44px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+:root[data-theme="dark"] .logo-claro { display: none; }
+:root[data-theme="dark"] .logo-oscuro { display: block; }
+.etiqueta { margin: 40px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
 h1 { margin: 6px 0 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.02em; }
 .intro { margin: 14px 0 0; font-size: 18px; color: var(--gris); max-width: 640px; }
-.lista { list-style: none; margin: 40px 0 0; padding: 0; }
-.fila { display: grid; grid-template-columns: 64px 1fr auto; gap: 8px 20px; align-items: center; padding: 22px 0; border-top: 1px solid var(--linea); }
-.fila:last-child { border-bottom: 1px solid var(--linea); }
-.num { font-size: 44px; font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--c); }
+
+.nav { position: sticky; top: 0; z-index: 5; margin: 28px -16px 0; padding: 12px 16px; background: var(--fondo); border-bottom: 1px solid var(--linea); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { flex: none; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--linea); color: var(--tinta); font-size: 14px; font-weight: 700; text-decoration: none; }
+.nav a:hover, .nav a:focus-visible { border-color: var(--c, var(--tinta)); background: var(--c, var(--suave)); color: #000; outline: none; }
+
+.seccion { margin-top: 44px; }
+.seccion-cab { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; padding-bottom: 14px; border-bottom: 4px solid var(--c); }
+.seccion-cab h2 { margin: 0; font-size: 34px; letter-spacing: -.02em; color: var(--c); }
+.seccion-cab p { margin: 0; font-size: 16px; font-weight: 700; }
+.actual { margin-left: auto; padding: 4px 12px; border-radius: 999px; background: var(--c); color: #000; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+.lista { list-style: none; margin: 0; padding: 0; }
+.fila { display: grid; grid-template-columns: 110px 1fr auto; gap: 6px 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--linea); }
 .cuando { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); }
-.fila h2 { margin: 2px 0 4px; font-size: 22px; line-height: 1.2; }
-.fila p { margin: 0; font-size: 15px; color: var(--gris); }
-.meta { display: block; margin-top: 6px; font-size: 13px; color: var(--gris); }
-.abrir { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
-.abrir:hover, .abrir:focus-visible { background: var(--naranja); color: #000; outline: none; }
-.uso { margin-top: 44px; padding: 24px 28px; border-radius: 16px; background: var(--suave); }
-.uso h3 { margin: 0 0 12px; font-size: 16px; }
+.fila h3 { margin: 0 0 4px; font-size: 19px; line-height: 1.25; }
+.fila p { margin: 0; font-size: 14px; color: var(--gris); }
+.meta { display: block; margin-top: 4px; font-size: 13px; color: var(--gris); }
+.fila--pronto { opacity: .55; }
+.pronto { font-size: 13px; font-weight: 700; color: var(--gris); white-space: nowrap; }
+.fila--opcional { margin-left: 110px; grid-template-columns: 1fr auto; padding: 14px 0 14px 20px; border-left: 3px solid var(--linea); }
+.fila--opcional .cuando { grid-column: 1 / -1; }
+.acciones { display: flex; gap: 8px; }
+.abrir { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.abrir--borde { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 8px 18px; }
+.abrir:hover, .abrir:focus-visible { background: var(--naranja); border-color: var(--naranja); color: #000; outline: none; }
+
+.uso { margin-top: 48px; padding: 24px 28px; border-radius: 16px; background: var(--suave); }
+.uso h2 { margin: 0 0 12px; font-size: 16px; }
 .uso ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 24px; }
 .uso li { font-size: 15px; color: var(--gris); }
 kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6px; border: 1px solid var(--linea); background: var(--fondo); color: var(--tinta); font: 700 13px Arial, sans-serif; text-align: center; }
 .pie { margin-top: 36px; font-size: 13px; color: var(--gris); }
-@media (max-width: 620px) {
-  .fila { grid-template-columns: 48px 1fr; }
-  .num { font-size: 34px; }
-  .abrir { grid-column: 2; justify-self: start; }
+@media (max-width: 640px) {
+  .fila { grid-template-columns: 1fr; }
+  .fila--opcional { margin-left: 0; grid-template-columns: 1fr; }
+  .actual { margin-left: 0; }
 }
 </style>
 </head>
@@ -57,53 +77,104 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
 
   <p class="etiqueta">Análisis de datos · Nivel básico</p>
   <h1>Slides del curso</h1>
-  <p class="intro">Aquí está todo en un solo lugar, en el orden en que lo vas a necesitar. Se irán sumando slides a medida que avance el curso.</p>
+  <p class="intro">Todo en un solo lugar, organizado por semanas. Cada semana trae sus dos encuentros y el módulo de Platzi que la acompaña. Las slides aparecen aquí a medida que avanza el curso.</p>
 
-  <ol class="lista">
-    <li class="fila" style="--c: #ff7c1a">
-      <span class="num">1</span>
-      <div>
-        <span class="cuando">Antes del encuentro 1</span>
-        <h2>Presentación del curso</h2>
-        <p>Qué vamos a hacer, cómo se organiza el programa, el marco de trabajo, los acuerdos y cómo usaremos la app.</p>
-        <span class="meta">30 slides</span>
-      </div>
-      <a class="abrir" href="c2bas-presentacion-del-curso.html">Abrir slides</a>
-    </li>
-    <li class="fila" style="--c: #cb318e">
-      <span class="num">2</span>
-      <div>
-        <span class="cuando">Antes del encuentro 1 · prework</span>
-        <h2>Instalación de herramientas</h2>
-        <p>Guía paso a paso para Windows: terminal, Python, VS Code, Git y tu cuenta de GitHub. Termina con una lista para verificar que todo funciona.</p>
-        <span class="meta">15 slides</span>
-      </div>
-      <a class="abrir" href="instalacion-herramientas.html">Abrir slides</a>
-    </li>
-    <li class="fila" style="--c: #5c9100">
-      <span class="num">3</span>
-      <div>
+  <nav class="nav" aria-label="Secciones del curso">
+    <a href="#inicio" style="--c: #ff7c1a">Antes de empezar</a>
+    <a href="#semana-1" style="--c: #ff7c1a">Semana 1</a>
+    <a href="#semana-2" style="--c: #cb318e">Semana 2</a>
+    <a href="#semana-3" style="--c: #7fc200">Semana 3</a>
+    <a href="#semana-4" style="--c: #11c9ee">Semana 4</a>
+    <a href="#semana-5" style="--c: #ff7c1a">Semana 5</a>
+  </nav>
+
+  <section class="seccion" id="inicio" style="--c: var(--tinta)">
+    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez, antes del encuentro 1</p></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="cuando">Curso</span>
+        <div>
+          <h3>Presentación del curso</h3>
+          <p>Qué vamos a hacer, cómo se organiza el programa, el marco de trabajo, los acuerdos y cómo usaremos la app.</p>
+          <span class="meta">30 slides</span>
+        </div>
+        <a class="abrir" href="c2bas-presentacion-del-curso.html">Abrir slides</a>
+      </li>
+      <li class="fila">
+        <span class="cuando">Prework</span>
+        <div>
+          <h3>Instalación de herramientas</h3>
+          <p>Terminal, Python, VS Code, Git y tu cuenta de GitHub, paso a paso. Termina con una lista para verificar que todo funciona.</p>
+          <span class="meta">15 slides por sistema</span>
+        </div>
+        <div class="acciones"><a class="abrir" href="instalacion-herramientas.html">Windows</a><a class="abrir" href="instalacion-herramientas-mac.html">Mac</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="semana-1" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Semana 1</h2><p>Platzi M1 · SQL para análisis de negocio</p><span class="actual">Esta semana</span></div>
+    <ul class="lista">
+      <li class="fila">
         <span class="cuando">Encuentro 1</span>
-        <h2>De la situación a la decisión</h2>
-        <p>Oportunidades analíticas: cómo pasar de una idea vaga a una oportunidad con usuario, decisión y datos que se pueden defender.</p>
-        <span class="meta">28 slides</span>
-      </div>
-      <a class="abrir" href="c2av-e01-oportunidades-analiticas.html">Abrir slides</a>
-    </li>
-    <li class="fila" style="--c: #0a8fb0">
-      <span class="num">4</span>
-      <div>
-        <span class="cuando">Si lo necesitas · encuentro 1</span>
-        <h2>Clínica de Git</h2>
-        <p>Repaso de 30 minutos: commits, ramas, pull requests y conflictos, con una hoja de comandos para tener a mano.</p>
-        <span class="meta">13 slides</span>
-      </div>
-      <a class="abrir" href="c2av-clinica-git.html">Abrir slides</a>
-    </li>
-  </ol>
+        <div>
+          <h3>Comunidad, pacto y oportunidades analíticas</h3>
+          <p>«De la situación a la decisión»: cómo pasar de una idea vaga a una oportunidad con usuario, decisión y datos que se pueden defender.</p>
+          <span class="meta">28 slides</span>
+        </div>
+        <a class="abrir" href="c2av-e01-oportunidades-analiticas.html">Abrir slides</a>
+      </li>
+      <li class="fila fila--opcional">
+        <span class="cuando">Opcional · si lo necesitas</span>
+        <div>
+          <h3>Clínica de Git</h3>
+          <p>Repaso de 30 minutos: commits, ramas, pull requests y conflictos, con una hoja de comandos.</p>
+          <span class="meta">13 slides</span>
+        </div>
+        <a class="abrir abrir--borde" href="c2av-clinica-git.html">Abrir slides</a>
+      </li>
+      <li class="fila fila--pronto">
+        <span class="cuando">Encuentro 2</span>
+        <div><h3>Delimitación de proyectos, fuentes y criterios de calidad</h3></div>
+        <span class="pronto">Disponible pronto</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="semana-2" style="--c: var(--magenta)">
+    <div class="seccion-cab"><h2>Semana 2</h2><p>Platzi M2 · Transformaciones avanzadas con pandas</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 3</span><div><h3>Consultas SQL y relaciones que conservan el significado</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 4</span><div><h3>Preparación reproducible y decisiones sobre calidad</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="semana-3" style="--c: var(--verde)">
+    <div class="seccion-cab"><h2>Semana 3</h2><p>Platzi M3 · Visualización avanzada: Power BI y Tableau</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 5</span><div><h3>Indicadores descriptivos y comprobación de resultados</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 6</span><div><h3>Diseño de un tablero para el usuario del proyecto</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="semana-4" style="--c: var(--cian)">
+    <div class="seccion-cab"><h2>Semana 4</h2><p>Platzi M4 · Estadística descriptiva aplicada a negocio</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 7</span><div><h3>Clínicas de profundización y coherencia entre herramientas</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 8</span><div><h3>Interpretación, recomendaciones y límites de cada proyecto</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="semana-5" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Semana 5</h2><p>Platzi M5 · Documentación y portafolio analítico</p></div>
+    <ul class="lista">
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 9</span><div><h3>Reproducibilidad, documentación y preparación del portafolio</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 10</span><div><h3>Demostración, defensa y proyección del trabajo</h3></div><span class="pronto">Disponible pronto</span></li>
+    </ul>
+  </section>
 
   <section class="uso" aria-labelledby="uso-titulo">
-    <h3 id="uso-titulo">Cómo moverte por las slides</h3>
+    <h2 id="uso-titulo">Cómo moverte por las slides</h2>
     <ul>
       <li><kbd>→</kbd> o clic: siguiente paso</li>
       <li><kbd>←</kbd>: paso anterior</li>
