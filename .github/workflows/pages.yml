@@ -57,6 +57,7 @@ jobs:
           cp docs/slides/c2av-presentacion-*.html web/dist/slides/
           cp docs/slides/c2bas-presentacion-*.html web/dist/slides/
           cp docs/slides/instalacion-herramientas.html web/dist/slides/
+          cp docs/slides/index.html web/dist/slides/
           cp docs/slides/c2av-e01-oportunidades-analiticas.html docs/slides/c2av-clinica-git.html web/dist/slides/
       - uses: actions/upload-pages-artifact@v3
         with:
