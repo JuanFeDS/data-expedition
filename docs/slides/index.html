@@ -16,7 +16,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: Arial, Helvetica, sans-serif; line-height: 1.4; }
-.pagina { max-width: 980px; margin: 0 auto; padding: 40px 16px 64px; }
+.pagina { max-width: 900px; margin: 0 auto; padding: 40px 16px 64px; }
 .logo-oscuro { display: none; }
 .cabecera img { height: 44px; width: auto; }
 @media (prefers-color-scheme: dark) {
@@ -26,8 +26,8 @@ body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: Ar
 :root[data-theme="dark"] .logo-claro { display: none; }
 :root[data-theme="dark"] .logo-oscuro { display: block; }
 .etiqueta { margin: 40px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
-h1 { margin: 6px 0 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.02em; }
-.intro { margin: 14px 0 0; font-size: 18px; color: var(--gris); max-width: 640px; }
+h1 { margin: 6px 0 0; font-size: clamp(30px, 5vw, 42px); line-height: 1.05; letter-spacing: -.02em; }
+.intro { margin: 12px 0 0; font-size: 16px; color: var(--gris); max-width: 640px; }
 
 .nav { position: sticky; top: 0; z-index: 5; margin: 28px -16px 0; padding: 12px 16px; background: var(--fondo); border-bottom: 1px solid var(--linea); display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
@@ -36,29 +36,29 @@ h1 { margin: 6px 0 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; lett
 
 .seccion { margin-top: 44px; }
 .seccion-cab { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; padding-bottom: 14px; border-bottom: 4px solid var(--c); }
-.seccion-cab h2 { margin: 0; font-size: 34px; letter-spacing: -.02em; color: var(--c); }
-.seccion-cab p { margin: 0; font-size: 16px; font-weight: 700; }
+.seccion-cab h2 { margin: 0; font-size: 28px; letter-spacing: -.02em; color: var(--c); }
+.seccion-cab p { margin: 0; font-size: 14px; font-weight: 700; }
 .actual { margin-left: auto; padding: 4px 12px; border-radius: 999px; background: var(--c); color: #000; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
 .lista { list-style: none; margin: 0; padding: 0; }
 .fila { display: grid; grid-template-columns: 110px 1fr auto; gap: 6px 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--linea); }
 .cuando { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gris); }
-.fila h3 { margin: 0 0 4px; font-size: 19px; line-height: 1.25; }
-.fila p { margin: 0; font-size: 14px; color: var(--gris); }
+.fila h3 { margin: 0 0 3px; font-size: 17px; line-height: 1.25; }
+.fila p { margin: 0; font-size: 13px; color: var(--gris); }
 .meta { display: block; margin-top: 4px; font-size: 13px; color: var(--gris); }
 .fila--pronto { opacity: .55; }
 .pronto { font-size: 13px; font-weight: 700; color: var(--gris); white-space: nowrap; }
 .fila--opcional { margin-left: 110px; grid-template-columns: 1fr auto; padding: 14px 0 14px 20px; border-left: 3px solid var(--linea); }
 .fila--opcional .cuando { grid-column: 1 / -1; }
 .acciones { display: flex; gap: 8px; }
-.abrir { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; }
-.abrir--borde { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 8px 18px; }
+.abrir { display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.abrir--borde { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 6px 16px; }
 .abrir:hover, .abrir:focus-visible { background: var(--naranja); border-color: var(--naranja); color: #000; outline: none; }
 
 .uso { margin-top: 48px; padding: 24px 28px; border-radius: 16px; background: var(--suave); }
 .uso h2 { margin: 0 0 12px; font-size: 16px; }
 .uso ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px 24px; }
-.uso li { font-size: 15px; color: var(--gris); }
+.uso li { font-size: 14px; color: var(--gris); }
 kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6px; border: 1px solid var(--linea); background: var(--fondo); color: var(--tinta); font: 700 13px Arial, sans-serif; text-align: center; }
 .pie { margin-top: 36px; font-size: 13px; color: var(--gris); }
 @media (max-width: 640px) {
@@ -115,15 +115,7 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
   <section class="seccion" id="semana-1" style="--c: var(--naranja)">
     <div class="seccion-cab"><h2>Semana 1</h2><p>Platzi M1 · SQL para análisis de negocio</p><span class="actual">Esta semana</span></div>
     <ul class="lista">
-      <li class="fila">
-        <span class="cuando">Encuentro 1</span>
-        <div>
-          <h3>Comunidad, pacto y oportunidades analíticas</h3>
-          <p>«De la situación a la decisión»: cómo pasar de una idea vaga a una oportunidad con usuario, decisión y datos que se pueden defender.</p>
-          <span class="meta">28 slides</span>
-        </div>
-        <a class="abrir" href="c2av-e01-oportunidades-analiticas.html">Abrir slides</a>
-      </li>
+      <li class="fila fila--pronto"><span class="cuando">Encuentro 1</span><div><h3>Comunidad, pacto y oportunidades analíticas</h3></div><span class="pronto">Disponible pronto</span></li>
       <li class="fila fila--opcional">
         <span class="cuando">Opcional · si lo necesitas</span>
         <div>
