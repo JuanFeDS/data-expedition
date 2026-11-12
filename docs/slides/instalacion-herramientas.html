@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prework · Instalación de herramientas · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Prework · Instalación de herramientas</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 118px; line-height: 1.02">Instala todo antes del encuentro</h1>
+      <p class="docente" style="font-size: 44px">Cinco herramientas, una guía paso a paso, para Windows</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · QUÉ VAMOS A INSTALAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="Qué vamos a instalar"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El plan</span>
+    <h2 class="titulo" style="font-size: 88px">Cinco herramientas, en este orden</h2>
+    <div class="rail" style="--n: 5">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Terminal</b><span>Para dar instrucciones al computador</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Python</b><span>El lenguaje que usaremos</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>VS Code</b><span>Donde escribirás el código</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Git</b><span>Guarda la historia de tu trabajo</span></div>
+      <div data-paso="5" style="--c: #0a3bd1"><i>5</i><b>GitHub</b><span>Donde lo compartes y lo revisan</span></div>
+    </div>
+    <p class="nota" style="margin-top: 34px">Esta guía es para Windows. Si usas Mac o Linux, avísale a tu profesor.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 3 · TERMINAL: ABRIRLA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Terminal"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Primeros pasos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Abre la terminal</h2>
+    <p class="sub" style="font-size: 40px">No es hackear: es darle instrucciones al computador, una por una.</p>
+    <div class="dividido" style="grid-template-columns: 1.1fr 1fr; align-items: start; margin-top: 20px">
+      <ol class="lista lista--num" style="font-size: 38px; gap: 22px">
+        <li><span>Busca <b>PowerShell</b> en el menú de inicio y ábrela.</span></li>
+        <li><span>Escribe <b>cd Desktop</b> y presiona Enter para ir al escritorio.</span></li>
+        <li><span>Escribe <b>mkdir prework</b> para crear una carpeta nueva.</span></li>
+      </ol>
+      <div class="consola" style="font-size: 26px; padding: 26px 30px"><span class="m">PS ~&gt;</span> <span class="h">cd</span> Desktop
+<span class="m">PS ~\Desktop&gt;</span> <span class="h">mkdir</span> prework
+<span class="m">PS ~\Desktop&gt;</span> <span class="h">ls</span>
+<span class="c">prework</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · TERMINAL: HAZLA TUYA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Terminal"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Opcional · dos minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Hazla tuya</h2>
+    <p class="sub" style="font-size: 40px">Una terminal con buen color da más ganas de abrirla.</p>
+    <ol class="lista lista--num" style="font-size: 38px; gap: 20px; margin-top: 26px">
+      <li><span>Instala <b>Windows Terminal</b> desde la Microsoft Store (en Windows 11 ya viene).</span></li>
+      <li><span>Ábrela y entra a <b>Configuración</b>, en el perfil de PowerShell.</span></li>
+      <li><span>En <b>Apariencia</b>, elige un esquema de color, por ejemplo One Half Dark o Solarized Dark.</span></li>
+      <li><span>Si la letra se ve chica, sube el tamaño de fuente ahí mismo.</span></li>
+    </ol>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 5 · PYTHON: INSTALAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Python"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Instalación</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Instala Python</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1.05fr; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num" style="font-size: 36px; gap: 20px">
+        <li><span>Entra a <b>python.org/downloads</b>.</span></li>
+        <li><span>Descarga la versión para Windows: el sitio la detecta sola.</span></li>
+        <li><span>Abre el instalador y marca <b>Add Python to PATH</b> antes de instalar.</span></li>
+        <li><span>Sigue el asistente hasta el final y ciérralo.</span></li>
+      </ol>
+      <div class="navegador"><b></b><img src="estudia/img/prework-python.webp" alt="Página de descargas de python.org"></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · PYTHON: VERIFICAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Python"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Verifica</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">¿Quedó instalado?</h2>
+    <p class="sub" style="font-size: 40px">Abre la terminal y escribe esto:</p>
+    <div class="consola" style="margin-top: 30px"><span class="m">PS&gt;</span> <span class="h">python</span> --version
+<span class="v">Python 3.12.4</span></div>
+    <p class="nota" style="margin-top: 30px; color: #e6e7ea">Si el número de versión es otro pero empieza por 3, está bien.</p>
+  </section>
+
+  <!-- 7 · PYTHON: SCRIPTS -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Python"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Déjalo listo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Permite que PowerShell ejecute scripts</h2>
+    <p class="sub" style="font-size: 38px; max-width: 1500px">Windows los bloquea por defecto. Más adelante necesitarás uno para activar un entorno virtual de Python: mejor resolverlo ahora.</p>
+    <div class="consola" style="margin-top: 26px; font-size: 28px"><span class="m">PS&gt;</span> <span class="h">Set-ExecutionPolicy</span> -Scope CurrentUser -ExecutionPolicy RemoteSigned</div>
+    <p class="nota" style="margin-top: 26px; color: #e6e7ea">Si te pregunta, confirma con «S».</p>
+  </section>
+
+  <!-- 8 · VS CODE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Editor"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Instalación</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Instala VS Code</h2>
+    <p class="sub" style="font-size: 40px">Ahí vas a escribir todo tu código.</p>
+    <div class="pasos-grandes" style="margin-top: 26px">
+      <div data-paso="1" style="--c: #ff7c1a; grid-template-columns: 120px 1fr"><i>1</i><div><b>Entra a code.visualstudio.com</b></div></div>
+      <div data-paso="2" style="--c: #cb318e; grid-template-columns: 120px 1fr"><i>2</i><div><b>Descarga el instalador para Windows</b></div></div>
+      <div data-paso="3" style="--c: #5c9100; grid-template-columns: 120px 1fr"><i>3</i><div><b>Ábrelo y deja las opciones por defecto</b></div></div>
+      <div data-paso="4" style="--c: #0a3bd1; grid-template-columns: 120px 1fr"><i>4</i><div><b>Abre VS Code y crea un archivo nuevo</b><span>Así compruebas que funciona.</span></div></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 9 · GIT: INSTALAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Git"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El programa, no la cuenta</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Instala Git</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1.05fr; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num" style="font-size: 36px; gap: 20px">
+        <li><span>Entra a <b>git-scm.com/downloads</b>.</span></li>
+        <li><span>Descarga el instalador para Windows.</span></li>
+        <li><span>Instala dejando todas las opciones por defecto.</span></li>
+      </ol>
+      <div class="navegador"><b></b><img src="estudia/img/prework-git.webp" alt="Página de descargas de Git para Windows"></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 10 · GIT: CONFIGURAR Y VERIFICAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Git"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Configura y verifica</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Dile quién eres y comprueba que quedó</h2>
+    <div class="consola" style="margin-top: 26px; font-size: 28px"><span class="m">PS&gt;</span> <span class="h">git</span> config --global user.name <span class="v">"Tu Nombre"</span>
+<span class="m">PS&gt;</span> <span class="h">git</span> config --global user.email <span class="v">"tu@email.com"</span>
+<span class="m">PS&gt;</span> <span class="h">git</span> --version
+<span class="v">git version 2.45.0</span></div>
+    <p class="nota" style="margin-top: 26px; color: #e6e7ea">Usa el mismo correo con el que crearás tu cuenta de GitHub.</p>
+  </section>
+
+  <!-- 11 · GITHUB: CUENTA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · GitHub"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Tu cuenta</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Crea tu cuenta de GitHub</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1.05fr; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num" style="font-size: 36px; gap: 20px">
+        <li><span>Entra a <b>github.com</b>.</span></li>
+        <li><span>Haz clic en <b>Sign up</b>.</span></li>
+        <li><span>Elige un nombre de usuario, tu correo y una contraseña.</span></li>
+        <li><span>Confirma la cuenta desde el correo que te llega.</span></li>
+      </ol>
+      <div class="navegador"><b></b><img src="estudia/img/prework-github.webp" alt="Formulario de registro de GitHub"></div>
+    </div>
+    <p class="nota" style="margin-top: 16px">Si ya tienes cuenta, pasa a la siguiente slide.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 12 · GITHUB CLI -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · GitHub"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Conecta Git con tu cuenta</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Así no te pide usuario y contraseña cada vez</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num" style="font-size: 34px; gap: 18px">
+        <li><span>Instala <b>GitHub CLI</b> desde cli.github.com.</span></li>
+        <li><span>En la terminal escribe <b>gh auth login</b>.</span></li>
+        <li><span>Elige <b>GitHub.com</b>, luego <b>HTTPS</b> y <b>Login with a web browser</b>.</span></li>
+        <li><span>Copia el código que te muestra, pégalo en el navegador que se abre y confirma.</span></li>
+      </ol>
+      <div class="consola" style="font-size: 25px; padding: 24px 30px"><span class="m">PS&gt;</span> <span class="h">gh</span> auth login
+<span class="c">?</span> Where do you use GitHub? <span class="v">GitHub.com</span>
+<span class="c">?</span> Preferred protocol for Git? <span class="v">HTTPS</span>
+<span class="c">?</span> Authenticate Git with your GitHub
+  credentials? <span class="v">Yes</span>
+<span class="c">?</span> How would you like to authenticate?
+<span class="v">&gt; Login with a web browser</span></div>
+    </div>
+  </section>
+
+  <!-- 13 · GITHUB: CONFIRMAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · GitHub"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Confirma la conexión</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">De vuelta en la terminal</h2>
+    <div class="consola" style="margin-top: 30px"><span class="m">PS&gt;</span> <span class="h">gh</span> auth setup-git
+<span class="m">PS&gt;</span> <span class="h">gh</span> auth status
+<span class="v">Logged in to github.com as tu-usuario</span></div>
+    <p class="nota" style="margin-top: 30px; color: #e6e7ea">Ya está todo conectado. Lo que falta, tu primer commit, lo hacemos en el encuentro.</p>
+  </section>
+
+  <!-- 14 · CHECKLIST -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Verificación"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Antes de llegar al encuentro</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Si todo esto funciona, estás lista o listo</h2>
+    <ul class="checks" style="font-size: 36px; gap: 14px; margin-top: 22px">
+      <li data-paso="1"><span>La terminal abre sin error</span></li>
+      <li data-paso="2"><span><b>python --version</b> responde, y PowerShell ejecuta scripts</span></li>
+      <li data-paso="3"><span>VS Code abre y puede crear un archivo</span></li>
+      <li data-paso="4"><span><b>git --version</b> responde</span></li>
+      <li data-paso="5"><span>Tienes tu cuenta de GitHub y <b>gh auth status</b> muestra tu usuario</span></li>
+    </ul>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · AYUDA -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Verificación"></div>
+    <span class="etiqueta">¿Algo no instaló bien?</span>
+    <p class="mensaje" style="font-size: 112px; margin-top: 30px; color: var(--negro)">Esto no es un examen.</p>
+    <p class="sub" style="font-size: 48px; max-width: 1500px; margin-top: 30px">Es para que el encuentro arranque directo. Si algo falla, escríbele a tu profesor antes, con una captura del error. No esperes al último minuto.</p>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
