@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encuentro 2 · Delimitación de proyectos, fuentes y calidad · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Nivel básico · Encuentro 2</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 112px; line-height: 1.02">Delimitación de proyectos, fuentes y calidad</h1>
+      <p class="docente" style="font-size: 44px">Decidir qué vas a investigar, con qué datos, y qué dejas fuera</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy, en tres horas</span>
+    <h2 class="titulo" style="font-size: 88px">Una ficha de alcance, con SQL y Airflow en el camino</h2>
+    <div class="bt">
+      <div class="seg seg--chica" style="--m: 10" data-paso="1"><i style="--c: #11c9ee">10</i><span>Inicio</span></div>
+      <div class="seg" style="--m: 25" data-paso="2"><i style="--c: #ff7c1a">25</i><span>La ficha de alcance</span></div>
+      <div class="seg" style="--m: 25" data-paso="3"><i style="--c: #cb318e; color: #fff">25</i><span>SQL: la unidad de fila</span></div>
+      <div class="seg seg--chica" style="--m: 10" data-paso="4"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 20" data-paso="5"><i style="--c: #5c9100; color: #fff">20</i><span>Airflow en acción</span></div>
+      <div class="seg" style="--m: 55" data-paso="6"><i style="--c: #7fc200">55</i><span>Taller: tu ficha de alcance</span></div>
+      <div class="seg" style="--m: 35" data-paso="7"><i style="--c: #0a3bd1; color: #fff">35</i><span>Contraste y cierre</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · DONDE QUEDAMOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Dónde quedamos · 3 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 66px">Cuéntale a tu pareja</h2>
+        <ul class="lista" style="font-size: 44px; gap: 24px; margin-top: 30px">
+          <li>Cuál de tus dos ideas elegiste primero</li>
+          <li>Quién usaría el resultado</li>
+          <li>Qué dato crees que te falta confirmar</li>
+        </ul>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="180">3:00</div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · RELÁMPAGO SQL EN LA APP -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <div style="display: flex; align-items: center; gap: 32px">
+      <div class="anillo-caja"><svg class="anillo" viewBox="0 0 42 42"><circle class="base" cx="21" cy="21" r="15.915"/><circle class="arco" style="--dur: 60s" pathLength="100" cx="21" cy="21" r="15.915"/></svg><b data-segundos="60">1:00</b></div>
+      <span class="bono">⚡ Relámpago · fundamentos de SQL</span>
+    </div>
+    <p class="mensaje" style="font-size: 120px; margin-top: 40px">Mira la pantalla de la app</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Responde desde tu celular. Es para ver cómo va lo que están viendo en Platzi.</p>
+  </section>
+
+  <!-- 5 · GANCHO: ALCANCE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Empecemos por el recorte</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Una buena idea, pero demasiado grande</h2>
+    <div class="contraste">
+      <div class="antes" data-paso="1"><small>Antes</small><span>«Quiero analizar la movilidad de toda la ciudad.»</span></div>
+      <div class="despues" data-paso="2"><small>Después</small>Quiero saber <b>en qué horas</b> se llena <b>una ruta de bus</b> durante <b>un mes</b>, para que <b>el coordinador</b> decida <b>cuándo reforzarla</b>.</div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 22px">No descartamos el interés: reducimos el alcance para hacerlo posible.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · DENTRO Y FUERA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El alcance es una decisión</span>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; margin-top: 30px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #5c9100; font-size: 90px">Adentro</p>
+        <p class="cuerpo" style="margin-top: 14px">Lo que vas a investigar con evidencia que sí tienes a la mano.</p>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #cb318e; font-size: 90px">Afuera</p>
+        <p class="cuerpo" style="margin-top: 14px">Lo que dejas de lado, escrito, para no prometer más de lo que puedes cumplir.</p>
+      </div>
+    </div>
+    <p class="mensaje" data-paso="3" style="font-size: 52px; margin-top: auto; margin-bottom: 26px">Decidir qué queda fuera también es parte del análisis.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 7 · LA FICHA EN OCHO CAMPOS -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que vamos a construir hoy</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">La ficha de alcance, en ocho campos</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(4, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3>Usuario</h3><p>Quién usará el resultado</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3>Pregunta</h3><p>Lo que quiere saber</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3>Periodo</h3><p>De cuándo a cuándo</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="4"><h3>Cada fila</h3><p>Qué representa una fila</p></div>
+      <div class="tile" style="--c: #0a3bd1; --t: #fff" data-paso="5"><h3>Fuentes</h3><p>Dónde están los datos y con qué permisos</p></div>
+      <div class="tile" style="--c: #16181d; --t: #fff" data-paso="6"><h3>Indicadores</h3><p>Cuatro esenciales</p></div>
+      <div class="tile" style="--c: #ff7c1a" data-paso="7"><h3>Cortes</h3><p>Dos formas de comparar</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="8"><h3>Exclusiones</h3><p>Lo que queda fuera</p></div>
+    </div>
+  </section>
+
+  <!-- 8 · EJEMPLO COMPLETO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un ejemplo completo · biblioteca</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">¿Qué libros se prestan más, y cuándo?</h2>
+    <div class="evid" style="margin-top: 16px">
+      <div data-paso="1" style="grid-template-columns: 260px 1fr"><i>Usuario</i><span>La coordinadora de la biblioteca de un barrio</span></div>
+      <div data-paso="2" style="grid-template-columns: 260px 1fr"><i>Periodo</i><span>Enero a marzo de 2026</span></div>
+      <div data-paso="3" style="grid-template-columns: 260px 1fr"><i>Cada fila</i><span>Un préstamo de un libro a una persona</span></div>
+      <div data-paso="4" style="grid-template-columns: 260px 1fr"><i>Fuentes</i><span>Registro de préstamos y catálogo de libros, sin nombres reales</span></div>
+      <div data-paso="5" style="grid-template-columns: 260px 1fr"><i>Indicadores</i><span>Préstamos por mes, libros distintos, préstamos por categoría, días promedio de préstamo</span></div>
+      <div data-paso="6" style="grid-template-columns: 260px 1fr"><i>Cortes</i><span>Por categoría y por mes</span></div>
+      <div data-paso="7" style="grid-template-columns: 260px 1fr"><i>Fuera</i><span>Las reservas y los libros digitales</span></div>
+    </div>
+    <p class="nota" style="margin-top: 14px">Caso ilustrativo, con datos sintéticos.</p>
+  </section>
+
+  <!-- 9 · FILAS DE EVENTOS O DE PERSONAS -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Una trampa muy común</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">¿Cuántas personas leyeron «Dune»?</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px; padding: 24px 40px"><span class="m">prestamo_id  socio_id  libro   fecha</span>
+101          7         Dune    2026-03-02
+102          9         Emma    2026-03-05
+103          7         Dune    2026-03-12</div>
+    <ul class="lista" style="font-size: 38px; gap: 16px; margin-top: 24px">
+      <li data-paso="1">Hay <b>dos filas</b> de «Dune»…</li>
+      <li data-paso="2">…pero solo <b>una persona</b>: la 7 lo pidió dos veces.</li>
+      <li data-paso="3">Una fila es un <b>préstamo</b>, no una persona. Por eso la ficha pide la unidad de cada fila.</li>
+    </ul>
+  </section>
+
+  <!-- 10 · INDICADORES -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Indicadores</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Cuatro esenciales y, si aportan, hasta dos más</h2>
+    <div class="mosaico" style="grid-template-columns: 1.4fr 1fr">
+      <div class="tile" style="--c: #7fc200" data-paso="1"><h3>El mínimo</h3><p>Cuatro indicadores y dos cortes. Cada uno responde una pregunta de tu usuario.</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="2"><h3>La ampliación</h3><p>Hasta dos más, solo si ayudan a tomar una decisión.</p></div>
+    </div>
+  </section>
+
+  <!-- 11 · TASA SIN DENOMINADOR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cuando falta un dato</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Una tasa necesita su denominador</h2>
+    <div class="contraste">
+      <div class="antes" data-paso="1"><small>No</small><span>Calcular la ocupación sin saber cuántos cupos había</span></div>
+      <div class="despues" data-paso="2"><small>Sí</small>Dejar la tasa como <b>pendiente</b> y anotar qué dato falta para calcularla.</div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 22px">No inventes el denominador: un indicador pendiente es más honesto que uno falso.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 12 · FUENTES MANEJABLES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Fuentes</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Una o dos fuentes que puedas manejar</h2>
+    <ul class="checks" style="font-size: 38px; gap: 18px; margin-top: 26px">
+      <li data-paso="1"><span>Una fuente principal que tengas hoy<small>Un archivo, una tabla de BigQuery o un conjunto de datos abiertos</small></span></li>
+      <li data-paso="2"><span>Si solo tienes una tabla, mira si una segunda fuente descriptiva ayuda<small>Por ejemplo, un catálogo de libros, de productos o de sedes</small></span></li>
+      <li data-paso="3"><span>Si no hay una, crea un catálogo sintético y dilo<small>Sirve para practicar la unión; no se presenta como fuente real</small></span></li>
+    </ul>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 13 · PERMISOS -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Datos de personas</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Antes de pedir un archivo, busca una alternativa</h2>
+    <ul class="lista lista--check" style="font-size: 40px; gap: 22px; margin-top: 30px">
+      <li>Si tu idea usa datos de clientes, estudiantes o pacientes, busca primero una versión pública o sintética.</li>
+      <li>Una idea puede ser buena aunque cambie su fuente.</li>
+      <li>Tu proyecto no debe depender de conseguir permisos durante la clase.</li>
+    </ul>
+  </section>
+
+  <!-- 14 · RIESGOS DE CALIDAD -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Criterios de calidad</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Anticipa tres riesgos de calidad</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Duplicados</b><span>¿Una misma cosa aparece dos veces?</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Ausentes</b><span>¿Qué significa un campo vacío?</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Fechas y tipos</b><span>¿Se leen bien las fechas y los números?</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Relaciones</b><span>¿Todo registro tiene su pareja en la otra tabla?</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Escoge los tres que más pueden afectar a tu proyecto y anótalos en la ficha.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · RELÁMPAGO: UNIDAD DE FILA EN LA APP -->
+  <section class="slide slide--magenta slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · La ficha de alcance"></div>
+    <div style="display: flex; align-items: center; gap: 32px">
+      <div class="anillo-caja"><svg class="anillo" viewBox="0 0 42 42"><circle class="base" cx="21" cy="21" r="15.915"/><circle class="arco" style="--dur: 60s" pathLength="100" cx="21" cy="21" r="15.915"/></svg><b data-segundos="60">1:00</b></div>
+      <span class="bono" style="color: #fff">⚡ Relámpago · ¿qué es una fila?</span>
+    </div>
+    <p class="mensaje" style="font-size: 120px; margin-top: 40px">Mira la pantalla de la app</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Responde desde tu celular. Los resultados salen en vivo.</p>
+  </section>
+
+  <!-- 16 · SQL: LA FICHA SE CONVIERTE EN CONSULTA -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">De la ficha a los datos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">La unidad de fila se comprueba con SQL</h2>
+    <p class="sub" style="font-size: 38px; max-width: 1500px">En Platzi estás viendo los fundamentos. Aquí los usamos para una sola cosa: entender qué hay en una tabla.</p>
+    <div class="consola" style="margin-top: 24px; font-size: 30px"><span class="h">SELECT</span> prestamo_id, socio_id, libro, fecha
+<span class="h">FROM</span> prestamos
+<span class="h">LIMIT</span> 5;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Primero se mira, después se calcula.</p>
+  </section>
+
+  <!-- 17 · BUENAS PRÁCTICAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Una buena práctica desde el comienzo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Nombra las columnas que necesitas</h2>
+    <div class="contraste">
+      <div class="antes" data-paso="1"><small>Evita</small><span>SELECT * FROM prestamos</span></div>
+      <div class="despues" data-paso="2"><small>Prefiere</small>Escribir las <b>columnas</b> que necesitas y limitar las filas mientras exploras.</div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 22px">Se lee mejor, cuesta menos en BigQuery y deja claro qué estás mirando.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 18 · FILAS VS ENTIDADES -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Filas frente a personas</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Cuenta filas, y cuenta personas distintas</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">SELECT</span> <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos,
+       <span class="h">COUNT</span>(<span class="h">DISTINCT</span> socio_id) <span class="h">AS</span> socios
+<span class="h">FROM</span> prestamos;
+
+<span class="m">prestamos | socios</span>
+<span class="v">3         | 2</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Si los dos números son distintos, una fila no es una persona. Anótalo en la ficha.</p>
+  </section>
+
+  <!-- 19 · GROUP BY -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Un indicador por un corte</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">GROUP BY resume por una dimensión</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">SELECT</span> libro, <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos
+<span class="h">FROM</span> prestamos
+<span class="h">GROUP BY</span> libro
+<span class="h">ORDER BY</span> prestamos <span class="h">DESC</span>;
+
+<span class="m">libro | prestamos</span>
+<span class="v">Dune  | 2</span>
+<span class="v">Emma  | 1</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">El indicador es «préstamos»; el corte es «libro». Así sale cada fila de tu ficha.</p>
+  </section>
+
+  <!-- 20 · PRÁCTICA SQL -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · SQL"></div>
+    <span class="etiqueta">Práctica guiada · 15 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 60px">Conoce tu tabla con tres consultas</h2>
+        <ol class="lista lista--num" style="font-size: 36px; gap: 18px; margin-top: 24px">
+          <li><span>Mira cinco filas con <b>LIMIT 5</b> y nombra las columnas.</span></li>
+          <li><span>Cuenta las filas y cuenta las entidades distintas con <b>COUNT</b> y <b>DISTINCT</b>.</span></li>
+          <li><span>Escribe en tu ficha: «cada fila representa…».</span></li>
+        </ol>
+        <p class="sub" style="font-size: 32px; margin-top: 22px">Usa BigQuery con un dataset público o tu muestra.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="900">15:00</div>
+    </div>
+  </section>
+
+  <!-- 21 · PAUSA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pausa</span>
+    <div class="reloj" style="font-size: 330px; margin-top: 30px" data-segundos="600">10:00</div>
+    <p class="sub" style="margin-top: auto">Aléjate de la pantalla. Al volver, abrimos Airflow.</p>
+  </section>
+
+  <!-- 22 · AIRFLOW: DÓNDE ENCAJA -->
+  <section class="slide slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Apache Airflow</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Es quien ordena, programa y vigila las tareas</h2>
+    <svg viewBox="0 0 1700 330" style="width: 1700px; height: 330px; margin-top: 14px" role="img" aria-label="Cuatro tareas encadenadas: traer datos, limpiar, calcular indicadores y actualizar el tablero, coordinadas por Airflow">
+      <path class="t-dibuja" pathLength="1" d="M190 130H1510" stroke="#16181d" stroke-width="6" fill="none"/>
+      <g text-anchor="middle" font-weight="700" fill="#16181d">
+        <g data-paso="1"><rect x="40" y="80" width="300" height="100" rx="14" fill="#ff7c1a"/><text x="190" y="140" font-size="30">Traer datos</text></g>
+        <g data-paso="2"><rect x="480" y="80" width="300" height="100" rx="14" fill="#e0509e"/><text x="630" y="140" font-size="30" fill="#fff">Limpiar</text></g>
+        <g data-paso="3"><rect x="920" y="80" width="300" height="100" rx="14" fill="#7fc200"/><text x="1070" y="140" font-size="30">Indicadores</text></g>
+        <g data-paso="4"><rect x="1360" y="80" width="300" height="100" rx="14" fill="#11c9ee"/><text x="1510" y="140" font-size="30">Actualizar tablero</text></g>
+      </g>
+      <text data-paso="5" x="40" y="270" font-size="34" font-weight="700" fill="#0a3bd1">Airflow decide el orden, la hora y qué hacer si una tarea falla.</text>
+    </svg>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 23 · VOCABULARIO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cuatro palabras de Airflow</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Lo mínimo para entenderlo</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>DAG</b><span>El flujo completo: tareas y el orden entre ellas</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Tarea</b><span>Un paso: traer, limpiar, calcular</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Programación</b><span>Cuándo corre: cada hora, cada día, cada lunes</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Registro</b><span>Lo que pasó en cada ejecución, bueno o malo</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Es un DAG porque las tareas van en un solo sentido y no se cierran en círculo.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 24 · PRÁCTICA AIRFLOW -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Práctica guiada · 12 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 58px">Ejecuta un DAG de ejemplo</h2>
+        <ol class="lista lista--num" style="font-size: 33px; gap: 14px; margin-top: 18px">
+          <li><span>Con Airflow encendido, abre <b>localhost:8080</b> e inicia sesión con <b>airflow</b> y <b>airflow</b>.</span></li>
+          <li><span>Busca un DAG de ejemplo, por ejemplo <b>example_bash_operator</b>.</span></li>
+          <li><span>Actívalo y pulsa <b>Trigger</b> para ejecutarlo una vez.</span></li>
+          <li><span>Abre la vista del DAG y el <b>registro</b> de una tarea.</span></li>
+        </ol>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="720">12:00</div>
+    </div>
+    <p class="nota" style="margin-top: 14px; color: #e6e7ea">¿Aún no lo tienes? Mira con un compañero. La guía de instalación lo explica en las slides 17 a 22. Los nombres pueden variar según la versión.</p>
+  </section>
+
+  <!-- 25 · QUÉ MIRAR EN EL REGISTRO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que Airflow tiene que ver con la calidad</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Un flujo bueno cuenta lo que pasó</h2>
+    <ul class="checks" style="font-size: 38px; gap: 18px; margin-top: 26px">
+      <li data-paso="1"><span>¿Cada tarea terminó bien o falló?<small>Un color distinto en la vista del DAG lo dice a simple vista</small></span></li>
+      <li data-paso="2"><span>¿Qué decía el registro cuando falló?<small>Ahí está la pista: un archivo que no llegó, un dato mal escrito</small></span></li>
+      <li data-paso="3"><span>¿Se puede repetir sin cambiar nada?<small>Ejecutar dos veces debe dar el mismo resultado</small></span></li>
+    </ul>
+    <p class="nota" data-paso="4" style="margin-top: 20px">Tus criterios de calidad de la ficha son los que algún día se convertirían en tareas de un flujo como este.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 26 · TALLER: LOS CINCO PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Tu ficha de alcance</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Cincuenta y cinco minutos, cinco pasos</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Pregunta, usuario y periodo</b><span>Recorta hasta que sea posible</span></div><em>10 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Unidad de fila y fuentes</b><span>Con tus tres consultas y tus permisos</span></div><em>15 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Cuatro indicadores y dos cortes</b><span>Y qué queda como ampliación</span></div><em>10 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Tres riesgos de calidad y lo que queda fuera</b><span>Anticipa lo que puede salir mal</span></div><em>10 min</em></div>
+      <div data-paso="5" style="--c: #16181d"><i>5</i><div><b>Guarda la ficha en tu repositorio</b><span>Un archivo ficha-alcance.md, con un commit</span></div><em>10 min</em></div>
+    </div>
+  </section>
+
+  <!-- 27 · PASO 1 -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <span class="etiqueta">Paso 1 · Pregunta, usuario y periodo</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 62px">Completa esta frase</h2>
+        <div class="bloque bloque--tinta" style="margin-top: 36px; border-top-color: var(--naranja)"><p style="font-size: 42px; line-height: 1.4; color: #fff; margin: 0"><b style="color: var(--naranja)">…</b> necesita saber <b style="color: var(--naranja)">…</b> durante <b style="color: var(--naranja)">…</b> para decidir <b style="color: var(--naranja)">…</b>.</p></div>
+        <p class="sub" style="font-size: 36px; margin-top: 30px">Si te queda grande, escoge un servicio, una pregunta y un periodo.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 28 · PASO 2 -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Paso 2 · Unidad de fila y fuentes</span>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; align-items: center">
+      <ul class="lista lista--check" style="margin-top: 0; gap: 22px; font-size: 38px">
+        <li>¿Qué representa una fila de tu fuente principal?</li>
+        <li>¿Cuántas filas y cuántas entidades distintas tiene?</li>
+        <li>¿Hay una segunda fuente descriptiva que se relacione?</li>
+        <li>¿Quién da el permiso, o cuál es la alternativa pública?</li>
+      </ul>
+      <div class="reloj" style="text-align: center; font-size: 200px" data-segundos="900">15:00</div>
+    </div>
+  </section>
+
+  <!-- 29 · PASO 3 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 3 · Indicadores y cortes</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Para cada indicador, responde</h2>
+    <ul class="checks" style="font-size: 40px; gap: 20px; margin-top: 26px">
+      <li data-paso="1"><span>¿Qué pregunta de tu usuario responde?<small>Si ninguna, se retira</small></span></li>
+      <li data-paso="2"><span>¿Con qué campos se calcula?<small>Si falta uno, queda como pendiente</small></span></li>
+      <li data-paso="3"><span>¿Por cuál corte lo compararás?<small>Dos cortes bastan: por ejemplo categoría y mes</small></span></li>
+    </ul>
+    <div class="reloj" style="position: absolute; right: 110px; bottom: 100px; font-size: 130px" data-segundos="600">10:00</div>
+  </section>
+
+  <!-- 30 · PASO 4 -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 4 · Calidad y alcance</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Tres riesgos y una lista de exclusiones</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(2, 1fr); margin-top: 24px">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3>Tres riesgos de calidad</h3><p>Duplicados, ausentes, fechas, relaciones. Escoge los tres que más afectan tu proyecto.</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3>Lo que queda fuera</h3><p>Escribe al menos dos cosas que no vas a hacer, para no prometer de más.</p></div>
+    </div>
+    <div class="reloj" style="position: absolute; right: 110px; top: 150px; font-size: 100px" data-segundos="600">10:00</div>
+  </section>
+
+  <!-- 31 · PASO 5 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 5 · Guárdala en tu repositorio</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Un archivo, un commit</h2>
+    <div class="consola" style="margin-top: 26px; font-size: 32px"><span class="m"># dentro de la carpeta de tu repositorio</span>
+<span class="h">git</span> add ficha-alcance.md
+<span class="h">git</span> commit -m <span class="v">"Agrega la ficha de alcance"</span>
+<span class="h">git</span> push</div>
+    <p class="cuerpo" style="margin-top: 24px">En <b>ficha-alcance.md</b> deja los ocho campos y, abajo, tus tres consultas con el resultado que obtuviste.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 32 · CONTRASTE CRUZADO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Revisión cruzada · 20 minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Lee la ficha de alguien de otro sector</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Completa</b><span>«Cada fila representa…» y «el usuario decidirá…»</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Pregunta</b><span>Una duda sobre un indicador o sobre la unión de fuentes</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Ajusta</b><span>La persona autora anota qué cambia y por qué</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Decide</b><span>Una decisión de alcance, no un «está bonito»</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Si no puedes completar las dos frases, la ficha todavía no está clara.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 33 · CIERRE -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Lo que nos llevamos</span>
+    <p class="enorme" data-paso="1" style="font-size: 120px; margin-top: 30px">Un proyecto posible.</p>
+    <p class="enorme" data-paso="2" style="font-size: 120px">Una fila bien definida.</p>
+    <p class="enorme" data-paso="3" style="font-size: 120px">Un recorte escrito.</p>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 42px">Guarda la primera versión de tu alcance y anota el primer control de calidad que ejecutarás.</p>
+  </section>
+
+  <!-- 34 · PULSO EN LA APP -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pulso del encuentro</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 40px">Pulso: tres preguntas rápidas</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Escanea el QR de la pantalla En clase. Es anónimo y no cuenta para nada.</p>
+  </section>
+
+  <!-- 35 · LO QUE SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que sigue</span>
+    <h2 class="titulo" style="font-size: 92px">De la ficha a las consultas</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Encuentro 3</h3><p>Consultas SQL y relaciones que conservan el significado, con tu muestra revisada.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>En Platzi</h3><p>Sigue con el módulo M1: SQL para análisis de negocio. Lleva una duda de uniones.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>En tu repo</h3><p>Deja tu ficha de alcance guardada: es la base de las consultas.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 36 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Encuentro 2 · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Preguntas y comentarios</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
