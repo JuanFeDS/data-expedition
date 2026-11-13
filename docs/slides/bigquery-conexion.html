@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conéctate a BigQuery desde Python · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Guía paso a paso</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 124px; line-height: 1.02">Conéctate a BigQuery desde Python</h1>
+      <p class="docente" style="font-size: 44px">Crea tu cuenta, tu proyecto gratuito y consulta la biblioteca de Lucía</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · EL PLAN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="Antes de empezar"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El plan</span>
+    <h2 class="titulo" style="font-size: 88px">Cuatro pasos, y todo es gratis</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Cuenta de Google</b><span>La que ya tienes o una nueva</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Proyecto sandbox</b><span>Tu espacio gratuito en BigQuery</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Conexión desde Python</b><span>En Colab o en tu computador</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Tu primera consulta</b><span>A los datos de la biblioteca</span></div>
+    </div>
+    <p class="nota" style="margin-top: 34px">No necesitas tarjeta de crédito en ningún paso.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 3 · SANDBOX, NO FACTURACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="Antes de empezar"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo más importante de esta guía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Trabaja en el sandbox y no actives la facturación</h2>
+    <div class="contraste">
+      <div class="antes" data-paso="1"><small>No hagas esto</small><span>Activar la facturación o poner una tarjeta</span></div>
+      <div class="despues" data-paso="2"><small>Haz esto</small>Quédate en el <b>sandbox</b>: es gratis, con <b>1 TiB de consultas al mes</b> y <b>10 GiB</b> de almacenamiento.</div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 24px">Si BigQuery te ofrece «Actualizar» o «Activar facturación», ignóralo. Las tablas que crees en el sandbox se borran solas a los 60 días.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · PASO 1: CUENTA DE GOOGLE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="1 · Cuenta de Google"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 1 · Tu cuenta</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Necesitas una cuenta de Google</h2>
+    <ol class="lista lista--num" style="font-size: 38px; gap: 22px; margin-top: 26px">
+      <li><span>Si tienes Gmail, esa es tu cuenta. Úsala.</span></li>
+      <li><span>Si no tienes, entra a <b>accounts.google.com/signup</b> y crea una.</span></li>
+      <li><span>Usa siempre <b>la misma cuenta</b> en todos los pasos de esta guía.</span></li>
+    </ol>
+    <p class="nota" style="margin-top: 22px">Si tu cuenta es de un trabajo o una universidad, puede tener restricciones. En ese caso usa una personal.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 5 · PASO 2: ABRIR BIGQUERY -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="2 · Proyecto sandbox"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 2 · Abre BigQuery</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Entra a la consola de BigQuery</h2>
+    <ol class="lista lista--num" style="font-size: 38px; gap: 22px; margin-top: 26px">
+      <li><span>Abre <b>console.cloud.google.com/bigquery</b> en el navegador.</span></li>
+      <li><span>Inicia sesión con tu cuenta de Google.</span></li>
+      <li><span>Si te pide aceptar los términos del servicio y elegir un país, hazlo.</span></li>
+    </ol>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · PASO 2: CREAR EL PROYECTO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="2 · Proyecto sandbox"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 2 · Crea tu proyecto</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Un proyecto es tu espacio de trabajo</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 20px; margin-top: 22px">
+      <li><span>Arriba, haz clic en el <b>selector de proyectos</b> y elige <b>Proyecto nuevo</b>.</span></li>
+      <li><span>Ponle un nombre, por ejemplo <b>practica-sql</b>. No agregues facturación.</span></li>
+      <li><span>Haz clic en <b>Crear</b> y selecciona el proyecto cuando termine.</span></li>
+      <li><span><b>Anota su ID.</b> No es igual al nombre: suele tener números al final.</span></li>
+    </ol>
+    <p class="nota" style="margin-top: 20px">Tu ID de proyecto lo vas a necesitar en Python.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 7 · PASO 2: COMPROBAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="2 · Proyecto sandbox"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Paso 2 · Comprueba que funciona</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Tu primera consulta, en la consola</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 18px; margin-top: 20px">
+      <li><span>Abre una <b>consulta nueva</b> en el editor de la consola.</span></li>
+      <li><span>Escribe esto y presiona <b>Ejecutar</b>:</span></li>
+    </ol>
+    <div class="consola" style="margin-top: 20px; font-size: 32px"><span class="h">SELECT</span> <span class="v">'¡Hola, BigQuery!'</span> <span class="h">AS</span> saludo;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Si ves el resultado abajo y tu proyecto marcado como sandbox, todo está bien.</p>
+  </section>
+
+  <!-- 8 · PASO 3: ELEGIR CÓMO CONECTARTE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="3 · Conexión"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 3 · Conéctate desde Python</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Dos caminos, elige uno</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 30px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #5c9100; font-size: 76px">Google Colab</p>
+        <p class="cuerpo" style="margin-top: 14px">Recomendado. Corre en el navegador y no instalas nada.</p>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #0a3bd1; font-size: 76px">Tu computador</p>
+        <p class="cuerpo" style="margin-top: 14px">Si ya instalaste Python con la guía de herramientas.</p>
+      </div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 9 · COLAB: ABRIR Y AUTORIZAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="3 · Conexión"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Camino 1 · Google Colab</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Abre un cuaderno y autoriza tu cuenta</h2>
+    <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 18px">
+      <li><span>Entra a <b>colab.research.google.com</b> y crea un <b>cuaderno nuevo</b>.</span></li>
+      <li><span>En la primera celda escribe esto y ejecútala:</span></li>
+    </ol>
+    <div class="consola" style="margin-top: 18px; font-size: 30px"><span class="h">from</span> google.colab <span class="h">import</span> auth
+auth.authenticate_user()</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Se abre una ventana: elige tu cuenta y acepta los permisos.</p>
+  </section>
+
+  <!-- 10 · COLAB: CONSULTAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="3 · Conexión"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Camino 1 · Google Colab</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">En la segunda celda, haz tu consulta</h2>
+    <div class="consola" style="margin-top: 18px; font-size: 26px; padding: 24px 32px"><span class="h">from</span> google.cloud <span class="h">import</span> bigquery
+
+cliente = bigquery.Client(project=<span class="v">"TU-ID-DE-PROYECTO"</span>)
+consulta = <span class="v">"""
+SELECT libro_id, titulo
+FROM `PROYECTO_PROFESOR.biblioteca.libros`
+LIMIT 5
+"""</span>
+tabla = cliente.query(consulta).to_dataframe()
+print(tabla)</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Cambia <b>TU-ID-DE-PROYECTO</b> por el tuyo y <b>PROYECTO_PROFESOR</b> por el que te dé tu profesor.</p>
+  </section>
+
+  <!-- 11 · LOCAL: INSTALAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="3 · Conexión"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Camino 2 · Tu computador</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Instala las librerías, una sola vez</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="m"># en la terminal</span>
+<span class="h">pip</span> install pandas pandas-gbq</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">En Mac, usa <b>pip3</b> en lugar de <b>pip</b>.</p>
+  </section>
+
+  <!-- 12 · LOCAL: CONSULTAR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="3 · Conexión"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Camino 2 · Tu computador</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Escribe un archivo y ejecútalo</h2>
+    <div class="consola" style="margin-top: 18px; font-size: 26px; padding: 24px 32px"><span class="h">import</span> pandas_gbq
+
+consulta = <span class="v">"""
+SELECT libro_id, titulo
+FROM `PROYECTO_PROFESOR.biblioteca.libros`
+LIMIT 5
+"""</span>
+tabla = pandas_gbq.read_gbq(consulta, project_id=<span class="v">"TU-ID-DE-PROYECTO"</span>)
+print(tabla)</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">La primera vez se abre el navegador para que autorices tu cuenta de Google.</p>
+  </section>
+
+  <!-- 13 · LA BASE DE LUCÍA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="4 · Tu consulta"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 4 · La biblioteca de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Cuatro tablas para practicar</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 400px 1fr"><i>libros</i><span>El catálogo: título, autor, categoría y año</span></div>
+      <div data-paso="2" style="grid-template-columns: 400px 1fr"><i>socios</i><span>Las personas inscritas, sin datos personales</span></div>
+      <div data-paso="3" style="grid-template-columns: 400px 1fr"><i>prestamos</i><span>Cada préstamo de enero a marzo de 2026</span></div>
+      <div data-paso="4" style="grid-template-columns: 400px 1fr"><i>prestamos_abril</i><span>Abril, tal como llegó el archivo, con sus problemas</span></div>
+    </div>
+    <p class="nota" style="margin-top: 20px">Todo es sintético. Las encuentras en el proyecto de tu profesor, en el dataset <b>biblioteca</b>.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 14 · CUIDAR LOS COSTOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="4 · Tu consulta"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un hábito desde el primer día</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">BigQuery cobra por lo que lee, no por lo que devuelve</h2>
+    <ul class="checks" style="font-size: 36px; gap: 18px; margin-top: 24px">
+      <li data-paso="1"><span>Escribe las columnas que necesitas, no <b>*</b><small>Cada columna que lees cuenta en los bytes procesados</small></span></li>
+      <li data-paso="2"><span><b>LIMIT</b> no reduce lo que se lee<small>Muestra pocas filas, pero BigQuery igual las procesó</small></span></li>
+      <li data-paso="3"><span>Mira los bytes estimados antes de ejecutar<small>La consola los muestra arriba a la derecha del editor</small></span></li>
+    </ul>
+    <p class="nota" data-paso="4" style="margin-top: 20px">En el sandbox no te cobran, pero el cupo mensual es limitado.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · PROBLEMAS COMUNES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Si algo falla"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Errores comunes</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Qué hacer cuando algo no sale</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 420px 1fr"><i>Access Denied</i><span>Revisa que usas la misma cuenta de Google en todo. Si sigue, avisa a tu profesor</span></div>
+      <div data-paso="2" style="grid-template-columns: 420px 1fr"><i>Not found: Dataset</i><span>El ID del proyecto del profesor está mal escrito</span></div>
+      <div data-paso="3" style="grid-template-columns: 420px 1fr"><i>Project not found</i><span>Usaste el nombre del proyecto y no su ID</span></div>
+      <div data-paso="4" style="grid-template-columns: 420px 1fr"><i>Piden tarjeta o facturación</i><span>Cierra esa ventana: no hace falta para esta guía</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 16 · CHECKLIST -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="Si algo falla"></div>
+    <span class="etiqueta">Antes de la clase</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Si todo esto funciona, estás lista o listo</h2>
+    <ul class="checks" style="font-size: 38px; gap: 18px; margin-top: 26px">
+      <li data-paso="1"><span>Tienes una cuenta de Google y entras a la consola de BigQuery</span></li>
+      <li data-paso="2"><span>Creaste un proyecto sin facturación y anotaste su ID</span></li>
+      <li data-paso="3"><span>Tu consulta <b>SELECT 'Hola'</b> devuelve un resultado</span></li>
+      <li data-paso="4"><span>Conectaste Python, en Colab o en tu computador</span></li>
+    </ul>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
