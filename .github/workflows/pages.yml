@@ -37,7 +37,7 @@ jobs:
         run: npm run test:cobertura
         working-directory: web
       - name: Auditoría de dependencias
-        run: npm audit --audit-level=high
+        run: node scripts/auditar-dependencias.mjs
         working-directory: web
       - name: Construir
         run: npx vite build
