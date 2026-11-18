@@ -52,10 +52,11 @@ h1 { margin: 6px 0 0; font-size: clamp(30px, 5vw, 42px); line-height: 1.05; lett
 .fila p { margin: 0; font-size: 13px; color: var(--gris); }
 .meta { display: block; margin-top: 4px; font-size: 13px; color: var(--gris); }
 .fila--pronto { opacity: .55; }
+.abrir--grab { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 6px 16px; }
 .pronto { font-size: 13px; font-weight: 700; color: var(--gris); white-space: nowrap; }
 .fila--opcional { margin-left: 110px; grid-template-columns: 1fr auto; padding: 14px 0 14px 20px; border-left: 3px solid var(--linea); }
 .fila--opcional .cuando { grid-column: 1 / -1; }
-.acciones { display: flex; gap: 8px; }
+.acciones { display: flex; gap: 8px; flex-wrap: wrap; }
 .abrir { display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--tinta); color: var(--fondo); font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
 .abrir--borde { background: transparent; color: var(--tinta); border: 2px solid var(--tinta); padding: 6px 16px; }
 .abrir:hover, .abrir:focus-visible { background: var(--naranja); border-color: var(--naranja); color: #000; outline: none; }
@@ -82,7 +83,7 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
 
   <p class="etiqueta">Análisis de datos</p>
   <h1>Slides del curso</h1>
-  <p class="intro">Todo en un solo lugar, organizado por semanas. Elige tu nivel: cada semana trae sus dos encuentros y el módulo de Platzi que la acompaña. Las slides aparecen aquí a medida que avanza el curso.</p>
+  <p class="intro">Todo en un solo lugar. Elige tu nivel: cada clase trae sus slides y la grabación de la sesión. Los cursos de Platzi los avanzas a tu ritmo durante todo el curso.</p>
 
   <div class="niveles" role="tablist" aria-label="Nivel del curso">
     <button type="button" role="tab" id="tab-basico" data-nivel="basico" aria-selected="true">Nivel básico</button>
@@ -92,15 +93,12 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
   <div class="panel" id="panel-basico" data-panel="basico" role="tabpanel" aria-labelledby="tab-basico">
   <nav class="nav" aria-label="Secciones del curso">
     <a href="#inicio" style="--c: #ff7c1a">Antes de empezar</a>
-    <a href="#semana-1" style="--c: #ff7c1a">Semana 1</a>
-    <a href="#semana-2" style="--c: #cb318e">Semana 2</a>
-    <a href="#semana-3" style="--c: #7fc200">Semana 3</a>
-    <a href="#semana-4" style="--c: #11c9ee">Semana 4</a>
-    <a href="#semana-5" style="--c: #ff7c1a">Semana 5</a>
+    <a href="#clases" style="--c: #ff7c1a">Clases</a>
+    <a href="#platzi" style="--c: #cb318e">Platzi</a>
   </nav>
 
   <section class="seccion" id="inicio" style="--c: var(--tinta)">
-    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez, antes del encuentro 1</p></div>
+    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez</p></div>
     <ul class="lista">
       <li class="fila">
         <span class="cuando">Curso</span>
@@ -132,60 +130,43 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
     </ul>
   </section>
 
-  <section class="seccion" id="semana-1" style="--c: var(--naranja)">
-    <div class="seccion-cab"><h2>Semana 1</h2><p>Platzi M1 · SQL para análisis de negocio</p><span class="actual">Esta semana</span></div>
+  <section class="seccion" id="clases" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Clases</h2><p>Slides y grabación de cada sesión</p></div>
     <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 1</span><div><h3>Comunidad, pacto y oportunidades analíticas</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--opcional">
-        <span class="cuando">Opcional · si lo necesitas</span>
+      <li class="fila"><span class="cuando">Clase 1</span><div><h3>Introducción</h3><p>Presentación del curso y de cómo vamos a trabajar.</p></div></li>
+      <li class="fila">
+        <span class="cuando">Clase 2</span>
         <div>
-          <h3>Clínica de Git</h3>
-          <p>Repaso de 30 minutos: commits, ramas, pull requests y conflictos, con una hoja de comandos.</p>
-          <span class="meta">13 slides</span>
+          <h3>Configuración del entorno</h3>
+          <p>Prework: terminal, Python, VS Code, Git, GitHub y Power BI, y un primer vistazo a cómo funciona Airflow.</p>
         </div>
-        <a class="abrir abrir--borde" href="c2av-clinica-git.html">Abrir slides</a>
+        <div class="acciones"><a class="abrir" href="instalacion-herramientas.html">Windows</a><a class="abrir" href="instalacion-herramientas-mac.html">Mac</a><a class="abrir abrir--grab" href="https://zoom.us/rec/share/0BLmPFzfvAOBtzrCoJ4ZFjfOromFRyeD33cIgb2Nsf8NQV49wwTk85wcFKL5URj0.Ne7TuDijlSlJW6D4?from=hub" target="_blank" rel="noopener noreferrer">▶ Grabación</a></div>
       </li>
       <li class="fila">
-        <span class="cuando">Encuentro 2</span>
+        <span class="cuando">Clase 3</span>
         <div>
-          <h3>Delimitación de proyectos, fuentes y criterios de calidad</h3>
-          <p>La ficha de alcance de tu proyecto, con fundamentos de SQL para entender qué es una fila y una práctica corta de Airflow.</p>
+          <h3>Delimitación de proyectos, fuentes y calidad</h3>
+          <p>La historia de Lucía y su biblioteca: la ficha de alcance, SQL para entender una fila y una práctica corta de Airflow.</p>
           <span class="meta">38 slides</span>
         </div>
-        <a class="abrir" href="c2bas-e02-delimitacion-proyectos.html">Abrir slides</a>
+        <div class="acciones"><a class="abrir" href="c2bas-e02-delimitacion-proyectos.html">Abrir slides</a><a class="abrir abrir--grab" href="https://zoom.us/rec/share/Z8eI4wVnewoUJJuXCnXzwYR6FcV7QrPukj2ZBk0DKB414X1exKyPuXIq5dOexmmQ.wA9oZiLfiyIGTrvK?from=hub" target="_blank" rel="noopener noreferrer">▶ Grabación</a></div>
       </li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 4</span><div><h3>Consultas SQL y uniones sobre tu fuente</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 5</span><div><h3>Preparación y calidad de datos</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 6</span><div><h3>Indicadores y comprobación</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 7</span><div><h3>Tablero en Power BI</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 8</span><div><h3>Interpretación y límites</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 9</span><div><h3>Documentación y portafolio</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 10</span><div><h3>Demostración y defensa</h3></div><span class="pronto">Próximamente</span></li>
     </ul>
   </section>
 
-  <section class="seccion" id="semana-2" style="--c: var(--magenta)">
-    <div class="seccion-cab"><h2>Semana 2</h2><p>Platzi M2 · Transformaciones avanzadas con pandas</p></div>
+  <section class="seccion" id="platzi" style="--c: var(--magenta)">
+    <div class="seccion-cab"><h2>Platzi</h2><p>A tu ritmo, durante todo el curso</p></div>
     <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 3</span><div><h3>Consultas SQL y relaciones que conservan el significado</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 4</span><div><h3>Preparación reproducible y decisiones sobre calidad</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="semana-3" style="--c: var(--verde)">
-    <div class="seccion-cab"><h2>Semana 3</h2><p>Platzi M3 · Visualización avanzada: Power BI y Tableau</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 5</span><div><h3>Indicadores descriptivos y comprobación de resultados</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 6</span><div><h3>Diseño de un tablero para el usuario del proyecto</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="semana-4" style="--c: var(--cian)">
-    <div class="seccion-cab"><h2>Semana 4</h2><p>Platzi M4 · Estadística descriptiva aplicada a negocio</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 7</span><div><h3>Clínicas de profundización y coherencia entre herramientas</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 8</span><div><h3>Interpretación, recomendaciones y límites de cada proyecto</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="semana-5" style="--c: var(--naranja)">
-    <div class="seccion-cab"><h2>Semana 5</h2><p>Platzi M5 · Documentación y portafolio analítico</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 9</span><div><h3>Reproducibilidad, documentación y preparación del portafolio</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 10</span><div><h3>Demostración, defensa y proyección del trabajo</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Fundamentos de Bases de Datos y SQL</h3></div></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Python para Ciencia de Datos</h3></div></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Power BI</h3></div></li>
     </ul>
   </section>
 
@@ -194,15 +175,12 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
   <div class="panel" id="panel-intermedio" data-panel="intermedio" role="tabpanel" aria-labelledby="tab-intermedio" hidden>
   <nav class="nav" aria-label="Secciones del curso, nivel intermedio">
     <a href="#i-inicio" style="--c: #ff7c1a">Antes de empezar</a>
-    <a href="#i-semana-1" style="--c: #ff7c1a">Semana 1</a>
-    <a href="#i-semana-2" style="--c: #cb318e">Semana 2</a>
-    <a href="#i-semana-3" style="--c: #7fc200">Semana 3</a>
-    <a href="#i-semana-4" style="--c: #11c9ee">Semana 4</a>
-    <a href="#i-semana-5" style="--c: #ff7c1a">Semana 5</a>
+    <a href="#i-clases" style="--c: #ff7c1a">Clases</a>
+    <a href="#i-platzi" style="--c: #cb318e">Platzi</a>
   </nav>
 
   <section class="seccion" id="i-inicio" style="--c: var(--tinta)">
-    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez, antes del encuentro 1</p></div>
+    <div class="seccion-cab"><h2>Antes de empezar</h2><p>Se consulta una vez</p></div>
     <ul class="lista">
       <li class="fila">
         <span class="cuando">Curso</span>
@@ -234,51 +212,45 @@ kbd { display: inline-block; min-width: 26px; padding: 1px 8px; border-radius: 6
     </ul>
   </section>
 
-  <section class="seccion" id="i-semana-1" style="--c: var(--naranja)">
-    <div class="seccion-cab"><h2>Semana 1</h2><p>Platzi M1 · Ingeniería de datos: APIs y automatización</p><span class="actual">Esta semana</span></div>
+  <section class="seccion" id="i-clases" style="--c: var(--naranja)">
+    <div class="seccion-cab"><h2>Clases</h2><p>Slides y grabación de cada sesión</p></div>
     <ul class="lista">
       <li class="fila">
-        <span class="cuando">Encuentro 1</span>
+        <span class="cuando">Clase 1</span>
         <div>
-          <h3>Inducción y oportunidades de industria</h3>
-          <p>El pacto del curso, qué es una API y cómo viaja un dato de la fuente a la decisión, y tus dos primeras oportunidades de industria.</p>
-          <span class="meta">39 slides</span>
+          <h3>Introducción y reglas de juego</h3>
+          <p>Cómo trabajamos, qué esperamos de ti y qué es una API.</p>
+          <span class="meta">39 slides de apoyo</span>
         </div>
-        <a class="abrir" href="c2int-e01-induccion-oportunidades.html">Abrir slides</a>
+        <div class="acciones"><a class="abrir abrir--borde" href="c2int-e01-induccion-oportunidades.html">Slides de apoyo</a><a class="abrir abrir--grab" href="https://zoom.us/rec/share/fzpBpn6ic_TworRoDC_TwVzI86T8bEacbOLeeYi28OnfnCHOEcfxD2qbd1Ike14.ekhqzXedIkdATnSN?from=hub" target="_blank" rel="noopener noreferrer">▶ Grabación</a></div>
       </li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 2</span><div><h3>Brief, datos y criterios de aceptación</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila">
+        <span class="cuando">Clase 2</span>
+        <div>
+          <h3>Entorno, brief y contrato de datos</h3>
+          <p>La historia de Lucía y su flujo: dejar el entorno funcionando, escribir el brief de tu proyecto y el contrato de tu fuente.</p>
+          <span class="meta">41 slides</span>
+        </div>
+        <div class="acciones"><a class="abrir" href="c2int-e02-entorno-brief-contrato.html">Abrir slides</a><a class="abrir abrir--grab" href="https://zoom.us/rec/share/1XmBA9iyVfAoLaLGRobLJNsCmS1yB9tYYRFfoOQNTkUmrmcSVJGmmapPMrNk87Vp.3qioO-MEWH8Q7fpe?from=hub" target="_blank" rel="noopener noreferrer">▶ Grabación</a></div>
+      </li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 3</span><div><h3>Extracción REST y manejo de fallas</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 4</span><div><h3>Staging y transformación</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 5</span><div><h3>Modelo dimensional y SQL analítico</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 6</span><div><h3>Automatización y pruebas del pipeline</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 7</span><div><h3>Calidad, gobernanza y acceso</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 8</span><div><h3>Estadística inferencial y decisión</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 9</span><div><h3>Auditoría técnica y portafolio</h3></div><span class="pronto">Próximamente</span></li>
+      <li class="fila fila--pronto"><span class="cuando">Clase 10</span><div><h3>Demostración y defensa profesional</h3></div><span class="pronto">Próximamente</span></li>
     </ul>
   </section>
 
-  <section class="seccion" id="i-semana-2" style="--c: var(--magenta)">
-    <div class="seccion-cab"><h2>Semana 2</h2><p>Platzi M2 · dbt para transformación de datos analíticos</p></div>
+  <section class="seccion" id="i-platzi" style="--c: var(--magenta)">
+    <div class="seccion-cab"><h2>Platzi</h2><p>A tu ritmo, durante todo el curso</p></div>
     <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 3</span><div><h3>Extracción REST y manejo de fallas</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 4</span><div><h3>Staging y transformación con dbt</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="i-semana-3" style="--c: var(--verde)">
-    <div class="seccion-cab"><h2>Semana 3</h2><p>Platzi M3 · SQL avanzado y modelado dimensional</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 5</span><div><h3>Modelo dimensional y SQL analítico</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 6</span><div><h3>Automatización y pruebas del pipeline</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="i-semana-4" style="--c: var(--cian)">
-    <div class="seccion-cab"><h2>Semana 4</h2><p>Platzi M4 · Estadística aplicada al análisis de negocio</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 7</span><div><h3>Calidad, gobernanza y acceso</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 8</span><div><h3>Estadística inferencial y decisión</h3></div><span class="pronto">Disponible pronto</span></li>
-    </ul>
-  </section>
-
-  <section class="seccion" id="i-semana-5" style="--c: var(--naranja)">
-    <div class="seccion-cab"><h2>Semana 5</h2><p>Platzi M5 · Calidad y gobernanza de datos</p></div>
-    <ul class="lista">
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 9</span><div><h3>Auditoría técnica y portafolio</h3></div><span class="pronto">Disponible pronto</span></li>
-      <li class="fila fila--pronto"><span class="cuando">Encuentro 10</span><div><h3>Demostración y defensa profesional</h3></div><span class="pronto">Disponible pronto</span></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Fundamentos de Apache Airflow</h3></div></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>PostgreSQL aplicado a Ciencia de Datos</h3></div></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Data Warehousing y Modelado OLAP</h3></div></li>
+      <li class="fila"><span class="cuando">Platzi</span><div><h3>Estadística Inferencial para Data Science e IA</h3></div></li>
     </ul>
   </section>
 

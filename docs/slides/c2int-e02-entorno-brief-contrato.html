@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 2 · Entorno, brief y contrato de datos · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Nivel intermedio · Sesión 2</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 112px; line-height: 1.02">Del dibujo al flujo: entorno, brief y contrato</h1>
+      <p class="docente" style="font-size: 44px">Hoy seguimos a Lucía, una analista cuyo flujo de datos no termina nunca</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy, en tres horas</span>
+    <h2 class="titulo" style="font-size: 80px">Lo que haremos hoy</h2>
+    <div class="bt">
+      <div class="seg seg--chica" style="--m: 10" data-paso="1"><i style="--c: #11c9ee">10</i><span>Inicio</span></div>
+      <div class="seg" style="--m: 45" data-paso="2"><i style="--c: #ff7c1a">45</i><span>1 · «En mi computador sí funciona»</span></div>
+      <div class="seg" style="--m: 35" data-paso="3"><i style="--c: #cb318e; color: #fff">35</i><span>2 · «¿Terminó?»</span></div>
+      <div class="seg seg--chica" style="--m: 10" data-paso="4"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 20" data-paso="5"><i style="--c: #5c9100; color: #fff">20</i><span>3 · «La fuente cambió»</span></div>
+      <div class="seg" style="--m: 45" data-paso="6"><i style="--c: #7fc200">45</i><span>Taller: tu brief y tu contrato</span></div>
+      <div class="seg" style="--m: 15" data-paso="7"><i style="--c: #0a3bd1; color: #fff">15</i><span>Cierre</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · DÓNDE ESTAMOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">De la sesión 1 a hoy</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Del dibujo al flujo real</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Un entorno que funcione</b><span>El mismo en todos los computadores.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Un brief</b><span>Qué vas a construir y cuándo estará terminado.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Un contrato de datos</b><span>Qué tiene que traer tu fuente para que el flujo no se rompa.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Cada pieza aparece porque a Lucía le hizo falta.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · ESCENA 1: PORTADA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <span class="etiqueta">Escena 1</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px; color: var(--negro)">«En mi computador sí funciona»</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto; color: var(--negro)">Lucía construyó un flujo de datos. Le toca mostrárselo a una colega.</p>
+  </section>
+
+  <!-- 5 · ESCENA 1: CONVERSACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un lunes, en la oficina</span>
+    <div class="chat">
+      <div class="burbuja burbuja--der" data-paso="1"><small style="color: #000">Una colega</small>Intenté correr tu flujo y falla en la primera línea.</div>
+      <div class="burbuja" data-paso="2"><small>Lucía</small>«Qué raro. En mi computador sí funciona.»</div>
+      <div class="burbuja burbuja--der m" data-paso="3"><small style="color: #fff">Una colega</small>¿Con qué versión de Python lo hiciste?</div>
+      <div class="burbuja" data-paso="4"><small>Lucía</small>«…No sé. La que ya tenía instalada.»</div>
+    </div>
+  </section>
+
+  <!-- 6 · POR QUÉ IMPORTA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">¿Por qué falló?</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Tres cosas que cambian</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>La versión de Python</b><span>Una función que existe en una versión puede no existir en otra.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Las librerías instaladas</b><span>Lucía tenía una versión de pandas distinta a la de su colega.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Lo que nadie escribió</b><span>Los pasos para preparar el entorno solo estaban en la cabeza de Lucía.</span></div>
+    </div>
+    <p class="mensaje" data-paso="4" style="font-size: 50px; margin-top: 30px">Un flujo es reproducible cuando otra persona lo corre y obtiene lo mismo.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 7 · LAS CINCO PIEZAS DEL ENTORNO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">La solución de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Cinco piezas del entorno</h2>
+    <div class="rail" style="--n: 5">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Python y venv</b><span>Un entorno propio por proyecto.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Git y GitHub</b><span>El código y su historia, compartidos.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Docker</b><span>El mismo sistema en todas las máquinas.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Airflow</b><span>Quien ejecuta y vigila el flujo.</span></div>
+      <div data-paso="5" style="--c: #0a3bd1"><i>5</i><b>Una base de datos</b><span>BigQuery o PostgreSQL, donde viven los datos.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Vamos a comprobar las cuatro primeras ahora, juntos. La quinta la usaremos en las siguientes sesiones.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 8 · COMPROBACIÓN 1: PYTHON Y VENV -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Comprobación 1 · Python y entorno virtual</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Un entorno por proyecto</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 27px"><span class="m"># en la carpeta de tu proyecto</span>
+<span class="h">python</span> --version
+<span class="h">python</span> -m venv .venv
+<span class="m"># Windows</span>
+.venv\Scripts\activate
+<span class="m"># Mac o Linux</span>
+<span class="h">source</span> .venv/bin/activate
+<span class="h">pip</span> install requests</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">En Mac y en Codespaces (que es Linux) usa la línea de «Mac o Linux» y <b>python3</b>. Cuando el entorno está activo, ves <b>(.venv)</b> al inicio de la línea.</p>
+  </section>
+
+  <!-- 9 · COMPROBACIÓN 2: GIT -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Comprobación 2 · Git y GitHub</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Git y GitHub</h2>
+    <div class="consola" style="margin-top: 22px; font-size: 30px"><span class="h">git</span> --version
+<span class="h">gh</span> auth status</div>
+    <p class="sub" style="font-size: 36px; margin-top: 24px">La segunda debe decir que iniciaste sesión en <b>github.com</b> con tu usuario.</p>
+    <p class="nota" style="margin-top: 14px; color: #e6e7ea">Si no lo tienes, sigue la guía de instalación: Git y GitHub están en las slides 9 a 13.</p>
+  </section>
+
+  <!-- 10 · COMPROBACIÓN 3: DOCKER -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Comprobación 3 · Docker</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Con Docker Desktop abierto</h2>
+    <div class="consola" style="margin-top: 22px; font-size: 30px"><span class="h">docker</span> --version
+<span class="h">docker</span> compose version
+<span class="h">docker</span> run hello-world
+<span class="v">Hello from Docker!</span></div>
+    <p class="nota" style="margin-top: 24px; color: #e6e7ea">Si dice que no puede conectarse, abre Docker Desktop y espera a que el ícono de la ballena deje de moverse. Luego repite.</p>
+  </section>
+
+  <!-- 11 · PRÁCTICA: HAZ LAS COMPROBACIONES -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <span class="etiqueta">Ahora tú · 20 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 60px">Ejecuta las tres comprobaciones</h2>
+        <ol class="lista lista--num" style="font-size: 36px; gap: 18px; margin-top: 24px">
+          <li><span>Corre los comandos de las tres slides anteriores.</span></li>
+          <li><span>Anota qué funciona y qué falla, con el mensaje exacto.</span></li>
+          <li><span>Si algo falla, intenta resolverlo; si no puedes, pasa al plan B.</span></li>
+        </ol>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="1200">20:00</div>
+    </div>
+  </section>
+
+  <!-- 12 · PLAN B: CODESPACES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Plan B · si Docker no corre en tu computador</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Trabaja en la nube</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 20px; margin-top: 24px">
+      <li><span>En el repositorio del curso en GitHub, elige <b>Code → Codespaces → Create codespace</b>.</span></li>
+      <li><span>Escoge la configuración <b>Airflow · ejercicios</b>.</span></li>
+      <li><span>Dentro, Docker ya está instalado. Todo lo demás se hace igual.</span></li>
+    </ol>
+    <p class="sub" style="font-size: 32px; margin-top: 18px">El Codespace es Linux: el entorno virtual se crea y se activa así.</p>
+    <div class="consola" style="margin-top: 14px; font-size: 28px; padding: 22px 34px"><span class="h">python3</span> -m venv .venv
+<span class="h">source</span> .venv/bin/activate</div>
+    <p class="nota" style="margin-top: 18px">Tu cuenta gratuita de GitHub incluye unas 60 horas al mes. Cuando termines, <b>detén el Codespace</b> para no gastarlas.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 13 · LEVANTAR AIRFLOW -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Con el entorno listo · 15 minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Levantemos Airflow</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 25px; padding: 24px 32px"><span class="m"># en la carpeta airflow-ejercicios</span>
+<span class="h">bash</span> iniciar_airflow.sh
+<span class="m"># o, paso a paso</span>
+<span class="h">docker</span> compose up airflow-init
+<span class="h">docker</span> compose up -d</div>
+    <ol class="lista lista--num" style="font-size: 30px; gap: 12px; margin-top: 22px">
+      <li><span>Espera unos minutos: la primera vez descarga las imágenes.</span></li>
+      <li><span>Abre <b>localhost:8080</b> con usuario <b>airflow</b> y contraseña <b>airflow</b>.</span></li>
+    </ol>
+  </section>
+
+  <!-- 14 · EJECUTAR UN DAG -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">La prueba final del entorno</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Ejecuta un DAG de ejemplo</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 20px; margin-top: 24px">
+      <li><span>Busca <b>example_bash_operator</b> y <b>actívalo</b>.</span></li>
+      <li><span>Pulsa <b>Trigger</b> para ejecutarlo una vez.</span></li>
+      <li><span>Abre el registro de una tarea: ¿qué te cuenta?</span></li>
+    </ol>
+    <p class="nota" style="margin-top: 22px">Si lo ves terminar en verde, tu entorno funciona. Lo mismo que Lucía debió asegurar antes de mostrar nada.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · ERRORES COMUNES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Si algo no sale</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los problemas más comunes</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 440px 1fr"><i>Docker no conecta</i><span>Docker Desktop está cerrado. Ábrelo y espera a que termine de iniciar</span></div>
+      <div data-paso="2" style="grid-template-columns: 440px 1fr"><i>Puerto 8080 ocupado</i><span>Otro programa lo usa. Ciérralo o cambia el puerto en el compose</span></div>
+      <div data-paso="3" style="grid-template-columns: 440px 1fr"><i>Airflow se reinicia solo</i><span>Falta memoria: en Docker Desktop, asígnale al menos 4 GB</span></div>
+      <div data-paso="4" style="grid-template-columns: 440px 1fr"><i>«python» no se reconoce</i><span>No agregaste Python al PATH al instalarlo, o en Mac usa python3</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 16 · ESCENA 2: PORTADA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <span class="etiqueta">Escena 2</span>
+    <p class="mensaje" style="font-size: 130px; margin-top: 30px">«¿Terminó?»</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Con el entorno resuelto, Lucía sigue construyendo. Y sigue.</p>
+  </section>
+
+  <!-- 17 · ESCENA 2: CONVERSACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un mes después, reunión de seguimiento</span>
+    <div class="chat">
+      <div class="burbuja burbuja--der" data-paso="1"><small style="color: #000">La jefa</small>¿Ya terminó el flujo de ventas?</div>
+      <div class="burbuja" data-paso="2"><small>Lucía</small>«Casi. Falta pulir unas cosas.»</div>
+      <div class="burbuja burbuja--der m" data-paso="3"><small style="color: #fff">La jefa</small>¿Qué significa «terminado» para ti?</div>
+      <div class="burbuja" data-paso="4"><small>Lucía</small>«…Que funcione, supongo.»</div>
+    </div>
+  </section>
+
+  <!-- 18 · QUÉ ES UN BRIEF -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que le faltó a Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Qué es un brief</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; margin-top: 30px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #cb318e; font-size: 78px">Sin brief</p>
+        <p class="cuerpo" style="margin-top: 14px">«Terminado» significa lo que cada quien imagina. El flujo crece sin fin y nadie sabe cuándo parar.</p>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #5c9100; font-size: 78px">Con brief</p>
+        <p class="cuerpo" style="margin-top: 14px">Está escrito qué se construye, para quién, y cuándo se da por terminado. Se puede revisar y discutir.</p>
+      </div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 19 · LOS OCHO CAMPOS -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que vamos a escribir hoy</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">El brief, en ocho campos</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(4, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3 style="font-size: 54px">Usuario</h3><p>Quién usa el resultado</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3 style="font-size: 54px">Fuente</h3><p>De dónde vienen los datos</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3 style="font-size: 54px">Destino</h3><p>Dónde queda el resultado</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="4"><h3 style="font-size: 54px">Tres KPI</h3><p>Lo que se va a medir</p></div>
+      <div class="tile" style="--c: #0a3bd1; --t: #fff" data-paso="5"><h3 style="font-size: 54px">Frecuencia</h3><p>Cada cuánto corre</p></div>
+      <div class="tile" style="--c: #16181d; --t: #fff" data-paso="6"><h3 style="font-size: 54px">Calidad</h3><p>El mínimo que debe cumplir</p></div>
+      <div class="tile" style="--c: #ff7c1a" data-paso="7"><h3 style="font-size: 54px">Terminó bien</h3><p>Cómo se comprueba</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="8"><h3 style="font-size: 54px">Fuera</h3><p>Lo que no se construye</p></div>
+    </div>
+  </section>
+
+  <!-- 20 · EL BRIEF DE MARTA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Así quedó el brief de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 54px">Brief: ventas de la tienda</h2>
+    <div class="evid" style="margin-top: 12px">
+      <div data-paso="1" style="grid-template-columns: 250px 1fr"><i>Usuario</i><span>La jefa de compras</span></div>
+      <div data-paso="2" style="grid-template-columns: 250px 1fr"><i>Fuente</i><span>Archivo diario de ventas del punto de venta, en CSV</span></div>
+      <div data-paso="3" style="grid-template-columns: 250px 1fr"><i>Destino</i><span>Una tabla de ventas por producto y día en BigQuery</span></div>
+      <div data-paso="4" style="grid-template-columns: 250px 1fr"><i>Tres KPI</i><span>Ventas por día, productos más vendidos, ticket promedio</span></div>
+      <div data-paso="5" style="grid-template-columns: 250px 1fr"><i>Frecuencia</i><span>Cada día a las 6 de la mañana</span></div>
+      <div data-paso="6" style="grid-template-columns: 250px 1fr"><i>Calidad mínima</i><span>Sin ventas repetidas, sin fechas ilegibles</span></div>
+      <div data-paso="7" style="grid-template-columns: 250px 1fr"><i>Terminó bien</i><span>Corre dos veces seguidas con el mismo resultado, y sus tres KPI coinciden con una cuenta manual</span></div>
+      <div data-paso="8" style="grid-template-columns: 250px 1fr"><i>Fuera</i><span>Compras a proveedores y devoluciones</span></div>
+    </div>
+    <p class="nota" style="margin-top: 10px">Caso ilustrativo.</p>
+  </section>
+
+  <!-- 21 · TRES SECTORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El mismo método, otros sectores</span>
+    <h2 class="titulo titulo--sm" style="font-size: 56px">Tres flujos de ejemplo</h2>
+    <div style="display: grid; grid-template-columns: 190px 1fr 1.4fr; gap: 28px; margin-top: 14px; padding-bottom: 8px; border-bottom: 4px solid #16181d">
+      <span></span><b style="font-size: 24px; letter-spacing: .12em; text-transform: uppercase; color: #5b6170">Fuente y destino</b><b style="font-size: 24px; letter-spacing: .12em; text-transform: uppercase; color: #5b6170">Tres KPI y decisión</b>
+    </div>
+    <div>
+      <div data-paso="1" style="display: grid; grid-template-columns: 190px 1fr 1.4fr; gap: 28px; padding: 16px 0; border-bottom: 2px solid #d9d9d9">
+        <b style="color: #5c9100; font-size: 38px">Comercio</b>
+        <span style="font-size: 32px; line-height: 1.25">CSV diario de ventas → tabla de ventas por producto y día</span>
+        <span style="font-size: 32px; line-height: 1.25">Ventas por día, ranking de productos, ticket promedio. <b>Decide qué reponer.</b></span>
+      </div>
+      <div data-paso="2" style="display: grid; grid-template-columns: 190px 1fr 1.4fr; gap: 28px; padding: 16px 0; border-bottom: 2px solid #d9d9d9">
+        <b style="color: #cb318e; font-size: 38px">Servicios</b>
+        <span style="font-size: 32px; line-height: 1.25">Portal de datos abiertos, por API → solicitudes por área y semana</span>
+        <span style="font-size: 32px; line-height: 1.25">Solicitudes por semana, tiempo de atención, casos abiertos. <b>Decide dónde reforzar.</b></span>
+      </div>
+      <div data-paso="3" style="display: grid; grid-template-columns: 190px 1fr 1.4fr; gap: 28px; padding: 16px 0; border-bottom: 2px solid #d9d9d9">
+        <b style="color: #0a8fb0; font-size: 38px">Clima</b>
+        <span style="font-size: 32px; line-height: 1.25">API pública de pronóstico → tabla diaria de temperatura y lluvia</span>
+        <span style="font-size: 32px; line-height: 1.25">Temperatura máxima, lluvia acumulada, días lluviosos. <b>Decide cuándo programar una actividad.</b></span>
+      </div>
+    </div>
+    <p class="nota" style="margin-top: 14px">Casos ilustrativos.</p>
+  </section>
+
+  <!-- 22 · «TERMINÓ BIEN» -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El campo más importante</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Qué es «terminó bien»</h2>
+    <ul class="checks" style="font-size: 36px; gap: 18px; margin-top: 24px">
+      <li data-paso="1"><span>Corre dos veces seguidas y da el mismo resultado<small>Es lo que significa «reproducible»</small></span></li>
+      <li data-paso="2"><span>Los KPI coinciden con una cuenta hecha a mano<small>Una suma, un conteo, un promedio comprobados aparte</small></span></li>
+      <li data-paso="3"><span>Si un dato llega mal, el flujo falla y avisa<small>No publica un resultado dudoso en silencio</small></span></li>
+    </ul>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 23 · FUERA DE ALCANCE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que no se construye</span>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; margin-top: 30px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #5c9100; font-size: 84px">Adentro</p>
+        <p class="cuerpo" style="margin-top: 14px">Traer, limpiar y calcular tres KPI de una fuente, y que todo corra solo.</p>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #cb318e; font-size: 84px">Afuera</p>
+        <p class="cuerpo" style="margin-top: 14px">Cada idea que se te ocurra a medias: otras fuentes, un modelo de predicción, un tablero con diez páginas.</p>
+      </div>
+    </div>
+    <p class="mensaje" data-paso="3" style="font-size: 50px; margin-top: auto; margin-bottom: 26px">Escribir lo que queda fuera te protege de que el proyecto no termine nunca.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 24 · DÓNDE BUSCAR FUENTES -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Para escribir tu brief necesitas una fuente</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Dónde buscar datos</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(3, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3 style="font-size: 52px">Datos abiertos</h3>
+        <p><b>datos.gov.co</b><br>Datos Abiertos Colombia</p>
+        <p><b>medata.gov.co</b><br>MEData, Alcaldía de Medellín</p>
+        <p><b>dane.gov.co</b><br>Estadísticas nacionales</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="2"><h3 style="font-size: 52px">APIs públicas</h3>
+        <p><b>open-meteo.com</b><br>Clima y pronóstico, sin llave</p>
+        <p><b>datos.gov.co</b><br>Cada dataset trae su propia API</p>
+        <p><b>data.worldbank.org</b><br>Indicadores del Banco Mundial</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3 style="font-size: 52px">Para cualquier tema</h3>
+        <p><b>kaggle.com/datasets</b><br>Conjuntos con su descripción</p>
+        <p><b>datasetsearch.research.google.com</b><br>El buscador de datos de Google</p>
+        <p><b>Datos sintéticos</b><br>Si no hay fuente pública, los generas y lo dices</p></div>
+    </div>
+  </section>
+
+  <!-- 25 · SIRVE O NO SIRVE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Antes de elegir una fuente</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">¿Te sirve esa fuente?</h2>
+    <ul class="checks" style="font-size: 35px; gap: 16px; margin-top: 24px">
+      <li data-paso="1"><span>¿Dice qué representa cada fila y cada columna?<small>Busca el diccionario de datos o la descripción</small></span></li>
+      <li data-paso="2"><span>¿Cubre el periodo que tu decisión necesita?<small>Mira la fecha más antigua y la más reciente</small></span></li>
+      <li data-paso="3"><span>¿Puedes usarla?<small>Revisa la licencia y que no traiga datos personales de nadie</small></span></li>
+      <li data-paso="4"><span>¿Se actualiza con la frecuencia que pide tu brief?<small>Un flujo diario con datos que cambian cada año no tiene sentido</small></span></li>
+      <li data-paso="5"><span>¿Puedes traerla desde un programa?<small>Un archivo con un enlace estable, o una API con su documentación</small></span></li>
+    </ul>
+  </section>
+
+  <!-- 26 · ARCHIVO O API -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Una decisión de tu brief</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">¿Archivo o API?</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; margin-top: 30px">
+      <div data-paso="1">
+        <p class="enorme" style="color: #0a3bd1; font-size: 82px">Archivo</p>
+        <ul class="lista" style="font-size: 34px; gap: 14px">
+          <li>Más sencillo de empezar</li>
+          <li>Casi no falla</li>
+          <li>Pero se queda viejo si nadie lo actualiza</li>
+        </ul>
+      </div>
+      <div data-paso="2">
+        <p class="enorme" style="color: #f26a00; font-size: 82px">API</p>
+        <ul class="lista" style="font-size: 34px; gap: 14px">
+          <li>Datos frescos, cada vez que corre</li>
+          <li>Hay que manejar límites, páginas y fallas</li>
+          <li>Es el tema del encuentro 3</li>
+        </ul>
+      </div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 28px">Puedes empezar con un archivo y cambiar a una API más adelante. Lo importante es que el brief lo diga.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 27 · PAUSA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pausa</span>
+    <div class="reloj" style="font-size: 330px; margin-top: 30px" data-segundos="600">10:00</div>
+    <p class="sub" style="margin-top: auto">Aléjate de la pantalla. Al volver, el flujo de Lucía falla un lunes.</p>
+  </section>
+
+  <!-- 28 · ESCENA 3: PORTADA -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <span class="etiqueta">Escena 3</span>
+    <p class="mensaje" style="font-size: 130px; margin-top: 30px; color: var(--negro)">«La fuente cambió»</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto; color: var(--negro)">El flujo de Lucía ya tiene brief. Un lunes, deja de funcionar.</p>
+  </section>
+
+  <!-- 29 · ESCENA 3: CONVERSACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lunes, 6:30 de la mañana</span>
+    <div class="chat">
+      <div class="burbuja" data-paso="1"><small>Lucía</small>«El flujo falló. Dice que no encuentra la columna “producto_id”.»</div>
+      <div class="burbuja burbuja--der" data-paso="2"><small style="color: #000">El equipo de la tienda</small>Ah, le cambiamos el nombre a «codigo_producto». Era más claro.</div>
+      <div class="burbuja burbuja--der m" data-paso="3"><small style="color: #fff">La jefa</small>¿Y nadie les avisó que el flujo dependía de ese nombre?</div>
+      <div class="burbuja" data-paso="4"><small>Lucía</small>«No estaba escrito en ningún lado.»</div>
+    </div>
+  </section>
+
+  <!-- 30 · QUÉ ES UN CONTRATO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que le faltó a la fuente</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Qué es un contrato</h2>
+    <p class="sub" style="font-size: 40px; max-width: 1560px">Entre quien produce los datos y quien los usa: qué columnas trae, de qué tipo, y cada cuánto se actualiza.</p>
+    <div class="rail" style="--n: 3; margin-top: 50px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Qué trae</b><span>Columnas, tipos y claves.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Cada cuánto</b><span>Frecuencia y hora de actualización.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Qué pasa si cambia</b><span>Quién avisa y cómo se detecta.</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 31 · EJEMPLO DE CONTRATO -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">El contrato que Lucía debió tener</span>
+    <h2 class="titulo titulo--sm" style="font-size: 56px">Ventas diarias de la tienda</h2>
+    <div class="consola" style="margin-top: 18px; font-size: 25px; padding: 24px 36px"><span class="m">columna          tipo      ¿puede faltar?   ejemplo</span>
+venta_id         texto     no               V-10234
+producto_id      texto     no               P-0045
+fecha_venta      fecha     no               2026-11-09
+cantidad         entero    no               2
+valor_total      número    no               45000
+
+<span class="m">clave: venta_id    frecuencia: diaria, 6:00 a. m.    responsable: tienda</span></div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Caso ilustrativo. En una hoja como esta, cambiar el nombre de una columna es una decisión que se avisa.</p>
+  </section>
+
+  <!-- 32 · QUÉ HACER SI SE ROMPE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Escena 3"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un contrato no sirve si nadie lo vigila</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Comprobar el contrato</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Detecta</b><span>Compara las columnas que llegaron con las del contrato.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Avisa</b><span>Falla con un mensaje: «falta la columna producto_id».</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>No publica</b><span>Ningún dato dudoso llega al tablero.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Esa comprobación se escribe como una tarea más de Airflow. La haremos más adelante.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 33 · TALLER: LOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ahora el proyecto es tuyo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Taller: tu brief y contrato</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Elige tu fuente</b><span>Que cumpla las cinco preguntas</span></div><em>10 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Escribe tu brief</b><span>Los ocho campos</span></div><em>15 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Escribe el contrato de tu fuente</b><span>Columnas, tipos, frecuencia</span></div><em>10 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Guárdalos en tu repositorio</b><span>brief.md y contrato.md, con un commit</span></div><em>10 min</em></div>
+    </div>
+  </section>
+
+  <!-- 34 · PASO 1 -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Paso 1 · Elige tu fuente</span>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; align-items: center">
+      <ul class="lista lista--check" style="margin-top: 0; gap: 22px; font-size: 38px">
+        <li>Busca en los portales de la slide anterior, o en uno que ya conozcas.</li>
+        <li>Abre los datos: ¿qué representa una fila?</li>
+        <li>Comprueba las cinco preguntas de «¿me sirve?».</li>
+        <li>Anota el enlace y de dónde sale: lo necesitas en el brief.</li>
+      </ul>
+      <div class="reloj" style="text-align: center; font-size: 200px" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 35 · PASO 2 -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <span class="etiqueta">Paso 2 · Escribe tu brief</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 62px">Completa los ocho campos</h2>
+        <div class="bloque bloque--tinta" style="margin-top: 36px; border-top-color: var(--naranja)"><p style="font-size: 38px; line-height: 1.4; color: #fff; margin: 0">Usuario · fuente · destino · tres KPI · frecuencia · calidad mínima · cómo sé que terminó bien · qué queda fuera.</p></div>
+        <p class="sub" style="font-size: 34px; margin-top: 30px">Usa el brief de Lucía como modelo, pero con tus palabras.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="900">15:00</div>
+    </div>
+  </section>
+
+  <!-- 36 · PASO 3 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 3 · El contrato de tu fuente</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Para cada columna, responde</h2>
+    <ul class="checks" style="font-size: 38px; gap: 20px; margin-top: 26px">
+      <li data-paso="1"><span>¿Cómo se llama y de qué tipo es?<small>Texto, entero, número, fecha</small></span></li>
+      <li data-paso="2"><span>¿Puede venir vacía?<small>Si no puede, será una revisión del flujo</small></span></li>
+      <li data-paso="3"><span>¿Cuál es la clave, y cada cuánto se actualiza?<small>La clave es lo que no debe repetirse</small></span></li>
+    </ul>
+    <div class="reloj" style="position: absolute; right: 110px; bottom: 100px; font-size: 130px" data-segundos="600">10:00</div>
+  </section>
+
+  <!-- 37 · PASO 4 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 4 · Guárdalos en tu repositorio</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Dos archivos, un commit</h2>
+    <div class="consola" style="margin-top: 26px; font-size: 30px"><span class="m"># dentro de la carpeta de tu repositorio</span>
+<span class="h">git</span> add brief.md contrato.md
+<span class="h">git</span> commit -m <span class="v">"Agrega el brief y el contrato de datos"</span>
+<span class="h">git</span> push</div>
+    <p class="cuerpo" style="margin-top: 24px">En <b>brief.md</b> van los ocho campos. En <b>contrato.md</b>, una tabla con una fila por columna de tu fuente.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 38 · CONTRASTE ENTRE PARES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Sé la jefa de otra persona · 10 minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Revisión entre pares</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Lee el brief</b><span>El de alguien de otro sector.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Pregunta</b><span>«¿Qué significa que terminó bien?»</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Busca una grieta</b><span>Un campo vacío o una columna sin definir.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Ajusta</b><span>La persona autora anota qué cambia.</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 39 · CIERRE -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Lucía ya sabe cuándo termina. Ahora tú.</span>
+    <p class="enorme" data-paso="1" style="font-size: 110px; margin-top: 30px">Un entorno que funciona.</p>
+    <p class="enorme" data-paso="2" style="font-size: 110px">Un brief que define «terminado».</p>
+    <p class="enorme" data-paso="3" style="font-size: 110px">Un contrato con tu fuente.</p>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 40px">Guarda tu brief y tu contrato, y anota qué fuente podría cambiar y cómo te enterarías.</p>
+  </section>
+
+  <!-- 40 · LO QUE SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que sigue</span>
+    <h2 class="titulo" style="font-size: 92px">Hacia los datos</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Sesión 3</h3><p>Extracción REST y manejo de fallas: traer datos de una API, con páginas, límites y errores.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>En Platzi</h3><p>Sigue con tu curso de Airflow, PostgreSQL, OLAP y estadística, a tu ritmo.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>En tu repo</h3><p>Deja tu brief y tu contrato guardados: son la base de lo que construiremos.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 41 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Sesión 2 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Preguntas y comentarios</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
