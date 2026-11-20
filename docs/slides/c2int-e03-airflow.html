@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 3 · Que el flujo corra solo (Airflow) · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Nivel intermedio · Sesión 3</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 120px; line-height: 1.02">Que el flujo corra solo</h1>
+      <p class="docente" style="font-size: 44px">Hoy Lucía descubre Airflow, porque un lunes nadie corrió su script</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy, en tres horas</span>
+    <h2 class="titulo" style="font-size: 80px">Lo que haremos hoy</h2>
+    <div class="bt">
+      <div class="seg seg--chica" style="--m: 10" data-paso="1"><i style="--c: #11c9ee">10</i><span>Inicio</span></div>
+      <div class="seg" style="--m: 25" data-paso="2"><i style="--c: #ff7c1a">25</i><span>1 · «Se me olvidó correrlo»</span></div>
+      <div class="seg" style="--m: 35" data-paso="3"><i style="--c: #cb318e; color: #fff">35</i><span>2 · Levantar Airflow</span></div>
+      <div class="seg seg--chica" style="--m: 10" data-paso="4"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 85" data-paso="5"><i style="--c: #7fc200">85</i><span>Taller: el flujo de Lucía</span></div>
+      <div class="seg" style="--m: 15" data-paso="6"><i style="--c: #0a3bd1; color: #fff">15</i><span>Cierre</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · DÓNDE ESTAMOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">De la sesión 2 a hoy</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Del brief al flujo vivo</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Tu brief</b><span>Dice qué construyes, de dónde vienen los datos y cada cuánto corre.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Hoy: quién lo ejecuta</b><span>Airflow corre el flujo, lo vigila y avisa cuando algo falla.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Después: el destino</b><span>Lo siguiente es llevar el resultado a BigQuery.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Airflow aparece porque a Lucía le hizo falta.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · ESCENA 1: PORTADA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <span class="etiqueta">Escena 1</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px; color: var(--negro)">«Se me olvidó correrlo»</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto; color: var(--negro)">El flujo de Lucía funciona. Pero alguien tiene que acordarse de ejecutarlo.</p>
+  </section>
+
+  <!-- 5 · ESCENA 1: CONVERSACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un lunes, en la oficina</span>
+    <div class="chat">
+      <div class="burbuja burbuja--der" data-paso="1"><small style="color: #000">Una colega</small>El tablero de préstamos está vacío esta semana.</div>
+      <div class="burbuja" data-paso="2"><small>Lucía</small>«Corrí el script el viernes, ¡yo vi que terminó!»</div>
+      <div class="burbuja burbuja--der m" data-paso="3"><small style="color: #fff">Una colega</small>¿Y el lunes? Los datos de la semana no están.</div>
+      <div class="burbuja" data-paso="4"><small>Lucía</small>«…Se me olvidó correrlo.»</div>
+    </div>
+  </section>
+
+  <!-- 6 · QUÉ LE FALTA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">¿Qué le faltaba al script?</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Cuatro cosas que no tenía</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Un horario</b><span>Que corra solo, sin depender de la memoria de nadie.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Un orden</b><span>Traer, limpiar y contar, siempre en esa secuencia.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Un aviso</b><span>Que grite cuando un paso falla, no tres días después.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Un registro</b><span>Qué pasó, cuándo y por qué, en un solo lugar.</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 7 · AIRFLOW -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Escena 1"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">La solución de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Airflow: ejecuta y vigila</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>DAG</b><span>La receta: pasos en orden, sin vueltas atrás.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Tarea</b><span>Un paso de la receta: traer, limpiar, contar.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Ejecución</b><span>Una vez que la receta corre completa.</span></div>
+    </div>
+    <p class="mensaje" data-paso="4" style="font-size: 48px; margin-top: 30px">Lucía no cambia su código: lo organiza en tareas y se lo entrega a Airflow.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 8 · ESCENA 2: PORTADA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <span class="etiqueta">Escena 2</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px">Levantar Airflow</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Sin instalar nada en tu computador: lo corremos en la nube.</p>
+  </section>
+
+  <!-- 9 · PASOS DEL CODESPACE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cuatro pasos · unos 10 minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Airflow en un Codespace</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Crea el Codespace</b><span>Repositorio airflow_estudia_c2_intermedio → Code → Codespaces → Create</span></div><em>3 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Enciende Airflow</b><span>En la terminal: bash iniciar_airflow.sh</span></div><em>5 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Abre el puerto 8080</b><span>Pestaña Puertos → ícono del globo</span></div><em>1 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Entra</b><span>Usuario airflow, contraseña airflow</span></div><em>1 min</em></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 10 · REPOSITORIO Y COMANDO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Dónde está todo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Un repositorio, un comando</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="m"># el repositorio</span>
+github.com/JuanFeDS/airflow_estudia_c2_intermedio
+
+<span class="m"># en la terminal del Codespace</span>
+<span class="h">bash</span> iniciar_airflow.sh</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">El script descarga Airflow, prepara la base de datos y lo enciende. Termina con «Airflow arrancando». <b>Entra con la dirección del globo en Puertos, no con localhost.</b></p>
+  </section>
+
+  <!-- 11 · SI ALGO NO SALE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Si algo no sale</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los problemas más comunes</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 440px 1fr"><i>El 8080 no abre</i><span>Airflow tarda un minuto en responder. Espera y recarga</span></div>
+      <div data-paso="2" style="grid-template-columns: 440px 1fr"><i>Te manda a «localhost»</i><span>Cambia solo esa parte de la barra por la dirección .app.github.dev</span></div>
+      <div data-paso="3" style="grid-template-columns: 440px 1fr"><i>Algo se cayó</i><span>En la terminal: docker compose ps muestra qué contenedor falló</span></div>
+      <div data-paso="4" style="grid-template-columns: 440px 1fr"><i>Todo va muy lento</i><span>Tienes más de un Codespace abierto. Deja solo uno</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 12 · RECORRIDO POR LA INTERFAZ -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ya estás dentro</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Qué verás en Airflow</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(3, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3 style="font-size: 54px">Dags</h3><p>La lista de flujos. El interruptor los activa</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3 style="font-size: 54px">▶ Trigger</h3><p>Lo ejecuta una vez, ahora mismo</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3 style="font-size: 54px">Graph</h3><p>Las tareas y sus flechas</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="4"><h3 style="font-size: 54px">Grid</h3><p>Un cuadro por tarea y por ejecución</p></div>
+      <div class="tile" style="--c: #0a3bd1; --t: #fff" data-paso="5"><h3 style="font-size: 54px">Logs</h3><p>Lo que escribió cada tarea</p></div>
+      <div class="tile" style="--c: #16181d; --t: #fff" data-paso="6"><h3 style="font-size: 54px">Code</h3><p>El Python del DAG</p></div>
+    </div>
+  </section>
+
+  <!-- 13 · COLORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cómo leer el Grid</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Tres colores, tres mensajes</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #5c9100"><i>✓</i><b>Verde</b><span>La tarea terminó bien.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>✕</i><b>Rojo</b><span>La tarea falló. Abre sus Logs: ahí está el motivo.</span></div>
+      <div data-paso="3" style="--c: #9aa0b0"><i>–</i><b>Gris</b><span>No corrió: una tarea anterior falló o se omitió.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Una tarea omitida no es un error: el DAG decidió seguir otro camino.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 14 · EJERCICIO 1 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Escena 2"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ejercicio 1 · Mira un flujo en marcha</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Tu primer DAG, ejecutado</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Busca example_bash_operator</b><span>Escríbelo en el buscador de Dags</span></div><em>2 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Actívalo y pulsa ▶</b><span>Los DAG nuevos empiezan pausados</span></div><em>2 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Mira Graph y Grid</b><span>¿Qué tareas hay y en qué orden?</span></div><em>3 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Abre un registro</b><span>¿Qué te cuenta la tarea?</span></div><em>3 min</em></div>
+    </div>
+  </section>
+
+  <!-- 15 · PAUSA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Pausa"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pausa</span>
+    <div class="reloj" style="font-size: 330px; margin-top: 30px" data-segundos="600">10:00</div>
+    <p class="sub" style="margin-top: auto">Aléjate de la pantalla. Al volver, construimos el flujo de Lucía.</p>
+  </section>
+
+  <!-- 16 · TALLER: LOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ahora el flujo es tuyo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Taller: el flujo de Lucía</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>2</i><div><b>Tres pasos encadenados</b><span>Traer, limpiar y contar «Dune»</span></div><em>25 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>3</i><div><b>Que avise si algo está raro</b><span>Un control que falla a propósito</span></div><em>25 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>4</i><div><b>Que corra solo</b><span>Los lunes, o el primer día del mes</span></div><em>20 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>5</i><div><b>Desafío: un tercer control</b><span>Uno que se te ocurra a ti</span></div><em>15 min</em></div>
+    </div>
+    <p class="nota" style="margin-top: 20px">Los enunciados están en ejercicios.md, dentro del repositorio.</p>
+  </section>
+
+  <!-- 17 · EJERCICIO 2 -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Ejercicio 2 · El flujo de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Tres tareas, una cadena</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="m"># dags/ej2_flujo_lucia.py</span>
+<span class="h">@task</span> <span class="h">def</span> traer(): ...
+<span class="h">@task</span> <span class="h">def</span> limpiar(filas_traidas): ...   <span class="m"># TODO 1</span>
+<span class="h">@task</span> <span class="h">def</span> contar(filas_limpias): ...     <span class="m"># TODO 2</span>
+
+contar(limpiar(traer()))</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Ejecútalo como está, lee los registros, completa los dos TODO y ejecútalo otra vez. Guarda y espera menos de un minuto: Airflow lee el cambio solo.</p>
+  </section>
+
+  <!-- 18 · EJERCICIO 3 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ejercicio 3 · Que avise</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Que falle, y que lo diga</h2>
+    <ul class="checks" style="font-size: 38px; gap: 20px; margin-top: 26px">
+      <li data-paso="1"><span>Si hay filas repetidas, detén el flujo<small>raise ValueError con un mensaje claro</small></span></li>
+      <li data-paso="2"><span>La tarea se pone roja a propósito<small>Abre su registro y lee el mensaje</small></span></li>
+      <li data-paso="3"><span>Mira qué pasó con la tarea siguiente<small>¿Por qué no corrió?</small></span></li>
+    </ul>
+    <p class="nota" data-paso="4" style="margin-top: 26px">Es mejor un flujo que se detiene que uno que sigue con datos malos.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 19 · EJERCICIO 4 -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Taller"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Ejercicio 4 · Que corra solo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Leer una programación</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 32px"><span class="m"># minuto  hora  día-del-mes  mes  día-de-la-semana</span>
+schedule=<span class="v">"0 7 * * 1"</span>     <span class="m"># ¿cuándo corre?</span>
+schedule=<span class="v">"0 7 1 * *"</span>     <span class="m"># ¿y esta?</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Cambia <b>schedule</b>, guarda y mira en la lista de Dags la <b>próxima ejecución</b>. Así compruebas lo que escribiste.</p>
+  </section>
+
+  <!-- 20 · CIERRE -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Lucía ya no depende de su memoria. Ahora tú.</span>
+    <p class="enorme" data-paso="1" style="font-size: 110px; margin-top: 30px">Un flujo que corre solo.</p>
+    <p class="enorme" data-paso="2" style="font-size: 110px">Que falla en voz alta.</p>
+    <p class="enorme" data-paso="3" style="font-size: 110px">Y deja registro.</p>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 40px">Detén tu Codespace al terminar: Codespaces → ⋯ → Stop codespace.</p>
+  </section>
+
+  <!-- 21 · LO QUE SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que sigue</span>
+    <h2 class="titulo" style="font-size: 92px">Hacia el destino</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Próxima clase</h3><p>BigQuery: el destino de tu flujo. Consultas, Python y cargar tu fuente.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>En Platzi</h3><p>Avanza en tu curso de Fundamentos de Apache Airflow, a tu ritmo.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>En tu proyecto</h3><p>Piensa qué pasos tendría tu flujo: traer, limpiar y comprobar.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 22 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Sesión 3 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Preguntas y comentarios</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
