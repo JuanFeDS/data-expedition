@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 4 · SQL y que el flujo corra solo (Airflow) · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Nivel básico · Sesión 4</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 120px; line-height: 1.02">Pregúntale a tus datos</h1>
+      <p class="docente" style="font-size: 44px">SQL para responder, y Airflow para que el flujo corra solo</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy, en tres horas</span>
+    <h2 class="titulo" style="font-size: 80px">Lo que haremos hoy</h2>
+    <div class="bt">
+      <div class="seg seg--chica" style="--m: 10" data-paso="1"><i style="--c: #11c9ee">10</i><span>Inicio</span></div>
+      <div class="seg" style="--m: 30" data-paso="2"><i style="--c: #ff7c1a">30</i><span>SQL · Preguntarle a la tabla</span></div>
+      <div class="seg" style="--m: 40" data-paso="3"><i style="--c: #cb318e; color: #fff">40</i><span>SQL · Unir tablas y practicar</span></div>
+      <div class="seg seg--chica" style="--m: 10" data-paso="4"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 75" data-paso="5"><i style="--c: #7fc200">75</i><span>Airflow · Que corra solo</span></div>
+      <div class="seg seg--chica" style="--m: 15" data-paso="6"><i style="--c: #0a3bd1; color: #fff">15</i><span>Cierre</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · DÓNDE ESTAMOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">De la ficha a los números</span>
+    <h2 class="titulo titulo--sm" style="font-size: 66px">Lucía ya tiene su ficha</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Su ficha</b><span>Dice qué pregunta, con qué datos y qué indicadores calcula.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Hoy: SQL</b><span>Le pregunta a las tablas y cuida que los números sean honestos.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Hoy: Airflow</b><span>Hace que el análisis corra solo y avise si algo falla.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Primero aprendes a preguntar. Después, a que la pregunta se repita sola.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · SQL: PORTADA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · SQL"></div>
+    <span class="etiqueta">Primera parte</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px; color: var(--negro)">Preguntarle a la tabla</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto; color: var(--negro)">Las tablas de la biblioteca de Lucía ya están en BigQuery.</p>
+  </section>
+
+  <!-- 5 · LAS TABLAS -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Antes de preguntar, saber qué hay</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Cuatro tablas, cuatro tipos de fila</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(2, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3 style="font-size: 50px">libros</h3><p>Una fila es un libro del catálogo</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3 style="font-size: 50px">socios</h3><p>Una fila es una persona inscrita</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3 style="font-size: 50px">prestamos</h3><p>Una fila es un préstamo, de enero a marzo</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="4"><h3 style="font-size: 50px">prestamos_abril</h3><p>Lo mismo, pero con las fechas como texto</p></div>
+    </div>
+  </section>
+
+  <!-- 6 · MIRAR -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">La primera pregunta: ¿qué hay aquí?</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Mira cinco filas</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="h">SELECT</span> prestamo_id, socio_id, libro_id, fecha_prestamo
+<span class="h">FROM</span> `PROYECTO.biblioteca.prestamos`
+<span class="h">LIMIT</span> 5;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Escribe las columnas que necesitas, no «*». Y antes de ejecutar, mira arriba a la derecha cuántos <b>bytes</b> va a leer.</p>
+  </section>
+
+  <!-- 7 · FILAS Y PERSONAS -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">La pregunta que Lucía debió hacer</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">¿Cuántos préstamos, y cuántas personas?</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">SELECT</span> <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos,
+       <span class="h">COUNT</span>(<span class="h">DISTINCT</span> socio_id) <span class="h">AS</span> socios
+<span class="h">FROM</span> `PROYECTO.biblioteca.prestamos`
+<span class="h">WHERE</span> libro_id = 1;
+
+<span class="m">prestamos | socios</span>
+<span class="v">321       | 58</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Contar filas no es contar personas. <b>COUNT(*)</b> cuenta filas; <b>COUNT(DISTINCT …)</b> cuenta cosas distintas.</p>
+  </section>
+
+  <!-- 8 · AGRUPAR -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">El indicador de la ficha</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Préstamos por mes</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">SELECT</span> <span class="h">FORMAT_DATE</span>(<span class="v">'%Y-%m'</span>, fecha_prestamo) <span class="h">AS</span> mes,
+       <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos
+<span class="h">FROM</span> `PROYECTO.biblioteca.prestamos`
+<span class="h">GROUP BY</span> mes
+<span class="h">ORDER BY</span> mes;
+
+<span class="m">mes     | prestamos</span>
+<span class="v">2026-01 | 879</span>
+<span class="v">2026-02 | 795</span>
+<span class="v">2026-03 | 854</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">El indicador es «préstamos»; el corte es «mes». <b>GROUP BY</b> parte la tabla en grupos y cuenta cada uno.</p>
+  </section>
+
+  <!-- 9 · JOIN: EL PROBLEMA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">La directora quiere nombres, no números</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Una tabla no lo sabe todo</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; align-items: start">
+      <div class="consola" style="font-size: 28px; padding: 24px 32px" data-paso="1"><span class="m">prestamos</span>
+prestamo_id  libro_id
+1            1
+2            2
+3            1</div>
+      <div class="consola" style="font-size: 28px; padding: 24px 32px" data-paso="2"><span class="m">libros</span>
+libro_id  titulo
+1         Dune
+2         Emma</div>
+    </div>
+    <p class="mensaje" data-paso="3" style="font-size: 44px; margin-top: 30px">«Libro 1» no le dice nada a la directora. El título está en <b>otra tabla</b>.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 10 · JOIN: LA CONSULTA -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">JOIN: unir por una columna común</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los libros más prestados, con su título</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 27px"><span class="h">SELECT</span> l.titulo, <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos
+<span class="h">FROM</span> `PROYECTO.biblioteca.prestamos` <span class="h">AS</span> p
+<span class="h">JOIN</span> `PROYECTO.biblioteca.libros` <span class="h">AS</span> l
+  <span class="h">ON</span> p.libro_id = l.libro_id
+<span class="h">GROUP BY</span> l.titulo
+<span class="h">ORDER BY</span> prestamos <span class="h">DESC</span>
+<span class="h">LIMIT</span> 3;
+
+<span class="m">titulo | prestamos</span>
+<span class="v">Dune   | 321</span>
+<span class="v">Emma   | 190</span>
+<span class="v">1984   | 110</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea"><b>ON</b> dice qué columna une las dos tablas. Los alias <b>p</b> y <b>l</b> evitan escribir el nombre largo cada vez.</p>
+  </section>
+
+  <!-- 11 · INNER VS LEFT -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Qué pasa con lo que no tiene pareja</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">JOIN y LEFT JOIN</h2>
+    <div class="rail" style="--n: 2">
+      <div data-paso="1" style="--c: #ff7c1a"><i>⋂</i><b>JOIN</b><span>Solo las filas que tienen pareja en las dos tablas. Un libro sin préstamos desaparece.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>⟕</i><b>LEFT JOIN</b><span>Todas las filas de la tabla de la izquierda, con o sin pareja. Lo que no tiene pareja queda en NULL.</span></div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 30px">¿Qué libros nunca se prestaron? Pon <b>libros</b> a la izquierda, usa LEFT JOIN y filtra donde el préstamo sea NULL.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 12 · CALIDAD: DUPLICADOS -->
+  <section class="slide slide--azul slide--ruta slide--sinpuntos">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Lo que le pasó a Lucía en abril</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">¿Hay filas repetidas?</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">SELECT</span> prestamo_id, <span class="h">COUNT</span>(*) <span class="h">AS</span> veces
+<span class="h">FROM</span> `PROYECTO.biblioteca.prestamos_abril`
+<span class="h">GROUP BY</span> prestamo_id
+<span class="h">HAVING</span> <span class="h">COUNT</span>(*) &gt; 1;
+
+<span class="m">prestamo_id | veces</span>
+<span class="v">2545        | 2</span>
+<span class="v">2546        | 2</span>   <span class="m">… 40 en total</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">El archivo de abril trae 900 filas, pero solo 860 préstamos distintos. <b>HAVING</b> filtra los grupos, como WHERE filtra las filas.</p>
+  </section>
+
+  <!-- 13 · TU TURNO: SQL -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <span class="etiqueta">Ahora tú, como Lucía · 40 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 58px">Practica en BigQuery</h2>
+        <ol class="lista lista--num" style="font-size: 34px; gap: 18px; margin-top: 24px">
+          <li><span><b>Nivel 1 · Mirar.</b> Cinco filas, cuántos libros y cuántos socios activos.</span></li>
+          <li><span><b>Nivel 2 · Filas y personas.</b> Los préstamos de «Dune» y «Emma», y las personas distintas.</span></li>
+          <li><span><b>Nivel 3 · Cortes.</b> Libros más prestados, categorías, meses y préstamos sin devolver.</span></li>
+        </ol>
+        <p class="sub" style="font-size: 30px; margin-top: 22px">Los enunciados están en ejercicios.md. Reemplaza PROYECTO por el ID que te doy.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="2400">40:00</div>
+    </div>
+  </section>
+
+  <!-- 14 · SI ALGO FALLA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Unir tablas"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Si la consulta no corre</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los errores más comunes</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 480px 1fr"><i>Not found: Table</i><span>Revisa el ID del proyecto y las comillas invertidas ` alrededor del nombre</span></div>
+      <div data-paso="2" style="grid-template-columns: 480px 1fr"><i>Unrecognized name</i><span>Una columna mal escrita. Mira los nombres en el esquema de la tabla</span></div>
+      <div data-paso="3" style="grid-template-columns: 480px 1fr"><i>Ambiguous column</i><span>Dos tablas tienen esa columna. Escríbela con el alias: p.libro_id</span></div>
+      <div data-paso="4" style="grid-template-columns: 480px 1fr"><i>Access Denied</i><span>Tu cuenta no ve ese proyecto. Avísame y lo revisamos</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · PAUSA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Pausa"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pausa</span>
+    <div class="reloj" style="font-size: 330px; margin-top: 30px" data-segundos="600">10:00</div>
+    <p class="sub" style="margin-top: auto">Aléjate de la pantalla. Al volver, el flujo de Lucía aprende a correr solo.</p>
+  </section>
+
+  <!-- 16 · AIRFLOW: PORTADA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <span class="etiqueta">Segunda parte</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px">«Se me olvidó correrlo»</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">El análisis de Lucía funciona. Pero alguien tiene que acordarse de ejecutarlo.</p>
+  </section>
+
+  <!-- 17 · CONVERSACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Un lunes, en la oficina</span>
+    <div class="chat">
+      <div class="burbuja burbuja--der" data-paso="1"><small style="color: #000">Una colega</small>El tablero de préstamos está vacío esta semana.</div>
+      <div class="burbuja" data-paso="2"><small>Lucía</small>«Corrí el script el viernes, ¡yo vi que terminó!»</div>
+      <div class="burbuja burbuja--der m" data-paso="3"><small style="color: #fff">Una colega</small>¿Y el lunes? Los datos de la semana no están.</div>
+      <div class="burbuja" data-paso="4"><small>Lucía</small>«…Se me olvidó correrlo.»</div>
+    </div>
+  </section>
+
+  <!-- 18 · QUÉ LE FALTABA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">¿Qué le faltaba al script?</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Cuatro cosas que no tenía</h2>
+    <div class="rail" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Un horario</b><span>Que corra solo, sin depender de la memoria de nadie.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Un orden</b><span>Traer, limpiar y contar, siempre en esa secuencia.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Un aviso</b><span>Que grite cuando un paso falla, no tres días después.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Un registro</b><span>Qué pasó, cuándo y por qué, en un solo lugar.</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 19 · AIRFLOW -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">La solución de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Airflow: ejecuta y vigila</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>DAG</b><span>La receta: pasos en orden, sin vueltas atrás.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Tarea</b><span>Un paso de la receta: traer, limpiar, contar.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Ejecución</b><span>Una vez que la receta corre completa.</span></div>
+    </div>
+    <p class="mensaje" data-paso="4" style="font-size: 48px; margin-top: 30px">Lucía no cambia su código: lo organiza en tareas y se lo entrega a Airflow.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 20 · CODESPACE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Sin instalar nada · unos 10 minutos</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Airflow en un Codespace</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Crea el Codespace</b><span>Repositorio airflow_estudia_c2_intermedio → Code → Codespaces → Create</span></div><em>3 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Enciende Airflow</b><span>En la terminal: bash iniciar_airflow.sh</span></div><em>5 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Abre el puerto 8080</b><span>Pestaña Puertos → ícono del globo</span></div><em>1 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Entra</b><span>Usuario airflow, contraseña airflow</span></div><em>1 min</em></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 21 · REPOSITORIO Y COMANDO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Dónde está todo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Un repositorio, un comando</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="m"># el repositorio</span>
+github.com/JuanFeDS/airflow_estudia_c2_intermedio
+
+<span class="m"># en la terminal del Codespace</span>
+<span class="h">bash</span> iniciar_airflow.sh</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">El script descarga Airflow, prepara la base de datos y lo enciende. Termina con «Airflow arrancando». <b>Entra con la dirección del globo en Puertos, no con localhost.</b></p>
+  </section>
+
+  <!-- 22 · PROBLEMAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Si algo no sale</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los problemas más comunes</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 440px 1fr"><i>El 8080 no abre</i><span>Airflow tarda un minuto en responder. Espera y recarga</span></div>
+      <div data-paso="2" style="grid-template-columns: 440px 1fr"><i>Te manda a «localhost»</i><span>Cambia solo esa parte de la barra por la dirección .app.github.dev</span></div>
+      <div data-paso="3" style="grid-template-columns: 440px 1fr"><i>Algo se cayó</i><span>En la terminal: docker compose ps muestra qué contenedor falló</span></div>
+      <div data-paso="4" style="grid-template-columns: 440px 1fr"><i>Todo va muy lento</i><span>Tienes más de un Codespace abierto. Deja solo uno</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 23 · INTERFAZ -->
+  <section class="slide slide--ruta" style="padding-bottom: 92px">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ya estás dentro</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Qué verás en Airflow</h2>
+    <div class="mosaico" style="grid-template-columns: repeat(3, 1fr)">
+      <div class="tile" style="--c: #ff7c1a" data-paso="1"><h3 style="font-size: 54px">Dags</h3><p>La lista de flujos. El interruptor los activa</p></div>
+      <div class="tile" style="--c: #cb318e; --t: #fff" data-paso="2"><h3 style="font-size: 54px">▶ Trigger</h3><p>Lo ejecuta una vez, ahora mismo</p></div>
+      <div class="tile" style="--c: #7fc200" data-paso="3"><h3 style="font-size: 54px">Graph</h3><p>Las tareas y sus flechas</p></div>
+      <div class="tile" style="--c: #11c9ee" data-paso="4"><h3 style="font-size: 54px">Grid</h3><p>Un cuadro por tarea y por ejecución</p></div>
+      <div class="tile" style="--c: #0a3bd1; --t: #fff" data-paso="5"><h3 style="font-size: 54px">Logs</h3><p>Lo que escribió cada tarea</p></div>
+      <div class="tile" style="--c: #16181d; --t: #fff" data-paso="6"><h3 style="font-size: 54px">Code</h3><p>El Python del DAG</p></div>
+    </div>
+  </section>
+
+  <!-- 24 · COLORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cómo leer el Grid</span>
+    <h2 class="titulo titulo--sm" style="font-size: 64px">Tres colores, tres mensajes</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #5c9100"><i>✓</i><b>Verde</b><span>La tarea terminó bien.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>✕</i><b>Rojo</b><span>La tarea falló. Abre sus Logs: ahí está el motivo.</span></div>
+      <div data-paso="3" style="--c: #9aa0b0"><i>–</i><b>Gris</b><span>No corrió: una tarea anterior falló o se omitió.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Una tarea omitida no es un error: el DAG decidió seguir otro camino.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 25 · EJERCICIO 1 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ejercicio 1 · Mira un flujo en marcha</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Tu primer DAG, ejecutado</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Busca example_bash_operator</b><span>Escríbelo en el buscador de Dags</span></div><em>2 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Actívalo y pulsa ▶</b><span>Los DAG nuevos empiezan pausados</span></div><em>2 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Mira Graph y Grid</b><span>¿Qué tareas hay y en qué orden?</span></div><em>3 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Abre un registro</b><span>¿Qué te cuenta la tarea?</span></div><em>3 min</em></div>
+    </div>
+  </section>
+
+  <!-- 26 · EJERCICIO 2 -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Ejercicio 2 · El flujo de Lucía</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Tres tareas, una cadena</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="m"># dags/ej2_flujo_lucia.py</span>
+<span class="h">@task</span> <span class="h">def</span> traer(): ...
+<span class="h">@task</span> <span class="h">def</span> limpiar(filas_traidas): ...   <span class="m"># TODO 1</span>
+<span class="h">@task</span> <span class="h">def</span> contar(filas_limpias): ...     <span class="m"># TODO 2</span>
+
+contar(limpiar(traer()))</div>
+    <p class="nota" style="margin-top: 18px; color: #e6e7ea">Ejecútalo como está, lee los registros, completa los dos TODO y ejecútalo otra vez. Guarda y espera menos de un minuto: Airflow lee el cambio solo.</p>
+  </section>
+
+  <!-- 27 · EJERCICIO 3 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Airflow"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Ejercicio 3 · Que avise</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Que falle, y que lo diga</h2>
+    <ul class="checks" style="font-size: 38px; gap: 20px; margin-top: 26px">
+      <li data-paso="1"><span>Si hay filas repetidas, detén el flujo<small>raise ValueError con un mensaje claro</small></span></li>
+      <li data-paso="2"><span>La tarea se pone roja a propósito<small>Abre su registro y lee el mensaje</small></span></li>
+      <li data-paso="3"><span>Mira qué pasó con la tarea siguiente<small>¿Por qué no corrió?</small></span></li>
+    </ul>
+    <p class="nota" data-paso="4" style="margin-top: 26px">Es mejor un flujo que se detiene que uno que sigue con datos malos.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 28 · CIERRE -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Lucía ya sabe preguntar, y ya no olvida correrlo</span>
+    <p class="enorme" data-paso="1" style="font-size: 110px; margin-top: 30px">Preguntas con SQL.</p>
+    <p class="enorme" data-paso="2" style="font-size: 110px">Un flujo que corre solo.</p>
+    <p class="enorme" data-paso="3" style="font-size: 110px">Que falla en voz alta.</p>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 40px">Detén tu Codespace al terminar: Codespaces → ⋯ → Stop codespace.</p>
+  </section>
+
+  <!-- 29 · LO QUE SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que sigue</span>
+    <h2 class="titulo" style="font-size: 92px">Para llevarte</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Termina los niveles</h3><p>Lo que no alcanzaste de SQL, a tu ritmo. Las consultas se aprenden escribiéndolas.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>En Platzi</h3><p>Avanza en tu curso de Fundamentos de Bases de Datos y SQL.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>En tu proyecto</h3><p>Escribe una pregunta de tu ficha como consulta SQL.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 30 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Sesión 4 · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Preguntas y comentarios</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
