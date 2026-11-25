@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesión 4 · Manos a BigQuery y SQL · EstudIA</title>
+<link rel="stylesheet" href="estudia.css">
+</head>
+<body>
+<div class="escenario">
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Nivel intermedio · Sesión 4</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 120px; line-height: 1.02">Manos a BigQuery</h1>
+      <p class="docente" style="font-size: 44px">Hoy construyes tu propia base en la nube, la consultas con SQL y guardas tu trabajo en GitHub</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · HOJA DE RUTA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy, en tres horas</span>
+    <h2 class="titulo" style="font-size: 80px">Lo que haremos hoy</h2>
+    <div class="bt">
+      <div class="seg seg--chica" style="--m: 10" data-paso="1"><i style="--c: #11c9ee">10</i><span>Inicio</span></div>
+      <div class="seg" style="--m: 45" data-paso="2"><i style="--c: #ff7c1a">45</i><span>BigQuery en vivo</span></div>
+      <div class="seg seg--chica" style="--m: 10" data-paso="3"><i style="--c: #9aa0b0">10</i><span>Pausa</span></div>
+      <div class="seg" style="--m: 55" data-paso="4"><i style="--c: #cb318e; color: #fff">55</i><span>Práctica de SQL</span></div>
+      <div class="seg" style="--m: 45" data-paso="5"><i style="--c: #7fc200">45</i><span>Tu repositorio y tu PR</span></div>
+      <div class="seg seg--chica" style="--m: 15" data-paso="6"><i style="--c: #0a3bd1; color: #fff">15</i><span>Cierre</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · POR QUÉ HOY -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Inicio"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Hemos hablado mucho. Hoy escribes SQL.</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">El destino de tu flujo</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Airflow</b><span>Ejecuta y vigila el flujo. Ya lo levantaste.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>BigQuery</b><span>Donde viven tus datos y donde les preguntas con SQL.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Tu repositorio</b><span>Donde guardas cada taller y me lo entregas con un pull request.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Hoy todo se hace desde el navegador, sin instalar nada. La conexión desde Python viene en la próxima sesión.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · BIGQUERY: PORTADA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <span class="etiqueta">Primera parte</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px; color: var(--negro)">Tu propia base en la nube</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto; color: var(--negro)">Lo hago yo en vivo y tú lo repites en tu cuenta.</p>
+  </section>
+
+  <!-- 5 · JERARQUÍA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cómo se organiza</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Proyecto, dataset y tabla</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Proyecto</b><span>Tu espacio de trabajo. Aquí se factura y se dan los permisos.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Dataset</b><span>Una carpeta de tablas. El nuestro se llama biblioteca.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Tabla</b><span>Filas y columnas. Se nombra proyecto.dataset.tabla.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Es la misma idea de carpeta, subcarpeta y archivo.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · PROYECTO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 1 · Sin tarjeta y sin costo</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Crea tu proyecto</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Entra a la consola</b><span>console.cloud.google.com/bigquery, con tu cuenta de Google</span></div><em>2 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Crea un proyecto nuevo</b><span>Selector de proyectos → Proyecto nuevo</span></div><em>2 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Anota su ID</b><span>El ID no es lo mismo que el nombre. Lo usarás en cada consulta</span></div><em>1 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>No actives la facturación</b><span>Te quedas en el sandbox, que es gratis</span></div><em>1 min</em></div>
+    </div>
+  </section>
+
+  <!-- 7 · DATASET -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Paso 2</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Crea el dataset</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="m"># En el panel izquierdo: tu proyecto → ⋮ → Crear conjunto de datos</span>
+ID del conjunto de datos:  <span class="v">biblioteca</span>
+Tipo de ubicación:         <span class="v">Multirregión → US</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Sin tildes ni espacios en el nombre. La ubicación se elige una sola vez: no se puede cambiar después.</p>
+  </section>
+
+  <!-- 8 · SUBIR UN CSV -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 3 · Una vez por cada CSV</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Crea una tabla desde un archivo</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Descarga los CSV</b><span>Los archivos que comparto en el chat, carpeta datos</span></div><em>2 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Crear tabla → Subir</b><span>Elige el archivo y el formato CSV</span></div><em>1 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Nombra la tabla</b><span>El mismo nombre del archivo: libros, socios, prestamos</span></div><em>1 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Detectar esquema automáticamente</b><span>Y crea la tabla. Revisa que aparezca con sus columnas</span></div><em>1 min</em></div>
+    </div>
+  </section>
+
+  <!-- 9 · LA TRAMPA DEL ESQUEMA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Con prestamos_abril, no autodetectes</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">La trampa del esquema</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="m"># Esquema → Editar como texto</span>
+prestamo_id:<span class="h">INTEGER</span>, socio_id:<span class="h">INTEGER</span>, libro_id:<span class="h">INTEGER</span>,
+fecha_prestamo:<span class="v">STRING</span>, fecha_devolucion:<span class="v">STRING</span>
+
+<span class="m"># Las fechas de abril llegan como 30/04/2026</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Si BigQuery adivina «fecha», falla o la entiende mal. En abril, cargamos el texto tal cual y lo <b>convertimos nosotros</b> con SQL.</p>
+  </section>
+
+  <!-- 10 · PRIMERA CONSULTA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Tu primera consulta</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Pregúntale a la tabla</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 29px"><span class="h">SELECT</span> libro_id, titulo, categoria
+<span class="h">FROM</span> `biblioteca.libros`
+<span class="h">LIMIT</span> 5;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Antes de ejecutar, mira arriba a la derecha: <b>«Esta consulta procesará X»</b>. BigQuery cobra por lo que lee, no por lo que devuelve.</p>
+  </section>
+
+  <!-- 11 · TABLA DESDE CONSULTA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Una tabla nueva, a partir de otra</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Guarda un resultado como tabla</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 28px"><span class="h">CREATE OR REPLACE TABLE</span> `biblioteca.prestamos_por_libro` <span class="h">AS</span>
+<span class="h">SELECT</span> l.titulo, <span class="h">COUNT</span>(*) <span class="h">AS</span> prestamos
+<span class="h">FROM</span> `biblioteca.prestamos` <span class="h">AS</span> p
+<span class="h">JOIN</span> `biblioteca.libros` <span class="h">AS</span> l <span class="h">USING</span> (libro_id)
+<span class="h">GROUP BY</span> l.titulo;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Es el paso que usará tu flujo para dejar datos listos: una consulta que se queda guardada como tabla.</p>
+  </section>
+
+  <!-- 13 · LÍMITES DEL SANDBOX -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que debes saber del sandbox</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Gratis, con tres límites</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 440px 1fr"><i>1 TiB al mes</i><span>De consultas. Estas tablas pesan megabytes: no lo alcanzarás</span></div>
+      <div data-paso="2" style="grid-template-columns: 440px 1fr"><i>60 días</i><span>Las tablas expiran. Si las necesitas, vuelve a cargarlas</span></div>
+      <div data-paso="3" style="grid-template-columns: 440px 1fr"><i>Sin INSERT, UPDATE ni DELETE</i><span>Cargas y consultas, sí. Modificar filas una a una, no</span></div>
+      <div data-paso="4" style="grid-template-columns: 440px 1fr"><i>Tu cuenta, tu proyecto</i><span>Nadie más ve tus tablas, y tus consultas no cuestan a nadie</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 14 · TU TURNO: CARGAR -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · BigQuery"></div>
+    <span class="etiqueta">Ahora tú · 20 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 58px">Deja tu biblioteca lista</h2>
+        <ol class="lista lista--num" style="font-size: 34px; gap: 18px; margin-top: 24px">
+          <li><span>Crea tu <b>proyecto</b> y el dataset <b>biblioteca</b>.</span></li>
+          <li><span>Sube las <b>cuatro tablas</b>, con prestamos_abril en texto.</span></li>
+          <li><span>Comprueba: <b>SELECT COUNT(*)</b> en cada una.</span></li>
+        </ol>
+        <p class="sub" style="font-size: 30px; margin-top: 22px">Deberías ver 40, 120, 2528 y 900 filas.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="1200">20:00</div>
+    </div>
+  </section>
+
+  <!-- 15 · PAUSA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Pausa"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Pausa</span>
+    <div class="reloj" style="font-size: 330px; margin-top: 30px" data-segundos="600">10:00</div>
+    <p class="sub" style="margin-top: auto">Aléjate de la pantalla. Al volver, es tu turno de escribir SQL.</p>
+  </section>
+
+  <!-- 16 · PRÁCTICA SQL -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica de SQL"></div>
+    <span class="etiqueta">La biblioteca de Lucía · 55 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 56px">Quince ejercicios, cuatro niveles</h2>
+        <ol class="lista lista--num" style="font-size: 32px; gap: 16px; margin-top: 22px">
+          <li><span><b>Mirar la tabla.</b> Filas, libros y socios activos.</span></li>
+          <li><span><b>Filas y personas.</b> Dune y Emma.</span></li>
+          <li><span><b>Indicadores y cortes.</b> Por libro, categoría y mes.</span></li>
+          <li><span><b>Calidad de datos.</b> Repetidos y fechas de abril.</span></li>
+        </ol>
+        <p class="sub" style="font-size: 28px; margin-top: 20px">Los enunciados están en ejercicios.md, en el chat. Guarda tus consultas: las entregas hoy.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="3300">55:00</div>
+    </div>
+  </section>
+
+  <!-- 17 · CHULETA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica de SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Para el nivel 3 y el 4</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Tres herramientas que necesitarás</h2>
+    <div class="rail" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>JOIN</b><span>Para unir préstamos con libros por libro_id.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>GROUP BY + HAVING</b><span>Para contar por grupo y quedarte con los repetidos.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>PARSE_DATE</b><span>Convierte texto a fecha: PARSE_DATE('%d/%m/%Y', fecha_prestamo).</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Escribe las columnas que necesitas, no «*», y mira los bytes antes de ejecutar.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 18 · ERRORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica de SQL"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Si la consulta no corre</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Los errores más comunes</h2>
+    <div class="evid" style="margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 480px 1fr"><i>Not found: Table</i><span>Revisa que tengas tu proyecto seleccionado y las comillas invertidas ` alrededor del nombre</span></div>
+      <div data-paso="2" style="grid-template-columns: 480px 1fr"><i>Unrecognized name</i><span>Una columna mal escrita. Mira el esquema de la tabla</span></div>
+      <div data-paso="3" style="grid-template-columns: 480px 1fr"><i>Ambiguous column</i><span>Dos tablas tienen esa columna. Escríbela con el alias: p.libro_id</span></div>
+      <div data-paso="4" style="grid-template-columns: 480px 1fr"><i>Could not cast literal</i><span>La fecha no tiene el formato que dijiste en PARSE_DATE</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 19 · REPO: PORTADA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <span class="etiqueta">Tercera parte</span>
+    <p class="mensaje" style="font-size: 120px; margin-top: 30px">Tu repositorio del curso</p>
+    <p class="sub" style="font-size: 46px; margin-top: auto">Aquí vivirán todos tus talleres. Hoy entregas el primero.</p>
+  </section>
+
+  <!-- 20 · CREAR EL REPOSITORIO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 1 · Una sola vez</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Crea tu repositorio</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Entra a github.com/new</b><span>Con tu cuenta de GitHub</span></div><em>1 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Nómbralo curso-estudia-c2</b><span>Minúsculas y guiones, sin tildes ni espacios</span></div><em>1 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Público, con README</b><span>Marca «Add a README file» para que no quede vacío</span></div><em>1 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Pulsa Create repository</b><span>Ya tienes dónde guardar cada taller</span></div><em>1 min</em></div>
+    </div>
+  </section>
+
+  <!-- 21 · ESTRUCTURA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Una carpeta por taller</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">Cómo se va a ver</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 30px"><span class="v">curso-estudia-c2/</span>
+├── README.md
+└── <span class="v">taller-04-bigquery/</span>
+    └── respuestas.sql      <span class="m"># tus consultas de hoy</span>
+
+<span class="m"># la próxima sesión: taller-05-…/</span></div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Cada taller entra con su propio <b>pull request</b>: así queda registrado qué hiciste y cuándo.</p>
+  </section>
+
+  <!-- 22 · RESPUESTAS.SQL -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">El archivo que me entregas</span>
+    <h2 class="titulo titulo--sm" style="font-size: 58px">respuestas.sql</h2>
+    <div class="consola" style="margin-top: 20px; font-size: 26px"><span class="m">-- Ejercicio 1: cinco filas de prestamos</span>
+<span class="h">SELECT</span> prestamo_id, socio_id, libro_id, fecha_prestamo
+<span class="h">FROM</span> `biblioteca.prestamos`
+<span class="h">LIMIT</span> 5;
+
+<span class="m">-- Ejercicio 2: libros en el catálogo</span>
+<span class="h">SELECT</span> <span class="h">COUNT</span>(*) <span class="h">FROM</span> `biblioteca.libros`;</div>
+    <p class="nota" style="margin-top: 22px; color: #e6e7ea">Un comentario con el número del ejercicio y, debajo, tu consulta. Las tablas se nombran <b>biblioteca.tabla</b>: se resuelven en tu proyecto activo.</p>
+  </section>
+
+  <!-- 23 · RAMA Y ARCHIVO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 2 · Todo desde el navegador</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Sube tus consultas en una rama</h2>
+    <div class="pasos-grandes" style="gap: 14px; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Add file → Create new file</b><span>Escribe taller-04-bigquery/respuestas.sql en el nombre</span></div><em>2 min</em></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><div><b>Pega tus consultas</b><span>Con un comentario por ejercicio</span></div><em>3 min</em></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><div><b>Commit changes…</b><span>Marca «Create a new branch» y llámala taller-04</span></div><em>2 min</em></div>
+      <div data-paso="4" style="--c: #0a3bd1"><i>4</i><div><b>Propose changes</b><span>GitHub abre la pantalla para crear el pull request</span></div><em>1 min</em></div>
+    </div>
+  </section>
+
+  <!-- 24 · ABRIR EL PR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Paso 3 · La entrega</span>
+    <h2 class="titulo titulo--sm" style="font-size: 62px">Abre tu pull request</h2>
+    <ul class="checks" style="font-size: 36px; gap: 18px; margin-top: 26px">
+      <li data-paso="1"><span>Título: «Taller 4: BigQuery»<small>Con tu nombre en la descripción</small></span></li>
+      <li data-paso="2"><span>Cuenta en una línea qué te costó más<small>Eso me ayuda a preparar la próxima sesión</small></span></li>
+      <li data-paso="3"><span>Pulsa Create pull request, y no lo fusiones<small>El merge lo decido yo al revisarlo</small></span></li>
+      <li data-paso="4"><span>Pega el enlace del PR en el chat<small>Termina con el número: …/pull/1</small></span></li>
+    </ul>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 25 · TU TURNO: PR -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Repositorio y PR"></div>
+    <span class="etiqueta">Ahora tú · 45 minutos</span>
+    <div class="dividido" style="grid-template-columns: 1.7fr 1fr; align-items: center">
+      <div>
+        <h2 class="titulo titulo--sm" style="font-size: 58px">Entrega tu taller</h2>
+        <ol class="lista lista--num" style="font-size: 34px; gap: 18px; margin-top: 24px">
+          <li><span>Crea tu <b>repositorio</b> con README.</span></li>
+          <li><span>Sube <b>respuestas.sql</b> en la rama taller-04.</span></li>
+          <li><span>Abre el <b>PR</b> y pega el enlace en el chat.</span></li>
+        </ol>
+        <p class="sub" style="font-size: 30px; margin-top: 22px">Si te falta un ejercicio, entrega lo que tengas: puedes sumar más commits al mismo PR.</p>
+      </div>
+      <div class="reloj" style="text-align: center" data-segundos="2700">45:00</div>
+    </div>
+  </section>
+
+  <!-- 24 · CIERRE -->
+  <section class="slide slide--verde slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Hoy dejaste de mirar y empezaste a construir</span>
+    <p class="enorme" data-paso="1" style="font-size: 110px; margin-top: 30px">Tu base en la nube.</p>
+    <p class="enorme" data-paso="2" style="font-size: 110px">SQL que responde.</p>
+    <p class="enorme" data-paso="3" style="font-size: 110px">Un PR que lo cuenta.</p>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 40px">Lo que no terminaste, termínalo a tu ritmo y súmalo al mismo PR.</p>
+  </section>
+
+  <!-- 25 · LO QUE SIGUE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Lo que sigue</span>
+    <h2 class="titulo" style="font-size: 92px">Para llevarte</h2>
+    <div class="camino">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Próxima sesión</h3><p>Python con datos: conectamos BigQuery con pandas desde código.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>En Platzi</h3><p>PostgreSQL aplicado: el SQL es casi el mismo y suma CTE y funciones ventana.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>En tu proyecto</h3><p>Carga la fuente de tu proyecto como una tabla en tu BigQuery.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 26 · GRACIAS -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Sesión 4 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Preguntas y comentarios</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
