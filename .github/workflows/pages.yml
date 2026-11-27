@@ -62,6 +62,8 @@ jobs:
           cp docs/slides/bigquery-conexion.html web/dist/slides/
           cp docs/slides/index.html web/dist/slides/
           cp docs/slides/c2av-clinica-git.html web/dist/slides/
+          mkdir -p web/dist/guias
+          cp docs/curso/reto-venture-one/guia-arranque.html web/dist/guias/reto-venture-one.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
