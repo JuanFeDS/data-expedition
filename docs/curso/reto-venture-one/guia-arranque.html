@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de arranque · Reto 13</title>
+<style>
+  :root {
+    --naranja: #ff7c1a; --magenta: #cb318e; --verde: #5c9100; --cian: #0a8fb0;
+    --azul: #011a61; --azul2: #0a3bd1; --tinta: #16181d; --gris: #5b6270;
+    --linea: #e3e5ea; --fondo: #f7f6f2; --papel: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--tinta); background: var(--fondo); line-height: 1.55; font-size: 17px; }
+  header.cab { background: var(--azul); color: #fff; padding: 28px 24px 22px; }
+  header.cab .in, nav.tabs .in, main, footer .in { max-width: 980px; margin: 0 auto; }
+  .etq { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--naranja); font-weight: 700; }
+  header.cab h1 { margin: 6px 0 4px; font-size: 32px; line-height: 1.15; }
+  header.cab p { margin: 0; color: #c9d2f0; }
+  nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--papel); border-bottom: 1px solid var(--linea); }
+  nav.tabs .in { display: flex; gap: 2px; overflow-x: auto; padding: 0 8px; scrollbar-width: none; }
+  nav.tabs .in::-webkit-scrollbar { display: none; }
+  nav.tabs button { border: 0; background: none; font: inherit; font-weight: 700; color: var(--gris); padding: 14px 10px 12px; cursor: pointer; white-space: nowrap; border-bottom: 4px solid transparent; }
+  nav.tabs button:hover { color: var(--tinta); }
+  nav.tabs button[aria-selected="true"] { color: var(--azul); border-bottom-color: var(--naranja); }
+  nav.tabs button:focus-visible { outline: 3px solid var(--azul2); outline-offset: -3px; }
+  nav.tabs .n { display: inline-block; min-width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 12px; background: var(--linea); color: var(--tinta); font-size: 13px; margin-right: 6px; }
+  nav.tabs button[aria-selected="true"] .n { background: var(--naranja); color: #fff; }
+  main { padding: 28px 20px 40px; }
+  .js .panel { display: none; }
+  .js .panel.on { display: block; }
+  .panel > h2 { font-size: 30px; line-height: 1.15; margin: 0 0 6px; color: var(--azul); }
+  .panel > .lead { font-size: 19px; color: var(--gris); margin: 0 0 24px; max-width: 760px; }
+  h3 { font-size: 20px; margin: 30px 0 8px; color: var(--azul); }
+  p, li { max-width: 780px; }
+  code { font-family: Consolas, "Courier New", monospace; background: #eceaf7; padding: 1px 6px; border-radius: 4px; font-size: .92em; }
+  pre { background: var(--tinta); color: #f3f3f3; padding: 14px 16px; border-radius: 8px; overflow-x: auto; font-size: 15px; line-height: 1.5; margin: 10px 0 16px; }
+  pre code { background: none; padding: 0; color: inherit; }
+  pre .c { color: #8fd3a4; }
+  .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 14px 0 6px; }
+  .tarjeta { background: var(--papel); border: 1px solid var(--linea); border-top: 5px solid var(--c, var(--naranja)); border-radius: 10px; padding: 12px 14px 14px; }
+  .tarjeta b { display: block; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--c, var(--naranja)); }
+  .tarjeta strong { display: block; font-size: 18px; margin: 2px 0 4px; }
+  .tarjeta span { font-size: 14.5px; color: var(--gris); line-height: 1.4; display: block; }
+  table { border-collapse: collapse; width: 100%; background: var(--papel); border: 1px solid var(--linea); border-radius: 8px; overflow: hidden; font-size: 16px; margin: 10px 0 18px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { background: #efeef6; color: var(--azul); font-size: 14px; letter-spacing: .03em; }
+  tr:last-child td { border-bottom: 0; }
+  .caja { background: var(--papel); border: 1px solid var(--linea); border-left: 6px solid var(--c, var(--azul2)); border-radius: 8px; padding: 12px 16px; margin: 16px 0; max-width: 820px; }
+  .caja > b:first-child { display: block; color: var(--c, var(--azul2)); font-size: 14px; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px; }
+  .caja p, .caja ul { margin: 4px 0; }
+  .caja.control { --c: var(--verde); }
+  .caja.ojo { --c: var(--magenta); }
+  .caja.pista { --c: var(--cian); }
+  ul.checks { list-style: none; padding: 0; margin: 8px 0; }
+  ul.checks li { padding: 4px 0 4px 32px; position: relative; }
+  ul.checks li::before { content: ""; position: absolute; left: 4px; top: 8px; width: 16px; height: 16px; border: 2px solid var(--azul2); border-radius: 4px; }
+  .pie-pan { display: flex; justify-content: space-between; gap: 12px; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--linea); }
+  .pie-pan button { border: 2px solid var(--azul); background: var(--papel); color: var(--azul); font: inherit; font-weight: 700; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+  .pie-pan button.sig { background: var(--azul); color: #fff; margin-left: auto; }
+  .pie-pan button:hover { background: var(--naranja); border-color: var(--naranja); color: #fff; }
+  .insignia { display: inline-block; background: var(--naranja); color: #fff; font-weight: 700; padding: 8px 14px; border-radius: 8px; text-decoration: none; }
+  footer { color: var(--gris); font-size: 14px; padding: 0 20px 36px; }
+  a.ar { color: var(--azul2); text-decoration: underline; text-underline-offset: 3px; }
+  a.ar:hover { color: var(--naranja); }
+  a.ar code { background: #e4e9fb; }
+  .caja.archivos { --c: var(--azul2); background: #f1f4ff; }
+  .caja.archivos a { font-weight: 700; }
+  @media (max-width: 640px) { body { font-size: 16px; } header.cab h1 { font-size: 26px; } .panel > h2 { font-size: 25px; } }
+  @media print {
+    nav.tabs, .pie-pan { display: none; }
+    .js .panel { display: block !important; page-break-before: always; }
+    .js .panel:first-of-type { page-break-before: auto; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+<header class="cab"><div class="in">
+  <span class="etq">Reto 13 · Venture One · EstudIA</span>
+  <h1>Guía de arranque</h1>
+  <p>Ficha de mercado y entorno para evaluar inmuebles en Medellín. Cómo empezar, en qué orden y cómo saber que vas bien.</p>
+</div></header>
+
+<nav class="tabs" aria-label="Pasos de la guía"><div class="in" role="tablist">
+  <button role="tab" data-t="t0"><span class="n">0</span>Empezar</button>
+  <button role="tab" data-t="t1"><span class="n">1</span>Explorar</button>
+  <button role="tab" data-t="t2"><span class="n">2</span>Limpiar</button>
+  <button role="tab" data-t="t3"><span class="n">3</span>Mercado</button>
+  <button role="tab" data-t="t4"><span class="n">4</span>Entorno</button>
+  <button role="tab" data-t="t5"><span class="n">5</span>Ficha y validar</button>
+  <button role="tab" data-t="t6"><span class="n">?</span>Si te atascas</button>
+</div></nav>
+
+<main>
+
+<!-- 0 · EMPEZAR -->
+<section class="panel" id="t0" role="tabpanel">
+  <h2>Empezar</h2>
+  <p class="lead">Vas a construir una herramienta que, para cada inmueble, junte los datos y entregue una ficha igual para todos. Esta guía te dice <strong>en qué orden</strong> hacerlo. El código lo escribes tú.</p>
+
+  <h3>Qué entregas</h3>
+  <p>Una ficha en formato JSON por inmueble, con cuatro bloques: <strong>mercado</strong> (precio por m² de comparables y qué tan confiable es), <strong>entorno</strong> (Metro y servicios cercanos), <strong>norma</strong> (qué dice el POT) y <strong>calidad</strong> (qué se descartó y qué falta). La meta: que el validador diga ✅ para INM-04, INM-06 e INM-09.</p>
+
+  <h3>La ruta, en cinco pasos</h3>
+  <div class="tarjetas">
+    <div class="tarjeta" style="--c: var(--naranja)"><b>Paso 1</b><strong>Explorar</strong><span>Mira los datos antes de tocarlos.</span></div>
+    <div class="tarjeta" style="--c: var(--magenta)"><b>Paso 2</b><strong>Limpiar</strong><span>Estados, duplicados e inválidos.</span></div>
+    <div class="tarjeta" style="--c: var(--verde)"><b>Paso 3</b><strong>Mercado</strong><span>Comparables, precio/m² y confianza.</span></div>
+    <div class="tarjeta" style="--c: var(--cian)"><b>Paso 4</b><strong>Entorno</strong><span>Metro y equipamientos cerca.</span></div>
+    <div class="tarjeta" style="--c: var(--azul2)"><b>Paso 5</b><strong>Ficha y validar</strong><span>Armar el JSON y compararlo.</span></div>
+  </div>
+
+  <h3>Antes de escribir código, lee esto (en este orden)</h3>
+  <table>
+    <tr><th>Archivo</th><th>Para qué</th></tr>
+    <tr><td><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/README.md" target="_blank" rel="noopener noreferrer"><code>README.md</code></a></td><td>Qué hay en el repositorio y qué se pide.</td></tr>
+    <tr><td><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/diccionario_datos.md" target="_blank" rel="noopener noreferrer"><code>docs/diccionario_datos.md</code></a></td><td>Qué significa cada columna y qué tan sucia viene.</td></tr>
+    <tr><td><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/config/parametros.yaml" target="_blank" rel="noopener noreferrer"><code>config/parametros.yaml</code></a></td><td>Todas las reglas: radio, estados, confianza. <strong>Ningún número va fijo en tu código.</strong></td></tr>
+    <tr><td><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/plantilla_ficha.md" target="_blank" rel="noopener noreferrer"><code>docs/plantilla_ficha.md</code></a> y <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/ejemplos/ficha_ejemplo.json" target="_blank" rel="noopener noreferrer"><code>ejemplos/ficha_ejemplo.json</code></a></td><td>Cómo debe verse la ficha que entregas.</td></tr>
+    <tr><td><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/calculo_manual.md" target="_blank" rel="noopener noreferrer"><code>validacion/calculo_manual.md</code></a></td><td>El cálculo a mano de 3 inmuebles. Es tu examen de comprobación.</td></tr>
+  </table>
+
+  <h3>Las tres preguntas que el reto deja abiertas</h3>
+  <p>La ficha del reto no las responde. El repositorio propone una respuesta por defecto, y tú puedes cambiarla. Si la cambias, <strong>dilo y justifícalo</strong>: son justo las preguntas para llevar a la empresa.</p>
+  <table>
+    <tr><th>Pregunta</th><th>Respuesta por defecto</th><th>Dónde está</th></tr>
+    <tr><td>¿Qué hace que una propiedad sea «parecida»?</td><td>Misma zona, mismo estado (remodelado, habitable, por remodelar) y área dentro de ±30 %.</td><td><code>comparables</code> en el YAML</td></tr>
+    <tr><td>¿Qué hacer cuando faltan datos?</td><td>Lo inválido se descarta y se cuenta. Lo que no existe queda en <code>null</code> y se anota en <code>datos_faltantes</code>.</td><td>Plantilla de la ficha</td></tr>
+    <tr><td>¿Cómo quieren ver el resultado?</td><td>Un JSON por inmueble, con una vista de lectura de una página.</td><td>Plantilla de la ficha</td></tr>
+  </table>
+
+  <h3>Reglas del juego</h3>
+  <ul>
+    <li>Usa solo los datos entregados: <strong>sin scraping</strong> y sin datos personales.</li>
+    <li>La ficha <strong>no recomienda comprar</strong>. Solo consolida mercado y entorno.</li>
+    <li>Si un dato no existe, no lo inventes: <code>null</code> y a <code>datos_faltantes</code>.</li>
+  </ul>
+
+  <h3>Cómo trabajar</h3>
+  <p>Abre el notebook de Colab, ejecuta las dos primeras celdas y verás que el repositorio y los datos quedan cargados. Las funciones que debes completar empiezan con <code>raise NotImplementedError</code>.</p>
+  <p><a class="insignia" href="https://colab.research.google.com/github/solhecoo/ventureone-reto-ficha/blob/main/notebooks/reto_ficha_colab.ipynb" target="_blank" rel="noopener noreferrer">Abrir el notebook en Colab</a></p>
+  <div class="caja pista"><b>Si son varios</b>
+    <p>Pueden repartirse el trabajo: el <strong>Paso 4 (entorno)</strong> no depende de los demás; los pasos 2 y 3 sí van en orden. Se juntan en el Paso 5. Hagan commits pequeños y escriban qué decidieron.</p>
+  </div>
+  <div class="caja ojo"><b>Una advertencia</b>
+    <p>La carpeta <code>src/ficha/</code> puede traer una solución de referencia. Si quieres aprender, <strong>no la abras</strong> hasta terminar tu versión.</p>
+  </div>
+
+  <div class="pie-pan"><span></span><button class="sig" data-ir="t1">Paso 1 · Explorar →</button></div>
+</section>
+
+<!-- 1 · EXPLORAR -->
+<section class="panel" id="t1" role="tabpanel">
+  <h2>Paso 1 · Explorar</h2>
+  <p class="lead">Antes de calcular nada, mira cómo vienen los datos. Lo que encuentres aquí decide cómo limpias y qué escribes en <code>datos_faltantes</code>.</p>
+  <div class="caja archivos"><b>Abre estos archivos</b><p><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/data/anuncios_muestra.csv" target="_blank" rel="noopener noreferrer">Datos: anuncios_muestra.csv</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/diccionario_datos.md" target="_blank" rel="noopener noreferrer">Diccionario de datos</a> · <a class="ar" href="https://colab.research.google.com/github/solhecoo/ventureone-reto-ficha/blob/main/notebooks/reto_ficha_colab.ipynb" target="_blank" rel="noopener noreferrer">Notebook en Colab</a></p></div>
+
+
+  <h3>Responde con código</h3>
+  <ul class="checks">
+    <li>¿Cuántas filas y columnas tiene <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/data/anuncios_muestra.csv" target="_blank" rel="noopener noreferrer"><code>anuncios_muestra.csv</code></a>?</li>
+    <li>¿Cuántas filas hay en cada zona?</li>
+    <li>¿Qué columnas están vacías del todo? ¿Cuáles tienen vacíos a medias?</li>
+    <li>¿Cuántos <code>id_anuncio</code> están vacíos? ¿Cuántos se repiten, sin contar los vacíos?</li>
+    <li>¿Qué variantes distintas tiene <code>estado</code>? ¿Cuáles significan lo mismo?</li>
+    <li>¿Todos los precios son <code>pedido</code>? ¿Qué implica para la ficha?</li>
+    <li>¿Cuánto da el precio por m² (mínimo, mediana, máximo)? ¿Algún valor te parece raro?</li>
+  </ul>
+
+  <div class="caja pista"><b>Pistas</b>
+<pre><code>df.shape                                   <span class="c"># filas y columnas</span>
+df.isna().sum()                            <span class="c"># vacíos por columna</span>
+df["zona"].value_counts(dropna=False)      <span class="c"># cuántas filas por valor</span>
+df["id_anuncio"].dropna().duplicated().sum()
+(df["precio"] / df["area_m2"]).describe()</code></pre>
+  </div>
+
+  <div class="caja ojo"><b>Ojo con los vacíos</b>
+    <p>Un id vacío no es un id repetido: son anuncios que simplemente no traen id. Si cuentas repetidos sin quitar los vacíos, el número sale inflado.</p>
+  </div>
+
+  <div class="caja control"><b>Cifras de control</b>
+    <p>Si lo hiciste bien, ves: <strong>117 filas y 14 columnas</strong>; <code>fecha</code> vacía en las 117; <code>id_anuncio</code> vacío en 50; zonas con <strong>82, 19 y 16</strong> filas; <code>estado</code> vacío en 25; y todos los <code>tipo_precio</code> iguales a <code>pedido</code>.</p>
+  </div>
+
+  <p><strong>Anota lo que encuentres.</strong> Que <code>fecha</code> venga vacía, por ejemplo, significa que no puedes medir qué tan reciente es un anuncio: eso es un dato faltante que la ficha debe declarar.</p>
+
+  <div class="pie-pan"><button data-ir="t0">← Empezar</button><button class="sig" data-ir="t2">Paso 2 · Limpiar →</button></div>
+</section>
+
+<!-- 2 · LIMPIAR -->
+<section class="panel" id="t2" role="tabpanel">
+  <h2>Paso 2 · Limpiar</h2>
+  <p class="lead">Función: <code>limpiar_anuncios(anuncios, params)</code>. Entra el CSV tal cual y sale una lista de anuncios limpios, cada uno marcado como válido o inválido, con su motivo.</p>
+  <div class="caja archivos"><b>Abre estos archivos</b><p><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/config/parametros.yaml" target="_blank" rel="noopener noreferrer">Reglas: parametros.yaml</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/diccionario_datos.md" target="_blank" rel="noopener noreferrer">Diccionario de datos</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/calculo_manual.md" target="_blank" rel="noopener noreferrer">Cálculo manual (para comparar)</a></p></div>
+
+
+  <h3>2.1 · Normaliza el estado</h3>
+  <p>El texto del CSV viene en muchas formas («REMODELADA ?», «Remodelar», «OK»). Llévalo a minúsculas, sin tildes, sin <code>?</code> y sin espacios en los extremos. Después búscalo en la sección <code>estados</code> de <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/config/parametros.yaml" target="_blank" rel="noopener noreferrer"><code>parametros.yaml</code></a>. Si no aparece, queda <code>sin_clasificar</code>.</p>
+  <div class="caja pista"><b>Pistas</b>
+    <ul>
+      <li>Para quitar tildes: <code>unicodedata.normalize("NFD", texto)</code> separa la letra de su tilde.</li>
+      <li>El YAML da, por cada estado, una lista de textos. Tú necesitas lo contrario: ¿cómo armas un diccionario <em>texto → estado</em>?</li>
+      <li>Un estado vacío no se puede clasificar. ¿Qué haces con él?</li>
+    </ul>
+  </div>
+
+  <h3>2.2 · Deduplica, en orden</h3>
+  <p>Las dos reglas están en <code>deduplicacion</code> del YAML. Se aplican en este orden y se conserva siempre la <strong>primera</strong> fila del CSV:</p>
+  <ol>
+    <li>Mismo <code>id_anuncio</code>, siempre que no esté vacío.</li>
+    <li>Misma combinación de <code>zona</code>, <code>area_m2</code> y <code>precio</code> (el mismo inmueble en dos fuentes).</li>
+  </ol>
+  <div class="caja pista"><b>Pista</b>
+    <p>Recorre las filas una vez y guarda en un <code>set</code> los ids y las combinaciones que ya viste. Cuenta cuántas descartas: ese número va luego a la ficha.</p>
+  </div>
+
+  <h3>2.3 · Valida y cuenta por motivo</h3>
+  <p>Marca como inválido y guarda el motivo si el anuncio:</p>
+  <ul>
+    <li>no tiene área o no tiene precio;</li>
+    <li>tiene un precio por m² fuera de <code>rango_precio_m2_valido</code>;</li>
+    <li>tiene estado <code>sin_clasificar</code>;</li>
+    <li>tiene un <code>tipo_precio</code> que no está en <code>tipos_precio</code>.</li>
+  </ul>
+  <p>Si un anuncio falla por dos motivos, cuéntalo una sola vez, con el primero que encuentres.</p>
+
+  <div class="caja ojo"><b>Errores comunes</b>
+    <ul>
+      <li>Escribir <code>0.30</code> o <code>800</code> directo en el código. Esos valores salen de <code>PARAMS</code>.</li>
+      <li>Deduplicar <em>después</em> de filtrar por estado: la deduplicación va sobre toda la zona, antes.</li>
+      <li>Tratar los ids vacíos como repetidos entre sí.</li>
+    </ul>
+  </div>
+
+  <div class="caja control"><b>Cifras de control (zona El Salvador)</b>
+    <p>De las <strong>82</strong> filas de la zona <code>buenos_aires_el_salvador</code>: <strong>28</strong> duplicados, <strong>54</strong> únicas, <strong>21</strong> inválidas (20 por estado vacío y 1 por no tener área), <strong>33</strong> válidas. El detalle está en <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/calculo_manual.md" target="_blank" rel="noopener noreferrer"><code>validacion/calculo_manual.md</code></a>.</p>
+  </div>
+
+  <div class="pie-pan"><button data-ir="t1">← Explorar</button><button class="sig" data-ir="t3">Paso 3 · Mercado →</button></div>
+</section>
+
+<!-- 3 · MERCADO -->
+<section class="panel" id="t3" role="tabpanel">
+  <h2>Paso 3 · Mercado</h2>
+  <p class="lead">Función: <code>bloque_mercado(inmueble, anuncios_limpios, params)</code>. Responde: ¿cuánto vale el m² de inmuebles parecidos, y qué tan confiable es ese número?</p>
+  <div class="caja archivos"><b>Abre estos archivos</b><p><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/config/parametros.yaml" target="_blank" rel="noopener noreferrer">Reglas: parametros.yaml</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/calculo_manual.md" target="_blank" rel="noopener noreferrer">Cálculo manual</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/esperado.json" target="_blank" rel="noopener noreferrer">Valores esperados</a></p></div>
+
+
+  <h3>3.1 · Elige los comparables</h3>
+  <p>Un comparable es un anuncio <strong>válido</strong> que está en la misma zona, tiene el mismo estado que el inmueble y un área dentro de ±<code>tolerancia_area</code> del área del inmueble. Calcula el área mínima y máxima aceptable antes de filtrar.</p>
+  <div class="caja ojo"><b>No te compares contigo mismo</b>
+    <p>Cada inmueble de prueba sale de un anuncio del CSV. Ese anuncio, y sus duplicados, no pueden ser comparables de sí mismo. Mira el <code>origen</code> del inmueble para saber cuál es.</p>
+  </div>
+
+  <h3>3.2 · Calcula el precio por m² y sus estadísticas</h3>
+  <p>Precio dividido entre área, para cada comparable. Después: cantidad (<code>n</code>), mediana, promedio, mínimo, máximo, desviación estándar y coeficiente de variación (desviación ÷ promedio).</p>
+  <div class="caja pista"><b>Pistas</b>
+    <ul>
+      <li>El módulo <code>statistics</code> trae <code>median</code>, <code>mean</code> y <code>stdev</code>.</li>
+      <li>Usa la desviación <strong>muestral</strong> (divisor n − 1): es la que usa <code>stdev</code>.</li>
+      <li><code>stdev</code> necesita al menos 2 datos. ¿Qué haces con 0 o 1 comparable? Esa es una de las preguntas abiertas de la empresa: decídelo y déjalo escrito.</li>
+      <li>Redondea como pide la plantilla: precios en pesos enteros, coeficiente con 4 decimales.</li>
+    </ul>
+  </div>
+
+  <h3>3.3 · Aplica la regla de confianza</h3>
+  <p>Mira <code>confianza</code> en el YAML. Se evalúa de arriba hacia abajo: el primer nivel que se cumple es el resultado, y si no se cumple ninguno, es <code>baja</code>. Escribe también el <code>motivo</code> en una frase que la dirección entienda.</p>
+
+  <h3>3.4 · El contexto de la zona</h3>
+  <p>La plantilla pide también la mediana por estado de <strong>toda</strong> la zona, sin filtrar por área. Sirve para que la dirección vea si «remodelado» cuesta más que «por remodelar».</p>
+
+  <div class="caja control"><b>Cifras de control (INM-04)</b>
+    <p>Estado de referencia <code>habitable</code>, <strong>n = 9</strong>, mediana <strong>4.375.000</strong>, promedio <strong>4.871.967</strong>, desviación <strong>1.148.433</strong>, coeficiente de variación <strong>0,2357</strong> y confianza <strong>media</strong>.</p>
+  </div>
+
+  <div class="pie-pan"><button data-ir="t2">← Limpiar</button><button class="sig" data-ir="t4">Paso 4 · Entorno →</button></div>
+</section>
+
+<!-- 4 · ENTORNO -->
+<section class="panel" id="t4" role="tabpanel">
+  <h2>Paso 4 · Entorno</h2>
+  <p class="lead">Función: <code>bloque_entorno(inmueble, transporte, equipamientos, params)</code>. ¿Qué tan cerca está el Metro y qué servicios hay alrededor? Este paso no depende de los anteriores: se puede hacer en paralelo.</p>
+  <div class="caja archivos"><b>Abre estos archivos</b><p><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/data/geo/transporte.geojson" target="_blank" rel="noopener noreferrer">Estaciones: transporte.geojson</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/data/geo/equipamientos.geojson" target="_blank" rel="noopener noreferrer">Servicios: equipamientos.geojson</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/data/inmuebles_prueba.csv" target="_blank" rel="noopener noreferrer">Inmuebles de prueba</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/config/parametros.yaml" target="_blank" rel="noopener noreferrer">Reglas: parametros.yaml</a></p></div>
+
+
+  <h3>4.1 · La estación más cercana</h3>
+  <p>La función <code>haversine_m</code> ya viene hecha: da la distancia en metros entre dos puntos. Úsala contra cada estación y quédate con la menor. Solo cuentan los sistemas que dice <code>sistemas_transporte</code> en el YAML.</p>
+  <div class="caja ojo"><b>El orden de las coordenadas</b>
+    <p>En un GeoJSON, las coordenadas vienen como <strong>[longitud, latitud]</strong>. En el CSV de inmuebles, <code>lat</code> y <code>lon</code> están separadas. Si las cruzas, los resultados salen a miles de kilómetros.</p>
+  </div>
+
+  <h3>4.2 · Cuántas estaciones y equipamientos hay en el radio</h3>
+  <p>Cuenta las estaciones a una distancia menor o igual a <code>radio_busqueda_m</code>. Haz lo mismo con los equipamientos, agrupados por la <code>categoria</code> de cada punto (educación, salud, parques, abastecimiento, seguridad, cultura). Incluye las categorías con cero.</p>
+
+  <h3>4.3 · Si el lugar es aproximado</h3>
+  <p>Algunos inmuebles tienen coordenadas del <strong>barrio</strong>, no de la dirección (<code>precision_coordenadas</code>). Su entorno es aproximado y la ficha debe decirlo.</p>
+
+  <div class="caja pista"><b>Pistas</b>
+    <ul>
+      <li>Abre el GeoJSON y mira una entrada: <code>properties</code> trae el nombre y el sistema; <code>geometry</code> las coordenadas.</li>
+      <li>Un contador por categoría se arma bien con un diccionario que empiece en cero.</li>
+    </ul>
+  </div>
+
+  <div class="caja control"><b>Cifras de control (INM-04)</b>
+    <p>Estación más cercana: <strong>Buenos Aires (tranvía), a 1000 m</strong>. Estaciones en el radio: <strong>0</strong>. Equipamientos: educación 22, salud 2, parques 12, abastecimiento 1, seguridad 1, cultura 0.</p>
+  </div>
+
+  <div class="pie-pan"><button data-ir="t3">← Mercado</button><button class="sig" data-ir="t5">Paso 5 · Ficha y validar →</button></div>
+</section>
+
+<!-- 5 · FICHA Y VALIDAR -->
+<section class="panel" id="t5" role="tabpanel">
+  <h2>Paso 5 · Ficha y validar</h2>
+  <p class="lead">Función: <code>generar_ficha(inmueble)</code>. Junta todo en un JSON con el formato de <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/ejemplos/ficha_ejemplo.json" target="_blank" rel="noopener noreferrer"><code>ejemplos/ficha_ejemplo.json</code></a> y compáralo contra el cálculo manual.</p>
+  <div class="caja archivos"><b>Abre estos archivos</b><p><a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/plantilla_ficha.md" target="_blank" rel="noopener noreferrer">Plantilla de la ficha</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/ejemplos/ficha_ejemplo.json" target="_blank" rel="noopener noreferrer">Ficha de ejemplo</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/validar.py" target="_blank" rel="noopener noreferrer">Validador</a> · <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/esperado.json" target="_blank" rel="noopener noreferrer">Valores esperados</a></p></div>
+
+
+  <h3>5.1 · Arma la ficha</h3>
+  <ul class="checks">
+    <li>Copia los datos del inmueble (<code>inmueble</code>, con sus coordenadas y su estado).</li>
+    <li>Agrega el bloque de <code>mercado</code> del Paso 3.</li>
+    <li>Agrega la <code>calidad_datos_zona</code>: cuántos anuncios, cuántos duplicados, cuántos válidos, cuántos inválidos por motivo.</li>
+    <li>Agrega el <code>entorno</code> del Paso 4.</li>
+    <li>La <code>norma</code>: la capa del POT puede estar pendiente. Si es así, la ficha lo dice con su <code>estado</code>.</li>
+    <li>Llena <code>datos_faltantes</code> con lo que realmente falte, y los <code>metadatos</code> (versión de parámetros, fecha, fuentes).</li>
+  </ul>
+  <div class="caja ojo"><b>La regla de oro</b>
+    <p>Todo valor sale de los datos entregados. Si algo no existe, queda en <code>null</code> y se anota en <code>datos_faltantes</code>. La ficha no recomienda comprar.</p>
+  </div>
+
+  <h3>5.2 · Genera y valida</h3>
+  <p>El notebook ya tiene la celda que guarda una ficha por inmueble en <code>salidas/participante/</code> y otra que corre el validador. El validador compara tus resultados con <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/esperado.json" target="_blank" rel="noopener noreferrer"><code>validacion/esperado.json</code></a> y lista cada diferencia.</p>
+<pre><code>python3 validacion/validar.py salidas/participante</code></pre>
+  <p>Si sale ❌, lee la diferencia: te dice el campo, lo que se esperaba y lo que obtuviste. Corrige de a una y vuelve a correr.</p>
+
+  <h3>5.3 · Si te sobra tiempo</h3>
+  <ul>
+    <li>Escribe una vista de lectura de una página (como en <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/docs/plantilla_ficha.md" target="_blank" rel="noopener noreferrer"><code>plantilla_ficha.md</code></a>) que un directivo entienda sin abrir el JSON.</li>
+    <li>La capa del POT (<code>pot_tratamientos.geojson</code>) está pendiente. El <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/README.md#capa-del-pot-pendiente" target="_blank" rel="noopener noreferrer">README</a> explica cómo conseguirla; con ella la ficha puede decir qué permite la norma.</li>
+    <li>Prepara tres frases para la empresa: qué decidiste sobre «parecido», sobre los datos faltantes y sobre el formato, y por qué.</li>
+  </ul>
+
+  <h3>Antes de entregar</h3>
+  <ul class="checks">
+    <li>El validador dice ✅ para INM-04, INM-06 e INM-09.</li>
+    <li>No hay números fijos en el código: todo sale de <code>PARAMS</code>.</li>
+    <li>Cualquier decisión que cambiaste del YAML está explicada.</li>
+    <li>No usaste datos personales ni hiciste scraping.</li>
+  </ul>
+
+  <div class="pie-pan"><button data-ir="t4">← Entorno</button><button class="sig" data-ir="t6">Si te atascas →</button></div>
+</section>
+
+<!-- ? · SI TE ATASCAS -->
+<section class="panel" id="t6" role="tabpanel">
+  <h2>Si te atascas</h2>
+  <p class="lead">Antes de pedir ayuda, mira esta tabla. Casi siempre es una de estas.</p>
+  <table>
+    <tr><th>Lo que ves</th><th>Lo más probable</th></tr>
+    <tr><td>Salen muchos más duplicados de los esperados</td><td>Estás contando los ids vacíos como repetidos.</td></tr>
+    <tr><td>El <code>n</code> de comparables no coincide</td><td>Filtraste por estado antes de deduplicar, o te incluyes a ti mismo, o la tolerancia de área está mal aplicada.</td></tr>
+    <tr><td>La distancia sale en miles de kilómetros</td><td>Cruzaste latitud y longitud al leer el GeoJSON.</td></tr>
+    <tr><td>La mediana es casi igual pero la desviación no</td><td>Usaste la desviación poblacional en vez de la muestral (n − 1).</td></tr>
+    <tr><td>La confianza sale distinta</td><td>Revisa el orden: se evalúa de arriba hacia abajo y gana el primer nivel que cumple.</td></tr>
+    <tr><td><code>NotImplementedError</code></td><td>Te falta reemplazar el <code>raise</code> de esa función por tu código.</td></tr>
+    <tr><td>El validador falla solo por 1 peso</td><td>Redondeo: mira la tolerancia de <a class="ar" href="https://github.com/solhecoo/ventureone-reto-ficha/blob/main/validacion/esperado.json" target="_blank" rel="noopener noreferrer"><code>esperado.json</code></a>.</td></tr>
+  </table>
+
+  <h3>Cómo pedir ayuda bien</h3>
+  <ul>
+    <li>Di en qué paso estás y qué función.</li>
+    <li>Pega el mensaje de error completo, o la diferencia que muestra el validador.</li>
+    <li>Cuenta qué ya probaste. Así se puede ayudar sin empezar de cero.</li>
+  </ul>
+
+  <div class="pie-pan"><button data-ir="t5">← Ficha y validar</button><span></span></div>
+</section>
+
+</main>
+
+<footer><div class="in">Guía de arranque del reto 13 · EstudIA · Análisis de datos (Capa 2). Basada en los materiales del repositorio <code>ventureone-reto-ficha</code>.</div></footer>
+
+<script>
+(function () {
+  var paneles = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+  var pestanas = Array.prototype.slice.call(document.querySelectorAll("nav.tabs button"));
+  function mostrar(id, subir) {
+    if (!document.getElementById(id)) { id = "t0"; }
+    paneles.forEach(function (p) { p.classList.toggle("on", p.id === id); });
+    pestanas.forEach(function (b) {
+      var activa = b.getAttribute("data-t") === id;
+      b.setAttribute("aria-selected", activa ? "true" : "false");
+      b.tabIndex = activa ? 0 : -1;
+      if (activa) { b.scrollIntoView({ block: "nearest", inline: "center" }); }
+    });
+    try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    if (subir) { window.scrollTo(0, 0); }
+  }
+  document.documentElement.classList.add("js");
+  pestanas.forEach(function (b) { b.addEventListener("click", function () { mostrar(b.getAttribute("data-t"), true); }); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-ir]"), function (b) {
+    b.addEventListener("click", function () { mostrar(b.getAttribute("data-ir"), true); });
+  });
+  mostrar((location.hash || "#t0").slice(1), false);
+})();
+</script>
+</body>
+</html>
